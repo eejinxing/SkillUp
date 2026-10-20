@@ -1,0 +1,584 @@
+const imgRectangle = "https://www.figma.com/api/mcp/asset/18923e70-bc54-4ae6-9056-16938dd09457.png";
+const imgRectangle1 = "https://www.figma.com/api/mcp/asset/8e0de337-aab3-4754-9265-8b501c4f781f.png";
+const imgRectangle2 = "https://www.figma.com/api/mcp/asset/ce502b2e-e89b-48b0-91d3-ea04a534c32c.png";
+const imgRectangle3 = "https://www.figma.com/api/mcp/asset/226c80a5-b618-4a2b-81e4-83e3c68c4e6f.png";
+const imgRectangle4 = "https://www.figma.com/api/mcp/asset/3e2adfe0-a82a-4b2f-ad22-f92dc693c8c6.png";
+const imgRectangle7 = "https://www.figma.com/api/mcp/asset/40d07a05-38f9-465e-849a-6045ebb81f48.png";
+const imgRectangle8 = "https://www.figma.com/api/mcp/asset/8cfa6a91-2903-434f-99e2-f89757ce3d19.png";
+const imgRectangle9 = "https://www.figma.com/api/mcp/asset/9c3789ae-26ab-49ef-8ad4-95a6ec6d3c2b.png";
+const imgImage6 = "https://www.figma.com/api/mcp/asset/0ecf04e6-0bc4-475d-8fa7-491a250e75f2.png";
+const imgRectangle10 = "https://www.figma.com/api/mcp/asset/c2552d09-8c6c-4e2e-ae5e-783485aeb9ba.png";
+const imgRectangle11 = "https://www.figma.com/api/mcp/asset/e3e91e2e-4f90-4141-b3f1-48a1c34953e7.png";
+const imgEllipse3 = "https://www.figma.com/api/mcp/asset/2fe8881b-c486-47c1-ab5b-ea8474cb373c.svg";
+const imgEllipse2 = "https://www.figma.com/api/mcp/asset/490fb1ee-c251-4fc9-bd79-b2443968ee1d.svg";
+const imgEllipse4 = "https://www.figma.com/api/mcp/asset/9e284c68-d2d3-42f6-ad2b-5fdd8f8e41ef.svg";
+const imgEllipse5 = "https://www.figma.com/api/mcp/asset/8a9151eb-c345-450b-bad9-11adc6a807b2.svg";
+const imgRectangle5 = "https://www.figma.com/api/mcp/asset/cd52c83f-ab78-4c61-8347-f3f9ba16cdbd.svg";
+const imgRectangle6 = "https://www.figma.com/api/mcp/asset/9c07fcae-411c-4591-9ddd-3d25d087687f.svg";
+const imgVector2 = "https://www.figma.com/api/mcp/asset/8037cbf2-127f-4a8c-ae18-12f045f1f390.svg";
+const imgVector3 = "https://www.figma.com/api/mcp/asset/31e4a711-211e-4da4-a854-a51c723e82ba.svg";
+const imgVector1 = "https://www.figma.com/api/mcp/asset/cd87ca8f-33fa-49a3-bbd9-aa1b0d7ee830.svg";
+const imgGroup = "https://www.figma.com/api/mcp/asset/cad3d0cd-05b7-4302-a1fe-ec0d40956837.svg";
+const imgBiPerson = "https://www.figma.com/api/mcp/asset/0c941c51-53bc-44ff-9874-26fb54b21bed.svg";
+const imgVector = "https://www.figma.com/api/mcp/asset/f652dc7b-7d76-4057-83cf-9862388b4614.svg";
+const imgReplica9CtaFooter1 = "https://www.figma.com/api/mcp/asset/927c493c-c9ae-4ccf-aeb5-5f32c598d10e.svg";
+const imgVector4 = "https://www.figma.com/api/mcp/asset/674bcc3f-240b-4b6a-8d75-7022832ff3ce.svg";
+const imgVector5 = "https://www.figma.com/api/mcp/asset/9fbffc28-6c70-4f16-83c2-4c3a546cc194.svg";
+const imgVector6 = "https://www.figma.com/api/mcp/asset/9d954d4c-956d-414f-a7dd-77c55e02141e.svg";
+const imgVector7 = "https://www.figma.com/api/mcp/asset/f61ca1d8-2d13-4ff8-a1ec-dd4cbaa92ca4.svg";
+const imgVector8 = "https://www.figma.com/api/mcp/asset/0bafaaeb-75ab-4ee3-b3de-d314fd359f7b.svg";
+const imgVector9 = "https://www.figma.com/api/mcp/asset/03013d97-68e0-4662-9bf3-3a4f674d18a8.svg";
+const imgVector10 = "https://www.figma.com/api/mcp/asset/22280864-1b9f-4a04-9feb-cec9d9b12b1f.svg";
+const imgVector11 = "https://www.figma.com/api/mcp/asset/877e0f79-8782-48c5-abb4-d61f6e8e87fe.svg";
+const imgVector12 = "https://www.figma.com/api/mcp/asset/2a1e51df-1bb5-4179-9abf-ad0b29508e51.svg";
+const imgVector13 = "https://www.figma.com/api/mcp/asset/81540630-f0e7-4444-97e1-dd92ec94ce89.svg";
+const imgVector14 = "https://www.figma.com/api/mcp/asset/2047b016-423e-4f6b-8b70-de32923ae788.svg";
+const imgVector15 = "https://www.figma.com/api/mcp/asset/11a25b79-4864-4ebb-b6f1-036f02702260.svg";
+const imgVector16 = "https://www.figma.com/api/mcp/asset/95f20869-cbf8-4779-b034-44d456a4a80c.svg";
+const imgVector17 = "https://www.figma.com/api/mcp/asset/80931902-3ee0-42d0-a4c6-87717d581be2.svg";
+const imgVector18 = "https://www.figma.com/api/mcp/asset/b10b2c7d-1540-432b-b1b9-40f4e254d9c4.svg";
+
+export default function MacBookPro161() {
+  return (
+    <div className="bg-black relative size-full" data-node-id="250:311" data-name="MacBook Pro 16' - 1">
+      <div className="absolute bg-black h-[5861px] left-[390px] overflow-clip top-[1059px] w-[13355px]" data-node-id="250:312">
+        <div className="absolute h-[7145.989px] left-[5277.4px] top-[-923.61px] w-[7102.525px]" data-node-id="250:313">
+          <div className="absolute inset-[-33.89%_-34.1%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse3} />
+          </div>
+        </div>
+        <div className="absolute h-[2027.586px] left-[-463.21px] top-[4202.14px] w-[3696.828px]" data-node-id="250:314">
+          <div className="absolute inset-[-74.92%_-41.09%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse2} />
+          </div>
+        </div>
+        <div className="absolute h-[2348.05px] left-[6007.86px] top-[-311.31px] w-[4085.712px]" data-node-id="250:315">
+          <div className="absolute inset-[-75.63%_-43.47%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse4} />
+          </div>
+        </div>
+        <div className="absolute h-[6367.306px] left-[8212.59px] top-[-1967.79px] w-[4324.833px]" data-node-id="250:316">
+          <div className="absolute inset-[-54.9%_-80.83%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse5} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Regular'] font-normal leading-[normal] left-[2406.36px] text-[530.031px] text-white top-[2318.96px] whitespace-nowrap" data-node-id="250:317" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Unlock Your Potential Future
+        </p>
+        <div className="absolute h-[314.804px] left-[4305.81px] top-[3927.08px] w-[973.031px]" data-node-id="250:318">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgRectangle5} />
+        </div>
+        <div className="absolute h-[314.633px] left-[5436.16px] top-[3927.08px] w-[1142px]" data-node-id="250:319">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgRectangle6} />
+        </div>
+        <div className="absolute h-[2321.872px] left-[20.39px] top-[3545.44px] w-[3169.634px]" data-node-id="250:320">
+          <div className="absolute inset-[-0.38%_-0.27%_0_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector2} />
+          </div>
+        </div>
+        <div className="absolute h-[1318.738px] left-[26.22px] top-[-2.91px] w-[2318.96px]" data-node-id="250:321">
+          <div className="absolute inset-[-0.13%_-0.37%_-0.66%_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector3} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Regular'] font-normal leading-[normal] left-[4632.09px] text-[141.848px] text-white top-[3997px] whitespace-nowrap" data-node-id="250:322" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Start
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Regular'] font-normal h-[174.796px] leading-[normal] left-[5570.17px] text-[139.189px] text-black top-[3997px] w-[868.153px]" data-node-id="250:323" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Expand more
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Regular'] font-normal leading-[normal] left-[4218.41px] text-[140.814px] text-white top-[3111.37px] whitespace-nowrap" data-node-id="250:324" style={{ fontVariationSettings: '"opsz" 14' }}>
+          your exclusive online learning platform
+        </p>
+      </div>
+      <div className="absolute h-[1608.123px] left-[7929.91px] top-[5016.64px] w-[3361.909px]" data-node-id="250:325">
+        <div className="absolute inset-[-0.54%_0_-0.26%_-0.23%]">
+          <img alt="" className="block max-w-none size-full" src={imgVector1} />
+        </div>
+      </div>
+      <div className="absolute h-[262.194px] left-[6233px] top-[7281px] w-[1187.156px]" data-node-id="250:326">
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold leading-[normal] left-[225.78px] text-[#777] text-[216.594px] top-0 whitespace-nowrap" data-node-id="250:327" style={{ fontVariationSettings: '"opsz" 14' }}>
+          SocketIO
+        </p>
+        <div className="absolute left-[-69.92px] overflow-clip size-[221.408px] top-[29.13px]" data-node-id="250:328" data-name="devicon:socketio">
+          <div className="absolute inset-[0_0.08%_0.08%_0]" data-node-id="250:329" data-name="Group">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup} />
+          </div>
+        </div>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Inter:Extra_Bold'] font-extrabold leading-[normal] left-[390.38px] not-italic text-[200.181px] text-white top-[332.11px] whitespace-nowrap" data-node-id="250:332">
+        Skill UP
+      </p>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold leading-[normal] left-[12731.75px] text-[130.594px] text-white top-[368px] whitespace-nowrap" data-node-id="250:333" style={{ fontVariationSettings: '"opsz" 14' }}>
+        Create Account
+      </p>
+      <div className="absolute left-[12522px] size-[145.663px] top-[379.65px]" data-node-id="250:334" data-name="bi:person">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBiPerson} />
+      </div>
+      <div className="absolute border-[5.827px] border-[rgba(255,255,255,0.37)] border-solid h-[337.939px] left-[3771px] pointer-events-none rounded-[5826.532px] top-[284px] w-[6444.145px]" data-node-id="250:336">
+        <div aria-hidden className="absolute backdrop-blur-[58.265px] bg-[rgba(84,84,84,0.3)] inset-0 mix-blend-plus-lighter rounded-[5826.532px]" />
+        <div className="absolute inset-[-5.827px] rounded-[inherit] shadow-[inset_0px_0px_128.184px_0px_rgba(242,242,242,0.5),inset_0px_0px_0px_5.827px_#999,inset_11.653px_11.653px_5.827px_-11.653px_#b3b3b3,inset_-11.653px_-11.653px_5.827px_-11.653px_#b3b3b3,inset_17.48px_17.48px_0px_-17.48px_rgba(0,0,0,0.5)]" />
+      </div>
+      <div className="absolute contents inset-[16.81%_4.97%_67.53%_6.05%]" data-node-id="250:337">
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold inset-[16.81%_63.69%_81.47%_6.27%] leading-[normal] text-[311.461px] text-white" data-node-id="250:338" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Our Services
+        </p>
+        <div className="absolute inset-[19.01%_71.71%_74.47%_6.05%]" data-node-id="250:339" data-name="Vector">
+          <div className="absolute inset-[-0.22%_-0.26%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[19.48%_83.2%_80.06%_7.37%] leading-[normal] not-italic text-[83.056px] text-white" data-node-id="250:340">
+          Ethical hacking
+        </p>
+        <div className="absolute inset-[19.01%_49.46%_74.47%_28.29%]" data-node-id="250:341" data-name="Vector">
+          <div className="absolute inset-[-0.22%_-0.26%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[19.48%_58.5%_80.06%_29.61%] leading-[normal] not-italic text-[83.056px] text-white" data-node-id="250:342">
+          Platform hardening
+        </p>
+        <div className="absolute inset-[19.01%_27.21%_74.47%_50.54%]" data-node-id="250:343" data-name="Vector">
+          <div className="absolute inset-[-0.22%_-0.26%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[19.48%_37.75%_80.06%_51.86%] leading-[normal] not-italic text-[83.056px] text-white" data-node-id="250:344">
+          Threat detection
+        </p>
+        <div className="absolute inset-[19.01%_4.97%_74.47%_72.79%]" data-node-id="250:345" data-name="Vector">
+          <div className="absolute inset-[-0.22%_-0.26%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[19.48%_12.86%_80.06%_74.11%] leading-[normal] not-italic text-[83.056px] text-white" data-node-id="250:346">
+          Security architecture
+        </p>
+        <div className="absolute inset-[25.82%_71.71%_67.65%_6.05%]" data-node-id="250:347" data-name="Vector">
+          <div className="absolute inset-[-0.22%_-0.26%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[26.29%_81.7%_73.25%_7.37%] leading-[normal] not-italic text-[83.056px] text-white" data-node-id="250:348">
+          Regulatory audits
+        </p>
+        <div className="absolute inset-[25.82%_49.46%_67.65%_28.29%]" data-node-id="250:349" data-name="Vector">
+          <div className="absolute inset-[-0.22%_-0.26%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[26.29%_60.7%_73.25%_29.61%] leading-[normal] not-italic text-[83.056px] text-white" data-node-id="250:350">
+          Data protection
+        </p>
+        <div className="absolute inset-[25.82%_27.21%_67.65%_50.54%]" data-node-id="250:351" data-name="Vector">
+          <div className="absolute inset-[-0.22%_-0.26%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[26.29%_35.06%_73.25%_51.86%] leading-[normal] not-italic text-[83.056px] text-white" data-node-id="250:352">{`Awareness & training`}</p>
+        <div className="absolute inset-[25.82%_4.97%_67.65%_72.79%]" data-node-id="250:353" data-name="Vector">
+          <div className="absolute inset-[-0.22%_-0.26%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[26.29%_20.02%_73.25%_74.11%] leading-[normal] not-italic text-[83.056px] text-white" data-node-id="250:354">
+          AI agents
+        </p>
+        <div className="absolute inset-[22.73%_75.12%_74.65%_8.8%]" data-node-id="250:355" data-name="Rectangle">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRectangle} />
+          </div>
+        </div>
+        <div className="absolute inset-[22.73%_52.98%_74.59%_30.5%]" data-node-id="250:356" data-name="Rectangle">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRectangle1} />
+          </div>
+        </div>
+        <div className="absolute inset-[22.73%_34.04%_74.46%_53.84%]" data-node-id="250:357" data-name="Rectangle">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRectangle2} />
+          </div>
+        </div>
+        <div className="absolute inset-[22.73%_8.16%_74.53%_75.1%]" data-node-id="250:358" data-name="Rectangle">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRectangle3} />
+          </div>
+        </div>
+        <div className="absolute inset-[29.26%_75.56%_67.56%_8.69%]" data-node-id="250:359" data-name="Rectangle">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRectangle4} />
+          </div>
+        </div>
+        <div className="absolute inset-[29.26%_54.75%_67.68%_31.27%]" data-node-id="250:360" data-name="Rectangle">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRectangle7} />
+          </div>
+        </div>
+        <div className="absolute inset-[29.26%_31.07%_67.53%_53.29%]" data-node-id="250:361" data-name="Rectangle">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRectangle8} />
+          </div>
+        </div>
+        <div className="absolute inset-[29.26%_9.04%_67.53%_75.54%]" data-node-id="250:362" data-name="Rectangle">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRectangle9} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute h-[4858px] left-[1421px] top-[21754px] w-[10455px]" data-node-id="250:363" data-name="image 6">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage6} />
+      </div>
+      <div className="[word-break:break-word] absolute contents font-['DM_Sans:Bold'] font-bold leading-[normal] left-[4495px] top-[19550px]" data-node-id="250:364">
+        <p className="absolute left-[4495px] text-[514.642px] text-white top-[19550px] w-[5039.665px]" data-node-id="250:365" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Meet Our Instructor
+        </p>
+        <p className="absolute left-[5063.68px] text-[#5e5e5e] text-[429.611px] top-[20220.85px] w-[3903.989px]" data-node-id="250:366" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Dedicated Service
+        </p>
+      </div>
+      <div className="absolute contents left-[-152px] top-[45179px]" data-node-id="250:367">
+        <div className="absolute h-[9928.042px] left-[-152px] overflow-clip top-[45179px] w-[14347px]" data-node-id="250:368" data-name="replica-9-cta-footer 1">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgReplica9CtaFooter1} />
+          <div className="absolute inset-[2.12%_1.5%_44.35%_1.5%]" data-node-id="250:370" data-name="Vector">
+            <div className="absolute inset-[-0.11%_0]">
+              <img alt="" className="block max-w-none size-full" src={imgVector4} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[11.18%_75.76%_82.14%_7.5%] leading-[normal] not-italic text-[548.962px] text-white" data-node-id="250:371">
+            Connect.
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[17.76%_62.41%_75.55%_7.5%] leading-[normal] not-italic text-[548.962px] text-white" data-node-id="250:372">
+            Dont Just Listen
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[29.53%_58.15%_68.48%_7.5%] leading-[normal] not-italic text-[#f3d5d5] text-[163.521px]" data-node-id="250:373">
+            Join millions of other music lovers! Download the app now and
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[32%_58.05%_66.01%_7.5%] leading-[normal] not-italic text-[#f3d5d5] text-[163.521px]" data-node-id="250:374">
+            experience limitless music at your fingertips. Let’s Get Started!
+          </p>
+          <div className="absolute inset-[38.59%_79.92%_57.18%_7.5%]" data-node-id="250:375" data-name="Vector">
+            <div className="absolute inset-[-1.39%_-0.32%]">
+              <img alt="" className="block max-w-none size-full" src={imgVector5} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[40%_85.51%_58.29%_8.5%] leading-[normal] not-italic text-[#111] text-[140.161px]" data-node-id="250:376">
+            {`\uF8FF`}
+            {` App Store`}
+          </p>
+          <div className="absolute inset-[38.59%_65.67%_57.18%_21.42%]" data-node-id="250:377" data-name="Vector">
+            <div className="absolute inset-[-1.39%_-0.32%]">
+              <img alt="" className="block max-w-none size-full" src={imgVector6} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[40%_70.76%_58.29%_22.42%] leading-[normal] not-italic text-[#111] text-[140.161px]" data-node-id="250:378">
+            ▷ Google Play
+          </p>
+          <div className="absolute inset-[9.29%_4%_54%_47.25%]" data-node-id="250:379" data-name="Rectangle">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRectangle10} />
+            </div>
+          </div>
+          <div className="absolute inset-[57.76%_1.5%_2.12%_1.5%]" data-node-id="250:380" data-name="Vector">
+            <div className="absolute inset-[-0.15%_0]">
+              <img alt="" className="block max-w-none size-full" src={imgVector7} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[64.59%_89.53%_33.14%_5.17%] leading-[normal] not-italic text-[#ddd] text-[186.881px]" data-node-id="250:381">
+            Platform
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[68.94%_87.85%_29.35%_5.17%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:382">{`Plans & Pricing`}</p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[72.35%_85.07%_25.93%_5.17%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:383">
+            Personal AI Manager
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[75.76%_86.34%_22.52%_5.17%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:384">
+            AI Business Music
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[79.18%_85.29%_19.11%_5.17%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:385">
+            AI Data Artist Album
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[64.59%_73.51%_33.14%_20.5%] leading-[normal] not-italic text-[#ddd] text-[186.881px]" data-node-id="250:386">
+            Company
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[68.94%_75.11%_29.35%_20.5%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:387">
+            About Us
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[72.35%_73.11%_25.93%_20.5%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:388">
+            Work With Us
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[75.76%_73.53%_22.52%_20.5%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:389">{`Blog & News`}</p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[64.59%_57.58%_33.14%_35.83%] leading-[normal] not-italic text-[#ddd] text-[186.881px]" data-node-id="250:390">
+            Resources
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[68.94%_56.96%_29.35%_35.83%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:391">
+            Documentation
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[72.35%_59.02%_25.93%_35.83%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:392">
+            Free Demo
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[75.76%_55.25%_22.52%_35.83%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:393">
+            Press Conferences
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[64.59%_45.42%_33.14%_51.17%] leading-[normal] not-italic text-[#ddd] text-[186.881px]" data-node-id="250:394">
+            Legal
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[68.94%_40.86%_29.35%_51.17%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:395">
+            Terms of Service
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[72.35%_42.27%_25.93%_51.17%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:396">
+            Privacy Policy
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[75.76%_41.93%_22.52%_51.17%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:397">
+            Cookies Policy
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[79.18%_41.13%_19.11%_51.17%] leading-[normal] not-italic text-[#999] text-[140.161px]" data-node-id="250:398">
+            Data Processing
+          </p>
+          <div className="absolute inset-[64.47%_5.08%_19.06%_76%]" data-node-id="250:399" data-name="Vector">
+            <div className="absolute inset-[-0.36%_-0.22%]">
+              <img alt="" className="block max-w-none size-full" src={imgVector8} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[66.24%_17.66%_31.63%_77.58%] leading-[normal] not-italic text-[175.201px] text-white" data-node-id="250:400">{`✥ Clova `}</p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[69.29%_18.09%_29.29%_77.58%] leading-[normal] not-italic text-[#888] text-[116.801px]" data-node-id="250:401">
+            @clovaapp
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[72.94%_7.68%_25.5%_77.58%] leading-[normal] not-italic text-[#bbb] text-[128.481px]" data-node-id="250:402">{`We're just announced new feature`}</p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[74.94%_9%_23.5%_77.58%] leading-[normal] not-italic text-[#bbb] text-[128.481px]" data-node-id="250:403">
+            that will help you increase your
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[76.94%_10.98%_21.5%_77.58%] leading-[normal] not-italic text-[#bbb] text-[128.481px]" data-node-id="250:404">
+            experience of using Clova!
+          </p>
+          <div className="absolute inset-[87.41%_5.17%_12.59%_5.25%]" data-node-id="250:405" data-name="Vector">
+            <div className="absolute inset-[-5.84px_0]">
+              <img alt="" className="block max-w-none size-full" src={imgVector9} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[91.76%_87.66%_6.52%_5.25%] leading-[normal] not-italic text-[#bbb] text-[140.161px]" data-node-id="250:406">
+            ✥ Clova, 2023.
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[90.94%_12.72%_6.35%_83.83%] leading-[normal] not-italic text-[#aaa] text-[221.921px]" data-node-id="250:407">{`◉ ⓕ `}</p>
+        </div>
+      </div>
+      <div className="absolute contents inset-[51.4%_-12.94%_34.77%_5.75%]" data-node-id="250:408">
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[51.4%_67.8%_46.55%_7.53%] leading-[normal] not-italic text-[311.461px] text-white" data-node-id="250:409">
+          Our Clients
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[51.61%_-10.14%_47.89%_75.42%] leading-[normal] not-italic text-[#888] text-[76.135px]" data-node-id="250:410">
+          From startups to global enterprises, our clients trust Cyvance to
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[52.17%_-12.94%_47.33%_75.42%] leading-[normal] not-italic text-[#888] text-[76.135px]" data-node-id="250:411">
+          secure their systems, protect their data, and deliver results that build
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[52.74%_14.3%_46.76%_75.42%] leading-[normal] not-italic text-[#888] text-[76.135px]" data-node-id="250:412">
+          lasting confidence.
+        </p>
+        <div className="absolute inset-[55.38%_70.2%_40.03%_5.75%]" data-node-id="250:413" data-name="Vector">
+          <div className="absolute inset-[-0.36%_-0.27%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector10} />
+          </div>
+        </div>
+        <div className="absolute inset-[60.65%_70.2%_34.77%_5.75%]" data-node-id="250:414" data-name="Vector">
+          <div className="absolute inset-[-0.36%_-0.27%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector10} />
+          </div>
+        </div>
+        <div className="absolute inset-[55.38%_32.46%_34.77%_31.47%]" data-node-id="250:415" data-name="Vector">
+          <div className="absolute inset-[-0.17%_-0.18%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector11} />
+          </div>
+        </div>
+        <div className="absolute inset-[55.38%_4.33%_40.03%_69.22%]" data-node-id="250:416" data-name="Vector">
+          <div className="absolute inset-[-0.36%_-0.24%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector12} />
+          </div>
+        </div>
+        <div className="absolute inset-[60.65%_4.33%_34.77%_69.22%]" data-node-id="250:417" data-name="Vector">
+          <div className="absolute inset-[-0.36%_-0.24%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector12} />
+          </div>
+        </div>
+        <div className="absolute inset-[55.91%_60.63%_42.49%_32.83%]" data-node-id="250:418" data-name="Rectangle">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgRectangle11} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Regular'] font-normal inset-[58.12%_49.3%_40.7%_33.42%] leading-[normal] text-[#eed344] text-[150px]" data-node-id="250:419" style={{ fontVariationSettings: '"opsz" 14' }}>
+          ★ ★ ★ ★ ☆
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[59.83%_36.97%_39.48%_33.42%] leading-[normal] text-[#eee] text-[150px]" data-node-id="250:420" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Cyvance gave us complete visibility into
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[60.55%_41.23%_38.77%_33.42%] leading-[normal] text-[#eee] text-[150px]" data-node-id="250:421" style={{ fontVariationSettings: '"opsz" 14' }}>
+          our vulnerabilities. Their team was
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[61.26%_42.56%_38.06%_33.42%] leading-[normal] text-[#eee] text-[150px]" data-node-id="250:422" style={{ fontVariationSettings: '"opsz" 14' }}>
+          professional, fast, and incredibly
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[61.97%_59.4%_37.34%_33.42%] leading-[normal] text-[#eee] text-[150px]" data-node-id="250:423" style={{ fontVariationSettings: '"opsz" 14' }}>
+          thorough.
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[63.81%_44.36%_35.69%_33.42%] leading-[normal] text-[#aaa] text-[150px]" data-node-id="250:424" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Sarah Mitchell, CTO at FinEdge Solutions
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[57.26%_77.87%_42.24%_7.22%] leading-[normal] text-[#ddd] text-[150px]" data-node-id="250:425" style={{ fontVariationSettings: '"opsz" 14' }}>
+          The team was professional,
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[57.87%_77.16%_41.64%_7.22%] leading-[normal] text-[#ddd] text-[150px]" data-node-id="250:426" style={{ fontVariationSettings: '"opsz" 14' }}>
+          fast and incredibly thorough.
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[58.97%_74.93%_40.63%_7.22%] leading-[normal] text-[#888] text-[150px]" data-node-id="250:427" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Sarah Mitchell, FinEdge Solutions
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[55.68%_26.42%_43.28%_70.68%] leading-[normal] not-italic text-[191.119px] text-white" data-node-id="250:428">
+          ✳
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[61.1%_26.6%_37.86%_70.49%] leading-[normal] not-italic text-[191.119px] text-white" data-node-id="250:429">
+          ✳
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[57.26%_9.97%_42.24%_70.68%] leading-[normal] text-[#ddd] text-[150px]" data-node-id="250:430" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Cyvance gave us complete visibility
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[57.87%_17.02%_41.64%_70.68%] leading-[normal] text-[#ddd] text-[150px]" data-node-id="250:431" style={{ fontVariationSettings: '"opsz" 14' }}>
+          into our vulnerabilities.
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[59.03%_11.81%_40.62%_70.68%] leading-[normal] text-[#888] text-[150px] whitespace-nowrap" data-node-id="250:432" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Jason Lee, IT Manager at NovaBank
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[60.99%_89.92%_37.52%_7.22%] leading-[normal] not-italic text-[226.939px] text-white" data-node-id="250:433">
+          ▣
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[55.77%_89.92%_42.74%_7.22%] leading-[normal] not-italic text-[226.939px] text-white" data-node-id="250:434">
+          ▣
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[62.16%_77.87%_37.34%_7.22%] leading-[normal] text-[#ddd] text-[150px]" data-node-id="250:435" style={{ fontVariationSettings: '"opsz" 14' }}>
+          The team was professional,
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[62.76%_77.16%_36.74%_7.22%] leading-[normal] text-[#ddd] text-[150px]" data-node-id="250:436" style={{ fontVariationSettings: '"opsz" 14' }}>
+          fast and incredibly thorough.
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[63.91%_74.93%_35.69%_7.22%] leading-[normal] text-[#888] text-[150px]" data-node-id="250:437" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Sarah Mitchell, FinEdge Solutions
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[62.31%_9.97%_37.19%_70.68%] leading-[normal] text-[#ddd] text-[150px]" data-node-id="250:438" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Cyvance gave us complete visibility
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[62.91%_17.02%_36.59%_70.68%] leading-[normal] text-[#ddd] text-[150px]" data-node-id="250:439" style={{ fontVariationSettings: '"opsz" 14' }}>
+          into our vulnerabilities.
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium inset-[64.36%_11.34%_35.23%_70.68%] leading-[normal] text-[#888] text-[150px]" data-node-id="250:440" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Jason Lee, IT Manager at NovaBank
+        </p>
+      </div>
+      <div className="absolute contents inset-[66.33%_7.22%_18.99%_8.35%]" data-node-id="250:441">
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[66.33%_32.86%_32.37%_35.24%] leading-[normal] not-italic text-[546.867px] text-white" data-node-id="250:442">
+          Questions You
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[67.57%_36.83%_31.13%_37.95%] leading-[normal] not-italic text-[546.867px] text-white" data-node-id="250:443">
+          Might Have
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[69.43%_28.42%_30.25%_14.91%] leading-[normal] not-italic text-[#999] text-[133.679px]" data-node-id="250:444">{`We're here to simplify it for you. Below, we've compiled detailed responses to frequently asked questions`}</p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[69.81%_23.88%_29.87%_14.91%] leading-[normal] not-italic text-[#999] text-[133.679px]" data-node-id="250:445">
+          that businesses typically have regarding our services and the strategies we employ to protect your digital assets.
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[70.19%_30.42%_29.49%_14.91%] leading-[normal] not-italic text-[#999] text-[133.679px]" data-node-id="250:446">
+          Our goal is to provide you with the clarity you need to navigate this critical aspect of your operations.
+        </p>
+        <div className="absolute inset-[71.86%_7.22%_25.35%_8.35%]" data-node-id="250:447" data-name="Vector">
+          <div className="absolute inset-[-0.4%_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector13} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[72.26%_30.96%_27.28%_10.12%] leading-[normal] not-italic text-[194.442px] text-white" data-node-id="250:448">
+          Can we perform security assessments without interrupting our operations?
+        </p>
+        <div className="absolute inset-[72.12%_9.1%_27.12%_87.56%]" data-node-id="250:449" data-name="Vector">
+          <div className="absolute inset-[-1.45%_-1.3%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector14} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[72.29%_10.01%_27.28%_88.5%] leading-[normal] not-italic text-[182.289px] text-white" data-node-id="250:450">
+          ↗
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[73.55%_26.5%_26.13%_10.12%] leading-[normal] not-italic text-[#999] text-[133.679px]" data-node-id="250:451">
+          Absolutely. Our penetration tests, audits, and configuration reviews are meticulously planned to ensure no disruption.
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[73.96%_28.8%_25.73%_10.12%] leading-[normal] not-italic text-[#999] text-[133.679px]" data-node-id="250:452">
+          We test in controlled environments or during off-peak hours, keeping your systems secure and running smoothly.
+        </p>
+        <div className="absolute inset-[74.88%_7.22%_23.78%_8.35%]" data-node-id="250:453" data-name="Vector">
+          <div className="absolute inset-[-0.83%_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector15} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[75.29%_56.92%_24.25%_10.12%] leading-[normal] not-italic text-[194.442px] text-white" data-node-id="250:454">
+          What industries does Cyvance work with?
+        </p>
+        <div className="absolute inset-[75.15%_9.1%_24.09%_87.56%]" data-node-id="250:455" data-name="Vector">
+          <div className="absolute inset-[-1.45%_-1.3%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector14} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[75.31%_10.01%_24.25%_88.5%] leading-[normal] not-italic text-[182.289px] text-white" data-node-id="250:456">
+          ↘
+        </p>
+        <div className="absolute inset-[76.48%_7.22%_22.19%_8.35%]" data-node-id="250:457" data-name="Vector">
+          <div className="absolute inset-[-0.83%_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector15} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[76.89%_45.08%_22.65%_10.12%] leading-[normal] not-italic text-[194.442px] text-white" data-node-id="250:458">
+          How long does a typical cybersecurity audit or test take?
+        </p>
+        <div className="absolute inset-[76.74%_9.1%_22.5%_87.56%]" data-node-id="250:459" data-name="Vector">
+          <div className="absolute inset-[-1.45%_-1.3%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector14} />
+          </div>
+        </div>
+        <div className="absolute inset-[78.08%_7.22%_20.59%_8.35%]" data-node-id="250:460" data-name="Vector">
+          <div className="absolute inset-[-0.83%_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector15} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[78.48%_39.85%_21.06%_10.12%] leading-[normal] not-italic text-[194.442px] text-white" data-node-id="250:461">
+          Do you offer ongoing monitoring or just one-time assessments?
+        </p>
+        <div className="absolute inset-[78.34%_9.1%_20.9%_87.56%]" data-node-id="250:462" data-name="Vector">
+          <div className="absolute inset-[-1.45%_-1.3%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector14} />
+          </div>
+        </div>
+        <div className="absolute inset-[79.67%_7.22%_18.99%_8.35%]" data-node-id="250:463" data-name="Vector">
+          <div className="absolute inset-[-0.83%_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector15} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[80.08%_46.34%_19.46%_10.12%] leading-[normal] not-italic text-[194.442px] text-white" data-node-id="250:464">
+          How do you handle sensitive client data during testing?
+        </p>
+      </div>
+      <div className="absolute flex inset-[42.14%_67.16%_57.15%_29.89%] items-center justify-center" data-node-id="255:6469" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(-71.9416cqw,35.6755cqh)] rotate-[65.06deg] w-[hypot(28.0584cqw,64.3245cqh)]">
+          <div className="relative size-full" data-name="Vector">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector16} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute flex inset-[39.1%_42.37%_60.24%_54.81%] items-center justify-center" data-node-id="255:6470" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(79.0152cqw,-27.4134cqh)] rotate-[-107.57deg] w-[hypot(-20.9848cqw,-72.5866cqh)]">
+          <div className="relative size-full" data-name="Vector">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector17} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute flex inset-[41.92%_51.43%_57.39%_46.13%] items-center justify-center" data-node-id="255:6471" style={{ containerType: "size" }}>
+        <div className="flex-none h-[hypot(21.3897cqw,83.9388cqh)] rotate-[-12.85deg] w-[hypot(78.6103cqw,-16.0612cqh)]">
+          <div className="relative size-full" data-name="Vector">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector18} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

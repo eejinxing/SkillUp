@@ -1,0 +1,118 @@
+/* Call polish, round 3: rounded strip that fits the capsule, larger compact call window with a working camera tile. */
+
+/* ---------- Strip ---------- */
+#app .skill-global-header .gn-capsule.is-calling .gn-call-strip{height:38px;padding:0;border:0;border-radius:999px;background:none;box-shadow:none;overflow:visible}
+#app .skill-global-header .gn-capsule .gn-call-strip>button.cs-bar{all:unset;box-sizing:border-box;position:relative;display:flex;align-items:center;gap:12px;flex:1;width:100%;height:38px;padding:3px 3px 3px 3px;border:1px solid #e4ffa8;border-radius:999px;background:linear-gradient(90deg,#b4f04e,#c6ff3d 55%,#d4ff6a);box-shadow:inset 0 1px 0 #ffffffa6,0 6px 18px -10px #c6ff3d;color:#17210c;font-family:'DM Sans',sans-serif;cursor:pointer;overflow:hidden}
+#app .skill-global-header .gn-capsule .gn-call-strip>button.cs-bar:focus-visible{outline:2px solid #fff;outline-offset:3px}
+#app .skill-global-header .cs-bar .cs-who{display:flex;align-items:center;gap:8px;flex:none;height:30px;padding:0 14px 0 2px;border-radius:999px;background:#ffffff73;box-shadow:inset 0 0 0 1px #ffffff99}
+#app .skill-global-header .cs-bar .cs-who .gn-face{width:26px;height:26px;border:2px solid #fff;box-shadow:none}
+#app .skill-global-header .cs-bar .cs-who-copy{display:grid;line-height:1.1}
+#app .skill-global-header .cs-bar .cs-who-copy b{font-size:12.5px;font-weight:700}
+#app .skill-global-header .cs-bar .cs-who-copy small{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:500;color:#3a4b25}
+#app .skill-global-header .cs-bar .cs-who-copy small i{display:block;width:6px;height:6px;border-radius:50%;background:#ef4444;box-shadow:0 0 0 2px #ef444433;animation:room-blink 1.4s infinite}
+#app .skill-global-header .cs-bar .cs-time{flex:none;margin:0;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+#app .skill-global-header .cs-bar .cs-rail{position:relative;flex:1;min-width:60px;height:24px;margin:0;border-radius:999px;background:#17210c14;box-shadow:inset 0 1px 2px #17210c1f;overflow:hidden}
+#app .skill-global-header .cs-bar .cs-rail .cs-fill{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p) * 100%);min-width:0;border-radius:999px;background:repeating-linear-gradient(90deg,#17210c33 0 3px,transparent 3px 6px);transition:width 1s linear}
+#app .skill-global-header .cs-bar .cs-rail .gn-playhead.cs-head{position:absolute;top:2px;bottom:2px;left:clamp(26px,calc(var(--p) * 100%),calc(100% - 26px));width:auto;margin:0;transform:translateX(-50%);background:none;pointer-events:none;transition:left 1s linear}
+#app .skill-global-header .cs-bar .cs-head time{position:static;display:grid;place-items:center;height:20px;margin:0;padding:0 8px;transform:none;border-radius:999px;background:#17210c;color:#d4ff6a;font-size:10.5px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;visibility:visible}
+#app .skill-global-header .cs-bar .gn-attendees{display:flex;flex:none}
+#app .skill-global-header .cs-bar .gn-attendees .gn-face{width:24px;height:24px;margin-left:-7px;border:2px solid #fff;box-shadow:none}
+#app .skill-global-header .cs-bar .gn-attendees .gn-face:first-child{margin-left:0}
+#app .skill-global-header .cs-bar .cs-open{display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;background:#17210c;color:#d4ff6a;transition:transform .25s}
+#app .skill-global-header .cs-bar:hover .cs-open{transform:rotate(45deg)}
+#app .skill-global-header .cs-bar .cs-open svg{width:14px;height:14px}
+#app .skill-global-header .cs-bar>span{display:flex}
+@media(max-width:1100px){#app .skill-global-header .cs-bar .cs-who-copy,#app .skill-global-header .cs-bar .gn-attendees{display:none}#app .skill-global-header .cs-bar .cs-who{padding:0 2px}}
+@media(max-width:760px){#app .skill-global-header .cs-bar .cs-time{display:none}}
+
+/* ---------- Compact call window ---------- */
+#skill-call-dock.cd{position:fixed;top:96px;right:24px;bottom:auto;left:auto;z-index:120;width:min(400px,calc(100vw - 32px));max-height:calc(100dvh - 112px);padding:8px;border:1px solid #ffffff1c;border-radius:28px;background:linear-gradient(180deg,#141416,#0c0c0e);box-shadow:0 30px 70px -24px #000,inset 0 1px 0 #ffffff12;color:#f2f2f4;font:13px/1.5 'DM Sans',sans-serif;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;animation:cd-in .4s cubic-bezier(.2,.8,.2,1) both}
+#skill-call-dock.cd::-webkit-scrollbar{display:none}
+#skill-call-dock.cd .cd-stage{position:relative;width:100%;aspect-ratio:5/4;height:auto;margin:0;border:0;border-radius:22px;background:radial-gradient(ellipse at 50% 0%,#2b3626,#131712 75%);box-shadow:none;overflow:hidden;isolation:isolate}
+#skill-call-dock.cd .cd-stage:before,#skill-call-dock.cd .cd-stage:after{content:"";position:absolute;left:0;right:0;z-index:1;pointer-events:none}
+#skill-call-dock.cd .cd-stage:before{top:0;height:90px;background:linear-gradient(#000a,transparent)}
+#skill-call-dock.cd .cd-stage:after{bottom:0;height:110px;background:linear-gradient(transparent,#000b)}
+#skill-call-dock.cd .call-demo-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;border-radius:0}
+#skill-call-dock.cd .cd-waiting{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:6px;color:#e4e4e8}
+#skill-call-dock.cd .cd-waiting span{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:#c6ff3d;color:#17210c;font-size:28px;font-weight:700;box-shadow:0 0 0 8px #c6ff3d22}
+#skill-call-dock.cd .cd-waiting b{font-size:16px}
+#skill-call-dock.cd .cd-waiting small{font-size:12px;color:#a1a1aa}
+#skill-call-dock.cd .cd-top{position:absolute;z-index:3;left:12px;right:12px;top:12px;display:flex;align-items:center;gap:10px}
+#skill-call-dock.cd .cd-live{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:999px;background:#000000a6;color:#fff;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;backdrop-filter:blur(8px)}
+#skill-call-dock.cd .cd-live i{width:7px;height:7px;border-radius:50%;background:#ef4444;animation:room-blink 1.4s infinite}
+#skill-call-dock.cd .cd-who{display:grid;min-width:0;line-height:1.15;text-shadow:0 1px 6px #0009}
+#skill-call-dock.cd .cd-who b{font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#skill-call-dock.cd .cd-who small{font-size:11.5px;color:#e4e4e8cc}
+#skill-call-dock.cd .call-picture-tools{position:static;display:flex;gap:6px;margin-left:auto}
+#skill-call-dock.cd .call-picture-tools button{display:grid;place-items:center;width:32px;height:32px;min-height:0;padding:0;border:0;border-radius:50%;background:#000000a6;color:#fff;box-shadow:none;backdrop-filter:blur(8px);transition:background-color .15s}
+#skill-call-dock.cd .call-picture-tools button:hover{background:#000000d9}
+#skill-call-dock.cd .call-picture-tools svg{width:15px;height:15px}
+
+/* You tile: live camera when on, portrait or initials when off */
+#skill-call-dock.cd .cd-self{position:absolute;z-index:3;right:12px;bottom:72px;left:auto;display:grid;place-items:center;width:104px;height:auto;aspect-ratio:3/4;border:2px solid #c6ff3d;border-radius:16px;background:#1d2419;overflow:hidden;box-shadow:0 12px 24px -10px #000}
+#skill-call-dock.cd .cd-self>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#skill-call-dock.cd .cd-self>b{font-size:22px;font-weight:700;color:#c6ff3d}
+#skill-call-dock.cd .cd-self #skill-call-video{position:absolute;inset:0;width:100%;height:100%;margin:0;border:0;border-radius:0;object-fit:cover;transform:scaleX(-1);box-shadow:none;z-index:1}
+#skill-call-dock.cd .cd-self.is-live>img,#skill-call-dock.cd .cd-self.is-live>b{visibility:hidden}
+#skill-call-dock.cd .cd-self small{position:absolute;z-index:2;left:6px;bottom:6px;padding:2px 7px;border-radius:999px;background:#000000b3;color:#fff;font-size:10px;white-space:nowrap}
+
+#skill-call-dock.cd .cd-controls{position:absolute;z-index:3;left:50%;right:auto;bottom:14px;display:flex;gap:8px;width:max-content;padding:6px;border-radius:999px;background:#000000a6;transform:translateX(-50%);backdrop-filter:blur(10px)}
+#skill-call-dock.cd .cd-controls button{display:grid;place-items:center;width:42px;height:42px;min-height:0;padding:0;border:0;border-radius:50%;background:#ffffff26;color:#fff;box-shadow:none;transition:background-color .15s,transform .15s}
+#skill-call-dock.cd .cd-controls button:hover{background:#ffffff3d;transform:translateY(-2px)}
+#skill-call-dock.cd .cd-controls button[aria-pressed=false]{background:#ffffff12;color:#a1a1aa}
+#skill-call-dock.cd .cd-controls .call-end{width:56px;border-radius:999px;background:#ef4444;color:#fff}
+#skill-call-dock.cd .cd-controls .call-end:hover{background:#f05252}
+#skill-call-dock.cd .cd-controls svg{width:18px;height:18px}
+
+/* Summary */
+#skill-call-dock.cd .cd-summary{margin:0;padding:14px 8px 6px;border:0;background:none}
+#skill-call-dock.cd .cd-summary>header{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+#skill-call-dock.cd .cd-summary h2{margin:0;font-size:18px;font-weight:600;color:#fff}
+#skill-call-dock.cd .cd-sub{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:#8f8f99}
+#skill-call-dock.cd .cd-summary>header button{display:grid;place-items:center;width:30px;height:30px;min-height:0;padding:0;border:1px solid #ffffff22;border-radius:50%;background:transparent;color:#fff;box-shadow:none;transition:transform .25s,background-color .15s}
+#skill-call-dock.cd .cd-summary>header button:hover{background:#ffffff10}
+#skill-call-dock.cd .cd-summary>header svg{width:14px;height:14px}
+#skill-call-dock.cd[data-summary=closed] .cd-summary>header button{transform:rotate(180deg)}
+#skill-call-dock.cd[data-summary=closed] .cd-summary-body{display:none}
+#skill-call-dock.cd .cd-summary-body{display:grid;gap:10px}
+#skill-call-dock.cd .cd-docs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0;padding:0;border:0;background:none}
+#skill-call-dock.cd .cd-docs button{display:flex;align-items:center;gap:10px;min-width:0;height:auto;min-height:0;padding:8px;border:1px solid #ffffff14;border-radius:16px;background:#ffffff08;color:#fff;text-align:left;box-shadow:none;transition:background-color .15s,border-color .15s}
+#skill-call-dock.cd .cd-docs button:hover{background:#ffffff10;border-color:#ffffff26}
+#skill-call-dock.cd .cd-docs .call-paper{position:relative;flex:none;display:block;width:40px;height:52px;margin:0;padding:5px 4px;border-radius:6px;background:#f4f2ea;overflow:hidden;box-shadow:0 4px 10px -4px #000;transform:none}
+#skill-call-dock.cd .cd-docs .call-paper>*{display:block;margin:0 0 2px;font-size:3.2px!important;line-height:1.4;color:#33332f;white-space:nowrap;overflow:hidden}
+#skill-call-dock.cd .cd-docs .call-paper i{height:1px;background:#0000001f}
+#skill-call-dock.cd .cd-docs button>span:not(.call-paper){display:grid;min-width:0}
+#skill-call-dock.cd .cd-docs b{font-size:12.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#skill-call-dock.cd .cd-docs small{font-size:11px;color:#8f8f99}
+#skill-call-dock.cd .cd-goal{display:grid;gap:6px;margin:0;padding:12px;border:1px solid #ffffff14;border-radius:16px;background:#ffffff08}
+#skill-call-dock.cd .cd-goal-head{display:flex;align-items:center;gap:8px;color:#c6ff3d}
+#skill-call-dock.cd .cd-goal-head svg{width:16px;height:16px}
+#skill-call-dock.cd .cd-goal-head b{flex:1;font-size:13px;color:#fff}
+#skill-call-dock.cd .cd-goal-head button{display:grid;place-items:center;width:26px;height:26px;min-height:0;padding:0;border:0;border-radius:50%;background:transparent;color:#a1a1aa;box-shadow:none}
+#skill-call-dock.cd .cd-goal-head button:hover{background:#ffffff10;color:#fff}
+#skill-call-dock.cd .cd-goal-head button svg{width:13px;height:13px}
+#skill-call-dock.cd .cd-goal textarea{width:100%;min-height:0;margin:0;padding:4px 0;border:0;background:transparent;color:#e4e4e8;font:13px/1.55 'DM Sans',sans-serif;resize:none;box-shadow:none;outline:none}
+#skill-call-dock.cd .cd-goal textarea::placeholder{color:#71717a}
+#skill-call-dock.cd .cd-goal:focus-within{border-color:#c6ff3d66}
+#skill-call-dock.cd .call-status{margin:2px 4px 0;font-size:11.5px;color:#a3c97a}
+#skill-call-dock.cd .call-local-note{display:block;margin:0 4px 4px;font-size:10.5px;color:#6b6b74}
+
+/* Room: the camera lives in the "You" tile too */
+#skill-call-dock.is-room .room-self{display:grid;place-items:center;background:#1d2419}
+#skill-call-dock.is-room .room-self>b{font-size:26px;color:#c6ff3d}
+#skill-call-dock.is-room .room-self #skill-call-video{position:absolute;inset:0;width:100%;height:100%;margin:0;border:0;border-radius:0;aspect-ratio:auto;object-fit:cover;transform:scaleX(-1);box-shadow:none;z-index:1}
+#skill-call-dock.is-room .room-self.is-live>img,#skill-call-dock.is-room .room-self.is-live>b{visibility:hidden}
+#skill-call-dock.is-room .room-self small{z-index:2}
+
+@keyframes cd-in{from{opacity:0;transform:translateY(-10px) scale(.97)}to{opacity:1;transform:none}}
+@media(max-width:600px){#skill-call-dock.cd{top:auto;bottom:12px;right:12px;left:12px;width:auto}#skill-call-dock.cd .cd-self{width:84px}}
+@media(prefers-reduced-motion:reduce){#skill-call-dock.cd,#skill-call-dock.cd .cd-live i,#app .skill-global-header .cs-bar .cs-who-copy small i{animation:none}}
+
+/* Document tiles: override the older thumbnail rules */
+#skill-call-dock.cd section.call-documents.cd-docs{padding:0;border:0;border-radius:0;background:none}
+#skill-call-dock.cd .cd-docs>button{flex-direction:row;width:100%;min-height:0;padding:8px 10px 8px 8px;font-size:12px}
+#skill-call-dock.cd .cd-docs>button>.call-paper{flex:none;width:38px;height:50px;min-height:0;gap:2px;padding:5px 4px}
+#skill-call-dock.cd .cd-docs>button>span:last-child{position:static;display:grid;flex:1;max-width:none;padding:0;border-radius:0;background:none;color:#fff;font-size:12px;line-height:1.3}
+#skill-call-dock.cd .cd-docs>button>span:last-child b{font-size:12.5px;font-weight:600;line-height:1.3}
+#skill-call-dock.cd .cd-docs>button>span:last-child small{font-size:11px;line-height:1.3;color:#8f8f99}
+#skill-call-dock.cd .call-goal.cd-goal{padding:12px;border:1px solid #ffffff14;border-radius:16px;background:#ffffff08}

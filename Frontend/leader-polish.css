@@ -1,0 +1,72 @@
+/* Program Leader overview polish — top KPIs and activity chart keep their look; Completion By Course becomes labelled
+   bars; the bottom row is Pending Approval plus three Hyper-Charts-style cards on real data. */
+
+/* ── Completion by course: horizontal, labelled ── */
+.ld-completion .ld-completion-note{font-size:12px;color:#9a9aa0;margin:14px 16px 0}
+.ld-course-bars{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:12px;height:auto;max-height:300px;overflow:auto;margin:18px 16px 0;scrollbar-width:thin;scrollbar-color:#ffffff1f transparent}
+.ld-course-row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name value" "track track" "note note";gap:4px 10px;text-decoration:none;color:inherit}
+.ld-course-name{grid-area:name;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12.5px;color:#d8d8dc}
+.ld-course-value{grid-area:value;font:600 12.5px 'Space Mono',Consolas,monospace;color:#f2f2f2}
+.ld-course-row .ld-course-track{grid-area:track;display:block;width:auto;height:6px;border:0;border-radius:6px;background:#2a2a2e;overflow:hidden}
+.ld-course-row .ld-course-fill{display:block;height:100%;border-radius:inherit;mask:none;-webkit-mask:none;background:linear-gradient(90deg,#3fd35a,#7ff6d0);box-shadow:0 0 8px #56f08f66}
+.ld-course-row small{grid-area:note;font-size:11px;color:#7d7d84}
+.ld-course-row:hover .ld-course-name{color:#fff}
+.ld-completion-report{font-size:12px;color:#c9c9cf;text-decoration:underline;text-decoration-color:#ffffff40;text-underline-offset:3px}
+.ld-activity figcaption{font-size:12px}
+
+/* ── Bottom row: four equal cards ── */
+.ld-bottom{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.ld-bottom>.ld-pending,.ld-insight{height:360px;border-radius:18px}
+
+/* Pending approval as a data card */
+.ld-bottom>.ld-pending{background:#050505;border:1px solid #ffffff14;padding:18px 16px;box-shadow:inset 0 1px 0 #ffffff0d}
+.ld-pending>header h2{font-size:14px;font-weight:500}
+.ld-pending>header>a{font-size:12px;color:#9fd8b2;padding:3px 10px;border-radius:999px;background:#3fd35a1a}
+.ld-pending .ld-pending-scroll{background:transparent;border:0;border-radius:0}
+.ld-pending th{font-size:11px;padding:10px 6px;background:transparent;color:#8a8a90;border-bottom:1px solid #ffffff14}
+.ld-pending td{font-size:12.5px;padding:14px 6px;color:#e2e2e6;border-bottom:1px solid #ffffff0d}
+.ld-pending td small{font-size:11px;margin-top:4px}
+.ld-pending td a{color:inherit;text-decoration:none}
+.ld-pending .ld-review{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid #ffffff26;font-size:11.5px;color:#e8e8ec}
+.ld-pending .avatar{width:26px;height:26px;font-size:9px}
+.ld-pending .ld-empty{font-size:12.5px;color:#8a8a90}
+
+/* Insight cards (Hyper Charts style) */
+.ld-insight{display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:18px 18px 14px;background:#050505;border:1px solid #ffffff14;box-shadow:inset 0 1px 0 #ffffff0d;color:#ececf0;font-family:'DM Sans',sans-serif}
+.ld-insight header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ld-insight h2{margin:0;font-size:14px;font-weight:500;color:#f0f0f3}
+.ld-insight header a{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;color:#9a9aa0}
+.ld-insight header a svg{width:18px;height:18px}
+.ld-in-figure{display:flex;align-items:baseline;gap:10px;margin:10px 0 0}
+.ld-in-figure strong{font:700 30px/1.1 'Space Mono',Consolas,monospace;letter-spacing:-.03em;color:#fff}
+.ld-in-delta{font:700 13px 'Space Mono',Consolas,monospace;color:#57e36b}
+.ld-in-delta.is-down{color:#ff7a7a}
+.ld-in-note{margin:4px 0 0;font-size:12px;color:#7f7f86}
+.ld-in-axis{display:flex;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid #ffffff14;font:11px 'Space Mono',Consolas,monospace;color:#8a8a90}
+
+/* 1 — glowing daily bars */
+.ld-in-bars{flex:1;min-height:0;margin-top:16px;display:flex;align-items:flex-end;gap:3px}
+.ld-in-bars span{flex:1;min-width:0;height:var(--h);border-radius:2px 2px 0 0;background:linear-gradient(180deg,#9bffb9,#34d65a 55%,#14802f);box-shadow:0 0 10px #3fe36b55}
+.ld-in-bars span.is-zero{background:#1d1d20;box-shadow:none}
+
+/* 2 — weekday pill rows */
+.ld-in-rows{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:9px;flex:1;align-content:end}
+.ld-in-rows li{display:grid;grid-template-columns:34px minmax(0,1fr) 26px;align-items:center;gap:10px;font:11.5px 'Space Mono',Consolas,monospace;color:#a0a0a6}
+.ld-in-rows b{font-weight:700;color:#e8e8ec;text-align:right}
+.ld-in-pills{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.ld-in-pills i{height:9px;border-radius:999px;background:#2a2a2e}
+.ld-in-pills i.is-lit{background:linear-gradient(90deg,#4be36a,#8ef5a2);box-shadow:0 0 8px #4be36a88}
+
+/* 3 — glowing candles: weekly min–max range with the average marked */
+.ld-in-candles{position:relative;flex:1;min-height:0;margin-top:16px;display:flex;align-items:stretch;justify-content:space-between;gap:8px;background:repeating-linear-gradient(to top,#ffffff0a 0 1px,transparent 1px 25%)}
+.ld-candle{position:relative;flex:1;min-width:0;max-width:22px;margin:0 auto}
+.ld-candle:before{content:"";position:absolute;left:50%;width:10px;transform:translateX(-50%);bottom:var(--lo);height:calc(var(--hi) - var(--lo) + 4px);border-radius:999px;background:linear-gradient(180deg,#7ff6d0,#22c58f);box-shadow:0 0 14px #2fe3a088;opacity:.85}
+.ld-candle i{position:absolute;left:50%;bottom:calc(var(--avg) - 2px);width:16px;height:4px;transform:translateX(-50%);border-radius:2px;background:#fff;box-shadow:0 0 8px #ffffffaa}
+.ld-candle.is-empty:before{bottom:0;height:4px;background:#2a2a2e;box-shadow:none}
+
+@media(hover:hover){.ld-insight header a:hover{background:#ffffff12;color:#fff}.ld-pending .ld-review:hover{background:#ffffff14}}
+@media(max-width:1100px){.ld-bottom{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.ld-bottom{grid-template-columns:minmax(0,1fr)}.ld-bottom>.ld-pending,.ld-insight{height:320px}}
+.ld-pending th{white-space:nowrap}
+.ld-pending th:first-child{width:48%}.ld-pending th:nth-child(2){width:26%}
+.leader-dashboard .ld-pending th{white-space:nowrap}.leader-dashboard .ld-pending td:last-child>a.ld-review{font-size:11.5px;color:#e8e8ec}

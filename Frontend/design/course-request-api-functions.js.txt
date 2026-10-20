@@ -1,0 +1,12 @@
+  function ensureCourseRequests(){
+    db.courseRequests ||= [];const active={};
+    for(const a of [...db.approvals].reverse().sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt))){
+      if(a.decision==='Submitted'){let r=db.courseRequests.find(r=>r.submissionId===a.id);const c=db.courses.find(c=>c.id===a.courseId);if(!r&&c){r={id:'request-'+a.id,submissionId:a.id,kind:'Create',courseId:c.id,courseTitle:c.title,programId:c.programId,requesterId:a.actorId,status:'Pending review',createdAt:a.createdAt,reason:a.comment||'Submitted for review',events:[{id:a.id,actorId:a.actorId,action:'Submitted',comment:a.comment||'Submitted for review',createdAt:a.createdAt}]};db.courseRequests.push(r);}if(r)active[a.courseId]=r;
+      }else if(active[a.courseId]&&['Approved','Changes requested','Rejected','Withdrawn'].includes(a.decision)){const r=active[a.courseId];if(!r.events.some(e=>e.id===a.id)){r.events.push({id:a.id,actorId:a.actorId,action:a.decision,comment:a.comment,createdAt:a.createdAt});r.status=a.decision;}}
+    }
+  }
+  function pendingCourseRequest(cid){ensureCourseRequests();return db.courseRequests.find(r=>r.courseId===cid&&r.status==='Pending review');}
+  function appendRequestEvent(r,action,comment,source){const e=source||{id:id(),actorId:session,createdAt:now()};r.events.push({id:e.id,actorId:e.actorId,action,comment,createdAt:e.createdAt});if(action!=='Review started')r.status=action;return r;}
+  function submitCourseRequest(c,kind,reason,source){const r={id:source?'request-'+source.id:id(),submissionId:source?.id||null,kind,courseId:c.id,courseTitle:c.title,programId:c.programId,requesterId:session,status:'Pending review',createdAt:source?.createdAt||now(),reason,events:[]};r.events.push({id:source?.id||id(),actorId:session,action:'Submitted',comment:reason,createdAt:r.createdAt});db.courseRequests.push(r);return r;}
+  function findCourseRequest(rid){ensureCourseRequests();const r=db.courseRequests.find(r=>r.id===rid);if(!r)fail('Request not found.',404);return r;}
+  function removeApprovedCourse(c){if(db.enrollments.some(e=>e.courseId===c.id))fail('This course has learners. Hide it instead.');db.courses=db.courses.filter(x=>x.id!==c.id);for(const p of db.programs)p.courseIds=p.courseIds.filter(x=>x!==c.id);for(const key of ['resources','posts','announcements','sessions','reviews','attempts'])db[key]=(db[key]||[]).filter(x=>x.courseId!==c.id);}

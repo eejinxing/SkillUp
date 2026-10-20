@@ -1,0 +1,110 @@
+const imgImage12 = "https://www.figma.com/api/mcp/asset/4f0724a5-609f-45a1-8e10-131949e2deea.png";
+const imgImage16 = "https://www.figma.com/api/mcp/asset/d705d781-550e-4e9c-b83c-abe850d359e3.png";
+const imgImage15 = "https://www.figma.com/api/mcp/asset/8ee10135-47b3-44b4-b68e-58a48436c4a3.png";
+const imgImage17 = "https://www.figma.com/api/mcp/asset/d0193e8b-4987-4a0b-9165-d075d3d4e161.png";
+const imgImage18 = "https://www.figma.com/api/mcp/asset/5479ac3a-c2e2-4e92-92f8-62eb2cdefa04.png";
+const imgVector18 = "https://www.figma.com/api/mcp/asset/52cbb33a-bc2d-4cae-800f-b1425530fd55.svg";
+const imgAkarIconsArrowRight = "https://www.figma.com/api/mcp/asset/f5ca6f2f-31ba-45fc-a127-fcb9f8f095ff.svg";
+
+export default function Frame197() {
+  return (
+    <div className="bg-black relative size-full" data-node-id="296:448">
+      <div className="absolute contents left-[1111px] top-[6186px]" data-node-id="313:868">
+        <div className="absolute h-[6130px] left-[1111px] top-[6186px] w-[4462.006px]" data-node-id="313:869" data-name="image 12">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage12} />
+        </div>
+      </div>
+      <div className="absolute contents left-[1165px] top-[761px]" data-node-id="313:871">
+        <div className="absolute h-[5982.141px] left-[1165px] top-[761px] w-[4354.38px]" data-node-id="313:872" data-name="image 12">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage12} />
+        </div>
+        <p className="[word-break:break-word] absolute font-['Archivo_Black:Regular'] h-[864.714px] leading-[864.597px] left-[2052px] not-italic text-[616.025px] text-white top-[1586px] tracking-[18.4808px] w-[3024.977px]" data-node-id="313:873">
+          CSHARP
+        </p>
+      </div>
+      <div className="absolute bg-[var(--courses-color-surface,#121419)] border-[7.5px] border-[var(--courses-color-line,#2d303c)] border-solid content-stretch flex flex-col h-[8220px] items-center left-[262px] p-[90px] rounded-[210px] top-[240px] w-[685px]" data-node-id="296:449" data-name="Main navigation">
+        <div className="h-[90px] relative shrink-0 w-[30px]" data-node-id="296:450" data-name="Space" />
+      </div>
+      <div className="absolute border-13 border-[#b4b4b4] border-solid h-[13142px] left-[5539px] overflow-clip rounded-[500px] top-[240px] w-[10906px]" data-node-id="313:875">
+        <div className="absolute h-[3563px] left-[4061px] top-[4400px] w-[6331px]" data-node-id="314:884" data-name="image 16">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage16} />
+        </div>
+        <div className="absolute h-0 left-[833px] top-[4009px] w-[9566px]" data-node-id="331:346">
+          <div className="absolute inset-[-5px_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector18} />
+          </div>
+        </div>
+        <div className="absolute h-0 left-[826px] top-[8169px] w-[9566px]" data-node-id="331:347">
+          <div className="absolute inset-[-5px_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector18} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute contents left-[620px] top-[3315px]" data-node-id="296:451">
+        <div className="absolute h-[6498px] left-[620px] top-[3315px] w-[4729.873px]" data-node-id="296:452" data-name="image 12">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage12} />
+        </div>
+        <p className="[word-break:break-word] absolute font-['Archivo_Black:Regular'] h-[939.281px] leading-[821.972px] left-[1888px] not-italic text-[585.655px] text-white top-[4350px] tracking-[17.5696px] w-[3285.83px]" data-node-id="296:453">
+          CSHARP
+        </p>
+      </div>
+      <div className="absolute h-[3563px] left-[9586px] top-[298px] w-[6331px]" data-node-id="313:880" data-name="image 15">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage15} />
+      </div>
+      <div className="absolute contents left-[6026px] top-[5px]" data-node-id="314:897">
+        <p className="[word-break:break-word] absolute font-['Archivo_Black:Regular'] leading-[2934.815px] left-[6359px] not-italic text-[2091.056px] text-white top-[5px] tracking-[62.7317px] whitespace-nowrap" data-node-id="313:882">
+          01
+        </p>
+        <div className="absolute contents left-[7786px] top-[2552px]" data-node-id="314:896">
+          <div className="absolute bg-[#393939] h-[871px] left-[7786px] rounded-[200px] top-[2552px] w-[1639px]" data-node-id="314:891" />
+          <div className="absolute left-[8361px] size-[490px] top-[2743px]" data-node-id="314:894" data-name="akar-icons:arrow-right">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgAkarIconsArrowRight} />
+          </div>
+        </div>
+        <div className="absolute h-[1747px] left-[6026px] top-[2114px] w-[1859.061px]" data-node-id="314:887" data-name="image 17">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage17} />
+        </div>
+      </div>
+      <div className="absolute contents left-[6086px] top-[4350px]" data-node-id="314:898">
+        <p className="[word-break:break-word] absolute font-['Archivo_Black:Regular'] leading-[2934.815px] left-[6419px] not-italic text-[2091.056px] text-white top-[4350px] tracking-[62.7317px] whitespace-nowrap" data-node-id="314:899">
+          02
+        </p>
+        <div className="absolute contents left-[7846px] top-[6897px]" data-node-id="314:900">
+          <div className="absolute bg-[#393939] h-[871px] left-[7846px] rounded-[200px] top-[6897px] w-[1639px]" data-node-id="314:901" />
+          <div className="absolute left-[8421px] size-[490px] top-[7088px]" data-node-id="314:902" data-name="akar-icons:arrow-right">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgAkarIconsArrowRight} />
+          </div>
+        </div>
+        <div className="absolute h-[1747px] left-[6086px] top-[6459px] w-[1859.061px]" data-node-id="314:904" data-name="image 17">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage17} />
+        </div>
+      </div>
+      <div className="absolute contents left-[6146px] top-[8460px]" data-node-id="314:908">
+        <p className="[word-break:break-word] absolute font-['Archivo_Black:Regular'] leading-[2934.815px] left-[6479px] not-italic text-[2091.056px] text-white top-[8460px] tracking-[62.7317px] whitespace-nowrap" data-node-id="314:909">
+          03
+        </p>
+        <div className="absolute contents left-[7906px] top-[11007px]" data-node-id="314:910">
+          <div className="absolute bg-[#393939] h-[871px] left-[7906px] rounded-[200px] top-[11007px] w-[1639px]" data-node-id="314:911" />
+          <div className="absolute left-[8481px] size-[490px] top-[11198px]" data-node-id="314:912" data-name="akar-icons:arrow-right">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgAkarIconsArrowRight} />
+          </div>
+        </div>
+        <div className="absolute h-[1747px] left-[6146px] top-[10569px] w-[1859.061px]" data-node-id="314:914" data-name="image 17">
+          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage17} />
+        </div>
+      </div>
+      <div className="absolute h-[3563px] left-[9545px] top-[8753px] w-[6331px]" data-node-id="314:906" data-name="image 18">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage18} />
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

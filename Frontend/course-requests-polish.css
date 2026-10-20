@@ -1,0 +1,66 @@
+/* My requests (course requests) polish — same dark layout, readable type scale, clearer hierarchy and states. */
+.course-requests-page{font-family:'DM Sans',sans-serif;letter-spacing:.005em}
+.course-requests-page .rq-breadcrumb{font-size:12px}
+.course-requests-page .rq-title h1{font-size:34px;font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.course-requests-page .rq-title p{font-size:13.5px;margin-top:8px}
+.course-requests-page .rq-title .rq-new{min-height:40px;padding:0 18px;border-radius:999px;font-size:13px;font-weight:600}
+.course-requests-page .rq-summary{font-size:13px;gap:16px}
+.course-requests-page .rq-count{font-size:12px;margin:14px 0 10px}
+
+/* Filters */
+.course-requests-page .rq-filters{gap:10px}
+.course-requests-page .rq-filters :is(input,select){height:44px;padding:0 14px;border-radius:12px;font-size:13.5px}
+.course-requests-page .rq-filters select{padding-right:34px}
+
+/* Request cards */
+.course-requests-page .rq-request-list{gap:10px}
+.course-requests-page .rq-request{padding:18px 20px;border-radius:16px;gap:16px;transition:background-color .15s,border-color .15s}
+.course-requests-page .rq-request-type{width:38px;height:38px;font-size:20px}
+.course-requests-page .rq-request>div>span{font-size:12px}
+.course-requests-page .rq-request h2{font-size:16px;font-weight:600;margin:4px 0 6px}
+.course-requests-page .rq-request small{font-size:12.5px}
+.course-requests-page .rq-state{padding:4px 10px;border-radius:999px;font-size:11.5px;font-weight:500;white-space:nowrap}
+.course-requests-page .rq-request.rq-selected{box-shadow:inset 0 0 0 1px #ffffff2e}
+
+/* Activity panel */
+.course-requests-page .rq-overview h2{font-size:17px;font-weight:600}
+.course-requests-page .rq-overview>span{font-size:12px}
+.course-requests-page .rq-status-notice{gap:10px;padding:16px 22px}
+.course-requests-page .rq-status-notice>span{width:18px;height:18px;font-size:11px;margin-top:1px}
+.course-requests-page .rq-status-notice p{font-size:13.5px;line-height:1.6}
+.course-requests-page .rq-kind{font-size:12px}
+.course-requests-page .rq-request-meta>h2{font-size:24px;font-weight:600;letter-spacing:-.02em;line-height:1.25;margin:6px 0 10px}
+.course-requests-page .rq-request-meta>p{padding:4px 10px;border-radius:999px;font-size:12px;font-weight:500}
+.course-requests-page .rq-request-meta>small{font-size:12.5px;margin-top:12px}
+
+/* Review progress stepper */
+.course-requests-page .rq-review-progress h3{font-size:13px;margin-bottom:18px}
+.course-requests-page .rq-review-progress li:not(:last-child):before{top:13px;left:34px;height:2px;border-radius:2px}
+.course-requests-page .rq-review-progress li[data-state=done]:not(:last-child):before{background:#376547}
+.course-requests-page .rq-stage-dot{width:28px;height:28px;font-size:12px;margin-bottom:12px}
+.course-requests-page .rq-review-progress strong{font-size:13px}
+.course-requests-page .rq-review-progress small{font-size:11.5px;margin-top:4px}
+
+/* Activity history */
+.course-requests-page .rq-tracker summary{font-size:14px}
+.course-requests-page .rq-tracker summary>span{font-size:12px;min-width:22px;height:22px}
+.course-requests-page .rq-event-heading strong{font-size:14.5px}
+.course-requests-page .rq-event-heading time{font-size:12px}
+.course-requests-page .rq-event-card{border-radius:14px}
+.course-requests-page .rq-event-card dt{font-size:12.5px}
+.course-requests-page .rq-event-card dd{font-size:13px;line-height:1.55}
+.course-requests-page .rq-person-avatar{width:22px;height:22px;font-size:9px}
+.course-requests-page .rq-data-tag{padding:3px 8px;border-radius:6px;font-size:12px}
+.course-requests-page .rq-event-note{font-size:13px}
+.course-requests-page .rq-event-card footer a{min-height:40px;border-radius:10px;font-size:13px}
+.course-requests-page .rq-awaiting{font-size:12.5px}
+
+/* Actions */
+.course-requests-page .rq-detail-actions{gap:14px;font-size:13px}
+.course-requests-page .rq-detail-actions .rq-withdraw{min-height:40px;padding:0 18px;border-radius:999px;font-size:13px;font-weight:500}
+.course-requests-page .rq-detail-actions .rq-open-course{font-size:13px;font-weight:500}
+.course-requests-page .rq-detail-actions>small{font-size:12px}
+.course-requests-page .rq-empty h2{font-size:20px}.course-requests-page .rq-empty p{font-size:13.5px}
+.course-requests-page :is(a,button,input,select,summary):focus-visible{outline:2px solid #a78bfa;outline-offset:2px}
+@media(max-width:760px){.course-requests-page .rq-title h1{font-size:28px}.course-requests-page .rq-request{padding:14px 16px}.course-requests-page .rq-request-meta>h2{font-size:20px}.course-requests-page .rq-stage-dot{width:24px;height:24px}.course-requests-page .rq-review-progress li:not(:last-child):before{top:11px;left:30px}.course-requests-page .rq-review-progress strong{font-size:12px}.course-requests-page .rq-filters{grid-template-columns:1fr}}
+.course-requests-page .rq-event-card dt{white-space:nowrap;min-width:96px}

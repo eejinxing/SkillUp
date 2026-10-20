@@ -1,0 +1,281 @@
+const imgImage7 = "https://www.figma.com/api/mcp/asset/64eec4d8-4281-4094-a196-9e50d34772e0.png";
+const imgVector = "https://www.figma.com/api/mcp/asset/34160aa0-a839-4f5e-bd5f-6956f4b3937f.svg";
+const imgAddLine = "https://www.figma.com/api/mcp/asset/c1b575e9-323a-4b5e-a786-57ba45c7ccc1.svg";
+const imgVector1 = "https://www.figma.com/api/mcp/asset/fd0742a8-ec2e-4957-91da-0d3d7af2504e.svg";
+const imgVector2 = "https://www.figma.com/api/mcp/asset/65910e36-8ac4-4217-bd30-49c6e230a829.svg";
+const imgVector3 = "https://www.figma.com/api/mcp/asset/bdc17a31-d7c8-49ba-9522-54c227351a24.svg";
+const imgVector4 = "https://www.figma.com/api/mcp/asset/3776bcd5-69ec-48d2-ac1e-cb817866d6e7.svg";
+const imgClarityDateSolid = "https://www.figma.com/api/mcp/asset/d85519d6-4684-496a-a9c7-60e01631fdb4.svg";
+const imgGroup = "https://www.figma.com/api/mcp/asset/74766313-a271-4147-a925-3bbd0f8a7040.svg";
+const imgVector5 = "https://www.figma.com/api/mcp/asset/3967d127-5c35-4d49-bcb4-5d5a1d3a4a40.svg";
+const imgVector6 = "https://www.figma.com/api/mcp/asset/72b657ae-aee3-4705-b3c0-ea97cda06ec3.svg";
+const imgVector7 = "https://www.figma.com/api/mcp/asset/6cab54a2-da98-409c-a214-7813fd260b3c.svg";
+const imgEllipse199 = "https://www.figma.com/api/mcp/asset/cc5f1b48-7fbf-4c0b-a6f5-dd012737ce20.svg";
+const imgEllipse200 = "https://www.figma.com/api/mcp/asset/aeae1faf-a4c1-40eb-ba7a-d743cc6e429b.svg";
+const imgEllipse201 = "https://www.figma.com/api/mcp/asset/66343232-d0c9-4ba8-bd02-0277e9657861.svg";
+const imgEllipse202 = "https://www.figma.com/api/mcp/asset/7123c07d-b80f-47ba-ac7d-be4721a7340f.svg";
+const imgEllipse203 = "https://www.figma.com/api/mcp/asset/75933e13-9d10-474d-9c27-7f6c1317df22.svg";
+const imgEllipse204 = "https://www.figma.com/api/mcp/asset/3071db98-a13e-4ebe-8d2b-69bcf48cecbe.svg";
+const imgEllipse197 = "https://www.figma.com/api/mcp/asset/0f046acc-f512-493a-90c0-8cea15271777.svg";
+const imgEllipse205 = "https://www.figma.com/api/mcp/asset/ce78e5b7-dfd4-4a3e-8b7c-1038b32ed296.svg";
+const imgEllipse206 = "https://www.figma.com/api/mcp/asset/7cd01e0f-7acd-4734-8e4b-83c62ccabef8.svg";
+const imgEllipse207 = "https://www.figma.com/api/mcp/asset/f3fb8a35-7b2d-425c-a532-7e25c3d5d063.svg";
+const imgEllipse208 = "https://www.figma.com/api/mcp/asset/12897ea2-643b-43c5-8532-4369d7581325.svg";
+const imgEllipse211 = "https://www.figma.com/api/mcp/asset/2677e264-3503-4301-b62e-d5944ebe7dff.svg";
+const imgVector8 = "https://www.figma.com/api/mcp/asset/6769b943-8a32-42d6-855f-66aae14f86f4.svg";
+const imgVector9 = "https://www.figma.com/api/mcp/asset/b708060e-1a9d-493b-ab88-95f009f77c88.svg";
+const imgGroup1 = "https://www.figma.com/api/mcp/asset/2026df40-8345-4e6d-8ffb-b6d255e2274b.svg";
+
+export default function MacBookPro1613() {
+  return (
+    <div className="bg-black relative size-full" data-node-id="250:1980" data-name="MacBook Pro 16' - 13">
+      <div className="absolute contents left-[959px] top-[2588px]" data-node-id="250:1981">
+        <div className="absolute inset-[10.12%_94.68%_86.26%_2.71%]" data-node-id="250:1982" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[10.97%_95.51%_87.12%_3.54%] leading-[normal] not-italic text-[#eee] text-[405.219px] whitespace-nowrap" data-node-id="250:1983">
+          ▣
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold inset-[10.69%_78.14%_86.66%_6.3%] leading-[normal] text-[#f2f2f2] text-[520.996px] whitespace-nowrap" data-node-id="250:1984" style={{ fontVariationSettings: '"opsz" 14' }}>
+          MongoDB Management
+        </p>
+        <div className="absolute bg-[#f8f8f8] border-[#343434] border-[28.944px] border-solid content-stretch flex gap-[10px] h-[926.215px] items-center justify-center left-[32319px] pb-[256px] pl-[675px] pr-[674px] pt-[255px] rounded-[300px] top-[2611px] w-[1997.151px]" data-node-id="250:1985">
+          <div className="h-[338px] relative shrink-0 w-[408px]" data-node-id="250:1986" data-name="add-line">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgAddLine} />
+          </div>
+          <p className="[word-break:break-word] font-['DM_Sans:SemiBold'] font-semibold leading-[normal] relative shrink-0 text-[#111] text-[318.386px] whitespace-nowrap" data-node-id="250:1988" style={{ fontVariationSettings: '"opsz" 14' }}>
+            Save
+          </p>
+        </div>
+        <div className="absolute inset-[18.04%_75.64%_2.89%_2.71%]" data-node-id="250:1989" data-name="Vector">
+          <div className="absolute inset-[0_-0.19%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector1} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[44.06%_82.94%_54.43%_6.63%] leading-[normal] not-italic text-[#b6b6b6] text-[318.386px] whitespace-nowrap" data-node-id="250:1990">
+          John doe@example.com
+        </p>
+        <div className="absolute inset-[18.04%_0.87%_76.53%_24.68%]" data-node-id="250:1991" data-name="Vector">
+          <div className="absolute inset-[-1.04%_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector2} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[20.08%_65.91%_78.28%_26.72%] leading-[normal] not-italic text-[#eee] text-[347.331px] whitespace-nowrap" data-node-id="250:1992">{`Profile & access`}</p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[20.08%_56.19%_78.28%_37.81%] leading-[normal] not-italic text-[#aaa] text-[347.331px] whitespace-nowrap" data-node-id="250:1993">
+          Activity Logs
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[30.99%_67.94%_67.36%_26.72%] leading-[0] not-italic text-[#bdbdbd] text-[347.331px] whitespace-nowrap" data-node-id="250:1994">
+          <span className="leading-[normal]">Full Name</span>
+          <span className="leading-[normal] text-[#d94242]">{` *`}</span>
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[39.86%_65.4%_58.5%_26.74%] leading-[0] not-italic text-[#bdbdbd] text-[347.331px] whitespace-nowrap" data-node-id="250:1995">
+          <span className="leading-[normal]">{`Account Status `}</span>
+          <span className="leading-[normal] text-[#de3c3c]">*</span>
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:SemiBold'] font-semibold inset-[48.7%_59.88%_48.25%_26.52%] leading-[normal] text-[600px] text-white whitespace-nowrap" data-node-id="250:1996" style={{ fontVariationSettings: '"opsz" 14' }}>
+          User Information
+        </p>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:SemiBold'] font-semibold inset-[64.6%_62.05%_32.35%_26.6%] leading-[normal] text-[600px] text-white whitespace-nowrap" data-node-id="250:1997" style={{ fontVariationSettings: '"opsz" 14' }}>{`Role & access`}</p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[68.57%_70.48%_29.79%_26.74%] leading-[0] not-italic text-[#bdbdbd] text-[347.331px] whitespace-nowrap" data-node-id="250:1998">
+          <span className="leading-[normal]">{`Role `}</span>
+          <span className="leading-[normal] text-[#ce3535]">*</span>
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[89.35%_52.72%_9.01%_40.27%] leading-[normal] not-italic text-[#e44f4f] text-[347.331px] whitespace-nowrap" data-node-id="250:1999">
+          Delete account
+        </p>
+        <div className="absolute inset-[33.82%_50.88%_61.99%_26.72%]" data-node-id="250:2000" data-name="Vector">
+          <div className="absolute inset-[-1.35%_-0.18%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector3} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[35.29%_66.37%_63.2%_29.58%] leading-[normal] not-italic text-[#9b9b9b] text-[318.386px] whitespace-nowrap" data-node-id="250:2001">
+          John Doe
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[30.99%_42.93%_67.36%_50.51%] leading-[normal] not-italic text-[#bdbdbd] text-[347.331px] whitespace-nowrap" data-node-id="250:2002">
+          Email Address
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[30.99%_22.39%_67.36%_74.29%] leading-[normal] not-italic text-[#bdbdbd] text-[347.331px] whitespace-nowrap" data-node-id="250:2003">
+          User Id
+        </p>
+        <div className="absolute inset-[33.82%_27.1%_61.99%_50.51%]" data-node-id="250:2004" data-name="Vector">
+          <div className="absolute inset-[-1.35%_-0.18%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector3} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[35.29%_36.73%_63.2%_53.37%] leading-[normal] not-italic text-[#9b9b9b] text-[318.386px] whitespace-nowrap" data-node-id="250:2005">
+          johndoe@example.com
+        </p>
+        <div className="absolute inset-[33.82%_3.32%_61.99%_74.29%]" data-node-id="250:2006" data-name="Vector">
+          <div className="absolute inset-[-1.35%_-0.18%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector3} />
+          </div>
+        </div>
+        <div className="absolute inset-[43.18%_61.5%_52.64%_26.72%]" data-node-id="250:2007" data-name="Vector">
+          <div className="absolute inset-[-1.35%_-0.35%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector4} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[35.29%_20.61%_63.2%_74.91%] leading-[normal] not-italic text-[#9b9b9b] text-[318.386px] whitespace-nowrap" data-node-id="250:2008">
+          USR-0000
+        </p>
+      </div>
+      <div className="absolute left-[2350.53px] size-[522.859px] top-[16007.61px]" data-node-id="250:2009" data-name="clarity:date-solid">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgClarityDateSolid} />
+      </div>
+      <div className="absolute left-[2402.2px] overflow-clip size-[421.978px] top-[13787px]" data-node-id="250:2014" data-name="charm:person">
+        <div className="absolute inset-[17.19%_17.19%_10.94%_17.19%]" data-node-id="250:2015" data-name="Group">
+          <div className="absolute inset-[-6.52%_-7.14%]">
+            <img alt="" className="block max-w-none size-full" src={imgGroup} />
+          </div>
+        </div>
+      </div>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold inset-[54.1%_88.02%_44.02%_8.39%] leading-[normal] text-[#848484] text-[369.077px] whitespace-nowrap" data-node-id="250:2018" style={{ fontVariationSettings: '"opsz" 14' }}>
+        User ID
+      </p>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold inset-[62.68%_88.02%_35.44%_8.54%] leading-[normal] text-[#b6b6b6] text-[369.077px] whitespace-nowrap" data-node-id="250:2019" style={{ fontVariationSettings: '"opsz" 14' }}>
+        Joined
+      </p>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold inset-[71.6%_85.87%_26.52%_8.54%] leading-[normal] text-[#848484] text-[369.077px] whitespace-nowrap" data-node-id="250:2020" style={{ fontVariationSettings: '"opsz" 14' }}>
+        Last active
+      </p>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:SemiBold'] font-semibold inset-[57.58%_86.14%_40.54%_8.39%] leading-[normal] text-[#848484] text-[369.077px] whitespace-nowrap" data-node-id="250:2021" style={{ fontVariationSettings: '"opsz" 14' }}>
+        USR-0000
+      </p>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:SemiBold'] font-semibold inset-[66.71%_85.5%_31.41%_8.54%] leading-[normal] text-[#848484] text-[369.077px] whitespace-nowrap" data-node-id="250:2022" style={{ fontVariationSettings: '"opsz" 14' }}>
+        12 Sep 2026
+      </p>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:SemiBold'] font-semibold inset-[75.63%_83.78%_22.49%_8.54%] leading-[normal] text-[#848484] text-[369.077px] whitespace-nowrap" data-node-id="250:2023" style={{ fontVariationSettings: '"opsz" 14' }}>
+        Today, 10:42AM
+      </p>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold inset-[39.98%_85.64%_56.97%_6.66%] leading-[normal] text-[600px] text-white whitespace-nowrap" data-node-id="250:2024" style={{ fontVariationSettings: '"opsz" 14' }}>
+        John Doe
+      </p>
+      <div className="absolute h-[20202px] left-[8629px] overflow-clip top-[4630px] w-[25900px]" data-node-id="250:2025" data-name="mongodb-course-complete-form 1">
+        <div className="absolute inset-[43.92%_1.4%_41.77%_2.94%]" data-node-id="250:2026" data-name="Vector">
+          <div className="absolute inset-[-0.5%_0]">
+            <img alt="" className="block max-w-none size-full" src={imgVector5} />
+          </div>
+        </div>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold leading-[normal] left-[762px] text-[700px] text-white top-[1986px] whitespace-nowrap" data-node-id="250:2027" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Account Information
+        </p>
+        <div className="absolute inset-[21.73%_3.3%_76.06%_95.32%]" data-node-id="250:2028" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
+        </div>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Regular'] font-normal leading-[normal] left-[1200px] text-[#9b9b9b] text-[400px] top-[9269px] whitespace-nowrap" data-node-id="250:2029" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Learner interested in web development and database fundamental
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[1274px] not-italic text-[#9b9b9b] text-[347.331px] top-[6737px] whitespace-nowrap" data-node-id="250:2030">
+          Active
+        </p>
+        <div className="absolute inset-[34.15%_81.62%_64.99%_17.22%]" data-node-id="250:2031" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector7} />
+        </div>
+        <div className="absolute inset-[71.68%_79.76%_27.45%_19.07%]" data-node-id="250:2032" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector7} />
+        </div>
+        <div className="absolute bg-[#1d1d1d] border-13 border-solid border-white h-[1015px] left-[914px] overflow-clip rounded-[111px] top-[17958px] w-[4171px]" data-node-id="250:2033">
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[calc(26.72%-6.05px)_calc(-2.98%-13.78px)_calc(26.72%-6.05px)_calc(9.42%-10.55px)] leading-[normal] not-italic text-[#bdbdbd] text-[347.331px]" data-node-id="250:2034">
+            Deactivate account
+          </p>
+        </div>
+        <p className="[word-break:break-word] absolute font-['DM_Sans:Regular'] font-normal inset-[84.09%_80.67%_12.05%_3.53%] leading-[normal] text-[600px] text-white whitespace-nowrap" data-node-id="250:2035" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Account actions
+        </p>
+        <div className="absolute bg-[#848484] inset-[67.97%_59.9%_23.28%_2.94%] overflow-clip rounded-[10000px]" data-node-id="250:2036">
+          <div className="absolute h-[3925.85px] left-[6500px] top-[-584.5px] w-[19091.443px]" data-node-id="250:2037">
+            <div className="absolute inset-[-25.47%_-5.24%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse199} />
+            </div>
+          </div>
+          <div className="absolute h-[3809.12px] left-[4383px] top-[-7px] w-[11663px]" data-node-id="250:2038">
+            <div className="absolute inset-[-58.45%_-19.09%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse200} />
+            </div>
+          </div>
+          <div className="absolute h-[1605.793px] left-[12804px] top-[1260.21px] w-[6687.5px]" data-node-id="250:2039">
+            <div className="absolute inset-[-62.27%_-14.95%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse201} />
+            </div>
+          </div>
+          <div className="absolute h-[3296px] left-[2117px] top-[-387px] w-[5599px]" data-node-id="250:2040">
+            <div className="absolute inset-[-30.34%_-17.86%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse202} />
+            </div>
+          </div>
+          <div className="absolute inset-[10.38%_77.4%_-4.83%_-1.1%]" data-node-id="250:2041">
+            <div className="absolute inset-[-59.95%_-43.84%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse203} />
+            </div>
+          </div>
+          <div className="absolute inset-[-4.05%_63.17%_-47.18%_11.57%]" data-node-id="250:2042">
+            <div className="absolute inset-[-38.9%_-42.74%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse204} />
+            </div>
+          </div>
+          <div className="absolute inset-[-15.49%_78.89%_42.39%_-7.05%]" data-node-id="250:2043">
+            <div className="absolute inset-[-154.38%_-73.54%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse197} />
+            </div>
+          </div>
+          <div className="absolute inset-[-23.23%_44.05%_43.36%_10.79%]" data-node-id="250:2044">
+            <div className="absolute inset-[-141.79%_-46.02%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse205} />
+            </div>
+          </div>
+          <div className="absolute inset-[4.63%_70.65%_-20.5%_-20.96%]" data-node-id="250:2045">
+            <div className="absolute inset-[-97.74%_-41.31%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse206} />
+            </div>
+          </div>
+          <div className="absolute h-[2324.681px] left-[12782px] top-[1043.32px] w-[11541.5px]" data-node-id="250:2046">
+            <div className="absolute inset-[-65.48%_-13.19%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse207} />
+            </div>
+          </div>
+          <div className="absolute h-[1416px] left-[4246px] mix-blend-plus-lighter top-[-164px] w-[2991px]" data-node-id="250:2047">
+            <div className="absolute inset-[-141.24%_-66.87%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse208} />
+            </div>
+          </div>
+          <div className="absolute h-[1416px] left-[1734px] mix-blend-plus-lighter top-[-440px] w-[2991px]" data-node-id="250:2048">
+            <div className="absolute inset-[-141.24%_-66.87%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse208} />
+            </div>
+          </div>
+          <div className="absolute h-[1416px] left-[14299px] mix-blend-plus-lighter top-[1355px] w-[2991px]" data-node-id="250:2049">
+            <div className="absolute inset-[-141.24%_-66.87%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse208} />
+            </div>
+          </div>
+          <div className="absolute h-[1468.531px] left-[11339.5px] mix-blend-plus-lighter top-[1820.97px] w-[10977.236px]" data-node-id="250:2050">
+            <div className="absolute inset-[-136.19%_-18.22%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse211} />
+            </div>
+          </div>
+          <div className="absolute inset-[12.4%_5.73%_12.4%_5.74%]" data-node-id="250:2051" data-name="Vector">
+            <div className="absolute inset-[-1.09%_-0.17%]">
+              <img alt="" className="block max-w-none size-full" src={imgVector8} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['DM_Sans:Medium'] font-medium leading-[normal] left-[870px] text-[500px] text-white top-[557px] whitespace-nowrap" data-node-id="250:2052" style={{ fontVariationSettings: '"opsz" 14' }}>
+            Instructor
+          </p>
+          <div className="absolute inset-[45.02%_8.49%_45.06%_88.37%]" data-node-id="250:2053" data-name="Vector">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector9} />
+          </div>
+        </div>
+      </div>
+      <div className="absolute h-[3000px] left-[7.36%] right-[84.17%] rounded-[90000px] top-[6587px]" data-node-id="250:2054" data-name="image 7">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[90000px] size-full" src={imgImage7} />
+      </div>
+      <div className="absolute left-[2337px] overflow-clip size-[552.386px] top-[18282.36px]" data-node-id="250:2055" data-name="akar-icons:clock">
+        <div className="absolute inset-[8.33%]" data-node-id="250:2056" data-name="Group">
+          <div className="absolute inset-[-5%]">
+            <img alt="" className="block max-w-none size-full" src={imgGroup1} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

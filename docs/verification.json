@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-20",
+  "timezone": "Asia/Kuala_Lumpur",
+  "format": "Web Forms .aspx + .aspx.cs; existing JavaScript preserved by user request",
+  "build": {
+    "framework": ".NET Framework 4.8.1",
+    "configuration": "Debug / AnyCPU",
+    "result": "passed",
+    "tool": "MSBuild (Visual Studio 18 Community)"
+  },
+  "staticChecks": {
+    "scripts": 47,
+    "styles": 61,
+    "jsSyntax": 47,
+    "localCssResources": 29,
+    "missingReferences": 0,
+    "webFormsPairs": 46
+  },
+  "domainSuites": {
+    "count": 9,
+    "result": "passed"
+  },
+  "httpAdapter": {
+    "result": "passed",
+    "checks": [
+      "runtime configuration",
+      "configured API base URL",
+      "GET workspace",
+      "JSON command POST",
+      "credentials include",
+      "HTTP error propagation"
+    ]
+  },
+  "iis": {
+    "result": "passed",
+    "compiledAspxPages": 46,
+    "allHttp200": true,
+    "defaultEntry": "Default.aspx → Frontend/Home.aspx (Friendly URLs extensionless redirect enabled)"
+  },
+  "browser": {
+    "result": "passed",
+    "roles": [
+      "Learner",
+      "Instructor",
+      "Program Leader",
+      "Admin"
+    ],
+    "checks": [
+      "real IIS .aspx entry",
+      "notification bell/page removal",
+      "mobile no horizontal overflow",
+      "learner course filter",
+      "enquiry submission",
+      "private enquiry portal access"
+    ],
+    "pageErrors": []
+  },
+  "limitations": [
+    "Backend/database/authentication services have not been implemented.",
+    "Existing JavaScript is retained; forms are not rewritten as server postbacks.",
+    "Historical visual-selector tests were preserved but not all rerun or updated."
+  ]
+}

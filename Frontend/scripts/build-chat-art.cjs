@@ -1,0 +1,13 @@
+const fs=require('node:fs'),path=require('node:path'),parser=require('@babel/parser'),base=path.join(__dirname,'..');
+const source=fs.readFileSync(path.join(base,'design/chat-source.jsx.txt'),'utf8').split('SUPER CRITICAL:')[0],ast=parser.parse(source,{sourceType:'module',plugins:['jsx']}),assets={};
+for(const a of require('../design/chat-assets.json'))assets[a.name]='assets/chat/'+a.file;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fixed={absolute:'position:absolute',relative:'position:relative',block:'display:block',flex:'display:flex','flex-none':'flex:none','size-full':'width:100%;height:100%','inset-0':'inset:0','max-w-none':'max-width:none','mix-blend-plus-lighter':'mix-blend-mode:plus-lighter','items-center':'align-items:center','justify-center':'justify-content:center'};
+const props={w:'width',h:'height',left:'left',top:'top',inset:'inset',rotate:'rotate'};
+function css(c){return c.split(' ').filter(Boolean).map(s=>{if(fixed[s])return fixed[s];const m=s.match(/^(.+?)-\[(.+)\]$/);if(!m||!props[m[1]])throw Error('Unsupported chat artwork utility '+s);return props[m[1]]+':'+m[2].replaceAll('_',' ').replace(/(-?\d*\.?\d+)px/g,(_,v)=>'calc('+v+' * var(--chat-unit))');}).join(';');}
+const nodes={};function visit(n){if(!n||typeof n!=='object')return;if(n.type==='JSXElement'){const id=n.openingElement.attributes.find(a=>a.name?.name==='data-node-id');if(id)nodes[id.value.value]=n;}for(const k in n)if(k!=='loc')Array.isArray(n[k])?n[k].forEach(visit):visit(n[k]);}visit(ast);
+const slots=[];function render(n){if(n.type!=='JSXElement')return '';const a={};for(const x of n.openingElement.attributes)if(x.name)a[x.name.name]=x.value?.type==='JSXExpressionContainer'?assets[x.value.expression.name]:x.value?.value||'';const tag=n.openingElement.name.name;if(tag==='img')slots.push(a.src);return '<'+tag+' class="sc-art-layer" '+Object.entries(a).filter(([k])=>k!=='className').map(([k,v])=>k+'="'+esc(v)+'"').join(' ')+' style="'+esc(css(a.className||''))+'">'+(tag==='img'?'':n.children.map(render).join('')+'</'+tag+'>');}
+const ids=['313:718','313:720','313:729','313:731','313:733','313:735','313:737','313:739'],bubble=ids.map(id=>render(nodes[id])).join('');
+fs.writeFileSync(path.join(base,'js/chat-art.js'),'/* Original Figma 313:706 glow placements, scaled from 3194px. */\nwindow.SkillChatArt='+JSON.stringify({bubble})+';\n');
+fs.writeFileSync(path.join(base,'design/chat-layer-map.json'),JSON.stringify({frame:'310:561',bubble:'313:706',glows:ids,wallpaper:'313:877',composer:'313:792',send:'313:865',slots,assets},null,2));
+console.log('Prepared '+slots.length+' original bubble glow assets.');

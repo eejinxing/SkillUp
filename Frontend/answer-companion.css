@@ -1,0 +1,53 @@
+/* The original companion orb is retained; the surrounding panel follows the supplied reference. */
+#app .answer-page .answer-ai-reference{background:#000;border:1px solid #ffffff24;border-radius:22px;min-height:780px;max-height:1100px;box-shadow:-12px 0 55px -40px #134af5;isolation:isolate}
+#app .answer-ai-reference .answer-ai-top{display:flex;align-items:center;justify-content:space-between;flex:none;min-height:58px;padding:16px 24px 8px}
+#app .answer-ai-reference .answer-ai-brand{display:inline-flex;align-items:baseline;gap:7px;color:#f4f4f6;text-decoration:none;font-size:17px;font-weight:750;letter-spacing:-.07em}
+#app .answer-ai-reference .answer-ai-brand span{font-size:11px;font-weight:400;letter-spacing:-.02em;color:#a5a5ae}
+#app .answer-ai-reference .answer-ai-options{position:relative;z-index:5}
+#app .answer-ai-reference .answer-ai-options summary{display:grid;place-items:center;min-width:32px;min-height:32px;padding:0;list-style:none;cursor:pointer;color:#88888f;letter-spacing:3px;font-size:15px}
+#app .answer-ai-reference .answer-ai-options summary::-webkit-details-marker{display:none}
+#app .answer-ai-reference .answer-ai-options>div{position:absolute;top:35px;right:0;display:grid;min-width:156px;padding:5px;border:1px solid #ffffff20;border-radius:10px;background:#111114;box-shadow:0 12px 28px #0009}
+#app .answer-ai-reference .answer-ai-options button,#app .answer-ai-reference .answer-ai-options a{display:block;text-align:left;min-height:38px;padding:10px 12px;border:0;border-radius:6px;background:transparent;color:#ccc;font-family:inherit;font-size:12px;text-decoration:none}
+#app .answer-ai-reference .answer-ai-options button:hover,#app .answer-ai-reference .answer-ai-options a:hover{background:#ffffff0a}
+#app .answer-ai-reference .answer-ai-intro{flex:none}
+#app .answer-ai-reference .answer-orb{margin-top:0;margin-bottom:4px}
+#app .answer-page .answer-ai-reference h2{margin:5px 26px 14px;text-align:left;font-size:clamp(24px,2.5vw,38px);font-weight:400;line-height:1.2;letter-spacing:-.055em;animation:none;color:#62626b}
+#app .answer-ai-reference h2 span{display:block}
+#app .answer-ai-reference h2 em{font-style:normal;color:#f3f3f5}
+#app .answer-ai-reference .answer-ai-conversation{flex:1;min-height:36px;padding:0 24px;scrollbar-color:#333 #000}
+#app .answer-ai-reference .answer-ai-conversation>div{background:#111114;border:1px solid #ffffff0e;border-radius:12px;padding:12px 14px;font-size:12px;line-height:1.65;color:#ccc}
+#app .answer-ai-reference .answer-ai-conversation .answer-ai-reply{background:#0d101b;border-color:#5072cf24;color:#d4dcf2}
+#app .answer-ai-reference .answer-ai-bottom{position:relative;flex:none;padding:68px 18px 20px;margin-top:12px}
+#app .answer-ai-reference .answer-ai-books{position:absolute;top:0;left:28px;width:210px;height:95px;pointer-events:none}
+#app .answer-ai-reference .answer-ai-book{position:absolute;top:5px;left:3px;width:95px;height:106px;overflow:hidden;padding:11px 10px;border:1px solid #4278ff55;border-radius:4px;background:linear-gradient(140deg,#1637c0,#102a8c 75%);color:#ccd9ff;transform:rotate(-9deg);box-shadow:3px 3px 8px #0006}
+#app .answer-ai-reference .answer-ai-book:nth-child(2){top:15px;left:80px;transform:rotate(8deg);z-index:-1;background:linear-gradient(130deg,#131e68,#10121d);color:#7d88b9;border-color:#243777}
+#app .answer-ai-reference .answer-ai-book:nth-child(3){top:24px;left:144px;transform:rotate(19deg);z-index:-2;background:linear-gradient(140deg,#111a38,#080b14);color:#687297;border-color:#1d2944}
+#app .answer-ai-reference .answer-ai-book small{display:block;font-size:7px;line-height:1.2;color:inherit;opacity:.65;letter-spacing:.04em}
+#app .answer-ai-reference .answer-ai-book b{position:relative;z-index:1;display:block;margin-top:5px;font-size:12px;line-height:1.1;font-weight:400;letter-spacing:-.03em}
+#app .answer-ai-reference .answer-ai-book i{position:absolute;width:85px;height:85px;left:30px;top:60px;border:1px solid #7394ff3b;border-radius:50%;box-shadow:0 0 0 9px #7394ff0c,0 0 0 18px #7394ff08;background:radial-gradient(circle at 80% 50%,#3ad9ec77,transparent 65%)}
+#app .answer-page .answer-ai-reference .answer-ai-suggest{position:relative;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;margin:0 0 12px;padding:0 0 1px;isolation:isolate}
+#app .answer-ai-reference .answer-ai-suggest::-webkit-scrollbar{display:none}
+#app .answer-page .answer-ai-reference .answer-ai-suggest button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;flex:0 0 76%;height:77px;min-height:77px;padding:14px 16px;white-space:normal;border:1px solid #ffffff15;border-radius:8px;background:linear-gradient(130deg,#111215f2,#0c0c0de8);box-shadow:inset 0 1px 0 #ffffff04;backdrop-filter:blur(16px);color:#e9e9ed;text-align:left;scroll-snap-align:start;transform:none;animation:none;transition:background-color .15s,border-color .15s}
+#app .answer-ai-reference .answer-ai-suggest button span{font-size:12.5px;font-weight:400;line-height:1.3}
+#app .answer-ai-reference .answer-ai-suggest button small{font-size:10px;line-height:1.4;color:#86868f;font-weight:400}
+#app .answer-page .answer-ai-reference .answer-ai-composer{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 48px;gap:9px;align-items:start;width:auto;min-height:0;height:auto;aspect-ratio:auto;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;transition:none}
+#app .answer-ai-reference .answer-ai-input-wrap{display:flex;align-items:center;min-width:0;height:52px;padding:0 7px;border:1px solid #ffffff26;border-radius:12px;background:#080809;transition:border-color .15s}
+#app .answer-ai-reference .answer-ai-input-wrap:focus-within{border-color:#6692ff}
+#app .answer-ai-reference .answer-ai-composer input{flex:1;min-width:0;width:0;height:38px;min-height:38px;margin:0;padding:10px 5px;text-overflow:ellipsis;background:transparent;border:0;box-shadow:none;color:#e7e7ed;font:11px/18px 'DM Sans',sans-serif;outline:0}
+#app .answer-ai-reference .answer-ai-composer input::placeholder{color:#73737c}
+#app .answer-ai-reference .answer-ai-composer button{position:static;display:grid;place-items:center;flex:none;width:28px;height:38px;min-height:38px;aspect-ratio:auto;margin:0;padding:0;border:0;background:none;border-radius:7px;color:#8e8e98;box-shadow:none;cursor:pointer}
+#app .answer-ai-reference .answer-ai-composer button svg{width:20px;height:20px}
+#app .answer-ai-reference .answer-ai-composer .answer-ai-send{width:48px;height:48px;min-height:48px;margin-top:2px;border-radius:50%;background:#064be9;color:#fff;transition:background-color .15s,transform .15s}
+#app .answer-ai-reference .answer-ai-composer .answer-ai-send svg{width:25px;height:25px}
+#app .answer-ai-reference .answer-ai-send:active:not(:disabled){transform:scale(.96)}
+#app .answer-ai-reference .answer-ai-send:disabled{opacity:.5;cursor:wait}
+#app .answer-ai-reference .answer-ai-composer .form-error{position:static;grid-column:1/-1;margin:0;padding:0;font-size:11px;line-height:1.5;color:#c4cde2}
+#app .answer-ai-reference .answer-ai-composer .form-error:empty{display:none}
+#app .answer-ai-reference .answer-ai-mic[aria-pressed=true]{background:#14254c;color:#adc9ff}
+#app .answer-ai-reference :is(button,a,summary):focus-visible{outline:2px solid #779dff;outline-offset:3px}
+#app .answer-ai-reference.has-conversation{min-height:900px}
+#app .answer-ai-reference.has-conversation .answer-ai-conversation{min-height:150px}
+@media(hover:hover) and (pointer:fine){#app .answer-page .answer-ai-reference .answer-ai-suggest button:hover{background:#17191f;border-color:#ffffff36;transform:none}#app .answer-ai-reference .answer-ai-composer .answer-ai-send:hover{background:#2163ff}#app .answer-ai-reference .answer-ai-composer :is(.answer-ai-add,.answer-ai-mic):hover{color:#fff;background:#ffffff09}}
+@media(max-width:1050px) and (min-width:761px){#app .answer-ai-reference .answer-ai-top{padding-inline:18px}#app .answer-page .answer-ai-reference h2{margin-inline:20px;font-size:27px}#app .answer-ai-reference .answer-ai-bottom{padding-inline:12px}#app .answer-ai-reference .answer-ai-composer{grid-template-columns:minmax(0,1fr) 42px;gap:7px}#app .answer-ai-reference .answer-ai-composer .answer-ai-send{width:42px;height:42px;min-height:42px;margin-top:5px}#app .answer-ai-reference .answer-ai-composer .answer-ai-add{display:none}}
+@media(max-width:760px){#app .answer-page .answer-ai-reference{position:relative;top:0;min-height:720px;height:auto;max-height:none}#app .answer-page .answer-ai-reference h2{font-size:34px;margin-inline:26px}#app .answer-ai-reference .answer-ai-conversation{min-height:100px;max-height:320px}#app .answer-ai-reference .answer-ai-bottom{margin-top:auto}#app .answer-ai-reference.has-conversation{min-height:900px}}
+@media(prefers-reduced-motion:reduce){#app .answer-ai-reference .answer-ai-composer *,#app .answer-ai-reference .answer-ai-suggest button{transition:none}}

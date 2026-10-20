@@ -1,0 +1,988 @@
+const imgImage1 = "https://www.figma.com/api/mcp/asset/ff5647e7-74d1-4b97-b9ca-ff679843d048.png";
+const imgEllipse176 = "https://www.figma.com/api/mcp/asset/b51af7ab-3c8f-4cf1-97a3-61a6213980d1.svg";
+const imgEllipse177 = "https://www.figma.com/api/mcp/asset/deafaee8-6d01-4b61-a296-8da6506c4e44.svg";
+const imgEllipse178 = "https://www.figma.com/api/mcp/asset/282c9997-feb4-48bf-bd2c-62fdad2fce39.svg";
+const imgEllipse179 = "https://www.figma.com/api/mcp/asset/ab279768-94be-47e1-8b0b-bcb7186d723b.svg";
+const imgEllipse180 = "https://www.figma.com/api/mcp/asset/e8e1a9b6-9b25-40ee-849c-c37f27f17e9a.svg";
+const imgEllipse181 = "https://www.figma.com/api/mcp/asset/d41629ea-5ac0-4a7d-823f-40ff5be80da8.svg";
+const imgMoreLine = "https://www.figma.com/api/mcp/asset/1189ea20-9433-4c13-b3ba-193314816a5c.svg";
+const imgFamiconsAddCircleOutline = "https://www.figma.com/api/mcp/asset/815640ba-a423-438e-b8a0-c4d0be83d908.svg";
+
+export default function MacBookPro168() {
+  return (
+    <div className="bg-black relative size-full" data-node-id="250:1288" data-name="MacBook Pro 16' - 8">
+      <div className="absolute h-[14224px] left-[348px] overflow-clip top-[242px] w-[16447px]" data-node-id="250:1289">
+        <div className="absolute h-[12671.989px] left-[-3211px] top-[-2602px] w-[12303.659px]" data-node-id="250:1290">
+          <div className="absolute inset-[-47.35%_-48.77%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse176} />
+          </div>
+        </div>
+        <div className="absolute h-[9589px] left-[7920.5px] top-[6352px] w-[9972.492px]" data-node-id="250:1291">
+          <div className="absolute inset-[-62.57%_-60.17%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse177} />
+          </div>
+        </div>
+        <div className="absolute h-[9740.542px] left-[-514px] top-[6500.46px] w-[11703px]" data-node-id="250:1292">
+          <div className="absolute inset-[-61.6%_-51.27%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse178} />
+          </div>
+        </div>
+        <div className="absolute h-[12920.767px] left-[6230px] top-[-2927px] w-[12216px]" data-node-id="250:1293">
+          <div className="absolute inset-[-46.44%_-49.12%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse179} />
+          </div>
+        </div>
+        <div className="absolute h-[7423px] left-[3472px] top-[2170px] w-[7091px]" data-node-id="250:1294">
+          <div className="absolute inset-[-80.83%_-84.61%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse180} />
+          </div>
+        </div>
+        <div className="absolute h-[6724px] left-[6658.5px] top-[5839px] w-[8735.5px]" data-node-id="250:1295">
+          <div className="absolute inset-[-89.23%_-68.69%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse181} />
+          </div>
+        </div>
+        <div className="absolute gap-x-[105px] gap-y-[205px] grid grid-cols-[repeat(6,minmax(0,1fr))] grid-rows-[repeat(10,minmax(0,1fr))] h-[9122.775px] left-[378px] top-[2394px] w-[15860.547px]" data-node-id="250:1296">
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1297">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1298">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1299">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1300">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1301">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1302">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1303">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1304">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1305">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1306">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1307">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1308">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1309">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1310">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1311">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1312">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1313">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1314">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1315">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1316">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1317">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1318">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1319">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1320">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1321">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1322">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1323">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1324">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1325">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1326">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1327">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1328">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1329">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1330">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1331">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1332">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1333">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1334">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1335">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1336">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1337">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1338">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1339">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1340">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1341">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1342">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1343">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1344">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1345">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1346">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1347">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1348">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1349">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1350">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1351">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1352">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1353">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1354">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1355">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1356">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1357">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1358">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1359">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1360">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1361">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1362">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1363">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1364">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1365">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1366">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1367">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1368">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1369">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1370">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1371">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1372">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1373">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1374">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1375">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1376">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1377">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1378">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1379">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1380">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1381">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1382">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1383">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1384">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1385">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1386">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1387">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1388">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1389">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1390">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1391">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1392">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1393">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1394">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1395">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1396">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1397">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1398">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1399">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1400">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1401">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1402">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1403">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1404">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1405">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1406">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1407">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1408">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1409">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1410">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1411">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1412">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1413">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1414">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1415">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1416">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1417">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1418">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1419">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1420">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1421">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1422">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1423">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1424">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1425">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1426">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1427">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1428">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1429">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1430">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1431">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1432">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1433">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1434">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1435">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1436">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1437">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1438">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1439">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1440">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1441">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1442">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1443">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1444">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1445">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1446">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1447">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1448">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1449">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1450">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1451">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1452">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1453">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1454">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1455">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1456">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1457">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1458">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1459">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1460">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1461">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1462">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1463">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1464">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1465">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1466">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1467">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1468">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1469">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1470">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1471">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1472">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1473">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1474">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1475">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1476">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1477">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1478">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1479">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1480">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1481">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1482">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1483">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1484">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1485">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1486">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1487">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1488">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1489">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1490">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1491">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1492">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1493">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1494">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1495">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1496">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1497">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1498">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1499">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1500">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1501">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1502">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1503">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1504">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1505">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1506">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1507">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1508">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1509">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1510">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1511">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1512">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1513">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1514">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1515">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1516">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1517">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1518">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1519">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1520">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1521">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1522">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1523">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1524">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1525">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1526">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1527">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1528">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1529">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1530">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1531">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1532">
+              Instructor
+            </p>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.03)] justify-self-stretch overflow-clip relative rounded-[1437.467px] self-stretch shrink-0" data-node-id="250:1533">
+            <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1534">
+              <div className="-scale-y-100 flex-none rotate-180">
+                <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1">
+                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[2395.779px] size-full" src={imgImage1} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[22.41%_27.84%_50.53%_30.33%] leading-[normal] not-italic text-[#f0f1f4] text-[155.726px] text-center" data-node-id="250:1535">
+              Emma Wilson
+            </p>
+            <p className="[word-break:break-word] absolute bottom-[27.11%] font-['Inter:Regular'] font-normal leading-[normal] left-[30.81%] not-italic right-[44.68%] text-[#878c97] text-[131.768px] text-center top-1/2" data-node-id="250:1536">
+              Instructor
+            </p>
+          </div>
+        </div>
+        <div className="absolute bg-black h-[728px] left-[6335px] overflow-clip rounded-[1437.467px] top-[12675px] w-[3870px]" data-node-id="250:1537">
+          <div className="absolute flex h-[491.135px] items-center justify-center left-[167.71px] top-[107.81px] w-[467.177px]" data-node-id="250:1538">
+            <div className="-scale-y-100 flex-none rotate-180">
+              <div className="h-[491.135px] relative rounded-[2395.779px] w-[467.177px]" data-name="image 1" />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[30.49%_19.96%_30.63%_19.95%] leading-[normal] not-italic text-[#f0f1f4] text-[223.719px] text-center" data-node-id="250:1539">
+            Load More
+          </p>
+        </div>
+        <div className="absolute content-stretch flex flex-col items-start left-[14396px] top-[193px] w-[1843px]" data-node-id="250:1540">
+          <div className="bg-black h-[602px] overflow-clip relative rounded-[2448.079px] shrink-0 w-full" data-node-id="250:1541">
+            <div className="absolute left-[3529.31px] size-[489.616px] top-[346.81px]" data-node-id="250:1542" data-name="more-line">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMoreLine} />
+            </div>
+            <div className="absolute contents left-[293px] top-[164px]" data-node-id="250:1544">
+              <p className="[word-break:break-word] absolute font-['DM_Sans:Regular'] font-normal leading-[normal] left-[658px] text-[#737373] text-[210px] top-[164px] whitespace-nowrap" data-node-id="250:1545" style={{ fontVariationSettings: '"opsz" 14' }}>
+                Add User
+              </p>
+              <div className="absolute left-[293px] size-[258px] top-[172px]" data-node-id="250:1546" data-name="famicons:add-circle-outline">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFamiconsAddCircleOutline} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="absolute bg-black h-[602px] left-[12339px] overflow-clip rounded-[2448.079px] top-[193px] w-[2035px]" data-node-id="250:1549">
+          <div className="absolute left-[3529.31px] size-[489.616px] top-[346.81px]" data-node-id="250:1550" data-name="more-line">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMoreLine} />
+          </div>
+          <div className="absolute border-11 border-[#737373] border-solid h-[429px] left-[224px] overflow-clip rounded-[500px] top-[86px] w-[1588px]" data-node-id="250:1552">
+            <div className="absolute left-[3518.31px] size-[489.616px] top-[335.81px]" data-node-id="250:1553" data-name="more-line">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMoreLine} />
+            </div>
+            <p className="[word-break:break-word] absolute font-['DM_Sans:Regular'] font-normal leading-[normal] left-[195px] text-[#737373] text-[200px] top-[74px] whitespace-nowrap" data-node-id="250:1555" style={{ fontVariationSettings: '"opsz" 14' }}>
+              Search
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

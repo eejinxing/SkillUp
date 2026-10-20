@@ -1,0 +1,310 @@
+const imgIncomeNeonGreenBarChart = "https://www.figma.com/api/mcp/asset/f26818cd-3f71-49ce-9281-bd8f4e162068.svg";
+const imgVector = "https://www.figma.com/api/mcp/asset/321fb578-ba7d-488f-8185-859019978f6d.svg";
+const imgVector1 = "https://www.figma.com/api/mcp/asset/87564a8b-9851-4710-98e6-f9b83bf78bc1.svg";
+const imgVector2 = "https://www.figma.com/api/mcp/asset/89a77951-9dcf-4e07-a035-cd4e2a38bba5.svg";
+const imgBar1 = "https://www.figma.com/api/mcp/asset/450ab799-1522-4da6-84e9-1b2bc97596d6.svg";
+const imgBar2 = "https://www.figma.com/api/mcp/asset/081acf12-a24d-404e-b240-4dcceca24094.svg";
+const imgBar3 = "https://www.figma.com/api/mcp/asset/b0465f07-a90a-46d7-852d-fd03c16d074a.svg";
+const imgBar4 = "https://www.figma.com/api/mcp/asset/aea5c723-b7bf-4e33-8236-3e34ab1e91aa.svg";
+const imgBar5 = "https://www.figma.com/api/mcp/asset/98104c94-00ff-4ebd-82b7-3a325602f992.svg";
+const imgBar6 = "https://www.figma.com/api/mcp/asset/d58097e8-fb0e-4a50-b22e-2a688e7aefed.svg";
+const imgBar7 = "https://www.figma.com/api/mcp/asset/7fc36a02-86b9-456a-bc09-a07c0d6aa857.svg";
+const imgBar8 = "https://www.figma.com/api/mcp/asset/af7344f3-58af-41ad-8634-117c7a94a854.svg";
+const imgBar9 = "https://www.figma.com/api/mcp/asset/4e3de472-401a-4096-9ff8-e73157e5bd91.svg";
+const imgBar10 = "https://www.figma.com/api/mcp/asset/600e2f71-b5d5-4c9d-be77-00ea1f9f3e54.svg";
+const imgBar11 = "https://www.figma.com/api/mcp/asset/36296289-a303-4093-b67a-afefe9b3b22e.svg";
+const imgBar12 = "https://www.figma.com/api/mcp/asset/7de5d794-ea80-4f77-b22b-b0242bf1658b.svg";
+const imgBar13 = "https://www.figma.com/api/mcp/asset/ba728a96-ce6c-4bc4-9557-aec8371c16c1.svg";
+const imgBar14 = "https://www.figma.com/api/mcp/asset/c3d54052-2a58-49a4-aa88-2cfe2a2ba898.svg";
+const imgBar15 = "https://www.figma.com/api/mcp/asset/cab97011-24ea-470f-a628-af5582bc8ac6.svg";
+const imgBar16 = "https://www.figma.com/api/mcp/asset/26f70175-4263-4f59-9c07-c7cf2453e4d3.svg";
+const imgBar17 = "https://www.figma.com/api/mcp/asset/b949f35c-9c49-49ae-9435-fd3b57371a4b.svg";
+const imgBar18 = "https://www.figma.com/api/mcp/asset/ec5751d1-3de7-4c38-9e15-ae8d9883e7f6.svg";
+const imgBar19 = "https://www.figma.com/api/mcp/asset/82c69131-b2c9-46c3-a8a5-ed77bff32cbd.svg";
+const imgBar20 = "https://www.figma.com/api/mcp/asset/d7065d5e-c157-4ba6-ae46-e013e6038dbd.svg";
+const imgBar21 = "https://www.figma.com/api/mcp/asset/1026b833-b2d9-4aea-90ab-872cb4af970f.svg";
+const imgBar22 = "https://www.figma.com/api/mcp/asset/010c6450-df48-4e32-aff1-5c8d857e9f12.svg";
+const imgBar23 = "https://www.figma.com/api/mcp/asset/f880fbff-f040-47bb-8855-54811b3dbc42.svg";
+const imgBar24 = "https://www.figma.com/api/mcp/asset/d0612e13-5ae6-460d-b70f-8682cde8d107.svg";
+const imgBar25 = "https://www.figma.com/api/mcp/asset/c2c6278d-9763-4956-afc9-2299ce66aece.svg";
+const imgBar26 = "https://www.figma.com/api/mcp/asset/304adcb2-4a1c-409b-b679-33d6575decbc.svg";
+const imgBar27 = "https://www.figma.com/api/mcp/asset/3af3e263-2a37-43c8-a7f4-e02dcf376fff.svg";
+const imgBar28 = "https://www.figma.com/api/mcp/asset/0b453577-b404-479c-8849-2ca6879fe3d3.svg";
+const imgBar29 = "https://www.figma.com/api/mcp/asset/96797275-00b4-4eb2-8679-73a4e1427cda.svg";
+const imgBar30 = "https://www.figma.com/api/mcp/asset/1d26e09c-d5bf-42b9-9a84-c6d383256910.svg";
+const imgBar31 = "https://www.figma.com/api/mcp/asset/949269da-2a2f-4e2a-9651-6c2360c94204.svg";
+const imgBar32 = "https://www.figma.com/api/mcp/asset/54d3447d-6fea-4fe0-85cf-21e4939c9b8f.svg";
+const imgBar33 = "https://www.figma.com/api/mcp/asset/772ccc44-4871-4a0e-b8b4-e396b911aa9e.svg";
+const imgBar34 = "https://www.figma.com/api/mcp/asset/5ed2cf23-3523-4a41-b359-fcafb84ac5b8.svg";
+const imgBar35 = "https://www.figma.com/api/mcp/asset/e8f64926-13b3-4577-8041-f1ebaf6a726c.svg";
+const imgBar36 = "https://www.figma.com/api/mcp/asset/c7ba98ef-55bb-4189-b20c-70221632b05d.svg";
+const imgBar37 = "https://www.figma.com/api/mcp/asset/a40a7220-469f-4acd-ba22-cd0943de595c.svg";
+const imgBar38 = "https://www.figma.com/api/mcp/asset/ba95926a-4eee-4ff5-ae55-953b974de0e8.svg";
+const imgBar39 = "https://www.figma.com/api/mcp/asset/5b8bae9c-1d6d-40f2-a29b-828f0a9bf1d8.svg";
+const imgBar40 = "https://www.figma.com/api/mcp/asset/85570718-90e8-4f84-8506-01c1347673ee.svg";
+const imgBar41 = "https://www.figma.com/api/mcp/asset/e5da76e2-a46d-48b9-9efd-7eeedf3b21ca.svg";
+const imgBar42 = "https://www.figma.com/api/mcp/asset/c81fd59b-eea5-43f8-81d2-324badee9c00.svg";
+const imgBar43 = "https://www.figma.com/api/mcp/asset/95419a81-599a-4861-a63d-1a6a1d301602.svg";
+const imgBar44 = "https://www.figma.com/api/mcp/asset/e0e4f1b6-3d58-4966-8d7e-c03785433aff.svg";
+const imgBar45 = "https://www.figma.com/api/mcp/asset/0edbcf00-0343-4003-a14c-447a4abc1ae0.svg";
+const imgBar46 = "https://www.figma.com/api/mcp/asset/4813f8c8-e2fa-4eb2-9558-bc80de893c2c.svg";
+const imgBar47 = "https://www.figma.com/api/mcp/asset/8c52287e-ecbe-4a25-9cd7-0d175901e340.svg";
+const imgBar48 = "https://www.figma.com/api/mcp/asset/c35348ef-94a6-4154-85cb-7933db23fc80.svg";
+const imgBar49 = "https://www.figma.com/api/mcp/asset/fd0977d8-a151-4b90-916f-44c464c53515.svg";
+const imgBar50 = "https://www.figma.com/api/mcp/asset/657e0327-9272-4ab8-b7c7-96e40d10f5db.svg";
+const imgBar51 = "https://www.figma.com/api/mcp/asset/af21992d-21f1-456a-bda1-ffe1a8c9580c.svg";
+const imgBar52 = "https://www.figma.com/api/mcp/asset/6a0e3a42-924b-4af3-8ba5-82839467f1d2.svg";
+const imgBar53 = "https://www.figma.com/api/mcp/asset/391fb736-8b0e-4bd8-a9a6-2c69cd74cae0.svg";
+const imgBar54 = "https://www.figma.com/api/mcp/asset/0c2b60da-169a-4a53-9331-64f728d9030f.svg";
+const imgEllipse193 = "https://www.figma.com/api/mcp/asset/3ae23555-28fe-4671-99a5-74cbad955d10.svg";
+const imgEllipse194 = "https://www.figma.com/api/mcp/asset/fb1139cf-bec0-44de-ab46-8bf11ec14cca.svg";
+
+export default function Frame() {
+  return (
+    <div className="overflow-clip relative rounded-[300px] size-full" data-node-id="283:2114" data-name="Frame">
+      <div className="absolute contents inset-0" data-node-id="283:2115" data-name="Income neon green bar chart">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIncomeNeonGreenBarChart} />
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[6.11%_68.19%_89.41%_6.28%] leading-[normal] not-italic text-[#c6c7cc] text-[131.73px]" data-node-id="283:2117">
+          Enrolled learner
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[11.24%_80.38%_82.76%_6.28%] leading-[normal] not-italic text-[#fafafa] text-[271.209px]" data-node-id="283:2118">
+          2.1k
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[12.48%_61.05%_82.75%_25.36%] leading-[normal] not-italic text-[#26c79d] text-[139.479px]" data-node-id="283:2119">
+          ↑2.5%
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[22.09%_43.15%_74.22%_6.28%] leading-[normal] not-italic text-[#4d5056] text-[108.484px]" data-node-id="283:2120">
+          Compared to 2k last month
+        </p>
+        <div className="absolute inset-[7.86%_8.84%_91.27%_90.23%]" data-node-id="283:2121" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+        </div>
+        <div className="absolute inset-[9.39%_8.84%_89.74%_90.23%]" data-node-id="283:2122" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+        </div>
+        <div className="absolute inset-[10.92%_8.84%_88.21%_90.23%]" data-node-id="283:2123" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+        </div>
+        <div className="absolute inset-[32.97%_0_6.33%_43.26%]" data-node-id="283:2124" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+        </div>
+        <div className="absolute inset-[63.86%_26.51%_8.62%_21.16%]" data-node-id="283:2125" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector2} />
+        </div>
+        <div className="absolute inset-[64.96%_91.63%_15.17%_6.28%]" data-node-id="283:2126" data-name="Bar 1">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar1} />
+        </div>
+        <div className="absolute inset-[64.96%_90.03%_15.17%_7.87%]" data-node-id="283:2130" data-name="Bar 2">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar2} />
+        </div>
+        <div className="absolute inset-[62.66%_88.44%_15.17%_9.47%]" data-node-id="283:2134" data-name="Bar 3">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar3} />
+        </div>
+        <div className="absolute inset-[62.66%_86.84%_15.17%_11.06%]" data-node-id="283:2138" data-name="Bar 4">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar4} />
+        </div>
+        <div className="absolute inset-[62.66%_85.25%_15.17%_12.66%]" data-node-id="283:2142" data-name="Bar 5">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar5} />
+        </div>
+        <div className="absolute inset-[62.66%_83.65%_15.17%_14.26%]" data-node-id="283:2146" data-name="Bar 6">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar6} />
+        </div>
+        <div className="absolute inset-[51.42%_82.06%_15.17%_15.85%]" data-node-id="283:2150" data-name="Bar 7">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar7} />
+        </div>
+        <div className="absolute inset-[51.42%_80.46%_15.17%_17.45%]" data-node-id="283:2154" data-name="Bar 8">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar8} />
+        </div>
+        <div className="absolute inset-[51.42%_78.87%_15.17%_19.04%]" data-node-id="283:2158" data-name="Bar 9">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar9} />
+        </div>
+        <div className="absolute inset-[51.42%_77.27%_15.17%_20.64%]" data-node-id="283:2162" data-name="Bar 10">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar10} />
+        </div>
+        <div className="absolute inset-[73.58%_75.67%_15.17%_22.23%]" data-node-id="283:2166" data-name="Bar 11">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar11} />
+        </div>
+        <div className="absolute inset-[73.58%_74.08%_15.17%_23.83%]" data-node-id="283:2170" data-name="Bar 12">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar12} />
+        </div>
+        <div className="absolute inset-[73.58%_72.48%_15.17%_25.42%]" data-node-id="283:2174" data-name="Bar 13">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar13} />
+        </div>
+        <div className="absolute inset-[73.58%_70.89%_15.17%_27.02%]" data-node-id="283:2178" data-name="Bar 14">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar14} />
+        </div>
+        <div className="absolute inset-[62.66%_69.29%_15.17%_28.61%]" data-node-id="283:2182" data-name="Bar 15">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar15} />
+        </div>
+        <div className="absolute inset-[62.66%_67.7%_15.17%_30.21%]" data-node-id="283:2186" data-name="Bar 16">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar16} />
+        </div>
+        <div className="absolute inset-[62.66%_66.1%_15.17%_31.81%]" data-node-id="283:2190" data-name="Bar 17">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar17} />
+        </div>
+        <div className="absolute inset-[62.66%_64.51%_15.17%_33.4%]" data-node-id="283:2194" data-name="Bar 18">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar18} />
+        </div>
+        <div className="absolute inset-[73.58%_62.91%_15.17%_35%]" data-node-id="283:2198" data-name="Bar 19">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar19} />
+        </div>
+        <div className="absolute inset-[73.58%_61.32%_15.17%_36.59%]" data-node-id="283:2202" data-name="Bar 20">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar20} />
+        </div>
+        <div className="absolute inset-[73.58%_59.72%_15.17%_38.19%]" data-node-id="283:2206" data-name="Bar 21">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar21} />
+        </div>
+        <div className="absolute inset-[73.58%_58.13%_15.17%_39.78%]" data-node-id="283:2210" data-name="Bar 22">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar22} />
+        </div>
+        <div className="absolute inset-[62.66%_56.53%_15.17%_41.38%]" data-node-id="283:2214" data-name="Bar 23">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar23} />
+        </div>
+        <div className="absolute inset-[62.66%_54.93%_15.17%_42.97%]" data-node-id="283:2218" data-name="Bar 24">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar24} />
+        </div>
+        <div className="absolute inset-[62.66%_53.34%_15.17%_44.57%]" data-node-id="283:2222" data-name="Bar 25">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar25} />
+        </div>
+        <div className="absolute inset-[62.66%_51.74%_15.17%_46.16%]" data-node-id="283:2226" data-name="Bar 26">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar26} />
+        </div>
+        <div className="absolute inset-[41.92%_50.15%_15.17%_47.76%]" data-node-id="283:2230" data-name="Bar 27">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar27} />
+        </div>
+        <div className="absolute inset-[41.92%_48.55%_15.17%_49.35%]" data-node-id="283:2234" data-name="Bar 28">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar28} />
+        </div>
+        <div className="absolute inset-[41.92%_46.96%_15.17%_50.95%]" data-node-id="283:2238" data-name="Bar 29">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar29} />
+        </div>
+        <div className="absolute inset-[41.92%_45.36%_15.17%_52.54%]" data-node-id="283:2242" data-name="Bar 30">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar30} />
+        </div>
+        <div className="absolute inset-[51.42%_43.77%_15.17%_54.14%]" data-node-id="283:2246" data-name="Bar 31">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar31} />
+        </div>
+        <div className="absolute inset-[51.42%_42.17%_15.17%_55.73%]" data-node-id="283:2250" data-name="Bar 32">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar32} />
+        </div>
+        <div className="absolute inset-[51.42%_40.58%_15.17%_57.33%]" data-node-id="283:2254" data-name="Bar 33">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar33} />
+        </div>
+        <div className="absolute inset-[51.42%_38.98%_15.17%_58.93%]" data-node-id="283:2258" data-name="Bar 34">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar34} />
+        </div>
+        <div className="absolute inset-[62.66%_37.39%_15.17%_60.52%]" data-node-id="283:2262" data-name="Bar 35">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar35} />
+        </div>
+        <div className="absolute inset-[62.66%_35.79%_15.17%_62.12%]" data-node-id="283:2266" data-name="Bar 36">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar36} />
+        </div>
+        <div className="absolute inset-[62.66%_34.2%_15.17%_63.71%]" data-node-id="283:2270" data-name="Bar 37">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar37} />
+        </div>
+        <div className="absolute inset-[62.66%_32.6%_15.17%_65.31%]" data-node-id="283:2274" data-name="Bar 38">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar38} />
+        </div>
+        <div className="absolute inset-[51.42%_31%_15.17%_66.9%]" data-node-id="283:2278" data-name="Bar 39">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar39} />
+        </div>
+        <div className="absolute inset-[51.42%_29.41%_15.17%_68.5%]" data-node-id="283:2282" data-name="Bar 40">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar40} />
+        </div>
+        <div className="absolute inset-[51.42%_27.81%_15.17%_70.09%]" data-node-id="283:2286" data-name="Bar 41">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar41} />
+        </div>
+        <div className="absolute inset-[51.42%_26.22%_15.17%_71.69%]" data-node-id="283:2290" data-name="Bar 42">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar42} />
+        </div>
+        <div className="absolute inset-[41.92%_24.62%_15.17%_73.28%]" data-node-id="283:2294" data-name="Bar 43">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar43} />
+        </div>
+        <div className="absolute inset-[41.92%_23.03%_15.17%_74.88%]" data-node-id="283:2298" data-name="Bar 44">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar44} />
+        </div>
+        <div className="absolute inset-[41.92%_21.43%_15.17%_76.47%]" data-node-id="283:2302" data-name="Bar 45">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar45} />
+        </div>
+        <div className="absolute inset-[41.92%_19.84%_15.17%_78.07%]" data-node-id="283:2306" data-name="Bar 46">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar46} />
+        </div>
+        <div className="absolute inset-[32.31%_18.24%_15.17%_79.66%]" data-node-id="283:2310" data-name="Bar 47">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar47} />
+        </div>
+        <div className="absolute inset-[32.31%_16.65%_15.17%_81.26%]" data-node-id="283:2314" data-name="Bar 48">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar48} />
+        </div>
+        <div className="absolute inset-[32.31%_15.05%_15.17%_82.86%]" data-node-id="283:2318" data-name="Bar 49">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar49} />
+        </div>
+        <div className="absolute inset-[32.31%_13.46%_15.17%_84.45%]" data-node-id="283:2322" data-name="Bar 50">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar50} />
+        </div>
+        <div className="absolute inset-[41.92%_11.86%_15.17%_86.05%]" data-node-id="283:2326" data-name="Bar 51">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar51} />
+        </div>
+        <div className="absolute inset-[41.92%_10.27%_15.17%_87.64%]" data-node-id="283:2330" data-name="Bar 52">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar52} />
+        </div>
+        <div className="absolute inset-[41.92%_8.67%_15.17%_89.24%]" data-node-id="283:2334" data-name="Bar 53">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar53} />
+        </div>
+        <div className="absolute inset-[41.92%_7.07%_15.17%_90.83%]" data-node-id="283:2338" data-name="Bar 54">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBar54} />
+        </div>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[89.08%_89.22%_7.62%_6.28%] leading-[normal] not-italic text-[#e7e8eb] text-[96.86px]" data-node-id="283:2342">
+          181
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[89.08%_78.88%_7.62%_16.2%] leading-[normal] not-italic text-[#e7e8eb] text-[96.86px]" data-node-id="283:2343">
+          182
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[89.08%_68.87%_7.62%_26.12%] leading-[normal] not-italic text-[#e7e8eb] text-[96.86px]" data-node-id="283:2344">
+          183
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[89.08%_58.95%_7.62%_36.03%] leading-[normal] not-italic text-[#e7e8eb] text-[96.86px]" data-node-id="283:2345">
+          184
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[89.08%_49.12%_7.62%_45.95%] leading-[normal] not-italic text-[#e7e8eb] text-[96.86px]" data-node-id="283:2346">
+          185
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[89.08%_39.15%_7.62%_55.87%] leading-[normal] not-italic text-[#e7e8eb] text-[96.86px]" data-node-id="283:2347">
+          186
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[89.08%_29.38%_7.62%_65.79%] leading-[normal] not-italic text-[#e7e8eb] text-[96.86px]" data-node-id="283:2348">
+          187
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[89.08%_19.34%_7.62%_75.71%] leading-[normal] not-italic text-[#e7e8eb] text-[96.86px]" data-node-id="283:2349">
+          188
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[89.08%_9.39%_7.62%_85.63%] leading-[normal] not-italic text-[#e7e8eb] text-[96.86px]" data-node-id="283:2350">
+          189
+        </p>
+      </div>
+      <div className="absolute inset-[-5.43%_-13.52%_80.39%_22.6%] mix-blend-plus-lighter" data-node-id="283:2351">
+        <div className="absolute inset-[-146.64%_-54.16%]">
+          <img alt="" className="block max-w-none size-full" src={imgEllipse193} />
+        </div>
+      </div>
+      <div className="absolute inset-[27.6%_91.36%_-3.2%_-20.09%] mix-blend-plus-lighter" data-node-id="283:2352">
+        <div className="absolute inset-[-121.42%_-428.4%]">
+          <img alt="" className="block max-w-none size-full" src={imgEllipse194} />
+        </div>
+      </div>
+      <div className="absolute inset-[27.6%_91.36%_-3.2%_-20.09%] mix-blend-plus-lighter" data-node-id="283:2353">
+        <div className="absolute inset-[-121.42%_-428.4%]">
+          <img alt="" className="block max-w-none size-full" src={imgEllipse194} />
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

@@ -1,0 +1,9 @@
+const imgImage1 = "https://www.figma.com/api/mcp/asset/d0f8e1c1-2f1a-4805-be56-f64dfdd95c1a.png";
+
+export default function Image1() {
+  return (
+    <div className="overflow-clip relative rounded-[89.144px] size-full" data-node-id="250:6368" data-name="image 1">
+      <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[89.144px] size-full" src={imgImage1} />
+    </div>
+  );
+}

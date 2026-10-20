@@ -1,0 +1,14 @@
+const imgVector = "https://www.figma.com/api/mcp/asset/0f2a6922-37a7-4c52-92d6-66707838ff76.svg";
+
+export default function AiCompanionPixelFaceOrb() {
+  return (
+    <div className="contents relative size-full" data-node-id="250:6349" data-name="AI Companion / Pixel Face Orb">
+      <div className="absolute inset-[70.33%_40.48%_2.08%_43.33%]" data-node-id="250:6350" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+      </div>
+      <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[71.02%_51.95%_28.04%_44.03%] leading-[normal] not-italic text-[#29292c] text-[165.419px] whitespace-nowrap" data-node-id="250:6351">
+        AI Companion
+      </p>
+    </div>
+  );
+}

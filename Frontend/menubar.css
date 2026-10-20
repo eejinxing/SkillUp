@@ -1,0 +1,68 @@
+/* Top-left menu bar: every page as a line icon in one dark bar; hovering an item drops a notch with its name. */
+#skill-edge-nav.skill-menubar{--mb-bg:#0d0d10;--mb-line:#ffffff17;--mb-icon:#9b9ba6;--mb-ease:cubic-bezier(.2,.7,.2,1);position:fixed;left:20px;top:16px;right:auto;bottom:auto;z-index:60;display:flex;flex-direction:row;align-items:center;gap:2px;width:auto;height:46px;min-height:0;max-width:calc(100vw - 40px);padding:0 6px;border:1px solid var(--mb-line);border-radius:14px;background:var(--mb-bg);box-shadow:inset 0 1px 0 #ffffff12,0 10px 30px -12px #000;transform:none;overflow:visible}
+#skill-edge-nav.skill-menubar:before,#skill-edge-nav.skill-menubar:after{content:none;display:none}
+.figma-workspace-header.has-menubar{position:relative}
+.figma-workspace-header.has-menubar>#skill-edge-nav.skill-menubar{position:relative;left:auto;top:auto}
+.figma-workspace-header.has-menubar>.figma-workspace-brand,.figma-workspace-header.has-menubar>.skill-logo,.figma-workspace-header.has-menubar>a:has(.skill-logo){display:none}
+
+#skill-edge-nav.skill-menubar .bar-items{display:flex;flex-direction:row;align-items:center;gap:2px;margin:0;padding:0;background:none;border:0}
+#skill-edge-nav.skill-menubar :is(.bar-brand,.bar-item,.bar-account){position:relative;display:grid;place-items:center;width:36px;height:34px;min-height:0;margin:0;padding:0;border:0;border-radius:9px;background:transparent;color:var(--mb-icon);text-decoration:none;box-shadow:none;transition:color .2s,background-color .2s}
+#skill-edge-nav.skill-menubar .bar-icon,#skill-edge-nav.skill-menubar .bar-brand svg{width:19px;height:19px}
+#skill-edge-nav.skill-menubar .bar-brand{color:#fff;width:34px;background:linear-gradient(150deg,#a78bfa,#6d28d9);border-radius:10px}
+#skill-edge-nav.skill-menubar .bar-brand svg{width:16px;height:16px}
+#skill-edge-nav.skill-menubar :is(.bar-item,.bar-account):hover,#skill-edge-nav.skill-menubar :is(.bar-item,.bar-account):focus-visible{color:#fff;background:#ffffff0f}
+#skill-edge-nav.skill-menubar .bar-item.is-active{color:#fff;background:#ffffff14}
+#skill-edge-nav.skill-menubar .bar-item.is-active:after{content:'';position:absolute;left:50%;bottom:3px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:#a78bfa}
+#skill-edge-nav.skill-menubar :is(a,button):focus-visible{outline:2px solid #a78bfa;outline-offset:1px}
+#skill-edge-nav.skill-menubar .edge-unread{position:absolute;top:3px;right:3px;min-width:14px;height:14px;padding:0 3px;border-radius:7px;background:#a78bfa;color:#140f24;font-size:9px;font-weight:700;line-height:14px;text-align:center}
+#skill-edge-nav.skill-menubar .bar-sep{width:1px;height:20px;margin:0 6px;background:var(--mb-line)}
+
+/* Zoom control */
+#skill-edge-nav.skill-menubar .bar-zoom{display:flex;align-items:center;gap:0;height:30px;padding:0 2px;border:1px solid var(--mb-line);border-radius:9px}
+#skill-edge-nav.skill-menubar .bar-zoom button{display:grid;place-items:center;width:24px;height:26px;min-height:0;padding:0;border:0;border-radius:7px;background:transparent;color:var(--mb-icon);box-shadow:none;transition:color .15s,background-color .15s}
+#skill-edge-nav.skill-menubar .bar-zoom button svg{width:13px;height:13px}
+#skill-edge-nav.skill-menubar .bar-zoom button:hover{color:#fff;background:#ffffff10}
+#skill-edge-nav.skill-menubar .bar-zoom .bar-zoom-value{width:auto;min-width:42px;padding:0 4px;font-size:12px;font-weight:600;color:#e4e4e7;font-variant-numeric:tabular-nums}
+#skill-edge-nav.skill-menubar .bar-account{margin-left:6px;width:32px;height:32px;border-radius:50%;background:linear-gradient(150deg,#f97316,#c2410c);color:#fff}
+#skill-edge-nav.skill-menubar .bar-account b{font-size:11px;font-weight:700}
+#skill-edge-nav.skill-menubar .bar-account:hover{background:linear-gradient(150deg,#fb923c,#ea580c)}
+
+/* Notch: hangs from the bar under the hovered item, with concave shoulders */
+#skill-edge-nav.skill-menubar .bar-notch{position:absolute;top:calc(100% + 1px);left:50%;z-index:2;display:grid;justify-items:center;gap:1px;min-width:max-content;padding:7px 14px 9px;border:1px solid var(--mb-line);border-top:0;border-radius:0 0 14px 14px;background:var(--mb-bg);color:#fff;white-space:nowrap;pointer-events:none;opacity:0;transform:translate(-50%,-6px) scaleY(.6);transform-origin:top center;transition:opacity .18s ease,transform .28s var(--mb-ease);box-shadow:0 14px 24px -14px #000}
+#skill-edge-nav.skill-menubar .bar-notch:before,#skill-edge-nav.skill-menubar .bar-notch:after{content:'';position:absolute;top:0;width:12px;height:12px;background:radial-gradient(circle at var(--cx) 100%,transparent 11.5px,var(--mb-bg) 12px)}
+#skill-edge-nav.skill-menubar .bar-notch:before{--cx:0%;left:-12px}
+#skill-edge-nav.skill-menubar .bar-notch:after{--cx:100%;right:-12px}
+#skill-edge-nav.skill-menubar .bar-notch b{font-size:12.5px;font-weight:600}
+#skill-edge-nav.skill-menubar .bar-notch small{font-size:11px;color:#8f8f9c}
+#skill-edge-nav.skill-menubar :is(.bar-brand,.bar-item,.bar-account):is(:hover,:focus-visible) .bar-notch{opacity:1;transform:translate(-50%,0) scaleY(1)}
+#skill-edge-nav.skill-menubar .bar-brand .bar-notch{left:0;transform:translate(-6px,-6px) scaleY(.6)}
+#skill-edge-nav.skill-menubar .bar-brand:is(:hover,:focus-visible) .bar-notch{transform:translate(-6px,0) scaleY(1)}
+#skill-edge-nav.skill-menubar .bar-account .bar-notch{left:auto;right:-6px;transform:translate(0,-6px) scaleY(.6)}
+#skill-edge-nav.skill-menubar .bar-account:is(:hover,:focus-visible) .bar-notch{transform:translate(0,0) scaleY(1)}
+#skill-edge-nav.skill-menubar :is(a,button)>span:not(.bar-notch){display:none}
+
+/* Give the page a little room under the floating bar when it is not inside a header */
+body.ui-refined:not(:has(.figma-workspace-header.has-menubar)) #app{padding-top:58px}
+
+@media(max-width:760px){
+ #skill-edge-nav.skill-menubar{left:8px;right:8px;top:8px;max-width:none;overflow-x:auto;overflow-y:visible;scrollbar-width:none;padding:0 4px}
+ #skill-edge-nav.skill-menubar::-webkit-scrollbar{display:none}
+ .figma-workspace-header.has-menubar{flex-wrap:wrap}
+ .figma-workspace-header.has-menubar>#skill-edge-nav.skill-menubar{order:3;flex:1 1 100%;left:auto;right:auto;margin-top:8px}
+ #skill-edge-nav.skill-menubar .bar-zoom,#skill-edge-nav.skill-menubar .bar-sep{display:none}
+ #skill-edge-nav.skill-menubar .bar-notch{display:none}
+ #skill-edge-nav.skill-menubar .bar-account{margin-left:auto;flex:none}
+}
+@media(prefers-reduced-motion:reduce){#skill-edge-nav.skill-menubar .bar-notch{transition:opacity .1s}}
+@media(prefers-reduced-motion:no-preference){
+ @keyframes mb-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+ #skill-edge-nav.skill-menubar .bar-items>.bar-item{animation:mb-in .35s var(--mb-ease) both}
+ #skill-edge-nav.skill-menubar .bar-items>.bar-item:nth-child(2){animation-delay:.03s}
+ #skill-edge-nav.skill-menubar .bar-items>.bar-item:nth-child(3){animation-delay:.06s}
+ #skill-edge-nav.skill-menubar .bar-items>.bar-item:nth-child(4){animation-delay:.09s}
+ #skill-edge-nav.skill-menubar .bar-items>.bar-item:nth-child(5){animation-delay:.12s}
+ #skill-edge-nav.skill-menubar .bar-items>.bar-item:nth-child(n+6){animation-delay:.15s}
+}
+#app .figma-workspace-header.has-menubar>.figma-workspace-brand{display:none}
+body.ui-home #skill-edge-nav.skill-menubar,body:has(.auth-v2) #skill-edge-nav.skill-menubar,.ui-home>#skill-edge-nav.skill-menubar{display:none}
+html body .figma-workspace-header.has-menubar>a.figma-workspace-brand{display:none!important}

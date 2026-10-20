@@ -1,0 +1,19 @@
+{
+  "name": "skillup-frontend-handoff",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Skill UP static frontend and backend integration handoff",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.cjs",
+    "check": "node scripts/check-handoff.cjs",
+    "test": "node scripts/check-handoff.cjs && node scripts/test-domain.cjs && node tests/handoff-contract.cjs",
+    "test:ui": "node tests/handoff-ui.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "sharp": "0.35.5"
+  }
+}

@@ -1,0 +1,964 @@
+{
+  "source": "250:466",
+  "assets": {
+    "imgImage1": "assets/registered/imgImage1.png",
+    "imgNoiseTexture": "assets/registered/imgNoiseTexture.png",
+    "imgImage12": "assets/registered/imgImage12.png",
+    "imgEllipse11": "assets/registered/imgEllipse11.svg",
+    "imgEllipse67": "assets/registered/imgEllipse67.svg",
+    "imgEllipse71": "assets/registered/imgEllipse71.svg",
+    "imgEllipse78": "assets/registered/imgEllipse78.svg",
+    "imgEllipse68": "assets/registered/imgEllipse68.svg",
+    "imgEllipse13": "assets/registered/imgEllipse13.svg",
+    "imgEllipse15": "assets/registered/imgEllipse15.svg",
+    "imgEllipse14": "assets/registered/imgEllipse14.svg",
+    "imgEllipse16": "assets/registered/imgEllipse16.svg",
+    "imgVector5": "assets/registered/imgVector5.svg",
+    "imgGroup8": "assets/registered/imgGroup8.svg",
+    "imgEllipse53": "assets/registered/imgEllipse53.svg",
+    "imgEllipse55": "assets/registered/imgEllipse55.svg",
+    "imgEllipse56": "assets/registered/imgEllipse56.svg",
+    "imgEllipse61": "assets/registered/imgEllipse61.svg",
+    "imgEllipse66": "assets/registered/imgEllipse66.svg",
+    "imgVector14": "assets/registered/imgVector14.svg",
+    "imgVector15": "assets/registered/imgVector15.svg",
+    "imgSubtract": "assets/registered/imgSubtract.svg",
+    "imgEllipse120": "assets/registered/imgEllipse120.svg",
+    "imgEllipse121": "assets/registered/imgEllipse121.svg",
+    "imgEllipse123": "assets/registered/imgEllipse123.svg",
+    "imgEllipse124": "assets/registered/imgEllipse124.svg",
+    "imgEllipse126": "assets/registered/imgEllipse126.svg",
+    "imgEllipse127": "assets/registered/imgEllipse127.svg",
+    "imgEllipse128": "assets/registered/imgEllipse128.svg",
+    "imgEllipse129": "assets/registered/imgEllipse129.svg",
+    "imgEllipse133": "assets/registered/imgEllipse133.svg",
+    "imgEllipse134": "assets/registered/imgEllipse134.svg",
+    "imgEllipse135": "assets/registered/imgEllipse135.svg",
+    "imgEllipse136": "assets/registered/imgEllipse136.svg",
+    "imgEllipse137": "assets/registered/imgEllipse137.svg",
+    "imgEllipse17": "assets/registered/imgEllipse17.svg",
+    "imgEllipse18": "assets/registered/imgEllipse18.svg",
+    "imgEllipse19": "assets/registered/imgEllipse19.svg",
+    "imgEllipse20": "assets/registered/imgEllipse20.svg",
+    "imgGroup1": "assets/registered/imgGroup1.svg",
+    "imgEllipse32": "assets/registered/imgEllipse32.svg",
+    "imgEllipse33": "assets/registered/imgEllipse33.svg",
+    "imgEllipse38": "assets/registered/imgEllipse38.svg",
+    "imgEllipse39": "assets/registered/imgEllipse39.svg",
+    "imgEllipse41": "assets/registered/imgEllipse41.svg",
+    "imgEllipse42": "assets/registered/imgEllipse42.svg",
+    "imgEllipse43": "assets/registered/imgEllipse43.svg",
+    "imgEllipse44": "assets/registered/imgEllipse44.svg",
+    "imgEllipse36": "assets/registered/imgEllipse36.svg",
+    "imgEllipse37": "assets/registered/imgEllipse37.svg",
+    "imgEllipse45": "assets/registered/imgEllipse45.svg",
+    "imgFrame41": "assets/registered/imgFrame41.svg",
+    "imgVector": "assets/registered/imgVector.svg",
+    "imgEllipse212": "assets/registered/imgEllipse212.svg",
+    "imgEllipse213": "assets/registered/imgEllipse213.svg",
+    "imgEllipse104": "assets/registered/imgEllipse104.svg",
+    "imgEllipse105": "assets/registered/imgEllipse105.svg",
+    "imgEllipse106": "assets/registered/imgEllipse106.svg",
+    "imgEllipse108": "assets/registered/imgEllipse108.svg",
+    "imgEllipse109": "assets/registered/imgEllipse109.svg",
+    "imgEllipse111": "assets/registered/imgEllipse111.svg",
+    "imgEllipse112": "assets/registered/imgEllipse112.svg",
+    "imgEllipse113": "assets/registered/imgEllipse113.svg",
+    "imgEllipse114": "assets/registered/imgEllipse114.svg",
+    "imgEllipse116": "assets/registered/imgEllipse116.svg",
+    "imgEllipse117": "assets/registered/imgEllipse117.svg",
+    "imgEllipse118": "assets/registered/imgEllipse118.svg",
+    "imgEllipse138": "assets/registered/imgEllipse138.svg",
+    "imgEllipse139": "assets/registered/imgEllipse139.svg",
+    "imgEllipse140": "assets/registered/imgEllipse140.svg",
+    "imgEllipse141": "assets/registered/imgEllipse141.svg",
+    "imgEllipse142": "assets/registered/imgEllipse142.svg",
+    "imgEllipse143": "assets/registered/imgEllipse143.svg",
+    "imgRectangle38": "assets/registered/imgRectangle38.svg",
+    "imgRectangle39": "assets/registered/imgRectangle39.svg",
+    "imgSubtract1": "assets/registered/imgSubtract1.svg"
+  },
+  "slots": [
+    {
+      "src": "assets/registered/imgEllipse11.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse67.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse67.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse67.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse71.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse71.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse71.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse71.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse71.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse71.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse71.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse78.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse68.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse13.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse15.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse14.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse16.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgVector5.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgVector5.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgVector5.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgVector5.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgVector5.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgGroup8.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse53.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse53.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse55.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse53.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse56.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse61.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse66.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgVector14.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgVector15.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgImage1.png",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgImage1.png",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgSubtract.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse120.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse121.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse123.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse124.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse123.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse127.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse128.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse129.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse133.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse134.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse135.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse136.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse137.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgSubtract.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse120.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse121.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse123.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse124.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse123.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse127.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse128.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse129.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse133.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse134.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse135.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse136.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse137.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgSubtract.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse120.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse121.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse123.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse124.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse123.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse127.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse128.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse129.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse126.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse133.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse134.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse135.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse136.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse137.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse17.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse18.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse19.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse20.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgNoiseTexture.png",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgGroup1.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgImage1.png",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse32.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse33.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse38.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse39.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse33.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse41.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse42.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse43.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse44.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse36.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse37.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse45.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgImage1.png",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse32.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse33.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse38.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse39.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse33.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse41.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse42.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse43.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse44.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse36.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse37.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse45.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgImage1.png",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse32.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse33.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse38.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse39.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse33.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse41.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse42.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse43.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse44.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse36.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse37.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse45.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgImage1.png",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse32.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse33.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse38.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse39.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse33.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse41.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse42.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse43.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse44.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse36.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse37.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse45.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgImage1.png",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse32.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse33.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse38.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse39.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse33.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse41.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse42.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse43.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse44.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse36.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse37.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse45.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgFrame41.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgVector.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse212.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse213.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse104.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse105.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse106.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse108.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse109.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse111.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse112.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse113.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse114.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse114.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse116.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse117.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse118.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse114.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse138.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse139.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse140.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse141.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse142.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse143.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgRectangle38.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgRectangle39.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgSubtract1.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse138.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse139.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse140.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse141.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse142.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse143.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgRectangle38.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgRectangle39.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgSubtract1.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse138.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse139.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse140.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse141.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse142.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgEllipse143.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgRectangle38.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgRectangle39.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgSubtract1.svg",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgImage12.png",
+      "node": null
+    },
+    {
+      "src": "assets/registered/imgImage12.png",
+      "node": null
+    }
+  ],
+  "tokens": {
+    "250:471": "GREETING",
+    "250:474": "COMPLETION",
+    "250:475": "ACTIVITIES",
+    "250:476": "PROGRESS_LABEL",
+    "250:494": "ENGAGE",
+    "250:604": "AI_PROMPT",
+    "250:609": "AI_FORM",
+    "250:525": "UPDATE_TAG0",
+    "250:526": "UPDATE_TITLE0",
+    "250:527": "UPDATE_LABEL0",
+    "250:551": "UPDATE_TAG1",
+    "250:552": "UPDATE_TITLE1",
+    "250:553": "UPDATE_LABEL1",
+    "250:577": "UPDATE_TAG2",
+    "250:578": "UPDATE_TITLE2",
+    "250:579": "UPDATE_LABEL2",
+    "250:517": "CHAT_PREVIEW",
+    "250:518": "CHAT_LINK",
+    "250:721": "GLOBAL_FORM",
+    "250:736": "CHALLENGE",
+    "250:737": "CHALLENGE_DETAIL",
+    "250:738": "CHALLENGE_LABEL",
+    "I250:739;121:231": "LEVEL",
+    "I250:739;121:232": "LEVEL",
+    "I250:740;121:229": "LEVEL_LABEL",
+    "250:769": "RESUME_TITLE0",
+    "250:770": "RESUME_DETAIL0",
+    "250:785": "RESUME_TITLE1",
+    "250:786": "RESUME_DETAIL1",
+    "250:801": "RESUME_TITLE2",
+    "250:802": "RESUME_DETAIL2",
+    "283:834": "PATH_TITLE0",
+    "298:450": "PATH_TITLE1",
+    "250:690": "GLOBAL_NAME0",
+    "250:691": "GLOBAL_ROLE0",
+    "250:692": "GLOBAL_TEXT0",
+    "250:694": "GLOBAL_TIME0",
+    "250:633": "GLOBAL_NAME1",
+    "250:634": "GLOBAL_ROLE1",
+    "250:635": "GLOBAL_TEXT1",
+    "250:637": "GLOBAL_TIME1",
+    "250:710": "SESSION_HOST",
+    "250:711": "SESSION_ROLE",
+    "250:712": "SESSION_TITLE",
+    "250:714": "SESSION_TIME",
+    "250:720": "SESSION_JOIN",
+    "250:652": "GLOBAL_NAME3",
+    "250:653": "GLOBAL_ROLE3",
+    "250:654": "GLOBAL_TEXT3",
+    "250:656": "GLOBAL_TIME3",
+    "250:671": "GLOBAL_NAME4",
+    "250:672": "GLOBAL_ROLE4",
+    "250:673": "GLOBAL_TEXT4",
+    "250:675": "GLOBAL_TIME4"
+  },
+  "nodeCount": 324
+}

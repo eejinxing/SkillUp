@@ -1,0 +1,349 @@
+[
+  {
+    "page": "Frontend/Home.aspx",
+    "codeBehind": "Frontend/Home.aspx.cs",
+    "initialRoute": "home",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Login.aspx",
+    "codeBehind": "Frontend/Login.aspx.cs",
+    "initialRoute": "login",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Register.aspx",
+    "codeBehind": "Frontend/Register.aspx.cs",
+    "initialRoute": "register",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/ForgotPassword.aspx",
+    "codeBehind": "Frontend/ForgotPassword.aspx.cs",
+    "initialRoute": "forgot",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/ResetPassword.aspx",
+    "codeBehind": "Frontend/ResetPassword.aspx.cs",
+    "initialRoute": "reset",
+    "queryParameters": [
+      "token"
+    ],
+    "fallback": "forgot"
+  },
+  {
+    "page": "Frontend/Dashboard.aspx",
+    "codeBehind": "Frontend/Dashboard.aspx.cs",
+    "initialRoute": "dashboard",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/MyCourses.aspx",
+    "codeBehind": "Frontend/MyCourses.aspx.cs",
+    "initialRoute": "learning",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Catalog.aspx",
+    "codeBehind": "Frontend/Catalog.aspx.cs",
+    "initialRoute": "catalog",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Course.aspx",
+    "codeBehind": "Frontend/Course.aspx.cs",
+    "initialRoute": "course",
+    "queryParameters": [
+      "id"
+    ],
+    "fallback": "catalog"
+  },
+  {
+    "page": "Frontend/Activity.aspx",
+    "codeBehind": "Frontend/Activity.aspx.cs",
+    "initialRoute": "lesson",
+    "queryParameters": [
+      "course",
+      "lesson"
+    ],
+    "fallback": "learning"
+  },
+  {
+    "page": "Frontend/Leaderboard.aspx",
+    "codeBehind": "Frontend/Leaderboard.aspx.cs",
+    "initialRoute": "leaderboard",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Certificates.aspx",
+    "codeBehind": "Frontend/Certificates.aspx.cs",
+    "initialRoute": "certificates",
+    "queryParameters": [
+      "id"
+    ],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Courses.aspx",
+    "codeBehind": "Frontend/Courses.aspx.cs",
+    "initialRoute": "courses",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/CourseEditor.aspx",
+    "codeBehind": "Frontend/CourseEditor.aspx.cs",
+    "initialRoute": "course-edit",
+    "queryParameters": [
+      "id"
+    ],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/QuizEditor.aspx",
+    "codeBehind": "Frontend/QuizEditor.aspx.cs",
+    "initialRoute": "quiz-editor",
+    "queryParameters": [
+      "id"
+    ],
+    "fallback": "courses"
+  },
+  {
+    "page": "Frontend/CourseRequests.aspx",
+    "codeBehind": "Frontend/CourseRequests.aspx.cs",
+    "initialRoute": "requests",
+    "queryParameters": [
+      "id"
+    ],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Approvals.aspx",
+    "codeBehind": "Frontend/Approvals.aspx.cs",
+    "initialRoute": "approvals",
+    "queryParameters": [
+      "id"
+    ],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/CourseReview.aspx",
+    "codeBehind": "Frontend/CourseReview.aspx.cs",
+    "initialRoute": "review",
+    "queryParameters": [
+      "id"
+    ],
+    "fallback": "approvals"
+  },
+  {
+    "page": "Frontend/RequestReview.aspx",
+    "codeBehind": "Frontend/RequestReview.aspx.cs",
+    "initialRoute": "request-review",
+    "queryParameters": [
+      "id"
+    ],
+    "fallback": "approvals"
+  },
+  {
+    "page": "Frontend/Programs.aspx",
+    "codeBehind": "Frontend/Programs.aspx.cs",
+    "initialRoute": "programs",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Assignments.aspx",
+    "codeBehind": "Frontend/Assignments.aspx.cs",
+    "initialRoute": "assignments",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Learners.aspx",
+    "codeBehind": "Frontend/Learners.aspx.cs",
+    "initialRoute": "learners",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Analytics.aspx",
+    "codeBehind": "Frontend/Analytics.aspx.cs",
+    "initialRoute": "analytics",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Resources.aspx",
+    "codeBehind": "Frontend/Resources.aspx.cs",
+    "initialRoute": "resources",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Discussions.aspx",
+    "codeBehind": "Frontend/Discussions.aspx.cs",
+    "initialRoute": "discussions",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Messages.aspx",
+    "codeBehind": "Frontend/Messages.aspx.cs",
+    "initialRoute": "messages",
+    "queryParameters": [
+      "id"
+    ],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Assistant.aspx",
+    "codeBehind": "Frontend/Assistant.aspx.cs",
+    "initialRoute": "assistant",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/LiveSessions.aspx",
+    "codeBehind": "Frontend/LiveSessions.aspx.cs",
+    "initialRoute": "sessions",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Users.aspx",
+    "codeBehind": "Frontend/Users.aspx.cs",
+    "initialRoute": "users",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/UserEditor.aspx",
+    "codeBehind": "Frontend/UserEditor.aspx.cs",
+    "initialRoute": "users",
+    "queryParameters": [
+      "id"
+    ],
+    "fallback": "users/new"
+  },
+  {
+    "page": "Frontend/Verification.aspx",
+    "codeBehind": "Frontend/Verification.aspx.cs",
+    "initialRoute": "verification",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/ActivityLogs.aspx",
+    "codeBehind": "Frontend/ActivityLogs.aspx.cs",
+    "initialRoute": "activity",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Moderation.aspx",
+    "codeBehind": "Frontend/Moderation.aspx.cs",
+    "initialRoute": "moderation",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Profile.aspx",
+    "codeBehind": "Frontend/Profile.aspx.cs",
+    "initialRoute": "profile",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Settings.aspx",
+    "codeBehind": "Frontend/Settings.aspx.cs",
+    "initialRoute": "settings",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Roles.aspx",
+    "codeBehind": "Frontend/Roles.aspx.cs",
+    "initialRoute": "roles",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/ActiveUsers.aspx",
+    "codeBehind": "Frontend/ActiveUsers.aspx.cs",
+    "initialRoute": "active-users",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Support.aspx",
+    "codeBehind": "Frontend/Support.aspx.cs",
+    "initialRoute": "support",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Help.aspx",
+    "codeBehind": "Frontend/Help.aspx.cs",
+    "initialRoute": "help",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/EnquiryPortal.aspx",
+    "codeBehind": "Frontend/EnquiryPortal.aspx.cs",
+    "initialRoute": "enquiries",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/About.aspx",
+    "codeBehind": "Frontend/About.aspx.cs",
+    "initialRoute": "about",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Contact.aspx",
+    "codeBehind": "Frontend/Contact.aspx.cs",
+    "initialRoute": "contact",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Instructors.aspx",
+    "codeBehind": "Frontend/Instructors.aspx.cs",
+    "initialRoute": "instructors",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/FAQ.aspx",
+    "codeBehind": "Frontend/FAQ.aspx.cs",
+    "initialRoute": "faq",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Terms.aspx",
+    "codeBehind": "Frontend/Terms.aspx.cs",
+    "initialRoute": "terms",
+    "queryParameters": [],
+    "fallback": null
+  },
+  {
+    "page": "Frontend/Privacy.aspx",
+    "codeBehind": "Frontend/Privacy.aspx.cs",
+    "initialRoute": "privacy",
+    "queryParameters": [],
+    "fallback": null
+  }
+]

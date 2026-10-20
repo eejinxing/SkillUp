@@ -1,0 +1,15 @@
+# Visual Studio / .NET build output
+.vs/
+bin/
+obj/
+packages/
+*.csproj.user
+*.suo
+# Frontend developer output
+Frontend/node_modules/
+Frontend/previews/
+Frontend/.test-output/
+Frontend/.taste-skill/
+# Local integration backups / handoff archives
+App_Data/HandoffBackups/
+handoff/*.zip

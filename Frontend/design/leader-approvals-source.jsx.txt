@@ -1,0 +1,423 @@
+const imgVector = "https://www.figma.com/api/mcp/asset/6bacbced-2da6-47d4-81bb-220f1a20bb82.svg";
+
+export default function ReferenceBookingRequestsEditableReplica() {
+  return (
+    <div className="bg-gradient-to-b content-stretch flex flex-col from-[#060608] items-start overflow-clip p-[800px] relative rounded-[560px] size-full to-[#7a21ff] via-[#0e0617] via-[65%]" data-node-id="250:3682" data-name="Reference / Booking Requests / Editable replica">
+      <div className="bg-[#0b0b0c] border-20 border-[#343039] border-solid content-stretch flex gap-[424px] h-[17400px] items-start overflow-clip p-[280px] relative rounded-[440px] shrink-0 w-[21524px]" data-node-id="250:3683" data-name="Application window">
+        <div className="bg-[#7b7b7b] border-20 border-[#242424] border-solid content-stretch flex flex-col h-[16840px] items-start p-[200px] relative rounded-[500px] shrink-0 w-[960px]" data-node-id="250:3684" data-name="Navigation" />
+        <div className="bg-[#0b0b0c] content-stretch flex flex-col gap-[360px] h-[16840px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[19949px]" data-node-id="250:3685" data-name="Booking workspace">
+          <div className="content-stretch flex gap-[240px] h-[840px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[25960px]" data-node-id="250:3686" data-name="Page header">
+            <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#eee] text-[540px] whitespace-nowrap" data-node-id="250:3687">{`Requests `}</p>
+            <div className="bg-[#0b0b0c] h-[20px] relative rounded-[240px] shrink-0 w-[13000px]" data-node-id="250:3688" data-name="Spacer" />
+          </div>
+          <div className="content-stretch flex gap-[160px] h-[1060px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[25960px]" data-node-id="250:3689" data-name="Date strip">
+            <div className="bg-[#191919] content-stretch flex flex-col h-[680px] items-start overflow-clip p-[180px] relative rounded-[160px] shrink-0 w-[600px]" data-node-id="250:3690" data-name="‹">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#e6e6e6] text-[240px] whitespace-nowrap" data-node-id="250:3691">
+                ‹
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3692" data-name="September 20">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3693">
+                Mon
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3694">
+                20
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3695" data-name="September 21">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3696">
+                Tue
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3697">
+                21
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3698" data-name="September 22">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3699">
+                Wed
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3700">
+                22
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3701" data-name="September 23">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3702">
+                Thu
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3703">
+                23
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3704" data-name="September 24">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3705">
+                Fri
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3706">
+                24
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3707" data-name="September 25">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3708">
+                Sat
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3709">
+                25
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#493259] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3710" data-name="September 26">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3711">
+                Sun
+              </p>
+              <p className="relative shrink-0 text-[#eed8ff] text-[260px]" data-node-id="250:3712">
+                26
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3713" data-name="September 27">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3714">
+                Mon
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3715">
+                27
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3716" data-name="September 28">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3717">
+                Tue
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3718">
+                28
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3719" data-name="September 29">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3720">
+                Wed
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3721">
+                29
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3722" data-name="September 30">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3723">
+                Thu
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3724">
+                30
+              </p>
+            </div>
+            <div className="[word-break:break-word] bg-[#191919] content-stretch flex flex-col font-['Inter:Regular'] font-normal gap-[60px] h-[960px] items-center leading-[normal] not-italic overflow-clip p-[140px] relative rounded-[240px] shrink-0 w-[1300px] whitespace-nowrap" data-node-id="250:3725" data-name="September 31">
+              <p className="relative shrink-0 text-[#777] text-[200px]" data-node-id="250:3726">
+                Fri
+              </p>
+              <p className="relative shrink-0 text-[#bbb] text-[260px]" data-node-id="250:3727">
+                31
+              </p>
+            </div>
+            <div className="bg-[#191919] content-stretch flex flex-col h-[680px] items-start overflow-clip p-[180px] relative rounded-[160px] shrink-0 w-[600px]" data-node-id="250:3728" data-name="›">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#e6e6e6] text-[240px] whitespace-nowrap" data-node-id="250:3729">
+                ›
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[760px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[19200px]" data-node-id="250:3730" data-name="View controls">
+            <div className="bg-[#1a1a1a] content-stretch flex flex-col h-[680px] items-start overflow-clip p-[180px] relative rounded-[160px] shrink-0 w-[25960px]" data-node-id="250:3731" data-name="⌕  Search by name or filter…">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#e6e6e6] text-[240px] whitespace-pre" data-node-id="250:3732">{`⌕  Search by name or filter…`}</p>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[280px] h-[12000px] items-start overflow-clip relative rounded-[240px] shrink-0 w-[25960px]" data-node-id="250:3733" data-name="Kanban columns">
+            <div className="bg-[#101011] content-stretch flex flex-col gap-[240px] h-[12000px] items-start overflow-clip p-[200px] relative rounded-[240px] shrink-0 w-[6280px]" data-node-id="250:3734" data-name="NEW">
+              <div className="content-stretch flex h-[520px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[5880px]" data-node-id="250:3735" data-name="NEW header">
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#8fa88e] text-[240px] whitespace-pre" data-node-id="250:3736">{`●  NEW   2`}</p>
+              </div>
+              <div className="bg-[#1c1c1d] border-20 border-[#252526] border-solid content-stretch flex flex-col gap-[240px] h-[4960px] items-start overflow-clip p-[320px] relative rounded-[240px] shrink-0 w-[5880px]" data-node-id="250:3737" data-name="Table B24 / Kretov Mikhail Ilyich">
+                <div className="h-[429.825px] relative shrink-0 w-[1400px]" data-node-id="250:3738">
+                  <div className="absolute h-[429.825px] left-0 top-0 w-[1400px]" data-node-id="250:3739" data-name="Vector">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+                  </div>
+                  <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold'] font-semibold leading-[normal] left-[312px] not-italic text-[288.981px] text-white top-[40px] whitespace-nowrap" data-node-id="250:3740">
+                    DSTR
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#eee] text-[340px] whitespace-nowrap" data-node-id="250:3741">
+                  Create new Course
+                </p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3742">{`⌾  XJ-22PFV24`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3743">{`▦  September 26, 2026`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3744">{`◷  10:00 AM `}</p>
+                <div className="content-stretch flex gap-[140px] h-[540px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[5240px]" data-node-id="250:3745" data-name="Request tags">
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[2800px]" data-node-id="250:3746" data-name="Urgent">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#d6c69c] text-[200px] whitespace-nowrap" data-node-id="250:3747">
+                      ● Urgent
+                    </p>
+                  </div>
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[1800px]" data-node-id="250:3748" data-name="Event">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#bc91e5] text-[200px] whitespace-nowrap" data-node-id="250:3749">
+                      ● Event
+                    </p>
+                  </div>
+                </div>
+                <div className="border-6 border-[#a7a7a7] border-solid content-stretch flex gap-[110px] h-[609px] items-center justify-center relative rounded-[500px] shrink-0 w-[3654px]" data-node-id="250:3750">
+                  <div className="border-[#a5a5a5] border-[4.597px] border-solid h-[278.578px] overflow-clip relative rounded-[459.68px] shrink-0 w-[1159.266px]" data-node-id="250:3751">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[124.95px] not-italic text-[#717171] text-[156.072px] top-[39.41px] whitespace-nowrap" data-node-id="250:3752">
+                      <span className="leading-[normal] text-[#2ee565]">●</span>
+                      <span className="leading-[normal]">{` Approved`}</span>
+                    </p>
+                  </div>
+                  <div className="border-5 border-[#a5a5a5] border-solid h-[303px] overflow-clip relative rounded-[500px] shrink-0 w-[1261px]" data-node-id="250:3753">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[231.26px] not-italic text-[#717171] text-[147.165px] top-[57.17px] whitespace-nowrap" data-node-id="250:3754">
+                      <span className="leading-[normal] text-[#e42c4a]">●</span>
+                      <span className="leading-[normal]">{` Rejected`}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[#1c1c1d] border-20 border-[#252526] border-solid content-stretch flex flex-col gap-[240px] h-[4960px] items-start overflow-clip p-[320px] relative rounded-[240px] shrink-0 w-[5880px]" data-node-id="250:3755" data-name="Table B24 / Kretov Mikhail Ilyich">
+                <div className="h-[429.825px] relative shrink-0 w-[1400px]" data-node-id="250:3756">
+                  <div className="absolute h-[429.825px] left-0 top-0 w-[1400px]" data-node-id="250:3757" data-name="Vector">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+                  </div>
+                  <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold'] font-semibold leading-[normal] left-[312px] not-italic text-[288.981px] text-white top-[40px] whitespace-nowrap" data-node-id="250:3758">
+                    DSTR
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#eee] text-[340px] whitespace-nowrap" data-node-id="250:3759">
+                  Delete Course
+                </p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3760">{`⌾  XJ-22PFV24`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3761">{`▦  September 26, 2026`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3762">{`◷  10:00 AM `}</p>
+                <div className="content-stretch flex gap-[140px] h-[540px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[5240px]" data-node-id="250:3763" data-name="Request tags">
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[2800px]" data-node-id="250:3764" data-name="Urgent">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#d6c69c] text-[200px] whitespace-nowrap" data-node-id="250:3765">
+                      ● Urgent
+                    </p>
+                  </div>
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[1800px]" data-node-id="250:3766" data-name="Event">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#bc91e5] text-[200px] whitespace-nowrap" data-node-id="250:3767">
+                      ● Event
+                    </p>
+                  </div>
+                </div>
+                <div className="border-6 border-[#a7a7a7] border-solid content-stretch flex gap-[110px] h-[609px] items-center justify-center relative rounded-[500px] shrink-0 w-[3654px]" data-node-id="250:3768">
+                  <div className="border-[#a5a5a5] border-[4.597px] border-solid h-[278.578px] overflow-clip relative rounded-[459.68px] shrink-0 w-[1159.266px]" data-node-id="250:3769">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[124.95px] not-italic text-[#717171] text-[156.072px] top-[39.41px] whitespace-nowrap" data-node-id="250:3770">
+                      <span className="leading-[normal] text-[#2ee565]">●</span>
+                      <span className="leading-[normal]">{` Approved`}</span>
+                    </p>
+                  </div>
+                  <div className="border-5 border-[#a5a5a5] border-solid h-[303px] overflow-clip relative rounded-[500px] shrink-0 w-[1261px]" data-node-id="250:3771">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[231.26px] not-italic text-[#717171] text-[147.165px] top-[57.17px] whitespace-nowrap" data-node-id="250:3772">
+                      <span className="leading-[normal] text-[#e42c4a]">●</span>
+                      <span className="leading-[normal]">{` Rejected`}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[#101011] content-stretch flex flex-col gap-[240px] h-[12000px] items-start overflow-clip p-[200px] relative rounded-[240px] shrink-0 w-[6280px]" data-node-id="250:3773" data-name="WAITING">
+              <div className="content-stretch flex h-[520px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[5880px]" data-node-id="250:3774" data-name="WAITING header">
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#a388d0] text-[240px] whitespace-pre" data-node-id="250:3775">{`●  Rejected`}</p>
+              </div>
+              <div className="bg-[#1c1c1d] border-20 border-[#252526] border-solid content-stretch flex flex-col gap-[240px] h-[4960px] items-start overflow-clip p-[320px] relative rounded-[240px] shrink-0 w-[5880px]" data-node-id="250:3776" data-name="Table B24 / Kretov Mikhail Ilyich">
+                <div className="content-stretch flex gap-[155px] items-center relative shrink-0" data-node-id="250:3777">
+                  <div className="h-[429.825px] relative shrink-0 w-[1400px]" data-node-id="250:3778">
+                    <div className="absolute h-[429.825px] left-0 top-0 w-[1400px]" data-node-id="250:3779" data-name="Vector">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+                    </div>
+                    <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold'] font-semibold leading-[normal] left-[312px] not-italic text-[288.981px] text-white top-[40px] whitespace-nowrap" data-node-id="250:3780">
+                      DSTR
+                    </p>
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[0] not-italic relative shrink-0 text-[#717171] text-[156.072px] whitespace-nowrap" data-node-id="250:3781">
+                    <span className="leading-[normal] text-[#ff1139]">●</span>
+                    <span className="leading-[normal]">{` Rejected`}</span>
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#eee] text-[340px] whitespace-nowrap" data-node-id="250:3782">
+                  Create new Course
+                </p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3783">{`⌾  XJ-22PFV24`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3784">{`▦  September 26, 2026`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3785">{`◷  10:00 AM `}</p>
+                <div className="content-stretch flex gap-[140px] h-[540px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[5240px]" data-node-id="250:3786" data-name="Request tags">
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[2800px]" data-node-id="250:3787" data-name="Urgent">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#d6c69c] text-[200px] whitespace-nowrap" data-node-id="250:3788">
+                      ● Urgent
+                    </p>
+                  </div>
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[1800px]" data-node-id="250:3789" data-name="Event">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#bc91e5] text-[200px] whitespace-nowrap" data-node-id="250:3790">
+                      ● Event
+                    </p>
+                  </div>
+                </div>
+                <div className="border-6 border-[#a7a7a7] border-solid content-stretch flex gap-[110px] h-[609px] items-center justify-center relative rounded-[500px] shrink-0 w-[3654px]" data-node-id="250:3791">
+                  <div className="border-[#a5a5a5] border-[4.597px] border-solid h-[278.578px] overflow-clip relative rounded-[459.68px] shrink-0 w-[1159.266px]" data-node-id="250:3792">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[124.95px] not-italic text-[#717171] text-[156.072px] top-[39.41px] whitespace-nowrap" data-node-id="250:3793">
+                      <span className="leading-[normal] text-[#2ee565]">●</span>
+                      <span className="leading-[normal]">{` Approved`}</span>
+                    </p>
+                  </div>
+                  <div className="border-5 border-[#a5a5a5] border-solid h-[303px] overflow-clip relative rounded-[500px] shrink-0 w-[1261px]" data-node-id="250:3794">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[231.26px] not-italic text-[#717171] text-[147.165px] top-[57.17px] whitespace-nowrap" data-node-id="250:3795">
+                      <span className="leading-[normal] text-[#e42c4a]">●</span>
+                      <span className="leading-[normal]">{` Rejected`}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[#1c1c1d] border-20 border-[#252526] border-solid content-stretch flex flex-col gap-[240px] h-[4960px] items-start overflow-clip p-[320px] relative rounded-[240px] shrink-0 w-[5880px]" data-node-id="250:3796" data-name="Table B24 / Kretov Mikhail Ilyich">
+                <div className="content-stretch flex gap-[155px] items-center relative shrink-0" data-node-id="250:3797">
+                  <div className="h-[429.825px] relative shrink-0 w-[1400px]" data-node-id="250:3798">
+                    <div className="absolute h-[429.825px] left-0 top-0 w-[1400px]" data-node-id="250:3799" data-name="Vector">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+                    </div>
+                    <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold'] font-semibold leading-[normal] left-[312px] not-italic text-[288.981px] text-white top-[40px] whitespace-nowrap" data-node-id="250:3800">
+                      DSTR
+                    </p>
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[0] not-italic relative shrink-0 text-[#717171] text-[156.072px] whitespace-nowrap" data-node-id="250:3801">
+                    <span className="leading-[normal] text-[#f31a30]">●</span>
+                    <span className="leading-[normal]">{` Rejected`}</span>
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#eee] text-[340px] whitespace-nowrap" data-node-id="250:3802">
+                  Create new Course
+                </p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3803">{`⌾  XJ-22PFV24`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3804">{`▦  September 26, 2026`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3805">{`◷  10:00 AM `}</p>
+                <div className="content-stretch flex gap-[140px] h-[540px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[5240px]" data-node-id="250:3806" data-name="Request tags">
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[2800px]" data-node-id="250:3807" data-name="Urgent">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#d6c69c] text-[200px] whitespace-nowrap" data-node-id="250:3808">
+                      ● Urgent
+                    </p>
+                  </div>
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[1800px]" data-node-id="250:3809" data-name="Event">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#bc91e5] text-[200px] whitespace-nowrap" data-node-id="250:3810">
+                      ● Event
+                    </p>
+                  </div>
+                </div>
+                <div className="border-6 border-[#a7a7a7] border-solid content-stretch flex gap-[110px] h-[609px] items-center justify-center relative rounded-[500px] shrink-0 w-[3654px]" data-node-id="250:3811">
+                  <div className="border-[#a5a5a5] border-[4.597px] border-solid h-[278.578px] overflow-clip relative rounded-[459.68px] shrink-0 w-[1159.266px]" data-node-id="250:3812">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[124.95px] not-italic text-[#717171] text-[156.072px] top-[39.41px] whitespace-nowrap" data-node-id="250:3813">
+                      <span className="leading-[normal] text-[#2ee565]">●</span>
+                      <span className="leading-[normal]">{` Approved`}</span>
+                    </p>
+                  </div>
+                  <div className="border-5 border-[#a5a5a5] border-solid h-[303px] overflow-clip relative rounded-[500px] shrink-0 w-[1261px]" data-node-id="250:3814">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[231.26px] not-italic text-[#717171] text-[147.165px] top-[57.17px] whitespace-nowrap" data-node-id="250:3815">
+                      <span className="leading-[normal] text-[#e42c4a]">●</span>
+                      <span className="leading-[normal]">{` Rejected`}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[#101011] content-stretch flex flex-col gap-[240px] h-[12000px] items-start overflow-clip p-[200px] relative rounded-[240px] shrink-0 w-[6280px]" data-node-id="250:3816" data-name="APPROVED">
+              <div className="content-stretch flex h-[520px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[5880px]" data-node-id="250:3817" data-name="APPROVED header">
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#ceab74] text-[240px] whitespace-pre" data-node-id="250:3818">{`●  APPROVED   2`}</p>
+              </div>
+              <div className="bg-[#1c1c1d] border-20 border-[#252526] border-solid content-stretch flex flex-col gap-[240px] h-[4960px] items-start overflow-clip p-[320px] relative rounded-[240px] shrink-0 w-[5880px]" data-node-id="250:3819" data-name="Table B24 / Kretov Mikhail Ilyich">
+                <div className="content-stretch flex gap-[155px] items-center relative shrink-0" data-node-id="250:3820">
+                  <div className="h-[429.825px] relative shrink-0 w-[1400px]" data-node-id="250:3821">
+                    <div className="absolute h-[429.825px] left-0 top-0 w-[1400px]" data-node-id="250:3822" data-name="Vector">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+                    </div>
+                    <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold'] font-semibold leading-[normal] left-[312px] not-italic text-[288.981px] text-white top-[40px] whitespace-nowrap" data-node-id="250:3823">
+                      DSTR
+                    </p>
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[0] not-italic relative shrink-0 text-[#717171] text-[156.072px] whitespace-nowrap" data-node-id="250:3824">
+                    <span className="leading-[normal] text-[#2ee565]">●</span>
+                    <span className="leading-[normal]">{` Approved`}</span>
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#eee] text-[340px] whitespace-nowrap" data-node-id="250:3825">
+                  Create new Course
+                </p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3826">{`⌾  XJ-22PFV24`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3827">{`▦  September 26, 2026`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3828">{`◷  10:00 AM `}</p>
+                <div className="content-stretch flex gap-[140px] h-[540px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[5240px]" data-node-id="250:3829" data-name="Request tags">
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[2800px]" data-node-id="250:3830" data-name="Urgent">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#d6c69c] text-[200px] whitespace-nowrap" data-node-id="250:3831">
+                      ● Urgent
+                    </p>
+                  </div>
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[1800px]" data-node-id="250:3832" data-name="Event">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#bc91e5] text-[200px] whitespace-nowrap" data-node-id="250:3833">
+                      ● Event
+                    </p>
+                  </div>
+                </div>
+                <div className="border-6 border-[#a7a7a7] border-solid content-stretch flex gap-[110px] h-[609px] items-center justify-center relative rounded-[500px] shrink-0 w-[3654px]" data-node-id="250:3834">
+                  <div className="border-[#a5a5a5] border-[4.597px] border-solid h-[278.578px] overflow-clip relative rounded-[459.68px] shrink-0 w-[1159.266px]" data-node-id="250:3835">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[124.95px] not-italic text-[#717171] text-[156.072px] top-[39.41px] whitespace-nowrap" data-node-id="250:3836">
+                      <span className="leading-[normal] text-[#2ee565]">●</span>
+                      <span className="leading-[normal]">{` Approved`}</span>
+                    </p>
+                  </div>
+                  <div className="border-5 border-[#a5a5a5] border-solid h-[303px] overflow-clip relative rounded-[500px] shrink-0 w-[1261px]" data-node-id="250:3837">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[231.26px] not-italic text-[#717171] text-[147.165px] top-[57.17px] whitespace-nowrap" data-node-id="250:3838">
+                      <span className="leading-[normal] text-[#e42c4a]">●</span>
+                      <span className="leading-[normal]">{` Rejected`}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[#1c1c1d] border-20 border-[#252526] border-solid content-stretch flex flex-col gap-[240px] h-[4960px] items-start overflow-clip p-[320px] relative rounded-[240px] shrink-0 w-[5880px]" data-node-id="250:3839" data-name="Table B24 / Kretov Mikhail Ilyich">
+                <div className="content-stretch flex gap-[155px] items-center relative shrink-0" data-node-id="250:3840">
+                  <div className="h-[429.825px] relative shrink-0 w-[1400px]" data-node-id="250:3841">
+                    <div className="absolute h-[429.825px] left-0 top-0 w-[1400px]" data-node-id="250:3842" data-name="Vector">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+                    </div>
+                    <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold'] font-semibold leading-[normal] left-[312px] not-italic text-[288.981px] text-white top-[40px] whitespace-nowrap" data-node-id="250:3843">
+                      DSTR
+                    </p>
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[0] not-italic relative shrink-0 text-[#717171] text-[156.072px] whitespace-nowrap" data-node-id="250:3844">
+                    <span className="leading-[normal] text-[#2ee565]">●</span>
+                    <span className="leading-[normal]">{` Approved`}</span>
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#eee] text-[340px] whitespace-nowrap" data-node-id="250:3845">
+                  Create new Course
+                </p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3846">{`⌾  XJ-22PFV24`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3847">{`▦  September 26, 2026`}</p>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#929292] text-[240px] whitespace-pre" data-node-id="250:3848">{`◷  10:00 AM `}</p>
+                <div className="content-stretch flex gap-[140px] h-[540px] items-center overflow-clip relative rounded-[240px] shrink-0 w-[5240px]" data-node-id="250:3849" data-name="Request tags">
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[2800px]" data-node-id="250:3850" data-name="Urgent">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#d6c69c] text-[200px] whitespace-nowrap" data-node-id="250:3851">
+                      ● Urgent
+                    </p>
+                  </div>
+                  <div className="bg-[#28252c] content-stretch flex flex-col h-[480px] items-start overflow-clip p-[120px] relative rounded-[240px] shrink-0 w-[1800px]" data-node-id="250:3852" data-name="Event">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[#bc91e5] text-[200px] whitespace-nowrap" data-node-id="250:3853">
+                      ● Event
+                    </p>
+                  </div>
+                </div>
+                <div className="border-6 border-[#a7a7a7] border-solid content-stretch flex gap-[110px] h-[609px] items-center justify-center relative rounded-[500px] shrink-0 w-[3654px]" data-node-id="250:3854">
+                  <div className="border-[#a5a5a5] border-[4.597px] border-solid h-[278.578px] overflow-clip relative rounded-[459.68px] shrink-0 w-[1159.266px]" data-node-id="250:3855">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[124.95px] not-italic text-[#717171] text-[156.072px] top-[39.41px] whitespace-nowrap" data-node-id="250:3856">
+                      <span className="leading-[normal] text-[#2ee565]">●</span>
+                      <span className="leading-[normal]">{` Approved`}</span>
+                    </p>
+                  </div>
+                  <div className="border-5 border-[#a5a5a5] border-solid h-[303px] overflow-clip relative rounded-[500px] shrink-0 w-[1261px]" data-node-id="250:3857">
+                    <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0] left-[231.26px] not-italic text-[#717171] text-[147.165px] top-[57.17px] whitespace-nowrap" data-node-id="250:3858">
+                      <span className="leading-[normal] text-[#e42c4a]">●</span>
+                      <span className="leading-[normal]">{` Rejected`}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

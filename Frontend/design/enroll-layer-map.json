@@ -1,0 +1,123 @@
+{
+  "source": "262:6504",
+  "hero": "262:6505",
+  "curriculumSurface": "262:6741",
+  "outcomeGlow": [
+    "262:6667",
+    "262:6678"
+  ],
+  "replyConnector": "268:100",
+  "assets": {
+    "imgImage11": "assets/enroll/imgImage11.png",
+    "imgEllipse214": "assets/enroll/imgEllipse214.svg",
+    "imgEllipse219": "assets/enroll/imgEllipse219.svg",
+    "imgEllipse215": "assets/enroll/imgEllipse215.svg",
+    "imgEllipse218": "assets/enroll/imgEllipse218.svg",
+    "imgEllipse216": "assets/enroll/imgEllipse216.svg",
+    "imgEllipse217": "assets/enroll/imgEllipse217.svg",
+    "imgEllipse220": "assets/enroll/imgEllipse220.svg",
+    "imgEllipse222": "assets/enroll/imgEllipse222.svg",
+    "imgEllipse224": "assets/enroll/imgEllipse224.svg",
+    "imgEllipse225": "assets/enroll/imgEllipse225.svg",
+    "imgEllipse226": "assets/enroll/imgEllipse226.svg",
+    "imgEllipse227": "assets/enroll/imgEllipse227.svg",
+    "imgEllipse229": "assets/enroll/imgEllipse229.svg",
+    "imgEllipse236": "assets/enroll/imgEllipse236.svg",
+    "imgVector16": "assets/enroll/imgVector16.svg"
+  },
+  "slots": [
+    {
+      "src": "assets/enroll/imgImage11.png"
+    },
+    {
+      "src": "assets/enroll/imgEllipse214.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse219.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse215.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse218.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse216.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse217.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse220.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse220.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse224.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse225.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse226.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse227.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse227.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse236.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse229.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse222.svg"
+    },
+    {
+      "src": "assets/enroll/imgEllipse222.svg"
+    }
+  ]
+}
