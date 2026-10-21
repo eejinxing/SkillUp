@@ -77,7 +77,7 @@ Master 的 designer.cs 是 Web Forms 控制項宣告輔助檔，不是第三套�
 - Visual Studio F5：從 Default.aspx 轉到 Frontend/Home.aspx。
 - 靜態模式：在 Frontend 執行 `node server.cjs`，只提供靜態檔案，沒有 C# API。
 - `npm test`：相對路徑檢查、JS 語法、domain suites、HTTP adapter 契約測試。
-- `npm run test:ui`：安裝開發相依套件和 Playwright Chromium 後，檢查各角色、已刪除通知頁、inquiry 與手機排版。
+- `npm run test:ui`：安裝開發相依套件和 Playwright Chromium 後，檢查各角色、已刪除通知頁、inquiry 與電腦版排版。
 - 原 UI 截圖測試保留在 tests，但部分屬於較早設計，可能需更新 selector；不要把它們全數標為已通過。
 - `scripts/` 中依 Figma 匯出來源重建素材的工具是開發參考；執行前確認對應 design input 存在，避免覆蓋目前客製 UI。
 - 通用 browser 工具已移除原電腦的 Playwright/Sharp module path，改用 package.json 開發依賴；可用 BROWSER_EXECUTABLE_PATH 指定已安裝瀏覽器。
@@ -86,3 +86,6 @@ Master 的 designer.cs 是 Web Forms 控制項宣告輔助檔，不是第三套�
 既有 C#、NuGet 與 Web Forms 範本保留。新增每頁 .aspx/.aspx.cs 與共用 Master Page；修改 Default.aspx.cs 啟動轉址、.csproj content/compile items，以及本機啟始頁設定。
 原整合檔備份放在 App_Data/HandoffBackups（不提供 Web 存取）；舊的前端視覺歷史文件在 docs/history。
 不要把 .vs、bin、obj、node_modules、測試輸出或本機備份當作 backend source 交付。
+
+## 電腦端支援範圍
+目前只提供桌面瀏覽器版本，建議寬度 1280px 以上。窄視窗保留至少 1024px 的桌面畫布。手機專用母版、切換控制項、頁面模板、預覽圖片與手機版 CSS 已移除；一般電腦視窗調整、列印和減少動態效果仍保留。

@@ -72,8 +72,6 @@
 #app .catalog-page .course-body .actions .button.primary:hover{background:#e9e4ff}
 #app .catalog-page .empty{grid-column:1/-1;padding:48px 20px;border:1px dashed var(--cp-line-2);border-radius:20px;text-align:center}
 
-@media(max-width:760px){#app .catalog-page .cat-head{align-items:flex-start}#app .catalog-page .cat-stats>div{min-width:0;flex:1}#app .catalog-page .cat-stats{width:100%}#app .catalog-page .cat-search{max-width:none}#app .catalog-page .cat-chips{width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}#app .catalog-page .cat-grid{grid-template-columns:minmax(0,1fr)}}
-
 @keyframes cat-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:no-preference){
  #app .catalog-page .cat-head,#app .catalog-page .cat-toolbar{animation:cat-rise .5s var(--ease) both}

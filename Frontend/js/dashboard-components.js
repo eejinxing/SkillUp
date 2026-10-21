@@ -2,7 +2,7 @@
 (function(root){
  const shapes={star:'<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/>',flag:'<path d="M5 21V4m0 0c5-4 9 4 14 0v10c-5 4-9-4-14 0"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',code:'<path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-14-2 16"/>',database:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/>',chart:'<path d="M4 3v18h17M8 17v-5m5 5V7m5 10V4"/>',chat:'<path d="M3 4h18v13H9l-6 4Z"/>',spark:'<path d="m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"/>',arrow:'<path d="M5 12h14m-5-5 5 5-5 5"/>'};
  const icon=name=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+shapes[name]+'</svg>';
- root.SkillDashboardComponents=function({native,mobile,state,me,tiles,target,next,esc,person,date}){
+ root.SkillDashboardComponents=function({native,state,me,tiles,target,next,esc,person,date}){
   const safe=v=>esc(v??''),mine=state.enrollments.filter(e=>e.userId===me.id),enrolledIds=new Set(mine.map(e=>e.courseId));
   const avatar=u=>'<span class="da-avatar">'+(u.avatar?'<img src="'+safe(u.avatar)+'" alt="">':safe(u.name.split(' ').map(n=>n[0]).slice(0,2).join('')))+'</span>';
   const cards='<section class="dc-resume" aria-labelledby="dc-title"><div class="dc-section-heading"><h2 id="dc-title">Continue Your Last Access</h2><a href="#/learning">My courses '+icon('arrow')+'</a></div><div class="dc-card-grid">'+tiles.map((c,i)=>{
@@ -24,7 +24,6 @@
   n.querySelectorAll('h2,p').forEach(p=>{if(p.textContent.trim()==='Continue Your Last Access')p.remove();});
   n.querySelectorAll('.lh-hit[aria-label^="Continue "],.lh-history').forEach(el=>el.remove());n.style.height='calc(6650 * var(--learner-unit))';
   const aside=n.querySelector('[data-node-id="250:617"]');aside.classList.add('da-desktop');aside.setAttribute('aria-label','Learning activity');aside.innerHTML=feed('desktop');n.querySelector('.lh-reopen').textContent='Activity ↗';
-  const m=document.createElement('template');m.innerHTML=mobile;const resume=m.content.querySelector('.lm-resume')?.parentElement;if(resume)resume.outerHTML=cards.replaceAll('dc-title','dc-mobile-title');const global=m.content.querySelector('.lm-global');if(global)global.outerHTML=feed('mobile');
   return root.SkillLearningConsole({state,me,mine,tiles,target,safe,icon,cards,feed});
  };
  document.addEventListener('click',e=>{const button=e.target.closest('[data-activity-filter]');if(!button)return;const feed=button.closest('[data-activity-feed]'),selected=button.dataset.activityFilter;sessionStorage.setItem(feed.dataset.filterKey,selected);feed.querySelectorAll('[data-activity-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));feed.querySelectorAll('[data-activity-group]').forEach(item=>item.hidden=selected!=='All workspace'&&item.dataset.activityGroup!==selected);feed.querySelector('.da-empty').hidden=!![...feed.querySelectorAll('[data-activity-group]')].some(item=>!item.hidden);});

@@ -143,46 +143,10 @@
   .lc-pills .lx-courses li a:hover strong { color: #fff; }
 }
 .lc-pills .lx-courses a:focus-visible { outline: 2px solid #c4b5fd; outline-offset: 3px; }
-@media (min-width: 901px) and (max-width: 1180px) {
+@media (max-width: 1180px) {
   .lc-pills .lx-hero { grid-template-columns: minmax(0, 1fr) 265px; gap: 25px; }
   .lc-pills .lx-course-info { gap: 9px; }
   .lc-pills .lx-courses li a { grid-template-columns: minmax(0, 1fr) 120px; gap: 12px; padding-inline: 16px; }
-}
-@media (max-width: 900px) {
-  .lc-pills .lx-hero { grid-template-columns: 1fr; }
-}
-@media (max-width: 700px) {
-  .lc-pills .lx-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-  .lc-pills .lx-stat:last-child { grid-column: auto; }
-  .lc-pills .lx-stat { min-height: 0; padding: 0; gap: 8px; }
-  .lc-pills .lx-stat header { justify-content: flex-start; min-height: 18px; padding: 0 3px; font-size: 11px; }
-  .lc-pills .lx-stat header > span { white-space: nowrap; }
-  .lc-pills .lx-stat em { display: none; }
-  .lc-pills .lp-metric-pill { height: 39px; padding: 4px; }
-  .lc-pills .lx-stat strong { min-height: 27px; padding: 5px 8px; font-size: 15px; }
-  .lc-pills .lx-stat strong small { font-size: 11px; }
-  .lc-pills .lx-courses li a { grid-template-columns: minmax(0, 1fr) 95px; gap: 10px; padding: 15px 16px; border-radius: 999px; }
-  .lc-pills .lx-course-info { gap: 8px; }
-  .lc-pills .lp-course-marks { width: 36px; }
-  .lc-pills .lp-course-instructor { width: 24px; height: 24px; font-size: 7px; }
-  .lc-pills .lx-glyph { width: 26px; height: 26px; margin-left: -11px; }
-  .lc-pills .lx-glyph svg { width: 12px; height: 12px; }
-  .lc-pills .lx-courses strong { font-size: 11px; line-height: 1.4; white-space: normal; }
-  .lc-pills .lx-courses small { font-size: 9px; }
-  .lc-pills .lx-course-progress { margin: 0; gap: 10px; }
-  .lc-pills .lp-course-stat :is(em, b) { grid-column: auto; grid-row: auto; font-size: 11px; }
-  .lc-pills .lp-course-stat small { font-size: 8px; }
-  .lc-pills .lx-courses .lx-suggested a { grid-template-columns: minmax(0, 1fr) auto; }
-  .lc-pills .lx-explore { gap: 5px; height: 29px; padding-inline: 9px; font-size: 9px; }
-}
-@media (max-width: 360px) {
-  .lc-pills .lx-courses li a { grid-template-columns: minmax(0, 1fr) 82px; padding-inline: 13px; gap: 7px; }
-  .lc-pills .lp-course-marks { width: 29px; }
-  .lc-pills .lp-course-instructor { width: 21px; height: 21px; }
-  .lc-pills .lx-glyph { width: 23px; height: 23px; margin-left: -13px; }
-  .lc-pills .lx-course-progress { gap: 7px; }
-  .lc-pills .lx-stat header { font-size: 10px; }
-  .lc-pills .lx-stat strong { padding-inline: 6px; font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .lc-pills .lx-courses a { transition: none; }
@@ -247,8 +211,6 @@
 .lc-pills .lx-row { gap: 22px; }
 .lc-pills .lx-panel { padding: 26px 28px; }
 @media (hover: hover) { .lc-pills .lp-resume:hover { background: #fff; } .lc-pills .lp-resume:hover span { transform: translateX(3px); } }
-@media (max-width: 900px) { .lc-pills .lx-hero { grid-template-rows: auto; } .lc-pills .lp-greeting, .lc-pills .lx-stats, .lc-pills .lx-ach { grid-column: 1; grid-row: auto; } }
-@media (max-width: 700px) { .lc-pills .lp-greeting h2 { font-size: 28px; } .lc-pills .lp-greeting p { font-size: 13px; } .lc-pills .lx-panel { padding: 20px; } .lc-pills .lx-courses strong { font-size: 12.5px; } .lc-pills .lx-courses small { font-size: 10.5px; } }
 .lc-pills .lp-course-marks { width: 54px; } .lc-pills .lx-glyph { margin-left: -8px; }
 
 /* Beautify: glass metric capsules, structured announcements card, single-bar activity chart with a date axis. */
@@ -289,7 +251,6 @@
 .lc-pills .lp-axis { display: flex; justify-content: space-around; margin-top: 10px; }
 .lc-pills .lp-axis span { flex: 0 0 12px; display: flex; justify-content: center; white-space: nowrap; font-size: 10px; color: #8e879f; }
 @media (hover: hover) { .lc-pills .lx-bars span:hover i::after { opacity: 1; } }
-@media (max-width: 700px) { .lc-pills .lp-metric-pill { height: 42px; } .lc-pills .lx-bars span, .lc-pills .lx-bars span.on, .lc-pills .lp-axis span { flex-basis: 8px; } .lc-pills .lp-axis span { font-size: 9px; } }
 
 /* Layout pass: content-height banner (no empty band), captions under capsules, a 5:7 bottom row with matched heights,
    a chart that fills its panel and a progress line along each course row. */
@@ -304,4 +265,3 @@
 .lc-pills .lx-courses li[style] a { position: relative; overflow: hidden; }
 .lc-pills .lx-courses li[style] a::after { content: ''; position: absolute; left: 28px; right: 28px; bottom: 0; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #c4b5fd 0 var(--row-p), #ffffff10 var(--row-p) 100%); }
 @media (max-width: 1100px) { .lc-pills .lx-row { grid-template-columns: minmax(0, 1fr); } }
-@media (max-width: 700px) { .lc-pills .lp-metric-note { display: none; } .lc-pills .lx-bars span, .lc-pills .lx-bars span.on, .lc-pills .lp-axis span { flex-basis: 8px; } .lc-pills .lx-courses li[style] a::after { left: 22px; right: 22px; } }

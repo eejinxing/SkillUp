@@ -39,8 +39,6 @@
 .hd-courses em{font-style:normal;font-size:10px;color:#c9c2dc;text-align:right}
 .hd-courses .hd-pink i:after{background:linear-gradient(90deg,#c026d3,#f0abfc)}
 .hd-note{margin:12px 0 0!important;font-size:10px!important;color:#6f6984!important;text-align:center;max-width:none!important}
-@media(max-width:900px){.hd-hero{grid-template-columns:1fr}.hd-row{grid-template-columns:1fr}}
-@media(max-width:560px){.home-dash{padding:10px;border-radius:18px}.hd-stat{padding:10px}.hd-stat strong{font-size:26px}.hd-stat small{font-size:12px}.hd-stat em{display:none}.hd-courses>div{grid-template-columns:minmax(0,1fr) 32px}.hd-courses .hd-bar{grid-column:1/3;grid-row:2}.hd-search{display:none}.hd-pill{margin-left:auto}}
 
 /* Supplied gradient + glass, matching the Learner dashboard */
 .home-refined .home-hero{background:radial-gradient(60% 50% at 50% 0%,#00000000,#050508 90%),url(assets/dashboard-gradient.webp) center top/cover no-repeat,#050508}

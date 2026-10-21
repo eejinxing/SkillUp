@@ -153,70 +153,6 @@
   #app .lb-timing .lb-group-note.is-gold { font-size: 9px; }
   #app .lb-timing .lb-course-row { grid-template-columns: 27px minmax(130px, 1fr) 52px minmax(50px, 100px) 48px 62px; gap: 10px; }
 }
-@media (max-width: 640px) {
-  #app .lb-timing { --timing-cols: 30px minmax(0, 1fr) 54px; border-radius: 12px; }
-  #app .lb-timing .lb-header { padding: 13px 15px; gap: 9px; }
-  #app .lb-timing .lb-brand-mark { width: 26px; height: 26px; }
-  #app .lb-timing .lb-header h1 { flex: 1; font-size: 14px; }
-  #app .lb-timing .lb-header-pills { margin-left: 0; }
-  #app .lb-timing .lb-pill { font-size: 10px; height: 22px; padding: 0 6px; }
-  #app .lb-timing .lb-header-profile { margin-left: 0; order: 0; }
-  #app .lb-timing .lb-header-profile > span:not(.avatar) { display: none; }
-  #app .lb-timing .lb-search { flex: 1 1 100%; max-width: none; margin: 0; padding-top: 8px; border-top: 1px solid #ffffff0e; }
-  #app .lb-timing .lb-search input { font-size: 12px; }
-  #app .lb-timing .lb-board { margin: 0 6px 6px; padding: 21px 10px 17px; }
-  #app .lb-timing .lb-profile { align-items: center; gap: 14px; }
-  #app .lb-timing .lb-profile-avatar .avatar { width: 62px; height: 62px; font-size: 22px; }
-  #app .lb-timing .lb-profile-copy h2 { font-size: 25px; line-height: 1.1; gap: 5px; }
-  #app .lb-timing .lb-verified { width: 16px; height: 16px; }
-  #app .lb-timing .lb-profile-stats { margin-top: 8px; gap: 3px 10px; font-size: 11px; }
-  #app .lb-timing .lb-profile-stats svg { width: 13px; height: 13px; }
-  #app .lb-timing .lb-period-nav { gap: 20px; margin-top: 25px; margin-bottom: 17px; }
-  #app .lb-timing .lb-period-nav button { font-size: 16px; }
-  #app .lb-timing .lb-session-name { font-size: 9px; padding-left: 9px; padding-right: 18px; }
-  #app .lb-timing .lb-timing-session { gap: 4px; }
-  #app .lb-timing .lb-timing-session > span + span { font-size: 9px; }
-  #app .lb-timing .lb-checkered { width: 20px; height: 12px; margin-right: 8px; }
-  #app .lb-timing .lb-row-group > header { gap: 8px; min-height: 34px; padding: 8px; }
-  #app .lb-timing .lb-group-note { display: none !important; }
-  #app .lb-timing .lb-row-group h2 { font-size: 11px; }
-  #app .lb-timing .lb-timing-labels, #app .lb-timing .lb-rank-card { gap: 8px; padding-left: 8px; padding-right: 8px; }
-  #app .lb-timing .lb-timing-labels > span:nth-child(4),
-  #app .lb-timing .lb-timing-labels > span:nth-child(5),
-  #app .lb-timing :is(.lb-best-quiz, .lb-timing-gap) { display: none; }
-  #app .lb-timing .lb-timing-labels { font-size: 8px; }
-  #app .lb-timing .lb-rank-card { min-height: 59px; }
-  #app .lb-timing .lb-timing-position { width: 25px; height: 27px; font-size: 15px; }
-  #app .lb-timing .lb-timing-identity { gap: 7px; padding-left: 7px; border-left-width: 2px; }
-  #app .lb-timing .lb-rank-person, #app .lb-timing .lb-rank-person .avatar { width: 25px; min-width: 25px; height: 25px; font-size: 8px; }
-  #app .lb-timing .lb-rank-card h2 { font-size: 11px; gap: 4px; white-space: nowrap; }
-  #app .lb-timing .lb-driver-copy > p { margin-top: 4px; }
-  #app .lb-timing :is(.lb-level-chip, .lb-date-chip) { display: none; }
-  #app .lb-timing .lb-row-context { display: block; grid-column: auto; grid-row: auto; margin: 0; font-size: 9px; }
-  #app .lb-timing .lb-you-label { font-size: 7px; padding: 2px 3px; margin-left: 0; }
-  #app .lb-timing .lb-rank-score { font-size: 18px; }
-  #app .lb-timing .lb-learning { margin-top: 24px; }
-  #app .lb-timing .lb-learning h2 { font-size: 13px; }
-  #app .lb-timing .lb-course-row { grid-template-columns: 24px minmax(0, 1fr) 46px 51px; gap: 7px; padding: 11px 7px; min-height: 77px; }
-  #app .lb-timing .lb-course-index { grid-column: 1; grid-row: 1 / 3; font-size: 12px; }
-  #app .lb-timing .lb-course-identity { grid-column: 2; grid-row: 1; gap: 7px; }
-  #app .lb-timing .lb-course-identity strong { font-size: 11px; }
-  #app .lb-timing .lb-course-identity .lb-marks { display: none; }
-  #app .lb-timing .lb-course-next { font-size: 9px; }
-  #app .lb-timing .lb-course-state { display: none; }
-  #app .lb-timing .lb-course-sectors { grid-column: 2; grid-row: 2; width: 100%; margin-top: 1px; }
-  #app .lb-timing .lb-course-sectors i { height: 6px; }
-  #app .lb-timing .lb-course-progress { grid-column: 3; grid-row: 1 / 3; font-size: 13px; }
-  #app .lb-timing .lb-course-open { display: flex; grid-column: 4; grid-row: 1 / 3; font-size: 10px; gap: 3px; }
-  #app .lb-timing .lb-course-open.is-go { font-size: 10px; }
-  #app .lb-timing .lb-course-open svg { width: 10px; height: 10px; }
-  #app .lb-timing .lb-weekly { padding: 12px 10px; gap: 8px; }
-  #app .lb-timing .lb-weekly p { font-size: 9px; }
-  #app .lb-timing .lb-weekly > strong { font-size: 20px; }
-  #app .lb-timing .lb-weekly > strong small { display: block; margin: 4px 0 0; font-size: 9px; }
-  #app .lb-timing .lb-footer { align-items: stretch; gap: 14px; }
-  #app .lb-timing .lb-footer a { align-self: flex-end; font-size: 11px; }
-}
 @media (prefers-reduced-motion: reduce) {
   #app .lb-timing * { animation: none !important; transition: none !important; }
 }
@@ -282,15 +218,6 @@
 @media (max-width: 1100px) {
   #app .lb-timing .lb-learning-labels, #app .lb-timing .lb-course-row { grid-template-columns: 28px minmax(140px, 1fr) 64px 44px 40px minmax(110px, 180px) 80px; gap: 10px; }
 }
-@media (max-width: 700px) {
-  #app .lb-timing .lb-rank-card, #app .lb-timing .lb-timing-labels { --timing-cols: 32px minmax(0, 1fr) 66px; }
-  #app .lb-timing .lb-learning-labels { display: none; }
-  #app .lb-timing .lb-course-row { grid-template-columns: 24px minmax(0, 1fr) 58px 74px; gap: 8px; }
-  #app .lb-timing .lb-course-row .lb-ers { grid-column: 3; grid-row: 1; }
-  #app .lb-timing .lb-course-row :is(.lb-drs, .lb-interval) { display: none; }
-  #app .lb-timing .lb-course-row .lb-sectors { grid-column: 2 / 4; grid-row: 2; }
-  #app .lb-timing .lb-sectors i { font-size: 10px; }
-}
 /* Open Top 10 positions: same row rhythm, visibly empty. */
 #app .lb-timing .lb-empty-slot { opacity: .55; }
 #app .lb-timing .lb-empty-slot:hover { background: inherit; }
@@ -314,18 +241,10 @@
 @media (max-width: 1100px) {
   #app .lb-timing .lb-rank-card, #app .lb-timing .lb-timing-labels { --timing-cols: 38px minmax(170px, 1fr) 56px 40px 66px 50px 50px 50px 64px; gap: 8px; }
 }
-@media (max-width: 760px) {
-  #app .lb-timing .lb-rank-card, #app .lb-timing .lb-timing-labels { --timing-cols: 32px minmax(0, 1fr) 54px 60px; }
-  #app .lb-timing :is(.lb-rank-card, .lb-timing-labels) > :is(.lb-drs, .lb-sector, span:nth-child(4), span:nth-child(6), span:nth-child(7), span:nth-child(8)) { display: none; }
-  #app .lb-timing .lb-rank-card .lb-interval { display: none; }
-  #app .lb-timing .lb-timing-labels > span:nth-child(5) { display: none; }
-}
 
 /* Reference timing strip: square indicators and tightly aligned fluorescent numerals. */
-@media (min-width: 761px) {
-  #app .lb-timing .lb-timing-labels > span { display: block; }
-  #app .lb-timing .lb-rank-card > .lb-row-status { display: grid; }
-}
+#app .lb-timing .lb-timing-labels > span { display: block; }
+#app .lb-timing .lb-rank-card > .lb-row-status { display: grid; }
 #app .lb-timing .lb-rank-card,
 #app .lb-timing .lb-timing-labels {
   --timing-cols: 46px minmax(220px, 1fr) 56px 42px 89px 79px 79px 79px 72px;
@@ -427,7 +346,7 @@
 #app .lb-timing .lb-rank-card > .lb-sector.is-none { color: #636d64; }
 #app .lb-timing .lb-rank-card > .lb-sector small { font-size: 8px; margin-left: 2px; opacity: .7; }
 #app .lb-timing .lb-rank-card > :is(.lb-interval, .lb-sector) { padding-right: 2px; }
-@media (min-width: 761px) and (max-width: 1100px) {
+@media (max-width: 1100px) {
   #app .lb-timing .lb-rank-card,
   #app .lb-timing .lb-timing-labels {
     --timing-cols: 34px minmax(140px, 1fr) 49px 34px 71px 65px 65px 65px 59px;
@@ -437,55 +356,20 @@
   #app .lb-timing .lb-rank-card > .lb-interval { font-size: 11px; }
   #app .lb-timing .lb-rank-card > .lb-sector small { font-size: 7px; margin-left: 1px; }
 }
-@media (max-width: 760px) {
-  #app .lb-timing .lb-rank-card,
-  #app .lb-timing .lb-timing-labels { --timing-cols: 32px minmax(0, 1fr) 48px 60px; }
-  #app .lb-timing .lb-timing-labels > span:nth-child(3) { display: block; }
-  #app .lb-timing .lb-rank-card > .lb-row-status { display: grid; }
-}
 
 /* Keep the timing header aligned with its cells when space becomes narrower. */
 #app .lb-timing .lb-rank-card > .lb-interval { font-family: Consolas, 'Courier New', monospace; }
 #app .lb-timing .lb-rank-card > .lb-interval.is-leader { font-family: Arial, sans-serif; font-weight: 600; }
 #app .lb-timing .lb-rank-card > .lb-sector { font-family: Consolas, 'Courier New', monospace; }
 #app .lb-timing .lb-row-points { flex: none; white-space: nowrap; }
-@media (min-width: 761px) {
-  #app .lb-timing .lb-timing-labels > span:nth-child(n) { display: block; }
-}
-@media (min-width: 901px) and (max-width: 1100px) {
+#app .lb-timing .lb-timing-labels > span:nth-child(n) { display: block; }
+@media (max-width: 1100px) {
   #app .lb-timing .lb-rank-card,
   #app .lb-timing .lb-timing-labels {
     --timing-cols: 28px minmax(140px, 1fr) 44px 32px 65px 57px 57px 57px 50px;
     column-gap: 6px;
   }
   #app .lb-timing .lb-rank-card > .lb-sector { font-size: 11px; }
-}
-@media (min-width: 761px) and (max-width: 900px) {
-  #app .lb-timing .lb-rank-card,
-  #app .lb-timing .lb-timing-labels {
-    --timing-cols: 28px minmax(140px, 1fr) 44px 32px 65px 64px 50px;
-    column-gap: 6px;
-  }
-  #app .lb-timing .lb-rank-card > .lb-sector:nth-child(n+7),
-  #app .lb-timing .lb-timing-labels > span:nth-child(7),
-  #app .lb-timing .lb-timing-labels > span:nth-child(8) { display: none; }
-  #app .lb-timing .lb-date-chip { display: none; }
-}
-@media (max-width: 760px) {
-  #app .lb-timing .lb-rank-card,
-  #app .lb-timing .lb-timing-labels { --timing-cols: 28px minmax(0, 1fr) 48px; }
-  #app .lb-timing .lb-rank-card > .lb-row-status,
-  #app .lb-timing .lb-timing-labels > span:nth-child(9),
-  #app .lb-timing .lb-done-badges,
-  #app .lb-timing .lb-rank-card .lb-row-context { display: none; }
-  #app .lb-timing .lb-empty-slot .lb-row-context { display: block; }
-  #app .lb-timing .lb-driver-copy > p { margin-top: 5px; }
-  #app .lb-timing .lb-row-points { margin-left: 0; font-size: 9px; }
-}
-@media (max-width: 380px) {
-  #app .lb-timing .lb-timing-identity .lb-rank-person,
-  #app .lb-timing .lb-you-label { display: none; }
-  #app .lb-timing .lb-rank-card h2 { display: block; white-space: normal; overflow-wrap: anywhere; }
 }
 
 /* Dense learning telemetry: progress sectors, quiz scores and activity totals. */
@@ -536,7 +420,7 @@
   #app .lb-timing :is(.lb-data-avg, .lb-data-quiz),
   #app .lb-timing .lb-timing-labels > :is(.lb-col-avg, .lb-col-quiz) { display: none; }
 }
-@media (min-width: 901px) and (max-width: 1100px) {
+@media (max-width: 1100px) {
   #app .lb-timing .lb-rank-card,
   #app .lb-timing .lb-timing-labels {
     --timing-cols: 34px minmax(140px, 1fr) 44px 32px 70px 63px 63px 64px 50px;
@@ -545,24 +429,6 @@
   #app .lb-timing .lb-timing-labels > :is(.lb-col-avg, .lb-col-quiz, .lb-col-act),
   #app .lb-timing .lb-rank-card > .lb-sector:nth-child(8),
   #app .lb-timing .lb-timing-labels > span:nth-child(8) { display: none; }
-}
-@media (min-width: 761px) and (max-width: 900px) {
-  #app .lb-timing .lb-rank-card,
-  #app .lb-timing .lb-timing-labels {
-    --timing-cols: 28px minmax(140px, 1fr) 44px 32px 65px 64px 50px;
-  }
-  #app .lb-timing .lb-datum,
-  #app .lb-timing .lb-timing-labels > :is(.lb-col-best, .lb-col-avg, .lb-col-act, .lb-col-quiz),
-  #app .lb-timing .lb-rank-card > .lb-sector:nth-child(n+7),
-  #app .lb-timing .lb-timing-labels > span:nth-child(7),
-  #app .lb-timing .lb-timing-labels > span:nth-child(8) { display: none; }
-}
-@media (max-width: 760px) {
-  #app .lb-timing .lb-rank-card,
-  #app .lb-timing .lb-timing-labels { --timing-cols: 28px minmax(0, 1fr) 48px; }
-  #app .lb-timing .lb-rank-card > :is(.lb-datum, .lb-sector),
-  #app .lb-timing .lb-timing-labels > :is(.lb-col-best, .lb-col-avg, .lb-col-act, .lb-col-quiz),
-  #app .lb-timing .lb-timing-labels > span:last-child { display: none; }
 }
 
 /* More timing-screen yellow: intervals, in-progress sectors, quiz scores and counts read yellow; complete/passing stays green,

@@ -168,21 +168,6 @@
   .ob-chart { grid-column: span 7; }
   .ob-news { grid-column: span 5; }
 }
-@media (max-width: 860px) {
-  .ob-chart, .ob-news { grid-column: span 12; }
-}
-@media (max-width: 640px) {
-  .ob-grid { gap: 12px; }
-  .ob-tile { padding: 20px; border-radius: 20px; }
-  .ob-hero { min-height: 0; padding: 24px 20px; }
-  .ob-level, .ob-progress { grid-column: span 12; }
-  .ob-next { flex-wrap: wrap; }
-  .ob-next b { width: 100%; justify-content: center; }
-  .ob-bars { gap: 5px; min-height: 160px; }
-  .ob-axis { gap: 5px; }
-  .ob-axis span { font-size: 9px; }
-  .ob-progress-big { font-size: 52px; }
-}
 
 /* Reduced motion: everything appears in place. */
 @media (prefers-reduced-motion: reduce) {

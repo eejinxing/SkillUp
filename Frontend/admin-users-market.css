@@ -130,21 +130,6 @@
 #app .au-market .au-empty button{margin-top:12px;height:36px;padding:0 16px;border:1px solid var(--m-line-2);border-radius:10px;background:transparent;color:#fff}
 
 @media(max-width:980px){#app .au-market .au-body{grid-template-columns:minmax(0,1fr)}#app .au-market .au-sidebar{position:static;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));column-gap:20px}#app .au-market .au-facet{border-bottom:0}}
-@media(max-width:600px){
- #app .admin-users-page.au-market{padding:18px;border-radius:18px}
- #app .au-market .au-header{flex-wrap:wrap}
- #app .au-market .au-header h1{font-size:24px}
- #app .au-market .au-toolbar{flex-wrap:wrap}
- #app .au-market .au-search-wrap{flex:1 1 100%}
- #app .au-market .au-sort{flex:1}
- #app .au-market .au-directory{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
- #app .au-market .au-media{height:118px}
- #app .au-market .au-avatar{width:58px;height:58px}
- #app .au-market .au-avatar b{font-size:19px}
- #app .au-market .au-stats{grid-template-columns:1fr}
- #app .au-market[data-view=list] .au-user{grid-template-columns:56px minmax(0,1fr);padding-right:48px}
- #app .au-market[data-view=list] .au-stats{display:none}
-}
 
 /* Motion */
 @keyframes au-rise{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
@@ -207,5 +192,4 @@
 #app .au-market .au-diary-bars>span:last-child i{background:#dba372}
 #app .au-market .au-diary-dates{display:flex;justify-content:space-between;margin-top:7px;color:#66666e;font:9px ui-monospace,SFMono-Regular,Consolas,monospace}
 @media(hover:hover) and (pointer:fine){#app .au-market .au-diary-person:hover .au-diary-face{transform:scale(1.12);border-color:#ffffff9e}#app .au-market .au-diary-person:hover .au-diary-caption,#app .au-market .au-diary-summary a:hover{color:#fff}}
-@media(max-width:600px){#app .au-market .au-diary{margin:-4px -4px 20px;padding:21px 16px 14px}#app .au-market .au-diary h2{font-size:36px}#app .au-market .au-diary-summary{gap:9px;font-size:10px;max-width:116px}#app .au-market .au-diary-map{height:285px;margin-inline:18px}#app .au-market .au-diary-person{width:90px}#app .au-market .au-diary-caption{font-size:8px;gap:4px}#app .au-market .au-diary-face{width:29px;height:29px}#app .au-market .au-diary-role{font-size:8px}#app .au-market .au-diary-timeline-head{align-items:flex-start;font-size:8px}#app .au-market .au-diary-timeline-head small{max-width:105px;font-size:8px;text-align:right}#app .au-market .au-diary-bars{gap:3px}}
 @media(prefers-reduced-motion:reduce){#app .au-market .au-diary-face{transition:none}}

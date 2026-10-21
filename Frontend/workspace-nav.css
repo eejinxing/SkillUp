@@ -9,7 +9,6 @@
 #skill-incoming-call .incoming-call-actions{display:flex;gap:9px;width:100%;margin-top:10px}
 #skill-incoming-call button{flex:1;min-height:39px;padding:8px;border-radius:999px;font-size:11px;border:1px solid #ffffff18;background:#30322f;color:#ddd}
 #skill-incoming-call [data-incoming-call=accept]{background:#baf36e;border-color:#baf36e;color:#203011}
-@media(max-width:760px){#skill-incoming-call{top:145px;right:12px}#app .skill-global-header .gn-actions{gap:5px}#app .skill-global-header .gn-actions .gn-demo-call{padding-inline:7px;font-size:9px}}
 body.ui-refined.shared-capsule-nav #app{padding-top:0!important}
 body.shared-capsule-nav #skill-edge-nav.skill-menubar{display:none!important}
 body.shared-capsule-nav .learning-console .lx-top{display:none}
@@ -77,11 +76,9 @@ body.shared-capsule-nav .learning-console .lx-top{display:none}
 #skill-call-dock textarea{min-height:65px;background:#161618;border-color:#ffffff14;font-size:11px;padding:10px;color:#ddd}
 #skill-call-dock .call-local-note{display:block;margin-top:12px;font-size:9px;line-height:1.5;color:#85858f}
 @media(max-width:1100px){#app .skill-global-header{gap:12px}#app .skill-global-header .gn-workspace-label,#app .skill-global-header .gn-date{display:none}#app .skill-global-header .gn-links{margin-left:0;flex:1}#app .skill-global-header .gn-links>a{padding:0 10px}#app .skill-global-header .gn-capsule{padding-left:7px}}
-@media(max-width:760px){#app .skill-global-header{flex-wrap:wrap;padding:13px 14px;gap:12px;min-height:100px}#app .skill-global-header .gn-brand{width:auto;margin-right:auto}#app .skill-global-header .gn-actions{order:1}#app .skill-global-header .gn-capsule{order:2;flex-basis:100%;height:43px}#app .skill-global-header .gn-links>a{flex:1;font-size:10px;padding:0 8px}#app .skill-global-header .gn-call-strip>button{gap:8px;padding:0 9px}#app .skill-global-header .gn-call-strip>button>span{display:none}#skill-call-dock{width:min(310px,calc(100vw - 76px));right:12px;bottom:12px;max-height:calc(100dvh - 160px)}}
 @media(prefers-reduced-motion:reduce){#skill-call-dock *,#app .skill-global-header *{transition:none}}
 /* Temporary call-test buttons: stack "Receive call" above "Test video call" (remove with SHOW_INCOMING_CALL_TEST) */
 #app .skill-global-header .gn-actions .gn-demo-call.gn-demo-voice{bottom:62px;border-color:#7dfa1466;color:#b8f582}
-@media(max-width:760px){#app .skill-global-header .gn-actions .gn-demo-call.gn-demo-voice{bottom:50px}}
 /* Visitor nav: jump links to sections of the current page and a plain icon avatar. */
 #app .skill-global-header .gn-links>button,#app .skill-global-header .gn-more button[data-gn-section]{display:flex;align-items:center;justify-content:center;min-height:34px;padding:0 13px;border:0;border-radius:999px;font:inherit;font-size:11px;white-space:nowrap;color:#999;background:none;cursor:pointer}
 #app .skill-global-header .gn-links>button:hover,#app .skill-global-header .gn-links>button[aria-current=true]{background:#252525;color:#fff}

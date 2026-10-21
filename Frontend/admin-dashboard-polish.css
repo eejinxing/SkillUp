@@ -36,18 +36,12 @@
 .admin-dashboard .ad-logs-panel #ad-export-logs{display:inline-flex;align-items:center;gap:7px}
 .admin-dashboard .ad-logs-panel #ad-export-logs svg{width:15px;height:15px}
 .admin-dashboard .ad-action-card a:not(.ad-audit-link){grid-template-columns:32px minmax(0,1fr)}
-
-@media(max-width:700px){
- .ad-banner.ad-banner-live{aspect-ratio:auto;min-height:420px}
- .ad-pulse-stats{gap:18px;flex-wrap:wrap}
- .ad-pulse-x span:nth-child(2),.ad-pulse-x span:nth-child(4){display:none}
-}
 .ad-banner.ad-banner-live>img{opacity:.55}
 .ad-banner.ad-banner-live{background:linear-gradient(120deg,#1d3fb8,#3f6fe0 55%,#86a9f2)}
 .admin-dashboard .ad-table-scroll{max-height:880px;overflow:auto;scrollbar-width:thin;scrollbar-color:#ffffff26 transparent}
-.ad-banner.ad-banner-live{aspect-ratio:auto;min-height:0;height:clamp(340px,31vw,450px)}@media(max-width:700px){.ad-banner.ad-banner-live{height:auto;min-height:420px}}
+.ad-banner.ad-banner-live{aspect-ratio:auto;min-height:0;height:clamp(340px,31vw,450px)}
 /* Taller metric row (about 22% taller than before at 1440px) */
-@media(min-width:701px){.admin-dashboard .ad-top-grid>:is(.ad-summary,.ad-metric){aspect-ratio:auto;min-height:0;height:clamp(500px,39vw,600px)}}
+.admin-dashboard .ad-top-grid>:is(.ad-summary,.ad-metric){aspect-ratio:auto;min-height:0;height:clamp(500px,39vw,600px)}
 
 /* ── Activity log as a timeline (supplied reference), on the black panel ── */
 .admin-dashboard .ad-timeline{list-style:none;margin:0;padding:6px 4px 0 0}
@@ -74,7 +68,6 @@
 .admin-dashboard .ad-timeline .ad-empty{padding:28px 0;text-align:center;color:#7c7d86;font-size:13px}
 .admin-dashboard .ad-tl-scroll{padding-right:6px}
 @media(hover:hover){.admin-dashboard .ad-tl-item:hover .ad-tl-icon{border-color:#ffffff38;background:#18181d}}
-@media(max-width:700px){.admin-dashboard .ad-tl-item{grid-template-columns:30px minmax(0,1fr);gap:10px}.admin-dashboard .ad-tl-icon{width:30px;height:30px}.admin-dashboard .ad-tl-item:before{left:14.5px}.admin-dashboard .ad-tl-line{font-size:13px}}
 /* Activity feed: paired avatar/action circles and quiet inline targets. */
 .admin-dashboard .ad-logs-panel{background:#060607}
 .admin-dashboard .ad-timeline{padding:7px 4px 5px 0}
@@ -93,6 +86,5 @@
 .admin-dashboard .ad-feed-item :is(a,button).ad-tl-detail:hover{color:#ddd;text-decoration-color:#aaa}
 .admin-dashboard .ad-feed-item:hover .ad-tl-icon{border:0;background:#202022;color:#b8b8bc}
 .admin-dashboard .ad-feed-item :focus-visible{outline:2px solid #aaa;outline-offset:4px}
-@media(max-width:700px){.admin-dashboard .ad-tl-item.ad-feed-item{grid-template-columns:52px minmax(0,1fr);gap:12px;padding:14px 0;min-height:66px}.admin-dashboard .ad-feed-item .ad-tl-avatar,.admin-dashboard .ad-feed-item .ad-tl-icon{width:30px;height:30px}.admin-dashboard .ad-feed-item .ad-tl-icon{margin-left:-8px}.admin-dashboard .ad-feed-item .ad-tl-icon svg{width:15px;height:15px}.admin-dashboard .ad-feed-item .ad-tl-line{font-size:13px;line-height:1.85}.admin-dashboard .ad-feed-item .ad-tl-avatar{font-size:10px}}
 .admin-dashboard .ad-feed-item[data-source] .ad-tl-icon{color:#919193}
 .admin-dashboard .ad-feed-item[data-source]:hover .ad-tl-icon{color:#b8b8bc}

@@ -23,7 +23,6 @@
 #app .skill-global-header .cs-bar .cs-open svg{width:14px;height:14px}
 #app .skill-global-header .cs-bar>span{display:flex}
 @media(max-width:1100px){#app .skill-global-header .cs-bar .cs-who-copy,#app .skill-global-header .cs-bar .gn-attendees{display:none}#app .skill-global-header .cs-bar .cs-who{padding:0 2px}}
-@media(max-width:760px){#app .skill-global-header .cs-bar .cs-time{display:none}}
 
 /* ---------- Compact call window ---------- */
 #skill-call-dock.cd{position:fixed;top:96px;right:24px;bottom:auto;left:auto;z-index:120;width:min(400px,calc(100vw - 32px));max-height:calc(100dvh - 112px);padding:8px;border:1px solid #ffffff1c;border-radius:28px;background:linear-gradient(180deg,#141416,#0c0c0e);box-shadow:0 30px 70px -24px #000,inset 0 1px 0 #ffffff12;color:#f2f2f4;font:13px/1.5 'DM Sans',sans-serif;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;animation:cd-in .4s cubic-bezier(.2,.8,.2,1) both}
@@ -105,7 +104,6 @@
 #skill-call-dock.is-room .room-self small{z-index:2}
 
 @keyframes cd-in{from{opacity:0;transform:translateY(-10px) scale(.97)}to{opacity:1;transform:none}}
-@media(max-width:600px){#skill-call-dock.cd{top:auto;bottom:12px;right:12px;left:12px;width:auto}#skill-call-dock.cd .cd-self{width:84px}}
 @media(prefers-reduced-motion:reduce){#skill-call-dock.cd,#skill-call-dock.cd .cd-live i,#app .skill-global-header .cs-bar .cs-who-copy small i{animation:none}}
 
 /* Document tiles: override the older thumbnail rules */

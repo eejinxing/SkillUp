@@ -123,7 +123,6 @@
 @keyframes room-level{0%,100%{height:35%}30%{height:72%}60%{height:48%}80%{height:85%}}
 @keyframes room-msg{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media(max-width:980px){#skill-call-dock.is-room .room{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 300px;overflow:auto}#skill-call-dock.is-room .room-chat{border-left:0;border-top:1px solid #ffffff12}}
-@media(max-width:600px){#skill-call-dock.is-room{inset:8px;border-radius:20px}#skill-call-dock.is-room .room-people{grid-template-columns:minmax(0,1fr)}#skill-call-dock.is-room .room-row{grid-template-columns:40px minmax(0,1fr) auto}#skill-call-dock.is-room .room-progress,#skill-call-dock.is-room .room-row em{display:none}#skill-call-dock.is-room .room-head h2{font-size:24px}}
 @media(prefers-reduced-motion:reduce){#skill-incoming-call.incoming-v2,#skill-incoming-call .incoming-avatar i,#skill-incoming-call .book-dots circle,#skill-call-dock.is-room,#skill-call-dock.is-room *{animation:none!important}}
 /* Logo was darkened for the old light header */
 #app .skill-global-header .gn-brand{filter:none!important}

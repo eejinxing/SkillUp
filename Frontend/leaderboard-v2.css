@@ -102,30 +102,6 @@
 #app .lb-v2 .lb-footer a svg{width:15px;height:15px}
 
 @media(max-width:1100px){#app .lb-v2 .lb-row-context,#app .lb-v2 .lb-course-next{display:none}#app .lb-v2 .lb-rank-card,#app .lb-v2 .lb-course-row{grid-template-columns:52px 44px 32px auto minmax(0,1fr) auto 60px}#app .lb-v2 .lb-course-row>.lb-score-boxes{grid-column:6}}
-@media(max-width:760px){
- #app .lb-v2 .lb-header{flex-wrap:wrap;gap:12px;padding:14px 16px}
- #app .lb-v2 .lb-search{order:5;flex:1 1 100%;max-width:none}
- #app .lb-v2 .lb-header-pills{margin-left:0}
- #app .lb-v2 .lb-live{display:none}
- #app .lb-v2 .lb-board{margin:0 8px 8px;padding:22px 14px}
- #app .lb-v2 .lb-profile{gap:16px}
- #app .lb-v2 .lb-profile-avatar .avatar{width:72px;height:72px;font-size:22px}
- #app .lb-v2 .lb-profile-copy h2{font-size:28px}
- #app .lb-v2 .lb-profile-stats{font-size:14px;gap:10px}
- #app .lb-v2 .lb-profile-settings{display:none}
- #app .lb-v2 .lb-period-nav button{font-size:18px}
- #app .lb-v2 .lb-period-caption{display:none}
- #app .lb-v2 .lb-row-group>header{flex-wrap:wrap}
- #app .lb-v2 .lb-group-note:not(.is-gold){display:none}
- #app .lb-v2 .lb-rank-card,#app .lb-v2 .lb-course-row{grid-template-columns:44px 30px minmax(0,1fr) auto 0;gap:8px}
- #app .lb-v2 :is(.lb-level-chip,.lb-marks,.lb-row-context,.lb-course-next){display:none}
- #app .lb-v2 .lb-rank-card h2,#app .lb-v2 .lb-course-row>strong{font-size:13.5px;overflow:hidden;text-overflow:ellipsis}
- #app .lb-v2 .lb-row-status{display:none}
- #app .lb-v2 .lb-course-open{display:none}
- #app .lb-v2 .lb-course-row>.lb-score-boxes{grid-column:4}
- #app .lb-v2 .lb-score-boxes .lb-box:not(.is-points):not(.is-light){display:none}
- #app .lb-v2 .lb-footer{flex-direction:column;align-items:flex-start}
-}
 
 /* Motion */
 @keyframes lb-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
@@ -154,5 +130,3 @@
 #app .lb-v2 :is(.lb-row-status,.lb-course-open){width:100%;box-sizing:border-box}
 #app .lb-v2 .lb-row-group>header .lb-group-note{padding:0;border:0;border-radius:0;background:none}
 @media(max-width:1100px){#app .lb-v2 .lb-rank-card,#app .lb-v2 .lb-course-row{grid-template-columns:52px 44px 32px auto minmax(0,1fr) auto 88px}}
-@media(max-width:760px){#app .lb-v2 .lb-rank-card,#app .lb-v2 .lb-course-row{grid-template-columns:44px 30px minmax(0,1fr) auto 0}}
-@media(max-width:760px){#app .lb-v2 .lb-course-row>strong{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#app .lb-v2 .lb-course-row>.lb-rank-person{display:none}#app .lb-v2 .lb-course-row{grid-template-columns:52px minmax(0,1fr) auto 0}#app .lb-v2 .lb-course-row>.lb-score-boxes{grid-column:3}}

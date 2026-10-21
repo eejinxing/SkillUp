@@ -43,16 +43,6 @@
 
 /* Give the page a little room under the floating bar when it is not inside a header */
 body.ui-refined:not(:has(.figma-workspace-header.has-menubar)) #app{padding-top:58px}
-
-@media(max-width:760px){
- #skill-edge-nav.skill-menubar{left:8px;right:8px;top:8px;max-width:none;overflow-x:auto;overflow-y:visible;scrollbar-width:none;padding:0 4px}
- #skill-edge-nav.skill-menubar::-webkit-scrollbar{display:none}
- .figma-workspace-header.has-menubar{flex-wrap:wrap}
- .figma-workspace-header.has-menubar>#skill-edge-nav.skill-menubar{order:3;flex:1 1 100%;left:auto;right:auto;margin-top:8px}
- #skill-edge-nav.skill-menubar .bar-zoom,#skill-edge-nav.skill-menubar .bar-sep{display:none}
- #skill-edge-nav.skill-menubar .bar-notch{display:none}
- #skill-edge-nav.skill-menubar .bar-account{margin-left:auto;flex:none}
-}
 @media(prefers-reduced-motion:reduce){#skill-edge-nav.skill-menubar .bar-notch{transition:opacity .1s}}
 @media(prefers-reduced-motion:no-preference){
  @keyframes mb-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}

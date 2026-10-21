@@ -62,5 +62,4 @@
 .course-requests-page .rq-detail-actions>small{font-size:12px}
 .course-requests-page .rq-empty h2{font-size:20px}.course-requests-page .rq-empty p{font-size:13.5px}
 .course-requests-page :is(a,button,input,select,summary):focus-visible{outline:2px solid #a78bfa;outline-offset:2px}
-@media(max-width:760px){.course-requests-page .rq-title h1{font-size:28px}.course-requests-page .rq-request{padding:14px 16px}.course-requests-page .rq-request-meta>h2{font-size:20px}.course-requests-page .rq-stage-dot{width:24px;height:24px}.course-requests-page .rq-review-progress li:not(:last-child):before{top:11px;left:30px}.course-requests-page .rq-review-progress strong{font-size:12px}.course-requests-page .rq-filters{grid-template-columns:1fr}}
 .course-requests-page .rq-event-card dt{white-space:nowrap;min-width:96px}

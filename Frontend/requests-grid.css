@@ -256,16 +256,6 @@ html body .main:has(.rq-grid-view){max-width:1780px}
 #app .rq-grid-view .rq-detail-actions>small{flex:1;min-width:160px;font-size:12.5px;line-height:1.5;color:var(--g-muted)}
 
 @media(max-width:1100px){#app .course-requests-page.rq-grid-view{grid-template-columns:minmax(0,1fr) 340px}#app .rq-grid-view .rq-table-search{width:180px}}
-@media(max-width:760px){
- #app .course-requests-page.rq-grid-view{grid-template-columns:minmax(0,1fr)}
- #app .rq-grid-view .rq-tool-group{width:100%}
- #app .rq-grid-view .rq-table-search{width:100%;flex:1 1 100%}
- #app .rq-grid-view .rq-grid-toolbar .rq-select-tool{flex:1 1 calc(50% - 4px);min-width:0}
- #app .rq-grid-view .rq-grid-toolbar .rq-select-tool select{flex:1;width:100%;min-width:0}
- #app .rq-grid-view .rq-side{border-left:0;border-top:1px solid var(--g-line-2)}
- #app .rq-grid-view .rq-pager{justify-content:center}
- #app .rq-grid-view .rq-prop{grid-template-columns:104px minmax(0,1fr)}
-}
 
 /* Motion */
 @keyframes rq-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}

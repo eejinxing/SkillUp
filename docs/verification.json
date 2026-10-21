@@ -1,16 +1,18 @@
 {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "timezone": "Asia/Kuala_Lumpur",
   "format": "Web Forms .aspx + .aspx.cs; existing JavaScript preserved by user request",
   "build": {
     "framework": ".NET Framework 4.8.1",
     "configuration": "Debug / AnyCPU",
     "result": "passed",
-    "tool": "MSBuild (Visual Studio 18 Community)"
+    "tool": "MSBuild (Visual Studio 18 Community)",
+    "errors": 0,
+    "warnings": 0
   },
   "staticChecks": {
     "scripts": 47,
-    "styles": 61,
+    "styles": 62,
     "jsSyntax": 47,
     "localCssResources": 29,
     "missingReferences": 0,
@@ -48,7 +50,7 @@
     "checks": [
       "real IIS .aspx entry",
       "notification bell/page removal",
-      "mobile no horizontal overflow",
+      "desktop-only layout at 1280px and 1440px",
       "learner course filter",
       "enquiry submission",
       "private enquiry portal access"
@@ -59,5 +61,55 @@
     "Backend/database/authentication services have not been implemented.",
     "Existing JavaScript is retained; forms are not rewritten as server postbacks.",
     "Historical visual-selector tests were preserved but not all rerun or updated."
-  ]
+  ],
+  "documentationUpdated": "2026-10-21",
+  "desktopOnly": {
+    "result": "passed",
+    "recommendedViewportWidth": 1280,
+    "minimumCanvasWidth": 1024,
+    "comparedDesktopLayouts": 10,
+    "primaryGeometryUnchanged": true,
+    "narrowViewportRetainsDesktop": true,
+    "mobileUserAgentRetainsDesktop": true,
+    "mobileMasterAndSwitcherRemoved": true
+  },
+  "finalRecheck": {
+    "checkedAt": "2026-10-21T02:09:05.617Z",
+    "result": "passed",
+    "iis": {
+      "configuration": "Visual Studio .vs/SKILL UP.slnx/config/applicationhost.config",
+      "httpPort": 51872,
+      "httpsPort": 44353,
+      "defaultEntryHttp200": true,
+      "defaultEntryHttps200": true,
+      "fix": "Replaced HTTP port 58654 because Windows now excludes that port; HTTPS unchanged."
+    },
+    "syntax": {
+      "allFrontendCssParsed": 63,
+      "allRuntimeAndToolingJsParsed": 106,
+      "jsonParsed": 6,
+      "errors": 0
+    },
+    "compiledPagesHttp200": 49,
+    "encodedQueryRoutes": 12,
+    "roleRouteVisits": 93,
+    "browserErrors": [],
+    "consoleErrors": [],
+    "horizontalOverflow": [],
+    "workflowChecks": [
+      "create course",
+      "add activity",
+      "submit for approval",
+      "approve",
+      "enrol",
+      "complete",
+      "certificate",
+      "lab correction",
+      "quiz grading",
+      "profile persistence",
+      "failed save rollback",
+      "instructor verification"
+    ],
+    "scope": "Existing Web Forms and JavaScript/mock implementation. Live backend/database/AI/call services are outside this verification."
+  }
 }

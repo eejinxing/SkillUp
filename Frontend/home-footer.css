@@ -87,42 +87,6 @@
  #app .tm-footer .tm-subscribe h2{font-size:clamp(29px,3.2vw,36px)}
  #app .tm-footer .tm-side{padding:36px 26px 28px}
 }
-@media(max-width:800px){
- #app .tm-footer .tm-subscribe{grid-template-columns:minmax(0,1fr)}
- #app .tm-footer .tm-subscribe-copy{padding:40px 36px 24px}
- #app .tm-footer .tm-subscribe h2{font-size:clamp(30px,4.6vw,38px)}
- #app .tm-footer .tm-form{max-width:none}
- #app .tm-footer .tm-side{padding:28px 36px;border-left:0;border-top:1px solid var(--tm-line);border-radius:0 0 28px 28px} /* taste-skill-ignore: requested green/purple Linear treatment and existing subtle panel boundaries. */
- #app .tm-footer .tm-perks{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
- #app .tm-footer .tm-perks li{align-items:flex-start;gap:8px}
- #app .tm-footer .tm-perk-icon{width:22px;height:22px}
- #app .tm-footer .tm-side-title{margin-bottom:20px}
-}
-@media(max-width:560px){
- #app .home-footer.tm-footer{--tm-edge:31px;padding:calc(var(--tm-edge) + 30px) 16px 0}
- #app .tm-footer .tm-edge{height:32px}
- #app .tm-footer .tm-subscribe{border-radius:22px}
- #app .tm-footer .tm-subscribe-copy{padding:30px 22px 19px}
- #app .tm-footer .tm-subscribe h2{font-size:clamp(25px,7.15vw,36px);letter-spacing:-.04em}
- #app .tm-footer .tm-subscribe-intro{font-size:14px;margin:14px 0 24px}
- #app .tm-footer .tm-field{gap:5px;padding:5px}
- #app .tm-footer .tm-field-icon{width:17px;height:17px;margin-left:9px}
- #app .tm-footer .tm-field input{height:44px;font-size:13px;padding:0 3px}
- #app .tm-footer .tm-field button{height:44px;min-height:44px;padding:0 13px;gap:7px;font-size:12px}
- #app .tm-footer .tm-field button svg{width:14px;height:14px}
-  #app .tm-footer .tm-side{padding:25px 22px 26px;border-radius:0 0 22px 22px}
- #app .tm-footer .tm-perks{grid-template-columns:1fr;gap:17px;margin-bottom:23px}
- #app .tm-footer .tm-perks li{align-items:center;gap:13px}
- #app .tm-footer .tm-perk-icon{width:24px;height:28px}
- #app .tm-footer .tm-reach{gap:18px}
- #app .tm-footer .tm-social{margin-left:auto;gap:5px}
- #app .tm-footer .home-footer-base{flex-direction:column;align-items:flex-start;gap:14px;margin-top:22px}
- #app .tm-footer .home-footer-base nav{flex-wrap:wrap;gap:20px}
-}
-@media(max-width:360px){
- #app .tm-footer .tm-field-icon{display:none}
- #app .tm-footer .tm-field button{padding:0 11px;gap:6px}
-}
 @media(prefers-reduced-motion:no-preference){
  #app .tm-footer .tm-ch{transition:transform .3s,color .3s}
  #app .tm-footer .tm-wordmark .tm-ch:hover{transform:translateY(-.08em);color:var(--tm-green)}

@@ -83,42 +83,8 @@ body:has(.my-courses) .figma-workspace-header .actions>a{display:grid;place-item
 .my-courses :is(a,button):focus-visible,.my-courses .mc-course-scroll:focus-visible{outline:2px solid #c4b5fd;outline-offset:3px}
 
 /* ── Tablet and phone: the wheel turns sideways above the panel ── */
-@media(max-width:900px){
- .my-courses .mc-layout{grid-template-columns:minmax(0,1fr);height:auto;gap:22px}
- .my-courses .mc-programs{height:310px}
- .my-courses .mc-program-scroll{display:flex;align-items:center;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
- .my-courses .mc-program,.my-courses .mc-program-scroll::before,.my-courses .mc-program-scroll::after{--h:88cqh;--w:calc(var(--h) / var(--mc-pouch-ratio))}
- .my-courses .mc-program-scroll::before,.my-courses .mc-program-scroll::after{height:1px;width:calc(50cqw - var(--w) / 2);flex:none}
- .my-courses .mc-program{flex:none;margin:0}
- .my-courses .mc-program+.mc-program{margin:0 0 0 calc(var(--w) * -.1)}
- .my-courses .mc-program-name{top:19%}
- .my-courses .mc-courses-panel{height:auto;max-height:none}
- .my-courses .mc-course-scroll{overflow:visible}
- @supports (animation-timeline:view()){.my-courses .mc-program{animation-name:mc-roll-x;animation-timeline:view(inline)}}
-}
-@media(max-width:620px){
- .my-courses .mc-page-header h1{font-size:28px}
- .my-courses .mc-page-header>a{font-size:12px;padding:8px 14px}
- .my-courses .mc-programs{height:280px}
- .my-courses .mc-courses-panel{border-radius:24px}
- .my-courses .mc-panel-header{padding:20px 20px 16px}
- .my-courses .mc-panel-header>span{display:inline-block;font-size:11px;padding:5px 12px}
- .my-courses .mc-panel-header h2{font-size:21px}
- .my-courses .mc-course-scroll{padding:0 20px 18px}
- .my-courses .mc-course{grid-template-columns:minmax(0,1fr);gap:16px;padding:24px 0}
- .my-courses .mc-course-index{display:flex;align-items:center;justify-content:space-between;gap:12px}
- .my-courses .mc-number{font-size:64px}
- .my-courses .mc-course-controls{margin:0}
- .my-courses .mc-progress{width:46px}
- .my-courses .mc-arrow{height:40px;min-width:56px;padding:0 16px}
- .my-courses .mc-course-art{height:clamp(140px,44vw,220px)}
- .my-courses .mc-course-caption h3{font-size:16px}
- .my-courses .mc-course-caption p{font-size:12.5px}
- body:has(.my-courses) .figma-workspace-header button{padding:8px 14px;font-size:12px}
-}
 @media(prefers-reduced-motion:reduce){.my-courses .mc-program{animation:none!important}.my-courses .mc-program-heading b{animation:none}}
 .my-courses .mc-page-header>a{white-space:nowrap}
-@media(max-width:900px){.my-courses .mc-program-count{bottom:25%}.my-courses .mc-selected{bottom:8%}}
 
 /* ── Course caption: tech avatar, title with status dot, short description (matches the supplied reference) ── */
 .my-courses .mc-course-caption{display:flex;align-items:center;gap:14px;padding:18px 2px 0}
@@ -141,18 +107,15 @@ body:has(.my-courses) .figma-workspace-header .actions>a{display:grid;place-item
 .my-courses .mc-dot-off{background:#6b6678;box-shadow:0 0 0 3px #6b66782b}
 .my-courses .mc-course-caption .mc-desc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:6px 0 0;font-size:12.5px;line-height:1.55;letter-spacing:.01em;color:#a49db6}
 .my-courses .mc-course-caption .mc-meta{margin:6px 0 0;font-size:11.5px;letter-spacing:.04em;color:#7e7891}
-@media(max-width:620px){.my-courses .mc-tech{width:36px;height:36px}.my-courses .mc-course-caption h3{font-size:16px}}
 
 /* ── Polish pass: fit the screen, calm the wheel, editorial index ─────────────────────────────── */
 
 /* Fit the viewport on desktop: header + title + layout fill exactly one screen (taller content scrolls inside the panels). */
-@media(min-width:901px){
- body:has(.my-courses) .shell>div{display:flex;flex-direction:column;height:100dvh;min-height:620px}
- body:has(.my-courses) .main{flex:1;min-height:0;display:flex;flex-direction:column;padding-bottom:28px}
- .my-courses{flex:1;min-height:0;display:flex;flex-direction:column}
- .my-courses .mc-page-header{flex:none;margin:6px 0 22px}
- .my-courses .mc-layout{flex:1;min-height:0;height:auto}
-}
+body:has(.my-courses) .shell>div{display:flex;flex-direction:column;height:100dvh;min-height:620px}
+body:has(.my-courses) .main{flex:1;min-height:0;display:flex;flex-direction:column;padding-bottom:28px}
+.my-courses{flex:1;min-height:0;display:flex;flex-direction:column}
+.my-courses .mc-page-header{flex:none;margin:6px 0 22px}
+.my-courses .mc-layout{flex:1;min-height:0;height:auto}
 
 /* Calm wheel: no 3D tilt, at most a 6% size change, neighbours dim instead of zooming; gentle snapping. */
 .my-courses .mc-program-scroll{scroll-snap-type:y proximity}
@@ -167,7 +130,6 @@ body:has(.my-courses) .figma-workspace-header .actions>a{display:grid;place-item
  50%{opacity:1;z-index:3;transform:none}
  100%{opacity:.34;z-index:1;transform:scale(.94)}
 }
-@media(max-width:900px){.my-courses .mc-program-scroll{scroll-snap-type:x proximity}}
 
 /* Editorial index beside the heading: current / total, tabular figures. */
 .my-courses .mc-program-heading{align-items:center}
@@ -189,16 +151,14 @@ body:has(.my-courses) .figma-workspace-header .actions>a{display:grid;place-item
 .my-courses .mc-course-scroll{scrollbar-color:#ffffff26 transparent}
 
 @media(prefers-reduced-motion:reduce){.my-courses .mc-index .mc-ico{animation:none}}
-@media(min-width:901px){body:has(.my-courses) .figma-workspace-header{width:100%;flex:none}}
+body:has(.my-courses) .figma-workspace-header{width:100%;flex:none}
 /* Header and content share one column edge at every width */
 body:has(.my-courses) .main{width:100%;max-width:1500px;margin-inline:auto;padding-inline:clamp(18px,3vw,42px)}
 /* First program sits under the heading instead of floating mid-rail (later cards still centre) */
-@media(min-width:901px){.my-courses .mc-program-scroll::before{height:max(8px,calc(40cqh - var(--h) / 2))}}
+.my-courses .mc-program-scroll::before{height:max(8px,calc(40cqh - var(--h) / 2))}
 /* The panel title speaks for itself; the "Selected program" label stays for screen readers only */
 .my-courses .mc-panel-header small{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .my-courses .mc-panel-header h2{margin-top:0}
-@media(max-width:900px){.my-courses .mc-index .mc-ico{transform:rotate(-90deg);animation:none}}
-@media(max-width:620px){.my-courses .mc-page-header{gap:12px}.my-courses .mc-page-header h1{font-size:26px;white-space:nowrap}.my-courses .mc-page-header>a{padding:8px 13px}}
 
 /* Pixel heading and bold black print on cyan foil, matching the supplied references. */
 .my-courses .mc-page-header h1{display:flex;align-items:center;min-width:0}
@@ -208,7 +168,6 @@ body:has(.my-courses) .main{width:100%;max-width:1500px;margin-inline:auto;paddi
 .my-courses .mc-print-top,.my-courses .mc-print-bottom{position:absolute;left:9%;right:9%;display:block}
 .my-courses .mc-print-top{top:30%}
 .my-courses .mc-print-bottom{top:65%}
-@media(max-width:620px){.my-courses .mc-pixel-title{width:190px;height:46px}.my-courses .mc-page-header{flex-wrap:wrap}.my-courses .mc-page-header>a{margin-left:auto}}
 
 
 /* Number and gauge share the artwork height; course information sits beneath it. */
@@ -224,9 +183,7 @@ body:has(.my-courses) .main{width:100%;max-width:1500px;margin-inline:auto;paddi
 .my-courses .mc-task-ring svg{position:absolute;inset:0;width:100%;height:100%}
 .my-courses .mc-task-ring strong{position:relative;font-size:31px;font-weight:400;letter-spacing:-1px;color:#f5f5f5;line-height:1}
 .my-courses .mc-task-ring sup{font-size:11px;vertical-align:baseline;margin-left:1px;letter-spacing:0;color:#a5a5aa}
-@media(max-width:1100px) and (min-width:901px){.my-courses .mc-course{grid-template-columns:110px minmax(0,1fr);gap:18px}.my-courses .mc-number{font-size:88px}.my-courses .mc-task-ring{width:110px;height:110px}.my-courses .mc-course-art{height:230px}.my-courses .mc-course-emblem{width:36px;height:36px}.my-courses .mc-summary-copy h3{font-size:16px}.my-courses .mc-course-summary{gap:12px}}
-@media(max-width:900px){.my-courses .mc-program+.mc-program{margin:0 0 0 24px}}
-@media(max-width:620px){.my-courses .mc-course{grid-template-columns:64px minmax(0,1fr);gap:18px 12px;padding:24px 0}.my-courses .mc-number{font-size:52px}.my-courses .mc-course-art{height:auto;aspect-ratio:1.65}.my-courses .mc-task-ring{width:64px;height:64px}.my-courses .mc-task-ring strong{font-size:18px}.my-courses .mc-task-ring sup{font-size:8px}.my-courses .mc-course-summary{gap:9px;padding:2px 0}.my-courses .mc-course-emblem{width:28px;height:28px}.my-courses .mc-summary-copy h3{font-size:14px}.my-courses .mc-summary-status{font-size:12px;margin-top:7px}.my-courses .mc-summary-due{font-size:10px;margin-top:6px}}
+@media(max-width:1100px){.my-courses .mc-course{grid-template-columns:110px minmax(0,1fr);gap:18px}.my-courses .mc-number{font-size:88px}.my-courses .mc-task-ring{width:110px;height:110px}.my-courses .mc-course-art{height:230px}.my-courses .mc-course-emblem{width:36px;height:36px}.my-courses .mc-summary-copy h3{font-size:16px}.my-courses .mc-course-summary{gap:12px}}
 
 
 
@@ -254,8 +211,7 @@ body:has(.my-courses) .main{width:100%;max-width:1500px;margin-inline:auto;paddi
 .my-courses .mc-market-action{display:grid;place-items:center;width:36px;height:27px;background:#242426;color:#ddd;border-radius:999px}
 .my-courses .mc-market-main .mc-ico{width:18px;height:18px;stroke-width:1.5}
 @media(hover:hover){.my-courses .mc-market-action:hover{background:#39393d;color:#fff}.my-courses .mc-market-details:hover{color:#fff;background:#ffffff08}}
-@media(max-width:1100px) and (min-width:901px){.my-courses .mc-course-summary{grid-template-columns:34% minmax(0,1fr)}.my-courses .mc-market-accent,.my-courses .mc-market-main{padding:15px}.my-courses .mc-market-accent strong{font-size:35px}.my-courses .mc-market-main h3{font-size:15px}}
-@media(max-width:620px){.my-courses .mc-course-summary{grid-column:1/-1;grid-template-columns:33% minmax(0,1fr);min-height:182px;border-radius:15px}.my-courses .mc-market-accent{padding:13px 10px}.my-courses .mc-market-main{padding:14px 12px}.my-courses .mc-market-accent strong{font-size:32px;letter-spacing:-1px}.my-courses .mc-market-accent sup{font-size:14px;margin-left:1px}.my-courses .mc-market-accent p{font-size:9px}.my-courses .mc-market-main h3{font-size:14px;flex-basis:100%}.my-courses .mc-market-tags span{font-size:8px}.my-courses .mc-market-subtitle,.my-courses .mc-market-date{font-size:10px}.my-courses .mc-market-marks>span{width:23px;height:23px}.my-courses .mc-market-marks .mc-ico{width:15px;height:15px}}
+@media(max-width:1100px){.my-courses .mc-course-summary{grid-template-columns:34% minmax(0,1fr)}.my-courses .mc-market-accent,.my-courses .mc-market-main{padding:15px}.my-courses .mc-market-accent strong{font-size:35px}.my-courses .mc-market-main h3{font-size:15px}}
 
 /* ── Course panel: no scrollbar and a staggered, scroll-linked reveal ──
    Each part of a course has its own role as it scrolls into view: the number rises, the ring turns into place,
@@ -284,13 +240,11 @@ body:has(.my-courses) .main{width:100%;max-width:1500px;margin-inline:auto;paddi
 @media(prefers-reduced-motion:reduce){.my-courses :is(.mc-number,.mc-task-ring svg,.mc-course-art,.mc-course-art img,.mc-course-summary,.mc-market-accent){animation:none!important}}
 
 /* ── Course card spans the full row; its red block lines up under the number/ring column ── */
-@media(min-width:621px){
- .my-courses .mc-course{--mc-meta:150px;grid-template-columns:var(--mc-meta) minmax(0,1fr);grid-template-areas:"metrics artwork" "summary summary";column-gap:24px}
- .my-courses .mc-course-summary{grid-area:summary;grid-template-columns:calc(var(--mc-meta) + 24px) minmax(0,1fr);min-height:200px;border-radius:20px}
- .my-courses .mc-market-accent{padding:22px}
- .my-courses .mc-market-main{padding:22px 24px}
-}
-@media(min-width:901px) and (max-width:1100px){.my-courses .mc-course{--mc-meta:110px;column-gap:18px}.my-courses .mc-course-summary{grid-template-columns:calc(var(--mc-meta) + 18px) minmax(0,1fr)}}
+.my-courses .mc-course{--mc-meta:150px;grid-template-columns:var(--mc-meta) minmax(0,1fr);grid-template-areas:"metrics artwork" "summary summary";column-gap:24px}
+.my-courses .mc-course-summary{grid-area:summary;grid-template-columns:calc(var(--mc-meta) + 24px) minmax(0,1fr);min-height:200px;border-radius:20px}
+.my-courses .mc-market-accent{padding:22px}
+.my-courses .mc-market-main{padding:22px 24px}
+@media(max-width:1100px){.my-courses .mc-course{--mc-meta:110px;column-gap:18px}.my-courses .mc-course-summary{grid-template-columns:calc(var(--mc-meta) + 18px) minmax(0,1fr)}}
 .my-courses .mc-market-main h3{font-size:19px;font-weight:500;letter-spacing:-.02em}
 .my-courses .mc-market-tags{gap:6px}
 .my-courses .mc-market-tags span{padding:4px 9px;border-radius:999px;font-size:11px;letter-spacing:.02em;color:#c9c9d0;border-color:#ffffff1a}
@@ -318,4 +272,3 @@ body:has(.my-courses) .main{width:100%;max-width:1500px;margin-inline:auto;paddi
 .my-courses .mc-program-caption{position:absolute;left:0;right:0;bottom:-2px;text-align:center;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#c9c3d8;pointer-events:none}
 .my-courses .mc-course-art{width:auto;aspect-ratio:554/900;height:clamp(200px,calc((100dvh - 420px) / 2),300px);justify-self:start;background:none}
 .my-courses .mc-course-art img{width:100%;height:100%;object-fit:contain;object-position:center}
-@media(max-width:700px){.my-courses .mc-course-art{height:clamp(200px,70vw,280px)}}

@@ -128,16 +128,6 @@
 #app .pf-cancel{height:40px;padding:0 16px;border-radius:10px}
 
 @media(max-width:1100px){#app .pf-page{grid-template-columns:240px minmax(0,1fr)}#app .pf-grid{grid-template-columns:minmax(0,1fr)}#app .pf-hero{grid-template-columns:minmax(0,1fr)}#app .pf-cover{min-height:160px}}
-@media(max-width:760px){
- #app .pf-page{grid-template-columns:minmax(0,1fr)}
- #app .pf-side{position:static}
- #app .pf-badges{grid-template-columns:repeat(4,minmax(0,56px));justify-content:space-between}
- #app .pf-row,#app .pf-row-action{grid-template-columns:minmax(0,1fr) auto;padding:10px 10px 10px 14px}
- #app .pf-row-label{grid-column:1/-1}
- #app .pf-row-value{grid-column:1}
- #app .pf-row-action .pf-row-value{display:none}
- #app .pf-heat{gap:2px}
-}
 
 /* Motion */
 @keyframes pf-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}

@@ -14,7 +14,7 @@ const fs=require('node:fs'),path=require('node:path'),{pathToFileURL}=require('n
   await page.evaluate(()=>document.fonts.ready);
   await page.addStyleTag({content:'.gn-demo-call{display:none!important}'});
   await page.waitForFunction(()=>[...document.querySelectorAll('.lc-x img')].every(i=>i.complete&&i.naturalWidth));
-  for(const [name,width,height] of [['desktop',1440,1000],['mobile',390,1000]]){
+  for(const [name,width,height] of [['desktop',1440,1000]]){
    await page.setViewportSize({width,height});
    const bounds=await page.locator('.lc-velo').boundingBox(),bottom=await page.locator('.vd-courses').boundingBox();
    const full=await page.locator('.lc-x').screenshot(),meta=await sharp(full).metadata();
@@ -22,7 +22,7 @@ const fs=require('node:fs'),path=require('node:path'),{pathToFileURL}=require('n
    fs.writeFileSync(path.join(dir,'learner-'+name+'.png'),image);
    await sharp(image).webp({quality:92}).toFile(path.join(dir,'learner-'+name+'.webp'));
   }
-  fs.writeFileSync(path.join(dir,'source.json'),JSON.stringify({source:'Actual SkillLearningConsole at #/dashboard',capturedAt:new Date().toISOString(),mode:'isolated seeded Learner demo',variants:['desktop','mobile']},null,2));
-  console.log('Captured actual learner dashboard: desktop and mobile.');
+  fs.writeFileSync(path.join(dir,'source.json'),JSON.stringify({source:'Actual SkillLearningConsole at #/dashboard',capturedAt:new Date().toISOString(),mode:'isolated seeded Learner demo',variants:['desktop']},null,2));
+  console.log('Captured actual learner dashboard: desktop.');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});

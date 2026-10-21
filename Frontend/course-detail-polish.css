@@ -156,44 +156,8 @@
  .course-enroll .ce-reviews{grid-template-columns:240px minmax(0,1fr);padding:30px;gap:30px}
  .course-enroll .ce-review{grid-template-columns:90px minmax(0,1fr)}
 }
-@media(max-width:760px){
- .course-enroll .ce-breadcrumb{font-size:12.5px}
- .course-enroll .ce-banner{aspect-ratio:auto;min-height:0;display:flex;flex-direction:column;border-radius:18px;background:#0b0716}
- .course-enroll .ce-banner .ce-hero{position:relative;order:0}
- .course-enroll .ce-banner:after{background:none}
- .course-enroll .ce-banner-copy{position:static;padding:22px 20px 22px;max-width:none}
- .course-enroll .ce-banner h1{font-size:30px}
- .course-enroll .ce-banner-desc{font-size:14.5px}
- .course-enroll .ce-banner-facts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
- .course-enroll .ce-sidebar{position:static}
- .course-enroll .ce-content{padding-top:28px;gap:32px}
- .course-enroll .ce-main h2,.course-enroll .ce-about h2{font-size:20px}
- .course-enroll .ce-outcomes ul{padding:18px;font-size:14px}
- .course-enroll .ce-lesson>summary{grid-template-columns:34px minmax(0,1fr) 18px;padding:14px 16px;gap:12px;min-height:68px}
- .course-enroll .ce-lesson-index{width:34px;height:34px;border-radius:10px;font-size:13px}
- .course-enroll .ce-lesson-title{font-size:15px;white-space:normal}
- .course-enroll .ce-lesson-state{grid-column:2;grid-row:2;justify-self:start;margin-top:-4px}
- .course-enroll .ce-chevron{grid-column:3;grid-row:1}
- .course-enroll .ce-lesson-body{display:block;padding:4px 16px 18px 62px}
- .course-enroll .ce-lesson-body>div:last-child{margin-top:14px}
- .course-enroll .ce-section-heading{flex-wrap:wrap}
- .course-enroll .ce-section-heading small{font-size:12.5px}
- .course-enroll .ce-sidebar>section{padding:20px;border-radius:16px}
- .course-enroll .ce-enrol-card dl{display:block;font-size:14px}
- .course-enroll .ce-info-grid{grid-template-columns:1fr}
- .course-enroll .ce-reviews{display:block;padding:24px 18px;border-radius:18px;margin:0 0 32px}
- .course-enroll .ce-review-list{margin-top:30px}
- .course-enroll .ce-review{grid-template-columns:44px minmax(0,1fr);padding:18px;gap:12px 14px}
- .course-enroll .ce-review-identity>.avatar{width:40px;height:40px;font-size:13px}
- .course-enroll .ce-review-identity>strong{font-size:12px}
- .course-enroll .ce-review-stars>span:not(.ce-stars){display:block;margin:4px 0 0;font-size:12.5px}
- .course-enroll .ce-review-text{font-size:14.5px}
- .course-enroll .ce-thread{grid-column:1/-1;margin-left:0}
- .course-enroll .ce-reply-form{grid-column:1/-1;margin-left:0}
-}
 @media(prefers-reduced-motion:reduce){.course-enroll .ce-chevron,.course-enroll .ce-lesson>summary{transition:none}}
 .course-enroll .ce-main>.panel .panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .course-enroll .ce-main>.panel button.primary{min-height:38px;padding:0 16px;border-radius:999px;border:1px solid #a78bfa66;background:#7c4ddb33;color:#efe8ff;font-size:13px;font-weight:500;box-shadow:none}
 .course-enroll .ce-main>.panel button.primary:hover{background:#7c4ddb66}
 .course-enroll .ce-lesson[data-state=managed] .ce-lesson-state{color:var(--cd-soft)}
-@media(max-width:760px){.course-enroll .ce-review{grid-template-columns:minmax(0,1fr)}.course-enroll .ce-review-identity{flex-wrap:nowrap;align-items:center}.course-enroll .ce-review-identity>strong{width:auto;font-size:14px}.course-enroll .ce-thread,.course-enroll .ce-reply-form{grid-column:1}}

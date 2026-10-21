@@ -85,8 +85,6 @@ body.ui-refined.ui-home{padding-left:0;background:#030215}
 .instructor-position i{display:block;width:25%;height:100%;background:#aca1cd;transform:translateX(0);transition:transform 180ms ease}
 .instructor-sample{font-size:10px;color:#655d7e}
 @media(hover:hover){.home-refined .instructor-card:hover .instructor-identity strong{color:#cbb8ff}.home-refined .instructor-arrow:hover{background:#ffffff08;color:#fff}.home-refined .stellar-demo:hover{background-color:#9365ff20}}
-@media(max-width:900px){.home-refined .stellar-top{padding-inline:25px;gap:20px}.stellar-top .visitor-nav{gap:18px}.home-refined .home-hero{padding-top:45px}.home-refined .home-hero-copy{margin-bottom:62px}.stellar-preview{grid-template-columns:145px minmax(0,1fr)}.sp-main{padding:14px}.sp-sidebar{padding:15px 10px;font-size:10px}.sp-panels{gap:10px}.sp-xp,.sp-progress{padding:12px}.sp-xp>strong,.sp-progress>strong{font-size:24px}.sp-line-chart{height:110px}.instructor-carousel{gap:10px}.instructor-track{gap:14px}.home-refined button.instructor-card{flex-basis:calc((100% - 28px)/3)}.instructor-bio>span{font-size:11px}.home-refined .home-team{padding-inline:22px}}
-@media(max-width:600px){.home-refined .stellar-top{height:72px;padding-inline:20px;gap:15px}.stellar-top .home-wordmark{margin-right:auto}.stellar-top .home-header-action{font-size:11px;padding:8px 10px}.stellar-top .stellar-login{font-size:12px}.home-refined .home-hero{padding:39px 16px 0}.stellar-update{font-size:9px;gap:7px}.stellar-update>span{padding:2px 5px}.home-refined .home-hero h1{font-size:43px;letter-spacing:-.06em;margin-top:25px}.home-refined .home-hero-copy>p{font-size:14px;max-width:30ch;margin-top:21px}.home-refined .home-hero-copy{margin-bottom:58px}.home-refined .home-hero .home-button{font-size:12px;min-height:44px;padding:10px 14px}.stellar-preview{grid-template-columns:minmax(0,1fr);border-radius:14px 14px 0 0;padding:5px 5px 0}.sp-sidebar{display:none}.sp-main{padding:12px 11px 28px}.stellar-preview .sp-main>h2{font-size:18px}.sp-panels{grid-template-columns:minmax(0,1fr)}.sp-progress{display:none}.sp-line-chart{height:122px}.sp-xp>strong{font-size:28px}.sp-table>div{grid-template-columns:1.6fr .5fr;font-size:9px;padding:10px 4px;gap:8px}.sp-table>div>span:last-child{display:none}.sp-table>div>span:nth-child(2){display:block}.home-refined .home-team{margin:75px 0;padding:46px 14px}.home-refined .home-team h2{font-size:29px}.home-refined .home-team>header>p{font-size:13px}.instructor-carousel{gap:8px;margin-top:32px}.instructor-track{gap:13px}.home-refined button.instructor-card{flex-basis:82%;aspect-ratio:.69}.home-refined .instructor-arrow{width:27px;height:27px;min-height:27px;font-size:20px}.instructor-identity strong,.instructor-bio>strong{font-size:16px}.instructor-bio{padding:22px 18px}.instructor-bio>span{font-size:13px}.instructor-position{width:140px}}
 @media(prefers-reduced-motion:reduce){.instructor-photo,.instructor-bio,.instructor-position i{transition:none}}
 
 /* Narrow crops isolate one person from the existing team artwork. */
@@ -98,9 +96,6 @@ body.ui-refined.ui-home{padding-left:0;background:#030215}
 .instructor-bio>span{font-size:13px}
 .instructor-sample{font-size:13px}
 .stellar-update{font-size:13px}
-@media(max-width:600px){.stellar-update{font-size:13px}.instructor-identity small,.instructor-bio>small{font-size:13px}}
-
-@media(max-width:600px){.stellar-top .home-header-action,.stellar-top .stellar-login,.home-refined .home-hero .home-button{font-size:13px}}
 
 
 /* Original portrait set: consistent crops, clear identities and comfortable card spacing. */
@@ -110,14 +105,12 @@ body.ui-refined.ui-home{padding-left:0;background:#030215}
 .instructor-bio>span{font-size:13px;line-height:1.65}
 .instructor-bio:before{opacity:.45}
 .home-refined .instructor-arrow{width:40px;height:40px;min-height:40px}
-@media(max-width:600px){.home-refined .instructor-arrow{width:30px;height:36px;min-height:36px}.home-refined button.instructor-card{aspect-ratio:.67}.instructor-identity{left:17px;right:17px;bottom:21px}}
 
 /* The hero now shows a capture of our real learner UI, rather than a separate mock dashboard. */
 .stellar-preview--learner{display:block;padding:0;overflow:hidden;mask-image:linear-gradient(#000 88%,transparent);background:#050407} /* taste-skill-ignore: reference product preview fades into the hero ground. */
 .stellar-preview--learner picture{display:block}
 .stellar-preview--learner .learner-dashboard-shot{display:block;width:100%;height:auto;max-width:100%}
 .stellar-preview--learner figcaption{padding:12px 16px 24px;text-align:center;font-size:12px;color:#9289aa}
-@media(max-width:600px){.stellar-preview--learner{max-height:680px}.stellar-preview--learner .learner-dashboard-shot{width:100%;height:auto}.stellar-preview--learner figcaption{display:none}}
 
 /* ── Instructor cards: hover / keyboard focus reveals the profile panel (click still toggles for touch) ── */
 .instructor-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}

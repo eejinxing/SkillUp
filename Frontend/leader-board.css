@@ -76,17 +76,3 @@
  #app .leader-dashboard .ld-notifications{height:400px}
  #app .leader-dashboard .ld-note-body p{font-size:12px}
 }
-@media(max-width:650px){
- #app .leader-dashboard .ld-reach{grid-template-columns:minmax(0,1fr)}
- #app .leader-dashboard .ld-course-detail{grid-template-columns:minmax(0,1fr)}
- #app .leader-dashboard .ld-course-facts{padding:14px}
- #app .leader-dashboard .ld-course-foot{flex-wrap:wrap}
- #app .leader-dashboard .ld-course-trends{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
- #app .leader-dashboard .ld-course-trends h3,#app .leader-dashboard .ld-panel-more{grid-column:1/-1}
- #app .leader-dashboard .ld-course-trends h3{margin:0}
- #app .leader-dashboard .ld-course-trends .ld-detail-cell{display:grid}
- #app .leader-dashboard .ld-reach-row{margin:0}
- #app .leader-dashboard .ld-activity{height:auto;min-height:410px;padding-bottom:12px}
- #app .leader-dashboard .ld-note-tab{height:35px;font-size:11px}
- #app .leader-dashboard .ld-note-actions>*{height:28px}
-}
