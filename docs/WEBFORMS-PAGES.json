@@ -235,27 +235,6 @@
     "fallback": "users/new"
   },
   {
-    "page": "Frontend/Verification.aspx",
-    "codeBehind": "Frontend/Verification.aspx.cs",
-    "initialRoute": "verification",
-    "queryParameters": [],
-    "fallback": null
-  },
-  {
-    "page": "Frontend/ActivityLogs.aspx",
-    "codeBehind": "Frontend/ActivityLogs.aspx.cs",
-    "initialRoute": "activity",
-    "queryParameters": [],
-    "fallback": null
-  },
-  {
-    "page": "Frontend/Moderation.aspx",
-    "codeBehind": "Frontend/Moderation.aspx.cs",
-    "initialRoute": "moderation",
-    "queryParameters": [],
-    "fallback": null
-  },
-  {
     "page": "Frontend/Profile.aspx",
     "codeBehind": "Frontend/Profile.aspx.cs",
     "initialRoute": "profile",
@@ -266,27 +245,6 @@
     "page": "Frontend/Settings.aspx",
     "codeBehind": "Frontend/Settings.aspx.cs",
     "initialRoute": "settings",
-    "queryParameters": [],
-    "fallback": null
-  },
-  {
-    "page": "Frontend/Roles.aspx",
-    "codeBehind": "Frontend/Roles.aspx.cs",
-    "initialRoute": "roles",
-    "queryParameters": [],
-    "fallback": null
-  },
-  {
-    "page": "Frontend/ActiveUsers.aspx",
-    "codeBehind": "Frontend/ActiveUsers.aspx.cs",
-    "initialRoute": "active-users",
-    "queryParameters": [],
-    "fallback": null
-  },
-  {
-    "page": "Frontend/Support.aspx",
-    "codeBehind": "Frontend/Support.aspx.cs",
-    "initialRoute": "support",
     "queryParameters": [],
     "fallback": null
   },

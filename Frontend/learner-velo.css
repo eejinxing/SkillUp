@@ -113,3 +113,23 @@ body.has-velo-dashboard #app .skill-global-header :is(.gn-more summary,.gn-all-p
 @media(hover:hover){.lc-velo .vd-hero-update:hover{border-color:#a48ac440}.lc-velo .vd-table-actions :is(button,select):hover{background:#19111f}.lc-velo .vd-course-row:hover .vd-course-info strong{color:#c4a4ed}.lc-velo .vd-hero-bottom nav :is(a,button):hover{background:#ffffff12}}
 @media(max-width:1100px){.lc-x.lc-velo{width:calc(100% - 30px)}.lc-velo .vd-body{padding:18px}.lc-velo .vd-metrics{gap:13px}.lc-velo .vd-card{padding:18px}.lc-velo .vd-main-value{font-size:46px}.lc-velo .vd-card>header>span{font-size:11px}.lc-velo .vd-card>header>small{font-size:9px}.lc-velo .vd-hero{padding-inline:25px}}
 @media(prefers-reduced-motion:reduce){.lc-velo{scroll-behavior:auto}}
+/* Ranking card: the badge is a link to the leaderboard. */
+.lc-velo a.vd-level-badge{display:inline-flex;align-items:center;gap:6px;transition:border-color .15s,color .15s,background-color .15s}
+.lc-velo a.vd-level-badge svg{width:12px;height:12px}
+.lc-velo a.vd-level-badge:hover{border-color:#ffffff30;background:#ffffff0d;color:#e6defa}
+/* Ranking card, unranked: podium of the top three plus a dashed "You" step. Steps grow in on render. */
+.lc-velo .vd-podium{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;gap:8px;height:112px;margin:18px 0 6px}
+.lc-velo .vd-podium-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%;min-width:0}
+.lc-velo .vd-podium-face{display:grid;place-items:center;width:26px;height:26px;flex:none;border:1px solid #ffffff1f;border-radius:50%;background:#1a1626;color:#e6defa;font-size:10px;font-weight:600}
+.lc-velo .vd-podium-step{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1px;width:100%;height:calc(var(--h) - 32px);min-height:22px;padding-top:6px;border:1px solid #a78bfa33;border-bottom:0;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#a78bfa38,#a78bfa0a);transform-origin:bottom;animation:vd-step-up .7s cubic-bezier(.2,.7,.2,1) both}
+.lc-velo .vd-podium-col:nth-child(2) .vd-podium-step{animation-delay:.08s}
+.lc-velo .vd-podium-col:nth-child(3) .vd-podium-step{animation-delay:.16s}
+.lc-velo .vd-podium-col:nth-child(4) .vd-podium-step{animation-delay:.24s}
+.lc-velo .vd-podium-col.is-first .vd-podium-step{border-color:#c4b5fd66;background:linear-gradient(180deg,#a78bfa66,#a78bfa14)}
+.lc-velo .vd-podium-col.is-first .vd-podium-face{border-color:#c4b5fd;color:#fff}
+.lc-velo .vd-podium-step b{font-size:11px;font-weight:600;color:#fff}
+.lc-velo .vd-podium-step small{font-size:10px;color:#aaa0b9;font-variant-numeric:tabular-nums}
+.lc-velo .vd-podium-col.is-you .vd-podium-face{border-style:dashed;border-color:#ffffff40;background:transparent;color:#aaa0b9;font-size:9px}
+.lc-velo .vd-podium-col.is-you .vd-podium-step{border:1px dashed #ffffff33;border-bottom:0;background:#ffffff05}
+@keyframes vd-step-up{from{transform:scaleY(0);opacity:0}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){.lc-velo .vd-podium-step{animation:none}}

@@ -266,9 +266,9 @@ body:has(.my-courses) .main{width:100%;max-width:1500px;margin-inline:auto;paddi
 @media(hover:hover){.my-courses .mc-course-art:hover img{transform:translateY(-4px);filter:drop-shadow(0 18px 30px #7c3aed55)}}
 .my-courses .mc-score-header h3{text-wrap:balance}
 /* Kit artwork: Dev Kit pouches for programs (name printed in the art, so the drawn name becomes a caption);
-   Computer Essentials cards for courses, shown whole in a portrait slot. */
+   Computer Essentials cards fill the course artwork column in landscape format. */
 .my-courses .mc-program,.my-courses .mc-program-scroll::before,.my-courses .mc-program-scroll::after{--mc-pouch-ratio:1.34}
 .my-courses .mc-program>img{object-fit:contain;border-radius:14px}
 .my-courses .mc-program-caption{position:absolute;left:0;right:0;bottom:-2px;text-align:center;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#c9c3d8;pointer-events:none}
-.my-courses .mc-course-art{width:auto;aspect-ratio:554/900;height:clamp(200px,calc((100dvh - 420px) / 2),300px);justify-self:start;background:none}
+.my-courses .mc-course-art{width:100%;aspect-ratio:5/2;height:auto;justify-self:stretch;background:none}
 .my-courses .mc-course-art img{width:100%;height:100%;object-fit:contain;object-position:center}

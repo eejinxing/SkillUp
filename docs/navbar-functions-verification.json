@@ -1,0 +1,32 @@
+{
+  "checkedAt": "2026-10-22T09:12:58.701Z",
+  "restored": [
+    "AI companion",
+    "Course discussions",
+    "Live sessions",
+    "Account settings"
+  ],
+  "sidebarRemoved": true,
+  "navbarDestinationsPreserved": true,
+  "restoredWebFormsEndpoints": 8,
+  "webFormsPairs": 40,
+  "roles": [
+    "Program Leader",
+    "Learner",
+    "Instructor",
+    "Admin"
+  ],
+  "checks": [
+    "Navbar More opens all retained destinations",
+    "Standalone AI response",
+    "Discussion creation dialog",
+    "Settings password and saved address sections",
+    "Activity companion and command execution",
+    "Activity Logs summary stays removed",
+    "1280/1440 desktop layout"
+  ],
+  "errors": [],
+  "build": "MSBuild Debug passed",
+  "staticCheck": "47 scripts, 62 styles, 29 CSS resources, 40 Web Forms pairs; no missing files",
+  "smoke": "Four-role desktop handoff and public enquiry checks passed"
+}

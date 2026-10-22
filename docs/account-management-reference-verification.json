@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-22T08:50:17.995Z",
+  "courseReferenceLayout": true,
+  "desktopWidths": [
+    1280,
+    1440
+  ],
+  "checks": [
+    "account values and read-only ID",
+    "draft restore/discard",
+    "failed save and duplicate validation",
+    "save changes and account audit",
+    "create form retained",
+    "approve/deactivate/reactivate confirmations",
+    "delete and assigned-instructor guards",
+    "self-admin protection",
+    "audit and learning routes",
+    "missing account and non-admin access"
+  ],
+  "errors": [],
+  "build": "Visual Studio MSBuild Debug passed",
+  "staticChecks": "47 runtime scripts, 62 styles, 29 CSS assets, 40 Web Forms pairs; no missing resources",
+  "domain": "Account data checks passed",
+  "smoke": "Four-role desktop handoff and public enquiry workflow passed"
+}

@@ -89,3 +89,35 @@ Master 的 designer.cs 是 Web Forms 控制項宣告輔助檔，不是第三套�
 
 ## 電腦端支援範圍
 目前只提供桌面瀏覽器版本，建議寬度 1280px 以上。窄視窗保留至少 1024px 的桌面畫布。手機專用母版、切換控制項、頁面模板、預覽圖片與手機版 CSS 已移除；一般電腦視窗調整、列印和減少動態效果仍保留。
+
+## Admin 頁面移除（2026-10-22）
+
+Platform reports、Pending verifications、Roles & permissions 已移除，相關 Admin 導覽及報表連結已清理。Roles.aspx／Verification.aspx 與其 code-behind 已刪除，入口清單剩 44 組。使用者帳戶的角色及啟用操作仍在 User accounts 中；Instructor／Program Leader 的 Learning analytics 使用共用 Analytics.aspx。舊 Admin hash 連結會轉回有效頁面。
+
+## Admin 活躍使用者與稽核頁面移除（2026-10-22）
+
+Active users 與 Activity & audit 獨立頁面已刪除，包括 ActiveUsers.aspx、ActivityLogs.aspx 及各自 code-behind、專案編譯項目、路由、導覽和失效連結。Frontend 現有 42 組頁面入口。舊的 #/active-users 與 #/activity 會導回 Overview；未登入者導向 Log in。Admin overview 內的活動紀錄及 CSV 匯出保留，原活動連結改為定位到該區。Activity.aspx 是學員課程活動入口，並非被刪除的 Admin 稽核頁，繼續保留。
+
+## Admin 討論審核與意見頁面移除（2026-10-22）
+
+Discussion moderation 和 Enquiries & feedback 獨立 Admin 頁面已刪除，包括 Moderation.aspx、Support.aspx、各自 code-behind、專案編譯項目及導覽。舊 #/moderation、#/support 轉回 Overview；訪客轉到 Log in。Frontend 現有 40 組頁面入口。一般課程討論與講師的討論操作、訪客提交 enquiry、個人 enquiry portal CRUD 及既有 feedback 資料仍保留；此次只移除指定的 Admin 頁面。
+
+## Virtual Lab 終端機（2026-10-22）
+
+活動頁的終端機由 js/answer-page.js、answer-skill.css 及 js/app.js 共同實作。題目直接使用活動 title／body；command、output、history 保留原本依使用者與活動區分的 sessionStorage 草稿。執行狀態由 .lab-shell 的 data-execution 及 aria-busy 控制，分段 loading 為不顯示假百分比的執行中動畫。
+
+目前 Execute 使用本機 JavaScript Web Worker，可停止、逾時或切換頁面終止，並不提供遠端系統指令、MongoDB 連線或 C# 編譯。題目交答案與評分仍透過原 SkillAPI 流程。後端接 isolated runner 時應保留成功／錯誤／停止生命週期，並由伺服器獨立驗證作答與權限。Frontend/tests/terminal-lab.cjs 與 tests/answer-page.cjs 可供回歸驗證。
+
+## 帳號編輯介面更新（2026-10-22）
+
+User Management 的編輯與帳號紀錄頁改用課程編輯頁的摘要／表單配置，建立帳號保留行式表單。共用 js/user-editor.js 與 user-editor.css；原 userSave／userDelete API、角色／狀態選項及草稿 key 維持原契約。左側摘要與日期、最近活動由真實帳號資料及 audit 紀錄取得，未有資料時顯示 Not recorded／No activity recorded。
+
+## 全域側欄及獨立功能頁移除（2026-10-22）
+
+已移除 Assistant／Discussions／LiveSessions／Settings 的四組 Web Forms 頁面及獨立 hash renderer，現有頁面共 36 組。舊 hash 對已登入帳號導回 dashboard、訪客導向 login。全域 sidebar 與 drawer 不再產生；ui-refinement.js 的 SkillNavigationItems 直接提供頁面資料給 workspace-nav.js，剩餘入口、Profile／Help／Sign out 改由頂部 More 選單操作。
+
+活動中的 AI companion、Profile 編輯與密碼功能、Messages／課程公告及訊息通話介面保留。既有 AI／討論／session／preferences 資料及 API 契約未刪除；本次移除的是指定獨立頁面與其導覽。
+
+## Sidebar 範圍更正：功能與 navbar 保留（2026-10-22）
+
+使用者確認只刪除全域 sidebar。Assistant、Discussions、LiveSessions、Settings 的四組 Web Forms 頁面、hash renderer 及頂部導覽入口已恢復，最新頁面數為 40；此更正取代前一節的獨立頁面移除。navbar 主入口與 More 選單提供原有功能，sidebar／drawer 不再產生。課程內 AI、Profile／Settings、訊息、Live sessions 與討論繼續沿用既有 API；Activity Logs 的左側資料卡移除維持。

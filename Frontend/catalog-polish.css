@@ -27,9 +27,9 @@
 #app .catalog-page .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;align-items:stretch}
 #app .catalog-page .course-card{display:flex;flex-direction:column;min-width:0;padding:8px;border:1px solid var(--cp-line);border-radius:22px;background:#111114;overflow:hidden;box-shadow:none;transition:transform .3s var(--ease),border-color .25s,box-shadow .3s}
 #app .catalog-page .course-card:hover{transform:translateY(-4px);border-color:#a78bfa55;box-shadow:0 24px 50px -28px #7c3aed}
-#app .catalog-page .figma-course-cover{position:relative;display:block;aspect-ratio:16/10;margin:0;padding:0;border-radius:16px;background:radial-gradient(80% 90% at 50% 40%,#2a1a55,#0d0a1a);overflow:hidden}
-#app .catalog-page .figma-course-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8%;transition:transform .5s var(--ease)}
-#app .catalog-page .course-card:hover .figma-course-cover img{transform:scale(1.05) rotate(-1deg)}
+#app .catalog-page .figma-course-cover{position:relative;display:block;aspect-ratio:5/2;margin:0;padding:0;border-radius:16px;background:radial-gradient(80% 90% at 50% 40%,#2a1a55,#0d0a1a);overflow:hidden}
+#app .catalog-page .figma-course-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:0;transition:filter .25s var(--ease)}
+#app .catalog-page .course-card:hover .figma-course-cover img{filter:brightness(1.06)}
 /* Difficulty is a small three-bar signal, without a floating text badge. */
 #app .figma-course-tile .figma-course-cover{position:relative}
 #app .figma-course-tile .cc-level{

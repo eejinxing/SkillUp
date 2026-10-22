@@ -1,4 +1,4 @@
-/* Figma 296:448. Programs select data; course rows retain the original artwork. */
+/* Programs select data; course rows use generated landscape artwork. */
 (function(root){
   const assets='assets/my-courses/';
   const ico=d=>'<svg class="mc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>';
@@ -24,7 +24,7 @@
     const {state,user,esc}=ctx,courses=coursesFor(state,p);
     return courses.map((c,i)=>{
       const e=state.enrollments.find(e=>e.userId===user().id&&e.courseId===c.id),value=SkillData.progress(c,e),next=e&&c.lessons.find(l=>!e.completed.includes(l.id));
-      const art=c.artwork||assets+'computer-kit-0'+(i%5+1)+'.webp';
+      const art=c.artwork||assets+'computer-essentials-wide-'+pad(i%4+1)+'.webp';
       const action=e?(value===100?'Review course':'Continue learning'):'View course';
       const href=next?'lesson/'+encodeURIComponent(c.id)+'/'+encodeURIComponent(next.id):'course/'+encodeURIComponent(c.id);
       return `<article class="mc-course" data-course-id="${esc(c.id)}"><div class="mc-course-metrics"><div class="mc-course-index"><span class="mc-number">${String(i+1).padStart(2,'0')}</span></div><div class="mc-course-gauge">${progressRing(value,esc(c.title))}</div></div><a class="mc-course-art" href="#/course/${encodeURIComponent(c.id)}" aria-label="View course: ${esc(c.title)}"><img src="${esc(art)}" alt="" loading="eager"></a>${courseSummary(c,e,value,href,action,esc)}</article>`;

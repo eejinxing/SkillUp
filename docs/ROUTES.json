@@ -4,7 +4,13 @@
   "removed": [
     "paths",
     "announcements",
-    "notifications"
+    "notifications",
+    "roles",
+    "verification",
+    "active-users",
+    "activity",
+    "moderation",
+    "support"
   ],
   "public": [
     "home",
@@ -39,21 +45,15 @@
     "learners",
     "analytics",
     "resources",
-    "discussions",
     "messages/{userId?}",
-    "assistant",
-    "sessions",
     "leaderboard",
     "certificates",
     "users",
-    "verification",
-    "activity",
-    "moderation",
     "profile",
-    "settings",
-    "roles",
-    "active-users",
-    "support"
+    "discussions",
+    "assistant",
+    "sessions",
+    "settings"
   ],
   "note": "This is a handoff index. Exact role guards and optional path parameters are authoritative in app.js permissions/routes."
 }
