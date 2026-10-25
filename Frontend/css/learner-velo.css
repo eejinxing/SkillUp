@@ -10,7 +10,7 @@ body.has-velo-dashboard main{padding-bottom:38px!important}
 .lc-velo a{color:inherit;text-decoration:none}
 .lc-velo button,.lc-velo select{font:inherit;cursor:pointer}
 .lc-velo button:focus-visible,.lc-velo a:focus-visible,.lc-velo select:focus-visible{outline:2px solid #b99af1;outline-offset:4px}
-.lc-velo .vd-hero{padding:27px 29px 0;background:linear-gradient(90deg,#08031745,#08031718 65%,#08031740),url('assets/dashboard-gradient.webp') center 46%/cover;color:white}
+.lc-velo .vd-hero{padding:27px 29px 0;background:linear-gradient(90deg,#08031745,#08031718 65%,#08031740),url('../assets/dashboard-gradient.webp') center 46%/cover;color:white}
 .lc-velo .vd-hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:26px;min-height:208px}
 .lc-velo .vd-hero time{font-size:11px;color:#d0c7e2}
 .lc-velo .vd-hero h1{margin:18px 0 19px;color:#fff;font-size:35px;line-height:1.12;font-weight:400;letter-spacing:-1.1px}

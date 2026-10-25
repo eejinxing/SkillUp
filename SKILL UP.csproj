@@ -270,8 +270,8 @@
   </Target>
   <!-- Skill UP frontend runtime; preserve script and CSS order in Frontend/index.html. -->
   <ItemGroup>
-    <Content Include="Frontend\index.html;Frontend\*.aspx;Frontend\SkillUp.Master;Frontend\*.css;Frontend\js\**\*.js;Frontend\assets\**\*;Frontend\Web.config" Exclude="Frontend\assets\**\*.md;Frontend\assets\**\*.txt" />
-    <None Include="Frontend\README.md;Frontend\HANDOFF.md;Frontend\API-CONTRACT.md;Frontend\package.json;Frontend\server.cjs;Frontend\scripts\**\*.cjs;Frontend\tests\**\*.cjs;Frontend\design\**\*;docs\**\*.md;docs\**\*.json;README.md;handoff-manifest.json" />
+    <Content Include="Frontend\index.html;Frontend\*.aspx;Frontend\SkillUp.Master;Frontend\css\*.css;Frontend\js\**\*.js;Frontend\assets\**\*;Frontend\Web.config" Exclude="Frontend\assets\**\*.md;Frontend\assets\**\*.txt" />
+    <None Include="Frontend\README.md;Frontend\package.json;Frontend\server.cjs;Frontend\scripts\**\*.cjs;Frontend\tests\**\*.cjs;Frontend\design\**\*;docs\**\*.md;docs\**\*.json;README.md" />
   </ItemGroup>
 <ItemGroup>
     <Compile Include="Frontend\Home.aspx.cs"><DependentUpon>Home.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>

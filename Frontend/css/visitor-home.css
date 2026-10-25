@@ -1,4 +1,4 @@
-@import url('assets/visitor/fonts.css');
+@import url('../assets/visitor/fonts.css');
 /* Keep the source composition while giving the replacement copy enough room. */
 .visitor-native [data-node-id="250:336"]{pointer-events:auto!important;z-index:20}
 .visitor-native [data-node-id="250:340"],.visitor-native [data-node-id="250:342"],.visitor-native [data-node-id="250:344"],.visitor-native [data-node-id="250:346"],.visitor-native [data-node-id="250:348"],.visitor-native [data-node-id="250:350"],.visitor-native [data-node-id="250:352"],.visitor-native [data-node-id="250:354"]{font-size:calc(150 * var(--visitor-unit))!important;white-space:nowrap}
