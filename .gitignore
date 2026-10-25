@@ -11,7 +11,7 @@ bin/
 obj/
 packages/
 
-# SQL Server LocalDB database files (App_Data). Share the database as a SQL script instead.
+# SQL Server LocalDB database files (App_Data). Each teammate builds theirs with Database/create-tables.sql.
 *.mdf
 *.ldf
 

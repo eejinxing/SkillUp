@@ -217,7 +217,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Content Include="App_Data\SkillUp.mdf" />
+    <Content Include="App_Data\SkillUp_log.ldf">
+      <DependentUpon>SkillUp.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -271,7 +274,7 @@
   <!-- Skill UP frontend runtime; preserve script and CSS order in Frontend/index.html. -->
   <ItemGroup>
     <Content Include="Frontend\index.html;Frontend\*.aspx;Frontend\SkillUp.Master;Frontend\css\*.css;Frontend\js\**\*.js;Frontend\assets\**\*;Frontend\Web.config" Exclude="Frontend\assets\**\*.md;Frontend\assets\**\*.txt" />
-    <None Include="Frontend\README.md;Frontend\package.json;Frontend\server.cjs;Frontend\scripts\**\*.cjs;Frontend\tests\**\*.cjs;Frontend\design\**\*;docs\**\*.md;docs\**\*.json;README.md" />
+    <None Include="Frontend\README.md;Frontend\package.json;Frontend\server.cjs;Frontend\scripts\**\*.cjs;Frontend\tests\**\*.cjs;Frontend\design\**\*;docs\**\*.md;docs\**\*.json;README.md;Database\*.sql" />
   </ItemGroup>
 <ItemGroup>
     <Compile Include="Frontend\Home.aspx.cs"><DependentUpon>Home.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
