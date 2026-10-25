@@ -76,8 +76,11 @@ Skill-Up/
 │   ├── server.cjs                     Static file server for local preview
 │   └── package.json                   npm scripts
 │
+├── App_Data/SkillUp.mdf               SQL Server database (37 tables, from the ERD); not in git
+├── Database/create-tables.sql         Query that creates those 37 tables in a new SkillUp.mdf
+│
 └── docs/
-    ├── BACKEND-HANDOFF.md             Backend integration guide (Traditional Chinese)
+    ├── BACKEND-HANDOFF.md             Backend integration guide
     ├── API-CONTRACT.md                Workspace and command API contract for the C# service
     ├── MODULE-MAP.md                  Which JS and CSS files own each feature
     ├── WEBFORMS-PAGES.md / .json      Each .aspx page and the route it opens
@@ -126,7 +129,36 @@ To test against IIS instead of `index.html`, set `SKILLUP_BASE_URL`. To use an i
 
 ## Database
 
-There is no database yet. When you add one, for example SQL Server LocalDB in `App_Data`, git ignores its `.mdf` and `.ldf` files, so each teammate keeps their own local copy. Commit the schema and seed data as a SQL script instead (for example `Database/schema.sql`), and recreate the local database from that script.
+The database is `App_Data/SkillUp.mdf`, a SQL Server LocalDB file built from the ERD in `docs/proposal/WAPP.drawio`. It has the ERD's 37 tables. Only `ROLE` contains rows (Learner, Instructor, Program Leader, Admin); every other table starts empty.
+
+**View or edit the tables.** In Solution Explorer, double-click `App_Data/SkillUp.mdf`. It opens in **Server Explorer** under **Data Connections**. Expand **Tables**, then right-click a table:
+
+- **Open Table Definition** opens the table designer. After changing a table, click **Update** to apply it.
+- **Show Table Data** shows and edits the rows.
+
+**Setting up your copy.** Git ignores `.mdf` and `.ldf` files, so each teammate creates their own database once:
+
+1. Go to **View → Server Explorer**. Right-click **Data Connections** and choose **Add Connection…**.
+2. Set **Data source** to **Microsoft SQL Server Database File**. For **Database file name**, browse to the project's `App_Data` folder and type `SkillUp.mdf`. Click **OK**, then **Yes** to create the file.
+3. Right-click the new **SkillUp.mdf** connection and choose **New Query**.
+4. Paste the contents of [`Database/create-tables.sql`](Database/create-tables.sql) and press **Ctrl+Shift+E**. It ends with `Done: 37 tables created.`
+5. Right-click **Tables** and choose **Refresh**.
+
+Until you do this, Solution Explorer shows `SkillUp.mdf` with a missing-file warning. If the tables change, update `Database/create-tables.sql` so everyone can rebuild the same database.
+
+**Connect from C#.** `Web.config` has a connection string named `SkillUp`:
+
+```csharp
+var connectionString = ConfigurationManager.ConnectionStrings["SkillUp"].ConnectionString;
+using (var connection = new SqlConnection(connectionString)) { /* ... */ }
+```
+
+**Things to know:**
+
+- `USER` is a reserved word in SQL Server, so write the table as `[USER]` in every query.
+- `[USER].password` is `nvarchar(255)`, long enough to store a hashed password instead of plain text.
+- A row that other rows still reference cannot be deleted. For example, a user who created a course cannot be deleted until that course is reassigned. Child rows that only belong to their parent, such as quiz options and lab tasks, are deleted with the parent.
+- The JavaScript frontend still uses its browser mock data. Pages read and write this database only once C# code is written for them.
 
 ## Known limitations
 
