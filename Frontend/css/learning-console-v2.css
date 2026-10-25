@@ -94,12 +94,12 @@ body.has-learning-console.has-lc-exact .skill-edge-nav{display:flex}
 
 /* Reference refinement: quiet surfaces, solid activity bars, and balanced course rows. */
 .lc-x{position:relative;isolation:isolate;font-style:normal;--x-panel:#030304;--x-line:#ffffff08;--x-line2:#ffffff12}
-.lc-x:before{content:"";position:absolute;inset:0 0 auto;height:280px;z-index:-1;pointer-events:none;background:url(assets/dashboard-gradient.webp) center top/cover no-repeat;opacity:.12;mask-image:linear-gradient(#000,transparent)}
+.lc-x:before{content:"";position:absolute;inset:0 0 auto;height:280px;z-index:-1;pointer-events:none;background:url(../assets/dashboard-gradient.webp) center top/cover no-repeat;opacity:.12;mask-image:linear-gradient(#000,transparent)}
 .lx-top{position:relative;z-index:1}
 .lx-bell{width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:#ffffff04;border:1px solid #ffffff09;box-shadow:none}
 .lx-actions{gap:12px}
 .lx-hero{min-height:400px;border-color:#ffffff0d;box-shadow:none;background:#0a0716}
-.lx-glow{background:url(assets/dashboard-gradient.webp) center/cover no-repeat;animation:lx-pan 24s ease-in-out infinite alternate;transform-origin:center}
+.lx-glow{background:url(../assets/dashboard-gradient.webp) center/cover no-repeat;animation:lx-pan 24s ease-in-out infinite alternate;transform-origin:center}
 .lx-glow span{display:none}
 .lx-hero:after{background:linear-gradient(180deg,#07050c00 35%,#07050c99)}
 @keyframes lx-pan{from{transform:scale(1.04) translate3d(-1.2%,0,0)}to{transform:scale(1.12) translate3d(1.2%,-1%,0)}}

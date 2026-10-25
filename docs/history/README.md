@@ -44,7 +44,7 @@ Admin overview (`#/dashboard`, signed in as admin) now follows `250:845`: the or
 
 Run `node tests/instructor-editor-performance.cjs` with the local server on port 4185 to verify the editor and performance screens in an isolated browser.
 
-完整交接與測試帳號請看 [HANDOFF.md](HANDOFF.md)。新增的角色導覽、使用者詳情、審批看板、聊天及帳號偏好已接入同一份示範資料。
+See [HANDOFF.md](HANDOFF.md) for the full handoff notes and test accounts. The new role navigation, user details, approval board, chat and account preferences all use the same demo data.
 
 Double-click `index.html`. Or, from the parent workspace, run `node server.cjs` and visit `http://127.0.0.1:4173/skillup-frontend/`.
 

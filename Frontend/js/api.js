@@ -1,4 +1,4 @@
-/* Replace only this adapter when connecting ASP.NET. See API-CONTRACT.md. */
+/* Replace only this adapter when connecting ASP.NET. See docs/API-CONTRACT.md. */
 (function(root){
   const KEY='skillup.workspace.v1',SESSION='skillup.session.v1';
   const config={mode:'mock',baseUrl:'/api',latency:160,...root.SkillRuntimeConfig};

@@ -1,15 +1,39 @@
-# Visual Studio / .NET build output
+# Visual Studio: per-user settings, caches and IIS Express config (.vs/)
 .vs/
+*.user
+*.suo
+*.rsuser
+*.userosscache
+*.sln.docstates
+
+# Build output and NuGet packages (restored on build)
 bin/
 obj/
 packages/
-*.csproj.user
-*.suo
+
+# SQL Server LocalDB database files (App_Data). Share the database as a SQL script instead.
+*.mdf
+*.ldf
+
+# Publish: per-user profile settings and downloaded publish settings (contain deploy credentials)
+*.pubxml.user
+*.publishsettings
+
 # Frontend developer output
-Frontend/node_modules/
+node_modules/
+npm-debug.log*
 Frontend/previews/
 Frontend/.test-output/
 Frontend/.taste-skill/
+
+# OS and Office temporary files
+Thumbs.db
+desktop.ini
+~$*
+
 # Local integration backups / handoff archives
 App_Data/HandoffBackups/
 handoff/*.zip
+
+# Local Claude Code permissions
+.claude/settings.local.json

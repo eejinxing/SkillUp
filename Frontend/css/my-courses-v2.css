@@ -1,7 +1,7 @@
 /* My courses — rolling program wheel (no scrollbar), black labels on the foil cards, refined panel, buttons and type. */
 
 /* Page ground: the same soft purple haze as the dashboard */
-body:has(.my-courses){background:linear-gradient(180deg,#05040700 0,#050407 380px) top/100% 380px no-repeat,linear-gradient(#0504078c,#0504078c) top/100% 380px no-repeat,url(assets/dashboard-gradient.webp) top/100% 380px no-repeat,#050407}
+body:has(.my-courses){background:linear-gradient(180deg,#05040700 0,#050407 380px) top/100% 380px no-repeat,linear-gradient(#0504078c,#0504078c) top/100% 380px no-repeat,url(../assets/dashboard-gradient.webp) top/100% 380px no-repeat,#050407}
 body:has(.my-courses) :is(.shell,.shell>div,.main,.figma-secondary){background:transparent}
 
 /* Header controls: glass pills */

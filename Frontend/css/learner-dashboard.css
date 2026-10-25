@@ -1,4 +1,4 @@
-@import url('assets/registered/fonts.css');
+@import url('../assets/registered/fonts.css');
 /* Figma 250:466 — preserve the original layered glass surfaces. */
 .shell.learner-home-shell,.shell.learner-home-shell.is-collapsed{display:block;background:#000;color:#e3eaf4}
 .learner-home-shell>.sidebar{display:none;position:fixed;left:0;top:0;width:255px;z-index:60;background:#0c1018;box-shadow:30px 0 80px #0009}

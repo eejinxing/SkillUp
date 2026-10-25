@@ -7,7 +7,7 @@
 .skill-chat svg{width:18px;height:18px;flex:none}
 
 /* Page ground + header controls, matching the other Learner pages */
-body:has(.skill-chat){background:linear-gradient(180deg,#05040700 0,#050407 360px) top/100% 360px no-repeat,linear-gradient(#0504079e,#0504079e) top/100% 360px no-repeat,url(assets/dashboard-gradient.webp) top/100% 360px no-repeat,#050407}
+body:has(.skill-chat){background:linear-gradient(180deg,#05040700 0,#050407 360px) top/100% 360px no-repeat,linear-gradient(#0504079e,#0504079e) top/100% 360px no-repeat,url(../assets/dashboard-gradient.webp) top/100% 360px no-repeat,#050407}
 body:has(.skill-chat) :is(.shell,.shell>div,.main,.figma-secondary){background:transparent}
 body:has(.skill-chat) .figma-workspace-header{background:none}
 body:has(.skill-chat) .figma-workspace-header .skill-logo{height:30px}
