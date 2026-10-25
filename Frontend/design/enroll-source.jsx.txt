@@ -1,0 +1,1283 @@
+const imgImage11 = "https://www.figma.com/api/mcp/asset/ab681440-b583-4f05-9af5-e4dfa9fafe1d.png";
+const imgEllipse214 = "https://www.figma.com/api/mcp/asset/e4d085ea-ff0b-456f-969b-0223193c8512.svg";
+const imgEllipse219 = "https://www.figma.com/api/mcp/asset/6345ee34-e53a-4de0-812a-a1aa85ff9309.svg";
+const imgEllipse215 = "https://www.figma.com/api/mcp/asset/fbabcb2f-b6c0-4054-ab44-5fee220cdacf.svg";
+const imgEllipse218 = "https://www.figma.com/api/mcp/asset/4dbee186-be34-4b0e-841e-502378301199.svg";
+const imgEllipse216 = "https://www.figma.com/api/mcp/asset/d3e5f1c8-1078-4956-ad54-e593afa2d730.svg";
+const imgEllipse217 = "https://www.figma.com/api/mcp/asset/0672e6ca-63ed-4e4c-9d69-849a45669ca5.svg";
+const imgEllipse220 = "https://www.figma.com/api/mcp/asset/96bfac4a-8407-487d-8311-e4426f5f9195.svg";
+const imgEllipse222 = "https://www.figma.com/api/mcp/asset/74377168-6346-4b48-a7f2-58deab81b834.svg";
+const imgEllipse224 = "https://www.figma.com/api/mcp/asset/aba77231-a589-4df7-bbd1-1eafbfeac073.svg";
+const imgEllipse225 = "https://www.figma.com/api/mcp/asset/f2d1c877-4a98-4a9b-8381-facadae65b5b.svg";
+const imgEllipse226 = "https://www.figma.com/api/mcp/asset/88a87206-46ad-46eb-81d7-b4ae22da8e0c.svg";
+const imgEllipse227 = "https://www.figma.com/api/mcp/asset/544530a1-69a0-41b9-96f7-1915634617c2.svg";
+const imgEllipse229 = "https://www.figma.com/api/mcp/asset/f246ef38-fe08-451b-bcfd-0d73668835d7.svg";
+const imgEllipse236 = "https://www.figma.com/api/mcp/asset/ea6cbeef-72a3-4e6e-ba2c-c97f53d977f1.svg";
+const imgVector16 = "https://www.figma.com/api/mcp/asset/c2babca0-91e9-4ec6-825e-43ac6baf92f1.svg";
+
+export default function CourseDetailsTutorLmsReferenceEditable() {
+  return (
+    <div className="bg-black relative size-full" data-node-id="262:6504" data-name="Course Details / Tutor LMS reference / Editable">
+      <div className="absolute bg-white h-[2831px] left-[115px] overflow-clip top-[116px] w-[6250px]" data-node-id="262:6505">
+        <div className="absolute h-[2865px] left-0 top-[-34px] w-[6365px]" data-node-id="262:6507" data-name="image 11">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute h-[100.04%] left-[-1.71%] max-w-none top-[-0.01%] w-full" src={imgImage11} />
+          </div>
+        </div>
+        <div className="absolute h-[839.814px] left-[3433.5px] mix-blend-plus-lighter top-[2537.19px] w-[2975.5px]" data-node-id="262:6510">
+          <div className="absolute inset-[-59.54%_-16.8%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse214} />
+          </div>
+        </div>
+        <div className="absolute h-[839.814px] left-[2816px] mix-blend-plus-lighter top-[2537px] w-[2975.5px]" data-node-id="262:6521">
+          <div className="absolute inset-[-238.15%_-67.22%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse219} />
+          </div>
+        </div>
+        <div className="absolute h-[1357.5px] left-[4505.96px] mix-blend-plus-lighter top-[-394.5px] w-[2324.5px]" data-node-id="262:6512">
+          <div className="absolute inset-[-73.66%_-43.02%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse215} />
+          </div>
+        </div>
+        <div className="absolute flex h-[2105.672px] items-center justify-center left-[-211px] mix-blend-plus-lighter top-[-902px] w-[2625.911px]" data-node-id="262:6516">
+          <div className="flex-none rotate-[167.39deg]">
+            <div className="h-[1637.859px] relative w-[2324.5px]">
+              <div className="absolute inset-[-122.11%_-86.04%]">
+                <img alt="" className="block max-w-none size-full" src={imgEllipse218} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="absolute h-[1776px] left-[-623px] top-[-395px] w-[1538px]" data-node-id="262:6514">
+          <div className="absolute inset-[-112.61%_-130.04%]">
+            <img alt="" className="block max-w-none size-full" src={imgEllipse216} />
+          </div>
+        </div>
+        <div className="absolute flex h-[1056.749px] items-center justify-center left-[-526px] top-[2103px] w-[2514.906px]" data-node-id="262:6515">
+          <div className="flex-none rotate-[79.02deg]">
+            <div className="h-[2445px] relative w-[602px]">
+              <div className="absolute inset-[-81.8%_-332.23%]">
+                <img alt="" className="block max-w-none size-full" src={imgEllipse217} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="absolute flex h-[410.29px] items-center justify-center left-[3350px] mix-blend-plus-lighter top-[-126px] w-[1155.807px]" data-node-id="262:6523">
+          <div className="flex-none rotate-[90.11deg]">
+            <div className="h-[1155px] relative w-[408px]">
+              <div className="absolute inset-[-259.74%_-735.29%]">
+                <img alt="" className="block max-w-none size-full" src={imgEllipse220} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="absolute flex h-[410.29px] items-center justify-center left-[3350px] mix-blend-plus-lighter top-[-126px] w-[1155.807px]" data-node-id="262:6525">
+          <div className="flex-none rotate-[90.11deg]">
+            <div className="h-[1155px] relative w-[408px]">
+              <div className="absolute inset-[-259.74%_-735.29%]">
+                <img alt="" className="block max-w-none size-full" src={imgEllipse220} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="-translate-y-full [word-break:break-word] absolute flex flex-col font-['DM_Sans:SemiBold'] font-semibold justify-end leading-[0] left-[115px] text-[200px] text-white top-[3431px] whitespace-nowrap" data-node-id="262:6537" style={{ fontVariationSettings: '"opsz" 14' }}>
+        <p className="leading-[1.55]">About Course</p>
+      </div>
+      <div className="absolute content-stretch flex flex-col gap-[90px] h-[5004px] items-start left-[4487px] overflow-clip top-[3121px] w-[1993px]" data-node-id="262:6592" data-name="Enrollment and course information">
+        <div className="bg-black border-7 border-[#9a9a9a] border-solid content-stretch flex flex-col gap-[72px] h-[846px] items-start overflow-clip p-[108px] relative rounded-[36px] shrink-0 w-full" data-node-id="262:6609" data-name="Instructors">
+          <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.55] not-italic relative shrink-0 text-[58.5px] text-white whitespace-nowrap" data-node-id="262:6610">
+            A course by
+          </p>
+          <div className="content-stretch flex gap-[54px] h-[216px] items-start overflow-clip relative shrink-0 w-[1512px]" data-node-id="262:6611" data-name="Joseph Robbins">
+            <div className="bg-[#e1eafa] content-stretch flex items-center justify-center overflow-clip relative rounded-[94.5px] shrink-0 size-[189px]" data-node-id="262:6612" data-name="Avatar JR">
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.55] not-italic relative shrink-0 text-[#4165df] text-[54px] whitespace-nowrap" data-node-id="262:6613">
+                JR
+              </p>
+            </div>
+            <div className="[word-break:break-word] content-stretch flex flex-col font-semibold h-[216px] items-start leading-[1.55] overflow-clip relative shrink-0 text-white w-[1260px] whitespace-nowrap" data-node-id="262:6614" data-name="Instructor details">
+              <p className="font-['Inter:Semi_Bold'] not-italic relative shrink-0 text-[58.5px]" data-node-id="262:6615">
+                Joseph Robbins
+              </p>
+              <p className="font-['DM_Sans:SemiBold'] relative shrink-0 text-[49.5px]" data-node-id="262:6616" style={{ fontVariationSettings: '"opsz" 14' }}>{`UX Designer & Developer`}</p>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[54px] h-[216px] items-start overflow-clip relative shrink-0 w-[1512px]" data-node-id="262:6617" data-name="Savannah Nguyen">
+            <div className="bg-[#e1eafa] content-stretch flex items-center justify-center overflow-clip relative rounded-[94.5px] shrink-0 size-[189px]" data-node-id="262:6618" data-name="Avatar SN">
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.55] not-italic relative shrink-0 text-[#4165df] text-[54px] whitespace-nowrap" data-node-id="262:6619">
+                SN
+              </p>
+            </div>
+            <div className="[word-break:break-word] content-stretch flex flex-col font-semibold h-[216px] items-start leading-[1.55] overflow-clip relative shrink-0 text-white w-[1260px] whitespace-nowrap" data-node-id="262:6620" data-name="Instructor details">
+              <p className="font-['Inter:Semi_Bold'] not-italic relative shrink-0 text-[58.5px]" data-node-id="262:6621">
+                Savannah Nguyen
+              </p>
+              <p className="font-['DM_Sans:SemiBold'] relative shrink-0 text-[49.5px]" data-node-id="262:6622" style={{ fontVariationSettings: '"opsz" 14' }}>
+                Instructor
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-black border-7 border-[#9a9a9a] border-solid content-stretch flex flex-col gap-[72px] h-[4068px] items-start overflow-clip p-[108px] relative rounded-[36px] shrink-0 w-full" data-node-id="262:6623" data-name="Course details">
+          <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.55] not-italic relative shrink-0 text-[81px] text-white whitespace-nowrap" data-node-id="262:6630">
+            Requirements
+          </p>
+          <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.55] not-italic relative shrink-0 text-[58.5px] text-white w-[1485px] whitespace-pre-wrap" data-node-id="262:6631">{`•  Basic knowledge of JavaScript`}</p>
+          <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.55] not-italic relative shrink-0 text-[58.5px] text-white w-[1485px] whitespace-pre-wrap" data-node-id="262:6632">{`•  A computer with internet access`}</p>
+          <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.55] not-italic relative shrink-0 text-[58.5px] text-white w-[1485px] whitespace-pre-wrap" data-node-id="262:6633">{`•  A code editor and a curious mind`}</p>
+          <p className="[word-break:break-word] font-['DM_Sans:SemiBold'] font-semibold leading-[1.55] relative shrink-0 text-[81px] text-white whitespace-nowrap" data-node-id="262:6634" style={{ fontVariationSettings: '"opsz" 14' }}>
+            Tags
+          </p>
+          <div className="content-stretch flex gap-[36px] h-[297px] items-start overflow-clip relative shrink-0 w-[1512px]" data-node-id="262:6635" data-name="Course tags">
+            <div className="bg-[#f6f7fb] border-[#ddd9e0] border-[4.5px] border-solid content-stretch flex h-[144px] items-center justify-center overflow-clip relative rounded-[36px] shrink-0 w-[450px]" data-node-id="262:6636" data-name="Tag Node.js">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.55] not-italic relative shrink-0 text-[#747b8a] text-[49.5px] whitespace-nowrap" data-node-id="262:6637">
+                Node.js
+              </p>
+            </div>
+            <div className="bg-[#f6f7fb] border-[#ddd9e0] border-[4.5px] border-solid content-stretch flex h-[144px] items-center justify-center overflow-clip relative rounded-[36px] shrink-0 w-[450px]" data-node-id="262:6638" data-name="Tag Backend">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.55] not-italic relative shrink-0 text-[#747b8a] text-[49.5px] whitespace-nowrap" data-node-id="262:6639">
+                Backend
+              </p>
+            </div>
+            <div className="bg-[#f6f7fb] border-[#ddd9e0] border-[4.5px] border-solid content-stretch flex h-[144px] items-center justify-center overflow-clip relative rounded-[36px] shrink-0 w-[450px]" data-node-id="262:6640" data-name="Tag JavaScript">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.55] not-italic relative shrink-0 text-[#747b8a] text-[49.5px] whitespace-nowrap" data-node-id="262:6641">
+                JavaScript
+              </p>
+            </div>
+          </div>
+          <p className="[word-break:break-word] font-['DM_Sans:SemiBold'] font-semibold leading-[1.55] relative shrink-0 text-[81px] text-white whitespace-nowrap" data-node-id="262:6642" style={{ fontVariationSettings: '"opsz" 14' }}>
+            Target Audience
+          </p>
+          <p className="[word-break:break-word] font-['DM_Sans:Regular'] font-normal leading-[1.55] relative shrink-0 text-[#e0e0e0] text-[58.5px] w-[1485px] whitespace-pre-wrap" data-node-id="262:6643" style={{ fontVariationSettings: '"opsz" 14' }}>{`•  Aspiring backend developers`}</p>
+          <p className="[word-break:break-word] font-['DM_Sans:Regular'] font-normal leading-[1.55] relative shrink-0 text-[#e0e0e0] text-[58.5px] w-[1485px] whitespace-pre-wrap" data-node-id="262:6644" style={{ fontVariationSettings: '"opsz" 14' }}>{`•  Students learning web development`}</p>
+          <p className="[word-break:break-word] font-['DM_Sans:Regular'] font-normal leading-[1.55] relative shrink-0 text-[#e0e0e0] text-[58.5px] w-[1485px] whitespace-pre-wrap" data-node-id="262:6645" style={{ fontVariationSettings: '"opsz" 14' }}>{`•  Developers building their first API`}</p>
+        </div>
+      </div>
+      <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['DM_Sans:SemiBold'] font-semibold gap-[72px] h-[789px] items-start leading-[1.55] left-[119px] overflow-clip top-[3543px] w-[3960px]" data-node-id="262:6646" data-name="About course">
+        <p className="relative shrink-0 text-[67.5px] text-white w-[3870px]" data-node-id="262:6648" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Node.js is a popular open-source JavaScript runtime for building fast, scalable applications. Learn how to create servers, develop REST APIs, and connect your application to a database.
+        </p>
+        <p className="relative shrink-0 text-[67.5px] text-white w-[3870px]" data-node-id="262:6649" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Start with the essentials, then put your knowledge into practice through focused lessons and hands-on examples. Build a strong foundation you can use in real projects.
+        </p>
+        <p className="relative shrink-0 text-[#8696ff] text-[60px] w-[343px]" data-node-id="262:6650" style={{ fontVariationSettings: '"opsz" 14' }}>
+          + Show more
+        </p>
+      </div>
+      <div className="[word-break:break-word] absolute contents font-['DM_Sans:Regular'] font-normal leading-[1.55] left-[119px] text-[#747b8a] text-[63px] top-[4725px]" data-node-id="262:6659">
+        <p className="absolute left-[2141px] top-[4725px] w-[1890px] whitespace-pre-wrap" data-node-id="262:6655" style={{ fontVariationSettings: '"opsz" 14' }}>{`  Connect applications to MongoDB`}</p>
+        <p className="absolute left-[2141px] top-[4868px] w-[1890px] whitespace-pre-wrap" data-node-id="262:6656" style={{ fontVariationSettings: '"opsz" 14' }}>{`  Manage packages and dependencies`}</p>
+        <p className="absolute left-[2169px] top-[5006px] w-[1890px]" data-node-id="262:6657" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Deploy your first backend project
+        </p>
+        <p className="absolute left-[119px] top-[4725px] w-[1890px]" data-node-id="262:6652" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Understand the core concepts of Node.js
+        </p>
+        <p className="absolute left-[119px] top-[4868px] w-[1848px]" data-node-id="262:6653" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Create a server and handle HTTP requests
+        </p>
+        <p className="absolute left-[119px] top-[5011px] w-[1819px]" data-node-id="262:6654" style={{ fontVariationSettings: '"opsz" 14' }}>
+          Build REST APIs with Express
+        </p>
+      </div>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold leading-[1.55] left-[119px] text-[99px] text-white top-[4452px] whitespace-nowrap" data-node-id="262:6658" style={{ fontVariationSettings: '"opsz" 14' }}>
+        What Will I Learn?
+      </p>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:Bold'] font-bold leading-[1.55] left-[119px] text-[99px] text-white top-[5273px] whitespace-nowrap" data-node-id="262:6666" style={{ fontVariationSettings: '"opsz" 14' }}>
+        What Will I Learn?
+      </p>
+      <div className="absolute flex h-[43.1px] items-center justify-center left-[103px] mix-blend-lighten top-[5050px] w-[70.573px]" data-node-id="262:6667">
+        <div className="flex-none rotate-[0.79deg]">
+          <div className="h-[42.141px] relative w-[70px]">
+            <div className="absolute inset-[-474.6%_-285.71%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse222} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute flex h-[43.1px] items-center justify-center left-[103px] mix-blend-lighten top-[5050px] w-[70.573px]" data-node-id="262:6678">
+        <div className="flex-none rotate-[0.79deg]">
+          <div className="h-[42.141px] relative w-[70px]">
+            <div className="absolute inset-[-474.6%_-285.71%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse222} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute border-5 border-[#d4d4d4] border-solid h-[2579px] left-[103px] overflow-clip rounded-[100px] top-[5546px] w-[4249px]" data-node-id="262:6739">
+        <div className="absolute h-[2557px] left-[130px] rounded-[300px] top-[107px] w-[3979px]" data-node-id="262:6740" />
+        <div className="absolute h-[2557px] left-[130px] overflow-clip rounded-[300px] top-[107px] w-[3979px]" data-node-id="262:6754">
+          <div className="absolute flex items-center justify-center left-[3710px] size-[140px] top-[905px]" data-node-id="262:6786">
+            <div className="-scale-y-100 flex-none rotate-180">
+              <div className="relative size-[140px]" data-name="fe:beginner" />
+            </div>
+          </div>
+          <div className="absolute flex items-center justify-center left-[3710px] size-[140px] top-[1171px]" data-node-id="262:6788">
+            <div className="-scale-y-100 flex-none rotate-180">
+              <div className="relative size-[140px]" data-name="fe:beginner" />
+            </div>
+          </div>
+          <div className="absolute flex items-center justify-center left-[3710px] size-[140px] top-[1437px]" data-node-id="262:6791">
+            <div className="-scale-y-100 flex-none rotate-180">
+              <div className="relative size-[140px]" data-name="fe:beginner" />
+            </div>
+          </div>
+          <div className="absolute flex items-center justify-center left-[3710px] size-[140px] top-[1744px]" data-node-id="262:6794">
+            <div className="-scale-y-100 flex-none rotate-180">
+              <div className="relative size-[140px]" data-name="fe:beginner" />
+            </div>
+          </div>
+          <div className="absolute content-stretch flex flex-col h-[271.176px] items-start left-[1035px] overflow-clip top-[1884px] w-[246.964px]" data-node-id="268:43" data-name="security">
+            <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#d9e8dd] text-[11.068px] w-[235.204px]" data-node-id="268:45">
+              security
+            </p>
+          </div>
+        </div>
+        <div className="absolute h-[408px] left-[130px] overflow-clip rounded-[300px] top-[107px] w-[3979px]" data-node-id="262:6741">
+          <div className="absolute h-[605.524px] left-[-258px] mix-blend-plus-lighter top-[-88.52px] w-[2196.361px]" data-node-id="262:6742">
+            <div className="absolute inset-[-94.74%_-26.12%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse224} />
+            </div>
+          </div>
+          <div className="absolute h-[259px] left-[2515px] mix-blend-plus-lighter top-[278px] w-[848px]" data-node-id="262:6744">
+            <div className="absolute inset-[-231.66%_-70.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse225} />
+            </div>
+          </div>
+          <div className="absolute h-[259px] left-[2897px] mix-blend-plus-lighter top-[258px] w-[848px]" data-node-id="262:6748">
+            <div className="absolute inset-[-231.66%_-70.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse226} />
+            </div>
+          </div>
+          <div className="absolute h-[393.595px] left-[1608px] mix-blend-plus-lighter top-[19px] w-[2434px]" data-node-id="262:6750">
+            <div className="absolute inset-[-152.44%_-24.65%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse227} />
+            </div>
+          </div>
+          <div className="absolute h-[393.595px] left-[887px] mix-blend-plus-lighter top-[36px] w-[2434px]" data-node-id="262:6776">
+            <div className="absolute inset-[-152.44%_-24.65%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse227} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1656px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6756">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1656px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6760">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6762">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6764">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6766">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[3236px] mix-blend-plus-lighter top-[36px] w-[1177px]" data-node-id="262:6781">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[3321px] mix-blend-plus-lighter top-[282px] w-[1177px]" data-node-id="262:6782">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[-94px] mix-blend-plus-lighter top-[36px] w-[1177px]" data-node-id="262:6777">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-0 mix-blend-plus-lighter top-[337px] w-[1177px]" data-node-id="262:6778">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[981px] mix-blend-plus-lighter top-[19px] w-[1177px]" data-node-id="262:6779">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1762px] mix-blend-plus-lighter top-[317px] w-[1177px]" data-node-id="262:6780">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6768">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6769">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6771">
+            <div className="absolute inset-[-704.23%_-42.48%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse236} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1524px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6773">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['DM_Sans:ExtraBold'] font-extrabold leading-[1.55] left-[78px] text-[200px] text-white top-[49px] w-[1005px] whitespace-pre-wrap" data-node-id="262:6783" style={{ fontVariationSettings: '"opsz" 14' }}>{`01   DSTR`}</p>
+          <div className="absolute border-[1.875px] border-[rgba(220,230,223,0.5)] border-solid h-[249.954px] left-[1177px] overflow-clip rounded-[100px] top-[79px] w-[1074.8px]" data-node-id="268:359" style={{ backgroundImage: "linear-gradient(180deg, rgba(98, 98, 98, 0.9) 0%, rgba(37, 39, 41, 0.95) 13%, rgb(4, 9, 10) 45%, rgb(9, 87, 91) 66%, rgb(100, 237, 189) 82%, rgb(218, 255, 166) 100%)" }} data-name="Skill UP / Glass Progress Capsule">
+            <div className="absolute bg-gradient-to-b from-[rgba(255,255,255,0.17)] h-[106.23px] left-[0.62px] rounded-[100px] to-[rgba(255,255,255,0)] top-[0.62px] w-[1069.801px]" data-node-id="I268:359;275:34" data-name="Glass top highlight" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[18.12px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:35" data-name="Progress segment 1" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[30.62px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:36" data-name="Progress segment 2" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[43.12px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:37" data-name="Progress segment 3" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[55.61px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:38" data-name="Progress segment 4" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[68.11px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:39" data-name="Progress segment 5" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[80.61px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:40" data-name="Progress segment 6" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[93.11px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:41" data-name="Progress segment 7" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[105.61px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:42" data-name="Progress segment 8" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[118.1px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:43" data-name="Progress segment 9" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[130.6px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:44" data-name="Progress segment 10" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[143.1px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:45" data-name="Progress segment 11" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[155.6px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:46" data-name="Progress segment 12" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[168.09px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:47" data-name="Progress segment 13" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[180.59px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:48" data-name="Progress segment 14" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[193.09px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:49" data-name="Progress segment 15" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[205.59px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:50" data-name="Progress segment 16" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[218.08px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:51" data-name="Progress segment 17" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[230.58px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:52" data-name="Progress segment 18" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[243.08px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:53" data-name="Progress segment 19" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[255.58px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:54" data-name="Progress segment 20" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[268.07px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:55" data-name="Progress segment 21" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[280.57px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:56" data-name="Progress segment 22" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[293.07px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:57" data-name="Progress segment 23" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[305.57px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:58" data-name="Progress segment 24" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[318.07px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:59" data-name="Progress segment 25" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[330.56px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:60" data-name="Progress segment 26" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[343.06px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:61" data-name="Progress segment 27" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[355.56px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:62" data-name="Progress segment 28" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[368.06px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:63" data-name="Progress segment 29" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[380.55px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:64" data-name="Progress segment 30" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[393.05px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:65" data-name="Progress segment 31" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[405.55px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:66" data-name="Progress segment 32" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[418.05px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:67" data-name="Progress segment 33" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[430.54px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:68" data-name="Progress segment 34" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[443.04px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:69" data-name="Progress segment 35" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[455.54px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:70" data-name="Progress segment 36" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[468.04px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:71" data-name="Progress segment 37" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[480.54px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:72" data-name="Progress segment 38" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[493.03px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:73" data-name="Progress segment 39" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[505.53px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:74" data-name="Progress segment 40" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[518.03px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:75" data-name="Progress segment 41" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[530.53px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:76" data-name="Progress segment 42" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[543.02px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:77" data-name="Progress segment 43" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[555.52px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:78" data-name="Progress segment 44" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[568.02px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:79" data-name="Progress segment 45" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[580.52px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:80" data-name="Progress segment 46" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[593.01px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:81" data-name="Progress segment 47" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[605.51px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:82" data-name="Progress segment 48" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[618.01px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:83" data-name="Progress segment 49" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[630.51px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:84" data-name="Progress segment 50" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[643.01px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:85" data-name="Progress segment 51" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[655.5px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:86" data-name="Progress segment 52" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[668px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:87" data-name="Progress segment 53" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[680.5px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:88" data-name="Progress segment 54" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[693px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:89" data-name="Progress segment 55" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[705.49px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:90" data-name="Progress segment 56" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[717.99px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:91" data-name="Progress segment 57" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[730.49px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:92" data-name="Progress segment 58" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[742.99px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:93" data-name="Progress segment 59" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[755.48px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:94" data-name="Progress segment 60" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[767.98px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:95" data-name="Progress segment 61" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[780.48px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:96" data-name="Progress segment 62" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[792.98px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:97" data-name="Progress segment 63" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[805.47px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:98" data-name="Progress segment 64" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[817.97px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:99" data-name="Progress segment 65" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[830.47px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:100" data-name="Progress segment 66" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[842.97px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:101" data-name="Progress segment 67" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[855.47px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:102" data-name="Progress segment 68" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[867.96px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:103" data-name="Progress segment 69" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[880.46px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:104" data-name="Progress segment 70" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[892.96px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:105" data-name="Progress segment 71" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[905.46px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:106" data-name="Progress segment 72" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[917.95px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:107" data-name="Progress segment 73" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[930.45px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:108" data-name="Progress segment 74" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[942.95px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:109" data-name="Progress segment 75" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[955.45px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:110" data-name="Progress segment 76" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[967.94px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:111" data-name="Progress segment 77" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[980.44px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:112" data-name="Progress segment 78" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[992.94px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:113" data-name="Progress segment 79" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[1005.44px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:114" data-name="Progress segment 80" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[1017.94px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:115" data-name="Progress segment 81" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.996px] left-[1030.43px] rounded-[1px] top-[114.35px] w-[4.999px]" data-node-id="I268:359;275:116" data-name="Progress segment 82" />
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[707.99px] not-italic text-[124.98px] text-[color:var(--glass-capsule-label,white)] top-[44.37px] whitespace-nowrap" data-node-id="I268:359;275:117">
+              100
+            </p>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[979.19px] not-italic text-[54.99px] text-[color:var(--glass-capsule-label,white)] top-[54.36px] whitespace-nowrap" data-node-id="I268:359;275:118">
+              %
+            </p>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[55.61px] not-italic text-[38.74px] text-[color:var(--glass-capsule-label,white)] top-[33.12px] whitespace-nowrap" data-node-id="I268:359;275:119">
+              Course progress
+            </p>
+          </div>
+        </div>
+        <div className="absolute h-[408px] left-[130px] overflow-clip rounded-[300px] top-[565px] w-[3979px]" data-node-id="262:6798">
+          <div className="absolute h-[605.524px] left-[-258px] mix-blend-plus-lighter top-[-88.52px] w-[2196.361px]" data-node-id="262:6799">
+            <div className="absolute inset-[-94.74%_-26.12%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse224} />
+            </div>
+          </div>
+          <div className="absolute h-[259px] left-[2515px] mix-blend-plus-lighter top-[278px] w-[848px]" data-node-id="262:6800">
+            <div className="absolute inset-[-231.66%_-70.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse225} />
+            </div>
+          </div>
+          <div className="absolute h-[259px] left-[2897px] mix-blend-plus-lighter top-[258px] w-[848px]" data-node-id="262:6801">
+            <div className="absolute inset-[-231.66%_-70.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse226} />
+            </div>
+          </div>
+          <div className="absolute h-[393.595px] left-[1608px] mix-blend-plus-lighter top-[19px] w-[2434px]" data-node-id="262:6802">
+            <div className="absolute inset-[-152.44%_-24.65%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse227} />
+            </div>
+          </div>
+          <div className="absolute h-[393.595px] left-[887px] mix-blend-plus-lighter top-[36px] w-[2434px]" data-node-id="262:6803">
+            <div className="absolute inset-[-152.44%_-24.65%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse227} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1656px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6804">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1656px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6805">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6806">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6807">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6808">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[3236px] mix-blend-plus-lighter top-[36px] w-[1177px]" data-node-id="262:6809">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[3321px] mix-blend-plus-lighter top-[282px] w-[1177px]" data-node-id="262:6810">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[-94px] mix-blend-plus-lighter top-[36px] w-[1177px]" data-node-id="262:6811">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-0 mix-blend-plus-lighter top-[337px] w-[1177px]" data-node-id="262:6812">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[981px] mix-blend-plus-lighter top-[19px] w-[1177px]" data-node-id="262:6813">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1762px] mix-blend-plus-lighter top-[317px] w-[1177px]" data-node-id="262:6814">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6815">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6816">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6817">
+            <div className="absolute inset-[-704.23%_-42.48%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse236} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1524px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6818">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['DM_Sans:ExtraBold'] font-extrabold leading-[1.55] left-[78px] text-[200px] text-white top-[49px] w-[1005px] whitespace-pre-wrap" data-node-id="262:6819" style={{ fontVariationSettings: '"opsz" 14' }}>{`01   DSTR`}</p>
+        </div>
+        <div className="absolute border-[1.868px] border-[rgba(220,230,223,0.5)] border-solid h-[249px] left-[1307px] overflow-clip rounded-[100px] top-[644px] w-[908.85px]" data-node-id="268:446" style={{ backgroundImage: "linear-gradient(180deg, rgba(98, 98, 98, 0.9) 0%, rgba(37, 39, 41, 0.95) 13%, rgb(4, 9, 10) 45%, rgb(9, 87, 91) 66%, rgb(100, 237, 189) 82%, rgb(218, 255, 166) 100%)" }} data-name="Skill UP / Glass Progress Capsule">
+          <div className="absolute bg-gradient-to-b from-[rgba(255,255,255,0.17)] h-[105.825px] left-[0.62px] rounded-[100px] to-[rgba(255,255,255,0)] top-[0.62px] w-[903.87px]" data-node-id="I268:446;275:121" data-name="Glass top highlight" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[18.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:122" data-name="Progress segment 1" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[30.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:123" data-name="Progress segment 2" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[42.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:124" data-name="Progress segment 3" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[55.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:125" data-name="Progress segment 4" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[67.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:126" data-name="Progress segment 5" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[80.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:127" data-name="Progress segment 6" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[92.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:128" data-name="Progress segment 7" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[105.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:129" data-name="Progress segment 8" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[117.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:130" data-name="Progress segment 9" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[130.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:131" data-name="Progress segment 10" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[142.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:132" data-name="Progress segment 11" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[155px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:133" data-name="Progress segment 12" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[167.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:134" data-name="Progress segment 13" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[179.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:135" data-name="Progress segment 14" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[192.35px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:136" data-name="Progress segment 15" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[204.8px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:137" data-name="Progress segment 16" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[217.25px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:138" data-name="Progress segment 17" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[229.7px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:139" data-name="Progress segment 18" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[242.15px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:140" data-name="Progress segment 19" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[254.6px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:141" data-name="Progress segment 20" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[267.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:142" data-name="Progress segment 21" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[279.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:143" data-name="Progress segment 22" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[291.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:144" data-name="Progress segment 23" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[304.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:145" data-name="Progress segment 24" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[316.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:146" data-name="Progress segment 25" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[329.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:147" data-name="Progress segment 26" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[341.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:148" data-name="Progress segment 27" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[354.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:149" data-name="Progress segment 28" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[366.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:150" data-name="Progress segment 29" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[379.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:151" data-name="Progress segment 30" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[391.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:152" data-name="Progress segment 31" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[404px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:153" data-name="Progress segment 32" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[416.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:154" data-name="Progress segment 33" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[428.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:155" data-name="Progress segment 34" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[441.35px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:156" data-name="Progress segment 35" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[453.8px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:157" data-name="Progress segment 36" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[466.25px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:158" data-name="Progress segment 37" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[478.7px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:159" data-name="Progress segment 38" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[491.15px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:160" data-name="Progress segment 39" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[503.6px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:161" data-name="Progress segment 40" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[516.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:162" data-name="Progress segment 41" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[528.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:163" data-name="Progress segment 42" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[540.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:164" data-name="Progress segment 43" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[553.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:165" data-name="Progress segment 44" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[565.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:166" data-name="Progress segment 45" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[578.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:167" data-name="Progress segment 46" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[590.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:168" data-name="Progress segment 47" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[603.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:169" data-name="Progress segment 48" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[615.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:170" data-name="Progress segment 49" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[628.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:171" data-name="Progress segment 50" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[640.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:172" data-name="Progress segment 51" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[653px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:173" data-name="Progress segment 52" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[665.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:174" data-name="Progress segment 53" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[677.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:175" data-name="Progress segment 54" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[690.35px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:176" data-name="Progress segment 55" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[702.8px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:177" data-name="Progress segment 56" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[715.25px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:178" data-name="Progress segment 57" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[727.7px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:179" data-name="Progress segment 58" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[740.15px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:180" data-name="Progress segment 59" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[752.6px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:181" data-name="Progress segment 60" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[765.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:182" data-name="Progress segment 61" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[777.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:183" data-name="Progress segment 62" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[789.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:184" data-name="Progress segment 63" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[802.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:185" data-name="Progress segment 64" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[814.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:186" data-name="Progress segment 65" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[827.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:187" data-name="Progress segment 66" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[839.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:188" data-name="Progress segment 67" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[852.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:189" data-name="Progress segment 68" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[864.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:446;275:190" data-name="Progress segment 69" />
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[620.63px] not-italic text-[124.5px] text-[color:var(--glass-capsule-label,white)] top-[44.2px] whitespace-nowrap" data-node-id="I268:446;275:191">
+            80
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[813.61px] not-italic text-[54.78px] text-[color:var(--glass-capsule-label,white)] top-[54.16px] whitespace-nowrap" data-node-id="I268:446;275:192">
+            %
+          </p>
+        </div>
+        <div className="absolute h-[408px] left-[130px] overflow-clip rounded-[300px] top-[1023px] w-[3979px]" data-node-id="262:6820">
+          <div className="absolute h-[605.524px] left-[-258px] mix-blend-plus-lighter top-[-88.52px] w-[2196.361px]" data-node-id="262:6821">
+            <div className="absolute inset-[-94.74%_-26.12%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse224} />
+            </div>
+          </div>
+          <div className="absolute h-[259px] left-[2515px] mix-blend-plus-lighter top-[278px] w-[848px]" data-node-id="262:6822">
+            <div className="absolute inset-[-231.66%_-70.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse225} />
+            </div>
+          </div>
+          <div className="absolute h-[259px] left-[2897px] mix-blend-plus-lighter top-[258px] w-[848px]" data-node-id="262:6823">
+            <div className="absolute inset-[-231.66%_-70.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse226} />
+            </div>
+          </div>
+          <div className="absolute h-[393.595px] left-[1608px] mix-blend-plus-lighter top-[19px] w-[2434px]" data-node-id="262:6824">
+            <div className="absolute inset-[-152.44%_-24.65%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse227} />
+            </div>
+          </div>
+          <div className="absolute h-[393.595px] left-[887px] mix-blend-plus-lighter top-[36px] w-[2434px]" data-node-id="262:6825">
+            <div className="absolute inset-[-152.44%_-24.65%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse227} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1656px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6826">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1656px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6827">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6828">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6829">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6830">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[3236px] mix-blend-plus-lighter top-[36px] w-[1177px]" data-node-id="262:6831">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[3321px] mix-blend-plus-lighter top-[282px] w-[1177px]" data-node-id="262:6832">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[-94px] mix-blend-plus-lighter top-[36px] w-[1177px]" data-node-id="262:6833">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-0 mix-blend-plus-lighter top-[337px] w-[1177px]" data-node-id="262:6834">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[981px] mix-blend-plus-lighter top-[19px] w-[1177px]" data-node-id="262:6835">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1762px] mix-blend-plus-lighter top-[317px] w-[1177px]" data-node-id="262:6836">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6837">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6838">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6839">
+            <div className="absolute inset-[-704.23%_-42.48%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse236} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1524px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6840">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['DM_Sans:ExtraBold'] font-extrabold leading-[1.55] left-[78px] text-[200px] text-white top-[49px] w-[1005px] whitespace-pre-wrap" data-node-id="262:6841" style={{ fontVariationSettings: '"opsz" 14' }}>{`01   DSTR`}</p>
+          <div className="absolute border-[1.868px] border-[rgba(220,230,223,0.5)] border-solid h-[249px] left-[1177px] overflow-clip rounded-[100px] top-[55px] w-[547.8px]" data-node-id="268:577" style={{ backgroundImage: "linear-gradient(180deg, rgba(98, 98, 98, 0.9) 0%, rgba(37, 39, 41, 0.95) 13%, rgb(4, 9, 10) 45%, rgb(9, 87, 91) 66%, rgb(100, 237, 189) 82%, rgb(218, 255, 166) 100%)" }} data-name="Skill UP / Glass Progress Capsule">
+            <div className="absolute bg-gradient-to-b from-[rgba(255,255,255,0.17)] h-[105.825px] left-[0.62px] rounded-[100px] to-[rgba(255,255,255,0)] top-[0.62px] w-[542.82px]" data-node-id="I268:577;275:252" data-name="Glass top highlight" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[18.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:253" data-name="Progress segment 1" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[30.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:254" data-name="Progress segment 2" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[42.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:255" data-name="Progress segment 3" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[55.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:256" data-name="Progress segment 4" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[67.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:257" data-name="Progress segment 5" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[80.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:258" data-name="Progress segment 6" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[92.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:259" data-name="Progress segment 7" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[105.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:260" data-name="Progress segment 8" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[117.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:261" data-name="Progress segment 9" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[130.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:262" data-name="Progress segment 10" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[142.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:263" data-name="Progress segment 11" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[155px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:264" data-name="Progress segment 12" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[167.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:265" data-name="Progress segment 13" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[179.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:266" data-name="Progress segment 14" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[192.35px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:267" data-name="Progress segment 15" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[204.8px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:268" data-name="Progress segment 16" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[217.25px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:269" data-name="Progress segment 17" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[229.7px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:270" data-name="Progress segment 18" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[242.15px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:271" data-name="Progress segment 19" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[254.6px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:272" data-name="Progress segment 20" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[267.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:273" data-name="Progress segment 21" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[279.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:274" data-name="Progress segment 22" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[291.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:275" data-name="Progress segment 23" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[304.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:276" data-name="Progress segment 24" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[316.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:277" data-name="Progress segment 25" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[329.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:278" data-name="Progress segment 26" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[341.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:279" data-name="Progress segment 27" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[354.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:280" data-name="Progress segment 28" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[366.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:281" data-name="Progress segment 29" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[379.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:282" data-name="Progress segment 30" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[391.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:283" data-name="Progress segment 31" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[404px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:284" data-name="Progress segment 32" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[416.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:285" data-name="Progress segment 33" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[428.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:286" data-name="Progress segment 34" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[441.35px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:287" data-name="Progress segment 35" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[453.8px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:288" data-name="Progress segment 36" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[466.25px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:289" data-name="Progress segment 37" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[478.7px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:290" data-name="Progress segment 38" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[491.15px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:291" data-name="Progress segment 39" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[503.6px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:577;275:292" data-name="Progress segment 40" />
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[259.58px] not-italic text-[124.5px] text-[color:var(--glass-capsule-label,white)] top-[44.2px] whitespace-nowrap" data-node-id="I268:577;275:293">
+              40
+            </p>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[452.56px] not-italic text-[54.78px] text-[color:var(--glass-capsule-label,white)] top-[54.16px] whitespace-nowrap" data-node-id="I268:577;275:294">
+              %
+            </p>
+          </div>
+        </div>
+        <div className="absolute h-[408px] left-[130px] overflow-clip rounded-[300px] top-[1481px] w-[3979px]" data-node-id="262:6842">
+          <div className="absolute h-[605.524px] left-[-258px] mix-blend-plus-lighter top-[-88.52px] w-[2196.361px]" data-node-id="262:6843">
+            <div className="absolute inset-[-94.74%_-26.12%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse224} />
+            </div>
+          </div>
+          <div className="absolute h-[259px] left-[2515px] mix-blend-plus-lighter top-[278px] w-[848px]" data-node-id="262:6844">
+            <div className="absolute inset-[-231.66%_-70.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse225} />
+            </div>
+          </div>
+          <div className="absolute h-[259px] left-[2897px] mix-blend-plus-lighter top-[258px] w-[848px]" data-node-id="262:6845">
+            <div className="absolute inset-[-231.66%_-70.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse226} />
+            </div>
+          </div>
+          <div className="absolute h-[393.595px] left-[1608px] mix-blend-plus-lighter top-[19px] w-[2434px]" data-node-id="262:6846">
+            <div className="absolute inset-[-152.44%_-24.65%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse227} />
+            </div>
+          </div>
+          <div className="absolute h-[393.595px] left-[887px] mix-blend-plus-lighter top-[36px] w-[2434px]" data-node-id="262:6847">
+            <div className="absolute inset-[-152.44%_-24.65%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse227} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1656px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6848">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1656px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6849">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6850">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6851">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6852">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[3236px] mix-blend-plus-lighter top-[36px] w-[1177px]" data-node-id="262:6853">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[3321px] mix-blend-plus-lighter top-[282px] w-[1177px]" data-node-id="262:6854">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[-94px] mix-blend-plus-lighter top-[36px] w-[1177px]" data-node-id="262:6855">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-0 mix-blend-plus-lighter top-[337px] w-[1177px]" data-node-id="262:6856">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[981px] mix-blend-plus-lighter top-[19px] w-[1177px]" data-node-id="262:6857">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1762px] mix-blend-plus-lighter top-[317px] w-[1177px]" data-node-id="262:6858">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6859">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6860">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6861">
+            <div className="absolute inset-[-704.23%_-42.48%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse236} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1524px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6862">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['DM_Sans:ExtraBold'] font-extrabold leading-[1.55] left-[78px] text-[200px] text-white top-[49px] w-[1005px] whitespace-pre-wrap" data-node-id="262:6863" style={{ fontVariationSettings: '"opsz" 14' }}>{`01   DSTR`}</p>
+        </div>
+        <div className="absolute border-[1.868px] border-[rgba(220,230,223,0.5)] border-solid h-[249px] left-[1309px] overflow-clip rounded-[100px] top-[1546px] w-[722.1px]" data-node-id="268:519" style={{ backgroundImage: "linear-gradient(180deg, rgba(98, 98, 98, 0.9) 0%, rgba(37, 39, 41, 0.95) 13%, rgb(4, 9, 10) 45%, rgb(9, 87, 91) 66%, rgb(100, 237, 189) 82%, rgb(218, 255, 166) 100%)" }} data-name="Skill UP / Glass Progress Capsule">
+          <div className="absolute bg-gradient-to-b from-[rgba(255,255,255,0.17)] h-[105.825px] left-[0.62px] rounded-[100px] to-[rgba(255,255,255,0)] top-[0.62px] w-[717.12px]" data-node-id="I268:519;275:194" data-name="Glass top highlight" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[18.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:195" data-name="Progress segment 1" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[30.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:196" data-name="Progress segment 2" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[42.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:197" data-name="Progress segment 3" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[55.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:198" data-name="Progress segment 4" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[67.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:199" data-name="Progress segment 5" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[80.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:200" data-name="Progress segment 6" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[92.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:201" data-name="Progress segment 7" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[105.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:202" data-name="Progress segment 8" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[117.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:203" data-name="Progress segment 9" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[130.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:204" data-name="Progress segment 10" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[142.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:205" data-name="Progress segment 11" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[155px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:206" data-name="Progress segment 12" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[167.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:207" data-name="Progress segment 13" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[179.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:208" data-name="Progress segment 14" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[192.35px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:209" data-name="Progress segment 15" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[204.8px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:210" data-name="Progress segment 16" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[217.25px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:211" data-name="Progress segment 17" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[229.7px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:212" data-name="Progress segment 18" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[242.15px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:213" data-name="Progress segment 19" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[254.6px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:214" data-name="Progress segment 20" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[267.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:215" data-name="Progress segment 21" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[279.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:216" data-name="Progress segment 22" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[291.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:217" data-name="Progress segment 23" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[304.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:218" data-name="Progress segment 24" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[316.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:219" data-name="Progress segment 25" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[329.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:220" data-name="Progress segment 26" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[341.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:221" data-name="Progress segment 27" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[354.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:222" data-name="Progress segment 28" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[366.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:223" data-name="Progress segment 29" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[379.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:224" data-name="Progress segment 30" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[391.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:225" data-name="Progress segment 31" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[404px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:226" data-name="Progress segment 32" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[416.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:227" data-name="Progress segment 33" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[428.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:228" data-name="Progress segment 34" />
+          <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[441.35px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:229" data-name="Progress segment 35" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[453.8px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:230" data-name="Progress segment 36" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[466.25px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:231" data-name="Progress segment 37" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[478.7px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:232" data-name="Progress segment 38" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[491.15px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:233" data-name="Progress segment 39" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[503.6px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:234" data-name="Progress segment 40" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[516.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:235" data-name="Progress segment 41" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[528.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:236" data-name="Progress segment 42" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[540.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:237" data-name="Progress segment 43" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[553.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:238" data-name="Progress segment 44" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[565.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:239" data-name="Progress segment 45" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[578.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:240" data-name="Progress segment 46" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[590.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:241" data-name="Progress segment 47" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[603.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:242" data-name="Progress segment 48" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[615.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:243" data-name="Progress segment 49" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[628.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:244" data-name="Progress segment 50" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[640.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:245" data-name="Progress segment 51" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[653px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:246" data-name="Progress segment 52" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[665.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:247" data-name="Progress segment 53" />
+          <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[677.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:519;275:248" data-name="Progress segment 54" />
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[433.88px] not-italic text-[124.5px] text-[color:var(--glass-capsule-label,white)] top-[44.2px] whitespace-nowrap" data-node-id="I268:519;275:249">
+            60
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[626.86px] not-italic text-[54.78px] text-[color:var(--glass-capsule-label,white)] top-[54.16px] whitespace-nowrap" data-node-id="I268:519;275:250">
+            %
+          </p>
+        </div>
+        <div className="absolute h-[408px] left-[130px] overflow-clip rounded-[300px] top-[1921px] w-[3979px]" data-node-id="262:6864">
+          <div className="absolute h-[605.524px] left-[-258px] mix-blend-plus-lighter top-[-88.52px] w-[2196.361px]" data-node-id="262:6865">
+            <div className="absolute inset-[-94.74%_-26.12%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse224} />
+            </div>
+          </div>
+          <div className="absolute h-[259px] left-[2515px] mix-blend-plus-lighter top-[278px] w-[848px]" data-node-id="262:6866">
+            <div className="absolute inset-[-231.66%_-70.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse225} />
+            </div>
+          </div>
+          <div className="absolute h-[259px] left-[2897px] mix-blend-plus-lighter top-[258px] w-[848px]" data-node-id="262:6867">
+            <div className="absolute inset-[-231.66%_-70.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse226} />
+            </div>
+          </div>
+          <div className="absolute h-[393.595px] left-[1608px] mix-blend-plus-lighter top-[19px] w-[2434px]" data-node-id="262:6868">
+            <div className="absolute inset-[-152.44%_-24.65%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse227} />
+            </div>
+          </div>
+          <div className="absolute h-[393.595px] left-[887px] mix-blend-plus-lighter top-[36px] w-[2434px]" data-node-id="262:6869">
+            <div className="absolute inset-[-152.44%_-24.65%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse227} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1656px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6870">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1656px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6871">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6872">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6873">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[2308px] mix-blend-plus-lighter top-0 w-[1177px]" data-node-id="262:6874">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[3236px] mix-blend-plus-lighter top-[36px] w-[1177px]" data-node-id="262:6875">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[3321px] mix-blend-plus-lighter top-[282px] w-[1177px]" data-node-id="262:6876">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[-94px] mix-blend-plus-lighter top-[36px] w-[1177px]" data-node-id="262:6877">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-0 mix-blend-plus-lighter top-[337px] w-[1177px]" data-node-id="262:6878">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[981px] mix-blend-plus-lighter top-[19px] w-[1177px]" data-node-id="262:6879">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1762px] mix-blend-plus-lighter top-[317px] w-[1177px]" data-node-id="262:6880">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6881">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6882">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[776px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6883">
+            <div className="absolute inset-[-704.23%_-42.48%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse236} />
+            </div>
+          </div>
+          <div className="absolute h-[71px] left-[1524px] mix-blend-plus-lighter top-[278px] w-[1177px]" data-node-id="262:6884">
+            <div className="absolute inset-[-422.54%_-25.49%]">
+              <img alt="" className="block max-w-none size-full" src={imgEllipse229} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] absolute font-['DM_Sans:ExtraBold'] font-extrabold leading-[1.55] left-[78px] text-[200px] text-white top-[49px] w-[1005px] whitespace-pre-wrap" data-node-id="262:6885" style={{ fontVariationSettings: '"opsz" 14' }}>{`01   DSTR`}</p>
+          <div className="absolute border-[1.868px] border-[rgba(220,230,223,0.5)] border-solid h-[249px] left-[1177px] overflow-clip rounded-[100px] top-[72px] w-[722.1px]" data-node-id="268:621" style={{ backgroundImage: "linear-gradient(180deg, rgba(98, 98, 98, 0.9) 0%, rgba(37, 39, 41, 0.95) 13%, rgb(4, 9, 10) 45%, rgb(9, 87, 91) 66%, rgb(100, 237, 189) 82%, rgb(218, 255, 166) 100%)" }} data-name="Skill UP / Glass Progress Capsule">
+            <div className="absolute bg-gradient-to-b from-[rgba(255,255,255,0.17)] h-[105.825px] left-[0.62px] rounded-[100px] to-[rgba(255,255,255,0)] top-[0.62px] w-[717.12px]" data-node-id="I268:621;275:194" data-name="Glass top highlight" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[18.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:195" data-name="Progress segment 1" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[30.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:196" data-name="Progress segment 2" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[42.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:197" data-name="Progress segment 3" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[55.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:198" data-name="Progress segment 4" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[67.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:199" data-name="Progress segment 5" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[80.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:200" data-name="Progress segment 6" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[92.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:201" data-name="Progress segment 7" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[105.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:202" data-name="Progress segment 8" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[117.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:203" data-name="Progress segment 9" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[130.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:204" data-name="Progress segment 10" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[142.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:205" data-name="Progress segment 11" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[155px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:206" data-name="Progress segment 12" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[167.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:207" data-name="Progress segment 13" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[179.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:208" data-name="Progress segment 14" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[192.35px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:209" data-name="Progress segment 15" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[204.8px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:210" data-name="Progress segment 16" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[217.25px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:211" data-name="Progress segment 17" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[229.7px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:212" data-name="Progress segment 18" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[242.15px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:213" data-name="Progress segment 19" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[254.6px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:214" data-name="Progress segment 20" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[267.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:215" data-name="Progress segment 21" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[279.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:216" data-name="Progress segment 22" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[291.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:217" data-name="Progress segment 23" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[304.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:218" data-name="Progress segment 24" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[316.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:219" data-name="Progress segment 25" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[329.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:220" data-name="Progress segment 26" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[341.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:221" data-name="Progress segment 27" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[354.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:222" data-name="Progress segment 28" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[366.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:223" data-name="Progress segment 29" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[379.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:224" data-name="Progress segment 30" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[391.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:225" data-name="Progress segment 31" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[404px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:226" data-name="Progress segment 32" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[416.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:227" data-name="Progress segment 33" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[428.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:228" data-name="Progress segment 34" />
+            <div className="absolute bg-[rgba(183,255,245,0.9)] h-[19.92px] left-[441.35px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:229" data-name="Progress segment 35" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[453.8px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:230" data-name="Progress segment 36" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[466.25px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:231" data-name="Progress segment 37" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[478.7px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:232" data-name="Progress segment 38" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[491.15px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:233" data-name="Progress segment 39" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[503.6px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:234" data-name="Progress segment 40" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[516.05px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:235" data-name="Progress segment 41" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[528.5px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:236" data-name="Progress segment 42" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[540.95px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:237" data-name="Progress segment 43" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[553.4px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:238" data-name="Progress segment 44" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[565.85px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:239" data-name="Progress segment 45" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[578.3px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:240" data-name="Progress segment 46" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[590.75px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:241" data-name="Progress segment 47" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[603.2px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:242" data-name="Progress segment 48" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[615.65px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:243" data-name="Progress segment 49" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[628.1px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:244" data-name="Progress segment 50" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[640.55px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:245" data-name="Progress segment 51" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[653px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:246" data-name="Progress segment 52" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[665.45px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:247" data-name="Progress segment 53" />
+            <div className="absolute bg-[rgba(68,104,106,0.9)] h-[19.92px] left-[677.9px] rounded-[1px] top-[113.92px] w-[4.98px]" data-node-id="I268:621;275:248" data-name="Progress segment 54" />
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[433.88px] not-italic text-[124.5px] text-[color:var(--glass-capsule-label,white)] top-[44.2px] whitespace-nowrap" data-node-id="I268:621;275:249">
+              60
+            </p>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[626.86px] not-italic text-[54.78px] text-[color:var(--glass-capsule-label,white)] top-[54.16px] whitespace-nowrap" data-node-id="I268:621;275:250">
+              %
+            </p>
+          </div>
+        </div>
+        <div className="absolute h-[273.686px] left-[1173px] top-[632px] w-[249.25px]" data-node-id="265:6902" data-name="code" />
+        <div className="absolute h-[305.902px] left-[1168px] top-[1082px] w-[278.589px]" data-node-id="268:34" data-name="chip" />
+        <div className="absolute h-[319.529px] left-[1155px] top-[1535px] w-[291px]" data-node-id="268:40" data-name="folder" />
+      </div>
+      <div className="absolute bg-white content-stretch flex gap-[215.264px] h-[5183px] items-start left-[51px] overflow-clip p-[215.264px] top-[8305px] w-[6377px]" data-node-id="264:31" data-name="Skill UP / Learner reviews / Editable reference">
+        <div className="content-stretch flex flex-col gap-[67.27px] h-[1917.191px] items-start overflow-clip relative shrink-0 w-[1715.382px]" data-node-id="264:32" data-name="Rating summary">
+          <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[90.814px] w-[1715.382px]" data-node-id="264:33">
+            Learner reviews across Skill UP
+          </p>
+          <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[107.632px] whitespace-nowrap" data-node-id="264:34">
+            ★ 4.6
+          </p>
+          <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[57.179px] whitespace-nowrap" data-node-id="264:35">
+            avg. across 12 courses
+          </p>
+          <div className="content-stretch flex flex-col gap-[60.543px] h-[773.604px] items-start overflow-clip relative shrink-0 w-[1580.842px]" data-node-id="264:36" data-name="Rating distribution">
+            <div className="content-stretch flex gap-[40.362px] h-[73.997px] items-center overflow-clip relative shrink-0 w-[1580.842px]" data-node-id="264:37" data-name="5 stars">
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[57.179px] w-[218.627px]" data-node-id="264:38">
+                5 stars
+              </p>
+              <div className="bg-[#e8edf6] content-stretch flex h-[26.908px] items-start overflow-clip relative rounded-[13.454px] shrink-0 w-[887.962px]" data-node-id="264:39" data-name="5 stars track">
+                <div className="bg-[#0759cf] h-[26.908px] relative rounded-[13.454px] shrink-0 w-[656.737px]" data-node-id="264:40" data-name="5 stars filled" />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[53.816px] w-[262.353px]" data-node-id="264:41">
+                73.96%
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[40.362px] h-[73.997px] items-center overflow-clip relative shrink-0 w-[1580.842px]" data-node-id="264:42" data-name="4 stars">
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[57.179px] w-[218.627px]" data-node-id="264:43">
+                4 stars
+              </p>
+              <div className="bg-[#e8edf6] content-stretch flex h-[26.908px] items-start overflow-clip relative rounded-[13.454px] shrink-0 w-[887.962px]" data-node-id="264:44" data-name="4 stars track">
+                <div className="bg-[#0759cf] h-[26.908px] relative rounded-[13.454px] shrink-0 w-[171.11px]" data-node-id="264:45" data-name="4 stars filled" />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[53.816px] w-[262.353px]" data-node-id="264:46">
+                19.27%
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[40.362px] h-[73.997px] items-center overflow-clip relative shrink-0 w-[1580.842px]" data-node-id="264:47" data-name="3 stars">
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[57.179px] w-[218.627px]" data-node-id="264:48">
+                3 stars
+              </p>
+              <div className="bg-[#e8edf6] content-stretch flex h-[26.908px] items-start overflow-clip relative rounded-[13.454px] shrink-0 w-[887.962px]" data-node-id="264:49" data-name="3 stars track">
+                <div className="bg-[#0759cf] h-[26.908px] relative rounded-[13.454px] shrink-0 w-[37.028px]" data-node-id="264:50" data-name="3 stars filled" />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[53.816px] w-[262.353px]" data-node-id="264:51">
+                4.17%
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[40.362px] h-[73.997px] items-center overflow-clip relative shrink-0 w-[1580.842px]" data-node-id="264:52" data-name="2 stars">
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[57.179px] w-[218.627px]" data-node-id="264:53">
+                2 stars
+              </p>
+              <div className="bg-[#e8edf6] content-stretch flex h-[26.908px] items-start overflow-clip relative rounded-[13.454px] shrink-0 w-[887.962px]" data-node-id="264:54" data-name="2 stars track">
+                <div className="bg-[#0759cf] h-[26.908px] relative rounded-[13.454px] shrink-0 w-[11.544px]" data-node-id="264:55" data-name="2 stars filled" />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[53.816px] w-[262.353px]" data-node-id="264:56">
+                1.30%
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[40.362px] h-[73.997px] items-center overflow-clip relative shrink-0 w-[1580.842px]" data-node-id="264:57" data-name="1 star">
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[57.179px] w-[218.627px]" data-node-id="264:58">
+                1 star
+              </p>
+              <div className="bg-[#e8edf6] content-stretch flex h-[26.908px] items-start overflow-clip relative rounded-[13.454px] shrink-0 w-[887.962px]" data-node-id="264:59" data-name="1 star track">
+                <div className="bg-[#0759cf] h-[26.908px] relative rounded-[13.454px] shrink-0 w-[11.188px]" data-node-id="264:60" data-name="1 star filled" />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[53.816px] w-[262.353px]" data-node-id="264:61">
+                1.26%
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="h-[4968px] overflow-clip relative shrink-0 w-[3962px]" data-node-id="264:62" data-name="Filter and learner review cards">
+          <div className="[word-break:break-word] absolute bg-white border-[#839ac0] border-[3.363px] border-solid content-stretch flex gap-[80.724px] h-[141.267px] items-center leading-[1.5] left-0 not-italic overflow-clip p-[33.635px] rounded-[73.997px] text-[#101418] text-[53.816px] top-0 w-[558.34px] whitespace-nowrap" data-node-id="264:63" data-name="All courses dropdown">
+            <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0" data-node-id="264:64">
+              All courses
+            </p>
+            <p className="font-['Inter:Regular'] font-normal relative shrink-0" data-node-id="264:65">
+              ⌄
+            </p>
+          </div>
+          <div className="absolute bg-white border-[#e3eaf7] border-[6.727px] border-solid content-stretch flex gap-[121.086px] h-[807.238px] items-start left-0 overflow-clip p-[107.632px] rounded-[33.635px] top-[235.44px] w-[3962.195px]" data-node-id="264:66" data-name="Review / AB">
+            <div className="content-stretch flex gap-[53.816px] h-[269.079px] items-center overflow-clip relative shrink-0 w-[739.969px]" data-node-id="264:67" data-name="Learner identity">
+              <div className="bg-[#10458e] content-stretch flex items-center justify-center overflow-clip relative rounded-[127.813px] shrink-0 size-[255.626px]" data-node-id="264:68" data-name="Avatar A">
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[114.359px] text-white whitespace-nowrap" data-node-id="264:69">
+                  A
+                </p>
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[60.543px] whitespace-nowrap" data-node-id="264:70">
+                AB
+              </p>
+            </div>
+            <div className="[word-break:break-word] content-stretch flex flex-col gap-[40.362px] h-[591.975px] items-start leading-[1.5] not-italic overflow-clip relative shrink-0 text-[#101418] w-[2858.969px]" data-node-id="264:71" data-name="Review content">
+              <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[57.179px] w-[2858.969px]" data-node-id="264:72">
+                Course: What is Data Science?
+              </p>
+              <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[53.816px] w-[2858.969px] whitespace-pre-wrap" data-node-id="264:73">{`★ ★ ★ ★ ★  5.0  ·  Reviewed on Apr 4, 2019`}</p>
+              <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[63.906px] w-[2858.969px]" data-node-id="264:74">
+                This is a great course for anyone willing to start exploring the field of Data Science. It starts with basic definitions with proper examples that help one understand this field with greater ease!
+              </p>
+            </div>
+          </div>
+          <div className="absolute bg-white border-[#e3eaf7] border-[6.727px] border-solid content-stretch flex gap-[121.086px] h-[807.238px] items-start left-0 overflow-clip p-[107.632px] rounded-[33.635px] top-[1136.86px] w-[3962.195px]" data-node-id="264:75" data-name="Review / RG">
+            <div className="content-stretch flex gap-[53.816px] h-[269.079px] items-center overflow-clip relative shrink-0 w-[739.969px]" data-node-id="264:76" data-name="Learner identity">
+              <div className="bg-[#10458e] content-stretch flex items-center justify-center overflow-clip relative rounded-[127.813px] shrink-0 size-[255.626px]" data-node-id="264:77" data-name="Avatar R">
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[114.359px] text-white whitespace-nowrap" data-node-id="264:78">
+                  R
+                </p>
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[60.543px] whitespace-nowrap" data-node-id="264:79">
+                RG
+              </p>
+            </div>
+            <div className="[word-break:break-word] content-stretch flex flex-col gap-[40.362px] h-[591.975px] items-start leading-[1.5] not-italic overflow-clip relative shrink-0 text-[#101418] w-[2858.969px]" data-node-id="264:80" data-name="Review content">
+              <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[57.179px] w-[2858.969px]" data-node-id="264:81">
+                Course: Tools for Data Science
+              </p>
+              <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[53.816px] w-[2858.969px] whitespace-pre-wrap" data-node-id="264:82">{`★ ★ ★ ★ ☆  4.0  ·  Reviewed on Mar 28, 2020`}</p>
+              <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[63.906px] w-[2858.969px]" data-node-id="264:83">
+                It’s a good introductory course to know all the open-source tools available for data science. However, it will not teach you how to code for these tools apart from introducing a few basic lines.
+              </p>
+            </div>
+          </div>
+          <div className="absolute bg-white border-[#e3eaf7] border-[6.727px] border-solid h-[2929px] left-0 overflow-clip rounded-[33.635px] top-[2038.28px] w-[3962px]" data-node-id="265:6914" data-name="Review / RG">
+            <div className="absolute content-stretch flex gap-[53.816px] h-[269.079px] items-center left-[107.63px] overflow-clip top-[107.63px] w-[739.969px]" data-node-id="265:6915" data-name="Learner identity">
+              <div className="bg-[#10458e] content-stretch flex items-center justify-center overflow-clip relative rounded-[127.813px] shrink-0 size-[255.626px]" data-node-id="265:6916" data-name="Avatar R">
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[114.359px] text-white whitespace-nowrap" data-node-id="265:6917">
+                  R
+                </p>
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.5] not-italic relative shrink-0 text-[#101418] text-[60.543px] whitespace-nowrap" data-node-id="265:6918">
+                RG
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute h-[656px] leading-[1.5] left-[968.69px] not-italic overflow-clip text-[#101418] top-[107.63px] w-[2859px]" data-node-id="265:6919" data-name="Review content">
+              <p className="absolute font-['Inter:Semi_Bold'] font-semibold left-0 text-[57.179px] top-0 w-[2858.969px]" data-node-id="265:6920">
+                Course: Tools for Data Science
+              </p>
+              <p className="absolute font-['Inter:Regular'] font-normal left-[-0.32px] text-[63.906px] top-[327.1px] w-[2858.969px]" data-node-id="265:6922">
+                It’s a good introductory course to know all the open-source tools available for data science. However, it will not teach you how to code for these tools apart from introducing a few basic lines.
+              </p>
+              <p className="absolute font-['Inter:Regular'] font-normal left-[0.68px] text-[53.816px] top-[166.1px] w-[2858.969px] whitespace-pre-wrap" data-node-id="268:84">{`★ ★ ★ ★ ☆  4.0  ·  Reviewed on Mar 28, 2020`}</p>
+            </div>
+            <div className="absolute h-[496.5px] left-[661.36px] top-[750.73px] w-[239.5px]" data-node-id="268:100">
+              <div className="absolute inset-[-2.32%_-4.8%]">
+                <img alt="" className="block max-w-none size-full" src={imgVector16} />
+              </div>
+            </div>
+            <div className="absolute bg-[var(--review-tint,#f0f6ff)] border-[2.858px] border-[var(--review-line,#dbe6f5)] border-solid h-[629px] left-[968.36px] overflow-clip rounded-[28.577px] top-[916.73px] w-[2803px]" data-node-id="268:88" data-name="Instructor response">
+              <div className="absolute bg-[var(--review-blue,#075de3)] left-[68.59px] overflow-clip rounded-[80.016px] size-[160.031px] top-[68.58px]" data-node-id="268:89" data-name="Avatar JD">
+                <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold'] font-semibold leading-[1.45] left-[36.51px] not-italic text-[67.213px] text-[color:var(--review-white,white)] top-[31.43px] whitespace-nowrap" data-node-id="268:90">
+                  JD
+                </p>
+              </div>
+              <div className="absolute h-[491.525px] left-[285.77px] overflow-clip top-[68.58px] w-[2457.623px]" data-node-id="268:91" data-name="Instructor response content">
+                <div className="absolute content-stretch flex gap-[34.292px] h-[80.016px] items-start left-0 overflow-clip top-0 w-[2457.623px]" data-node-id="268:92" data-name="Author and role">
+                  <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[1.45] not-italic relative shrink-0 text-[51.439px] text-[color:var(--review-ink,#142139)] whitespace-nowrap" data-node-id="268:93">
+                    John Doe
+                  </p>
+                  <div className="bg-[var(--review-badge,#d9e9ff)] content-stretch flex h-[74.3px] items-center justify-center overflow-clip relative rounded-[11.431px] shrink-0 w-[285.77px]" data-node-id="268:94" data-name="Instructor badge">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.45] not-italic relative shrink-0 text-[37.15px] text-[color:var(--review-blue,#075de3)] whitespace-nowrap" data-node-id="268:95">
+                      Instructor
+                    </p>
+                  </div>
+                </div>
+                <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[1.45] left-0 not-italic text-[37.15px] text-[color:var(--review-muted,#62738d)] top-[94.3px] whitespace-nowrap" data-node-id="268:96">
+                  Mar 29, 2020
+                </p>
+                <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[1.45] left-0 not-italic text-[37.15px] text-[color:var(--review-muted,#62738d)] top-[162.57px] whitespace-nowrap" data-node-id="268:97">
+                  Replying to RG
+                </p>
+                <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[1.45] left-0 not-italic text-[48.581px] text-[color:var(--review-ink,#142139)] top-[230.84px] w-[2429.047px]" data-node-id="268:98">
+                  Thanks for the feedback! This course introduces the tools. For hands-on practice, try our Python for Data Science course.
+                </p>
+                <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[1.45] left-0 not-italic text-[40.008px] text-[color:var(--review-muted,#62738d)] top-[386.11px] whitespace-nowrap" data-node-id="268:99">
+                  ▢ Reply
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

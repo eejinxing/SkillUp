@@ -1,0 +1,127 @@
+export default function RecentTask() {
+  return (
+    <div className="bg-[#29292c] border-[#333336] border-[8.907px] border-solid content-stretch flex flex-col gap-[160.326px] items-start overflow-clip p-[249.396px] relative rounded-[213.768px] shadow-[0px_62.349px_133.605px_0px_rgba(0,0,0,0.35)] size-full" data-node-id="250:6262" data-name="Recent task">
+      <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[#eee] text-[240.489px] whitespace-nowrap" data-node-id="250:6263">
+        Pending Approval
+      </p>
+      <div className="bg-[#1c1c1f] border-[#333336] border-[8.907px] border-solid content-stretch flex flex-col h-[4830.63px] items-start overflow-clip relative rounded-[178.14px] shrink-0 w-[4650.451px]" data-node-id="250:6264" data-name="Recent task table">
+        <div className="[word-break:break-word] font-['Inter:Regular'] font-normal h-[534.429px] leading-[normal] not-italic overflow-clip relative rounded-[213.768px] shrink-0 text-[#929298] text-[106.884px] w-[4641.9px] whitespace-nowrap" data-node-id="250:6265" data-name="Table headings">
+          <p className="absolute left-[160.32px] top-[202.47px]" data-node-id="250:6266">
+            Project Name
+          </p>
+          <p className="absolute left-[2858.74px] top-[306px]" data-node-id="250:6267">
+            Submitted at
+          </p>
+          <p className="absolute left-[4016.77px] top-[306px]" data-node-id="250:6268">
+            Status
+          </p>
+          <p className="absolute left-[1747.74px] top-[306px]" data-node-id="250:6269">
+            Submitted By
+          </p>
+        </div>
+        <div className="bg-[#19191c] h-[819.662px] overflow-clip relative rounded-[213.768px] shrink-0 w-[4548.451px]" data-node-id="250:6270" data-name="System Design">
+          <div className="absolute bg-[#7962db] content-stretch flex flex-col items-start left-[1650.02px] overflow-clip p-[80.163px] rounded-[160.326px] size-[320.652px] top-[267.53px]" data-node-id="250:6271" data-name="Avatar SD">
+            <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[106.884px] text-white whitespace-nowrap" data-node-id="250:6272">
+              AL
+            </p>
+          </div>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal h-[160.326px] leading-[normal] left-[160.33px] not-italic text-[#eee] text-[115.791px] top-[300.51px] w-[1113.375px]" data-node-id="250:6273">
+            System Design
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2854.47px] not-italic text-[#bcbcc2] text-[106.884px] top-[379.92px] whitespace-nowrap" data-node-id="250:6274">
+            15 Sep 2024
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[3923.33px] not-italic text-[#e7bb64] text-[61.078px] top-[368.31px] whitespace-pre" data-node-id="250:6275">{`●  Pending approval`}</p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2017.09px] not-italic text-[#b5b4b4] text-[106.884px] top-[368.91px] whitespace-nowrap" data-node-id="250:6276">
+            Ali
+          </p>
+        </div>
+        <div className="bg-[#232326] h-[819.662px] overflow-clip relative rounded-[213.768px] shrink-0 w-[4548.451px]" data-node-id="250:6277" data-name="Color Selection">
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal h-[160.326px] leading-[normal] left-[160.33px] not-italic text-[#eee] text-[115.791px] top-[300.51px] w-[1113.375px]" data-node-id="250:6278">
+            Color Selection
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2845.92px] not-italic text-[#bcbcc2] text-[106.884px] top-[387.47px] whitespace-nowrap" data-node-id="250:6279">
+            07 Sep 2024
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[3924.55px] not-italic text-[#e7bb64] text-[61.078px] top-[390.52px] whitespace-pre" data-node-id="250:6280">{`●  Pending approval`}</p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2017.09px] not-italic text-[#b5b4b4] text-[106.884px] top-[368.91px] whitespace-nowrap" data-node-id="250:6281">
+            Ali
+          </p>
+          <div className="absolute bg-[#7962db] content-stretch flex flex-col items-start left-[1650.02px] overflow-clip p-[80.163px] rounded-[160.326px] size-[320.652px] top-[234.54px]" data-node-id="250:6282" data-name="Avatar SD">
+            <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[106.884px] text-white whitespace-nowrap" data-node-id="250:6283">
+              AL
+            </p>
+          </div>
+        </div>
+        <div className="bg-[#19191c] h-[819.662px] overflow-clip relative rounded-[213.768px] shrink-0 w-[4548.451px]" data-node-id="250:6284" data-name="User Research">
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal h-[160.326px] leading-[normal] left-[160.33px] not-italic text-[#eee] text-[115.791px] top-[300.51px] w-[1113.375px]" data-node-id="250:6285">
+            User Research
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2847.75px] not-italic text-[#bcbcc2] text-[106.884px] top-[402.34px] whitespace-nowrap" data-node-id="250:6286">
+            02 Sep 2024
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[3946.53px] not-italic text-[#e7bb64] text-[61.078px] top-[395.62px] whitespace-pre" data-node-id="250:6287">{`●  Pending approval`}</p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2017.09px] not-italic text-[#b5b4b4] text-[106.884px] top-[329.82px] whitespace-nowrap" data-node-id="250:6288">
+            Ali
+          </p>
+          <div className="absolute bg-[#7962db] content-stretch flex flex-col items-start left-[1654.29px] overflow-clip p-[80.163px] rounded-[160.326px] size-[320.652px] top-[211.33px]" data-node-id="250:6289" data-name="Avatar SD">
+            <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[106.884px] text-white whitespace-nowrap" data-node-id="250:6290">
+              AL
+            </p>
+          </div>
+        </div>
+        <div className="bg-[#19191c] h-[819.662px] overflow-clip relative rounded-[213.768px] shrink-0 w-[4548.451px]" data-node-id="250:6291" data-name="System Design">
+          <div className="absolute bg-[#7962db] content-stretch flex flex-col items-start left-[1650.02px] overflow-clip p-[80.163px] rounded-[160.326px] size-[320.652px] top-[267.52px]" data-node-id="250:6292" data-name="Avatar SD">
+            <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[106.884px] text-white whitespace-nowrap" data-node-id="250:6293">
+              AL
+            </p>
+          </div>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal h-[160.326px] leading-[normal] left-[160.33px] not-italic text-[#eee] text-[115.791px] top-[300.51px] w-[1113.375px]" data-node-id="250:6294">
+            System Design
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2854.47px] not-italic text-[#bcbcc2] text-[106.884px] top-[379.92px] whitespace-nowrap" data-node-id="250:6295">
+            15 Sep 2024
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[3923.33px] not-italic text-[#e7bb64] text-[61.078px] top-[368.31px] whitespace-pre" data-node-id="250:6296">{`●  Pending approval`}</p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2017.09px] not-italic text-[#b5b4b4] text-[106.884px] top-[368.91px] whitespace-nowrap" data-node-id="250:6297">
+            Ali
+          </p>
+        </div>
+        <div className="bg-[#232326] h-[819.662px] overflow-clip relative rounded-[213.768px] shrink-0 w-[4548.451px]" data-node-id="250:6298" data-name="Color Selection">
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal h-[160.326px] leading-[normal] left-[160.33px] not-italic text-[#eee] text-[115.791px] top-[300.51px] w-[1113.375px]" data-node-id="250:6299">
+            Color Selection
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2845.92px] not-italic text-[#bcbcc2] text-[106.884px] top-[387.47px] whitespace-nowrap" data-node-id="250:6300">
+            07 Sep 2024
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[3924.55px] not-italic text-[#e7bb64] text-[61.078px] top-[390.52px] whitespace-pre" data-node-id="250:6301">{`●  Pending approval`}</p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2017.09px] not-italic text-[#b5b4b4] text-[106.884px] top-[368.91px] whitespace-nowrap" data-node-id="250:6302">
+            Ali
+          </p>
+          <div className="absolute bg-[#7962db] content-stretch flex flex-col items-start left-[1650.02px] overflow-clip p-[80.163px] rounded-[160.326px] size-[320.652px] top-[234.54px]" data-node-id="250:6303" data-name="Avatar SD">
+            <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[106.884px] text-white whitespace-nowrap" data-node-id="250:6304">
+              AL
+            </p>
+          </div>
+        </div>
+        <div className="bg-[#19191c] h-[819.662px] overflow-clip relative rounded-[213.768px] shrink-0 w-[4548.451px]" data-node-id="250:6305" data-name="User Research">
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal h-[160.326px] leading-[normal] left-[160.33px] not-italic text-[#eee] text-[115.791px] top-[300.51px] w-[1113.375px]" data-node-id="250:6306">
+            User Research
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2847.75px] not-italic text-[#bcbcc2] text-[106.884px] top-[402.34px] whitespace-nowrap" data-node-id="250:6307">
+            02 Sep 2024
+          </p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[3946.53px] not-italic text-[#e7bb64] text-[61.078px] top-[395.63px] whitespace-pre" data-node-id="250:6308">{`●  Pending approval`}</p>
+          <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[normal] left-[2017.09px] not-italic text-[#b5b4b4] text-[106.884px] top-[329.83px] whitespace-nowrap" data-node-id="250:6309">
+            Ali
+          </p>
+          <div className="absolute bg-[#7962db] content-stretch flex flex-col items-start left-[1654.29px] overflow-clip p-[80.163px] rounded-[160.326px] size-[320.652px] top-[211.33px]" data-node-id="250:6310" data-name="Avatar SD">
+            <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[106.884px] text-white whitespace-nowrap" data-node-id="250:6311">
+              AL
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

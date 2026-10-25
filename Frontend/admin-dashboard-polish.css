@@ -1,0 +1,90 @@
+/* Admin overview polish — keeps the glass design (blue banner, pink / grey / blue cards, streaked attention card)
+   and refines it: real data on the banner, a longer activity log, neutral category tags, no teal accents. */
+
+/* ── Banner: blue glass stays, a data layer sits on top ── */
+.ad-banner.ad-banner-live{position:relative;isolation:isolate;min-height:330px}
+.ad-banner.ad-banner-live>img{position:absolute;inset:0;z-index:-2}
+.ad-banner.ad-banner-live:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#081a5c80 0%,#0a1f6a26 45%,#06124a8c 100%)}
+.ad-banner-data{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;gap:16px;padding:clamp(18px,2.4vw,32px) clamp(20px,2.6vw,36px) clamp(14px,1.8vw,24px);color:#fff;font-family:'DM Sans',sans-serif}
+.ad-pulse-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.ad-pulse-head h2{margin:0;font-size:clamp(17px,1.5vw,22px);font-weight:500;letter-spacing:-.02em;color:#fff}
+.ad-pulse-head p{margin:6px 0 0;font-size:13px;color:#dbe4ffcc}
+.ad-pulse-stats{display:flex;gap:clamp(20px,3vw,44px);margin:0}
+.ad-pulse-stats div{display:grid;gap:2px}
+.ad-pulse-stats dt{font-size:12px;color:#dbe4ffb3}
+.ad-pulse-stats dd{margin:0;font-size:clamp(22px,2.2vw,32px);font-weight:500;letter-spacing:-.03em;line-height:1.15;font-variant-numeric:tabular-nums;color:#fff}
+.ad-pulse-stats small{font-size:12px;color:#dbe4ffcc}
+.ad-pulse-chart{margin:0;flex:1;display:flex;flex-direction:column;min-height:0}
+.ad-pulse-plot{position:relative;flex:1;min-height:110px;padding-left:30px}
+.ad-pulse-plot svg{display:block;width:100%;height:100%;overflow:visible}
+.ad-pulse-grid line{stroke:#ffffff26;stroke-width:1;vector-effect:non-scaling-stroke}
+.ad-pulse-hits rect{fill:transparent}
+.ad-pulse-hits rect:hover{fill:#ffffff14}
+.ad-pulse-y{position:absolute;left:0;top:0;bottom:0;width:24px}
+.ad-pulse-y span{position:absolute;right:0;transform:translateY(-50%);font-size:11px;color:#dbe4ffb3;font-variant-numeric:tabular-nums}
+.ad-pulse-x{position:relative;height:18px;margin:8px 0 0 30px}
+.ad-pulse-x span{position:absolute;top:0;transform:translateX(-50%);font-size:11px;color:#dbe4ffb3;white-space:nowrap}
+.ad-pulse-x span:first-child{transform:none}.ad-pulse-x span:last-child{transform:translateX(-100%)}
+
+/* ── Cards: drop the teal accent ── */
+.admin-dashboard .ad-growth{color:#e6e2f5}
+.admin-dashboard .ad-users b svg{display:block}
+
+/* ── Bottom: neutral tags, longer log, no arrow column ── */
+.admin-dashboard .ad-event-type,.admin-dashboard .ad-event-type[data-source]{color:#c6c4d0;background:transparent;border-color:#ffffff1f;font-size:10px;padding:4px 8px}
+.admin-dashboard .ad-table-scroll{max-height:none}
+.admin-dashboard .ad-logs-panel #ad-export-logs{display:inline-flex;align-items:center;gap:7px}
+.admin-dashboard .ad-logs-panel #ad-export-logs svg{width:15px;height:15px}
+.admin-dashboard .ad-action-card a:not(.ad-audit-link){grid-template-columns:32px minmax(0,1fr)}
+.ad-banner.ad-banner-live>img{opacity:.55}
+.ad-banner.ad-banner-live{background:linear-gradient(120deg,#1d3fb8,#3f6fe0 55%,#86a9f2)}
+.admin-dashboard .ad-table-scroll{max-height:880px;overflow:auto;scrollbar-width:thin;scrollbar-color:#ffffff26 transparent}
+.ad-banner.ad-banner-live{aspect-ratio:auto;min-height:0;height:clamp(340px,31vw,450px)}
+/* Taller metric row (about 22% taller than before at 1440px) */
+.admin-dashboard .ad-top-grid>:is(.ad-summary,.ad-metric){aspect-ratio:auto;min-height:0;height:clamp(500px,39vw,600px)}
+
+/* ── Activity log as a timeline (supplied reference), on the black panel ── */
+.admin-dashboard .ad-timeline{list-style:none;margin:0;padding:6px 4px 0 0}
+.admin-dashboard .ad-tl-item{position:relative;display:grid;grid-template-columns:36px minmax(0,1fr);gap:14px;padding:12px 0}
+.admin-dashboard .ad-tl-item:before{content:"";position:absolute;left:17.5px;top:0;bottom:0;width:1px;background:#ffffff14}
+.admin-dashboard .ad-tl-item:first-child:before{top:24px}
+.admin-dashboard .ad-tl-item:last-child:before{bottom:calc(100% - 24px)}
+.admin-dashboard .ad-tl-icon{position:relative;z-index:1;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#121216;border:1px solid #ffffff1c;color:#b8b9c4}
+.admin-dashboard .ad-tl-icon svg{width:16px;height:16px}
+.admin-dashboard .ad-tl-item[data-source=Audit] .ad-tl-icon{color:#c4b5fd}
+.admin-dashboard .ad-tl-item[data-source=Learning] .ad-tl-icon{color:#86efac}
+.admin-dashboard .ad-tl-item[data-source=Community] .ad-tl-icon{color:#93c5fd}
+.admin-dashboard .ad-tl-item[data-source=Messages] .ad-tl-icon{color:#fcd34d}
+.admin-dashboard .ad-tl-body{min-width:0;padding-top:7px}
+.admin-dashboard .ad-tl-line{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:0;font-size:13.5px;line-height:1.5;color:#a9aab4}
+.admin-dashboard .ad-tl-avatar{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#2a2342;color:#ddd0ff;font-size:9px;font-weight:600}
+.admin-dashboard .ad-tl-line strong{font-weight:600;color:#f1f1f4}
+.admin-dashboard .ad-tl-role{padding:1px 7px;border-radius:999px;background:#ffffff0d;color:#9d9ea8;font-size:11px}
+.admin-dashboard .ad-tl-detail{font-weight:600;color:#e4e4ea}
+.admin-dashboard .ad-tl-line time{color:#7c7d86;font-size:12.5px;font-variant-numeric:tabular-nums}
+.admin-dashboard .ad-tl-card{margin-top:10px;padding:10px 14px;border-radius:12px;background:#121216;border:1px solid #ffffff12;font-size:13px;line-height:1.55;color:#d2d3da;max-width:62ch}
+.admin-dashboard .ad-tl-card span{display:block;margin-bottom:2px;font-size:11px;color:#7c7d86}
+.admin-dashboard .ad-tl-tag{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.admin-dashboard .ad-timeline .ad-empty{padding:28px 0;text-align:center;color:#7c7d86;font-size:13px}
+.admin-dashboard .ad-tl-scroll{padding-right:6px}
+@media(hover:hover){.admin-dashboard .ad-tl-item:hover .ad-tl-icon{border-color:#ffffff38;background:#18181d}}
+/* Activity feed: paired avatar/action circles and quiet inline targets. */
+.admin-dashboard .ad-logs-panel{background:#060607}
+.admin-dashboard .ad-timeline{padding:7px 4px 5px 0}
+.admin-dashboard .ad-tl-item.ad-feed-item{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;align-items:center;padding:16px 0;min-height:72px}
+.admin-dashboard .ad-feed-item:before{content:none}
+.admin-dashboard .ad-feed-identity{display:flex;align-items:center;isolation:isolate}
+.admin-dashboard .ad-feed-item .ad-tl-avatar{position:relative;z-index:2;flex:none;width:36px;height:36px;border-radius:50%;overflow:hidden;background:var(--activity-avatar,#b9b9b9);color:#242424;font-size:11px;font-weight:600;border:2px solid #060607}
+.admin-dashboard .ad-tl-avatar img{width:100%;height:100%;object-fit:cover}
+.admin-dashboard .ad-feed-item .ad-tl-icon{z-index:1;flex:none;width:36px;height:36px;margin-left:-8px;border:0;background:#19191a;color:#919193}
+.admin-dashboard .ad-feed-item .ad-tl-icon svg{width:18px;height:18px;stroke-width:1.5}
+.admin-dashboard .ad-feed-item .ad-tl-body{padding:0;min-width:0}
+.admin-dashboard .ad-feed-item .ad-tl-line{display:block;margin:0;font-size:16px;line-height:1.75;letter-spacing:0;font-weight:400;color:#e6e6e8;overflow-wrap:anywhere}
+.admin-dashboard .ad-feed-item .ad-tl-action{color:#e6e6e8;font-weight:400;margin-right:5px}
+.admin-dashboard .ad-feed-item .ad-tl-detail{display:inline;font:inherit;letter-spacing:inherit;color:#96969b;font-weight:400;background:none;border:0;border-radius:0;padding:0;margin:0;white-space:normal;text-align:left}
+.admin-dashboard .ad-feed-item :is(a,button).ad-tl-detail{text-decoration:underline;text-decoration-color:#626266;text-decoration-thickness:1px;text-underline-offset:4px;cursor:pointer}
+.admin-dashboard .ad-feed-item :is(a,button).ad-tl-detail:hover{color:#ddd;text-decoration-color:#aaa}
+.admin-dashboard .ad-feed-item:hover .ad-tl-icon{border:0;background:#202022;color:#b8b8bc}
+.admin-dashboard .ad-feed-item :focus-visible{outline:2px solid #aaa;outline-offset:4px}
+.admin-dashboard .ad-feed-item[data-source] .ad-tl-icon{color:#919193}
+.admin-dashboard .ad-feed-item[data-source]:hover .ad-tl-icon{color:#b8b8bc}

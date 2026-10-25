@@ -1,0 +1,27 @@
+const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),assert=require('assert/strict');
+(async()=>{
+ const base=process.env.SKILLUP_BASE_URL||'http://localhost:51873/Frontend/Home.aspx',origin=new URL(base).origin,root=path.join(__dirname,'../..'),out=process.env.SKILLUP_NAV_OUTPUT||path.join(__dirname,'../.test-output/navbar-functions');fs.mkdirSync(out,{recursive:true});
+ const entries=JSON.parse(fs.readFileSync(path.join(root,'docs/WEBFORMS-PAGES.json'),'utf8'));assert.equal(entries.length,40);for(const name of ['Assistant','Discussions','LiveSessions','Settings'])for(const extension of ['.aspx',''])assert.equal((await fetch(origin+'/Frontend/'+name+extension)).status,200,name+extension);
+ const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE_PATH?{executablePath:process.env.BROWSER_EXECUTABLE_PATH}:{})}),errors=[],roles=[];
+ try{
+  for(const role of ['Program Leader','Learner','Instructor','Admin']){
+   const p=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});p.on('pageerror',error=>errors.push(role+': '+error.message));p.on('response',response=>{if(response.status()>=400)errors.push(role+': '+response.status()+' '+response.url());});await p.goto(base);await p.locator('.home-refined').waitFor();await p.evaluate(async role=>{SkillAPI.config.latency=0;await SkillAPI.request('demo',{role});location.hash='/dashboard';},role);await p.locator('main[data-view=dashboard]').waitFor();
+   assert.equal(await p.locator('#skill-edge-drawer,#skill-edge-nav,[data-edge-menu],.gn-all-pages').count(),0);
+   // No More menu in signed-in workspaces; account actions (Switch demo role, Sign out) live on the Profile page.
+   assert.equal(await p.locator('.gn-more').count(),0,role+' has no More menu');assert.equal(await p.locator('.skill-global-header [data-action=switchRole],.skill-global-header [data-action=refresh]').count(),0);if(role==='Instructor')for(const route of ['resources','analytics'])assert.equal(await p.locator(`.gn-links a[href="#/${route}"]`).count(),1,route+' is a top-level link');if(role==='Program Leader')await p.screenshot({path:path.join(out,'program-leader-navbar.png'),fullPage:true});
+   await p.evaluate(()=>location.hash='/profile');for(const action of ['switchRole','logout'])await p.locator(`.pf-side-actions [data-action=${action}]`).waitFor();
+   for(const [route,heading] of [['assistant','Your learning companion'],['discussions','Course discussions'],['sessions','Live sessions'],['settings','Account settings']]){
+    await p.evaluate(route=>location.hash='/'+route,route);
+    await p.getByRole('heading',{name:heading,exact:true}).waitFor();assert.equal(await p.locator('#skill-edge-drawer,[data-edge-menu]').count(),0);assert.equal(await p.evaluate(()=>location.hash),'#/'+route);
+    if(route==='assistant'){await p.locator('[data-form=ai] [name=text]').fill('Explain MongoDB aggregation');await p.getByRole('button',{name:'Ask companion',exact:true}).click();await p.waitForFunction(()=>document.querySelector('main')?.textContent.includes('$match'));}
+    if(route==='discussions'){await p.getByRole('button',{name:'+ New discussion',exact:true}).click();await p.getByRole('heading',{name:'Start a discussion',exact:true}).waitFor();await p.getByRole('button',{name:'Close dialog',exact:true}).click();}
+    if(route==='settings'){await p.getByRole('button',{name:'Change password',exact:true}).click();await p.getByRole('heading',{name:'Change password',exact:true}).waitFor();await p.getByRole('button',{name:'Close dialog',exact:true}).click();await p.getByRole('link',{name:'Saved address',exact:true}).click();await p.getByRole('heading',{name:'Saved address',exact:true}).waitFor();}
+   }
+   if(role==='Learner'){await p.evaluate(()=>location.hash='/lesson/c1/l2');await p.locator('.answer-page').waitFor();assert.equal(await p.locator('.answer-ai-brand[href="#/assistant"]').count(),1);await p.locator('#answer-ai-question').fill('Give me a hint');await p.getByRole('button',{name:'Send question',exact:true}).click();await p.waitForFunction(()=>document.querySelector('.answer-ai-conversation')?.textContent.includes('Give me a hint'));await p.locator('#code-editor').fill('console.log(42);');await p.locator('[data-action=runCode]').click();await p.waitForFunction(()=>document.querySelector('#code-output')?.textContent==='42');}
+   if(role==='Admin'){await p.evaluate(()=>location.hash='/users/u2/audit');await p.getByRole('heading',{name:'Activity Logs',exact:true}).waitFor();assert.equal(await p.locator('.uem-summary').count(),0);}
+   for(const width of [1280,1440]){await p.setViewportSize({width,height:1000});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
+   roles.push(role);await p.close();
+  }
+  assert.deepEqual(errors,[]);const result={restored:['AI companion','Course discussions','Live sessions','Account settings'],sidebarRemoved:true,navbarDestinationsPreserved:true,restoredWebFormsEndpoints:8,webFormsPairs:40,roles,checks:['No More menu; account actions on the Profile page; retained pages open by URL','Standalone AI response','Discussion creation dialog','Settings password and saved address sections','Activity companion and command execution','Activity Logs summary stays removed','1280/1440 desktop layout'],errors};fs.writeFileSync(path.join(out,'verification.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));
+ }finally{await browser.close();}
+})().catch(error=>{console.error(error);process.exitCode=1;});

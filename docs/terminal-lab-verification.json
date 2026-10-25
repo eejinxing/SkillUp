@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-22T08:43:22.415Z",
+  "checks": [
+    "multiline JavaScript output",
+    "runtime and syntax errors",
+    "empty and no-output commands",
+    "actual running state, loading segments, disabled duplicate execution",
+    "worker timeout",
+    "cancel and re-execute",
+    "keyboard execute, tabs and eight-entry history",
+    "draft and output survive reload",
+    "clear and reset",
+    "output is escaped text",
+    "worker startup failure restores controls",
+    "navigation stops worker without stale results",
+    "1280 and 1440 desktop layout",
+    "reduced motion and terminal typography",
+    "guest preview remains read-only"
+  ],
+  "errors": [],
+  "build": "Visual Studio MSBuild Debug passed",
+  "runtime": "Local synchronous JavaScript in a terminable Web Worker; 2-second timeout",
+  "handoff": "47 scripts, 62 styles, 29 CSS assets, 40 Web Forms pairs; no missing files",
+  "regressions": [
+    "9 domain suites",
+    "HTTP adapter contract",
+    "Four-role desktop handoff UI and enquiry portal",
+    "Existing answer-page grading, hints, AI, drafts, quiz timing and retry tests"
+  ]
+}

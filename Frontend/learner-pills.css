@@ -1,0 +1,267 @@
+/* Keep the original dashboard composition; change only metrics and course rows. */
+.lc-pills .lx-stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  gap: 13px;
+  width: 100%;
+}
+.lc-pills .lx-stat {
+  display: grid;
+  gap: 10px;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+.lc-pills .lx-stat header {
+  min-height: 18px;
+  padding: 0 5px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #e7e6eb;
+}
+.lc-pills .lx-stat header > span { line-height: 1.4; }
+.lc-pills .lx-stat em {
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #b6b2c1;
+  box-shadow: none;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.lc-pills .lx-stat em::before { display: none; }
+.lc-pills .lp-metric-pill {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 44px;
+  min-width: 0;
+  padding: 5px;
+  overflow: hidden;
+  border: 1px solid #b2f59355;
+  border-radius: 999px;
+  background: #65bc50;
+  box-shadow: inset 0 1px 0 #ffffff1c;
+}
+.lc-pills .lp-metric-pill > i {
+  position: absolute;
+  inset: 0;
+  height: auto;
+  border-radius: inherit;
+  background: none;
+}
+.lc-pills .lp-metric-pill > i::after { background: #b7f39b45; }
+.lc-pills .lx-stat strong {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  min-height: 29px;
+  margin: 0;
+  padding: 5px 10px;
+  border: 1px solid #ffffff45;
+  border-radius: 999px;
+  background: #184a2424;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+}
+.lc-pills .lx-stat strong small { margin-left: 2px; color: inherit; font-size: 12px; font-weight: 400; letter-spacing: 0; opacity: .9; }
+.lc-pills .lx-violet .lp-metric-pill { border-color: #ffe2a177; background: #eac36e; }
+.lc-pills .lx-violet .lp-metric-pill > i::after { display: none; }
+.lc-pills .lx-violet strong { border-color: #fff5; background: #92671524; color: #fff; }
+.lc-pills .lx-pink .lp-metric-pill { border-color: #ffffff2e; background: repeating-linear-gradient(125deg, #c4c5ca24 0 1px, transparent 1px 4px), #1a1a20; }
+.lc-pills .lx-pink .lp-metric-pill > i::after { background: #81c866; box-shadow: inset -1px 0 0 #d0f3bc80; }
+.lc-pills .lx-pink strong { border-color: #ffffff30; background: #121217a3; color: #e9ebee; }
+
+/* Coin-like paired course marks and quiet, fully rounded information rows. */
+.lc-pills .lx-courses > header { margin-bottom: 17px; }
+.lc-pills .lx-courses ul { display: grid; gap: 10px; }
+.lc-pills .lx-courses li { min-width: 0; }
+.lc-pills .lx-courses li a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 145px;
+  align-items: center;
+  gap: 18px;
+  min-height: 78px;
+  padding: 15px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: #363638;
+  transition: background-color 150ms ease-out;
+}
+.lc-pills .lx-courses li[data-progress="0"] a,
+.lc-pills .lx-courses .lx-suggested a { background: #171719; }
+.lc-pills .lx-course-info { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.lc-pills .lp-course-marks { display: flex; align-items: center; flex: none; width: 49px; }
+.lc-pills .lp-course-instructor {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 31px;
+  height: 31px;
+  overflow: hidden;
+  border: 2px solid #28282b;
+  border-radius: 50%;
+  background: #c9c7ce;
+  color: #36323e;
+  font-size: 9px;
+  font-weight: 500;
+}
+.lc-pills .lp-course-instructor img { width: 100%; height: 100%; object-fit: cover; }
+.lc-pills .lx-glyph { width: 33px; height: 33px; margin-left: -12px; border: 2px solid #28282b; background: #215bdf; color: #f7f7fb; }
+.lc-pills .lx-courses li:nth-child(2) .lx-glyph { background: #6552b8; }
+.lc-pills .lx-courses li:nth-child(3) .lx-glyph { background: #315f6a; }
+.lc-pills .lx-glyph svg { width: 15px; height: 15px; stroke-width: 1.25; }
+.lc-pills .lx-courses strong { font-size: 13px; font-weight: 400; color: #f0f0f3; letter-spacing: 0; }
+.lc-pills .lx-courses small { margin-top: 5px; color: #a3a3ac; font-size: 10px; letter-spacing: 0; }
+.lc-pills .lx-course-progress { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; gap: 18px; margin: 0; }
+.lc-pills .lp-course-stat { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.lc-pills .lp-course-stat :is(em, b) { display: block; margin: 0; color: #d5d5dc; font-size: 13px; font-weight: 400; font-style: normal; line-height: 1.3; white-space: nowrap; }
+.lc-pills .lp-course-stat small { margin: 0; color: #94949e; font-size: 9px; line-height: 1.4; }
+.lc-pills .lx-courses .lx-suggested .lx-course-progress { display: flex; justify-content: flex-end; }
+.lc-pills .lx-suggested .lx-glyph { margin-left: 0; border: 1px solid #ffffff12; background: #252333; }
+.lc-pills .lx-explore { height: 31px; padding: 0 11px; border-color: #ffffff19; background: #ffffff06; font-size: 10px; letter-spacing: 0; }
+@media (hover: hover) {
+  .lc-pills .lx-courses li a:hover { background: #424245; }
+  .lc-pills .lx-courses li[data-progress="0"] a:hover,
+  .lc-pills .lx-courses .lx-suggested a:hover { background: #252528; }
+  .lc-pills .lx-courses li a:hover strong { color: #fff; }
+}
+.lc-pills .lx-courses a:focus-visible { outline: 2px solid #c4b5fd; outline-offset: 3px; }
+@media (max-width: 1180px) {
+  .lc-pills .lx-hero { grid-template-columns: minmax(0, 1fr) 265px; gap: 25px; }
+  .lc-pills .lx-course-info { gap: 9px; }
+  .lc-pills .lx-courses li a { grid-template-columns: minmax(0, 1fr) 120px; gap: 12px; padding-inline: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lc-pills .lx-courses a { transition: none; }
+}
+
+/* Colour pass: bring the metric pills and course rows into the banner's purple / indigo / pink family
+   (replaces the green and yellow fills). Layout and sizes are unchanged. */
+.lc-pills .lp-metric-pill { border-color: #a5b4fc4d; background: linear-gradient(90deg, #4338ca, #6d7dff); box-shadow: inset 0 1px 0 #ffffff26, 0 8px 24px #4f46e540; }
+.lc-pills .lp-metric-pill > i::after { background: #ffffff1f; }
+.lc-pills .lx-stat strong { border-color: #ffffff40; background: #1e1b4b40; }
+.lc-pills .lx-violet .lp-metric-pill { border-color: #ddd6fe55; background: linear-gradient(90deg, #6d28d9, #a78bfa); box-shadow: inset 0 1px 0 #ffffff26, 0 8px 24px #7c3aed40; }
+.lc-pills .lx-violet strong { border-color: #ffffff45; background: #2e106540; }
+.lc-pills .lx-pink .lp-metric-pill { border-color: #f0abfc33; background: repeating-linear-gradient(125deg, #f0abfc1a 0 1px, transparent 1px 4px), #17121f; }
+.lc-pills .lx-pink .lp-metric-pill > i::after { background: linear-gradient(90deg, #c026d3, #f0abfc); box-shadow: inset -1px 0 0 #fae8ff99; }
+.lc-pills .lx-pink strong { border-color: #f0abfc40; background: #17121fb3; color: #fae8ff; }
+.lc-pills .lx-stat em { color: #c4b5fd; }
+.lc-pills .lx-courses li a { background: #2a2338; }
+.lc-pills .lx-courses li[data-progress="0"] a,
+.lc-pills .lx-courses .lx-suggested a { background: #15121c; }
+.lc-pills .lp-course-instructor { border-color: #1d1828; background: #3b3150; color: #e9e3f7; }
+.lc-pills .lx-glyph { border-color: #1d1828; background: #4f46e5; }
+.lc-pills .lx-courses li:nth-child(2) .lx-glyph { background: #7c3aed; }
+.lc-pills .lx-courses li:nth-child(3) .lx-glyph { background: #a21caf; }
+.lc-pills .lx-suggested .lx-glyph { border-color: #ffffff14; background: #231d33; }
+.lc-pills .lx-courses small, .lc-pills .lp-course-stat small { color: #a49db6; }
+.lc-pills .lp-course-stat :is(em, b) { color: #ede9fe; }
+.lc-pills .lx-explore { border-color: #c4b5fd33; background: #a78bfa12; color: #ddd6fe; }
+@media (hover: hover) {
+  .lc-pills .lx-courses li a:hover { background: #352b48; }
+  .lc-pills .lx-courses li[data-progress="0"] a:hover,
+  .lc-pills .lx-courses .lx-suggested a:hover { background: #211a2c; }
+}
+
+/* Refinement pass: greeting in the banner's open area, readable type sizes, a capsule (not a dot) for low progress,
+   calmer announcement header and consistent panel rhythm. Structure unchanged. */
+.lc-pills .lx-hero { grid-template-rows: 1fr auto; row-gap: 26px; }
+.lc-pills .lp-greeting { grid-column: 1; grid-row: 1; align-self: start; display: grid; gap: 8px; max-width: 560px; padding: 4px 2px 0; }
+.lc-pills .lx-stats { grid-column: 1; grid-row: 2; }
+.lc-pills .lx-ach { grid-column: 2; grid-row: 1 / 3; }
+.lc-pills .lp-greeting small { font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: #c4b5fd; }
+.lc-pills .lp-greeting h2 { margin: 0; font-size: 38px; font-weight: 300; line-height: 1.08; letter-spacing: -.035em; color: #fff; }
+.lc-pills .lp-greeting p { margin: 2px 0 0; font-size: 14px; line-height: 1.55; color: #d6d0e6; }
+.lc-pills .lp-greeting p b { font-weight: 500; color: #fff; }
+.lc-pills .lp-resume { justify-self: start; display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 10px 18px; border-radius: 999px; background: #f4f1fb; color: #1a1030; font-size: 13px; font-weight: 500; transition: background-color .15s, transform .15s; }
+.lc-pills .lp-resume span { transition: transform .2s; }
+.lc-pills .lx-stat header { padding: 0 6px; font-size: 13px; }
+.lc-pills .lx-stat em { font-size: 11px; color: #c4b5fd; }
+.lc-pills .lp-metric-pill > i::after { min-width: 40px; border-radius: 999px; }
+.lc-pills .lx-ach-icons > span { display: none; }
+.lc-pills .lx-ach-icons { justify-content: flex-end; }
+.lc-pills .lx-ach h2 { font-size: 22px; }
+.lc-pills .lx-ach > small { font-size: 11.5px; }
+.lc-pills .lx-ach p { font-size: 13px; line-height: 1.6; }
+.lc-pills .lx-ach footer { font-size: 12px; }
+.lc-pills .lx-chart-total small { font-size: 12px; }
+.lc-pills .lx-toggle button { font-size: 11px; padding: 5px 12px; }
+.lc-pills .lx-courses h2 { font-size: 19px; }
+.lc-pills .lx-courses strong { font-size: 14.5px; }
+.lc-pills .lx-courses small { font-size: 11.5px; }
+.lc-pills .lp-course-stat :is(em, b) { font-size: 14px; }
+.lc-pills .lp-course-stat small { font-size: 10.5px; }
+.lc-pills .lx-row { gap: 22px; }
+.lc-pills .lx-panel { padding: 26px 28px; }
+@media (hover: hover) { .lc-pills .lp-resume:hover { background: #fff; } .lc-pills .lp-resume:hover span { transform: translateX(3px); } }
+.lc-pills .lp-course-marks { width: 54px; } .lc-pills .lx-glyph { margin-left: -8px; }
+
+/* Beautify: glass metric capsules, structured announcements card, single-bar activity chart with a date axis. */
+/* Metric capsules */
+.lc-pills .lx-stat header { align-items: center; }
+.lc-pills .lx-stat em { padding: 2px 8px; border-radius: 999px; background: #ffffff12; color: #e9e3f7; font-size: 10.5px; }
+.lc-pills .lp-metric-pill { height: 50px; padding: 6px; border: 1px solid #ffffff1f; background: #120d22b3; box-shadow: inset 0 1px 0 #ffffff14, 0 10px 30px #0000004d; backdrop-filter: blur(8px); }
+.lc-pills .lp-metric-pill > i { inset: 5px; }
+.lc-pills .lp-metric-pill > i::after { position: absolute; inset: 0 auto 0 0; width: max(40px, var(--fill)); min-width: 0; border-radius: 999px; background: linear-gradient(90deg, #4338ca, #7c8cff); box-shadow: 0 0 22px #6d7dff73, inset 0 1px 0 #ffffff40; content: ''; }
+.lc-pills .lx-violet .lp-metric-pill { border-color: #ffffff1f; background: #120d22b3; box-shadow: inset 0 1px 0 #ffffff14, 0 10px 30px #0000004d; }
+.lc-pills .lx-violet .lp-metric-pill > i::after { display: block; background: linear-gradient(90deg, #6d28d9, #b794ff); box-shadow: 0 0 22px #a78bfa73, inset 0 1px 0 #ffffff40; }
+.lc-pills .lx-pink .lp-metric-pill { border-color: #ffffff1f; background: repeating-linear-gradient(125deg, #f0abfc12 0 1px, transparent 1px 5px), #120d22b3; }
+.lc-pills .lx-pink .lp-metric-pill > i::after { background: linear-gradient(90deg, #a21caf, #f0abfc); box-shadow: 0 0 22px #e879f973, inset 0 1px 0 #ffffff40; }
+.lc-pills .lx-stat strong, .lc-pills .lx-violet strong, .lc-pills .lx-pink strong { border: 1px solid #ffffff2e; background: #0b0716b3; color: #fff; backdrop-filter: blur(6px); font-size: 16px; }
+/* Announcements card */
+.lc-pills .lp-ach { display: flex; flex-direction: column; gap: 16px; padding: 20px; }
+.lc-pills .lp-ach-head { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; align-items: center; gap: 12px; }
+.lc-pills .lp-ach-icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(135deg, #7c3aed, #c084fc); color: #fff; box-shadow: 0 8px 20px #7c3aed59; }
+.lc-pills .lp-ach-icon svg { width: 18px; height: 18px; }
+.lc-pills .lp-ach-head h2 { margin: 0; font-size: 18px; font-weight: 400; letter-spacing: -.02em; color: #fff; }
+.lc-pills .lp-ach-head small { display: block; margin-top: 2px; font-size: 11px; color: #c7bfdc; }
+.lc-pills .lp-ach .lx-ach-open { position: static; margin: 0; }
+.lc-pills .lp-ach-item { display: grid; gap: 8px; margin-top: auto; padding: 16px; border: 1px solid #ffffff14; border-radius: 14px; background: #0b071680; }
+.lc-pills .lp-ach-course { justify-self: start; padding: 3px 9px; border-radius: 999px; background: #a78bfa26; color: #ddd6fe; font-size: 10.5px; }
+.lc-pills .lp-ach-item strong { font-size: 14.5px; font-weight: 500; color: #fff; }
+.lc-pills .lp-ach-item p { margin: 0; font-size: 12.5px; line-height: 1.6; color: #d6d0e6; }
+.lc-pills .lp-ach-item footer { display: flex; align-items: center; gap: 8px; margin-top: 4px; padding-top: 12px; border-top: 1px solid #ffffff12; font-size: 11.5px; color: #c7bfdc; }
+.lc-pills .lp-ach-item footer span { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #ffffff1f; color: #fff; font-size: 8px; }
+.lc-pills .lp-ach-item footer em { margin-left: auto; font-style: normal; color: #9d95b3; }
+/* Activity chart */
+.lc-pills .lx-chart { min-height: 0; }
+.lc-pills .lx-bars { min-height: 150px; margin-top: 26px; background: repeating-linear-gradient(to top, #ffffff12 0 1px, transparent 1px 25%); }
+.lc-pills .lx-bars span, .lc-pills .lx-bars span.on { flex: 0 0 12px; }
+.lc-pills .lx-bars span i { height: var(--h); }
+.lc-pills .lx-bars span i::before { display: none; }
+.lc-pills .lx-bars span i::after { top: 0; bottom: 0; height: auto; border-radius: 6px 6px 3px 3px; background: linear-gradient(180deg, #8b6fe0, #4c2f9a); opacity: .75; }
+.lc-pills .lx-bars span.is-now i::after { opacity: 1; background: linear-gradient(180deg, #e9d5ff, #8b5cf6); box-shadow: 0 0 18px #a78bfa80; }
+.lc-pills .lp-axis { display: flex; justify-content: space-around; margin-top: 10px; }
+.lc-pills .lp-axis span { flex: 0 0 12px; display: flex; justify-content: center; white-space: nowrap; font-size: 10px; color: #8e879f; }
+@media (hover: hover) { .lc-pills .lx-bars span:hover i::after { opacity: 1; } }
+
+/* Layout pass: content-height banner (no empty band), captions under capsules, a 5:7 bottom row with matched heights,
+   a chart that fills its panel and a progress line along each course row. */
+.lc-pills .lx-hero, .lc-x.lc-pills .lx-hero { min-height: 0; grid-template-rows: auto auto; row-gap: 34px; align-items: start; }
+.lc-pills .lx-stats { align-self: end; }
+.lc-pills .lp-metric-note { padding: 0 6px; font-size: 11px; line-height: 1.4; color: #b9b1cc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lc-pills .lx-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: stretch; gap: 22px; }
+.lc-pills .lx-chart { display: flex; flex-direction: column; }
+.lc-pills .lx-chart-view:not([hidden]) { display: flex; flex-direction: column; flex: 1; }
+.lc-pills .lx-bars { flex: 1; min-height: 170px; }
+.lc-pills .lx-bars span, .lc-pills .lx-bars span.on, .lc-pills .lp-axis span { flex-basis: 16px; }
+.lc-pills .lx-courses li[style] a { position: relative; overflow: hidden; }
+.lc-pills .lx-courses li[style] a::after { content: ''; position: absolute; left: 28px; right: 28px; bottom: 0; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #c4b5fd 0 var(--row-p), #ffffff10 var(--row-p) 100%); }
+@media (max-width: 1100px) { .lc-pills .lx-row { grid-template-columns: minmax(0, 1fr); } }

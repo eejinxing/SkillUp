@@ -1,0 +1,9 @@
+const imgVector = "https://www.figma.com/api/mcp/asset/5da7798b-7ebf-458a-b997-0d9218214826.svg";
+
+export default function Vector() {
+  return (
+    <div className="relative size-full" data-node-id="250:5201" data-name="Vector">
+      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+    </div>
+  );
+}

@@ -1,0 +1,78 @@
+/* Compact monitoring layout: chart 70%, alerts 30%. */
+#app .leader-dashboard .ld-board{--n-line:#ffffff12;--n-muted:#96969d;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,3fr);grid-template-areas:"activity notes" "reach reach";gap:14px;align-items:start;margin-bottom:24px}
+#app .leader-dashboard .ld-board-main{display:contents}
+#app .leader-dashboard .ld-activity{grid-area:activity;min-width:0}
+#app .leader-dashboard .ld-board :is(.ld-activity,.ld-notifications,.ld-course-panel,.ld-health-panel){border:1px solid #ffffff14;border-radius:6px;background:#101011}
+#app .leader-dashboard .ld-activity>.ld-native,#app .leader-dashboard .ld-chart-header>.ld-native{display:none}
+#app .leader-dashboard .ld-chart-header{background:#121213;border-bottom:1px solid #ffffff10}
+#app .leader-dashboard .ld-chart-header h2{font-size:13px;color:#ddd}
+#app .leader-dashboard .ld-reach{grid-area:reach;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,3fr);gap:14px;background:none;border:0;border-radius:0;padding:0;min-width:0;height:auto}
+#app .leader-dashboard .ld-course-panel,#app .leader-dashboard .ld-health-panel{padding:16px;min-width:0}
+#app .leader-dashboard .ld-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+#app .leader-dashboard .ld-panel-heading h2{font-size:14px;font-weight:500;color:#e3e3e5;margin:0;letter-spacing:0}
+#app .leader-dashboard .ld-panel-heading>a{font-size:16px;color:#a4a4ab;text-decoration:none;line-height:1;padding:4px}
+#app .leader-dashboard .ld-course-picker{display:block;margin:0 0 10px}
+#app .leader-dashboard .ld-course-picker select{width:100%;height:36px;min-height:0;margin:0;border:1px solid #ffffff15;border-radius:3px;padding:0 10px;background:#0b0b0c;color:#d8d8dc;font-size:12px;box-shadow:none}
+#app .leader-dashboard .ld-course-detail{display:grid;grid-template-columns:minmax(0,7fr) minmax(160px,3fr);gap:10px}
+#app .leader-dashboard .ld-course-facts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:25px 18px;padding:18px;border:1px solid #ffffff0f;border-radius:3px;align-content:start;background:#0b0b0c}
+#app .leader-dashboard .ld-detail-cell{min-width:0;display:grid;gap:7px}
+#app .leader-dashboard .ld-detail-cell>span{font-size:11px;color:#96969e;line-height:1.4}
+#app .leader-dashboard .ld-detail-cell>strong{font-size:15px;line-height:1.5;font-weight:500;color:#e3e3e6;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+#app .leader-dashboard .ld-course-trends{border:1px solid #ffffff0f;border-radius:3px;padding:13px 12px;background:#0c0c0d}
+#app .leader-dashboard .ld-course-trends h3{font-size:12px;font-weight:500;color:#b9b9c0;margin:0 0 15px}
+#app .leader-dashboard .ld-reach-row{margin:0 0 12px;padding:0;border:0}
+#app .leader-dashboard .ld-course-trends .ld-detail-cell{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+#app .leader-dashboard .ld-course-trends .ld-detail-cell strong{font-size:16px}
+#app .leader-dashboard .ld-panel-more{display:flex;justify-content:center;align-items:center;min-height:29px;border:1px solid #ffffff3b;background:#ffffff07;border-radius:3px;color:#c8c8ce;text-decoration:none;font-size:11px}
+#app .leader-dashboard .ld-course-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:12px;padding-top:11px;border-top:1px solid #ffffff0d;font-size:10px;color:#8a8a93;line-height:1.5}
+#app .leader-dashboard .ld-course-foot strong{color:#d3d3d9;font-weight:500;margin-left:6px}
+#app .leader-dashboard .ld-health-values{margin:0}
+#app .leader-dashboard .ld-health-values>div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-bottom:1px solid #ffffff12;font-size:11px}
+#app .leader-dashboard .ld-health-values dt{color:#9d9da5}
+#app .leader-dashboard .ld-health-values dd{color:#e0e0e4;margin:0;font-variant-numeric:tabular-nums}
+#app .leader-dashboard .ld-orb-wrap{position:relative;width:125px;height:125px;margin:13px auto 0}
+#app .leader-dashboard .ld-orb-wrap svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+#app .leader-dashboard .ld-orbit{stroke:#29292c;stroke-width:18;fill:none}
+#app .leader-dashboard .ld-arc{stroke:#e2e2e5;stroke-width:18;fill:none}
+#app .leader-dashboard .ld-orb{position:absolute;inset:18%;width:64%;height:64%;margin:0;align-self:auto;display:grid;place-content:center;border-radius:50%;background:#101011;box-shadow:none}
+#app .leader-dashboard .ld-orb strong{font-size:22px;line-height:1;font-weight:500;letter-spacing:-.03em;color:#e3e3e8}
+#app .leader-dashboard .ld-health-caption{margin:5px 0 0;color:#b1b1b8;font-size:11px;text-align:center}
+/* Alerts use a plain dot, concise event text, a timestamp and small inline actions. */
+#app .leader-dashboard .ld-notifications{grid-area:notes;height:435px;min-width:0;display:flex;flex-direction:column;gap:0;padding:13px 13px 0;overflow:hidden}
+#app .leader-dashboard .ld-notes-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+#app .leader-dashboard .ld-notes-head h2{margin:0;color:#d6d6dc;font-size:13px;font-weight:500;letter-spacing:0;white-space:normal}
+#app .leader-dashboard .ld-notes-head>a{color:#a2a2aa;background:none;padding:2px 0;font-size:10px;text-decoration:none;white-space:nowrap}
+#app .leader-dashboard .ld-note-tabs{display:flex;flex:none;gap:10px;margin-bottom:3px;border-bottom:1px solid #ffffff12}
+#app .leader-dashboard .ld-note-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:0;height:29px;padding:0;border:0;border-bottom:1px solid transparent;border-radius:0;background:none;box-shadow:none;color:#8c8c96;font-size:10px;font-weight:400}
+#app .leader-dashboard .ld-note-tab[aria-selected=true]{border-bottom-color:#e2e2e5;color:#e2e2e5}
+#app .leader-dashboard .ld-note-tab em{font-size:9px;font-style:normal;color:inherit}
+#app .leader-dashboard .ld-note-scroll{min-height:0;overflow:auto;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:#3a3a3e transparent;overscroll-behavior:contain}
+#app .leader-dashboard .ld-note-panel[hidden]{display:none}
+#app .leader-dashboard .ld-note-group,#app .leader-dashboard .ld-note-stack{display:contents}
+#app .leader-dashboard .ld-note-group>header{display:none}
+#app .leader-dashboard .ld-note{display:grid;grid-template-columns:7px minmax(0,1fr);align-items:start;gap:9px;padding:14px 0 12px;border:0;border-bottom:1px solid #ffffff0c;border-radius:0;background:none;box-shadow:none}
+#app .leader-dashboard .ld-note-dot{width:7px;height:7px;margin-top:4px;border-radius:50%;background:#85858c;box-shadow:none}
+#app .leader-dashboard .ld-note-dot.is-read{background:#414146}
+#app .leader-dashboard .ld-note-body{min-width:0;display:grid;gap:6px}
+#app .leader-dashboard .ld-note-body p{margin:0;font-size:11px;font-weight:400;line-height:1.5;color:#a9a9b0;overflow-wrap:anywhere}
+#app .leader-dashboard .ld-note-body p strong{color:#d7d7dd;font-weight:400}
+#app .leader-dashboard .ld-note-status{color:#ddd}
+#app .leader-dashboard .ld-note-body time{font-size:9px;color:#888892;text-align:right}
+#app .leader-dashboard .ld-note-actions{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#app .leader-dashboard .ld-note-ghost,#app .leader-dashboard .ld-note-primary{display:inline-flex;align-items:center;min-height:0;height:20px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;color:#96969f;font-size:9px;font-weight:400;text-decoration:none}
+#app .leader-dashboard .ld-note-primary{color:#d3d3da}
+#app .leader-dashboard .ld-caught-up{display:grid;gap:5px;margin:0;padding:30px 8px;text-align:center;color:#93939c;font-size:11px;line-height:1.5}
+#app .leader-dashboard .ld-caught-up b{font-weight:400;color:#d2d2d8;font-size:12px}
+#app .leader-dashboard .ld-note-error{color:#f1a7ad;font-size:11px}
+#app .leader-dashboard .ld-board :focus-visible{outline:2px solid #babac5;outline-offset:2px}
+@media(hover:hover) and (pointer:fine){
+ #app .leader-dashboard .ld-note:hover{background:#ffffff03}
+ #app .leader-dashboard :is(.ld-note-ghost,.ld-note-primary):hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+ #app .leader-dashboard .ld-panel-more:hover{background:#ffffff10}
+}
+@media(max-width:1000px){
+ #app .leader-dashboard .ld-board{grid-template-columns:minmax(0,1fr);grid-template-areas:"activity" "notes" "reach"}
+ #app .leader-dashboard .ld-reach{grid-template-columns:minmax(0,7fr) minmax(0,3fr)}
+ #app .leader-dashboard .ld-notifications{height:400px}
+ #app .leader-dashboard .ld-note-body p{font-size:12px}
+}

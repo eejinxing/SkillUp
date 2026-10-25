@@ -1,0 +1,139 @@
+/* User-selected references: deep navy, violet horizon, portrait carousel. */
+body.ui-refined.ui-home{padding-left:0;background:#030215}
+.ui-home>.skill-edge-nav{display:none}
+.home-refined{--home-ink:#f3f2fa;--home-muted:#a9a7bb;--home-ground:#030215;--home-accent:#a887ff;background:var(--home-ground);color:var(--home-ink)}
+.home-refined .stellar-top{height:78px;margin:0 auto;padding:0 clamp(22px,7vw,100px);gap:30px;max-width:1320px;border-bottom:1px solid #ffffff0a;background:transparent} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.stellar-top .home-wordmark{margin-right:8px}
+.stellar-top .visitor-nav{margin-right:auto;gap:28px}
+.stellar-top .visitor-nav :is(a,button){font-size:13px;color:#d6d2e6}
+.stellar-top .stellar-login{font-size:13px;color:#dedbea;white-space:nowrap}
+.stellar-top .home-header-action{font-size:13px;padding:10px 15px;border-radius:8px;border:1px solid #ffffff14;background:linear-gradient(180deg,#ffffff0c,#7060c212);box-shadow:inset 0 0 12px #9e87ff0c;min-height:38px;gap:10px} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.home-refined .home-hero{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;min-height:0;padding:54px clamp(18px,4.8vw,70px) 0;background:radial-gradient(ellipse 48% 23% at 50% 49%,#742bec38,transparent 100%),#030215} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.home-refined .home-hero:before{content:"";position:absolute;z-index:-1;left:15%;right:15%;top:-190px;height:700px;border:1px solid #ffffff09;border-radius:50%;pointer-events:none} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.home-refined .home-hero:after{content:"";position:absolute;z-index:-1;left:15%;right:15%;top:195px;height:650px;border:1px solid #ffffff09;border-radius:50%;pointer-events:none} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.home-refined .home-hero-copy{position:relative;z-index:1;text-align:center;margin:0 auto 76px;width:100%;max-width:850px}
+.stellar-update{display:inline-flex;align-items:center;gap:10px;padding:4px 9px 4px 4px;border:1px solid #ffffff09;border-radius:999px;background:#ffffff03;color:#aaa3cd!important;font-size:11px;line-height:1.6} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.stellar-update>span{padding:2px 8px;border-radius:999px;background:#ffffff0b;color:#e4def5}
+.stellar-update svg{width:14px;height:14px}
+.home-refined .home-hero h1{font-size:clamp(46px,5.1vw,68px);font-weight:400;line-height:1.04;letter-spacing:-.055em;max-width:800px;margin:25px auto 0;color:#f5f3fc;text-wrap:balance}
+.home-refined .home-hero h1>span{display:block}
+.home-refined .home-hero-copy>p{font-size:15px;color:#beb9d0;line-height:1.7;margin:23px auto 25px;max-width:52ch}
+.home-refined .home-actions{gap:15px}
+.home-refined .home-hero .home-button{min-height:44px;padding:10px 18px;border-radius:8px;font-size:13px;gap:10px}
+.home-refined .home-hero .stellar-demo{border:1px solid #c4b5fd35;background:linear-gradient(180deg,#8b5cf626,#7b4af510);box-shadow:inset 0 1px 0 #ffffff10;color:#e8e2ff} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.stellar-demo>span{display:grid;place-items:center;width:19px;height:19px;border:1px solid #fff8;border-radius:50%;font-size:12px} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.home-refined .home-hero .stellar-signup{background:#faf9ff;color:#171225;border-color:#faf9ff}
+.stellar-preview{position:relative;isolation:isolate;display:grid;grid-template-columns:190px minmax(0,1fr);width:100%;max-width:1160px;margin:0 auto;padding:10px 10px 0;border:1px solid #ffffff16;border-radius:22px 22px 0 0;background:linear-gradient(180deg,#ffffff06,#ffffff01 80px),#030215;color:#e8e5f6;text-align:left;font-family:'DM Sans',sans-serif;box-shadow:0 -13px 58px -24px #9b61ffb0;mask-image:linear-gradient(#000 77%,transparent)} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.stellar-preview:before{content:"";position:absolute;left:7%;right:7%;top:-2px;height:3px;background:linear-gradient(90deg,transparent,#8c4dff 18%,#ebaeff 50%,#8c4dff 82%,transparent);box-shadow:0 -10px 48px 7px #a947ff9c;z-index:3} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.sp-sidebar{display:flex;flex-direction:column;gap:20px;padding:17px 15px;border-right:1px solid #ffffff09;font-size:11px;color:#878296;min-width:0} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.sp-brand{font-size:23px;font-weight:700;letter-spacing:-1.3px;color:#f7f4ff;margin-bottom:9px}
+.sp-search{padding:9px 8px;border-radius:5px;background:#ffffff05;color:#706a86}
+.sp-sidebar>span:not(.sp-brand):not(.sp-search){padding:5px 7px}
+.sp-sidebar .sp-selected{background:linear-gradient(180deg,#ffffff08,#9f82f50c);border:1px solid #b4a5fa25;border-radius:5px;color:#e3dff2;box-shadow:inset 0 0 10px #8b5cf619} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.sp-sidebar-bottom{margin-top:auto;margin-bottom:65px;font-size:10px;color:#58536f}
+.sp-main{padding:15px 22px 42px;min-width:0}
+.sp-topline{display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#6e6883;margin-bottom:7px}
+.sp-profile{display:grid;place-items:center;width:23px;height:23px;border-radius:50%;background:#9c7de322;color:#d7c9fd;font-size:8px}
+.stellar-preview .sp-main>h2{font-size:21px;line-height:1.4;font-weight:400;color:#e8e5f0;letter-spacing:-.5px;margin:0 0 12px}
+.sp-period{display:flex;gap:0;font-size:9px;color:#7f788f;margin-bottom:17px}
+.sp-period>span{padding:6px 9px;border:1px solid #ffffff0c;border-right:0} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.sp-period>span:last-child{border-right:1px solid #ffffff0c} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.sp-period-current{color:#ded9ee;background:#ffffff05}
+.sp-panels{display:grid;grid-template-columns:1.15fr 1fr;gap:15px}
+.sp-xp,.sp-progress{position:relative;min-width:0;border:1px solid #ffffff0c;border-radius:6px;padding:16px 18px;color:#9e96b1;font-size:10px} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.sp-xp>strong,.sp-progress>strong{display:block;margin-top:11px;font-size:29px;font-weight:400;letter-spacing:-1.1px;line-height:1.3;color:#f0edf8}
+.sp-xp>strong small,.sp-progress>strong small{font-size:12px;color:#b4abc5;letter-spacing:0}
+.sp-xp>p{font-size:10px;margin:6px 0;color:#69d7bb}
+.sp-xp>p span{color:#726d83;margin-left:6px}
+.sp-line-chart{display:block;width:100%;height:126px;margin-top:5px}
+.sp-chart-labels{display:flex;justify-content:space-between;font-size:8px;color:#5c556f;margin-top:6px}
+.sp-progress>p{margin:7px 0 20px;font-size:10px;color:#827a96}
+.sp-progress-row{position:relative;display:flex;justify-content:space-between;gap:6px;margin:17px 0 20px;padding-bottom:10px;font-size:10px;color:#aaa1bc}
+.sp-progress-row b{font-size:9px;font-weight:400;color:#d1c4e9}
+.sp-progress-row i{position:absolute;left:0;right:0;bottom:0;height:3px;background:#ffffff09;border-radius:3px}
+.sp-progress-row i:before{content:"";display:block;width:var(--p);height:100%;border-radius:inherit;background:#a48bcf}
+.sp-table{margin-top:19px;font-size:10px;color:#7a728b}
+.sp-table>div{display:grid;grid-template-columns:1.3fr .5fr 1fr;gap:15px;border-bottom:1px solid #ffffff05;padding:12px 8px} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.sp-table>div:first-child{background:#ffffff03;color:#8c849b;border-radius:4px}
+.sp-table>div>span:nth-child(2){color:#7fb5a4}
+.sp-sample{font-size:9px!important;color:#625a78!important;margin:18px 0 0!important;text-align:center}
+
+/* Instructor portraits expand into a biography panel, as in the supplied carousel. */
+.home-refined .home-team{position:relative;overflow:hidden;margin:115px 0;padding:70px clamp(18px,6vw,86px) 65px;background:radial-gradient(ellipse 44% 60% at 50% 70%,#1c136f38,transparent),#030215;text-align:center} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.home-refined .home-team:before{content:"";position:absolute;top:30px;left:calc(50% - 240px);width:480px;height:480px;border:1px solid #ffffff07;border-radius:50%;pointer-events:none} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.home-refined .home-team h2{font-size:clamp(30px,3.4vw,43px);font-weight:400;line-height:1.12;letter-spacing:-.045em;position:relative}
+.home-refined .home-team h2 em{font-family:Georgia,'Times New Roman',serif;font-weight:400;color:#a99ae8;letter-spacing:-.055em}
+.home-refined .home-team>header>p{font-size:14px;color:#7e7797;margin-top:17px}
+.instructor-carousel{position:relative;display:flex;align-items:center;gap:18px;max-width:1080px;margin:45px auto 0}
+.instructor-track{position:relative;display:flex;flex:1;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0;min-width:0}
+.instructor-track::-webkit-scrollbar{display:none}
+.home-refined button.instructor-card{position:relative;flex:0 0 calc((100% - 60px)/4);aspect-ratio:.67;min-width:0;min-height:0;padding:0;border:0;border-radius:17px;background:radial-gradient(ellipse at 50% 43%,#5148a6,#0c083a 65%);color:#f4f1fc;overflow:hidden;text-align:left;scroll-snap-align:center;isolation:isolate;box-shadow:none} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.instructor-photo{position:absolute;inset:0;overflow:hidden;transition:opacity 180ms ease}
+.instructor-photo img{display:block;position:absolute;inset:0;width:100%;height:100%;max-width:100%;object-fit:cover;object-position:center top;filter:none;opacity:1}
+.instructor-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 43%,#08061945 65%,#080619f5 100%)} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.instructor-identity{position:absolute;left:15px;right:13px;bottom:19px}
+.instructor-identity strong,.instructor-bio>strong{display:block;font-size:17px;font-weight:500;letter-spacing:-.35px;color:#f2eefc;line-height:1.3}
+.instructor-identity small,.instructor-bio>small{display:block;font-size:10px;margin-top:5px;line-height:1.4;color:#a09aba}
+.instructor-bio{position:absolute;inset:0;display:flex;flex-direction:column;padding:22px 16px;opacity:0;pointer-events:none;background:linear-gradient(140deg,#3224aa,#25208a);transition:opacity 180ms ease} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.instructor-bio:before{content:"";position:absolute;inset:60px 0 0;background:linear-gradient(#ffffff04 1px,transparent 1px),linear-gradient(90deg,#ffffff04 1px,transparent 1px);background-size:30px 30px;pointer-events:none} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.instructor-bio>span{position:relative;margin-top:auto;font-size:12px;line-height:1.6;color:#d6cff2}
+.instructor-bio>i{align-self:flex-end;font-style:normal;font-size:20px;color:#bcb0ef;margin-top:12px}
+.instructor-card.is-open .instructor-bio{opacity:1}
+.instructor-card.is-open .instructor-photo,.instructor-card.is-open .instructor-identity{opacity:0}
+.home-refined .instructor-arrow{display:grid;place-items:center;width:32px;height:32px;flex:none;min-height:32px;padding:0;border-radius:50%;background:transparent;border:1px solid #ffffff0b;color:#8e87a4;font-size:23px;font-weight:300} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.instructor-position{height:2px;width:210px;background:#ffffff08;margin:22px auto 12px;overflow:hidden}
+.instructor-position i{display:block;width:25%;height:100%;background:#aca1cd;transform:translateX(0);transition:transform 180ms ease}
+.instructor-sample{font-size:10px;color:#655d7e}
+@media(hover:hover){.home-refined .instructor-card:hover .instructor-identity strong{color:#cbb8ff}.home-refined .instructor-arrow:hover{background:#ffffff08;color:#fff}.home-refined .stellar-demo:hover{background-color:#9365ff20}}
+@media(prefers-reduced-motion:reduce){.instructor-photo,.instructor-bio,.instructor-position i{transition:none}}
+
+/* Narrow crops isolate one person from the existing team artwork. */
+
+.sp-nav-icon{display:inline-block!important;width:12px;height:12px;vertical-align:middle;margin-right:3px}
+.stellar-stage{position:relative;width:100%;max-width:1160px;margin:0 auto;isolation:isolate}
+.stellar-stage:before{content:"";position:absolute;z-index:-1;left:8%;right:8%;height:64px;top:-28px;background:radial-gradient(ellipse,#c28affbd,#a451ff60 40%,transparent 73%);filter:blur(18px);pointer-events:none} /* taste-skill-ignore: supplied references require this surface or product-interface detail. */
+.instructor-identity small,.instructor-bio>small{font-size:13px}
+.instructor-bio>span{font-size:13px}
+.instructor-sample{font-size:13px}
+.stellar-update{font-size:13px}
+
+
+/* Original portrait set: consistent crops, clear identities and comfortable card spacing. */
+.instructor-identity{left:18px;right:18px;bottom:22px}
+.instructor-identity small{margin-top:7px;line-height:1.5;color:#b9b3cb}
+.instructor-bio{padding:24px 20px}
+.instructor-bio>span{font-size:13px;line-height:1.65}
+.instructor-bio:before{opacity:.45}
+.home-refined .instructor-arrow{width:40px;height:40px;min-height:40px}
+
+/* The hero now shows a capture of our real learner UI, rather than a separate mock dashboard. */
+.stellar-preview--learner{display:block;padding:0;overflow:hidden;mask-image:linear-gradient(#000 88%,transparent);background:#050407} /* taste-skill-ignore: reference product preview fades into the hero ground. */
+.stellar-preview--learner picture{display:block}
+.stellar-preview--learner .learner-dashboard-shot{display:block;width:100%;height:auto;max-width:100%}
+.stellar-preview--learner figcaption{padding:12px 16px 24px;text-align:center;font-size:12px;color:#9289aa}
+
+/* ── Instructor cards: hover / keyboard focus reveals the profile panel (click still toggles for touch) ── */
+.instructor-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
+.instructor-photo,.instructor-identity{transition:opacity .35s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+.instructor-photo img{transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.instructor-bio{background:linear-gradient(165deg,#4b3fd6 0%,#3328b3 48%,#221c80 100%);transition:opacity .35s cubic-bezier(.16,1,.3,1)}
+.instructor-bio:before{inset:72px 0 0;opacity:1;background:linear-gradient(#ffffff0d 1px,transparent 1px),linear-gradient(90deg,#ffffff0d 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.instructor-bio>strong{position:relative;transform:translateY(8px);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.instructor-bio>small{position:relative;color:#c3bdff;transform:translateY(8px);transition:transform .45s cubic-bezier(.16,1,.3,1) .03s}
+.instructor-bio>span{color:#e4e0ff;transform:translateY(12px);opacity:0;transition:transform .5s cubic-bezier(.16,1,.3,1) .06s,opacity .4s ease .06s}
+.instructor-bio>i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#ffffff1a;color:#fff;opacity:0;transition:opacity .4s ease .1s}
+.instructor-bio>i svg{width:16px;height:16px}
+/* Revealed state: hover on pointer devices, keyboard focus, or a tap/click (is-open) */
+.instructor-card.is-open .instructor-bio,.instructor-card:focus-visible .instructor-bio{opacity:1}
+.instructor-card.is-open .instructor-bio>*,.instructor-card:focus-visible .instructor-bio>*{transform:none;opacity:1}
+.instructor-card.is-open .instructor-photo,.instructor-card:focus-visible .instructor-photo{opacity:0;transform:scale(1.04)}
+.instructor-card.is-open .instructor-identity,.instructor-card:focus-visible .instructor-identity{opacity:0;transform:translateY(8px)}
+@media(hover:hover) and (pointer:fine){
+ .home-refined button.instructor-card{cursor:pointer}
+ .instructor-card:hover .instructor-bio{opacity:1}
+ .instructor-card:hover .instructor-bio>*{transform:none;opacity:1}
+ .instructor-card:hover .instructor-photo{opacity:0;transform:scale(1.04)}
+ .instructor-card:hover .instructor-identity{opacity:0;transform:translateY(8px)}
+}
+.home-refined .instructor-card:focus-visible{outline:2px solid #b9adff;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.instructor-photo,.instructor-identity,.instructor-bio,.instructor-bio>*,.instructor-photo img{transition:none!important;transform:none!important}}

@@ -1,0 +1,33 @@
+const imgProcessedItemsCard = "https://www.figma.com/api/mcp/asset/a0502b83-4c5c-4f0d-bc30-3749fa8e220f.svg";
+const imgVector = "https://www.figma.com/api/mcp/asset/d52fdc54-d8c1-4d8b-bf7b-68da00e9898d.svg";
+
+export default function ExtractedProcessedItems1() {
+  return (
+    <div className="relative size-full" data-node-id="283:839" data-name="extracted-processed-items 1">
+      <div className="absolute contents inset-0" data-node-id="283:840" data-name="Processed items card">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgProcessedItemsCard} />
+        <p className="[word-break:break-word] absolute font-['Space_Mono:Regular'] inset-[28.34%_39.1%_67.24%_34.57%] leading-[normal] not-italic text-[#090b09] text-[300px]" data-node-id="283:842">
+          97,22
+        </p>
+        <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[29.34%_30.69%_63.82%_62.26%] leading-[normal] not-italic text-[#596756] text-[300px]" data-node-id="283:843">
+          %
+        </p>
+      </div>
+      <p className="[word-break:break-word] absolute font-['DM_Sans:Regular'] font-normal inset-[3.99%_56.13%_91.89%_7.5%] leading-[normal] text-[135.343px] text-black" data-node-id="283:844" style={{ fontVariationSettings: '"opsz" 14' }}>
+        Average Quiz Score
+      </p>
+      <div className="absolute inset-[41.39%_3.04%_34.24%_7.5%]" data-node-id="283:845" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

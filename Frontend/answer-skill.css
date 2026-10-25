@@ -1,0 +1,318 @@
+/* Activity page: SKILL UP lime banner (SVG wordmark) and a livelier companion panel. */
+#app .skill-banner{--sb-lime:#7dfa14;--sb-ink:#0b0b0b;--ease:cubic-bezier(.2,.7,.2,1);position:relative;display:block;aspect-ratio:2.8/1;width:100%;height:auto;min-height:0;padding:0;border-radius:14px;background:var(--sb-lime);color:var(--sb-ink);overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 1px #0000001a}
+#app .skill-banner:before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 90% at 20% 0%,#ffffff2e,transparent 55%),radial-gradient(80% 60% at 100% 100%,#00000014,transparent 60%)}
+#app .skill-banner .sb-word{position:absolute;left:4.5%;top:12.5%;width:79%;height:58%;fill:var(--sb-ink);overflow:visible}
+#app .skill-banner .sb-ring{position:absolute;right:11%;top:10%;width:4.6%;aspect-ratio:1;color:var(--sb-ink)}
+#app .skill-banner .sb-ring svg{width:100%;height:100%}
+#app .skill-banner .sb-plus{position:absolute;right:13%;top:43%;width:2.6%;aspect-ratio:1}
+#app .skill-banner .sb-plus:before,#app .skill-banner .sb-plus:after{content:'';position:absolute;left:50%;top:0;width:2px;height:100%;margin-left:-1px;background:var(--sb-ink)}
+#app .skill-banner .sb-plus:after{transform:rotate(90deg)}
+#app .skill-banner .sb-tm{position:absolute;right:13.4%;top:76%;font:700 clamp(7px,.9vw,12px)/1 'DM Sans',sans-serif;letter-spacing:.04em}
+#app .skill-banner .sb-meta{position:absolute;left:4.5%;right:5%;bottom:8.5%;display:flex;align-items:center;gap:2.2%;height:7%;font-family:ui-monospace,'Cascadia Mono','Consolas',monospace;color:var(--sb-ink)}
+#app .skill-banner .sb-barcode{display:flex;align-items:stretch;gap:2px;height:100%;width:8%}
+#app .skill-banner .sb-barcode i{flex:var(--w) 1 0;background:var(--sb-ink)}
+#app .skill-banner .sb-x{position:relative;height:100%;aspect-ratio:1}
+#app .skill-banner .sb-x:before,#app .skill-banner .sb-x:after{content:'';position:absolute;left:50%;top:-10%;width:2px;height:120%;margin-left:-1px;background:var(--sb-ink);transform:rotate(45deg)}
+#app .skill-banner .sb-x:after{transform:rotate(-45deg)}
+#app .skill-banner .sb-target{height:100%;aspect-ratio:1.15;border-radius:3px;background:radial-gradient(circle,var(--sb-lime) 26%,var(--sb-ink) 27% 46%,var(--sb-lime) 47% 58%,var(--sb-ink) 59%)}
+#app .skill-banner .sb-meta b{font-size:clamp(12px,2.1vw,26px);font-weight:600;line-height:1;letter-spacing:-.02em}
+#app .skill-banner .sb-tri{height:90%;aspect-ratio:1.4;background:var(--sb-ink);clip-path:polygon(0 0,100% 0,50% 100%);-webkit-mask:repeating-linear-gradient(90deg,#000 0 3px,transparent 3px 5px);mask:repeating-linear-gradient(90deg,#000 0 3px,transparent 3px 5px)}
+#app .skill-banner .sb-caption{margin-left:2%;font-size:clamp(7px,1vw,13px);font-weight:600;line-height:1.15;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#app .skill-banner .sb-scan{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(100deg,transparent 40%,#ffffff55 50%,transparent 60%);transform:translateX(-120%)}
+
+/* Companion panel */
+#app .answer-ai .answer-orb{position:relative;isolation:isolate}
+#app .answer-ai .answer-orb:before{content:'';position:absolute;inset:-14%;z-index:-1;border-radius:50%;background:radial-gradient(circle,#7c5cff66,#3b82f633 45%,transparent 70%);filter:blur(10px)}
+#app .answer-ai .answer-orb img{will-change:transform}
+#app .answer-ai h2{letter-spacing:-.01em}
+
+/* Motion */
+@keyframes sb-rise{from{translate:0 140px;opacity:0}to{translate:0 0;opacity:1}}
+@keyframes sb-pop{0%{transform:scale(0) rotate(-90deg)}70%{transform:scale(1.15) rotate(10deg)}100%{transform:none}}
+@keyframes sb-spin{to{transform:rotate(360deg)}}
+@keyframes sb-scan{0%{transform:translateX(-120%)}35%,100%{transform:translateX(120%)}}
+@keyframes sb-bar{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.55)}}
+@keyframes sb-fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes sb-blink{0%,92%,100%{opacity:1}95%{opacity:.2}}
+@keyframes orb-float{0%,100%{transform:translateY(0) rotate(0) scale(1)}50%{transform:translateY(-10px) rotate(8deg) scale(1.03)}}
+@keyframes orb-hue{0%,100%{filter:hue-rotate(0) saturate(1)}50%{filter:hue-rotate(28deg) saturate(1.25)}}
+@keyframes orb-halo{0%,100%{opacity:.55;transform:scale(.95)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes panel-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes title-in{from{opacity:0;letter-spacing:.2em}to{opacity:1;letter-spacing:-.01em}}
+@media(prefers-reduced-motion:no-preference){
+ #app .skill-banner .sb-letter{animation:sb-rise .7s cubic-bezier(.2,.9,.25,1.15) both;animation-delay:calc(.15s + var(--k) * 70ms)}
+ #app .skill-banner .sb-ring{animation:sb-pop .6s .75s var(--ease) both}
+ #app .skill-banner .sb-ring svg{animation:sb-spin 9s 1.4s linear infinite}
+ #app .skill-banner .sb-plus{animation:sb-pop .5s .85s var(--ease) both;transition:transform .4s var(--ease)}
+ #app .skill-banner:hover .sb-plus{transform:rotate(90deg)}
+ #app .skill-banner .sb-meta>*{animation:sb-fade .5s var(--ease) both}
+ #app .skill-banner .sb-meta>:nth-child(2){animation-delay:.9s}#app .skill-banner .sb-meta>:nth-child(3){animation-delay:.95s}#app .skill-banner .sb-meta>:nth-child(4){animation-delay:1s}#app .skill-banner .sb-meta>:nth-child(5){animation-delay:1.05s}#app .skill-banner .sb-meta>:nth-child(6){animation-delay:1.1s}#app .skill-banner .sb-meta>:nth-child(7){animation-delay:1.15s}
+ #app .skill-banner .sb-meta>:first-child{animation-delay:.85s}
+ #app .skill-banner .sb-barcode i{transform-origin:bottom;animation:sb-bar 1.6s ease-in-out infinite}
+ #app .skill-banner .sb-barcode i:nth-child(3n){animation-delay:-.4s}#app .skill-banner .sb-barcode i:nth-child(3n+1){animation-delay:-.9s}
+ #app .skill-banner .sb-target{animation:sb-fade .5s .95s var(--ease) both,sb-blink 4s 2s infinite}
+ #app .skill-banner .sb-scan{animation:sb-scan 5s 1.6s ease-in-out infinite}
+ #app .skill-banner:hover .sb-letter{animation:sb-rise .45s cubic-bezier(.2,.9,.25,1.2) both;animation-delay:calc(var(--k) * 40ms)}
+ #app .answer-ai .answer-orb img{animation:orb-float 6s ease-in-out infinite,orb-hue 9s ease-in-out infinite}
+ #app .answer-ai .answer-orb:before{animation:orb-halo 4s ease-in-out infinite}
+ #app .answer-ai h2{animation:title-in .9s .2s var(--ease) both}
+ #app .answer-ai{animation:panel-in .6s var(--ease) both}
+ #app .answer-workspace>*{animation:panel-in .55s var(--ease) both}
+ #app .answer-workspace>:nth-child(2){animation-delay:.12s}
+ #app .answer-workspace>:nth-child(3){animation-delay:.2s}
+ #app .answer-workspace>:nth-child(4){animation-delay:.28s}
+ #app .answer-ai-composer{transition:box-shadow .3s,border-color .3s}
+ #app .answer-ai-composer:focus-within{box-shadow:0 0 0 2px #7c5cff55,0 0 30px -6px #7c5cff88}
+}
+
+/* ---------- Activity page polish ---------- */
+#app .answer-page{--ap-line:#ffffff14;--ap-line-2:#ffffff24;--ap-lime:#7dfa14;--ap-muted:#8f8f9a}
+#app .answer-page .ap-ic{width:16px;height:16px;flex:none}
+
+/* Companion panel */
+#app .answer-page .answer-ai{display:flex;flex-direction:column;border:1px solid var(--ap-line);border-radius:18px;background:radial-gradient(120% 60% at 50% 0%,#1d1730,#141416 60%)}
+#app .answer-page .answer-ai h2{color:#f4f4f6;font-size:26px;font-weight:600}
+#app .answer-page .answer-ai-sub{margin:8px auto 0;max-width:30ch;text-align:center;font-size:13.5px;line-height:1.55;color:var(--ap-muted)}
+#app .answer-page .answer-ai-suggest{display:grid;gap:8px;margin:20px 18px 0}
+#app .answer-page .answer-ai-suggest button{display:flex;align-items:center;gap:10px;height:42px;min-height:0;padding:0 14px;border:1px solid var(--ap-line-2);border-radius:12px;background:#ffffff06;color:#e4e4e8;font-size:13.5px;font-weight:500;text-align:left;box-shadow:none;transition:background-color .2s,border-color .2s,transform .2s}
+#app .answer-page .answer-ai-suggest button .ap-ic{color:#a78bfa}
+#app .answer-page .answer-ai-suggest button:hover{background:#a78bfa14;border-color:#a78bfa66;transform:translateX(3px)}
+#app .answer-page .answer-ai-conversation{flex:1}
+#app .answer-page .answer-ai-composer{border-radius:16px}
+
+/* Task card */
+#app .answer-page .answer-workspace>.answer-task:not(.answer-lab){border:1px solid var(--ap-line);border-radius:18px;background:#141416;padding:22px 24px}
+#app .answer-page .answer-task-heading{align-items:center}
+#app .answer-page .answer-task-label{display:inline-flex;align-items:center;height:30px;padding:0 12px;border:0;border-radius:999px;background:#7dfa141f;color:var(--ap-lime);font-size:13px;font-weight:600}
+#app .answer-page .answer-task-heading small{font-size:12.5px;color:var(--ap-muted)}
+#app .answer-page .answer-prompt{border:1px solid var(--ap-line);border-left:0;border-radius:14px;background:#1b1b1f;padding:18px 20px}
+#app .answer-page .answer-prompt h2{font-size:17px;font-weight:600;color:#fff}
+#app .answer-page .answer-prompt p{font-size:14.5px;line-height:1.7;color:#cfcfd6}
+#app .answer-page .answer-input-label{font-size:13px;color:var(--ap-muted)}
+#app .answer-page .answer-input-label input{height:46px;margin-top:8px;padding:0 16px;border:1px solid var(--ap-line-2);border-radius:12px;background:#0f0f11;color:#fff;font-size:14.5px;font-family:ui-monospace,'Cascadia Mono',Consolas,monospace;transition:border-color .2s,box-shadow .2s}
+#app .answer-page .answer-input-label input:focus{border-color:#7dfa1499;box-shadow:0 0 0 3px #7dfa1420;outline:none}
+#app .answer-page .answer-task-actions{display:flex;justify-content:flex-end;gap:10px}
+#app .answer-page .answer-glass{display:inline-flex;align-items:center;gap:8px;width:auto;height:42px;min-height:0;padding:0 18px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:none;background:none;transition:background-color .2s,transform .15s,box-shadow .2s}
+#app .answer-page .answer-glass img{display:none}
+#app .answer-page .answer-glass.answer-submit{order:2;border:0;background:var(--ap-lime);color:#0b0b0b}
+#app .answer-page .answer-glass.answer-submit:hover{background:#92ff3a;box-shadow:0 8px 24px -10px #7dfa14}
+#app .answer-page .answer-glass.answer-hint{order:1;border:1px solid var(--ap-line-2);color:#e4e4e8;background:#ffffff06}
+#app .answer-page .answer-glass.answer-hint:hover{background:#ffffff10}
+#app .answer-page .answer-glass.answer-hint .ap-ic{color:#f5c542}
+#app .answer-page .answer-glass:active{transform:scale(.96)}
+#app .answer-page .answer-glass.answer-submit .ap-ic{transition:transform .2s}
+#app .answer-page .answer-glass.answer-submit:hover .ap-ic{transform:translateX(3px)}
+
+/* Virtual lab */
+#app .answer-page .terminal-lab{border:1px solid var(--ap-line);border-radius:18px;overflow:hidden;background:#0f0f11}
+#app .answer-page .lab-sidebar{background:#121215;border-right:1px solid var(--ap-line)}
+#app .answer-page .lab-sidebar :is(button,.lab-runtime,.lab-workspaces>span){display:flex;align-items:center;gap:8px;font-size:13px;color:#d4d4da}
+#app .answer-page .lab-runtime small{display:block;font-size:11.5px;color:var(--ap-muted)}
+#app .answer-page .lab-sidebar .ap-ic{width:15px;height:15px;color:var(--ap-muted)}
+#app .answer-page .lab-workspaces button[aria-current=page]{border-radius:10px;background:#7dfa1414;border:1px solid #7dfa1440;color:#fff}
+#app .answer-page .lab-sidebar-foot{font-size:12px;color:var(--ap-muted)}
+#app .answer-page .lab-sidebar-foot i{background:var(--ap-lime)}
+#app .answer-page .lab-tabbar{background:#121215;border-bottom:1px solid var(--ap-line)}
+#app .answer-page .lab-tabs button{display:inline-flex;align-items:center;gap:7px;font-size:13px}
+#app .answer-page .lab-tabs button .ap-ic{width:14px;height:14px}
+#app .answer-page .lab-tabs button[aria-selected=true]{color:#fff;box-shadow:inset 0 -2px 0 var(--ap-lime)}
+#app .answer-page .lab-session-heading,#app .answer-page .lab-file-heading{font-size:12px}
+#app .answer-page .lab-session-heading i{background:var(--ap-lime)}
+#app .answer-page #code-editor{font-size:14px;line-height:1.7}
+#app .answer-page .lab-editor-panel,#app .answer-page .lab-console-panel{border-radius:12px;border-color:var(--ap-line)}
+#app .answer-page [data-lab-action=run],#app .answer-page .lab-run{background:var(--ap-lime);color:#0b0b0b;border:0;border-radius:9px;font-weight:600}
+
+/* Bottom navigation */
+#app .answer-page .answer-activity-nav{font-size:13.5px}
+#app .answer-page .answer-activity-nav a{display:inline-flex;align-items:center;height:36px;padding:0 14px;border:1px solid var(--ap-line-2);border-radius:10px;color:#e4e4e8;text-decoration:none;transition:background-color .2s}
+#app .answer-page .answer-activity-nav a:hover{background:#ffffff0d}
+#app .answer-page .answer-activity-nav a.answer-next{background:var(--ap-lime);border-color:var(--ap-lime);color:#0b0b0b;font-weight:600}
+#app .answer-page .answer-activity-nav>span{color:var(--ap-muted)}
+
+@media(prefers-reduced-motion:no-preference){
+ #app .answer-page .answer-ai-sub{animation:sb-fade .6s .35s var(--ease,ease) both}
+ #app .answer-page .answer-ai-suggest button{animation:sb-fade .5s var(--ease,ease) both}
+ #app .answer-page .answer-ai-suggest button:nth-child(1){animation-delay:.45s}
+ #app .answer-page .answer-ai-suggest button:nth-child(2){animation-delay:.52s}
+ #app .answer-page .answer-ai-suggest button:nth-child(3){animation-delay:.59s}
+ #app .answer-page .answer-glass.answer-submit{animation:sb-fade .5s .4s ease both}
+ #app .answer-page .answer-glass.answer-hint .ap-ic{animation:sb-blink 3.5s 1.5s infinite}
+}
+#app .answer-page .answer-glass.answer-submit{background:var(--ap-lime)!important;color:#0b0b0b}
+#app .answer-page .answer-glass.answer-submit:hover{background:#92ff3a!important}
+#app .answer-page .answer-glass.answer-hint{background:#ffffff06!important}
+#app .answer-page .answer-glass.answer-hint:hover{background:#ffffff10!important}
+#app .answer-page .lab-sidebar .lab-runtime{display:grid;grid-template-columns:16px minmax(0,1fr);column-gap:8px;align-items:start;font-family:inherit}
+#app .answer-page .lab-sidebar .lab-runtime small{grid-column:2}
+#app .answer-page .answer-run{background:var(--ap-lime)!important;border:0!important;border-radius:9px;color:#0b0b0b!important;font-weight:600;transition:background-color .2s,transform .15s}
+#app .answer-page .answer-run:hover{background:#92ff3a!important}
+#app .answer-page .answer-run:active{transform:scale(.96)}
+#app .answer-page .lab-sidebar .lab-runtime{display:flex!important;flex-wrap:wrap;align-items:center;gap:2px 8px}
+#app .answer-page .lab-sidebar .lab-runtime small{flex:0 0 100%;padding-left:23px;margin:0}
+#app .answer-page .lab-sidebar .lab-runtime{flex-wrap:wrap;white-space:nowrap;font-size:12px;letter-spacing:-.01em}
+#app .answer-page .lab-sidebar .lab-runtime>span{flex:none}
+#app .answer-page .lab-sidebar .lab-runtime small{white-space:normal}
+#app .answer-page .lab-sidebar .lab-runtime{display:grid!important;grid-template-columns:15px minmax(0,1fr);column-gap:8px;row-gap:2px;align-items:center;white-space:normal}
+#app .answer-page .lab-sidebar .lab-runtime>span{grid-column:1;grid-row:1}
+#app .answer-page .lab-sidebar .lab-runtime small{grid-column:2;padding-left:0}
+
+/* Keep the original Submit and Hint artwork controls. */
+#app .answer-page .answer-task-actions{min-height:88px}
+#app .answer-page .answer-glass:is(.answer-submit,.answer-hint){display:grid;place-items:center;flex:none;width:78px;height:78px;min-height:78px;padding:0;border:0;border-radius:13px;background:transparent!important;box-shadow:none;animation:none}
+#app .answer-page .answer-glass:is(.answer-submit,.answer-hint):hover{background:transparent!important;box-shadow:none;filter:brightness(1.08)}
+#app .answer-page .answer-glass.answer-submit{order:1}
+#app .answer-page .answer-glass.answer-hint{order:2}
+#app .answer-page .answer-glass img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+
+
+/* Virtual lab: instruction, editable command and execution strip in one terminal. */
+#app .answer-page .lab-shell{display:block;min-height:530px;background:#0b1519;border:1px solid #344045;border-radius:18px;color:#dce3e4;font:13px/1.7 Consolas,'Cascadia Code',monospace;box-shadow:none}
+#app .answer-page .lab-shell :is(h3,p,label,button,textarea,summary){font-family:Consolas,'Cascadia Code',monospace!important}
+#app .answer-page .lab-shell .shell-header{display:flex;align-items:stretch;gap:24px;min-height:70px;padding:0 22px;background:#1b2428;border-bottom:1px solid #273237}
+#app .answer-page .lab-shell .shell-brand{display:flex;flex-direction:column;justify-content:center;flex:none;font-size:12px;line-height:1.5;letter-spacing:.06em;color:#c3cccf}
+#app .answer-page .lab-shell .shell-brand span{font-weight:700;color:#f0f3f2;letter-spacing:.09em}
+#app .answer-page .lab-shell .shell-tabs{display:flex;gap:22px;min-width:0}
+#app .answer-page .lab-shell .shell-tabs button{position:relative;padding:0;border:0;border-radius:0;min-height:0;background:none;box-shadow:none;color:#93a0a4;font:11px Consolas,monospace;letter-spacing:.06em}
+#app .answer-page .lab-shell .shell-tabs button[aria-selected=true]{color:#69c4a4}
+#app .answer-page .lab-shell .shell-tabs button[aria-selected=true]:after{content:'';position:absolute;bottom:14px;left:0;right:0;height:2px;background:#58b997}
+#app .answer-page .lab-shell .lab-menu{margin:0 0 0 auto;align-self:center}
+#app .answer-page .lab-shell .lab-menu summary{background:transparent;color:#bcc8cb}
+#app .answer-page .lab-shell .lab-menu>div{background:#1b292e;border-color:#384a50}
+#app .answer-page .lab-shell .lab-menu button{color:#cfdbdc}
+#app .answer-page .lab-shell .shell-body{padding:24px 26px 28px;display:flex;flex-direction:column;min-height:460px}
+#app .answer-page .lab-shell .shell-session{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:10px;letter-spacing:.04em;color:#819195}
+#app .answer-page .lab-shell .shell-session i{display:inline-block;width:5px;height:5px;border-radius:50%;background:#54bb95;margin-right:7px;vertical-align:middle}
+#app .answer-page .lab-shell .shell-question{margin:28px 0 24px}
+#app .answer-page .lab-shell .shell-eyebrow{display:block;font-size:10px;letter-spacing:.12em;color:#6e858b;margin-bottom:8px}
+#app .answer-page .lab-shell .shell-question h3{margin:0 0 8px;font:400 16px/1.6 Consolas,monospace;letter-spacing:0;color:#b8c5c9;overflow-wrap:anywhere}
+#app .answer-page .lab-shell .shell-question p{margin:0;color:#899a9f;font:13px/1.85 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+#app .answer-page .lab-shell .shell-prompt{display:block;margin:0 0 14px;color:#e0e9e9;font:13px/1.7 Consolas,monospace}
+#app .answer-page .lab-shell .shell-prompt span{color:#c3d2d4}
+#app .answer-page .lab-shell .shell-prompt b{color:#66bf9f;font-weight:400}
+#app .answer-page .lab-shell .shell-command{position:relative;border-left:2px solid #c8b66f;margin:0 0 0 4px;padding-left:16px}
+#app .answer-page .lab-shell .shell-command:before,#app .answer-page .lab-shell .shell-command:after{content:'';position:absolute;left:0;width:8px;height:1px;background:#c8b66f}
+#app .answer-page .lab-shell .shell-command:before{top:14px}
+#app .answer-page .lab-shell .shell-command:after{bottom:14px}
+#app .answer-page .lab-shell #code-editor{display:block;margin:0;width:100%;height:140px;min-height:100px;padding:8px 10px;border:0;border-radius:0;background:transparent;box-shadow:none;color:#dfe9e9;font:15px/1.85 Consolas,'Cascadia Code',monospace;resize:vertical;caret-color:#71d4ae;tab-size:2}
+#app .answer-page .lab-shell #code-editor:focus-visible{outline:1px solid #437366;outline-offset:3px}
+#app .answer-page .lab-shell .shell-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:18px 0 16px}
+#app .answer-page .lab-shell .shell-actions>span{margin-right:auto;color:#7f949a;font:10px/1.6 Consolas,monospace;max-width:65%}
+#app .answer-page .lab-shell .shell-actions button{display:inline-flex;align-items:center;gap:14px;min-height:32px;margin:0;padding:0 13px;border:1px solid #4eaa8a;border-radius:4px;background:#4eaa8a;box-shadow:none;color:#071b17;font:600 11px Consolas,monospace;cursor:pointer;transition:background-color .15s}
+#app .answer-page .lab-shell .shell-actions .shell-cancel{background:transparent;color:#d0dcdc;border-color:#4b6068}
+#app .answer-page .lab-shell .shell-actions button:disabled{opacity:.45;cursor:default}
+#app .answer-page .lab-shell .shell-actions button:active:not(:disabled){transform:translateY(1px)}
+#app .answer-page .lab-shell .shell-output{margin:0 0 22px;padding:16px 0 0;border-top:1px solid #ffffff0d;min-width:0}
+#app .answer-page .lab-shell .shell-output h3{display:flex;justify-content:space-between;gap:10px;margin:0 0 10px;color:#6c878e;font:10px Consolas,monospace;letter-spacing:.08em}
+#app .answer-page .lab-shell .shell-output h3 span{font-size:9px;letter-spacing:0}
+#app .answer-page .lab-shell #code-output{padding:0;margin:0;min-height:38px;max-height:260px;overflow:auto;border:0;border-radius:0;background:transparent;box-shadow:none;color:#bed7d0;font:12px/1.8 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+#app .answer-page .lab-shell[data-execution=error] #code-output{color:#e8b5ac}
+#app .answer-page .lab-shell .shell-history{margin:0 0 24px;min-height:210px}
+#app .answer-page .lab-shell .shell-history header h3{color:#9bb0b6;font-size:11px}
+#app .answer-page .lab-shell .lab-history-list article{border:0;border-top:1px solid #26383e;border-radius:0;padding:14px 0;margin:0}
+#app .answer-page .lab-shell .lab-history-list time{color:#7e979f}
+#app .answer-page .lab-shell .lab-history-list pre{color:#bed7d0}
+#app .answer-page .lab-shell .shell-execution{margin-top:auto;padding-top:8px}
+#app .answer-page .lab-shell .shell-execution-heading{display:flex;justify-content:space-between;gap:14px;margin:0 0 12px;color:#becdce;font-size:11px}
+#app .answer-page .lab-shell .shell-execution-meta{font-size:10px;color:#748b92}
+#app .answer-page .lab-shell .shell-segments{display:flex;gap:3px;height:19px;overflow:hidden}
+#app .answer-page .lab-shell .shell-segments i{flex:1;min-width:0;border:1px solid #3e555e;background:transparent}
+#app .answer-page .lab-shell[data-execution=success] .shell-segments i{border-color:#50b794;background:#50b794}
+#app .answer-page .lab-shell[data-execution=running] .shell-segments{background:linear-gradient(90deg,transparent 0 10%,#50b794 25% 43%,transparent 58% 100%) 100% 0/250% 100%;animation:lab-executing 1.4s linear infinite}
+#app .answer-page .lab-shell[data-execution=error] .shell-segments i{border-color:#815954}
+#app .answer-page .lab-shell[data-execution=timeout] .shell-segments i{border-color:#a28b53}
+#app .answer-page .lab-shell[data-execution=cancelled] .shell-segments i{border-color:#6b7d84}
+#app .answer-page .lab-shell :focus-visible{outline:2px solid #79c7ae;outline-offset:4px}
+#app .answer-page .lab-shell [hidden]{display:none!important}
+@keyframes lab-executing{to{background-position:-67% 0}}
+@media(prefers-reduced-motion:reduce){#app .answer-page .lab-shell[data-execution=running] .shell-segments{animation:none;background:#244d41}#app .answer-page .lab-shell .shell-actions button{transition:none}}
+@media(hover:hover){#app .answer-page .lab-shell .shell-actions .shell-execute:hover:not(:disabled){background:#70c7a8}#app .answer-page .lab-shell .shell-tabs button:hover{color:#d4e2e1}}
+
+/* Refine pass: shorter banner, one-row answer bar, readable terminal type, slim execution segments. */
+#app .answer-page .answer-workspace{gap:12px}
+#app .answer-page .skill-banner{aspect-ratio:3.6/1}
+#app .answer-page .answer-workspace>.answer-task:has(.answer-answer-row){min-height:0;padding:18px 22px 20px}
+#app .answer-page .answer-answer-row{display:flex;align-items:flex-end;gap:14px}
+#app .answer-page .answer-answer-row .answer-input-label{flex:1;min-width:0}
+#app .answer-page .answer-answer-row .answer-input-label input{height:56px}
+#app .answer-page .answer-answer-row .answer-task-actions{flex:none;min-height:0;margin:0;gap:8px}
+#app .answer-page .answer-answer-row .answer-glass:is(.answer-submit,.answer-hint){width:56px;height:56px;min-height:56px}
+#app .answer-page .answer-task:has(.answer-answer-row) .form-error:not(:empty){margin:10px 0 0}
+#app .answer-page .lab-shell{min-height:0}
+#app .answer-page .lab-shell .shell-header{min-height:58px}
+#app .answer-page .lab-shell .shell-tabs button{font-size:12px}
+#app .answer-page .lab-shell .shell-tabs button[aria-selected=true]:after{bottom:10px}
+#app .answer-page .lab-shell .shell-body{min-height:0;padding:22px 26px 24px}
+#app .answer-page .lab-shell .shell-session{font-size:11px}
+#app .answer-page .lab-shell .shell-question{margin:22px 0}
+#app .answer-page .lab-shell .shell-eyebrow{font-size:11px}
+#app .answer-page .lab-shell .shell-question h3{font-size:17px;color:#d4e0e2}
+#app .answer-page .lab-shell .shell-question p{font-size:14px;color:#8fa3a8}
+#app .answer-page .lab-shell .shell-prompt{font-size:14px}
+#app .answer-page .lab-shell #code-editor{height:120px}
+#app .answer-page .lab-shell .shell-actions{padding:14px 0}
+#app .answer-page .lab-shell .shell-actions>span{font-size:11.5px}
+#app .answer-page .lab-shell .shell-actions button{min-height:36px;padding:0 16px;border-radius:8px;font-size:12.5px}
+#app .answer-page .lab-shell .shell-output h3{font-size:11px}
+#app .answer-page .lab-shell .shell-output h3 span{font-size:10.5px}
+#app .answer-page .lab-shell #code-output{font-size:13.5px}
+#app .answer-page .lab-shell .shell-execution-heading{font-size:12px}
+#app .answer-page .lab-shell .shell-execution-meta{font-size:11px}
+#app .answer-page .lab-shell .shell-segments{height:10px;gap:3px;border-radius:2px}
+#app .answer-page .lab-shell .shell-segments i{border:0;border-radius:2px;background:#ffffff12}
+#app .answer-page .lab-shell[data-execution=success] .shell-segments i{background:#50b794}
+#app .answer-page .lab-shell[data-execution=error] .shell-segments i{background:#815954}
+#app .answer-page .lab-shell[data-execution=timeout] .shell-segments i{background:#a28b53}
+#app .answer-page .lab-shell[data-execution=cancelled] .shell-segments i{background:#6b7d84}
+
+/* Black-and-white pass: both tasks are black cards with white task labels; the terminal drops its teal tint and tabs;
+   every Submit / Hint uses the two keycaps. */
+#app .answer-page .answer-task-label{height:28px;padding:0 12px;border:1px solid #ffffff;border-radius:999px;background:#fff;color:#000;font-size:12.5px;font-weight:600}
+#app .answer-page .answer-workspace>.answer-task:not(.answer-lab){border:1px solid #ffffff1f;background:#000}
+#app .answer-page .answer-task-heading small{color:#8a8a8a}
+#app .answer-page .answer-workspace>.answer-task .answer-prompt{margin:0 0 18px;padding:0;border:0;background:none}
+#app .answer-page .answer-workspace>.answer-task .answer-prompt h2{margin:0 0 6px;font-size:18px;font-weight:600;letter-spacing:-.01em;color:#fff}
+#app .answer-page .answer-workspace>.answer-task .answer-prompt p{margin:0;font-size:14.5px;line-height:1.7;color:#a8a8a8}
+#app .answer-page .answer-input-label{color:#a8a8a8}
+#app .answer-page .answer-input-label input{border-color:#ffffff2e;background:#000}
+#app .answer-page .answer-input-label input:focus{border-color:#fff;box-shadow:0 0 0 3px #ffffff1f}
+#app .answer-page .lab-shell{border-color:#ffffff1f;background:#000;color:#e6e6e6}
+#app .answer-page .lab-shell .shell-header{min-height:56px;background:#0a0a0a;border-bottom-color:#ffffff14}
+#app .answer-page .lab-shell .shell-brand{color:#a8a8a8}
+#app .answer-page .lab-shell .shell-brand span{color:#fff}
+#app .answer-page .lab-shell .lab-menu summary{color:#a8a8a8}
+#app .answer-page .lab-shell .lab-menu>div{background:#0f0f0f;border-color:#ffffff24}
+#app .answer-page .lab-shell .lab-menu button{color:#e6e6e6}
+#app .answer-page .lab-shell .shell-session{color:#7a7a7a}
+#app .answer-page .lab-shell .shell-session i{background:#fff}
+#app .answer-page .lab-shell .shell-task-heading{margin:0 0 14px}
+#app .answer-page .lab-shell .shell-task-heading small{font-family:'DM Sans',sans-serif}
+#app .answer-page .lab-shell .shell-task-heading .answer-task-label{font-family:'DM Sans',sans-serif!important}
+#app .answer-page .lab-shell .shell-question h3{color:#fff}
+#app .answer-page .lab-shell .shell-question p{color:#9a9a9a}
+#app .answer-page .lab-shell .shell-prompt,#app .answer-page .lab-shell .shell-prompt span{color:#e6e6e6}
+#app .answer-page .lab-shell .shell-prompt b{color:#fff;font-weight:700}
+#app .answer-page .lab-shell .shell-command{border-left-color:#ffffff59}
+#app .answer-page .lab-shell .shell-command:before,#app .answer-page .lab-shell .shell-command:after{background:#ffffff59}
+#app .answer-page .lab-shell #code-editor{color:#fff}
+#app .answer-page .lab-shell #code-editor:focus-visible{outline:1px solid #ffffff66}
+#app .answer-page .lab-shell .shell-actions>span{color:#7a7a7a}
+#app .answer-page .lab-shell .shell-actions{gap:8px}
+#app .answer-page .lab-shell .shell-actions .answer-glass{display:grid;place-items:center;width:56px;height:56px;min-height:56px;padding:0;border:0;border-radius:13px;background:transparent!important;box-shadow:none}
+#app .answer-page .lab-shell .shell-actions .answer-glass img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+#app .answer-page .lab-shell .shell-actions .answer-glass:hover:not(:disabled){filter:brightness(1.08)}
+#app .answer-page .lab-shell .shell-actions .answer-glass.answer-submit{order:1}
+#app .answer-page .lab-shell .shell-actions .answer-glass.answer-hint{order:2}
+#app .answer-page .lab-shell .shell-actions .shell-cancel{order:0;background:transparent;border-color:#ffffff40;color:#e6e6e6}
+#app .answer-page .lab-shell .shell-output{border-top-color:#ffffff14}
+#app .answer-page .lab-shell .shell-output h3{color:#7a7a7a}
+#app .answer-page .lab-shell #code-output{color:#e6e6e6}
+#app .answer-page .lab-shell[data-execution=error] #code-output{color:#ffb4b4}
+#app .answer-page .lab-shell .shell-execution-heading{color:#e6e6e6}
+#app .answer-page .lab-shell .shell-execution-meta{color:#7a7a7a}
+#app .answer-page .lab-shell .shell-segments i{background:#ffffff14}
+#app .answer-page .lab-shell[data-execution=success] .shell-segments i{background:#fff}
+#app .answer-page .lab-shell[data-execution=running] .shell-segments{background:linear-gradient(90deg,transparent 0 10%,#fff 25% 43%,transparent 58% 100%) 100% 0/250% 100%}
+#app .answer-page .lab-shell[data-execution=error] .shell-segments i{background:#7a4a4a}
+#app .answer-page .lab-shell[data-execution=timeout] .shell-segments i{background:#8a7a4a}
+#app .answer-page .lab-shell[data-execution=cancelled] .shell-segments i{background:#555}
+#app .answer-page .lab-shell :focus-visible{outline-color:#fff}

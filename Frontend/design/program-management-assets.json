@@ -1,0 +1,42 @@
+[
+  {
+    "key": "imgImage1",
+    "url": "https://www.figma.com/api/mcp/asset/5f82c75f-cd2c-4e7c-9283-688defa4c80c.png",
+    "file": "imgImage1.png"
+  },
+  {
+    "key": "imgThumbnailEditableGeometricArtwork",
+    "url": "https://www.figma.com/api/mcp/asset/7b52e205-bf6f-440a-be65-f4b7a9aa5319.svg",
+    "file": "imgThumbnailEditableGeometricArtwork.svg"
+  },
+  {
+    "key": "imgVector",
+    "url": "https://www.figma.com/api/mcp/asset/aa825f11-6703-462e-8c2a-0d2521b13aa8.svg",
+    "file": "imgVector.svg"
+  },
+  {
+    "key": "imgThumbnailEditableGeometricArtwork1",
+    "url": "https://www.figma.com/api/mcp/asset/9837a6e7-0705-472f-9df3-4811b3a139ab.svg",
+    "file": "imgThumbnailEditableGeometricArtwork1.svg"
+  },
+  {
+    "key": "imgThumbnailEditableGeometricArtwork2",
+    "url": "https://www.figma.com/api/mcp/asset/d41cce04-d260-4722-86db-1f1ec544e13a.svg",
+    "file": "imgThumbnailEditableGeometricArtwork2.svg"
+  },
+  {
+    "key": "imgThumbnailEditableGeometricArtwork3",
+    "url": "https://www.figma.com/api/mcp/asset/6941b9af-9f04-4eb2-a968-b82c0950ac8a.svg",
+    "file": "imgThumbnailEditableGeometricArtwork3.svg"
+  },
+  {
+    "key": "imgThumbnailEditableGeometricArtwork4",
+    "url": "https://www.figma.com/api/mcp/asset/beb74f7a-e547-42c5-8499-d76a3bef0c42.svg",
+    "file": "imgThumbnailEditableGeometricArtwork4.svg"
+  },
+  {
+    "key": "imgThumbnailEditableGeometricArtwork5",
+    "url": "https://www.figma.com/api/mcp/asset/fff1256e-21cb-441c-91cd-5f5cb2385600.svg",
+    "file": "imgThumbnailEditableGeometricArtwork5.svg"
+  }
+]

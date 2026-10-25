@@ -1,0 +1,211 @@
+{
+  "removedPages": [
+    "Discussion moderation",
+    "Enquiries & feedback"
+  ],
+  "remainingWebFormsPairs": 40,
+  "statuses": [
+    {
+      "page": "Frontend/Home.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Login.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Register.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/ForgotPassword.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/ResetPassword.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Dashboard.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/MyCourses.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Catalog.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Course.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Activity.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Leaderboard.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Certificates.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Courses.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/CourseEditor.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/QuizEditor.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/CourseRequests.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Approvals.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/CourseReview.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/RequestReview.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Programs.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Assignments.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Learners.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Analytics.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Resources.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Discussions.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Messages.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Assistant.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/LiveSessions.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Users.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/UserEditor.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Profile.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Settings.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Help.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/EnquiryPortal.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/About.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Contact.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Instructors.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/FAQ.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Terms.aspx",
+      "status": 200
+    },
+    {
+      "page": "Frontend/Privacy.aspx",
+      "status": 200
+    }
+  ],
+  "removedEndpoints": [
+    {
+      "page": "Frontend/Moderation.aspx",
+      "status": 404
+    },
+    {
+      "page": "Frontend/Moderation",
+      "status": 404
+    },
+    {
+      "page": "Frontend/Support.aspx",
+      "status": 404
+    },
+    {
+      "page": "Frontend/Support",
+      "status": 404
+    }
+  ],
+  "oldHashRedirects": {
+    "authenticated": "dashboard",
+    "guest": "login"
+  },
+  "roles": [
+    "Admin",
+    "Instructor",
+    "Learner",
+    "Program Leader"
+  ],
+  "adminMenuAndDashboardClean": true,
+  "userAccountsPreserved": true,
+  "courseDiscussionsAndInstructorModeratePreserved": true,
+  "errors": [],
+  "checkedAt": "2026-10-22T08:26:37.346Z",
+  "build": {
+    "result": "passed",
+    "errors": 0,
+    "warnings": 0
+  },
+  "domainSuites": 9,
+  "httpAdapterContract": "passed",
+  "fourRoleHandoffUI": "passed",
+  "visitorEnquirySubmitAndPortal": "passed"
+}

@@ -1,0 +1,111 @@
+const imgVector = "https://www.figma.com/api/mcp/asset/20fd5bde-73a2-4e26-a882-189e53149667.svg";
+const imgVector1 = "https://www.figma.com/api/mcp/asset/c1700ff8-4f14-4e7c-abad-79b97a8f7aee.svg";
+const imgVector2 = "https://www.figma.com/api/mcp/asset/7ab2ea87-fc3c-4e47-80a7-5ff5c8aa7915.svg";
+const imgVector3 = "https://www.figma.com/api/mcp/asset/8212218f-9832-4fce-9f6f-58e7cea80686.svg";
+const imgVector4 = "https://www.figma.com/api/mcp/asset/d64304da-28b9-4957-9238-d707fd71bec7.svg";
+const imgVector5 = "https://www.figma.com/api/mcp/asset/ff500573-11cd-423b-974b-e1c6d87007fc.svg";
+const imgVector6 = "https://www.figma.com/api/mcp/asset/f380dd71-53f8-4d81-9224-0e6df3eae22c.svg";
+const imgVector7 = "https://www.figma.com/api/mcp/asset/839177ff-f24a-43fd-8a02-a9d962a86a5a.svg";
+const imgVector8 = "https://www.figma.com/api/mcp/asset/ad096822-320e-42a4-ace2-7929d3030af8.svg";
+
+export default function Group46() {
+  return (
+    <div className="contents relative size-full" data-node-id="250:5074">
+      <div className="absolute inset-[3.83%_46.59%_83.65%_30.82%]" data-node-id="250:5075" data-name="Vector">
+        <div className="absolute inset-[-0.44%_-0.18%]">
+          <img alt="" className="block max-w-none size-full" src={imgVector} />
+        </div>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal inset-[5.27%_60.53%_93.26%_32.14%] leading-[normal] not-italic text-[#808080] text-[258.54px] whitespace-nowrap" data-node-id="250:5076">
+        Program courses
+      </p>
+      <p className="[word-break:break-word] absolute font-['Space_Mono:Regular'] inset-[7.71%_65.31%_88.19%_32.14%] leading-[normal] not-italic text-[#ebebeb] text-[587.591px] whitespace-nowrap" data-node-id="250:5077">
+        30
+      </p>
+      <div className="absolute inset-[10.7%_51.91%_89.03%_47.76%]" data-node-id="250:5078" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[10.25%_51.91%_89.47%_47.76%]" data-node-id="250:5079" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[10.7%_51.33%_89.03%_48.34%]" data-node-id="250:5080" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[10.25%_51.33%_89.47%_48.34%]" data-node-id="250:5081" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[9.81%_51.33%_89.91%_48.34%]" data-node-id="250:5082" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[10.7%_50.75%_89.03%_48.92%]" data-node-id="250:5083" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[10.25%_50.75%_89.47%_48.92%]" data-node-id="250:5084" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[9.81%_50.75%_89.91%_48.92%]" data-node-id="250:5085" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[9.37%_50.75%_90.36%_48.92%]" data-node-id="250:5086" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector2} />
+      </div>
+      <div className="absolute inset-[10.7%_50.17%_89.03%_49.5%]" data-node-id="250:5087" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[10.25%_50.17%_89.47%_49.5%]" data-node-id="250:5088" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[9.81%_50.17%_89.91%_49.5%]" data-node-id="250:5089" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+      </div>
+      <div className="absolute inset-[10.7%_49.58%_89.03%_50.08%]" data-node-id="250:5090" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector3} />
+      </div>
+      <div className="absolute inset-[10.25%_49.58%_89.47%_50.08%]" data-node-id="250:5091" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector3} />
+      </div>
+      <div className="absolute inset-[9.81%_49.58%_89.91%_50.08%]" data-node-id="250:5092" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector3} />
+      </div>
+      <div className="absolute inset-[9.37%_49.58%_90.36%_50.08%]" data-node-id="250:5093" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector4} />
+      </div>
+      <div className="absolute inset-[8.92%_49.58%_90.8%_50.08%]" data-node-id="250:5094" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+      </div>
+      <div className="absolute inset-[10.7%_49%_89.03%_50.66%]" data-node-id="250:5095" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
+      </div>
+      <div className="absolute inset-[10.25%_49%_89.47%_50.66%]" data-node-id="250:5096" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
+      </div>
+      <div className="absolute inset-[9.81%_49%_89.91%_50.66%]" data-node-id="250:5097" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
+      </div>
+      <div className="absolute inset-[9.37%_49%_90.36%_50.66%]" data-node-id="250:5098" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector7} />
+      </div>
+      <div className="absolute inset-[8.92%_49%_90.8%_50.66%]" data-node-id="250:5099" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector8} />
+      </div>
+      <div className="absolute inset-[8.48%_49%_91.24%_50.66%]" data-node-id="250:5100" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector8} />
+      </div>
+      <div className="absolute inset-[10.7%_48.42%_89.03%_51.25%]" data-node-id="250:5101" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
+      </div>
+      <div className="absolute inset-[10.25%_48.42%_89.47%_51.25%]" data-node-id="250:5102" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
+      </div>
+      <div className="absolute inset-[9.81%_48.42%_89.91%_51.25%]" data-node-id="250:5103" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
+      </div>
+      <div className="absolute inset-[9.37%_48.42%_90.36%_51.25%]" data-node-id="250:5104" data-name="Vector">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector7} />
+      </div>
+      <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold inset-[13.69%_59.49%_84.84%_32.14%] leading-[normal] not-italic text-[#3c9c80] text-[258.54px] whitespace-nowrap" data-node-id="250:5105">
+        3 awaiting reviews
+      </p>
+    </div>
+  );
+}

@@ -1,0 +1,175 @@
+/* Leader overview polish: segmented alert tabs, readable alert cards without a visible scrollbar,
+   clearer course performance and learning summary panels, and gentle motion. Layout stays as designed. */
+#app .leader-dashboard{--lp-line:#ffffff12;--lp-line-2:#ffffff20;--lp-muted:#8f8f98;--lp-text:#ececf0;--lp-green:#5bd08f;--ease:cubic-bezier(.2,.7,.2,1)}
+#app .leader-dashboard .ld-arrow{width:15px;height:15px;flex:none;vertical-align:-2px}
+#app .leader-dashboard .ld-board :is(.ld-activity,.ld-notifications,.ld-course-panel,.ld-health-panel){border-radius:12px;border-color:var(--lp-line-2);background:#0f0f11}
+
+/* Alerts & notifications */
+#app .leader-dashboard .ld-notes-head h2{font-size:14.5px;font-weight:600;color:#fff}
+#app .leader-dashboard .ld-notes-head a{padding:3px 10px;border-radius:999px;background:#f0c75e1f;color:#f0c75e;font-size:12px;text-decoration:none}
+#app .leader-dashboard .ld-note-tabs{position:relative;display:flex;gap:2px;padding:3px;border-radius:10px;background:#0a0a0b;border:1px solid var(--lp-line)}
+#app .leader-dashboard .ld-note-tab{height:30px;border:0;border-radius:8px;color:#7d7d86;font-size:12.5px;font-weight:500;transition:background-color .2s,color .2s}
+#app .leader-dashboard .ld-note-tab:hover{color:#d4d4da}
+#app .leader-dashboard .ld-note-tab[aria-selected=true]{background:#26262b;color:#fff;box-shadow:inset 0 1px 0 #ffffff14,0 1px 3px #0008;border:0}
+#app .leader-dashboard .ld-note-tab:focus-visible{outline:2px solid #a78bfa;outline-offset:1px}
+#app .leader-dashboard .ld-note-tab em{min-width:16px;margin-left:4px;padding:0 4px;border-radius:4px;background:#ffffff12;font-size:10.5px;line-height:16px}
+#app .leader-dashboard .ld-note-tab[aria-selected=true] em{background:#5bd08f26;color:var(--lp-green)}
+#app .leader-dashboard .ld-note-scroll{scrollbar-width:none;-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 28px),transparent)}
+#app .leader-dashboard .ld-note-scroll::-webkit-scrollbar{display:none}
+#app .leader-dashboard .ld-note-group>header h3{font-size:12px;font-weight:500;color:var(--lp-muted)}
+#app .leader-dashboard .ld-note-group>header h3 em{margin-left:6px;padding:0 6px;border-radius:5px;background:#ffffff10;font-style:normal;font-size:11px;color:#d4d4da}
+#app .leader-dashboard .ld-note{position:relative;display:grid;grid-template-columns:10px minmax(0,1fr);gap:10px;margin-bottom:8px;padding:12px 12px 12px 10px;border:1px solid var(--lp-line);border-radius:10px;background:linear-gradient(180deg,#18181c,#141417);transition:border-color .2s,transform .2s var(--ease),background-color .2s}
+#app .leader-dashboard .ld-note:hover{border-color:var(--lp-line-2);transform:translateY(-1px)}
+#app .leader-dashboard .ld-note-dot{width:8px;height:8px;margin-top:5px;border-radius:50%;background:var(--lp-green);box-shadow:0 0 8px #5bd08f99}
+#app .leader-dashboard .ld-note-dot.is-read{background:#3f3f46;box-shadow:none}
+#app .leader-dashboard .ld-note[data-kind=approval] .ld-note-dot:not(.is-read){background:#f0c75e;box-shadow:0 0 8px #f0c75e99}
+#app .leader-dashboard .ld-note-body{display:grid;gap:6px;min-width:0}
+#app .leader-dashboard .ld-note-body p{margin:0;font-size:13px;line-height:1.5;color:#9a9aa4}
+#app .leader-dashboard .ld-note-body p strong{font-weight:600;color:#f0f0f4}
+#app .leader-dashboard .ld-note-status{color:var(--lp-green)}
+#app .leader-dashboard .ld-note-body time{font-size:11.5px;color:#6b6b74;text-align:left}
+#app .leader-dashboard .ld-note-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+#app .leader-dashboard .ld-note-ghost,#app .leader-dashboard .ld-note-primary{display:inline-flex;align-items:center;gap:5px;height:26px;min-height:0;padding:0 10px;border-radius:7px;font-size:12px;font-weight:500;text-decoration:none;box-shadow:none;transition:background-color .15s,color .15s,transform .15s}
+#app .leader-dashboard .ld-note-ghost{border:1px solid var(--lp-line-2);background:transparent;color:#b4b4bd}
+#app .leader-dashboard .ld-note-ghost:hover{background:#ffffff0d;color:#fff}
+#app .leader-dashboard .ld-note-primary{margin-left:auto;border:1px solid #ffffff38;background:#f4f4f5;color:#111113}
+#app .leader-dashboard .ld-note-primary:hover{background:#fff}
+#app .leader-dashboard .ld-note-primary .ld-arrow{width:13px;height:13px}
+#app .leader-dashboard :is(.ld-note-ghost,.ld-note-primary):active{transform:scale(.95)}
+#app .leader-dashboard .ld-caught-up{display:grid;gap:4px;padding:14px;border:1px dashed var(--lp-line-2);border-radius:10px;font-size:12.5px;color:var(--lp-muted)}
+#app .leader-dashboard .ld-caught-up b{color:#fff}
+
+/* Course performance */
+#app .leader-dashboard .ld-panel-heading h2{font-size:14.5px;font-weight:600;color:#fff}
+#app .leader-dashboard .ld-panel-heading>a{display:grid;place-items:center;width:30px;height:30px;padding:0;border:1px solid var(--lp-line-2);border-radius:8px;color:#c9c9d0;transition:background-color .15s,color .15s}
+#app .leader-dashboard .ld-panel-heading>a:hover{background:#ffffff0d;color:#fff}
+#app .leader-dashboard .ld-course-picker select{height:40px;padding:0 36px 0 12px;border:1px solid var(--lp-line-2);border-radius:10px;background:#141417;color:#fff;font-size:13.5px;font-weight:500}
+#app .leader-dashboard .ld-course-picker select:focus{border-color:#ffffff4d;box-shadow:0 0 0 3px #ffffff10;outline:none}
+#app .leader-dashboard .ld-course-facts{border-color:var(--lp-line);border-radius:10px;background:#141417}
+#app .leader-dashboard .ld-detail-cell>span{font-size:12px;color:var(--lp-muted)}
+#app .leader-dashboard .ld-detail-cell>strong{font-size:16px;font-weight:600;color:#fff}
+#app .leader-dashboard .ld-course-trends{border-color:var(--lp-line);border-radius:10px;background:#141417}
+#app .leader-dashboard .ld-course-trends h3{font-size:13px;font-weight:600;color:#fff}
+#app .leader-dashboard .ld-course-trends .ld-reach-row{padding:8px 0;margin:0;border-top:1px solid var(--lp-line)}
+#app .leader-dashboard .ld-course-trends .ld-detail-cell strong{font-size:18px}
+#app .leader-dashboard .ld-reach-row:nth-of-type(2) .ld-detail-cell strong{color:#f0c75e}
+#app .leader-dashboard .ld-reach-row:nth-of-type(3) .ld-detail-cell strong{color:var(--lp-green)}
+#app .leader-dashboard .ld-panel-more{display:flex;align-items:center;justify-content:center;gap:6px;height:34px;margin-top:6px;border:1px solid var(--lp-line-2);border-radius:9px;color:#fff;font-size:12.5px;text-decoration:none;transition:background-color .15s}
+#app .leader-dashboard .ld-panel-more:hover{background:#ffffff0d}
+#app .leader-dashboard .ld-course-foot{font-size:12px;color:var(--lp-muted)}
+#app .leader-dashboard .ld-course-foot strong{color:var(--lp-green);font-size:13px}
+
+/* Learning summary */
+#app .leader-dashboard .ld-health-values>div{padding:9px 0;border-color:var(--lp-line)}
+#app .leader-dashboard .ld-health-values dt{font-size:12.5px;color:var(--lp-muted)}
+#app .leader-dashboard .ld-health-values dd{font-size:15px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+#app .leader-dashboard .ld-health-panel .ld-orbit{stroke:#ffffff10}
+#app .leader-dashboard .ld-health-panel .ld-arc{stroke:url(#ld-arc-grad);stroke:var(--lp-green);stroke-linecap:round;filter:drop-shadow(0 0 6px #5bd08f66)}
+#app .leader-dashboard .ld-health-panel .ld-orb strong{font-size:26px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+#app .leader-dashboard .ld-health-caption{font-size:12.5px;color:var(--lp-muted)}
+
+/* Motion */
+@keyframes lp-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes lp-arc{from{stroke-dasharray:0 999}}
+@keyframes lp-pulse{0%,100%{opacity:1}50%{opacity:.45}}
+@media(prefers-reduced-motion:no-preference){
+ #app .leader-dashboard .ld-note-panel:not([hidden]) .ld-note{animation:lp-rise .4s var(--ease) both}
+ #app .leader-dashboard .ld-note-panel:not([hidden]) .ld-note:nth-child(2){animation-delay:.05s}
+ #app .leader-dashboard .ld-note-panel:not([hidden]) .ld-note:nth-child(3){animation-delay:.1s}
+ #app .leader-dashboard .ld-note-panel:not([hidden]) .ld-note:nth-child(n+4){animation-delay:.15s}
+ #app .leader-dashboard .ld-note-dot:not(.is-read){animation:lp-pulse 2s ease-in-out infinite}
+ #app .leader-dashboard :is(.ld-course-panel,.ld-health-panel){animation:lp-rise .5s .1s var(--ease) both}
+ #app .leader-dashboard .ld-health-panel{animation-delay:.18s}
+ #app .leader-dashboard .ld-health-panel .ld-arc{animation:lp-arc 1.2s .35s var(--ease) both}
+ #app .leader-dashboard .ld-course-facts .ld-detail-cell{animation:lp-rise .4s var(--ease) both}
+ #app .leader-dashboard .ld-course-facts .ld-detail-cell:nth-child(2){animation-delay:.05s}
+ #app .leader-dashboard .ld-course-facts .ld-detail-cell:nth-child(3){animation-delay:.1s}
+ #app .leader-dashboard .ld-course-facts .ld-detail-cell:nth-child(4){animation-delay:.15s}
+ #app .leader-dashboard .ld-panel-heading>a .ld-arrow,#app .leader-dashboard .ld-panel-more .ld-arrow,#app .leader-dashboard .ld-note-primary .ld-arrow{transition:transform .2s var(--ease)}
+ #app .leader-dashboard .ld-panel-heading>a:hover .ld-arrow,#app .leader-dashboard .ld-panel-more:hover .ld-arrow,#app .leader-dashboard .ld-note-primary:hover .ld-arrow{transform:translate(2px,-2px)}
+}
+
+/* Reference monitoring console. Only the three selected panels use this treatment. */
+#app .leader-dashboard :is(.ld-monitor-alerts,.ld-monitor-course,.ld-monitor-health){border:1px solid #ffffff1b;border-radius:3px;background:#101011;box-shadow:inset 0 0 0 3px #0b0b0c;animation:none}
+#app .leader-dashboard :is(.ld-monitor-course,.ld-monitor-health){padding:10px}
+#app .leader-dashboard :is(.ld-monitor-course,.ld-monitor-health)>.ld-panel-heading{height:26px;margin:0 0 9px;padding:0 1px}
+#app .leader-dashboard :is(.ld-monitor-course,.ld-monitor-health)>.ld-panel-heading h2{font-size:13px;font-weight:500;color:#d4d4d8;letter-spacing:0}
+#app .leader-dashboard :is(.ld-monitor-course,.ld-monitor-health)>.ld-panel-heading>a{display:grid;place-items:center;width:23px;height:23px;padding:0;border:0;border-radius:2px;color:#7d7d85}
+#app .leader-dashboard .ld-monitor-course-body{display:grid;grid-template-columns:minmax(0,2.6fr) minmax(155px,1fr);gap:9px;min-width:0}
+#app .leader-dashboard .ld-monitor-course-primary{min-width:0;display:flex;flex-direction:column;gap:8px}
+#app .leader-dashboard .ld-monitor-course .ld-course-picker{display:block;margin:0}
+#app .leader-dashboard .ld-monitor-course .ld-course-picker select{height:34px;min-height:0;margin:0;padding:0 30px 0 10px;border:1px solid #ffffff22;border-radius:2px;background:#0c0c0d;color:#cccdd2;font-size:12px;font-weight:400;box-shadow:none}
+#app .leader-dashboard .ld-monitor-inspector{flex:1;min-width:0;padding:10px 11px;border:1px solid #ffffff16;border-radius:2px;background:#0c0c0d}
+#app .leader-dashboard .ld-monitor-inspector>header{display:flex;align-items:center;justify-content:space-between;gap:10px;height:22px;margin-bottom:7px;color:#91919b;font-size:11px}
+#app .leader-dashboard .ld-monitor-actions{position:relative;margin:0;padding:0;border:0;background:none}
+#app .leader-dashboard .ld-monitor-actions>summary{display:grid;place-items:center;width:23px;height:23px;margin:0;padding:0;border:0;border-radius:2px;list-style:none;color:#8d8d97;cursor:pointer}
+#app .leader-dashboard .ld-monitor-actions>summary::-webkit-details-marker{display:none}
+#app .leader-dashboard .ld-monitor-actions>summary svg{width:16px;height:16px}
+#app .leader-dashboard .ld-monitor-actions>nav{position:absolute;right:0;top:27px;z-index:12;display:grid;min-width:155px;padding:4px;border:1px solid #343438;border-radius:3px;background:#171719;box-shadow:0 6px 16px #0008}
+#app .leader-dashboard .ld-monitor-actions>nav a{display:block;padding:7px 9px;color:#ceced4;font-size:11px;white-space:nowrap}
+#app .leader-dashboard .ld-monitor-course-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:13px 20px;margin:0}
+#app .leader-dashboard .ld-monitor-course-fields>div{min-width:0}
+#app .leader-dashboard .ld-monitor-course-fields .is-wide{grid-column:1/-1}
+#app .leader-dashboard .ld-monitor-course-fields dt{margin:0 0 3px;color:#797983;font-size:10px;line-height:1.45}
+#app .leader-dashboard .ld-monitor-course-fields dd{margin:0;color:#c9c9ce;font-size:12px;font-weight:400;line-height:1.5;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+#app .leader-dashboard .ld-monitor-course-fields .is-wide dd{font-size:13px;color:#e0e0e4}
+#app .leader-dashboard .ld-monitor-course-fields .is-progress dd{font-size:23px;line-height:1.15;letter-spacing:-.035em;color:#e5e5e8}
+#app .leader-dashboard .ld-monitor-course-fields .is-status dd{display:inline-flex;align-items:center;gap:5px;padding-top:5px;color:#b6b6be;font-size:11px}
+#app .leader-dashboard .ld-monitor-course-fields .is-status dd::before{content:'';width:5px;height:5px;border-radius:50%;background:#9d9da6}
+#app .leader-dashboard .ld-monitor-course .ld-monitor-trends{display:flex;flex-direction:column;min-width:0;padding:12px 11px 10px;border:1px solid #ffffff16;border-radius:2px;background:#0c0c0d}
+#app .leader-dashboard .ld-monitor-trends h3{margin:0 0 15px;font-size:12px;font-weight:400;line-height:1.4;color:#c2c2c9}
+#app .leader-dashboard .ld-monitor-trends dl{display:grid;gap:15px;margin:0 0 15px}
+#app .leader-dashboard .ld-monitor-trends dl>div{display:flex;flex-direction:column;gap:3px}
+#app .leader-dashboard .ld-monitor-trends dt{order:2;color:#777781;font-size:10px;line-height:1.4}
+#app .leader-dashboard .ld-monitor-trends dd{order:1;margin:0;color:#d9d9df;font-size:17px;font-weight:400;line-height:1.2;font-variant-numeric:tabular-nums}
+#app .leader-dashboard .ld-monitor-course .ld-panel-more{display:flex;justify-content:center;gap:6px;height:29px;min-height:29px;margin:auto 0 0;padding:0 8px;border:1px solid #b4b4ba;border-radius:2px;background:none;color:#dedee2;font-size:11px;font-weight:400;box-shadow:none}
+#app .leader-dashboard .ld-monitor-course .ld-panel-more svg{width:12px;height:12px}
+#app .leader-dashboard .ld-monitor-course .ld-course-foot{margin:9px 0 0;padding:8px 1px 0;border-top:1px solid #ffffff10;color:#71717b;font-size:10px;line-height:1.5}
+#app .leader-dashboard .ld-monitor-course .ld-course-foot strong{color:#b5b5bf;font-size:11px;font-weight:400}
+#app .leader-dashboard .ld-monitor-health-body{padding:2px 9px 8px;border:1px solid #ffffff16;border-radius:2px;background:#0c0c0d}
+#app .leader-dashboard .ld-monitor-health .ld-health-values>div{padding:10px 0;border-bottom:1px solid #ffffff1b;line-height:1.4}
+#app .leader-dashboard .ld-monitor-health .ld-health-values dt{font-size:11px;color:#92929b}
+#app .leader-dashboard .ld-monitor-health .ld-health-values dd{font-size:12px;font-weight:400;color:#dedee4}
+#app .leader-dashboard .ld-monitor-health .ld-orb-wrap{width:110px;height:110px;margin:14px auto 0}
+#app .leader-dashboard .ld-monitor-health .ld-orbit{stroke:#27272a;stroke-width:20}
+#app .leader-dashboard .ld-monitor-health .ld-arc{stroke:#efeff1;stroke-width:20;stroke-linecap:butt;filter:none;animation:none}
+#app .leader-dashboard .ld-monitor-health .ld-orb{background:#0c0c0d;box-shadow:none}
+#app .leader-dashboard .ld-monitor-health .ld-orb strong{font-size:19px;font-weight:400;color:#dcdce2}
+#app .leader-dashboard .ld-monitor-health .ld-health-caption{margin:7px 0 0;color:#9696a0;font-size:11px;font-weight:400;line-height:1.5}
+#app .leader-dashboard .ld-monitor-alerts{padding:9px 10px 0;gap:0;overflow:visible;isolation:isolate}
+#app .leader-dashboard .ld-monitor-alerts .ld-notes-head{position:relative;z-index:5;display:flex;align-items:center;min-height:26px;gap:8px;margin:0 0 7px;padding:0}
+#app .leader-dashboard .ld-monitor-alerts .ld-notes-head h2{flex:1;min-width:0;color:#d4d4d8;font-size:13px;font-weight:500;line-height:1.4;letter-spacing:0}
+#app .leader-dashboard .ld-monitor-current-filter{flex:none;color:#696973;font-size:9px;white-space:nowrap}
+#app .leader-dashboard .ld-monitor-filter{position:relative;flex:none;margin:0;padding:0;border:0;background:none}
+#app .leader-dashboard .ld-monitor-filter>summary{display:grid;place-items:center;width:24px;height:24px;margin:0;padding:0;border:1px solid #ffffff12;border-radius:2px;background:#222225;color:#a0a0a9;list-style:none;cursor:pointer}
+#app .leader-dashboard .ld-monitor-filter>summary::-webkit-details-marker{display:none}
+#app .leader-dashboard .ld-monitor-filter>summary svg{width:13px;height:13px}
+#app .leader-dashboard .ld-monitor-filter .ld-note-tabs{position:absolute;right:0;top:30px;z-index:20;display:grid;gap:2px;min-width:160px;height:auto;margin:0;padding:4px;border:1px solid #37373b;border-radius:3px;background:#19191c;box-shadow:0 8px 22px #000b}
+#app .leader-dashboard .ld-monitor-filter .ld-note-tab{display:flex;justify-content:space-between;align-items:center;width:100%;height:32px;min-height:0;margin:0;padding:0 10px;border:0;border-radius:2px;background:none;box-shadow:none;font-size:12px;font-weight:400;color:#9c9ca7}
+#app .leader-dashboard .ld-monitor-filter .ld-note-tab[aria-selected=true]{border:0;background:#2c2c31;box-shadow:none;color:#ededf0}
+#app .leader-dashboard .ld-monitor-filter .ld-note-tab em{margin:0;padding:0;background:none;border-radius:0;color:inherit;font-size:10px;font-style:normal}
+#app .leader-dashboard .ld-monitor-alerts .ld-note-scroll{flex:1;min-height:0;margin:0;padding:0 5px 0 0;border:1px solid #ffffff10;border-radius:2px;background:#0d0d0e;overflow:auto;scrollbar-width:thin;scrollbar-color:#303035 transparent;mask-image:none;-webkit-mask-image:none;overscroll-behavior:contain}
+#app .leader-dashboard .ld-monitor-alerts .ld-note-scroll::-webkit-scrollbar{display:block;width:3px}
+#app .leader-dashboard .ld-monitor-alerts .ld-note-scroll::-webkit-scrollbar-thumb{background:#303035}
+#app .leader-dashboard .ld-monitor-alerts .ld-monitor-note{display:block;margin:0;padding:0;border:0;border-bottom:1px solid #ffffff06;border-radius:0;background:none;box-shadow:none;transform:none;animation:none}
+#app .leader-dashboard .ld-monitor-note>summary{display:grid;grid-template-columns:7px minmax(0,1fr);gap:10px;min-height:65px;margin:0;padding:13px 8px 10px;border:0;list-style:none;cursor:pointer}
+#app .leader-dashboard .ld-monitor-note>summary::-webkit-details-marker{display:none}
+#app .leader-dashboard .ld-monitor-note .ld-note-dot{width:6px;height:6px;margin-top:4px;background:#5c5c63;box-shadow:none;animation:none}
+#app .leader-dashboard .ld-monitor-note .ld-note-dot.is-read{background:#34343b}
+#app .leader-dashboard .ld-monitor-note[data-kind=approval] .ld-note-dot:not(.is-read){background:#95959d;box-shadow:none}
+#app .leader-dashboard .ld-monitor-note-copy{display:grid;gap:5px;min-width:0}
+#app .leader-dashboard .ld-monitor-event{color:#9a9aa3;font-size:11px;font-weight:400;line-height:1.55;overflow-wrap:anywhere}
+#app .leader-dashboard .ld-monitor-event strong{font-weight:400;color:inherit}
+#app .leader-dashboard .ld-monitor-note-copy time{color:#62626e;font-size:9px;line-height:1.4;text-align:right}
+#app .leader-dashboard .ld-monitor-note .ld-note-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:0 9px 10px 25px;padding-top:7px;border-top:1px solid #ffffff10}
+#app .leader-dashboard .ld-monitor-note :is(.ld-note-ghost,.ld-note-primary){display:inline-flex;align-items:center;gap:5px;height:25px;min-height:0;margin:0;padding:0 7px;border:1px solid #ffffff28;border-radius:2px;background:none;color:#b7b7c0;font-size:10px;font-weight:400;box-shadow:none;transform:none}
+#app .leader-dashboard .ld-monitor-note .ld-note-primary svg{width:11px;height:11px}
+#app .leader-dashboard .ld-monitor-alert-foot{display:flex;align-items:center;justify-content:space-between;flex:none;gap:10px;height:29px;padding:0 2px}
+#app .leader-dashboard .ld-monitor-alert-foot>a{color:#767680;font-size:9px;line-height:1.4}
+#app .leader-dashboard .ld-monitor-alert-foot>button{display:grid;place-items:center;width:28px;height:24px;min-height:0;margin:0;padding:0;border:0;border-radius:2px;background:none;color:#9f9fa8;box-shadow:none}
+#app .leader-dashboard .ld-monitor-alert-foot>button svg{width:14px;height:14px}
+#app .leader-dashboard .ld-monitor-alert-foot>button:disabled{opacity:.25;cursor:default}
+#app .leader-dashboard .ld-monitor-alerts .ld-caught-up{padding:30px 12px;font-size:11px}
+#app .leader-dashboard .ld-monitor-alerts .ld-caught-up b{font-size:12px;font-weight:400}
+#app .leader-dashboard .ld-monitor-alerts .ld-note-error{margin:0;padding:6px 0;font-size:11px;color:#eaa5aa}
+@media(hover:hover){#app .leader-dashboard .ld-monitor-note>summary:hover{background:#ffffff03}#app .leader-dashboard .ld-monitor-note :is(.ld-note-ghost,.ld-note-primary):hover{background:#ffffff09;color:#eeeef2;text-decoration:none}#app .leader-dashboard .ld-monitor-filter .ld-note-tab:hover{background:#ffffff09}#app .leader-dashboard .ld-monitor-actions>nav a:hover{background:#ffffff09}#app .leader-dashboard .ld-monitor-course .ld-panel-more:hover{background:#ffffff08}}

@@ -1,0 +1,161 @@
+/* Student performance as collapsible learner blocks: header row with tile, ring and toggle; inset detail panel with
+   icon rows and chips; follow-up footer with pill actions. */
+@property --sp-p{syntax:'<number>';inherits:false;initial-value:0}
+#app .student-performance{--b-line:#ffffff14;--b-line-2:#ffffff24;--b-text:#ececf1;--b-muted:#8f8f9c;--b-accent:#8b5cf6;--ease:cubic-bezier(.2,.7,.2,1);background:#0b0b0e;border:1px solid var(--b-line);border-radius:22px;padding:28px;color:var(--b-text);font-family:'DM Sans',sans-serif;min-height:0}
+#app .student-performance svg{width:16px;height:16px;flex:none}
+
+/* Heading and filters */
+#app .student-performance .sp-heading{margin:0 0 20px;align-items:flex-end}
+#app .student-performance .sp-heading h1{font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1.15;color:#fff}
+#app .student-performance .sp-heading p{font-size:14px;color:var(--b-muted);margin-top:6px}
+#app .student-performance .sp-heading>.sp-enrol{height:40px;padding:0 18px;border:0;border-radius:10px;background:var(--b-accent);color:#fff;font-size:13.5px;font-weight:600;box-shadow:0 6px 18px -8px #8b5cf6}
+#app .student-performance .sp-heading>.sp-enrol:hover{background:#9b72f8}
+#app .student-performance .sp-filters{gap:10px}
+#app .student-performance .sp-filters :is(input,select){height:40px;padding:0 14px;border:1px solid var(--b-line-2);border-radius:10px;background:#ffffff06;color:var(--b-text);font-size:13.5px}
+#app .student-performance .sp-filters select{padding-right:34px}
+#app .student-performance .sp-filters :is(input,select):focus{border-color:#8b5cf6aa;box-shadow:0 0 0 3px #8b5cf61f;outline:none}
+#app .student-performance .sp-filters select option{background:#17171b}
+#app .student-performance .sp-count{font-size:13px;color:var(--b-muted);margin:16px 0 14px}
+
+/* Grid of blocks */
+#app .student-performance .sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px;align-items:start}
+#app .student-performance .sp-card{position:relative;min-width:0;border:1px solid var(--b-line);border-radius:18px;background:#111113;box-shadow:0 1px 0 #ffffff08 inset,0 18px 40px -28px #000;transition:border-color .2s,box-shadow .25s}
+#app .student-performance .sp-card:hover{border-color:var(--b-line-2)}
+
+/* Header row */
+#app .student-performance .sp-block-head{display:flex;align-items:center;gap:12px;padding:16px 16px 16px 18px;cursor:pointer}
+#app .student-performance .sp-tile{display:grid;place-items:center;width:38px;height:38px;flex:none;border-radius:11px;background:linear-gradient(160deg,#a07bff,#7c4ddb);color:#fff;font-size:13.5px;font-weight:700;overflow:hidden;box-shadow:inset 0 1px 0 #ffffff40}
+#app .student-performance .sp-tile img{width:100%;height:100%;object-fit:cover}
+#app .student-performance .sp-head-copy{flex:1;min-width:0}
+#app .student-performance .sp-head-copy h2{font-size:15.5px;font-weight:500;line-height:1.3;color:#fff;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#app .student-performance .sp-head-copy p{font-size:12.5px;color:var(--b-muted);margin:3px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#app .student-performance .sp-ring{--sp-p:var(--p);position:relative;display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:50%;background:conic-gradient(#8b5cf6 calc(var(--sp-p) * 1%),#ffffff14 0)}
+#app .student-performance .sp-ring:before{content:'';position:absolute;inset:4px;border-radius:50%;background:#111113}
+#app .student-performance .sp-ring b{position:relative;font-size:10.5px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+#app .student-performance .sp-card[data-complete] .sp-ring{background:conic-gradient(#5bd08f calc(var(--sp-p) * 1%),#ffffff14 0)}
+#app .student-performance .sp-toggle{display:grid;place-items:center;width:32px;height:32px;min-height:0;padding:0;flex:none;border:1px solid var(--b-line-2);border-radius:9px;background:#ffffff06;color:var(--b-text);box-shadow:none;transition:background-color .15s}
+#app .student-performance .sp-toggle:hover{background:#ffffff12}
+#app .student-performance .sp-toggle svg{transform:rotate(180deg);transition:transform .35s var(--ease)}
+#app .student-performance .is-collapsed .sp-toggle svg{transform:none}
+#app .student-performance .sp-toggle:focus-visible{outline:2px solid #a78bfa;outline-offset:2px}
+
+/* Collapsible region (grid-rows animation) */
+#app .student-performance .sp-collapse{display:grid;grid-template-rows:1fr;transition:grid-template-rows .4s var(--ease)}
+#app .student-performance .is-collapsed .sp-collapse{grid-template-rows:0fr}
+#app .student-performance .sp-collapse-inner{min-height:0;overflow:hidden}
+#app .student-performance .sp-collapse-inner>*{transition:opacity .3s ease}
+#app .student-performance .is-collapsed .sp-collapse-inner>*{opacity:0}
+
+/* Inset detail panel */
+#app .student-performance .sp-block-body{margin:0 -1px;padding:18px 18px 20px;border:1px solid var(--b-line-2);border-radius:18px;background:#19191c}
+#app .student-performance .sp-rows{display:grid;gap:2px;margin:0}
+#app .student-performance .sp-row{display:grid;grid-template-columns:136px minmax(0,1fr);align-items:center;gap:10px;min-height:34px}
+#app .student-performance .sp-row dt{display:flex;align-items:center;gap:10px;font-size:13.5px;color:#b0b0bc}
+#app .student-performance .sp-row dt svg{color:#8f8f9c}
+#app .student-performance .sp-row dd{display:flex;align-items:center;min-width:0;margin:0}
+#app .student-performance .sp-chip{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:3px 10px;border:1px solid #ffffff30;border-radius:999px;font-size:12.5px;color:#f0f0f4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+#app .student-performance .sp-chip small{font-size:12px;color:var(--b-muted)}
+#app .student-performance .sp-chip.sp-pass-score{border-color:#30a46c66;color:#7ee0a8}
+#app .student-performance .sp-chip.sp-low-score{border-color:#e5484d66;color:#f59a9d}
+#app .student-performance .sp-chip.sp-no-score{color:#c0c0ca}
+#app .student-performance .sp-progress-row{display:flex;align-items:center;gap:10px;width:100%;margin:0}
+#app .student-performance .sp-segments{display:flex;gap:3px;flex:1;height:8px;min-width:0}
+#app .student-performance .sp-segments>span{position:relative;flex:1;min-width:0;border-radius:3px;background:#ffffff14;overflow:hidden}
+#app .student-performance .sp-segments>span>img{display:none}
+#app .student-performance .sp-segment-fill{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:linear-gradient(90deg,#8b5cf6,#a78bfa)}
+#app .student-performance .sp-card[data-complete] .sp-segment-fill{background:linear-gradient(90deg,#30a46c,#5bd08f)}
+#app .student-performance .sp-progress-row>b{min-width:38px;text-align:right;font-size:12.5px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+#app .student-performance .sp-switch{display:inline-flex;align-items:center;gap:8px;padding:2px 3px 2px 9px;border:1px solid #ffffff24;border-radius:999px;background:#ffffff08;color:#a0a0ac;font-size:12.5px}
+#app .student-performance .sp-switch i{width:16px;height:16px;border-radius:50%;background:#55555f;transition:transform .3s var(--ease)}
+#app .student-performance .sp-switch[data-on=true]{border-color:#30a46c66;background:#30a46c24;color:#5bd08f}
+#app .student-performance .sp-switch[data-on=true] i{background:#4ade80;box-shadow:0 0 8px #4ade8066}
+#app .student-performance .sp-switch[data-on=false]{flex-direction:row-reverse;padding:2px 9px 2px 3px}
+#app .student-performance .sp-section{margin-top:16px}
+#app .student-performance .sp-section:first-of-type{padding-top:16px;border-top:1px solid var(--b-line)}
+#app .student-performance .sp-sub{display:block;margin-bottom:9px;font-size:13.5px;color:#b0b0bc}
+#app .student-performance .sp-lesson-chips{display:flex;flex-wrap:wrap;gap:6px}
+#app .student-performance .sp-lesson{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:3px 6px 3px 10px;border:1px solid #ffffff2a;border-radius:999px;font-size:12.5px;color:#e6e6ec;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#app .student-performance .sp-lesson svg{width:15px;height:15px;color:#7a7a86}
+#app .student-performance .sp-lesson[data-done=true] svg{color:#4ade80}
+#app .student-performance .sp-section p{margin:0;font-size:13.5px;line-height:1.6;color:#e2e2e8}
+
+/* Footer */
+#app .student-performance .sp-block-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px 14px 18px}
+#app .student-performance .sp-block-foot>span{font-size:15px;color:#fff}
+#app .student-performance .sp-block-foot>div{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+#app .student-performance .sp-pill,#app .student-performance .sp-block-foot .sp-remove{display:inline-flex;align-items:center;height:32px;min-height:32px;padding:0 13px;border:1px solid #ffffff30;border-radius:999px;background:transparent;color:#f0f0f4;font-size:12.5px;font-weight:500;text-decoration:none;box-shadow:none;transition:background-color .15s,border-color .15s,transform .15s}
+#app .student-performance .sp-pill:hover{background:#ffffff10}
+#app .student-performance .sp-pill:active{transform:scale(.96)}
+#app .student-performance .sp-pill.sp-pill-primary{border-color:#8b5cf666;background:#8b5cf626;color:#cdb8ff}
+#app .student-performance .sp-pill.sp-pill-primary:hover{background:#8b5cf640}
+#app .student-performance .sp-block-foot .sp-remove{color:#f2a1a3;border-color:#e5484d40}
+#app .student-performance .sp-block-foot .sp-remove:hover{background:#e5484d1a}
+#app .student-performance .sp-empty{grid-column:1/-1;padding:48px 20px;border:1px dashed var(--b-line-2);border-radius:18px;text-align:center}
+#app .student-performance .sp-empty h2{font-size:18px;color:#fff}
+#app .student-performance .sp-empty p{font-size:14px;color:var(--b-muted)}
+
+/* Motion */
+@keyframes sp-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes sp-ring{from{--sp-p:0}}
+@keyframes sp-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes sp-row{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+@keyframes sp-knob{from{transform:scale(.3)}to{transform:scale(1)}}
+@media(prefers-reduced-motion:no-preference){
+ #app .student-performance .sp-card{animation:sp-rise .5s var(--ease) both}
+ #app .student-performance .sp-card:nth-child(2){animation-delay:.06s}
+ #app .student-performance .sp-card:nth-child(3){animation-delay:.12s}
+ #app .student-performance .sp-card:nth-child(4){animation-delay:.18s}
+ #app .student-performance .sp-card:nth-child(5){animation-delay:.24s}
+ #app .student-performance .sp-card:nth-child(n+6){animation-delay:.3s}
+ #app .student-performance .sp-ring{animation:sp-ring 1s .3s var(--ease) both}
+ #app .student-performance .sp-segment-fill{transform-origin:left;animation:sp-fill .5s var(--ease) both}
+ #app .student-performance .sp-segments>span:nth-child(n){animation:none}
+ #app .student-performance .sp-segments>span:nth-child(2) .sp-segment-fill{animation-delay:.04s}
+ #app .student-performance .sp-segments>span:nth-child(3) .sp-segment-fill{animation-delay:.08s}
+ #app .student-performance .sp-segments>span:nth-child(4) .sp-segment-fill{animation-delay:.12s}
+ #app .student-performance .sp-segments>span:nth-child(5) .sp-segment-fill{animation-delay:.16s}
+ #app .student-performance .sp-segments>span:nth-child(6) .sp-segment-fill{animation-delay:.2s}
+ #app .student-performance .sp-segments>span:nth-child(7) .sp-segment-fill{animation-delay:.24s}
+ #app .student-performance .sp-segments>span:nth-child(8) .sp-segment-fill{animation-delay:.28s}
+ #app .student-performance .sp-segments>span:nth-child(9) .sp-segment-fill{animation-delay:.32s}
+ #app .student-performance .sp-segments>span:nth-child(10) .sp-segment-fill{animation-delay:.36s}
+ #app .student-performance .sp-card:not(.is-collapsed) .sp-row{animation:sp-row .4s var(--ease) both}
+ #app .student-performance .sp-row:nth-child(2){animation-delay:.03s}
+ #app .student-performance .sp-row:nth-child(3){animation-delay:.06s}
+ #app .student-performance .sp-row:nth-child(4){animation-delay:.09s}
+ #app .student-performance .sp-row:nth-child(5){animation-delay:.12s}
+ #app .student-performance .sp-row:nth-child(6){animation-delay:.15s}
+ #app .student-performance .sp-row:nth-child(7){animation-delay:.18s}
+ #app .student-performance .sp-row:nth-child(8){animation-delay:.21s}
+ #app .student-performance .sp-switch[data-on=true] i{animation:sp-knob .4s .5s cubic-bezier(.3,1.5,.5,1) both}
+ #app .student-performance .sp-lesson{transition:border-color .15s,background-color .15s}
+ #app .student-performance .sp-lesson:hover{border-color:#ffffff4d;background:#ffffff08}
+}
+/* Masonry: blocks stack tightly so a collapsed card never leaves a gap */
+#app .student-performance .sp-grid{display:block;columns:360px auto;column-gap:16px}
+#app .student-performance .sp-grid>.sp-card{break-inside:avoid;margin:0 0 16px;display:block}
+#app .student-performance .sp-grid>.sp-card>.sp-block-head{display:flex}
+#app .student-performance .sp-filters>label{padding:0;border:0;background:none;box-shadow:none}
+
+/* Neutral palette: light grey progress, white primary, orange "View" like the reference RSVP */
+#app .student-performance{--b-accent:#f4f4f5}
+#app .student-performance .sp-heading>.sp-enrol{background:#f4f4f5;color:#111113;box-shadow:none}
+#app .student-performance .sp-heading>.sp-enrol:hover{background:#fff}
+#app .student-performance .sp-filters :is(input,select):focus{border-color:#ffffff59;box-shadow:0 0 0 3px #ffffff14}
+#app .student-performance .sp-tile{position:relative;overflow:visible;background:linear-gradient(160deg,#f4f4f5,#a1a1aa);color:#18181b;box-shadow:inset 0 1px 0 #fff}
+#app .student-performance .sp-tile img{border-radius:11px}
+#app .student-performance .sp-tile-badge{position:absolute;right:-5px;bottom:-5px;padding:2px;border-radius:7px;background:#111113;line-height:0}
+#app .student-performance .sp-tile-badge .sp-mark{width:16px;height:16px;border-radius:5px}
+#app .student-performance .sp-ring{background:conic-gradient(#e4e4e7 calc(var(--sp-p) * 1%),#ffffff14 0)}
+#app .student-performance .sp-segment-fill{background:linear-gradient(90deg,#d4d4d8,#f4f4f5)}
+#app .student-performance .sp-mark{display:inline-grid;place-items:center;width:16px;height:16px;flex:none;border-radius:4px;background:var(--mk);color:var(--mk-fg);box-shadow:inset 0 0 0 1px #ffffff26}
+#app .student-performance .sp-mark svg{width:11px;height:11px}
+#app .student-performance .sp-chip .sp-mark{margin-left:-4px}
+#app .student-performance .sp-lesson{padding-left:4px;gap:7px}
+#app .student-performance .sp-lesson .sp-mark{width:18px;height:18px;border-radius:999px}
+#app .student-performance .sp-lesson .sp-mark svg{width:11px;height:11px}
+#app .student-performance .sp-pill.sp-pill-primary{border-color:#f9731659;background:#f9731626;color:#fb923c}
+#app .student-performance .sp-pill.sp-pill-primary:hover{background:#f973163d;color:#fdba74}
+#app .student-performance .sp-pill,#app .student-performance .sp-block-foot .sp-remove{border-color:#ffffffb3;color:#fff}
+#app .student-performance .sp-block-foot .sp-remove{border-color:#ffffffb3;color:#fff}
+#app .student-performance .sp-block-foot .sp-remove:hover,#app .student-performance .sp-pill:not(.sp-pill-primary):hover{background:#ffffff14}

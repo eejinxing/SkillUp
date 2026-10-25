@@ -1,0 +1,152 @@
+/* Purple learning overview + lifted metric surfaces + capsule course progress. */
+.lc-fusion {
+  --x-panel: #111215;
+  --x-dim: #a5a5b2;
+  --fusion-green: #a9de87;
+  --fusion-yellow: #eed17e;
+  padding: 20px 32px 44px;
+  background: #070709;
+}
+.lc-fusion::before { display: none; }
+.lc-fusion .lx-hero {
+  grid-template-columns: minmax(0, 1fr) 288px;
+  align-items: stretch;
+  gap: 30px;
+  min-height: 390px;
+  padding: 30px;
+  border-radius: 30px;
+  border: 1px solid #b9a5eb25;
+  background: #110d1f;
+  box-shadow: inset 0 1px 0 #ffffff0d;
+}
+.lc-fusion .lx-glow {
+  background: radial-gradient(ellipse at 67% -40%, #bc8bea70, transparent 57%), radial-gradient(ellipse at 3% 0%, #6b3da975, transparent 56%), linear-gradient(115deg, #1f1034, #141021 55%, #0b0b12);
+  animation: none;
+  transform: none;
+}
+.lc-fusion .lx-hero::after { background: linear-gradient(0deg, #05050940, transparent 80%); }
+.lc-fusion .lf-summary { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; min-width: 0; position: relative; z-index: 1; }
+.lc-fusion .lf-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 22px; }
+.lc-fusion .lf-eyebrow { display: inline-flex; align-items: center; gap: 8px; color: #d1c6e1; font-size: 9px; font-weight: 500; letter-spacing: .13em; }
+.lc-fusion .lf-eyebrow i { width: 5px; height: 5px; border-radius: 50%; background: #c6b1e7; box-shadow: 0 0 0 4px #c6b1e711; }
+.lc-fusion .lf-heading h2 { max-width: 450px; margin: 14px 0 9px; font-size: clamp(25px, 2.5vw, 36px); line-height: 1.13; font-weight: 400; letter-spacing: -.045em; color: #faf8ff; }
+.lc-fusion .lf-heading h2 span { color: #c9badc; }
+.lc-fusion .lf-heading p { margin: 0; color: #bcb3cb; font-size: 12px; line-height: 1.7; }
+.lc-fusion .lf-continue { display: inline-flex; flex: none; align-items: center; gap: 12px; padding: 9px 13px; margin-bottom: 3px; color: #ece7f5; border: 1px solid #ffffff21; background: #ffffff08; border-radius: 999px; font-size: 11px; white-space: nowrap; transition: background-color 160ms ease-out; }
+.lc-fusion .lf-continue svg { width: 13px; height: 13px; }
+
+/* Original CSS glass sculpture: a fan of rounded, reflective surfaces. */
+.lc-fusion .lf-sculpture { position: absolute; top: -45px; left: 42%; width: 290px; height: 260px; z-index: -1; pointer-events: none; opacity: .65; transform: rotate(12deg); }
+.lc-fusion .lf-sculpture i { position: absolute; top: 15px; left: 126px; width: 36px; height: 150px; border: 1px solid #e3d6ff51; border-radius: 23px 23px 13px 13px; transform-origin: 50% 210px; transform: rotate(var(--a)); background: linear-gradient(90deg, #ac78d839, #ffffff61 8%, #b68cdb18 23%, #b994e326 69%, #f6eaff68 91%, #af81e02e); box-shadow: inset 3px 0 5px #fff2, inset -4px 0 7px #3c145a35, 0 6px 20px #09031220; }
+.lc-fusion .lf-sculpture i:nth-child(3n) { background: linear-gradient(90deg, #c5aae630, #e9e1ff77 8%, #947db818 26%, #c7bbdd2e 80%, #ffffff73); }
+
+/* Three connected visual levels; the XP metric is the raised centre tile. */
+.lc-fusion .lx-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; gap: 12px; }
+.lc-fusion .lx-stat { justify-content: space-between; min-height: 174px; margin-top: 0; gap: 18px; padding: 20px; background: #17151de8; border: 1px solid #ffffff13; border-radius: 23px; backdrop-filter: blur(18px); box-shadow: none; }
+.lc-fusion .lx-stat header { font-size: 12px; font-weight: 400; letter-spacing: 0; min-height: 21px; }
+.lc-fusion .lx-stat header > span { line-height: 1.3; }
+.lc-fusion .lx-stat em { height: 21px; gap: 0; padding: 0 7px; font-size: 10px; font-weight: 400; color: #cec7d8; background: #ffffff07; border: 1px solid #ffffff17; box-shadow: none; }
+.lc-fusion .lx-stat em::before { display: none; }
+.lc-fusion .lx-stat strong { font-size: clamp(36px, 4vw, 55px); font-weight: 300; letter-spacing: -.055em; margin-top: auto; }
+.lc-fusion .lx-stat strong small { font-size: 20px; margin-left: 2px; letter-spacing: -.04em; }
+.lc-fusion .lf-stat-footer { display: grid; gap: 10px; }
+.lc-fusion .lf-stat-footer > span { font-size: 10px; color: #ada6bb; line-height: 1.2; }
+.lc-fusion .lf-stat-footer i { height: 3px; background: #ffffff14; }
+.lc-fusion .lx-blue i::after { background: linear-gradient(90deg, #96c6af, #c4ead4); }
+.lc-fusion .lx-pink i::after { background: linear-gradient(90deg, #cfb36c, #f0dca0); }
+.lc-fusion .lx-stat.lx-violet { min-height: 197px; border-color: #ffffff5c; border-radius: 28px 28px 23px 23px; background: linear-gradient(145deg, #fbfaf7, #e5e1e8); box-shadow: 0 12px 25px #03010624, inset 0 1px 0 #fff; backdrop-filter: none; }
+.lc-fusion .lx-violet :is(header, strong) { color: #24212b; }
+.lc-fusion .lx-violet em { color: #4e6340; background: #b8d39c2b; border-color: #4c6c3520; }
+.lc-fusion .lx-violet .lf-stat-footer > span { color: #706879; }
+.lc-fusion .lx-violet .lf-stat-footer i { background: #24212b1a; }
+.lc-fusion .lx-violet i::after { background: linear-gradient(90deg, #6e518b, #b391ca); }
+
+/* Announcement card stays attached to the summary, with a quieter glass surface. */
+.lc-fusion .lx-ach { min-width: 0; padding: 20px; border-radius: 24px; gap: 6px; background: #12101870; border: 1px solid #ffffff17; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: inset 0 1px 0 #ffffff08; }
+.lc-fusion .lx-ach-icons { gap: 2px; color: #d2c5e4; }
+.lc-fusion .lx-ach-icons > span:nth-child(2) { display: none; }
+.lc-fusion .lx-ach-open { width: 28px; height: 28px; border-radius: 50%; background: #ffffff08; }
+.lc-fusion .lx-ach h2 { margin-top: 17px; font-size: 21px; line-height: 1.25; font-weight: 400; }
+.lc-fusion .lx-ach > small { color: #b9afca; font-size: 10px; letter-spacing: 0; }
+.lc-fusion .lx-ach p { margin-top: 17px; font-size: 12px; line-height: 1.8; color: #bcb4c9; -webkit-line-clamp: 5; }
+.lc-fusion .lx-ach p strong { margin-bottom: 7px; color: #f0eaf7; font-size: 12px; font-weight: 500; }
+.lc-fusion .lx-ach footer { border-top-color: #ffffff13; font-size: 10px; gap: 8px; padding-top: 13px; white-space: normal; line-height: 1.6; }
+.lc-fusion .lx-ach footer span { flex: none; width: 24px; height: 24px; background: #ffffff0e; }
+
+/* Original split: activity chart left, active learning right. */
+.lc-fusion .lx-row { grid-template-columns: minmax(0, .82fr) minmax(0, 1.38fr); align-items: stretch; gap: 16px; margin-top: 17px; }
+.lc-fusion .lx-panel { padding: 24px; border: 1px solid #ffffff0b; background: #111215; border-radius: 27px; }
+.lc-fusion .lx-chart { min-height: 326px; }
+.lc-fusion .lf-overline { display: block; margin-bottom: 13px; color: #a2a2ad; font-size: 9px; letter-spacing: .12em; line-height: 1.2; }
+.lc-fusion .lx-chart-total strong { font-size: 34px; line-height: 1.1; font-weight: 300; letter-spacing: -.045em; }
+.lc-fusion .lx-chart-total strong > span { font-size: 21px; color: #b0a9bd; letter-spacing: -.03em; }
+.lc-fusion .lx-chart-total small { margin-top: 7px; color: #a1a0af; font-size: 10px; letter-spacing: 0; }
+.lc-fusion .lx-toggle { top: 20px; right: 20px; padding: 3px; background: #050508; border-color: #ffffff0e; box-shadow: none; }
+.lc-fusion .lx-toggle button { padding: 4px 9px; font-size: 9px; line-height: 1.4; letter-spacing: 0; }
+.lc-fusion .lx-toggle button[aria-pressed=true] { background: #33333c; border-color: #ffffff0d; box-shadow: none; }
+.lc-fusion .lx-bars { margin-top: 27px; min-height: 158px; background: repeating-linear-gradient(to top, #ffffff10 0 1px, transparent 1px 33.33%); }
+.lc-fusion .lx-bars span, .lc-fusion .lx-bars span.on { flex-basis: 8px; }
+.lc-fusion .lx-bars span i::before, .lc-fusion .lx-bars span i::after { border-radius: 999px; background: linear-gradient(180deg, #b697d5, #8866ad); }
+.lc-fusion .lf-chart-axis { display: flex; justify-content: space-between; margin-top: 11px; color: #95939f; font-size: 9px; font-variant-numeric: tabular-nums; }
+
+/* Rounded list rows meet long, colour-coded progress capsules. */
+.lc-fusion .lx-courses { padding: 24px 20px 20px; }
+.lc-fusion .lx-courses > header { margin: 0 3px 18px; }
+.lc-fusion .lx-courses h2 { color: #e1dfe8; font-size: 18px; font-weight: 400; }
+.lc-fusion .lx-courses header div { gap: 8px; }
+.lc-fusion .lx-sort { width: 28px; height: 28px; border: 1px solid #ffffff10; border-radius: 50%; color: #b8b5c3; }
+.lc-fusion .lx-sort[aria-pressed=true] { background: #ffffff16; color: #fff; }
+.lc-fusion .lx-me-sm { width: 27px; height: 27px; font-size: 9px; box-shadow: none; }
+.lc-fusion .lx-courses ul { display: grid; gap: 10px; }
+.lc-fusion .lx-courses li { min-width: 0; }
+.lc-fusion .lx-courses li a { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: 18px; min-height: 89px; padding: 17px 18px; border: 1px solid #ffffff06; background: #24252b; border-radius: 27px; transition: background-color 160ms ease-out, border-color 160ms ease-out; }
+.lc-fusion .lx-courses li[data-progress="0"] a { background: #1b1d21; }
+.lc-fusion .lx-course-info { gap: 10px; }
+.lc-fusion .lf-course-marks { display: flex; align-items: center; flex: none; width: 51px; }
+.lc-fusion .lf-course-index { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 50%; background: #3d3d48; color: #dddae6; font-size: 9px; font-variant-numeric: tabular-nums; border: 2px solid #24252b; }
+.lc-fusion .lx-glyph { width: 30px; height: 30px; margin-left: -8px; border: 2px solid #24252b; background: #16191b; color: #e1e5df; }
+.lc-fusion .lx-courses li:nth-child(2) .lx-glyph { background: #302b1e; color: #eddbab; }
+.lc-fusion .lx-courses li:nth-child(3) .lx-glyph { background: #282335; color: #d0b9e7; }
+.lc-fusion .lx-glyph svg { width: 14px; height: 14px; stroke-width: 1.35; }
+.lc-fusion .lx-courses strong { font-size: 12px; font-weight: 400; color: #f0eef4; letter-spacing: 0; }
+.lc-fusion .lx-courses small { margin-top: 5px; color: #a4a4b0; font-size: 9px; letter-spacing: 0; line-height: 1.5; }
+.lc-fusion .lx-course-progress { display: grid; grid-template-columns: minmax(0, 1fr) 34px; gap: 12px; align-items: start; margin: 0; }
+.lc-fusion .lf-course-track { display: block; min-width: 0; }
+.lc-fusion .lx-line { height: 17px; border-radius: 999px; border: 1px solid #ffffff06; background: #101215; }
+.lc-fusion .lx-line i { inset: 0; }
+.lc-fusion .lx-line i::after { border-radius: 999px; background: var(--fusion-green); }
+.lc-fusion .lx-t1 i::after { background: var(--fusion-yellow); }
+.lc-fusion .lx-t2 i::after { background: #c4abde; }
+.lc-fusion .lf-course-track > small { margin-top: 7px; font-size: 8px; color: #979ba5; }
+.lc-fusion .lx-courses em { font-size: 11px; line-height: 17px; color: #dce0dc; }
+.lc-fusion .lx-courses .lx-suggested a { background: #16171c; border: 1px dashed #ffffff18; }
+.lc-fusion .lx-suggested .lx-glyph { margin: 0; width: 38px; height: 38px; border: 1px solid #ffffff12; color: #d4c7e4; background: #23202b; }
+.lc-fusion .lx-courses .lx-suggested .lx-course-progress { display: flex; justify-content: flex-end; align-items: center; }
+.lc-fusion .lx-explore { height: 31px; padding: 0 11px; border-color: #ffffff17; background: #ffffff06; font-size: 10px; letter-spacing: 0; }
+.lc-fusion .lx-empty { font-size: 12px; padding: 35px 10px; color: #b3adbf; }
+.lc-fusion :is(a, button):focus-visible { outline: 2px solid #c5a3e8; outline-offset: 3px; }
+.lc-fusion :is(a, button):active { transform: scale(.985); }
+@media (hover: hover) {
+  .lc-fusion .lf-continue:hover { background: #ffffff15; }
+  .lc-fusion .lx-courses li a:hover { background: #303139; border-color: #ffffff20; }
+  .lc-fusion .lx-courses li a:hover strong { color: #fff; }
+}
+
+@media (max-width: 1180px) {
+  .lc-fusion { padding: 20px 24px 40px; }
+  .lc-fusion .lx-hero { grid-template-columns: minmax(0, 1fr) 258px; gap: 22px; padding: 25px; }
+  .lc-fusion .lf-heading { align-items: flex-start; gap: 12px; }
+  .lc-fusion .lf-heading h2 { font-size: 30px; }
+  .lc-fusion .lf-continue { padding: 8px 10px; font-size: 10px; }
+  .lc-fusion .lx-stat { padding: 17px 14px; }
+  .lc-fusion .lx-stat header { font-size: 11px; gap: 5px; }
+  .lc-fusion .lx-stat em { padding: 0 5px; font-size: 9px; }
+  .lc-fusion .lx-stat strong { font-size: 44px; }
+  .lc-fusion .lx-row { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
+  .lc-fusion .lx-courses li a { grid-template-columns: 1fr; gap: 13px; padding: 16px 18px; }
+  .lc-fusion .lx-course-progress { margin-left: 61px; }
+  .lc-fusion .lx-courses .lx-suggested .lx-course-progress { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lc-fusion * { animation: none !important; transition: none !important; }
+}
