@@ -98,12 +98,13 @@ namespace SKILL_UP.Backend
             return value is DBNull ? (decimal?)null : Convert.ToDecimal(value);
         }
 
-        public static DateTime Date(this SqlDataReader r, string column) => DateTime.SpecifyKind((DateTime)r[column], DateTimeKind.Utc);
+        // Times in the database are the PC's local time, so they are labelled Local when read.
+        public static DateTime Date(this SqlDataReader r, string column) => DateTime.SpecifyKind((DateTime)r[column], DateTimeKind.Local);
 
         public static DateTime? DateN(this SqlDataReader r, string column)
         {
             var value = r[column];
-            return value is DBNull ? (DateTime?)null : DateTime.SpecifyKind((DateTime)value, DateTimeKind.Utc);
+            return value is DBNull ? (DateTime?)null : DateTime.SpecifyKind((DateTime)value, DateTimeKind.Local);
         }
     }
 }

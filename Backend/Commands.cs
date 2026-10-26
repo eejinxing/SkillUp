@@ -33,7 +33,8 @@ namespace SKILL_UP.Backend
         public int? SignIn { get; private set; }
         public bool SignOut { get; private set; }
 
-        static DateTime Now => DateTime.UtcNow;
+        /// <summary>The PC's current local time. Stored as is, so the database shows the same clock as the device.</summary>
+        static DateTime Now => DateTime.Now;
 
         public Commands(Db db, Model m, UserRow me)
         {

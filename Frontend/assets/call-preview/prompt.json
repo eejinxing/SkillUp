@@ -1,6 +1,0 @@
-{
-  "mode": "built-in image_gen",
-  "use": "Illustrative portrait for simulated incoming calls only",
-  "reference": "codex-clipboard-448f4767-4514-4097-96fc-4f65ec428995.png",
-  "prompt": "Use case: identity-preserve. Generate a clean photographic still for a DEMO video-call card, based on the mature silver-haired smiling man inside the video window at the right of the reference. Preserve his friendly mature appearance, light skin, silver swept-back hair, white collared shirt, chest-up framing and warm smile. Only the man and his softly blurred bright home-office bookshelf background; remove the entire website interface, buttons, borders, labels, icons and overlays. Frontal eye-level webcam view, natural daylight, realistic photography, landscape 4:3, sharp but natural skin texture. The photo fills the complete frame, no margins, no text, no UI. This is an illustrative demo still."
-}
