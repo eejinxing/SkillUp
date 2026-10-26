@@ -16,10 +16,9 @@ namespace SKILL_UP.Frontend
         protected override void OnPreRender(EventArgs e)
         {
             // The lecturer's file structure is Web Forms. Existing client-side behaviour is intentionally retained.
-            // Encode query-derived IDs before putting the initial hash in the document.
-            var routeJson = HttpUtility.JavaScriptStringEncode(initialRoute, true);
-            RouteBootstrap.Text = "<script>if(!location.hash){history.replaceState(null,'','#/'+"
-                + routeJson + ");}</script>";
+            // js/route-bootstrap.js reads this attribute. ASP.NET HTML-encodes attribute values, so
+            // query-derived IDs are safe here.
+            SkillBody.Attributes["data-initial-route"] = initialRoute;
             base.OnPreRender(e);
         }
     }
