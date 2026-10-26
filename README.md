@@ -28,8 +28,6 @@ Every signed-in role also has messages, discussions, live sessions, an AI compan
 
 `.aspx` pages need IIS or IIS Express. Opening them directly from disk does not work.
 
-If the page shows `Could not find a part of the path '...\bin\roslyn\csc.exe'`, your copy of `SKILL UP.csproj` is older than the fix that copies the compiler on the first build. Pull the latest code, or right-click the solution and choose **Restore NuGet Packages**, then **Build → Rebuild Solution**.
-
 ### Option 2: Frontend only (no .NET)
 
 Requires Node.js 22 or later. No `npm install` is needed.

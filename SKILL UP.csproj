@@ -271,13 +271,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <!-- On a fresh clone VS restores packages/ after loading the project, so the package .props import above is skipped and bin\roslyn\csc.exe is never copied. Copy it here as a fallback. -->
-  <Target Name="EnsureRoslynCompilerInBin" AfterTargets="CopyFilesToOutputDirectory" Condition="!Exists('$(MSBuildProjectDirectory)\bin\roslyn\csc.exe')">
-    <ItemGroup>
-      <_RoslynFallbackFiles Include="$(MSBuildProjectDirectory)\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\*" />
-    </ItemGroup>
-    <Copy SourceFiles="@(_RoslynFallbackFiles)" DestinationFolder="$(MSBuildProjectDirectory)\bin\roslyn" SkipUnchangedFiles="true" />
-  </Target>
   <!-- Skill UP frontend runtime; preserve script and CSS order in Frontend/index.html. -->
   <ItemGroup>
     <Content Include="Frontend\index.html;Frontend\*.aspx;Frontend\SkillUp.Master;Frontend\css\*.css;Frontend\js\**\*.js;Frontend\assets\**\*;Frontend\Web.config" Exclude="Frontend\assets\**\*.md;Frontend\assets\**\*.txt" />
