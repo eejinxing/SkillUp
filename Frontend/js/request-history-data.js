@@ -32,5 +32,5 @@
     });
     return rows;
   }
-  root.SkillRequestHistory={build,enabled:()=>{try{return localStorage.getItem('skillup.requests.demoHistory')!=='off';}catch{return true;}}};
+  root.SkillRequestHistory={build,enabled:()=>{if(root.SkillRuntimeConfig?.mode==='http')return false;try{return localStorage.getItem('skillup.requests.demoHistory')!=='off';}catch{return true;}}};
 })(globalThis);

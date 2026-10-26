@@ -2,7 +2,7 @@
   Skill UP - one-step local database setup.
 
   Creates App_Data\SkillUp.mdf on SQL Server LocalDB and runs Database\create-tables.sql
-  (37 tables). Run it once after cloning, from the project folder:
+  (37 tables) and Database\backend-extensions.sql. Run it once after cloning, from the project folder:
 
       powershell -ExecutionPolicy Bypass -File Database\setup-db.ps1
 
@@ -50,6 +50,9 @@ try {
     Write-Host 'Creating tables...'
     sqlcmd -S $server -d $tempDb -E -b -i $sqlFile
     if ($LASTEXITCODE -ne 0) { throw "create-tables.sql failed (exit code $LASTEXITCODE)." }
+    # Extra columns and tables the web app needs. The app also applies this itself on first start.
+    sqlcmd -S $server -d $tempDb -E -b -i (Join-Path $PSScriptRoot 'backend-extensions.sql')
+    if ($LASTEXITCODE -ne 0) { throw "backend-extensions.sql failed (exit code $LASTEXITCODE)." }
 }
 finally {
     # Detach so the web app can attach the file itself through AttachDbFilename (see Web.config).

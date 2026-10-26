@@ -10,6 +10,7 @@
 <asp:ContentPlaceHolder ID="PageContent" runat="server" />
 <dialog id="dialog" aria-labelledby="dialog-title"></dialog><div id="toast" role="status" aria-live="polite"></div><div id="busy" role="status" hidden>Saving changes…</div><noscript>This learning workspace requires JavaScript. Please enable it to continue.</noscript>
 <asp:Literal ID="RouteBootstrap" runat="server" />
+<script>window.SkillRuntimeMode='http';</script>
 <script src="js/runtime-config.js"></script>
 <script src="js/seed.js"></script>
 <script src="js/my-courses-data.js"></script>

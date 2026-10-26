@@ -1,5 +1,7 @@
 # Backend handoff
 
+> **2026-10-26: the backend now exists.** `Backend/` implements `GET /api/workspace` and every `POST /api/commands/{action}` below against `App_Data/SkillUp.mdf`, and the Web Forms pages use `http` mode. See [BACKEND.md](BACKEND.md). The sections below describe the original frontend handoff; their "no database / no sign-in" notes are historical.
+
 Last updated: 2026-10-20 (Asia/Kuala_Lumpur). This delivery is the **Web Forms .aspx/.aspx.cs file structure plus the existing JavaScript features**. It is not a finished backend.
 
 ## File format required by the lecturer

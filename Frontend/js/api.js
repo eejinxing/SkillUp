@@ -6,14 +6,18 @@
   const id=()=>globalThis.crypto?.randomUUID?.()||'id'+Date.now()+Math.random().toString(36).slice(2);
   const now=()=>new Date().toISOString();
   const fail=(message,status=400)=>{const e=new Error(message);e.status=status;throw e;};
-  let db;try{db=JSON.parse(localStorage.getItem(KEY));}catch{} if(!db||db.version!==1)db=SkillData.seed();
-  let session=localStorage.getItem(SESSION)||null;
+  // The localStorage mock database is only loaded in mock mode; http mode keeps nothing in browser storage.
+  let db,session=null;
+  if(config.mode!=='http'){
+  try{db=JSON.parse(localStorage.getItem(KEY));}catch{} if(!db||db.version!==1)db=SkillData.seed();
+  session=localStorage.getItem(SESSION)||null;
   if(root.SkillProgramDemo)root.SkillProgramDemo.apply(db);
   if(root.SkillLeaderboardDemo)root.SkillLeaderboardDemo.apply(db);
   db.resources ||= [];
   db.globalMessages ||= SkillData.seed().globalMessages;
   db.xpLog ||= typeof SkillXpHistory!=='undefined'?SkillXpHistory.build(db):[];
   if(typeof SkillXpHistory!=='undefined'&&SkillXpHistory.ensureScores)SkillXpHistory.ensureScores(db.xpLog);
+  }
   const current=()=>db.users.find(u=>u.id===session&&u.status==='Active')||null;
   function persist(){try{localStorage.setItem(KEY,JSON.stringify(db));}catch{fail('Browser storage is full or unavailable. Export your data before clearing storage.',507);}}
   function must(...roles){const u=current();if(!u)fail('Please sign in to continue.',401);if(roles.length&&!roles.includes(u.role))fail('You do not have permission for this action.',403);return u;}
@@ -38,7 +42,7 @@
   function publicState(){ensureCourseRequests();const result=clone(db);result.users=result.users.map(({password,...u})=>u);return {...result,currentUser:current()?result.users.find(u=>u.id===session):null};}
   let failNext=false;
   async function request(action,payload={}){
-    if(config.mode==='http'){const response=await fetch(config.baseUrl+(action==='state'?'/workspace':'/commands/'+action),{method:action==='state'?'GET':'POST',credentials:'include',headers:{'Content-Type':'application/json'},...(action==='state'?{}:{body:JSON.stringify(payload)})});const data=await response.json().catch(()=>({}));if(!response.ok)fail(data.detail||data.message||'Request failed. Please try again.',response.status);return data;}
+    if(config.mode==='http'){const response=await fetch(config.baseUrl+(action==='state'?'/workspace':'/commands/'+action),{method:action==='state'?'GET':'POST',credentials:'include',headers:{'Content-Type':'application/json','X-SkillUp-Request':'1'},...(action==='state'?{}:{body:JSON.stringify(payload)})});const data=await response.json().catch(()=>({}));if(!response.ok)fail(data.detail||data.message||'Request failed. Please try again.',response.status);return data;}
     await new Promise(r=>setTimeout(r,config.latency));if(failNext&&action!=='state'){failNext=false;fail('Simulated connection error. Your changes were not saved. Please try again.',503);}
     if(action==='state')return publicState();
     const before=clone(db),beforeSession=session;let result;
