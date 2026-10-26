@@ -59,7 +59,8 @@ namespace SKILL_UP.Backend
         {
             DateTime value;
             var text = (string)token;
-            return DateTime.TryParse(text, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal, out value) ? value : DateTime.UtcNow;
+            // The seed file holds UTC times; they are stored as the PC's local time like every other row.
+            return DateTime.TryParse(text, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal, out value) ? value.ToLocalTime() : DateTime.Now;
         }
 
         static string S(JToken token, string key) => token[key]?.Type == JTokenType.String ? (string)token[key] : null;
@@ -75,7 +76,7 @@ namespace SKILL_UP.Backend
             var lessonTypes = new Dictionary<string, string>();
             var quizzes = new Dictionary<string, int>();
             var hashes = new Dictionary<string, string>();
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
 
             foreach (var u in seed["users"])
             {

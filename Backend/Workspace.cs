@@ -13,7 +13,12 @@ namespace SKILL_UP.Backend
     /// </summary>
     public static class Workspace
     {
-        public static string Iso(DateTime utc) => DateTime.SpecifyKind(utc, DateTimeKind.Utc).ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'", CultureInfo.InvariantCulture);
+        /// <summary>Sent to the browser as UTC with a Z, so it converts the time to the viewer's own clock. Database times are the PC's local time.</summary>
+        public static string Iso(DateTime time)
+        {
+            var utc = time.Kind == DateTimeKind.Utc ? time : DateTime.SpecifyKind(time, DateTimeKind.Local).ToUniversalTime();
+            return utc.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'", CultureInfo.InvariantCulture);
+        }
         static string Day(DateTime? date) => date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? "";
         static string Id(int id) => id.ToString(CultureInfo.InvariantCulture);
         static string Id(int? id) => id?.ToString(CultureInfo.InvariantCulture);

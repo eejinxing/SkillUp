@@ -185,6 +185,31 @@ var connectionString = ConfigurationManager.ConnectionStrings["SkillUp"].Connect
 using (var connection = new SqlConnection(connectionString)) { /* ... */ }
 ```
 
+**Roles.** `[USER].role_id` points to the `ROLE` table. The numbers are fixed because `Database/create-tables.sql` inserts the four roles in this order:
+
+| `role_id` | Role | What they do |
+|---|---|---|
+| 1 | Learner | Enrols in courses and completes activities and quizzes |
+| 2 | Instructor | Creates and teaches courses, tracks learner performance |
+| 3 | Program Leader | Manages programs and approves course content |
+| 4 | Admin | Manages user accounts and the platform |
+
+To see them in the database, run `SELECT role_id, role_name FROM ROLE;`. To list users with their role names:
+
+```sql
+SELECT u.user_id, u.username, r.role_name
+FROM [USER] u JOIN ROLE r ON r.role_id = u.role_id;
+```
+
+**Timestamps.** Every `created_at`, `last_login` and similar column holds the **current time of the computer running the site**, with no time zone stored. If your PC clock says 18:04 when you register, the row shows `18:04`. Two places set it:
+
+- The SQL column defaults use `SYSDATETIME()`, the PC's local time.
+- The backend (`Backend/Commands.cs`) uses `DateTime.Now`, also the PC's local time.
+
+The browser still shows each viewer their own clock. The backend sends times to the page as UTC, and the page converts them for display. Times you type into forms, such as a live session's start time, are stored exactly as entered.
+
+Rows created before 2026-10-26 were saved in UTC, so in Malaysia they appear 8 hours earlier than the PC clock. To fix a database that has such rows, run [`Database/shift-existing-times-to-local.sql`](Database/shift-existing-times-to-local.sql) **once**, before using the updated site: stop the site, open a **New Query** on your `SkillUp.mdf` connection in Server Explorer, paste the file and press **Ctrl+Shift+E**. A marker in the database stops a second run from shifting the times again. A database created after 2026-10-26 does not need it.
+
 **Things to know:**
 
 - `USER` is a reserved word in SQL Server, so write the table as `[USER]` in every query.
