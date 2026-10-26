@@ -24,7 +24,14 @@ Every signed-in role also has messages, discussions, live sessions, an AI compan
 
 1. Open `SKILL UP.slnx` (or `SKILL UP.csproj`) in Visual Studio.
 2. Build once to restore the NuGet packages. The `packages/` folder is not committed.
-3. Press **F5**. IIS Express serves `https://localhost:44353/`, and `Default.aspx` redirects to `Frontend/Home.aspx`.
+3. Create the local database once (only needed when you work on the backend; the frontend runs without it). From the project folder:
+
+   ```powershell
+   powershell -File Database\setup-db.ps1
+   ```
+
+   This creates `App_Data\SkillUp.mdf` on LocalDB and runs `Database/create-tables.sql` (37 tables). It does nothing if the file already exists.
+4. Press **F5**. IIS Express serves `https://localhost:44353/`, and `Default.aspx` redirects to `Frontend/Home.aspx`.
 
 `.aspx` pages need IIS or IIS Express. Opening them directly from disk does not work.
 
