@@ -11,7 +11,7 @@ Frontend/js/api.js  ──GET  /api/workspace──────────►  
 ```
 
 - `App_Start/RouteConfig.cs` sends every `/api/...` URL to `Backend/ApiHandler.cs`.
-- `SkillUp.Master` sets `window.SkillRuntimeMode='http'`, so every `.aspx` page uses the API. `Frontend/index.html` (the Node preview) keeps the mock.
+- `SkillUp.Master` sets `data-runtime-mode="http"` on `<body>` (read by `js/runtime-config.js`), so every `.aspx` page uses the API. `Frontend/index.html` (the Node preview) keeps the mock.
 - Each command runs inside one transaction. Any error rolls back everything that command wrote.
 - Commands run one at a time (a lock in `ApiHandler`). That is enough for a single IIS Express process. Several servers would need database-level concurrency checks instead.
 - Errors return the right HTTP status (400, 401, 403, 404, 409) with `{ "detail": "..." }`, and the UI shows that message. Unexpected errors return 500 with a generic message and are written to the trace log.
