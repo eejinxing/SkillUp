@@ -4,7 +4,7 @@ Skill UP is a role-based online learning platform built for the WAPP group assig
 
 The app is an **ASP.NET Web Forms** project (.NET Framework 4.8.1). Each screen has an `.aspx` / `.aspx.cs` entry page, and a shared JavaScript frontend renders the UI inside them.
 
-> **Status:** The frontend is complete and runs on mock data stored in the browser's `localStorage`. The backend does not exist yet: there is no database, real sign-in, email, AI or video-call service. [docs/BACKEND-HANDOFF.md](docs/BACKEND-HANDOFF.md) describes what the C# service needs to implement.
+> **Status:** The Web Forms site now runs on a C# backend (`Backend/`) and the SQL Server database in `App_Data/SkillUp.mdf`. Sign-in, permissions, grading and every save happen on the server; nothing is stored in `localStorage` except UI preferences and enquiry access codes. Email, real AI, video calls and file storage services are not connected yet. [docs/BACKEND.md](docs/BACKEND.md) explains how the backend works.
 
 ## Features
 
@@ -24,7 +24,14 @@ Every signed-in role also has messages, discussions, live sessions, an AI compan
 
 1. Open `SKILL UP.slnx` (or `SKILL UP.csproj`) in Visual Studio.
 2. Build once to restore the NuGet packages. The `packages/` folder is not committed.
-3. Press **F5**. IIS Express serves `https://localhost:44353/`, and `Default.aspx` redirects to `Frontend/Home.aspx`.
+3. Create the local database once. From the project folder:
+
+   ```powershell
+   powershell -File Database\setup-db.ps1
+   ```
+
+   This creates `App_Data\SkillUp.mdf` on LocalDB and runs `Database/create-tables.sql` (37 tables) and `Database/backend-extensions.sql`. It does nothing if the file already exists.
+4. Press **F5**. IIS Express serves `https://localhost:44353/`, and `Default.aspx` redirects to `Frontend/Home.aspx`. On the first page load the app finishes the database setup itself: it applies `Database/backend-extensions.sql` if needed and loads the demo accounts and courses into an empty database.
 
 `.aspx` pages need IIS or IIS Express. Opening them directly from disk does not work.
 
@@ -39,7 +46,7 @@ cd Frontend
 node server.cjs
 ```
 
-Open <http://127.0.0.1:4185>. This serves `Frontend/index.html`, which is the same app without the Web Forms wrapper.
+Open <http://127.0.0.1:4185>. This serves `Frontend/index.html`, which is the same app without the Web Forms wrapper. There is no C# API here, so this preview still uses the browser mock data in `localStorage`.
 
 ### Demo accounts
 
@@ -52,7 +59,9 @@ Choose **Log in** and pick a demo role, or sign in with one of these accounts:
 | Program Leader | `sarah` | `Demo1234!` |
 | Admin | `admin` | `Demo1234!` |
 
-All accounts and records are fictional. Data is saved in the current browser and is separate for each origin: IIS Express, `node server.cjs` and `file://` do not share data. To start fresh, clear the site's local storage.
+All accounts and records are fictional. In Visual Studio they live in your `App_Data\SkillUp.mdf`, loaded from `Database/demo-seed.json` the first time the app starts with an empty database. To start fresh, stop the site, delete `App_Data\SkillUp.mdf` and `SkillUp_log.ldf`, and run `Database\setup-db.ps1` again. The Node preview keeps its own separate data in the browser.
+
+The demo role buttons (no password), the demo data and the on-screen password reset link are development switches in `Web.config` (`SkillUp:*` app settings). A Release publish turns all three off.
 
 ## Project structure
 
@@ -78,10 +87,23 @@ Skill-Up/
 │   ├── server.cjs                     Static file server for local preview
 │   └── package.json                   npm scripts
 │
-├── App_Data/SkillUp.mdf               SQL Server database (37 tables, from the ERD); not in git
-├── Database/create-tables.sql         Query that creates those 37 tables in a new SkillUp.mdf
+├── Backend/                           C# API: /api/workspace and /api/commands/{action}
+│   ├── ApiHandler.cs                  HTTP endpoint, sign-in cookie, CSRF header, error responses
+│   ├── Commands*.cs                   Every command: rules, permissions, grading, SQL writes
+│   ├── Workspace.cs                   Builds the role-scoped workspace JSON for each user
+│   ├── Model.cs, Db.cs                Loads the tables; parameterised ADO.NET helper
+│   ├── Security.cs                    Password hashing, tokens, auth cookie, Web.config switches
+│   └── DatabaseSetup.cs               Applies the extension script and loads the demo data
+│
+├── App_Data/SkillUp.mdf               SQL Server database (37 ERD tables + extensions); not in git
+├── Database/
+│   ├── create-tables.sql              Creates the 37 ERD tables in a new SkillUp.mdf
+│   ├── backend-extensions.sql         Extra columns and tables the web app needs (idempotent)
+│   ├── setup-db.ps1                   Creates App_Data\SkillUp.mdf and runs both scripts
+│   └── demo-seed.json                 Demo accounts and courses (from the frontend fixtures)
 │
 └── docs/
+    ├── BACKEND.md                     How the C# backend and database fit together
     ├── BACKEND-HANDOFF.md             Backend integration guide
     ├── API-CONTRACT.md                Workspace and command API contract for the C# service
     ├── MODULE-MAP.md                  Which JS and CSS files own each feature
@@ -99,8 +121,8 @@ Skill-Up/
 
 - **Pages:** Each `.aspx.cs` calls `SetInitialRoute(...)` in `Page_Load`. `SkillUp.Master` writes that route into the URL hash, loads the scripts, and `js/app.js` renders the screen into `<div id="app">`. Navigation after that uses hash routes such as `#/dashboard` and `#/course/c1`. Forms are handled in JavaScript, not by server postbacks.
 - **Data:** Every read and write goes through `SkillAPI.request(action, payload)` in `Frontend/js/api.js`. `Frontend/js/runtime-config.js` selects the transport:
-  - `mode: 'mock'` (default): data lives in `localStorage`, seeded from `js/seed.js` and the `js/*-data.js` fixtures.
-  - `mode: 'http'`: `GET {baseUrl}/workspace` and `POST {baseUrl}/commands/{action}`. Use this once the C# API in [docs/API-CONTRACT.md](docs/API-CONTRACT.md) exists.
+  - `mode: 'http'` (the Web Forms pages; `SkillUp.Master` selects it): `GET /api/workspace` and `POST /api/commands/{action}`, answered by `Backend/ApiHandler.cs` from the database.
+  - `mode: 'mock'` (`index.html` only): data lives in `localStorage`, seeded from `js/seed.js` and the `js/*-data.js` fixtures.
 - **Styles:** Stylesheets in `Frontend/css/` override each other in load order, so order matters. To add or reorder one, update `Frontend/index.html` and `Frontend/SkillUp.Master` in the same way, then run `npm run check`. Asset URLs inside the CSS are relative to `css/`, for example `url('../assets/…')`.
 
 [Frontend/README.md](Frontend/README.md) has notes for working on the frontend.
@@ -129,16 +151,24 @@ npm run test:ui
 
 To test against IIS instead of `index.html`, set `SKILLUP_BASE_URL`. To use an installed browser such as Edge, set `BROWSER_EXECUTABLE_PATH`. Some older tests in `tests/` target earlier layouts and may need selector updates.
 
+The backend has an end-to-end API test for every role (`tests/backend-api.cjs`, about 150 checks). It deletes and deactivates demo accounts, so run it only on a fresh demo database, with the site running:
+
+```bash
+NODE_TLS_REJECT_UNAUTHORIZED=0 node tests/backend-api.cjs https://localhost:44353 --fresh-db
+```
+
+`NODE_TLS_REJECT_UNAUTHORIZED=0` lets Node accept the IIS Express development certificate; use it only for this local test.
+
 ## Database
 
-The database is `App_Data/SkillUp.mdf`, a SQL Server LocalDB file built from the ERD in `docs/proposal/WAPP.drawio`. It has the ERD's 37 tables. Only `ROLE` contains rows (Learner, Instructor, Program Leader, Admin); every other table starts empty.
+The database is `App_Data/SkillUp.mdf`, a SQL Server LocalDB file built from the ERD in `docs/proposal/WAPP.drawio`. It has the ERD's 37 tables, plus the columns and five tables in `Database/backend-extensions.sql` that the web app needs. [docs/BACKEND.md](docs/BACKEND.md) lists which table stores each part of the app.
 
 **View or edit the tables.** In Solution Explorer, double-click `App_Data/SkillUp.mdf`. It opens in **Server Explorer** under **Data Connections**. Expand **Tables**, then right-click a table:
 
 - **Open Table Definition** opens the table designer. After changing a table, click **Update** to apply it.
 - **Show Table Data** shows and edits the rows.
 
-**Setting up your copy.** Git ignores `.mdf` and `.ldf` files, so each teammate creates their own database once:
+**Setting up your copy.** Git ignores `.mdf` and `.ldf` files, so each teammate creates their own database once. The quickest way is `powershell -File Database\setup-db.ps1`. To do it by hand in Visual Studio instead:
 
 1. Go to **View → Server Explorer**. Right-click **Data Connections** and choose **Add Connection…**.
 2. Set **Data source** to **Microsoft SQL Server Database File**. For **Database file name**, browse to the project's `App_Data` folder and type `SkillUp.mdf`. Click **OK**, then **Yes** to create the file.
@@ -146,7 +176,7 @@ The database is `App_Data/SkillUp.mdf`, a SQL Server LocalDB file built from the
 4. Paste the contents of [`Database/create-tables.sql`](Database/create-tables.sql) and press **Ctrl+Shift+E**. It ends with `Done: 37 tables created.`
 5. Right-click **Tables** and choose **Refresh**.
 
-Until you do this, Solution Explorer shows `SkillUp.mdf` with a missing-file warning. If the tables change, update `Database/create-tables.sql` so everyone can rebuild the same database.
+You do not need to run `backend-extensions.sql` by hand: the app applies it on first start. Until the file exists, Solution Explorer shows `SkillUp.mdf` with a missing-file warning. If the tables change, update `Database/create-tables.sql` or `Database/backend-extensions.sql` so everyone can rebuild the same database.
 
 **Connect from C#.** `Web.config` has a connection string named `SkillUp`:
 
@@ -158,13 +188,13 @@ using (var connection = new SqlConnection(connectionString)) { /* ... */ }
 **Things to know:**
 
 - `USER` is a reserved word in SQL Server, so write the table as `[USER]` in every query.
-- `[USER].password` is `nvarchar(255)`, long enough to store a hashed password instead of plain text.
-- A row that other rows still reference cannot be deleted. For example, a user who created a course cannot be deleted until that course is reassigned. Child rows that only belong to their parent, such as quiz options and lab tasks, are deleted with the parent.
-- The JavaScript frontend still uses its browser mock data. Pages read and write this database only once C# code is written for them.
+- `[USER].password` stores a salted PBKDF2-SHA256 hash, never the plain password.
+- A row that other rows still reference cannot be deleted. The backend deletes or reassigns dependent rows in the right order, for example when an admin deletes an account or a Program Leader approves a course deletion.
 
 ## Known limitations
 
-- Sign-in and permissions are only simulated in the browser. The server must enforce them.
-- Seed files contain demo passwords and quiz and lab answers. Remove them before any real deployment; switching to `http` mode alone is not enough.
-- AI replies are templates. The lab terminal runs JavaScript in a local Web Worker. Calls show a local camera preview only.
+- No email service: the password reset link is shown on screen (development setting).
+- AI replies are templates. The lab terminal runs JavaScript in a local Web Worker. Calls show a local camera preview only. Messages update on refresh, not in real time.
+- Course files are stored in the database as data URLs (2 MB limit), not in file storage.
+- `Frontend/js/seed.js` and the `*-data.js` fixtures still contain demo passwords and answers for the Node preview. The Web Forms site never sends answers to learners, but remove those files before any real deployment.
 - The layout targets desktop browsers 1280 px wide or more. Narrow windows keep a 1024 px minimum canvas.

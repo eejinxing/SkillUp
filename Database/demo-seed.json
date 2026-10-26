@@ -1,0 +1,1051 @@
+{
+ "version": 1,
+ "resources": [],
+ "globalMessages": [
+  {
+   "id": "g1",
+   "userId": "u4",
+   "text": "Welcome to Skill UP. Share what you are learning and help each other take the next step.",
+   "createdAt": "2026-10-15T09:00:00Z"
+  },
+  {
+   "id": "g2",
+   "userId": "u4",
+   "text": "Keep discussions kind and focused. Please keep personal information out of the community chat.",
+   "createdAt": "2026-10-15T10:00:00Z"
+  },
+  {
+   "id": "g3",
+   "userId": "u2",
+   "text": "Practising databases today? Try the documents and collections activity, then ask a question if you get stuck.",
+   "createdAt": "2026-10-16T09:00:00Z"
+  },
+  {
+   "id": "g4",
+   "userId": "u4",
+   "text": "Small steps count. Complete one activity today and check your updated learning progress.",
+   "createdAt": "2026-10-16T10:00:00Z"
+  }
+ ],
+ "users": [
+  {
+   "id": "u1",
+   "name": "Alex Morgan",
+   "email": "alex@skillup.demo",
+   "username": "alex",
+   "role": "Learner",
+   "status": "Active",
+   "bio": "Learning one practical skill at a time.",
+   "location": "Kuala Lumpur",
+   "password": "Demo1234!",
+   "language": "en",
+   "theme": "dark"
+  },
+  {
+   "id": "u2",
+   "name": "John Doe",
+   "email": "john@skillup.demo",
+   "username": "john",
+   "role": "Instructor",
+   "status": "Active",
+   "bio": "Database engineer and educator. I turn complex systems into practical lessons.",
+   "location": "Kuala Lumpur",
+   "password": "Demo1234!",
+   "language": "en",
+   "theme": "dark"
+  },
+  {
+   "id": "u3",
+   "name": "Sarah Chen",
+   "email": "sarah@skillup.demo",
+   "username": "sarah",
+   "role": "Program Leader",
+   "status": "Active",
+   "bio": "Building thoughtful learning experiences.",
+   "location": "Penang",
+   "password": "Demo1234!",
+   "language": "en",
+   "theme": "dark"
+  },
+  {
+   "id": "u4",
+   "name": "Jamie Lee",
+   "email": "admin@skillup.demo",
+   "username": "admin",
+   "role": "Admin",
+   "status": "Active",
+   "bio": "Skill UP platform administrator.",
+   "location": "Kuala Lumpur",
+   "password": "Demo1234!",
+   "language": "en",
+   "theme": "dark"
+  },
+  {
+   "id": "u5",
+   "name": "Mei Tan",
+   "email": "mei@skillup.demo",
+   "username": "mei",
+   "role": "Learner",
+   "status": "Active",
+   "password": "Demo1234!"
+  },
+  {
+   "id": "u6",
+   "name": "Daniel Lim",
+   "email": "daniel@skillup.demo",
+   "username": "daniel",
+   "role": "Learner",
+   "status": "Active",
+   "password": "Demo1234!"
+  },
+  {
+   "id": "u7",
+   "name": "Nora Ali",
+   "email": "nora@skillup.demo",
+   "username": "nora",
+   "role": "Instructor",
+   "status": "Pending",
+   "password": "Demo1234!",
+   "bio": "Application: web development instructor."
+  },
+  {
+   "id": "lb-u1",
+   "name": "Priya Nair",
+   "email": "priya@skillup.demo",
+   "username": "priya",
+   "role": "Learner",
+   "status": "Active",
+   "password": "Demo1234!",
+   "location": "Penang",
+   "bio": "Demo learner."
+  },
+  {
+   "id": "lb-u2",
+   "name": "Lucas Martin",
+   "email": "lucas@skillup.demo",
+   "username": "lucas",
+   "role": "Learner",
+   "status": "Active",
+   "password": "Demo1234!",
+   "location": "Kuala Lumpur",
+   "bio": "Demo learner."
+  },
+  {
+   "id": "lb-u3",
+   "name": "Hana Sato",
+   "email": "hana@skillup.demo",
+   "username": "hana",
+   "role": "Learner",
+   "status": "Active",
+   "password": "Demo1234!",
+   "location": "Johor Bahru",
+   "bio": "Demo learner."
+  },
+  {
+   "id": "lb-u4",
+   "name": "Omar Haddad",
+   "email": "omar@skillup.demo",
+   "username": "omar",
+   "role": "Learner",
+   "status": "Active",
+   "password": "Demo1234!",
+   "location": "Ipoh",
+   "bio": "Demo learner."
+  },
+  {
+   "id": "lb-u5",
+   "name": "Sofia Rossi",
+   "email": "sofia@skillup.demo",
+   "username": "sofia",
+   "role": "Learner",
+   "status": "Active",
+   "password": "Demo1234!",
+   "location": "Melaka",
+   "bio": "Demo learner."
+  },
+  {
+   "id": "lb-u6",
+   "name": "Arjun Mehta",
+   "email": "arjun@skillup.demo",
+   "username": "arjun",
+   "role": "Learner",
+   "status": "Active",
+   "password": "Demo1234!",
+   "location": "Kuching",
+   "bio": "Demo learner."
+  },
+  {
+   "id": "lb-u7",
+   "name": "Chloe Wong",
+   "email": "chloe@skillup.demo",
+   "username": "chloe",
+   "role": "Learner",
+   "status": "Active",
+   "password": "Demo1234!",
+   "location": "Kota Kinabalu",
+   "bio": "Demo learner."
+  }
+ ],
+ "programs": [
+  {
+   "id": "p1",
+   "name": "Data & Development",
+   "description": "Build reliable applications, from data modelling to your first API.",
+   "leaderId": "u3",
+   "courseIds": [
+    "c1",
+    "c2",
+    "c3"
+   ],
+   "published": true
+  },
+  {
+   "id": "demo-systems",
+   "name": "Computer Systems",
+   "description": "Understand the hardware and networks behind everyday computing.",
+   "leaderId": "u3",
+   "courseIds": [
+    "demo-hardware",
+    "demo-networks"
+   ],
+   "published": true
+  },
+  {
+   "id": "demo-ai",
+   "name": "AI & Data",
+   "description": "Build a thoughtful foundation in datasets, models and responsible AI.",
+   "leaderId": "u3",
+   "courseIds": [
+    "demo-data",
+    "demo-models"
+   ],
+   "published": true
+  }
+ ],
+ "courses": [
+  {
+   "id": "c1",
+   "title": "MongoDB Management",
+   "programId": "p1",
+   "instructorId": "u2",
+   "difficulty": "Intermediate",
+   "status": "Published",
+   "description": "Model, query and manage real application data. Build confidence with documents, CRUD operations and aggregation pipelines.",
+   "outcomes": "Design collections and documents\nWrite efficient queries and aggregation pipelines\nUnderstand indexes and database performance",
+   "deadline": "2026-11-20",
+   "duration": 4,
+   "color": "mint",
+   "icon": "DB",
+   "lessons": [
+    {
+     "id": "l1",
+     "title": "Documents & collections",
+     "type": "article",
+     "body": "MongoDB stores data as flexible documents. A collection groups related documents, like a table groups rows. A document can contain nested objects and arrays.\nExample: { name: \"Alex\", skills: [\"MongoDB\", \"C#\"] }.\nChoose a structure that reflects how your application reads data.",
+     "answer": "",
+     "minutes": 15,
+     "preview": true
+    },
+    {
+     "id": "l2",
+     "title": "Find your first document",
+     "type": "lab",
+     "body": "Use the users collection to find a document with the name Alex. Complete the command: db.users.____({ name: \"Alex\" }). Enter the missing method.",
+     "answer": "findOne",
+     "minutes": 25,
+     "preview": false
+    },
+    {
+     "id": "l3",
+     "title": "Aggregation pipelines",
+     "type": "article",
+     "body": "An aggregation pipeline processes documents in stages. $match filters documents; $group summarises them; $sort orders results.\nPlace selective filters early to reduce the amount of data passed to later stages.",
+     "answer": "",
+     "minutes": 15,
+     "preview": true
+    },
+    {
+     "id": "l4",
+     "title": "Knowledge check",
+     "type": "quiz",
+     "body": "Check your understanding of MongoDB documents and pipelines.",
+     "answer": "",
+     "minutes": 25,
+     "preview": false
+    }
+   ],
+   "quiz": {
+    "published": true,
+    "timeLimit": 10,
+    "questions": [
+     {
+      "id": "q1",
+      "text": "Which structure groups MongoDB documents?",
+      "options": [
+       "Collection",
+       "Row",
+       "Workbook"
+      ],
+      "answer": 0,
+      "topic": "Data modelling"
+     },
+     {
+      "id": "q2",
+      "text": "Which stage filters documents?",
+      "options": [
+       "$sort",
+       "$match",
+       "$group"
+      ],
+      "answer": 1,
+      "topic": "Aggregation"
+     },
+     {
+      "id": "q3",
+      "text": "What helps speed up frequent queries?",
+      "options": [
+       "Indexes",
+       "Longer names",
+       "Duplicate collections"
+      ],
+      "answer": 0,
+      "topic": "Performance"
+     }
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "title": "C# Foundations",
+   "programId": "p1",
+   "instructorId": "u2",
+   "difficulty": "Beginner",
+   "status": "Published",
+   "description": "Learn the building blocks of C#: variables, control flow and reusable methods. Prepare for your first ASP.NET application.",
+   "outcomes": "Use types and variables\nWrite reusable methods\nUnderstand conditions and loops",
+   "deadline": "2026-12-01",
+   "duration": 3,
+   "color": "violet",
+   "icon": "C#",
+   "lessons": [
+    {
+     "id": "l5",
+     "title": "Types & variables",
+     "type": "article",
+     "body": "C# is a statically typed language. int stores whole numbers, string stores text and bool stores true or false.\nFor example: int score = 80; string name = \"Alex\";",
+     "answer": "",
+     "minutes": 15,
+     "preview": true
+    },
+    {
+     "id": "l6",
+     "title": "Write to the console",
+     "type": "lab",
+     "body": "Complete the C# statement Console.____(\"Hello\"); Enter the missing method name.",
+     "answer": "WriteLine",
+     "minutes": 25,
+     "preview": false
+    },
+    {
+     "id": "l7",
+     "title": "C# essentials quiz",
+     "type": "quiz",
+     "body": "Test your knowledge of types and methods.",
+     "answer": "",
+     "minutes": 25,
+     "preview": false
+    }
+   ],
+   "quiz": {
+    "published": true,
+    "timeLimit": 5,
+    "questions": [
+     {
+      "id": "q4",
+      "text": "Which type stores true or false?",
+      "options": [
+       "string",
+       "bool",
+       "int"
+      ],
+      "answer": 1,
+      "topic": "Types"
+     },
+     {
+      "id": "q5",
+      "text": "Which keyword declares a class?",
+      "options": [
+       "class",
+       "objectify",
+       "define"
+      ],
+      "answer": 0,
+      "topic": "Classes"
+     }
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "title": "Data Science Essentials",
+   "programId": "p1",
+   "instructorId": "u2",
+   "difficulty": "Beginner",
+   "status": "Published",
+   "description": "Explore clean datasets, meaningful visualisations and the questions behind useful analysis.",
+   "outcomes": "Clean a dataset\nChoose a clear visualisation\nExplain insights responsibly",
+   "deadline": "2026-12-10",
+   "duration": 2,
+   "color": "blue",
+   "icon": "DS",
+   "lessons": [
+    {
+     "id": "l8",
+     "title": "Ask a better question",
+     "type": "article",
+     "body": "Start analysis with a clear question. Identify the population, the measure and the time period. Check missing values before drawing conclusions.",
+     "answer": "",
+     "minutes": 15,
+     "preview": true
+    },
+    {
+     "id": "l9",
+     "title": "Choose a chart",
+     "type": "quiz",
+     "body": "Pick a visualisation that matches the question.",
+     "answer": "",
+     "minutes": 25,
+     "preview": false
+    }
+   ],
+   "quiz": {
+    "published": true,
+    "timeLimit": 5,
+    "questions": [
+     {
+      "id": "q6",
+      "text": "Which chart compares categories?",
+      "options": [
+       "Bar chart",
+       "Random dots",
+       "Paragraph"
+      ],
+      "answer": 0,
+      "topic": "Visualisation"
+     }
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "title": "API Design with ASP.NET",
+   "programId": "p1",
+   "instructorId": "u2",
+   "difficulty": "Intermediate",
+   "status": "Pending review",
+   "description": "Design clear REST endpoints, validate requests and return consistent responses.",
+   "outcomes": "Design REST endpoints\nValidate API input\nHandle HTTP errors",
+   "deadline": "2026-12-20",
+   "duration": 4,
+   "color": "blue",
+   "icon": "API",
+   "lessons": [
+    {
+     "id": "l10",
+     "title": "Resources & routes",
+     "type": "article",
+     "body": "A REST API exposes resources through URLs. Use GET to read and POST to create. Return a clear status code and structured validation errors.",
+     "answer": "",
+     "minutes": 15,
+     "preview": true
+    }
+   ],
+   "quiz": {
+    "published": false,
+    "timeLimit": 10,
+    "questions": []
+   }
+  },
+  {
+   "id": "demo-hardware",
+   "title": "Inside a Computer",
+   "description": "Recognise the CPU, memory, storage and the role of an operating system.",
+   "programId": "demo-systems",
+   "instructorId": "u2",
+   "difficulty": "Beginner",
+   "status": "Published",
+   "outcomes": "Recognise the CPU, memory, storage and the role of an operating system.",
+   "duration": 2,
+   "deadline": "2026-12-20",
+   "color": "violet",
+   "icon": "UP",
+   "lessons": [
+    {
+     "id": "demo-hardware-intro",
+     "title": "Computer essentials",
+     "type": "article",
+     "body": "CPU carries out instructions. RAM holds data currently in use. Storage retains files when the power is off. The operating system coordinates these resources.",
+     "minutes": 15,
+     "preview": true
+    }
+   ],
+   "quiz": {
+    "published": false,
+    "timeLimit": 5,
+    "questions": []
+   }
+  },
+  {
+   "id": "demo-networks",
+   "title": "Networks & the Web",
+   "description": "Trace how a browser reaches a website through a network.",
+   "programId": "demo-systems",
+   "instructorId": "u2",
+   "difficulty": "Beginner",
+   "status": "Published",
+   "outcomes": "Trace how a browser reaches a website through a network.",
+   "duration": 2,
+   "deadline": "2026-12-20",
+   "color": "violet",
+   "icon": "UP",
+   "lessons": [
+    {
+     "id": "demo-networks-intro",
+     "title": "Networking",
+     "type": "article",
+     "body": "A client sends a request to a server. DNS translates a domain name to an IP address. HTTPS protects the connection while data travels between the browser and server.",
+     "minutes": 15,
+     "preview": true
+    }
+   ],
+   "quiz": {
+    "published": false,
+    "timeLimit": 5,
+    "questions": []
+   }
+  },
+  {
+   "id": "demo-data",
+   "title": "Working with Data",
+   "description": "Explore datasets and ask clear questions before analysing them.",
+   "programId": "demo-ai",
+   "instructorId": "u2",
+   "difficulty": "Beginner",
+   "status": "Published",
+   "outcomes": "Explore datasets and ask clear questions before analysing them.",
+   "duration": 2,
+   "deadline": "2026-12-20",
+   "color": "violet",
+   "icon": "UP",
+   "lessons": [
+    {
+     "id": "demo-data-intro",
+     "title": "Data literacy",
+     "type": "article",
+     "body": "Start with a question and inspect each column. Check missing values, units and duplicates. Keep an unchanged copy of the original dataset before cleaning it.",
+     "minutes": 15,
+     "preview": true
+    }
+   ],
+   "quiz": {
+    "published": false,
+    "timeLimit": 5,
+    "questions": []
+   }
+  },
+  {
+   "id": "demo-models",
+   "title": "AI Fundamentals",
+   "description": "Understand how models learn from examples and how to evaluate them.",
+   "programId": "demo-ai",
+   "instructorId": "u2",
+   "difficulty": "Beginner",
+   "status": "Published",
+   "outcomes": "Understand how models learn from examples and how to evaluate them.",
+   "duration": 2,
+   "deadline": "2026-12-20",
+   "color": "violet",
+   "icon": "UP",
+   "lessons": [
+    {
+     "id": "demo-models-intro",
+     "title": "AI foundations",
+     "type": "article",
+     "body": "Training data teaches a model patterns. Separate test data checks whether those patterns generalise to new examples. Evaluate errors and bias before using predictions.",
+     "minutes": 15,
+     "preview": true
+    }
+   ],
+   "quiz": {
+    "published": false,
+    "timeLimit": 5,
+    "questions": []
+   }
+  }
+ ],
+ "enrollments": [
+  {
+   "id": "e1",
+   "userId": "u1",
+   "courseId": "c1",
+   "completed": [
+    "l1"
+   ],
+   "joinedAt": "2026-10-10",
+   "lastActive": "2026-10-16",
+   "minutes": 15
+  },
+  {
+   "id": "e2",
+   "userId": "u1",
+   "courseId": "c2",
+   "completed": [],
+   "joinedAt": "2026-10-12",
+   "lastActive": "2026-10-15",
+   "minutes": 0
+  },
+  {
+   "id": "e3",
+   "userId": "u5",
+   "courseId": "c1",
+   "completed": [
+    "l1",
+    "l2",
+    "l3",
+    "l4"
+   ],
+   "joinedAt": "2026-10-09",
+   "lastActive": "2026-10-16",
+   "minutes": 80
+  },
+  {
+   "id": "e4",
+   "userId": "u6",
+   "courseId": "c1",
+   "completed": [
+    "l1",
+    "l2"
+   ],
+   "joinedAt": "2026-10-11",
+   "lastActive": "2026-10-14",
+   "minutes": 40
+  },
+  {
+   "id": "e-lb-u1-c1",
+   "userId": "lb-u1",
+   "courseId": "c1",
+   "completed": [
+    "l1",
+    "l2",
+    "l3",
+    "l4"
+   ],
+   "joinedAt": "2026-10-06",
+   "lastActive": "2026-10-26",
+   "minutes": 80
+  },
+  {
+   "id": "e-lb-u1-c2",
+   "userId": "lb-u1",
+   "courseId": "c2",
+   "completed": [
+    "l5",
+    "l6",
+    "l7"
+   ],
+   "joinedAt": "2026-10-06",
+   "lastActive": "2026-10-26",
+   "minutes": 65
+  },
+  {
+   "id": "e-lb-u1-c3",
+   "userId": "lb-u1",
+   "courseId": "c3",
+   "completed": [
+    "l8",
+    "l9"
+   ],
+   "joinedAt": "2026-10-06",
+   "lastActive": "2026-10-26",
+   "minutes": 40
+  },
+  {
+   "id": "e-lb-u2-c1",
+   "userId": "lb-u2",
+   "courseId": "c1",
+   "completed": [
+    "l1",
+    "l2",
+    "l3",
+    "l4"
+   ],
+   "joinedAt": "2026-10-05",
+   "lastActive": "2026-10-25",
+   "minutes": 80
+  },
+  {
+   "id": "e-lb-u2-c2",
+   "userId": "lb-u2",
+   "courseId": "c2",
+   "completed": [
+    "l5",
+    "l6",
+    "l7"
+   ],
+   "joinedAt": "2026-10-05",
+   "lastActive": "2026-10-25",
+   "minutes": 65
+  },
+  {
+   "id": "e-lb-u3-c1",
+   "userId": "lb-u3",
+   "courseId": "c1",
+   "completed": [
+    "l1",
+    "l2",
+    "l3",
+    "l4"
+   ],
+   "joinedAt": "2026-10-04",
+   "lastActive": "2026-10-24",
+   "minutes": 80
+  },
+  {
+   "id": "e-lb-u3-c3",
+   "userId": "lb-u3",
+   "courseId": "c3",
+   "completed": [
+    "l8",
+    "l9"
+   ],
+   "joinedAt": "2026-10-04",
+   "lastActive": "2026-10-24",
+   "minutes": 40
+  },
+  {
+   "id": "e-lb-u3-demo-data",
+   "userId": "lb-u3",
+   "courseId": "demo-data",
+   "completed": [
+    "demo-data-intro"
+   ],
+   "joinedAt": "2026-10-04",
+   "lastActive": "2026-10-24",
+   "minutes": 15
+  },
+  {
+   "id": "e-lb-u4-c2",
+   "userId": "lb-u4",
+   "courseId": "c2",
+   "completed": [
+    "l5",
+    "l6",
+    "l7"
+   ],
+   "joinedAt": "2026-10-03",
+   "lastActive": "2026-10-23",
+   "minutes": 65
+  },
+  {
+   "id": "e-lb-u4-c3",
+   "userId": "lb-u4",
+   "courseId": "c3",
+   "completed": [
+    "l8"
+   ],
+   "joinedAt": "2026-10-03",
+   "lastActive": "2026-10-23",
+   "minutes": 15
+  },
+  {
+   "id": "e-lb-u5-c1",
+   "userId": "lb-u5",
+   "courseId": "c1",
+   "completed": [
+    "l1",
+    "l2",
+    "l3",
+    "l4"
+   ],
+   "joinedAt": "2026-10-02",
+   "lastActive": "2026-10-22",
+   "minutes": 80
+  },
+  {
+   "id": "e-lb-u5-demo-models",
+   "userId": "lb-u5",
+   "courseId": "demo-models",
+   "completed": [
+    "demo-models-intro"
+   ],
+   "joinedAt": "2026-10-02",
+   "lastActive": "2026-10-22",
+   "minutes": 15
+  },
+  {
+   "id": "e-lb-u6-c1",
+   "userId": "lb-u6",
+   "courseId": "c1",
+   "completed": [
+    "l1",
+    "l2"
+   ],
+   "joinedAt": "2026-10-01",
+   "lastActive": "2026-10-26",
+   "minutes": 40
+  },
+  {
+   "id": "e-lb-u6-c2",
+   "userId": "lb-u6",
+   "courseId": "c2",
+   "completed": [
+    "l5",
+    "l6"
+   ],
+   "joinedAt": "2026-10-01",
+   "lastActive": "2026-10-26",
+   "minutes": 40
+  },
+  {
+   "id": "e-lb-u6-c3",
+   "userId": "lb-u6",
+   "courseId": "c3",
+   "completed": [
+    "l8"
+   ],
+   "joinedAt": "2026-10-01",
+   "lastActive": "2026-10-26",
+   "minutes": 15
+  },
+  {
+   "id": "e-lb-u7-c3",
+   "userId": "lb-u7",
+   "courseId": "c3",
+   "completed": [
+    "l8",
+    "l9"
+   ],
+   "joinedAt": "2026-09-30",
+   "lastActive": "2026-10-25",
+   "minutes": 40
+  },
+  {
+   "id": "e-lb-u7-demo-data",
+   "userId": "lb-u7",
+   "courseId": "demo-data",
+   "completed": [
+    "demo-data-intro"
+   ],
+   "joinedAt": "2026-09-30",
+   "lastActive": "2026-10-25",
+   "minutes": 15
+  }
+ ],
+ "attempts": [
+  {
+   "id": "a1",
+   "userId": "u5",
+   "courseId": "c1",
+   "score": 100,
+   "answers": [
+    0,
+    1,
+    0
+   ],
+   "wrongTopics": [],
+   "createdAt": "2026-10-16T09:00:00Z",
+   "type": "quiz"
+  },
+  {
+   "id": "a-lb-u1-c1",
+   "userId": "lb-u1",
+   "courseId": "c1",
+   "lessonId": "l4",
+   "type": "quiz",
+   "score": 96,
+   "answers": [],
+   "wrongTopics": [],
+   "createdAt": "2026-10-24T04:15:00.000Z"
+  },
+  {
+   "id": "a-lb-u1-c2",
+   "userId": "lb-u1",
+   "courseId": "c2",
+   "lessonId": "l7",
+   "type": "quiz",
+   "score": 88,
+   "answers": [],
+   "wrongTopics": [],
+   "createdAt": "2026-10-25T03:15:00.000Z"
+  },
+  {
+   "id": "a-lb-u1-c3",
+   "userId": "lb-u1",
+   "courseId": "c3",
+   "lessonId": "l9",
+   "type": "quiz",
+   "score": 100,
+   "answers": [],
+   "wrongTopics": [],
+   "createdAt": "2026-10-22T06:15:00.000Z"
+  },
+  {
+   "id": "a-lb-u2-c1",
+   "userId": "lb-u2",
+   "courseId": "c1",
+   "lessonId": "l4",
+   "type": "quiz",
+   "score": 84,
+   "answers": [],
+   "wrongTopics": [],
+   "createdAt": "2026-10-25T03:15:00.000Z"
+  },
+  {
+   "id": "a-lb-u2-c2",
+   "userId": "lb-u2",
+   "courseId": "c2",
+   "lessonId": "l7",
+   "type": "quiz",
+   "score": 92,
+   "answers": [],
+   "wrongTopics": [],
+   "createdAt": "2026-10-23T05:15:00.000Z"
+  },
+  {
+   "id": "a-lb-u3-c1",
+   "userId": "lb-u3",
+   "courseId": "c1",
+   "lessonId": "l4",
+   "type": "quiz",
+   "score": 78,
+   "answers": [],
+   "wrongTopics": [],
+   "createdAt": "2026-10-21T07:15:00.000Z"
+  },
+  {
+   "id": "a-lb-u3-c3",
+   "userId": "lb-u3",
+   "courseId": "c3",
+   "lessonId": "l9",
+   "type": "quiz",
+   "score": 90,
+   "answers": [],
+   "wrongTopics": [],
+   "createdAt": "2026-10-26T02:15:00.000Z"
+  },
+  {
+   "id": "a-lb-u4-c2",
+   "userId": "lb-u4",
+   "courseId": "c2",
+   "lessonId": "l7",
+   "type": "quiz",
+   "score": 74,
+   "answers": [],
+   "wrongTopics": [],
+   "createdAt": "2026-10-24T04:15:00.000Z"
+  },
+  {
+   "id": "a-lb-u5-c1",
+   "userId": "lb-u5",
+   "courseId": "c1",
+   "lessonId": "l4",
+   "type": "quiz",
+   "score": 67,
+   "answers": [],
+   "wrongTopics": [],
+   "createdAt": "2026-10-20T02:15:00.000Z"
+  },
+  {
+   "id": "a-lb-u7-c3",
+   "userId": "lb-u7",
+   "courseId": "c3",
+   "lessonId": "l9",
+   "type": "quiz",
+   "score": 81,
+   "answers": [],
+   "wrongTopics": [],
+   "createdAt": "2026-10-25T03:15:00.000Z"
+  }
+ ],
+ "reviews": [
+  {
+   "id": "r1",
+   "courseId": "c1",
+   "userId": "u5",
+   "rating": 5,
+   "text": "The practical queries made the concepts much easier to understand.",
+   "createdAt": "2026-10-15T08:00:00Z",
+   "replies": []
+  }
+ ],
+ "posts": [
+  {
+   "id": "d1",
+   "courseId": "c1",
+   "userId": "u6",
+   "text": "When should I use $match instead of find()? #MongoDB",
+   "createdAt": "2026-10-15T09:00:00Z",
+   "status": "Visible",
+   "replies": [
+    {
+     "id": "reply1",
+     "userId": "u2",
+     "text": "Use $match inside an aggregation pipeline. Use find() for a standalone query.",
+     "createdAt": "2026-10-15T10:00:00Z"
+    }
+   ]
+  }
+ ],
+ "announcements": [
+  {
+   "id": "n1",
+   "courseId": "c1",
+   "userId": "u2",
+   "title": "Your aggregation practice is ready",
+   "body": "Work through the examples before attempting the knowledge check. Ask questions in the discussion if you get stuck.",
+   "createdAt": "2026-10-15T08:00:00Z"
+  }
+ ],
+ "messages": [
+  {
+   "id": "m1",
+   "from": "u2",
+   "to": "u1",
+   "text": "Welcome, Alex. Let me know if you need help with your first database lab.",
+   "createdAt": "2026-10-15T08:00:00Z",
+   "read": false
+  }
+ ],
+ "sessions": [
+  {
+   "id": "s1",
+   "courseId": "c1",
+   "hostId": "u2",
+   "title": "MongoDB office hours",
+   "startsAt": "2026-10-23T14:00",
+   "attendees": []
+  }
+ ],
+ "ai": [],
+ "feedback": [],
+ "enquiries": [],
+ "approvals": [
+  {
+   "id": "ap1",
+   "courseId": "c4",
+   "actorId": "u2",
+   "decision": "Submitted",
+   "comment": "Ready for review. Please check the course structure.",
+   "createdAt": "2026-10-16T08:00:00Z"
+  }
+ ],
+ "audit": [
+  {
+   "id": "log1",
+   "actorId": "u2",
+   "action": "Course submitted for review",
+   "detail": "API Design with ASP.NET",
+   "createdAt": "2026-10-16T08:00:00Z"
+  }
+ ]
+}

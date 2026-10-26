@@ -10,6 +10,8 @@ namespace SKILL_UP
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            // JSON API for the frontend (Backend/ApiHandler.cs). Registered before FriendlyUrls so /api/... is never treated as a page.
+            routes.Add("SkillUpApi", new Route("api/{*path}", new Backend.ApiRouteHandler()));
             var settings = new FriendlyUrlSettings { AutoRedirectMode = RedirectMode.Permanent };
             routes.EnableFriendlyUrls(settings, new DesktopUrlResolver());
             var switchView = routes["AspNet.FriendlyUrls.SwitchView"];
