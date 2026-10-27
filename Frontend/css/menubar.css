@@ -54,5 +54,5 @@ body.ui-refined:not(:has(.figma-workspace-header.has-menubar)) #app{padding-top:
  #skill-edge-nav.skill-menubar .bar-items>.bar-item:nth-child(n+6){animation-delay:.15s}
 }
 #app .figma-workspace-header.has-menubar>.figma-workspace-brand{display:none}
-body.ui-home #skill-edge-nav.skill-menubar,body:has(.auth-v2) #skill-edge-nav.skill-menubar,.ui-home>#skill-edge-nav.skill-menubar{display:none}
+body.ui-home #skill-edge-nav.skill-menubar,body:has(main.auth-v2) #skill-edge-nav.skill-menubar,.ui-home>#skill-edge-nav.skill-menubar{display:none}
 html body .figma-workspace-header.has-menubar>a.figma-workspace-brand{display:none!important}
