@@ -2,7 +2,8 @@
 
    The ERD tables hold the core records. The web UI also needs a few fields and history
    tables the ERD does not have (course schedule and colour, lesson type, enquiry access
-   codes, course request history, course files, announcement comments, review replies).
+   codes and which browser may open them, course request history, course files,
+   announcement comments, review replies).
    This script adds them without changing or removing anything the ERD defines.
 
    You do not need to run it by hand: the web app applies it automatically on its first
@@ -41,6 +42,20 @@ IF COL_LENGTH(N'ACTIVITY_LOG', N'detail') IS NULL ALTER TABLE ACTIVITY_LOG ADD d
 IF COL_LENGTH(N'VOICE_CHANNEL', N'starts_at') IS NULL ALTER TABLE VOICE_CHANNEL ADD starts_at DATETIME2 NULL;
 /* Only a SHA-256 hash of the enquiry access code is stored. */
 IF COL_LENGTH(N'ENQUIRY', N'access_token_hash') IS NULL ALTER TABLE ENQUIRY ADD access_token_hash NVARCHAR(64) NULL;
+GO
+
+/* "My enquiries": which browser may open which enquiry without retyping its access code.
+   The browser keeps only a random key in an HttpOnly cookie; this table stores a SHA-256 hash of it. */
+IF OBJECT_ID(N'ENQUIRY_ACCESS') IS NULL
+CREATE TABLE ENQUIRY_ACCESS (
+    access_id         INT IDENTITY(1,1) NOT NULL,
+    visitor_key_hash  NVARCHAR(64)      NOT NULL,
+    enquiry_id        INT               NOT NULL,
+    granted_at        DATETIME2         NOT NULL DEFAULT SYSDATETIME(),
+    CONSTRAINT PK_ENQUIRY_ACCESS PRIMARY KEY (access_id),
+    CONSTRAINT FK_ENQUIRY_ACCESS_enquiry_id FOREIGN KEY (enquiry_id) REFERENCES ENQUIRY (enquiry_id) ON DELETE CASCADE,
+    CONSTRAINT UQ_ENQUIRY_ACCESS_visitor_enquiry UNIQUE (visitor_key_hash, enquiry_id)
+);
 GO
 
 /* Moderators can also flag a post (proposal: "Removes or flags inappropriate posts"). */

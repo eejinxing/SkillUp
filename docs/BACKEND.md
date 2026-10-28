@@ -1,20 +1,22 @@
 # Backend
 
-The Skill UP backend is plain C# in the Web Forms project (`Backend/`), with no extra NuGet packages. It implements the HTTP boundary from [API-CONTRACT.md](API-CONTRACT.md), so the existing JavaScript pages work unchanged. They now read and write the SQL Server database instead of `localStorage`.
+The Skill UP backend is plain C# in the Web Forms project (`Backend/`), with no extra NuGet packages. The Web Forms pages call its commands directly; the same commands are also available as the JSON API in [API-CONTRACT.md](API-CONTRACT.md). Everything is read from and written to the SQL Server database.
 
 ## Request flow
 
 ```text
-Frontend/js/api.js  ──GET  /api/workspace──────────►  ApiHandler ─► Model.Load ─► Workspace.Build(role)  ─► JSON
-(mode 'http')       ──POST /api/commands/{action}──►  ApiHandler ─► Commands.Run (one SQL transaction)
-                                                                   ─► commit ─► reload ─► { data, state }
+Frontend page (.aspx)  ──first load──►  SkillPage.OnPreInit ─► Model.Load ─► page renders the data it may show
+                       ──postback───►  button handler ─► SkillPage.TryRun ─► Commands.Run (one SQL transaction)
+                                                       ─► commit ─► redirect with a notice
+JSON API (optional)    ──GET  /api/workspace───────────► ApiHandler ─► Model.Load ─► Workspace.Build(role) ─► JSON
+                       ──POST /api/commands/{action}───► ApiHandler ─► Commands.Run (one SQL transaction)
 ```
 
-- `App_Start/RouteConfig.cs` sends every `/api/...` URL to `Backend/ApiHandler.cs`.
-- `SkillUp.Master` sets `data-runtime-mode="http"` on `<body>` (read by `js/runtime-config.js`), so every `.aspx` page uses the API. `Frontend/index.html` (the Node preview) keeps the mock.
+- Pages inherit `Frontend/SkillPage.cs`. It loads the account from the sign-in cookie on every request and checks the page's roles before any data is read.
+- `App_Start/RouteConfig.cs` sends every `/api/...` URL to `Backend/ApiHandler.cs`. No page uses the API any more; it stays for other clients.
 - Each command runs inside one transaction. Any error rolls back everything that command wrote.
-- Commands run one at a time (a lock in `ApiHandler`). That is enough for a single IIS Express process. Several servers would need database-level concurrency checks instead.
-- Errors return the right HTTP status (400, 401, 403, 404, 409) with `{ "detail": "..." }`, and the UI shows that message. Unexpected errors return 500 with a generic message and are written to the trace log.
+- Commands run one at a time (a lock in `SkillPage` and in `ApiHandler`). That is enough for a single IIS Express process. Several servers would need database-level concurrency checks instead.
+- A refused command (bad input, no permission, conflict) shows its message on the page and keeps what was typed. The API returns the right HTTP status (400, 401, 403, 404, 409) with `{ "detail": "..." }`. Unexpected errors show the error page and are written to the trace log.
 
 ## Security
 
@@ -22,12 +24,13 @@ Frontend/js/api.js  ──GET  /api/workspace──────────►  
 |---|---|
 | Passwords | PBKDF2-SHA256 with a random salt and 100,000 iterations, stored in `[USER].password`. Plain passwords are never stored or returned. |
 | Sign-in | An encrypted, HttpOnly, SameSite=Lax forms-authentication ticket in the `SkillUp.Auth` cookie (12 hours). The account is reloaded on every request, so a deactivated account loses access at once. |
-| CSRF | Every command must send the `X-SkillUp-Request: 1` header, which `api.js` adds. Cross-site forms cannot send it. |
+| CSRF | The sign-in cookie is SameSite=Lax, so a post from another site arrives signed out. Each page's view state is tied to the signed-in account (`ViewStateUserKey`), and ASP.NET checks postbacks against what was rendered. API commands must also send the `X-SkillUp-Request: 1` header. |
 | Authorisation | The role and user ID always come from the cookie, never from the request body. Instructors are limited to courses they are assigned to (`COURSE_INSTRUCTOR`), Program Leaders to their programs, and Admin-only commands check the role. |
-| Data scoping | `Workspace.Build` sends each role only what it may see. Learners and visitors never get lab answers or quiz answer keys. Visitors get no emails, messages or discussions. Enquiries are only reachable with their ID and access code. |
+| Data scoping | `Workspace.Build` sends each role only what it may see. Learners and visitors never get lab answers or quiz answer keys. Visitors get no emails, messages or discussions. Enquiries are reachable with their ID and access code, or without it from the browser that sent or found them (`ENQUIRY_ACCESS`, keyed by the hashed `SkillUp.Visitor` cookie) and for the signed-in account that sent them. A code that is sent must be correct. |
 | Grading | Lab answers and quiz scores are graded on the server. The quiz answer key is revealed only in the `quizSubmit` result. |
-| Tokens | Enquiry access codes and password reset tokens are stored only as SHA-256 hashes. Reset links expire after 15 minutes and work once. |
+| Tokens | Enquiry access codes, visitor keys and password reset tokens are stored only as SHA-256 hashes. Reset links expire after 15 minutes and work once. |
 | SQL | Every statement is parameterised (`Backend/Db.cs`). |
+| Browser storage | The site saves nothing in `localStorage`. Unsaved quiz and learning-path edits are kept in the server session. Program Leader read / archived alerts are in `USER.preferences` (`leaderInbox`). |
 
 ## Where each part of the app is stored
 
@@ -78,12 +81,12 @@ Not used by the current UI: `BADGE`, `USER_BADGE`, `NOTIFICATION`, `FAQ`, and th
 1. Add a `case` in `Commands.Run` (`Backend/Commands.cs`) and a method in the matching `Commands*.cs` file.
 2. Validate with `Must(...)`, `CourseFor(id, manage: true)` or `Enrolled(...)`, then write with `db.Exec` / `db.Insert`.
 3. Return `null`, a `JObject`, or a `Deferred` when the result needs the reloaded data, for example a new record's DTO.
-4. If the UI needs new data, add it to `Model.Load` and `Workspace.Build`, and add any column to `backend-extensions.sql` with an `IF COL_LENGTH(...) IS NULL` guard.
-5. Add checks to `Frontend/tests/backend-api.cjs`.
+4. If a page needs new data, add it to `Model.Load` (and to `Workspace.Build` for the API), and add any column to `backend-extensions.sql` with an `IF COL_LENGTH(...) IS NULL` guard.
+5. Call it from a page with `TryRun("action", new { ... })` in a button handler, then redirect with `ReloadPage` or `Go`.
 
 ## Not done yet
 
 - Email (password reset, registration notices), a real AI model, voice/video calls and SignalR real-time updates.
 - File storage: course files live in the database as data URLs.
 - Paging: the workspace is one snapshot per request, which is fine for a class-sized dataset.
-- `xpLog` is always empty. It was demo-only activity history, and the UI falls back to attempts and enrolments.
+- `xpLog` in the API workspace is always empty. It was demo-only activity history; the pages use attempts and enrolments.

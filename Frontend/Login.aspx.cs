@@ -1,16 +1,20 @@
 using System;
-using System.Web.UI;
 
 namespace SKILL_UP.Frontend
 {
-    public partial class LoginPage : Page
+    /// <summary>
+    /// The address for signing in (pages that need an account send visitors to Login?return=). It shows the master page's
+    /// Log in pop-up already open; the form and its buttons live in Controls/LoginDialog.ascx.
+    /// </summary>
+    public partial class LoginPage : SkillPage
     {
+        public override string Route => "login";
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            string route = "login";
-            ((SkillUpMaster)Master).SetInitialRoute(route);
-            // Backend handoff: add authenticated server-side services here when implementing the backend.
-            // Current form actions remain in JavaScript -> SkillAPI.request; no database implementation is claimed.
+            var form = ((SkillUpMaster)Master).LoginForm;
+            if (Me != null && !IsPostBack) Go(form.ReturnUrl);
+            form.Open = true;
         }
     }
 }

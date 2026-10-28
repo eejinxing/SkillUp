@@ -1,16 +1,19 @@
 using System;
-using System.Web.UI;
 
 namespace SKILL_UP.Frontend
 {
-    public partial class RegisterPage : Page
+    /// <summary>
+    /// The address for creating an account. It shows the master page's Sign up pop-up already open; the form lives in
+    /// Controls/RegisterDialog.ascx.
+    /// </summary>
+    public partial class RegisterPage : SkillPage
     {
+        public override string Route => "register";
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            string route = "register";
-            ((SkillUpMaster)Master).SetInitialRoute(route);
-            // Backend handoff: add authenticated server-side services here when implementing the backend.
-            // Current form actions remain in JavaScript -> SkillAPI.request; no database implementation is claimed.
+            if (Me != null && !IsPostBack) Go("Dashboard");
+            ((SkillUpMaster)Master).SignUpForm.Open = true;
         }
     }
 }

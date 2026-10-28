@@ -1,0 +1,110 @@
+/* Small-screen layout for every page. Loaded last so it wins over the page stylesheets.
+   Up to 1100px Messages stacks its panes, up to 1024px the dashboards drop their side rail, up to 900px course requests
+   stacks, and up to 760px (phones) every layout becomes a single column. */
+
+@media(max-width:1024px){
+#app .instructor-dashboard{grid-template-columns:minmax(0,1fr)}
+#app .ad-top-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Messages: below 1100px the three panes stack and the page scrolls instead of filling the window. */
+@media(max-width:1100px){
+#app :is(.skill-chat,.skill-chat.sc-workspace){grid-template-columns:minmax(0,1fr);grid-template-areas:none}
+#app :is(.skill-chat,.skill-chat.sc-workspace)>*{grid-column:auto;grid-row:auto;grid-area:auto;min-width:0}
+body:has(.skill-chat) .shell>div{height:auto;min-height:100dvh}
+body:has(.skill-chat) .main{flex:none}
+#app .skill-chat{height:auto;grid-template-rows:none;overflow:visible}
+#app .skill-chat .sc-contacts{overflow:visible}
+#app .skill-chat .sc-channels{max-height:none}
+#app .skill-chat .sc-contact-scroll{flex:none;max-height:300px}
+#app .skill-chat .sc-announcements-scroll{flex:none;max-height:none;overflow:visible}
+#app .skill-chat .sc-pane{height:min(620px,calc(100dvh - 32px))}
+#app .skill-chat .sc-heading-copy{flex:1 1 120px;min-width:0}
+}
+
+/* Course requests: below 900px the detail panel follows the list instead of sitting beside it. */
+@media(max-width:900px){
+#app .course-requests-page{grid-template-columns:minmax(0,1fr);grid-template-areas:none}
+#app .course-requests-page>*{grid-column:auto;grid-row:auto;grid-area:auto;min-width:0}
+#app .course-requests-page .rq-side{border-left:0;border-top:1px solid #ffffff12}
+#app .rq-title>div:first-child{flex:1 1 100%}
+}
+
+/* Shared navigation bar: on phones the logo and avatar share the first row and the capsule takes the full second row. */
+@media(max-width:760px){
+#app .skill-global-header{flex-wrap:wrap;gap:10px 12px;min-height:0;padding:12px 16px}
+#app .skill-global-header .gn-brand{order:1}
+#app .skill-global-header .gn-actions{order:2;margin-left:auto}
+#app .skill-global-header .gn-capsule{order:3;flex:1 1 100%;height:44px;padding:4px}
+#app .skill-global-header .gn-links{flex:1;margin-left:0;scroll-snap-type:x proximity}
+#app .skill-global-header .gn-links>a{scroll-snap-align:center}
+#app .skill-global-header :is(.gn-workspace-label,.gn-date,.gn-demo-call){display:none}
+}
+
+/* Phones: every page layout with a side column, and every card grid, stacks into a single column in reading order. */
+@media(max-width:760px){
+#app :is(.shell,.split,.chat-layout,.learning-layout,.user-detail-layout,.settings-layout,.figma-chat,.ranking-layout,.ce-content,.ce-reviews,.answer-layout,.skill-chat,.skill-chat.sc-workspace,.instructor-dashboard,.ci-layout,.course-requests-page,.ad-lower-grid,.ad-top-grid,.uem-layout,.pm-detail-layout,.la-detail-grid,.learning-console,.lc-layout,.lx-hero,.hd-hero,.mc-layout,.mc-course,.stellar-preview,.au-body,.ld-course-detail,.ld-monitor-course-body,.ld-reach,.pf-page,.pf-main,.pf-hero,.pf-grid,.ep-layout,.tm-subscribe,.vd-metrics,.id-metrics,.id-course-grid,.home-story-grid,.home-enquiry,.student-performance,.sp-grid,.ci-field-grid,.ue-account-grid,.uem-field-grid,.dc-card-grid,.la-columns,.la-other>div,.pm-grid,.asg-grid,.grid){grid-template-columns:minmax(0,1fr);grid-template-areas:none}
+#app :is(.shell,.split,.chat-layout,.learning-layout,.user-detail-layout,.settings-layout,.figma-chat,.ranking-layout,.ce-content,.ce-reviews,.answer-layout,.skill-chat,.skill-chat.sc-workspace,.instructor-dashboard,.ci-layout,.course-requests-page,.ad-lower-grid,.ad-top-grid,.uem-layout,.pm-detail-layout,.la-detail-grid,.learning-console,.lc-layout,.lx-hero,.hd-hero,.mc-layout,.mc-course,.stellar-preview,.au-body,.ld-course-detail,.ld-monitor-course-body,.ld-reach,.pf-page,.pf-main,.pf-hero,.pf-grid,.ep-layout,.tm-subscribe,.vd-metrics,.id-metrics,.id-course-grid,.home-story-grid,.home-enquiry,.student-performance,.sp-grid,.ci-field-grid,.ue-account-grid,.uem-field-grid,.dc-card-grid,.la-columns,.la-other>div,.pm-grid,.asg-grid,.grid)>*{grid-column:auto;grid-row:auto;grid-area:auto;min-width:0}
+
+/* Rows of controls wrap instead of squeezing. */
+#app :is(.page-head,.answer-guest-note,.sp-heading,.vd-hero-bottom,.vd-courses>header,.vd-table-actions,.lb-header,.lb-period-nav,.la-date-heading,.sc-chat-heading,.ci-danger-actions,.ad-log-footer,.au-toolbar,.kx-crumbs,.ld-chart-header,.ld-course-foot){flex-wrap:wrap;gap:10px}
+#app :is(.ci-tabs,.ue-tabs,.view-tabs,.rq-tabs,.da-tabs,.ld-note-tabs){flex-wrap:wrap;max-width:100%}
+#app .ue-course-editor .uem-tabs{display:flex;flex-wrap:wrap;border-radius:18px}
+#app .kx-crumb-actions{margin-left:0}
+
+/* My courses fills the window on desktop and scrolls as a normal page on phones. */
+body:has(.my-courses) .shell>div{height:auto;min-height:100dvh}
+body:has(.my-courses) .main{flex:none}
+#app .my-courses .mc-courses-panel{overflow:visible}
+#app .my-courses .mc-course-scroll{flex:none;overflow:visible;padding-inline:16px}
+#app .my-courses .mc-pixel-title{width:100%;height:auto;object-fit:contain}
+#app .my-courses .mc-course-summary{grid-template-columns:104px minmax(0,1fr)}
+#app .answer-ai{position:static;height:620px;min-height:0}
+
+/* Learner dashboard: greeting above the announcement, course rows with the progress bar underneath. */
+#app .vd-hero-top{flex-direction:column;gap:18px}
+#app .vd-hero-top>*{width:100%;max-width:none}
+#app .vd-metrics>*{min-height:0}
+#app .lc-velo .vd-course-row{grid-template-columns:minmax(0,1fr) 38px;gap:10px 14px}
+#app .lc-velo .vd-course-row .vd-course-meter{grid-column:1/-1;grid-row:2}
+
+/* Leaderboard: the profile stacks and the timing table scrolls sideways inside its card. */
+#app .lb-profile{flex-wrap:wrap;justify-content:flex-start;gap:16px}
+#app .lb-profile-copy{flex:1 1 180px;min-width:0}
+#app .lb-profile-copy h2{display:block;overflow-wrap:break-word}
+#app .lb-header-profile{margin-left:auto}
+#app .lb-row-group{overflow-x:auto;scrollbar-width:thin}
+#app .lb-row-group>*{min-width:760px}
+
+/* Learners page. */
+#app .student-performance{padding:16px;gap:0}
+#app .student-performance .sp-main{padding:0}
+#app .student-performance .sp-row{grid-template-columns:104px minmax(0,1fr)}
+
+/* Program Leader: twelve days as two rows of six, search on its own row, metrics two by two. */
+#app .la-date-strip #la-days{grid-template-columns:repeat(6,minmax(0,1fr));row-gap:8px}
+#app .la-filters,#app .leader-applications .la-filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+#app .la-filters>:first-child{grid-column:1/-1}
+#app .ld-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+/* Profile rows: label above value, edit button on the right. */
+#app .pf-row,#app .pf-row-action{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}
+#app .pf-row>:first-child{grid-column:1;grid-row:1}
+#app .pf-row>:nth-child(2){grid-column:1;grid-row:2}
+#app .pf-row>:nth-child(3){grid-column:2;grid-row:1/3}
+
+/* Visitor pages. */
+#app .home-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#app .home-topic{width:auto;min-width:0}
+#app .home-topic svg{max-width:100%}
+#app .home-refined button.instructor-card{flex:0 0 78%}
+#app .home-refined .home-enquiry{margin-inline:0;padding:28px 18px;gap:28px}
+#app .home-enquiry-portal{width:100%}
+#app .ce-outcomes ul{grid-template-columns:minmax(0,1fr)}
+#app .course-enroll .ce-banner{aspect-ratio:auto;min-height:0}
+#app .course-enroll .ce-banner-copy{position:relative;left:auto;bottom:auto;max-width:none;padding:28px 20px 24px}
+#app .course-enroll .ce-banner h1{font-size:30px}
+#app .course-enroll .ce-info-grid{grid-template-columns:minmax(0,1fr)}
+#app .home-footer-base,#app .home-footer-base nav{flex-wrap:wrap;gap:10px}
+#app .site-footer{grid-template-columns:minmax(0,1fr);gap:24px}
+}

@@ -11,8 +11,11 @@
 #skill-incoming-call [data-incoming-call=accept]{background:#baf36e;border-color:#baf36e;color:#203011}
 body.ui-refined.shared-capsule-nav #app{padding-top:0!important}
 body.shared-capsule-nav #skill-edge-nav.skill-menubar{display:none!important}
+/* The capsule replaces the old edge rail, so pages drop its 66px gutter and every page lines the bar up the same way. */
+body.ui-refined.shared-capsule-nav{padding-left:0}
+html{scrollbar-gutter:stable}
 body.shared-capsule-nav .learning-console .lx-top{display:none}
-#app .skill-global-header{display:flex;align-items:center;gap:22px;max-width:1500px;min-height:90px;margin:auto;padding:18px clamp(18px,3vw,42px);position:relative;z-index:30;color:#eaeaea}
+#app .skill-global-header{display:flex;align-items:center;gap:22px;box-sizing:border-box;width:100%;max-width:1424px;flex:none;align-self:stretch;min-height:90px;margin:0 auto;padding:18px clamp(16px,3vw,42px);position:relative;z-index:30;color:#eaeaea}
 #app .skill-global-header .gn-brand{display:flex;align-items:center;flex:none;gap:5px;width:70px;font-size:22px;font-weight:700;letter-spacing:-1px;color:#fff}
 #app .skill-global-header .gn-brand img{width:58px;height:30px;object-fit:contain}
 #app .skill-global-header .gn-brand>span{display:none}

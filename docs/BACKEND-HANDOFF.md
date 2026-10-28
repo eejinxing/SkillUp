@@ -85,12 +85,12 @@ The current design is snapshot/command. If the team prefers REST controllers, tr
 - The general browser tools no longer use the original machine's Playwright/Sharp module paths. They use the package.json dev dependencies instead, and `BROWSER_EXECUTABLE_PATH` can point to an installed browser.
 
 ## Protecting the original project
-The existing C#, NuGet and Web Forms template files are kept. Added: one .aspx/.aspx.cs pair per page and a shared master page. Changed: the Default.aspx.cs startup redirect, the .csproj content/compile items, and the local start page setting.
+The existing C#, NuGet and Web Forms template setup is kept (App_Start, Content, Scripts, Global.asax, Web.config). The template's own pages (About.aspx, Contact.aspx, Site.Master) were removed on 2026-10-29 because nothing used them; Default.aspx is now only the start-up redirect. Added: one .aspx/.aspx.cs pair per page and a shared master page. Changed: the Default.aspx.cs startup redirect, the .csproj content/compile items, and the local start page setting.
 Backups of the original integration files are in App_Data/HandoffBackups (not web-accessible). Older frontend visual history docs are in docs/history.
 Do not hand over .vs, bin, obj, node_modules, test output or local backups as backend source.
 
 ## Desktop support
-Only a desktop browser version is provided; a width of 1280px or more is recommended. Narrow windows keep a desktop canvas of at least 1024px. The mobile master page, view switcher, page templates, preview images and mobile CSS have been removed. Normal window resizing, printing and reduced motion are still supported.
+The same pages serve desktop, tablet and phone widths; there is no separate mobile master page or view switcher. `Frontend/css/responsive.css` (loaded last) holds the small-screen layouts. Printing and reduced motion are still supported.
 
 ## Admin pages removed (2026-10-22)
 
@@ -131,3 +131,12 @@ The user confirmed that only the global sidebar should be removed. The four Web 
 - API-CONTRACT.md moved to docs/; the verification records moved to docs/verification/; the old handoff-manifest.json moved to docs/history/.
 - The one-off integration scripts scripts/activate-*.cjs (already applied), two tests that only called other tests, and inspect-visitor.cjs (whose output path no longer existed) were deleted.
 - For the project overview and folder layout, see the root [README.md](../README.md).
+
+## Web Forms pages (2026-10-28)
+
+- Every page is now a real Web Forms page: the `.aspx` markup uses server controls, the code-behind reads the data and handles the buttons, and saves are postbacks. The JavaScript router (`js/app.js`), the hash routes and `SkillAPI.request` are no longer used.
+- Pages inherit `Frontend/SkillPage.cs`, which loads `Backend/Model`, checks the page's roles and saves through `Backend/Commands` (`Run` / `TryRun`), the same commands as the JSON API. After a save the page redirects with a notice.
+- The only scripts the pages load are `js/site.js` (small enhancements), `js/activity.js` (quiz timer and lab terminal) and `js/call-preview.js` (device-only call preview).
+- The look is unchanged: the same stylesheets and class names. Rules needed only by the server-rendered pages are in `css/webforms.css`.
+- The rest of `Frontend/js/`, `index.html`, `server.cjs`, `package.json`, `tests/` and `scripts/` belong to the JavaScript version, are no longer loaded and are listed in `.gitignore`. `docs/LOAD-ORDER.json`, `docs/ROUTES.json`, `docs/WEBFORMS-PAGES.json` and `docs/MODULE-MAP.md` describe that version. The sections above that mention hash routes, `SkillAPI` or `npm test` describe it too.
+- [WEBFORMS-PAGES.md](WEBFORMS-PAGES.md) lists every page, who can open it and its query parameters.

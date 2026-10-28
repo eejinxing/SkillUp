@@ -96,6 +96,33 @@ namespace SKILL_UP.Backend
     /// Sign-in cookie: an encrypted, HttpOnly forms-authentication ticket that holds the user ID.
     /// The account is reloaded on every request, so a deactivated account loses access at once.
     /// </summary>
+    /// <summary>
+    /// A random key that lets the database recognise this browser for "My enquiries". ENQUIRY_ACCESS stores only its
+    /// SHA-256 hash. HttpOnly, so page scripts cannot read it; nothing else about the visitor is kept in the browser.
+    /// </summary>
+    static class VisitorCookie
+    {
+        const string Name = "SkillUp.Visitor";
+
+        public static string Read(HttpContext context)
+        {
+            var value = context.Request.Cookies[Name]?.Value;
+            return string.IsNullOrEmpty(value) || value.Length > 64 ? null : value;
+        }
+
+        public static void Issue(HttpContext context, string key)
+        {
+            context.Response.Cookies.Add(new HttpCookie(Name, key)
+            {
+                HttpOnly = true,
+                Secure = context.Request.IsSecureConnection,
+                SameSite = SameSiteMode.Lax,
+                Path = "/",
+                Expires = DateTime.Now.AddYears(1)
+            });
+        }
+    }
+
     static class AuthCookie
     {
         const string Name = "SkillUp.Auth";

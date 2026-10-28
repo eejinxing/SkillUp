@@ -2,9 +2,9 @@
 
 Skill UP is a role-based online learning platform built for the WAPP group assignment (Group 24). Visitors browse courses, learners enrol and work through activities, labs and quizzes, instructors author courses, program leaders approve them, and admins manage accounts.
 
-The app is an **ASP.NET Web Forms** project (.NET Framework 4.8.1). Each screen has an `.aspx` / `.aspx.cs` entry page, and a shared JavaScript frontend renders the UI inside them.
+The app is an **ASP.NET Web Forms** project (.NET Framework 4.8.1). Each screen is a Web Forms page: `.aspx` markup with server controls and an `.aspx.cs` code-behind, rendered on the server and saved through postbacks.
 
-> **Status:** The Web Forms site now runs on a C# backend (`Backend/`) and the SQL Server database in `App_Data/SkillUp.mdf`. Sign-in, permissions, grading and every save happen on the server; nothing is stored in `localStorage` except UI preferences and enquiry access codes. Email, real AI, video calls and file storage services are not connected yet. [docs/BACKEND.md](docs/BACKEND.md) explains how the backend works.
+> **Status:** The Web Forms site now runs on a C# backend (`Backend/`) and the SQL Server database in `App_Data/SkillUp.mdf`. Sign-in, permissions, grading and every save happen on the server; nothing is stored in `localStorage`. The only thing kept in the browser is two HttpOnly cookies: the sign-in cookie and a random key that links the browser to its enquiries (`ENQUIRY_ACCESS`). Email, real AI, video calls and file storage services are not connected yet. [docs/BACKEND.md](docs/BACKEND.md) explains how the backend works.
 
 ## Features
 
@@ -20,7 +20,7 @@ Every signed-in role also has messages, discussions, live sessions, an AI compan
 
 ## Getting started
 
-### Option 1: Visual Studio (Web Forms)
+### Visual Studio
 
 1. Open `SKILL UP.slnx` (or `SKILL UP.csproj`) in Visual Studio.
 2. Build once to restore the NuGet packages. The `packages/` folder is not committed.
@@ -37,17 +37,6 @@ Every signed-in role also has messages, discussions, live sessions, an AI compan
 
 If the page shows `Could not find a part of the path '...\bin\roslyn\csc.exe'`, your copy of `SKILL UP.csproj` is older than the fix that copies the compiler on the first build. Pull the latest code, or right-click the solution and choose **Restore NuGet Packages**, then **Build → Rebuild Solution**.
 
-### Option 2: Frontend only (no .NET)
-
-Requires Node.js 22 or later. No `npm install` is needed.
-
-```bash
-cd Frontend
-node server.cjs
-```
-
-Open <http://127.0.0.1:4185>. This serves `Frontend/index.html`, which is the same app without the Web Forms wrapper. There is no C# API here, so this preview still uses the browser mock data in `localStorage`.
-
 ### Demo accounts
 
 Choose **Log in** and pick a demo role, or sign in with one of these accounts:
@@ -59,7 +48,7 @@ Choose **Log in** and pick a demo role, or sign in with one of these accounts:
 | Program Leader | `sarah` | `Demo1234!` |
 | Admin | `admin` | `Demo1234!` |
 
-All accounts and records are fictional. In Visual Studio they live in your `App_Data\SkillUp.mdf`, loaded from `Database/demo-seed.json` the first time the app starts with an empty database. To start fresh, stop the site, delete `App_Data\SkillUp.mdf` and `SkillUp_log.ldf`, and run `Database\setup-db.ps1` again. The Node preview keeps its own separate data in the browser.
+All accounts and records are fictional. In Visual Studio they live in your `App_Data\SkillUp.mdf`, loaded from `Database/demo-seed.json` the first time the app starts with an empty database. To start fresh, stop the site, delete `App_Data\SkillUp.mdf` and `SkillUp_log.ldf`, and run `Database\setup-db.ps1` again.
 
 The demo role buttons (no password), the demo data and the on-screen password reset link are development switches in `Web.config` (`SkillUp:*` app settings). A Release publish turns all three off.
 
@@ -71,23 +60,19 @@ Skill-Up/
 ├── Default.aspx(.cs)                  Start page; redirects to Frontend/Home.aspx
 ├── Global.asax, Web.config, …         ASP.NET application setup
 ├── App_Start/ Content/ Scripts/       Visual Studio template: routing, bundling, Bootstrap, jQuery
-├── About.aspx, Contact.aspx,          Original template pages, kept but not used by Skill UP
-│   Site.Master
 │
 ├── Frontend/                          The Skill UP application
-│   ├── *.aspx + *.aspx.cs             40 Web Forms entry pages, one per screen
-│   ├── SkillUp.Master(.cs)            Shared master page; loads every stylesheet and script
-│   ├── index.html                     Standalone entry for the Node preview server
-│   ├── css/                           62 stylesheets, loaded in a fixed order
-│   ├── js/                            Router, page modules, mock API and seed data
+│   ├── *.aspx + *.aspx.cs             39 Web Forms pages, one per screen, rendered on the server
+│   ├── SkillPage.cs                   Base page: signed-in account, role check, saves through Backend commands
+│   ├── SkillUp.Master(.cs)            Shared master page: stylesheets, navigation, page frame, notices
+│   ├── Controls/                      Shared user controls (course card, files, learner table, lab, dashboards)
+│   ├── Ui.cs, Icons.cs, Charts.cs, …  Display helpers, icons, charts, Figma artwork kept as markup
+│   ├── css/                           Stylesheets, loaded in a fixed order
+│   ├── js/                            site.js, activity.js and call-preview.js (small browser-only extras)
 │   ├── assets/                        Images, icons and fonts
-│   ├── design/                        Figma exports used by the design build scripts
-│   ├── scripts/                       Static checks, test runner, design build tools
-│   ├── tests/                         Domain-logic and Playwright browser tests
-│   ├── server.cjs                     Static file server for local preview
-│   └── package.json                   npm scripts
+│   └── design/                        Figma exports and reference images
 │
-├── Backend/                           C# API: /api/workspace and /api/commands/{action}
+├── Backend/                           C# commands used by the pages, plus the JSON API /api/workspace and /api/commands
 │   ├── ApiHandler.cs                  HTTP endpoint, sign-in cookie, CSRF header, error responses
 │   ├── Commands*.cs                   Every command: rules, permissions, grading, SQL writes
 │   ├── Workspace.cs                   Builds the role-scoped workspace JSON for each user
@@ -106,11 +91,8 @@ Skill-Up/
     ├── BACKEND.md                     How the C# backend and database fit together
     ├── BACKEND-HANDOFF.md             Backend integration guide
     ├── API-CONTRACT.md                Workspace and command API contract for the C# service
-    ├── MODULE-MAP.md                  Which JS and CSS files own each feature
-    ├── WEBFORMS-PAGES.md / .json      Each .aspx page and the route it opens
-    ├── ROUTES.json                    All hash routes
-    ├── COMMANDS.json                  All API command names
-    ├── LOAD-ORDER.json                Stylesheet and script load order
+    ├── WEBFORMS-PAGES.md              Every page: who can open it, its query parameters and shared controls
+    ├── COMMANDS.json                  All command names
     ├── INTEGRATION-CHANGES.md         What changed when the frontend joined the Web Forms project
     ├── verification/                  Dated verification log and result files
     ├── proposal/                      Assignment proposal and architecture diagram (WAPP.drawio)
@@ -119,45 +101,16 @@ Skill-Up/
 
 ## How it works
 
-- **Pages:** Each `.aspx.cs` calls `SetInitialRoute(...)` in `Page_Load`. `SkillUp.Master` writes that route into the URL hash, loads the scripts, and `js/app.js` renders the screen into `<div id="app">`. Navigation after that uses hash routes such as `#/dashboard` and `#/course/c1`. Forms are handled in JavaScript, not by server postbacks.
-- **Data:** Every read and write goes through `SkillAPI.request(action, payload)` in `Frontend/js/api.js`. `Frontend/js/runtime-config.js` selects the transport:
-  - `mode: 'http'` (the Web Forms pages; `SkillUp.Master` selects it): `GET /api/workspace` and `POST /api/commands/{action}`, answered by `Backend/ApiHandler.cs` from the database.
-  - `mode: 'mock'` (`index.html` only): data lives in `localStorage`, seeded from `js/seed.js` and the `js/*-data.js` fixtures.
-- **Styles:** Stylesheets in `Frontend/css/` override each other in load order, so order matters. To add or reorder one, update `Frontend/index.html` and `Frontend/SkillUp.Master` in the same way, then run `npm run check`. Asset URLs inside the CSS are relative to `css/`, for example `url('../assets/…')`.
+- **Pages:** Every page inherits `Frontend/SkillPage.cs`. It loads the database snapshot (`Backend/Model.cs`) and the signed-in account, checks the role, and the page renders its markup on the server. Links are page names without `.aspx`, such as `Course?id=3`; filters and tabs are query parameters.
+- **Saving:** Buttons are `skill:SubmitButton` controls that post back. The handler calls `TryRun(action, payload)`, which runs `Backend/Commands*.cs` in one transaction, the same commands the JSON API uses, so every rule and permission check is shared. After a save the page redirects with a short notice, so a refresh never repeats it.
+- **Scripts:** Pages work without JavaScript. `js/site.js` adds small conveniences, `js/activity.js` runs the quiz timer and the lab terminal, and `js/call-preview.js` the device-only call preview.
+- **Styles:** Stylesheets in `Frontend/css/` override each other in load order, so order matters; they are linked in `Frontend/SkillUp.Master`. Asset URLs inside the CSS are relative to `css/`, for example `url('../assets/…')`.
 
-[Frontend/README.md](Frontend/README.md) has notes for working on the frontend.
+[Frontend/README.md](Frontend/README.md) has notes for working on the pages, and [docs/WEBFORMS-PAGES.md](docs/WEBFORMS-PAGES.md) lists every page.
 
 ## Testing
 
-From `Frontend/`:
-
-```bash
-npm test
-```
-
-This needs no installed packages. It runs:
-
-- `scripts/check-handoff.cjs`: every linked stylesheet and script exists, every CSS asset URL resolves, all JavaScript parses, and every Web Forms page is wired to the master page.
-- `scripts/test-domain.cjs`: 9 business-rule suites covering progress, scoring, requests, accounts and similar logic.
-- `tests/handoff-contract.cjs`: checks the HTTP adapter against the API contract.
-
-Browser tests use Playwright:
-
-```bash
-npm install
-npx playwright install chromium
-npm run test:ui
-```
-
-To test against IIS instead of `index.html`, set `SKILLUP_BASE_URL`. To use an installed browser such as Edge, set `BROWSER_EXECUTABLE_PATH`. Some older tests in `tests/` target earlier layouts and may need selector updates.
-
-The backend has an end-to-end API test for every role (`tests/backend-api.cjs`, about 150 checks). It deletes and deactivates demo accounts, so run it only on a fresh demo database, with the site running:
-
-```bash
-NODE_TLS_REJECT_UNAUTHORIZED=0 node tests/backend-api.cjs https://localhost:44353 --fresh-db
-```
-
-`NODE_TLS_REJECT_UNAUTHORIZED=0` lets Node accept the IIS Express development certificate; use it only for this local test.
+Build in Visual Studio: the pages compile with the project, and markup errors show when a page is opened. There are no automated tests for the Web Forms pages yet. The earlier JavaScript frontend's npm scripts and tests (`Frontend/tests/`, `Frontend/scripts/`) no longer apply to the pages and are listed in `.gitignore`.
 
 ## Database
 
@@ -206,7 +159,7 @@ FROM [USER] u JOIN ROLE r ON r.role_id = u.role_id;
 - The SQL column defaults use `SYSDATETIME()`, the PC's local time.
 - The backend (`Backend/Commands.cs`) uses `DateTime.Now`, also the PC's local time.
 
-The browser still shows each viewer their own clock. The backend sends times to the page as UTC, and the page converts them for display. Times you type into forms, such as a live session's start time, are stored exactly as entered.
+Pages show these times as stored, in the site PC's local time (the Program Leader request board shows Malaysia time, MYT). The JSON API sends them as UTC. Times you type into forms, such as a live session's start time, are stored exactly as entered.
 
 Rows created before 2026-10-26 were saved in UTC, so in Malaysia they appear 8 hours earlier than the PC clock. To fix a database that has such rows, run [`Database/shift-existing-times-to-local.sql`](Database/shift-existing-times-to-local.sql) **once**, before using the updated site: stop the site, open a **New Query** on your `SkillUp.mdf` connection in Server Explorer, paste the file and press **Ctrl+Shift+E**. A marker in the database stops a second run from shifting the times again. A database created after 2026-10-26 does not need it.
 
@@ -221,5 +174,5 @@ Rows created before 2026-10-26 were saved in UTC, so in Malaysia they appear 8 h
 - No email service: the password reset link is shown on screen (development setting).
 - AI replies are templates. The lab terminal runs JavaScript in a local Web Worker. Calls show a local camera preview only. Messages update on refresh, not in real time.
 - Course files are stored in the database as data URLs (2 MB limit), not in file storage.
-- `Frontend/js/seed.js` and the `*-data.js` fixtures still contain demo passwords and answers for the Node preview. The Web Forms site never sends answers to learners, but remove those files before any real deployment.
-- The layout targets desktop browsers 1280 px wide or more. Narrow windows keep a 1024 px minimum canvas.
+- The old JavaScript files in `Frontend/js/` (for example `seed.js` and the `*-data.js` fixtures) contain demo passwords and answers. No page loads them, but remove them before any real deployment.
+- Every page adapts to desktop, tablet and phone widths. The small-screen rules live in `Frontend/css/responsive.css`, which loads last.

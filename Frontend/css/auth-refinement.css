@@ -36,7 +36,7 @@ body.ui-refined:has(main.auth-v2){padding-left:0}
 .auth-v2 .auth-card{width:100%;max-width:28em}
 .auth-v2 .auth-card h1{margin:0;font-size:2.05em;font-weight:500;letter-spacing:-.03em;line-height:1.15;text-align:left;color:var(--au-text)}
 .auth-v2 .auth-card>p{margin:.6em 0 2em;font-size:1em;line-height:1.55;text-align:left;color:var(--au-dim);text-wrap:pretty}
-.auth-v2 form{display:grid;gap:1.15em}
+.auth-v2 :is(form,.auth-fields){display:grid;gap:1.15em}
 .auth-v2 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85em}
 .auth-v2 .auth-control{display:grid;gap:.5em;min-width:0}
 .auth-v2 .auth-label-row{display:flex;align-items:baseline;justify-content:space-between;gap:1em}
@@ -66,10 +66,10 @@ body.ui-refined:has(main.auth-v2){padding-left:0}
 
 .auth-v2 .form-error{margin:0;font-size:.9em;line-height:1.45;color:#ffa4a4}
 .auth-v2 .form-error:empty{display:none}
-.auth-v2 form .actions{display:block;margin:.35em 0 0}
-.auth-v2 form .primary{width:100%;height:3.35em;border:0;border-radius:.75em;background:#f3f5f4;color:#060707;font:600 1.02em 'DM Sans',sans-serif;cursor:pointer;transition:background-color .2s,transform .12s}
-.auth-v2 form .primary:active{transform:scale(.985)}
-.auth-v2 form .primary:disabled{opacity:.55;cursor:progress}
+.auth-v2 :is(form,.auth-fields) .actions{display:block;margin:.35em 0 0}
+.auth-v2 :is(form,.auth-fields) .primary{width:100%;height:3.35em;border:0;border-radius:.75em;background:#f3f5f4;color:#060707;font:600 1.02em 'DM Sans',sans-serif;cursor:pointer;transition:background-color .2s,transform .12s}
+.auth-v2 :is(form,.auth-fields) .primary:active{transform:scale(.985)}
+.auth-v2 :is(form,.auth-fields) .primary:disabled{opacity:.55;cursor:progress}
 .auth-v2 .auth-switch{margin:1.5em 0 0;text-align:center;font-size:.92em;color:var(--au-dim)}
 .auth-v2 .auth-switch a{margin-left:.2em;color:var(--au-text);font-weight:600;text-decoration:underline;text-decoration-color:#ffffff40;text-underline-offset:.25em;transition:text-decoration-color .2s}
 
@@ -86,7 +86,7 @@ body.ui-refined:has(main.auth-v2){padding-left:0}
  .auth-v2 .auth-inline-link:hover{text-decoration:underline;text-underline-offset:.2em}
  .auth-v2 .auth-eye:hover{color:var(--au-text);background:#ffffff0a}
  .auth-v2 .auth-role label:hover span{border-color:#ffffff2e}
- .auth-v2 form .primary:hover{background:#d9efe8}
+ .auth-v2 :is(form,.auth-fields) .primary:hover{background:#d9efe8}
  .auth-v2 .auth-switch a:hover{text-decoration-color:currentColor}
  .auth-v2 .auth-social:hover{background:#ffffff0b;border-color:#ffffff30;color:var(--au-text)}
 }
@@ -168,38 +168,38 @@ body.ui-refined:has(main.auth-v2){padding-left:0}
 .auth-v2 input::-ms-reveal,.auth-v2 input::-ms-clear{display:none}
 /* Log in / sign up / password reset dialog (openAuth in js/app.js): the page's art panel on the left, the form on the right,
    in one dark card over the current page. Everything inside is sized in em from the dialog's 13px base. */
-#dialog.auth-dialog{width:min(900px,calc(100vw - 32px));max-width:none;max-height:calc(100vh - 32px);padding:10px;border:1px solid #ffffff24;border-radius:22px;background:#060707;color:#eeeef2;font-size:13px;overflow:auto;scrollbar-width:thin}
-#dialog.auth-dialog:has(.auth-register){width:min(960px,calc(100vw - 32px))}
-#dialog.auth-dialog .auth-modal{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1fr);align-items:stretch;gap:0;max-width:none;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;font-size:inherit;overflow:visible}
-#dialog.auth-dialog .dialog-close{top:20px;right:20px;z-index:3;display:grid;place-items:center;width:32px;min-height:32px;padding:0;border:0;border-radius:8px;background:transparent;color:#a2a2ad;font-size:20px}
-#dialog.auth-dialog .dialog-close:hover{background:#ffffff0d;color:#eeeef2}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog{width:min(900px,calc(100vw - 32px));max-width:none;max-height:calc(100vh - 32px);padding:10px;border:1px solid #ffffff24;border-radius:22px;background:#060707;color:#eeeef2;font-size:13px;overflow:auto;scrollbar-width:thin}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog:has(.auth-register){width:min(960px,calc(100vw - 32px))}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-modal{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1fr);align-items:stretch;gap:0;max-width:none;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;font-size:inherit;overflow:visible}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .dialog-close{top:20px;right:20px;z-index:3;display:grid;place-items:center;width:32px;min-height:32px;padding:0;border:0;border-radius:8px;background:transparent;color:#a2a2ad;font-size:20px}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .dialog-close:hover{background:#ffffff0d;color:#eeeef2}
 /* Left: the art panel, fitted to the form's height instead of the full window */
-#dialog.auth-dialog .auth-art{height:auto;min-height:36em;padding:2.2em;border-radius:14px}
-#dialog.auth-dialog .auth-brand .skill-logo{height:1.9em}
-#dialog.auth-dialog .auth-orbit{min-height:11em;margin:1em 0}
-#dialog.auth-dialog .auth-orb{width:10em}
-#dialog.auth-dialog .auth-chip{font-size:.85em}
-#dialog.auth-dialog .auth-art h2{max-width:12em;margin:0;padding:0;font-size:2.15em}
-#dialog.auth-dialog .auth-art p{margin-top:.7em;font-size:.95em}
-#dialog.auth-dialog .auth-steps{margin-top:1.6em;gap:.55em}
-#dialog.auth-dialog .auth-steps li{min-height:7.4em;padding:.95em .9em;border-radius:.85em}
-#dialog.auth-dialog .auth-steps span{padding-bottom:1em;font-size:.8em}
-#dialog.auth-dialog .auth-steps strong{font-size:.95em}
-#dialog.auth-dialog .auth-steps small{font-size:.82em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-art{height:auto;min-height:36em;padding:2.2em;border-radius:14px}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-brand .skill-logo{height:1.9em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-orbit{min-height:11em;margin:1em 0}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-orb{width:10em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-chip{font-size:.85em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-art h2{max-width:12em;margin:0;padding:0;font-size:2.15em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-art p{margin-top:.7em;font-size:.95em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-steps{margin-top:1.6em;gap:.55em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-steps li{min-height:7.4em;padding:.95em .9em;border-radius:.85em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-steps span{padding-bottom:1em;font-size:.8em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-steps strong{font-size:.95em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-steps small{font-size:.82em}
 /* Right: the form */
-#dialog.auth-dialog .auth-form{padding:2.2em 2.4em 1.8em}
-#dialog.auth-dialog .auth-card{max-width:26em}
-#dialog.auth-dialog .auth-modal h2#dialog-title{margin:0;padding-right:36px;font-size:1.85em;font-weight:500;line-height:1.2;letter-spacing:-.03em;color:var(--au-text)}
-#dialog.auth-dialog .auth-modal-sub{margin:.45em 0 1.3em;font-size:.95em;line-height:1.5;color:var(--au-dim);text-wrap:pretty}
-#dialog.auth-dialog .auth-modal form{gap:.95em}
-#dialog.auth-dialog .auth-v2 input:not([type=radio]){height:3.1em;background:var(--au-field);color:var(--au-text);border-color:var(--au-field-line)}
-#dialog.auth-dialog .auth-v2 input:not([type=radio]):focus{border-color:var(--au-accent);background:#171a19}
-#dialog.auth-dialog .auth-modal form .primary{height:3.1em;background:#f3f5f4;color:#060707;border:0}
-#dialog.auth-dialog .auth-modal form .primary:hover{background:#ece6fb}
-#dialog.auth-dialog .auth-switch{margin:1.1em 0 0}
-#dialog.auth-dialog .auth-demo{margin-top:1.3em;padding-top:1.1em}
-#dialog.auth-dialog .auth-demo h2{margin:0 0 .75em;padding:0;font-size:.88em;font-weight:500;letter-spacing:0;color:var(--au-dim)}
-#dialog.auth-dialog .auth-social{height:2.6em}
-#dialog.auth-dialog .auth-role span{padding:.75em .9em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-form{padding:2.2em 2.4em 1.8em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-card{max-width:26em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-modal h2:is(#dialog-title,#login-title,#register-title){margin:0;padding-right:36px;font-size:1.85em;font-weight:500;line-height:1.2;letter-spacing:-.03em;color:var(--au-text)}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-modal-sub{margin:.45em 0 1.3em;font-size:.95em;line-height:1.5;color:var(--au-dim);text-wrap:pretty}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-modal :is(form,.auth-fields){gap:.95em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-v2 input:not([type=radio]){height:3.1em;background:var(--au-field);color:var(--au-text);border-color:var(--au-field-line)}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-v2 input:not([type=radio]):focus{border-color:var(--au-accent);background:#171a19}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-modal :is(form,.auth-fields) .primary{height:3.1em;background:#f3f5f4;color:#060707;border:0}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-modal :is(form,.auth-fields) .primary:hover{background:#ece6fb}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-switch{margin:1.1em 0 0}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-demo{margin-top:1.3em;padding-top:1.1em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-demo h2{margin:0 0 .75em;padding:0;font-size:.88em;font-weight:500;letter-spacing:0;color:var(--au-dim)}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-social{height:2.6em}
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-role span{padding:.75em .9em}
 /* Narrow windows: the form alone */
-@media(max-width:760px){#dialog.auth-dialog{width:min(440px,calc(100vw - 32px))}#dialog.auth-dialog .auth-modal{grid-template-columns:minmax(0,1fr)}#dialog.auth-dialog .auth-art{display:none}#dialog.auth-dialog .auth-form{padding:2.2em 1.6em 1.6em}}
+@media(max-width:760px){:is(#dialog,#login-dialog,#register-dialog).auth-dialog{width:min(440px,calc(100vw - 32px))}:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-modal{grid-template-columns:minmax(0,1fr)}:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-art{display:none}:is(#dialog,#login-dialog,#register-dialog).auth-dialog .auth-form{padding:2.2em 1.6em 1.6em}}

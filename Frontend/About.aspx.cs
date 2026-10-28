@@ -1,16 +1,14 @@
 using System;
-using System.Web.UI;
 
 namespace SKILL_UP.Frontend
 {
-    public partial class AboutPage : Page
+    public partial class AboutPage : SkillPage
     {
+        public override string Route => "about";
+        public override PageLayout Layout => PageLayout.Public;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            string route = "about";
-            ((SkillUpMaster)Master).SetInitialRoute(route);
-            // Backend handoff: add authenticated server-side services here when implementing the backend.
-            // Current form actions remain in JavaScript -> SkillAPI.request; no database implementation is claimed.
         }
     }
 }

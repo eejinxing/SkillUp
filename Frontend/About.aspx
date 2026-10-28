@@ -1,5 +1,20 @@
-<%@ Page Title="Skill UP — About" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="About.aspx.cs" Inherits="SKILL_UP.Frontend.AboutPage" %>
-<asp:Content ID="PageBody" ContentPlaceHolderID="PageContent" runat="server">
-    <%-- Existing JavaScript renders this page inside the native Web Forms content region. --%>
-    <div id="app"></div>
+<%@ Page Title="Learning that moves you forward" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="About.aspx.cs" Inherits="SKILL_UP.Frontend.AboutPage" %>
+<asp:Content ContentPlaceHolderID="PageContent" runat="server">
+    <div class="page-head">
+        <div>
+            <h1 tabindex="-1" id="page-title">Learning that moves you forward</h1>
+            <p>Skill UP brings structured courses, practical learning and useful feedback together.</p>
+        </div>
+        <div class="actions tight"></div>
+    </div>
+    <div class="grid two">
+        <section class="panel">
+            <h2>Learn with a clear next step</h2>
+            <p>Choose a course, follow its activities, practise in a lab and check your knowledge. Every completed activity builds your progress.</p>
+        </section>
+        <section class="panel">
+            <h2>Built around collaboration</h2>
+            <p>Instructors create learning content, Program Leaders review it, and administrators support the community. Learners can ask questions and share feedback along the way.</p>
+        </section>
+    </div>
 </asp:Content>

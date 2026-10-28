@@ -102,7 +102,7 @@ body.has-velo-dashboard main{padding-bottom:38px!important}
 .lc-velo .vd-courses footer svg{width:12px;height:12px}
 .lc-velo .vd-filter-empty{padding:25px 4px;color:#9c8aaf;font-size:11px}
 .lc-velo .vd-filter-empty a{display:inline-flex;align-items:center;gap:5px;margin-left:8px;text-decoration:underline}
-body.has-velo-dashboard #app .skill-global-header{max-width:1424px;color:#e9e4f1}
+body.has-velo-dashboard #app .skill-global-header{color:#e9e4f1}
 body.has-velo-dashboard #app .skill-global-header .gn-brand{justify-content:center;padding:4px;border-radius:9px;background:transparent}
 body.has-velo-dashboard #app .skill-global-header .gn-capsule{background:#080609;border-color:#ffffff12}
 body.has-velo-dashboard #app .skill-global-header .gn-workspace-label{color:#d9d1e3}
