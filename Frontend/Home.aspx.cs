@@ -10,7 +10,11 @@ namespace SKILL_UP.Frontend
     {
         public override string Route => "home";
         public override PageLayout Layout => PageLayout.Home;
-        public override string BodyClass => "ui-home";
+        /// <summary>
+        /// smooth-scroll: links to a section of this page (visitor Help, the footer's social icons) glide to it. Left off
+        /// after a postback, so the reply to the enquiry form opens at the form instead of scrolling down from the top.
+        /// </summary>
+        public override string BodyClass => IsPostBack ? "ui-home" : "ui-home smooth-scroll";
 
         /// <summary>Words that tie a topic card to a course title or description.</summary>
         static readonly Dictionary<string, Regex> Topics = new Dictionary<string, Regex>

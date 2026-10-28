@@ -10,6 +10,6 @@
     <section class="panel">
         <h2>Your demo data</h2>
         <p>This is a learning platform prototype. Sample accounts and your changes are saved in this site's database. Use fictional information while testing. Production policies, retention rules and service terms will be provided by the platform operator before launch.</p>
-        <a class="button ghost" href="Help">Get help</a>
+        <a class="button ghost" href="<%= HelpUrl %>">Get help</a>
     </section>
 </asp:Content>

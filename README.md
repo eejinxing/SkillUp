@@ -60,11 +60,9 @@ Skill-Up/
 ├── Default.aspx(.cs)                  Start page; redirects to Frontend/Home.aspx
 ├── Global.asax, Web.config, …         ASP.NET application setup
 ├── App_Start/ Content/ Scripts/       Visual Studio template: routing, bundling, Bootstrap, jQuery
-├── About.aspx, Contact.aspx,          Original template pages, kept but not used by Skill UP
-│   Site.Master
 │
 ├── Frontend/                          The Skill UP application
-│   ├── *.aspx + *.aspx.cs             40 Web Forms pages, one per screen, rendered on the server
+│   ├── *.aspx + *.aspx.cs             39 Web Forms pages, one per screen, rendered on the server
 │   ├── SkillPage.cs                   Base page: signed-in account, role check, saves through Backend commands
 │   ├── SkillUp.Master(.cs)            Shared master page: stylesheets, navigation, page frame, notices
 │   ├── Controls/                      Shared user controls (course card, files, learner table, lab, dashboards)

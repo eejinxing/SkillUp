@@ -17,11 +17,12 @@ Roles: **V** visitor, **L** Learner, **I** Instructor, **P** Program Leader, **A
 
 | Page | Who | Query parameters | What it shows |
 |---|---|---|---|
-| Home | Any | | Landing page with the enquiry form |
+| Home | Any | | Landing page. Its enquiry form (`#home-enquiry`) is where visitors' Help links and the footer's social icons go |
 | Catalog | Any | `q`, `level` | Course catalogue |
 | Course | Any | `id` | Course details, enrolment, reviews, files, discussion |
 | Activity | Any | `course`, `lesson` | One activity: article, lab (with the practice terminal) or timed quiz, and the learning companion. Visitors see public previews |
-| About, Terms, Privacy, FAQ, Instructors, Contact, Help | Any | | Information pages |
+| About, Terms, Privacy, FAQ, Instructors | Any | | Information pages |
+| Help | Any | | The enquiry form for signed-in accounts. Visitors are sent to the one on Home (`Home#home-enquiry`) |
 | EnquiryPortal | Any | `id` | A visitor's enquiries, looked up with ID and access code |
 | Login | V | `return` | Sign in, demo role buttons |
 | Register | V | `email` | Create a learner account |
@@ -55,7 +56,7 @@ Roles: **V** visitor, **L** Learner, **I** Instructor, **P** Program Leader, **A
 | `Controls/CourseCard.ascx`, `CourseHero.ascx`, `CourseFiles.ascx` | Catalog, MyCourses, Courses, Course, CourseEditor, CourseReview, Resources |
 | `Controls/TerminalLab.ascx` | Activity (lab activities) |
 | `Controls/LearnerTable.ascx` | CourseEditor (Learners tab), Learners (Program Leader) |
-| `Controls/EnquiryForm.ascx`, `AuthArt.ascx` | Home and Contact; the sign-in pages |
+| `Controls/EnquiryForm.ascx`, `AuthArt.ascx` | Home and Help; the sign-in pages |
 | `Ui.cs`, `Icons.cs`, `Charts.cs`, `Insights.cs` | Encoding, dates and tags; inline icons; chart drawing; attempts and the leaderboard |
 | `*Art.cs` | Figma artwork kept as markup (course editor, program and leader dashboard illustrations) |
 

@@ -42,7 +42,7 @@
 <asp:PlaceHolder ID="SiteFooter" runat="server">
 <footer class="site-footer">
   <div><a class="brand has-skill-logo" href="Home"><img class="skill-logo" src="assets/skill-logo.png" alt="Skill UP" width="930" height="420"></a><p>Practical skills. Lasting possibilities.</p></div>
-  <div><a class="button" href="Catalog">Courses</a><a class="button" href="About">About us</a><a class="button" href="Help">Help &amp; enquiries</a><a class="button" href="Terms">Terms</a><a class="button" href="Privacy">Privacy</a></div>
+  <div><a class="button" href="Catalog">Courses</a><a class="button" href="About">About us</a><a class="button" href="<%= Page.HelpUrl %>">Help &amp; enquiries</a><a class="button" href="Terms">Terms</a><a class="button" href="Privacy">Privacy</a></div>
   <small>&copy; 2026 Skill UP &middot; Learning platform prototype</small>
 </footer>
 </asp:PlaceHolder>

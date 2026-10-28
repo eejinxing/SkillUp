@@ -6,7 +6,7 @@ using SKILL_UP.Backend;
 namespace SKILL_UP.Frontend.Controls
 {
     /// <summary>
-    /// "Ready for your next step?" enquiry form, shared by Contact, Help and the landing page.
+    /// "Ready for your next step?" enquiry form, shared by Help and the landing page.
     /// Saving creates the enquiry, links it to this browser (or account) and shows its ID and access code once.
     /// </summary>
     public partial class EnquiryForm : UserControl

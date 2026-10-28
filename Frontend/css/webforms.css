@@ -21,6 +21,10 @@
 .skill-global-header{view-transition-name:global-nav}
 @media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}
 
+/* Pages that set body.smooth-scroll (the landing page) glide to a section a link points at, such as #home-enquiry,
+   also when another page opens them at that section. */
+@media (prefers-reduced-motion:no-preference){html:has(>body.smooth-scroll){scroll-behavior:smooth}}
+
 /* Sign-in screens: the dialog sits over a dimmed backdrop instead of a modal opened by script. */
 .auth-screen{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px;overflow:auto;background:#000000b3;backdrop-filter:blur(6px)}
 .auth-screen>#dialog.auth-dialog{position:relative;inset:auto;display:block;margin:auto}

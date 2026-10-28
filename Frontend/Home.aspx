@@ -362,16 +362,16 @@
           </span>
         </a>
         <div class="tm-social" aria-label="Skill UP on social media">
-          <a href="Contact" aria-label="Facebook">
+          <a href="#home-enquiry" aria-label="Facebook">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8Z"></path></svg>
           </a>
-          <a href="Contact" aria-label="X">
+          <a href="#home-enquiry" aria-label="X">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20"></path></svg>
           </a>
-          <a href="Contact" aria-label="Instagram">
+          <a href="#home-enquiry" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.5"></circle><path d="M16.5 7.5h.01"></path></svg>
           </a>
-          <a href="Contact" aria-label="LinkedIn">
+          <a href="#home-enquiry" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M8 10v6M8 7.5h.01M12 16v-3.5a2 2 0 0 1 4 0V16M12 10v6"></path></svg>
           </a>
         </div>
@@ -386,7 +386,7 @@
     <nav aria-label="Legal">
       <a href="Privacy">Privacy information</a>
       <a href="Terms">Terms of use</a>
-      <a href="Help">Help center</a>
+      <a href="#home-enquiry">Help center</a>
     </nav>
   </div>
   <div class="tm-wordmark" aria-hidden="true">

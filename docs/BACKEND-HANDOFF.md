@@ -85,7 +85,7 @@ The current design is snapshot/command. If the team prefers REST controllers, tr
 - The general browser tools no longer use the original machine's Playwright/Sharp module paths. They use the package.json dev dependencies instead, and `BROWSER_EXECUTABLE_PATH` can point to an installed browser.
 
 ## Protecting the original project
-The existing C#, NuGet and Web Forms template files are kept. Added: one .aspx/.aspx.cs pair per page and a shared master page. Changed: the Default.aspx.cs startup redirect, the .csproj content/compile items, and the local start page setting.
+The existing C#, NuGet and Web Forms template setup is kept (App_Start, Content, Scripts, Global.asax, Web.config). The template's own pages (About.aspx, Contact.aspx, Site.Master) were removed on 2026-10-29 because nothing used them; Default.aspx is now only the start-up redirect. Added: one .aspx/.aspx.cs pair per page and a shared master page. Changed: the Default.aspx.cs startup redirect, the .csproj content/compile items, and the local start page setting.
 Backups of the original integration files are in App_Data/HandoffBackups (not web-accessible). Older frontend visual history docs are in docs/history.
 Do not hand over .vs, bin, obj, node_modules, test output or local backups as backend source.
 

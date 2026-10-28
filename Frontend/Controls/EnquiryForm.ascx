@@ -53,7 +53,8 @@
               <p id="home-enquiry-note">Manage your message in the enquiry portal.</p>
               <small class="home-enquiry-ready">All fields are required.</small>
             </div>
-            <skill:SubmitButton ID="SendButton" runat="server" CssClass="home-enquiry-submit" ValidationGroup="enquiry" OnClick="Send_Click"><span>Send enquiry</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"></path></svg></skill:SubmitButton>
+            <%-- formaction: the page that comes back (saved ID or an error) opens at this form, not at the top of the landing page. --%>
+            <skill:SubmitButton ID="SendButton" runat="server" CssClass="home-enquiry-submit" ValidationGroup="enquiry" OnClick="Send_Click" formaction="#home-enquiry"><span>Send enquiry</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"></path></svg></skill:SubmitButton>
           </div>
         </asp:Panel>
       </asp:View>

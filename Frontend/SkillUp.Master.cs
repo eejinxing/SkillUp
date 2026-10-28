@@ -28,7 +28,7 @@ namespace SKILL_UP.Frontend
             ["Instructor"] = new[] { L("dashboard", "Overview", "Dashboard"), L("courses", "My courses", "Courses"), L("requests", "My requests", "CourseRequests"), L("learners", "Learners", "Learners"), L("resources", "Learning resources", "Resources"), L("analytics", "Course analytics", "Analytics"), L("messages", "Messages", "Messages") },
             ["Program Leader"] = new[] { L("dashboard", "Overview", "Dashboard"), L("programs", "Programs", "Programs"), L("assignments", "Instructors", "Assignments"), L("approvals", "Course approvals", "Approvals"), L("messages", "Messages", "Messages") },
             ["Admin"] = new[] { L("dashboard", "Overview", "Dashboard"), L("users", "User accounts", "Users") },
-            ["Visitor"] = new[] { L("home", "Home", "Home"), L("catalog", "Courses", "Catalog"), L("instructors", "Instructors", "Instructors"), L("enquiries", "Enquiries", "EnquiryPortal"), L("help", "Help", "Help") }
+            ["Visitor"] = new[] { L("home", "Home", "Home"), L("catalog", "Courses", "Catalog"), L("instructors", "Instructors", "Instructors"), L("enquiries", "Enquiries", "EnquiryPortal"), L("help", "Help", SkillPage.HomeContact) }
         };
 
         static string[] L(string route, string label, string url) => new[] { route, label, url };

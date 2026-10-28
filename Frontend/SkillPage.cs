@@ -63,6 +63,11 @@ namespace SKILL_UP.Frontend
         /// <summary>Extra classes for body, used by page-specific styles.</summary>
         public virtual string BodyClass => "";
 
+        /// <summary>The enquiry form near the end of the landing page (Controls/EnquiryForm.ascx).</summary>
+        public const string HomeContact = "Home#home-enquiry";
+        /// <summary>Where Help links go: visitors to the landing page's enquiry form, signed-in accounts to the Help page.</summary>
+        public string HelpUrl => Me == null ? HomeContact : "Help";
+
         protected override void OnPreInit(EventArgs e)
         {
             base.OnPreInit(e);
