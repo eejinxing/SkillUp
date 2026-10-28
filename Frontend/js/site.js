@@ -1,10 +1,6 @@
 /* Small progressive enhancements for the server-rendered pages. Every page works without this file. */
 (function(){
  'use strict';
- // Wide screens scale the layout a little, as the original design does (1440px is 100%).
- function zoom(){const w=innerWidth,value=w<1024?1:Math.round(Math.min(1.35,Math.max(.85,w/1440))*20)/20;document.documentElement.style.zoom=value===1?'':String(value);}
- zoom();let timer;addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(zoom,150);});
-
  // Section entrance animation on the landing pages.
  const reveal=document.querySelectorAll('.home-reveal');
  if(reveal.length&&'IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
