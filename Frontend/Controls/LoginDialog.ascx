@@ -12,7 +12,7 @@
       <div class="auth-card">
         <h2 id="login-title">Log in</h2>
         <p class="auth-modal-sub">Use your email or username to open your workspace.</p>
-        <asp:Panel runat="server" DefaultButton="LogInButton">
+        <asp:Panel runat="server" CssClass="auth-fields" DefaultButton="LogInButton">
           <div class="auth-control">
             <div class="auth-label-row"><label for="LoginUser">Email or username</label></div>
             <span class="auth-field"><asp:TextBox ID="LoginUser" runat="server" ClientIDMode="Static" placeholder="you@example.com" autocomplete="username" /></span>

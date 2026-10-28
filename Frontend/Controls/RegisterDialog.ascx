@@ -12,7 +12,7 @@
       <div class="auth-card">
         <h2 id="register-title">Create your account</h2>
         <p class="auth-modal-sub">Instructor accounts are reviewed before they can publish courses.</p>
-        <asp:Panel runat="server" DefaultButton="RegisterButton">
+        <asp:Panel runat="server" CssClass="auth-fields" DefaultButton="RegisterButton">
           <div class="form-grid">
           <div class="auth-control">
             <div class="auth-label-row"><label for="SignUpName">Full name</label></div>
