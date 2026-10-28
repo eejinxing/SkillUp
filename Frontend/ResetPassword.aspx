@@ -25,7 +25,7 @@
         <p class="form-error" role="alert"><asp:Literal ID="FormError" runat="server" /></p>
           <div class="actions"><skill:SubmitButton ID="SaveButton" runat="server" CssClass="primary" Text="Save new password" OnClick="Save_Click" /></div>
         </asp:Panel>
-        <p class="auth-switch">Remembered your password? <a class="link" href="Login">Log in</a></p>
+        <p class="auth-switch">Remembered your password? <a class="link" href="#login">Log in</a></p>
       </div>
     </section>
   </div>

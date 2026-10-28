@@ -1,38 +1,20 @@
 using System;
-using System.Web.UI.WebControls;
 
 namespace SKILL_UP.Frontend
 {
+    /// <summary>
+    /// The address for signing in (pages that need an account send visitors to Login?return=). It shows the master page's
+    /// Log in pop-up already open; the form and its buttons live in Controls/LoginDialog.ascx.
+    /// </summary>
     public partial class LoginPage : SkillPage
     {
         public override string Route => "login";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Me != null && !IsPostBack) Go(ReturnUrl);
-            DemoPanel.Visible = Backend.Settings.DemoLogin;
+            var form = ((SkillUpMaster)Master).LoginForm;
+            if (Me != null && !IsPostBack) Go(form.ReturnUrl);
+            form.Open = true;
         }
-
-        /// <summary>Where to go after signing in: the page that asked for it, when it is on this site.</summary>
-        string ReturnUrl
-        {
-            get
-            {
-                var target = Request.QueryString["return"];
-                return !string.IsNullOrEmpty(target) && target.StartsWith("/") && !target.StartsWith("//") ? target : "Dashboard";
-            }
-        }
-
-        protected void LogIn_Click(object sender, EventArgs e)
-        {
-            if (IsValid && TryRun("login", new { email = AuthEmail.Text.Trim(), password = AuthPassword.Text })) Go(ReturnUrl);
-        }
-
-        protected void Demo_Command(object sender, CommandEventArgs e)
-        {
-            if (TryRun("demo", new { role = (string)e.CommandArgument })) Go(ReturnUrl);
-        }
-
-        public override void ShowError(string message) => FormError.Text = Server.HtmlEncode(message);
     }
 }

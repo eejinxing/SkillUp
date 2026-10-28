@@ -17,15 +17,15 @@ Roles: **V** visitor, **L** Learner, **I** Instructor, **P** Program Leader, **A
 
 | Page | Who | Query parameters | What it shows |
 |---|---|---|---|
-| Home | Any | | Landing page. Its enquiry form (`#home-enquiry`) is where visitors' Help links and the footer's social icons go |
+| Home | Any | | Landing page. The visitor tabs scroll to its sections: About `#top`, Our Courses `#discover`, Our Instructors `#visitor-instructors`, Feedback `#visitor-stories`, FAQ `#visitor-faq`, and Help (like the footer's social icons) the enquiry form `#home-enquiry`. My Enquiries opens EnquiryPortal |
 | Catalog | Any | `q`, `level` | Course catalogue |
 | Course | Any | `id` | Course details, enrolment, reviews, files, discussion |
 | Activity | Any | `course`, `lesson` | One activity: article, lab (with the practice terminal) or timed quiz, and the learning companion. Visitors see public previews |
 | About, Terms, Privacy, FAQ, Instructors | Any | | Information pages |
 | Help | Any | | The enquiry form for signed-in accounts. Visitors are sent to the one on Home (`Home#home-enquiry`) |
 | EnquiryPortal | Any | `id` | A visitor's enquiries, looked up with ID and access code |
-| Login | V | `return` | Sign in, demo role buttons |
-| Register | V | `email` | Create a learner account |
+| Login | V | `return` | The Log in pop-up shown open (sign-in redirects come here). Elsewhere it opens over the page from links to `#login` |
+| Register | V | `email` | The Sign up pop-up shown open. Elsewhere it opens over the page from links to `#register` |
 | ForgotPassword, ResetPassword | V | `token` (reset) | Password reset |
 | Dashboard | Signed in | Admin: `q`, `role`, `source` | Loads `Controls/<Role>Dashboard.ascx`: LearnerDashboard, InstructorDashboard, LeaderDashboard or AdminDashboard |
 | Messages | Signed in | `id`, `channel`, `announcement`, `compose`, `q` | Direct messages, course channels and announcements |
@@ -56,7 +56,9 @@ Roles: **V** visitor, **L** Learner, **I** Instructor, **P** Program Leader, **A
 | `Controls/CourseCard.ascx`, `CourseHero.ascx`, `CourseFiles.ascx` | Catalog, MyCourses, Courses, Course, CourseEditor, CourseReview, Resources |
 | `Controls/TerminalLab.ascx` | Activity (lab activities) |
 | `Controls/LearnerTable.ascx` | CourseEditor (Learners tab), Learners (Program Leader) |
-| `Controls/EnquiryForm.ascx`, `AuthArt.ascx` | Home and Help; the sign-in pages |
+| `Controls/EnquiryForm.ascx`, `AuthArt.ascx` | Home and Help; the sign-in pop-ups and ForgotPassword, ResetPassword |
+| `Controls/LoginDialog.ascx`, `RegisterDialog.ascx` | Log in and Sign up pop-ups on every visitor page, drawn by `SkillUp.Master`. A link to `#login` / `#register` opens one over the page (CSS `:target`, no script); a refused form comes back with it open. Signing in from a Course or Activity page returns there (`SkillPage.StayAfterSignIn`) |
+| `Controls/SiteFooter.ascx` | Footer of every visitor page (Home, EnquiryPortal, Catalog, About, …): sign-up, contact links, logo, legal links. `SkillUp.Master` draws it; signed-in accounts have no footer |
 | `Ui.cs`, `Icons.cs`, `Charts.cs`, `Insights.cs` | Encoding, dates and tags; inline icons; chart drawing; attempts and the leaderboard |
 | `*Art.cs` | Figma artwork kept as markup (course editor, program and leader dashboard illustrations) |
 

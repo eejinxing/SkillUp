@@ -18,6 +18,7 @@ namespace SKILL_UP.Frontend
         public const int GuestPreviewCount = 2;
 
         public override string Route => "course";
+        public override bool StayAfterSignIn => true;
 
         protected CourseRow C;
         protected List<LessonRow> Lessons;
@@ -156,7 +157,7 @@ namespace SKILL_UP.Frontend
             else if (Me == null)
             {
                 ActionLink.Text = "Sign in to enrol";
-                ActionLink.NavigateUrl = "Login?return=" + HttpUtility.UrlEncode(Request.RawUrl);
+                ActionLink.NavigateUrl = "#login";
             }
             else if (CanManage)
             {

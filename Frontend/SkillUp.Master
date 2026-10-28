@@ -23,8 +23,8 @@
   </div>
   <div class="gn-actions">
     <asp:PlaceHolder ID="GuestActions" runat="server">
-      <a href="Login" class="gn-guest" aria-label="Log in or sign up" title="Log in or sign up"><span class="avatar gn-guest-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span></a>
-      <a href="Register" class="gn-register">Sign up</a>
+      <a href="#login" class="gn-guest" aria-label="Log in or sign up" title="Log in or sign up"><span class="avatar gn-guest-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span></a>
+      <a href="#register" class="gn-register">Sign up</a>
     </asp:PlaceHolder>
     <asp:PlaceHolder ID="UserActions" runat="server">
       <%-- Temporary call preview triggers (js/call-preview.js). Remove with SHOW_INCOMING_CALL_TEST there. --%>
@@ -38,18 +38,20 @@
   <asp:ContentPlaceHolder ID="PageContent" runat="server" />
   <asp:PlaceHolder ID="RestrictedPanel" runat="server" Visible="false"><div class="empty"><h3>Access restricted</h3><p>This page belongs to a different role.</p></div></asp:PlaceHolder>
 </main>
-<asp:ContentPlaceHolder ID="AfterMain" runat="server" />
-<asp:PlaceHolder ID="SiteFooter" runat="server">
-<footer class="site-footer">
-  <div><a class="brand has-skill-logo" href="Home"><img class="skill-logo" src="assets/skill-logo.png" alt="Skill UP" width="930" height="420"></a><p>Practical skills. Lasting possibilities.</p></div>
-  <div><a class="button" href="Catalog">Courses</a><a class="button" href="About">About us</a><a class="button" href="<%= Page.HelpUrl %>">Help &amp; enquiries</a><a class="button" href="Terms">Terms</a><a class="button" href="Privacy">Privacy</a></div>
-  <small>&copy; 2026 Skill UP &middot; Learning platform prototype</small>
-</footer>
+<%-- The landing page footer, shown to visitors on every page. --%>
+<skill:SiteFooter ID="VisitorFooter" runat="server" />
+<%-- Log in and Sign up pop-ups for visitors: a link to #login or #register opens one over the page. --%>
+<asp:PlaceHolder ID="AuthDialogs" runat="server">
+<skill:LoginDialog ID="LoginPopup" runat="server" />
+<skill:RegisterDialog ID="RegisterPopup" runat="server" />
+<span id="close" hidden></span>
 </asp:PlaceHolder>
 <asp:Literal ID="ShellClose" runat="server" />
 </div>
 <div id="toast" role="status" aria-live="polite"<%= Notice == null ? "" : " class=\"visible\"" %>><%: Notice %></div>
 </form>
+<%-- Back to top: js/site.js shows it once the page is scrolled. --%>
+<button type="button" class="scroll-top" data-scroll-top="" aria-label="Back to top" title="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button>
 <script src="js/site.js" defer></script>
 <asp:PlaceHolder ID="CallScript" runat="server"><script type="application/json" id="call-context"><%= CallContext %></script><script src="js/call-preview.js" defer></script></asp:PlaceHolder>
 <asp:ContentPlaceHolder ID="PageScripts" runat="server" />

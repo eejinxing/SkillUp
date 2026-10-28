@@ -65,8 +65,15 @@ namespace SKILL_UP.Frontend
 
         /// <summary>The enquiry form near the end of the landing page (Controls/EnquiryForm.ascx).</summary>
         public const string HomeContact = "Home#home-enquiry";
+        /// <summary>The "What You'll Learn" section of the landing page, where visitors browse courses instead of the catalogue.</summary>
+        public const string HomeCourses = "Home#discover";
         /// <summary>Where Help links go: visitors to the landing page's enquiry form, signed-in accounts to the Help page.</summary>
         public string HelpUrl => Me == null ? HomeContact : "Help";
+        /// <summary>
+        /// Signing in through the Log in pop-up on this page comes back to it (a course or an activity) instead of going to
+        /// the dashboard.
+        /// </summary>
+        public virtual bool StayAfterSignIn => false;
 
         protected override void OnPreInit(EventArgs e)
         {
@@ -132,10 +139,14 @@ namespace SKILL_UP.Frontend
             }
         }
 
-        /// <summary>Runs a command and shows its message on the page when it is refused. Returns false in that case.</summary>
-        public bool TryRun(string action, object payload, out object data)
+        /// <summary>
+        /// Runs a command and shows its message on the page when it is refused. Returns false in that case.
+        /// showError puts the message somewhere else, such as inside the Log in pop-up.
+        /// </summary>
+        public bool TryRun(string action, object payload, out object data, Action<string> showError = null)
         {
             data = null;
+            var show = showError ?? ShowError;
             try
             {
                 data = Run(action, payload);
@@ -143,11 +154,11 @@ namespace SKILL_UP.Frontend
             }
             catch (ApiException e)
             {
-                ShowError(e.Message);
+                show(e.Message);
             }
             catch (SqlException e) when (e.Number == 2627 || e.Number == 2601)
             {
-                ShowError("That record already exists.");
+                show("That record already exists.");
             }
             return false;
         }

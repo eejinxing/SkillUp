@@ -9,7 +9,7 @@ Notes for working on the pages. For setup, demo accounts and the overall project
 | `*.aspx` + `*.aspx.cs` | One Web Forms page per screen. The markup uses server controls; the code-behind reads the data and handles the buttons |
 | `SkillPage.cs` | Base class of every page: signed-in account, role check, `Run` / `TryRun` for saves, redirect with a notice |
 | `SkillUp.Master` | Shared master page: stylesheets, capsule navigation, page frame, notice, scripts |
-| `Controls/` | User controls shared by several pages (course card, course files, learner table, lab terminal, the four role dashboards) and `SubmitButton` |
+| `Controls/` | User controls shared by several pages (course card, course files, learner table, lab terminal, the visitor footer, the four role dashboards) and `SubmitButton` |
 | `Ui.cs`, `Icons.cs`, `Charts.cs`, `Insights.cs`, `*Art.cs` | Display helpers, inline icons, chart drawing, learning figures, Figma artwork kept as markup |
 | `css/` | Stylesheets. Later files override earlier ones; `webforms.css` holds the rules only the server-rendered pages need, and `responsive.css` loads last |
 | `js/site.js`, `js/activity.js`, `js/call-preview.js` | The only scripts the pages load (see below) |

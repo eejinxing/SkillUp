@@ -6,7 +6,7 @@
 <asp:PlaceHolder ID="Detail" runat="server">
 <article class="course-enroll" data-course-id="<%= C.Id %>">
   <nav class="ce-breadcrumb" aria-label="Course navigation">
-    <a href="Catalog" class="ce-back"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>All courses</a>
+    <a href="<%= Me == null ? HomeCourses : "Catalog" %>" class="ce-back"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><%= Me == null ? "Our Courses" : "All courses" %></a>
     <span aria-hidden="true">/</span><span><%: C.Title %></span>
     <% if (Me?.Role == "Learner") { %><a href="Dashboard" class="ce-dashboard-link">My dashboard</a><% } %>
   </nav>
@@ -84,7 +84,7 @@
         <asp:HyperLink ID="ActionLink" runat="server" CssClass="ce-enrol-button" />
         <skill:SubmitButton ID="EnrolButton" runat="server" CssClass="ce-enrol-button" Text="Enrol in course" CausesValidation="false" OnClick="Enrol_Click" />
         <p><%= Enrollment != null ? Completed.Count + " of " + Lessons.Count + " activities completed" : CanManage ? "Edit activities, files and quizzes from the course editor." : "All course activities included &middot; Learn at your own pace" %></p>
-        <% if (Me == null) { %><a class="ce-create-account" href="Register">Create a free account</a><% } %>
+        <% if (Me == null) { %><a class="ce-create-account" href="#register">Create a free account</a><% } %>
         <dl>
           <div><dt>Level</dt><dd><%: C.Difficulty %></dd></div>
           <div><dt>Duration</dt><dd><%= C.Duration %> weeks</dd></div>

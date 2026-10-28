@@ -28,13 +28,18 @@ namespace SKILL_UP.Frontend
             ["Instructor"] = new[] { L("dashboard", "Overview", "Dashboard"), L("courses", "My courses", "Courses"), L("requests", "My requests", "CourseRequests"), L("learners", "Learners", "Learners"), L("resources", "Learning resources", "Resources"), L("analytics", "Course analytics", "Analytics"), L("messages", "Messages", "Messages") },
             ["Program Leader"] = new[] { L("dashboard", "Overview", "Dashboard"), L("programs", "Programs", "Programs"), L("assignments", "Instructors", "Assignments"), L("approvals", "Course approvals", "Approvals"), L("messages", "Messages", "Messages") },
             ["Admin"] = new[] { L("dashboard", "Overview", "Dashboard"), L("users", "User accounts", "Users") },
-            ["Visitor"] = new[] { L("home", "Home", "Home"), L("catalog", "Courses", "Catalog"), L("instructors", "Instructors", "Instructors"), L("enquiries", "Enquiries", "EnquiryPortal"), L("help", "Help", SkillPage.HomeContact) }
+            // Visitors: the tabs scroll to sections of the landing page (#top is the top of the page), except My Enquiries.
+            ["Visitor"] = new[] { L("home", "About", "Home#top"), L("catalog", "Our Courses", SkillPage.HomeCourses), L("instructors", "Our Instructors", "Home#visitor-instructors"), L("feedback", "Feedback", "Home#visitor-stories"), L("faq", "FAQ", "Home#visitor-faq"), L("help", "Help", SkillPage.HomeContact), L("enquiries", "My Enquiries", "EnquiryPortal") }
         };
 
         static string[] L(string route, string label, string url) => new[] { route, label, url };
 
         /// <summary>The current page, typed so the markup can read the signed-in account.</summary>
         public new SkillPage Page => (SkillPage)base.Page;
+
+        /// <summary>The Log in and Sign up pop-ups (visitors only). The Login and Register pages show theirs open.</summary>
+        public Controls.LoginDialog LoginForm => LoginPopup;
+        public Controls.RegisterDialog SignUpForm => RegisterPopup;
 
         /// <summary>A message shown in the toast on this response, such as a validation error.</summary>
         public string Notice { get; set; }
@@ -51,7 +56,7 @@ namespace SKILL_UP.Frontend
             var links = Menus[me == null ? "Visitor" : me.Role];
             NavLinks.DataSource = links.Select(l => new NavLink { Route = l[0], Label = l[1], Url = l[2], Current = l[0] == Page.Route });
             NavLinks.DataBind();
-            GuestActions.Visible = me == null;
+            GuestActions.Visible = AuthDialogs.Visible = me == null;
             UserActions.Visible = CallScript.Visible = me != null;
             if (me != null) CallContext = BuildCallContext(me);
         }
@@ -81,7 +86,7 @@ namespace SKILL_UP.Frontend
             var layout = page.Layout;
             ShellOpen.Text = layout == PageLayout.Workspace ? "<div class=\"shell learner-home-shell figma-shell\"><div>" : layout == PageLayout.Home ? "<div class=\"site-home home-refined\">" : "";
             ShellClose.Text = layout == PageLayout.Workspace ? "</div></div>" : layout == PageLayout.Home ? "</div>" : "";
-            SiteFooter.Visible = layout == PageLayout.Public;
+            VisitorFooter.Visible = layout != PageLayout.Workspace;
 
             if (layout == PageLayout.Workspace)
             {

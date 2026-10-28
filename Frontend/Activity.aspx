@@ -48,7 +48,7 @@
       <% if (Guest) { %>
       <section class="answer-guest-note" role="note">
         <div><strong>You&rsquo;re previewing this activity</strong><p>Log in to answer, use hints, ask the companion and save your progress.<%= HiddenQuestions > 0 ? " " + HiddenQuestions + " more question" + (HiddenQuestions == 1 ? " is" : "s are") + " hidden in this preview." : "" %></p></div>
-        <div><a class="answer-guest-login" href="Login?return=<%= Server.UrlEncode(Request.RawUrl) %>">Log in</a><a class="answer-guest-register" href="Register">Create account</a></div>
+        <div><a class="answer-guest-login" href="#login">Log in</a><a class="answer-guest-register" href="#register">Create account</a></div>
       </section>
       <% } %>
       <skill:TerminalLab ID="LabBefore" runat="server" />
@@ -140,7 +140,7 @@
   <asp:View runat="server">
     <div class="page-head"><div><h1 tabindex="-1" id="page-title">This activity is locked</h1><p></p></div><div class="actions tight"></div></div>
     <div class="empty"><h3>Log in to keep going</h3><p>Visitors can preview the first <%= CoursePage.GuestPreviewCount %> activities. Log in and enrol to unlock the rest of <%: C?.Title %>.</p></div>
-    <div class="actions"><a class="button primary" href="Login?return=<%= Server.UrlEncode(Request.RawUrl) %>">Log in</a><a class="button" href="Course?id=<%= C?.Id %>">Back to course</a></div>
+    <div class="actions"><a class="button primary" href="#login">Log in</a><a class="button" href="Course?id=<%= C?.Id %>">Back to course</a></div>
   </asp:View>
   <%-- 3: previous activity not done --%>
   <asp:View runat="server">

@@ -14,8 +14,10 @@ namespace SKILL_UP.Frontend
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl main;
         protected global::System.Web.UI.WebControls.ContentPlaceHolder PageContent;
         protected global::System.Web.UI.WebControls.PlaceHolder RestrictedPanel;
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder AfterMain;
-        protected global::System.Web.UI.WebControls.PlaceHolder SiteFooter;
+        protected global::SKILL_UP.Frontend.Controls.SiteFooter VisitorFooter;
+        protected global::System.Web.UI.WebControls.PlaceHolder AuthDialogs;
+        protected global::SKILL_UP.Frontend.Controls.LoginDialog LoginPopup;
+        protected global::SKILL_UP.Frontend.Controls.RegisterDialog RegisterPopup;
         protected global::System.Web.UI.WebControls.Literal ShellClose;
         protected global::System.Web.UI.WebControls.PlaceHolder CallScript;
         protected global::System.Web.UI.WebControls.ContentPlaceHolder PageScripts;

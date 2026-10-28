@@ -33,14 +33,14 @@ namespace SKILL_UP.Frontend
         {
         }
 
-        /// <summary>A topic card opens the first published course that matches it, or the catalogue when none does.</summary>
+        /// <summary>
+        /// A topic card opens the first published course whose title matches it, or the catalogue when none does. Only the
+        /// title counts: a description that merely mentions a word (a data course "with security in mind") is not that topic.
+        /// </summary>
         protected string TopicUrl(string topic)
         {
-            var course = Data.Courses.FirstOrDefault(c => c.Status == "Published" && Topics[topic].IsMatch(c.Title + " " + c.Description));
+            var course = Data.Courses.FirstOrDefault(c => c.Status == "Published" && Topics[topic].IsMatch(c.Title));
             return course == null ? "Catalog" : "Course?id=" + course.Id;
         }
-
-        protected void SignUp_Click(object sender, EventArgs e) =>
-            Go("Register" + (SignUpEmail.Text.Trim().Length > 0 ? "?email=" + HttpUtility.UrlEncode(SignUpEmail.Text.Trim()) : ""));
     }
 }

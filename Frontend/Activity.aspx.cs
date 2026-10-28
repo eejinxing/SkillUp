@@ -18,6 +18,7 @@ namespace SKILL_UP.Frontend
     public partial class ActivityPage : SkillPage
     {
         public override string Route => "lesson";
+        public override bool StayAfterSignIn => true;
 
         protected CourseRow C;
         protected LessonRow L;
@@ -181,7 +182,7 @@ namespace SKILL_UP.Frontend
             var previous = index > 0 ? link(LessonUrl(lessons[index - 1]), "&larr; Previous activity", "answer-previous") : link("Course?id=" + C.Id, "&larr; All activities", "answer-previous");
             var next = index + 1 < lessons.Count ? lessons[index + 1] : null;
             string forward;
-            if (Guest) forward = next != null && index + 1 < CoursePage.GuestPreviewCount ? link(LessonUrl(next), "Next preview &rarr;", "answer-next") : link("Login", "Log in to unlock more &rarr;", "answer-next");
+            if (Guest) forward = next != null && index + 1 < CoursePage.GuestPreviewCount ? link(LessonUrl(next), "Next preview &rarr;", "answer-next") : link("#login", "Log in to unlock more &rarr;", "answer-next");
             else if (IsCompleted) forward = next != null ? link(LessonUrl(next), "Next activity &rarr;", "answer-next") : link("Course?id=" + C.Id, "View course progress &rarr;", "answer-next");
             else forward = "<span>Complete this activity to continue</span>";
             return previous + forward;

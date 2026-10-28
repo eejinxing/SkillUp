@@ -38,8 +38,8 @@
   if(e.target.id==='CommentBox'&&e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();if(e.target.value.trim())e.target.closest('.sc-comment-box').querySelector('.sc-comment-post').click();}
  });
 
- // Escape closes any open disclosure menu.
- document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('details[open].gn-more,details[open][data-menu],details[open].ld-monitor-filter,details[open].ld-monitor-actions').forEach(d=>d.open=false);});
+ // Escape closes any open disclosure menu, and the open Log in / Sign up pop-up (as its close button would).
+ document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;document.querySelectorAll('details[open].gn-more,details[open][data-menu],details[open].ld-monitor-filter,details[open].ld-monitor-actions').forEach(d=>d.open=false);document.querySelector('.auth-popup:is(:target,.is-open) .dialog-close')?.click();});
 
  // Staff pages: Print buttons, and the leader overview's "more updates" arrow scrolls the alert list.
  document.addEventListener('click',e=>{if(e.target.closest('[data-action=print]'))print();const more=e.target.closest('[data-leader-note-scroll]');if(more){const list=more.closest('.ld-notifications')?.querySelector('.ld-note-scroll');list?.scrollBy({top:Math.max(80,list.clientHeight*.75)});}});
@@ -55,7 +55,33 @@
   clear?.addEventListener('click',()=>{boxes().forEach(b=>b.checked=false);sync();});sync();}
 
  // The quiz editor's companion shows its newest reply.
- const history=document.getElementById('qe-ai-history');if(history)history.scrollTop=history.scrollHeight;
+ const aiHistory=document.getElementById('qe-ai-history');if(aiHistory)aiHistory.scrollTop=aiHistory.scrollHeight;
+
+ // Back to top button: appears once the page is scrolled down a screen, scrolls up smoothly (instantly with reduced motion).
+ const top=document.querySelector('[data-scroll-top]');
+ if(top){const sync=()=>top.classList.toggle('is-visible',scrollY>Math.max(400,innerHeight/2));addEventListener('scroll',sync,{passive:true});sync();
+  top.addEventListener('click',()=>{scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});if(location.hash)history.replaceState(null,'',location.pathname+location.search);});}
+
+ // Landing page for visitors: a browser refresh starts again at the top of Home (no #section in the address, no remembered scroll
+ // position), wherever on the page it was pressed. Links to a section still open it, since those are not refreshes.
+ if(document.body.classList.contains('smooth-scroll')&&document.body.classList.contains('ui-public')){
+  history.scrollRestoration='manual';
+  const entry=performance.getEntriesByType('navigation')[0];
+  if(entry&&entry.type==='reload'){
+   if(location.hash)history.replaceState(null,'',location.pathname+location.search);
+   const top=()=>scrollTo({top:0,behavior:'instant'});top();addEventListener('load',top);
+  }
+ }
+
+ // Landing page tabs for visitors: the section tab you clicked stays highlighted (also when a link from another page opened
+ // that section) until you press the back-to-top button, which highlights About again. Scrolling by hand changes nothing.
+ if(document.body.classList.contains('smooth-scroll')&&document.body.classList.contains('ui-public')){
+  const tabs=[...document.querySelectorAll('.gn-links a')],tabAt=hash=>tabs.find(a=>(a.getAttribute('href')||'').split('#')[1]===hash);
+  const mark=tab=>{if(!tab)return;tabs.forEach(a=>a.removeAttribute('aria-current'));tab.setAttribute('aria-current','page');};
+  mark(tabAt(location.hash.slice(1)));
+  tabs.forEach(a=>a.addEventListener('click',()=>{if((a.getAttribute('href')||'').includes('#'))mark(a);}));
+  document.querySelector('[data-scroll-top]')?.addEventListener('click',()=>mark(tabAt('top')));
+ }
 
  // On narrow screens the nav links scroll sideways; keep the current page's link in view.
  const links=document.querySelector('.gn-links'),active=links&&links.querySelector('[aria-current=page]');

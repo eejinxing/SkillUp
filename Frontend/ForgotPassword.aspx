@@ -30,7 +30,7 @@
             <p class="auth-modal-sub">If that email belongs to an account, a reset link is on its way. It stays valid for 15 minutes.</p>
           </asp:View>
         </asp:MultiView>
-        <p class="auth-switch">Remembered your password? <a class="link" href="Login">Log in</a></p>
+        <p class="auth-switch">Remembered your password? <a class="link" href="#login">Log in</a></p>
       </div>
     </section>
   </div>

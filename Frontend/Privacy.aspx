@@ -3,13 +3,35 @@
     <div class="page-head">
         <div>
             <h1 tabindex="-1" id="page-title">Privacy information</h1>
-            <p>Information for this learning platform prototype.</p>
+            <p>What Skill UP keeps about you, why, and how you can change it. Last updated 29 October 2026.</p>
         </div>
         <div class="actions tight"></div>
     </div>
-    <section class="panel">
-        <h2>Your demo data</h2>
-        <p>This is a learning platform prototype. Sample accounts and your changes are saved in this site's database. Use fictional information while testing. Production policies, retention rules and service terms will be provided by the platform operator before launch.</p>
-        <a class="button ghost" href="<%= HelpUrl %>">Get help</a>
-    </section>
+    <div class="grid two">
+        <section class="panel">
+            <h2>What we keep</h2>
+            <p><strong>Your account:</strong> name, email, role and profile details. Your password is never stored as typed, only as a salted hash.</p>
+            <p><strong>Your learning:</strong> the courses you enrol in, your progress, quiz and lab results, badges, and the messages and discussion posts you write.</p>
+            <p><strong>Your enquiries:</strong> the name, email, subject and message you send through the enquiry form.</p>
+        </section>
+        <section class="panel">
+            <h2>Cookies</h2>
+            <p><strong>Sign-in cookie:</strong> an encrypted cookie that keeps you signed in for up to 12 hours. Page scripts cannot read it.</p>
+            <p><strong>Visitor cookie:</strong> a random key, kept for a year, that links the enquiries you send to this browser so you can find them again. Only a hash of it is stored.</p>
+            <p>We do not use advertising or tracking cookies.</p>
+        </section>
+        <section class="panel">
+            <h2>Who can see it</h2>
+            <p>Each role sees only what it needs. Instructors see the learners in their own courses, Program Leaders see their programs and the courses under review, and administrators manage accounts. The leaderboard shows learners' names, levels and points to other learners.</p>
+        </section>
+        <section class="panel">
+            <h2>Your choices</h2>
+            <p>Update your details from your profile. In the enquiry portal you can view, edit or delete any enquiry you sent. To ask about anything else, send us an enquiry.</p>
+            <a class="button ghost" href="<%= HelpUrl %>">Contact us</a>
+        </section>
+        <section class="panel" style="grid-column:1/-1">
+            <h2>This is a prototype</h2>
+            <p>Skill UP is a learning platform prototype. Sample accounts and your changes are saved in this site's database. Use fictional information while testing. Final retention rules and policies will be set by the platform operator before launch.</p>
+        </section>
+    </div>
 </asp:Content>
