@@ -1,6 +1,6 @@
 /* Homepage contact: keep the existing two-column composition with a compact action footer. */
 #app .home-refined .home-enquiry{--he-action-bg:#eeeef0;--he-action-ink:#141416;--he-secondary:#101012;--he-copy:#efeff1;--he-note:#92929c;--he-radius:12px;--he-hover:#19191c;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,6vw,92px);margin:72px -28px 0;padding:60px 56px 56px;border:1px solid #ffffff0d;border-radius:20px;background:#050505;color:#ededed;scroll-margin-top:40px}
-#app .home-refined .home-enquiry h3{margin:0;font-size:clamp(34px,3.6vw,52px);font-weight:400;line-height:1.08;letter-spacing:-.055em}
+#app .home-refined .home-enquiry :is(h1,h3){margin:0;font-size:clamp(34px,3.6vw,52px);font-weight:400;line-height:1.08;letter-spacing:-.055em}
 #app .home-enquiry-intro{display:flex;flex-direction:column;min-width:0}
 #app .home-enquiry-eyebrow{display:block;margin-bottom:22px;color:#737378;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
 #app .home-enquiry-intro>p{margin:28px 0 0;color:#9a9aa0;font-size:14px;line-height:1.7}
@@ -151,3 +151,7 @@
 #app .enquiry-portal .ep-editor :is(input,textarea):focus-visible{border-color:#eeeef0;background:#111114;outline:0}
 #app .enquiry-portal .ep-editor-actions .ep-primary{min-height:48px;padding:0 24px;border-radius:999px;font-size:14px}
 #app .enquiry-portal .ep-head .ep-primary{border-radius:999px;padding:0 20px}
+
+/* #/contact and #/help show this section as the whole page (help() in js/app.js): same width as on the home page, centred. */
+#app .contact-page{max-width:none;padding:clamp(32px,5vw,72px) clamp(22px,4.7vw,60px) 96px}
+#app .contact-page .home-enquiry{max-width:1116px;margin:0 auto}

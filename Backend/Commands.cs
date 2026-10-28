@@ -36,6 +36,11 @@ namespace SKILL_UP.Backend
         /// <summary>The PC's current local time. Stored as is, so the database shows the same clock as the device.</summary>
         static DateTime Now => DateTime.Now;
 
+        /// <summary>Random key from this browser's HttpOnly cookie (VisitorCookie). ENQUIRY_ACCESS links it to the enquiries sent or found here.</summary>
+        public string VisitorKey { get; set; }
+        /// <summary>Set when a command created a visitor key; the handler sends it as a cookie after the transaction commits.</summary>
+        public string NewVisitorKey { get; private set; }
+
         public Commands(Db db, Model m, UserRow me)
         {
             this.db = db;
@@ -57,6 +62,7 @@ namespace SKILL_UP.Backend
                 case "enquirySave": return EnquirySave();
                 case "enquiryLookup": return EnquiryLookup();
                 case "enquiryDelete": return EnquiryDelete();
+                case "enquiryList": return EnquiryList();
             }
             Must();
             object result;
@@ -106,7 +112,8 @@ namespace SKILL_UP.Backend
                 case "userDelete": result = UserDelete(); break;
                 default: throw new ApiException(404, "Unknown action: " + action);
             }
-            if (!logged && action != "ai" && action != "readMessages") Log(action, Str("title") ?? Str("courseId") ?? Str("id") ?? Me.Name);
+            var inboxClick = action == "preferences" && Str("section") == "leaderInbox";   // marking an alert read is not audit-worthy
+            if (!logged && action != "ai" && action != "readMessages" && !inboxClick) Log(action, Str("title") ?? Str("courseId") ?? Str("id") ?? Me.Name);
             return result;
         }
 
@@ -316,13 +323,38 @@ namespace SKILL_UP.Backend
             return null;
         }
 
-        EnquiryRow EnquiryWithToken(int status, string message)
+        // ---- enquiries ---------------------------------------------------------------------
+        // An enquiry opens with its access code, or without it in the browser that sent or found it
+        // (ENQUIRY_ACCESS, keyed by the hashed visitor cookie) and for the signed-in account that sent it.
+
+        EnquiryRow FindEnquiry()
         {
             int id;
+            return int.TryParse(Str("id"), out id) ? m.Enquiries.FirstOrDefault(x => x.Id == id) : null;
+        }
+
+        bool TokenMatches(EnquiryRow q)
+        {
             var token = Str("token") ?? "";
-            var q = int.TryParse(Str("id"), out id) ? m.Enquiries.FirstOrDefault(x => x.Id == id) : null;
-            if (q == null || token == "" || q.TokenHash != Tokens.Sha256(token)) Fail(message, status);
-            return q;
+            return token != "" && q.TokenHash == Tokens.Sha256(token);
+        }
+
+        bool LinkedToBrowser(EnquiryRow q)
+        {
+            if (Me != null && q.UserId == Me.Id) return true;
+            return VisitorKey != null && (int)db.Scalar("SELECT COUNT(*) FROM ENQUIRY_ACCESS WHERE visitor_key_hash = @p0 AND enquiry_id = @p1",
+                Tokens.Sha256(VisitorKey), q.Id) > 0;
+        }
+
+        /// <summary>A code that is sent must be right; without one, this browser or account must be linked to the enquiry.</summary>
+        bool MayOpen(EnquiryRow q) => string.IsNullOrEmpty(Str("token")) ? LinkedToBrowser(q) : TokenMatches(q);
+
+        /// <summary>Records in the database that this browser may open the enquiry. Creates the browser's key on first use.</summary>
+        void LinkToBrowser(int enquiryId)
+        {
+            if (VisitorKey == null) VisitorKey = NewVisitorKey = Tokens.New();
+            db.Exec(@"IF NOT EXISTS (SELECT 1 FROM ENQUIRY_ACCESS WHERE visitor_key_hash = @p0 AND enquiry_id = @p1)
+                      INSERT INTO ENQUIRY_ACCESS (visitor_key_hash, enquiry_id, granted_at) VALUES (@p0, @p1, @p2)", Tokens.Sha256(VisitorKey), enquiryId, Now);
         }
 
         object EnquirySave()
@@ -332,13 +364,13 @@ namespace SKILL_UP.Backend
             var message = Text("message", "Message", 4000);
             var email = (Str("email") ?? "").Trim();
             if (!EmailPattern.IsMatch(email) || email.Length > 255) Fail("Enter a valid email address.");
-            int id;
-            var existing = int.TryParse(Str("id"), out id) ? m.Enquiries.FirstOrDefault(x => x.Id == id) : null;
-            var token = Str("token");
+            var existing = FindEnquiry();
+            string token = null;
             var row = new EnquiryRow { Name = name, Email = email, Subject = subject, Message = message, Status = "Open", CreatedAt = Now };
             if (existing != null)
             {
-                if (string.IsNullOrEmpty(token) || existing.TokenHash != Tokens.Sha256(token)) Fail("Invalid enquiry access code.", 403);
+                if (!MayOpen(existing)) Fail("Invalid enquiry access code.", 403);
+                if (TokenMatches(existing)) token = Str("token");
                 db.Exec("UPDATE ENQUIRY SET name = @p1, email = @p2, subject = @p3, message = @p4, updated_at = @p5 WHERE enquiry_id = @p0", existing.Id, name, email, subject, message, Now);
                 row.Id = existing.Id;
                 row.Status = existing.Status;
@@ -349,17 +381,36 @@ namespace SKILL_UP.Backend
                 token = Tokens.New();
                 row.Id = db.Insert(@"INSERT INTO ENQUIRY (user_id, name, email, subject, message, status, submitted_at, access_token_hash)
                                      VALUES (@p0, @p1, @p2, @p3, @p4, N'Open', @p5, @p6)", Me?.Id, name, email, subject, message, Now, Tokens.Sha256(token));
+                LinkToBrowser(row.Id);
             }
             return Workspace.EnquiryDto(row, token);
         }
 
-        object EnquiryLookup() => Workspace.EnquiryDto(EnquiryWithToken(404, "Enquiry ID or access code is incorrect."), Str("token"));
+        /// <summary>Opens an enquiry from any device with its ID and access code, and links it to this browser.</summary>
+        object EnquiryLookup()
+        {
+            var q = FindEnquiry();
+            if (q == null || !TokenMatches(q)) Fail("Enquiry ID or access code is incorrect.", 404);
+            LinkToBrowser(q.Id);
+            return Workspace.EnquiryDto(q, Str("token"));
+        }
 
         object EnquiryDelete()
         {
-            var q = EnquiryWithToken(404, "Enquiry not found.");
-            db.Exec("DELETE FROM ENQUIRY WHERE enquiry_id = @p0", q.Id);
+            var q = FindEnquiry();
+            if (q == null || !MayOpen(q)) Fail("Enquiry not found.", 404);
+            db.Exec("DELETE FROM ENQUIRY WHERE enquiry_id = @p0", q.Id);   // ENQUIRY_ACCESS rows go with it (ON DELETE CASCADE)
             return null;
+        }
+
+        /// <summary>"My enquiries": those linked to this browser, plus the signed-in account's own. Access codes are never listed.</summary>
+        object EnquiryList()
+        {
+            var linked = VisitorKey == null ? new HashSet<int>() : new HashSet<int>(db.Query(
+                "SELECT enquiry_id FROM ENQUIRY_ACCESS WHERE visitor_key_hash = @p0", r => r.Int("enquiry_id"), Tokens.Sha256(VisitorKey)));
+            return m.Enquiries.Where(q => linked.Contains(q.Id) || (Me != null && q.UserId == Me.Id))
+                .OrderByDescending(q => q.CreatedAt).ThenByDescending(q => q.Id)
+                .Select(q => Workspace.EnquiryDto(q, null)).ToList();
         }
 
         // ---- own account -----------------------------------------------------------------
@@ -374,9 +425,18 @@ namespace SKILL_UP.Backend
                 foreach (var key in new[] { "address", "city", "country", "postcode" }) preferences[key] = Limit((Str(key) ?? "").Trim(), 300);
             else if (section == "notifications")
                 foreach (var key in new[] { "courseUpdates", "deadlines", "messages", "reviewUpdates" }) preferences[key] = d[key]?.Type == JTokenType.Boolean && (bool)d[key];
+            else if (section == "leaderInbox")
+            {
+                // Program Leader dashboard: which alerts are read or archived (item IDs such as "msg-12").
+                var inbox = new JObject();
+                foreach (var key in new[] { "read", "archived" })
+                    inbox[key] = JArray.FromObject(((d[key] as JArray) ?? new JArray()).Where(t => t.Type == JTokenType.String)
+                        .Select(t => Limit((string)t, 80)).Distinct().Take(500).ToList());
+                preferences["leaderInbox"] = inbox;
+            }
             else Fail("Unknown preferences section.");
             db.Exec("UPDATE [USER] SET preferences = @p1 WHERE user_id = @p0", Me.Id, preferences.ToString(Newtonsoft.Json.Formatting.None));
-            Log("Preferences updated", section);
+            if (section != "leaderInbox") Log("Preferences updated", section);
             return null;
         }
 

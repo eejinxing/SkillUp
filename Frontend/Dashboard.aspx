@@ -1,5 +1,5 @@
-<%@ Page Title="Skill UP — Dashboard" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="SKILL_UP.Frontend.DashboardPage" %>
-<asp:Content ID="PageBody" ContentPlaceHolderID="PageContent" runat="server">
-    <%-- Existing JavaScript renders this page inside the native Web Forms content region. --%>
-    <div id="app"></div>
+<%@ Page Title="Overview" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="SKILL_UP.Frontend.DashboardPage" %>
+<%-- Each role has its own overview, in Controls/<Role>Dashboard.ascx. --%>
+<asp:Content ContentPlaceHolderID="PageContent" runat="server">
+    <asp:PlaceHolder ID="RoleDashboard" runat="server" />
 </asp:Content>

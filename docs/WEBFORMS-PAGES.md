@@ -1,58 +1,72 @@
-# Web Forms page pairs
+# Web Forms pages
 
-All paths are relative to Frontend/. Every .aspx has a matching .aspx.cs class with a Page_Load event. Shared layout: SkillUp.Master + SkillUp.Master.cs.
+Every screen is a Web Forms page in `Frontend/`: `Name.aspx` holds the markup and server controls, `Name.aspx.cs` the code-behind, and `Name.aspx.designer.cs` the control fields Visual Studio generates. The page renders on the server and saves through postbacks; links use the page name without `.aspx` (FriendlyUrls), for example `Course?id=3`.
 
-Navigation inside the app still uses the existing hash router; these are direct ASP.NET entry pages, not a rewrite of every action as server postbacks. Initial query parameters are safely encoded by code-behind. Page names alone do not grant role permissions.
+All pages inherit `SkillPage` (`Frontend/SkillPage.cs`), which:
 
-| .aspx + .aspx.cs | Initial hash route | Query parameters | Missing required parameter fallback |
+- loads the database snapshot (`Backend/Model`) and the signed-in account,
+- sends a visitor to `Login?return=…` when the page needs an account, and shows "Access restricted" when the role may not open it,
+- saves with `Run` / `TryRun`, which call `Backend/Commands` in one transaction, so every rule and permission check is the same one the JSON API uses,
+- redirects after a save (`ReloadPage`, `Go`) with a one-line notice, so a refresh never repeats it.
+
+`SkillUp.Master` draws the capsule navigation for the role, the page frame and the notice.
+
+## Pages
+
+Roles: **V** visitor, **L** Learner, **I** Instructor, **P** Program Leader, **A** Admin. "Any" means anyone; "Signed in" means any role.
+
+| Page | Who | Query parameters | What it shows |
 |---|---|---|---|
-| Home | #/home | — | — |
-| Login | #/login | — | — |
-| Register | #/register | — | — |
-| ForgotPassword | #/forgot | — | — |
-| ResetPassword | #/reset | token | #/forgot |
-| Dashboard | #/dashboard | — | — |
-| MyCourses | #/learning | — | — |
-| Catalog | #/catalog | — | — |
-| Course | #/course | id | #/catalog |
-| Activity | #/lesson | course,lesson | #/learning |
-| Leaderboard | #/leaderboard | — | — |
-| Certificates | #/certificates | id | — |
-| Courses | #/courses | — | — |
-| CourseEditor | #/course-edit | id | — |
-| QuizEditor | #/quiz-editor | id | #/courses |
-| CourseRequests | #/requests | id | — |
-| Approvals | #/approvals | id | — |
-| CourseReview | #/review | id | #/approvals |
-| RequestReview | #/request-review | id | #/approvals |
-| Programs | #/programs | — | — |
-| Assignments | #/assignments | — | — |
-| Learners | #/learners | — | — |
-| Analytics | #/analytics | — | — |
-| Resources | #/resources | — | — |
-| Messages | #/messages | id | — |
-| Users | #/users | — | — |
-| UserEditor | #/users | id | #/users/new |
-| Profile | #/profile | — | — |
-| Help | #/help | — | — |
-| EnquiryPortal | #/enquiries | — | — |
-| About | #/about | — | — |
-| Contact | #/contact | — | — |
-| Instructors | #/instructors | — | — |
-| FAQ | #/faq | — | — |
-| Terms | #/terms | — | — |
-| Privacy | #/privacy | — | — |
-| Discussions | #/discussions | — | — |
-| Assistant | #/assistant | — | — |
-| LiveSessions | #/sessions | — | — |
-| Settings | #/settings | — | — |
+| Home | Any | | Landing page with the enquiry form |
+| Catalog | Any | `q`, `level` | Course catalogue |
+| Course | Any | `id` | Course details, enrolment, reviews, files, discussion |
+| Activity | Any | `course`, `lesson` | One activity: article, lab (with the practice terminal) or timed quiz, and the learning companion. Visitors see public previews |
+| About, Terms, Privacy, FAQ, Instructors, Contact, Help | Any | | Information pages |
+| EnquiryPortal | Any | `id` | A visitor's enquiries, looked up with ID and access code |
+| Login | V | `return` | Sign in, demo role buttons |
+| Register | V | `email` | Create a learner account |
+| ForgotPassword, ResetPassword | V | `token` (reset) | Password reset |
+| Dashboard | Signed in | Admin: `q`, `role`, `source` | Loads `Controls/<Role>Dashboard.ascx`: LearnerDashboard, InstructorDashboard, LeaderDashboard or AdminDashboard |
+| Messages | Signed in | `id`, `channel`, `announcement`, `compose`, `q` | Direct messages, course channels and announcements |
+| Discussions, LiveSessions, Assistant, Profile, Settings | Signed in | Settings: `tab` | Course discussions, live sessions, the companion, profile and account settings |
+| MyCourses | L | `program` | Enrolled courses and learning paths |
+| Leaderboard | L | `period`, `q` | Weekly and all-time ranking |
+| Certificates | L | `id` | Certificates of completed courses |
+| Courses | I, P | `q`, `status` | Courses the account manages |
+| CourseEditor | I, P | `id` (none = new), `program`, `tab`, `lesson` | Course information, activities, review submission, learners and files |
+| QuizEditor | I, P | `id` | The course quiz; unsaved edits are kept for the session |
+| Learners | I, P | `course`, `learner`, `q`, `state`, `sort`, `status`, `more` | Instructor: student performance cards. Leader: learners table. With `learner`: one learner's record |
+| Analytics | I, P | `filter`, `more` | Enrolment, completion and quiz figures; CSV export |
+| Resources | I | | Activities and files of the instructor's courses |
+| CourseRequests | I | `id`, `q`, `kind`, `status`, `sort`, `page`, `size`, `tab`, `export` | The instructor's Create / Delete requests; CSV export |
+| Approvals | P | `id`, `decision` | Request board (filters kept for the session) and one application with its decision form |
+| CourseReview | P | `id` | Review one submitted course |
+| RequestReview | P | `id` | Review one deletion request |
+| Programs | P | `id`, `q`, `edit`, `menu`, `delete`, `help`, `add`, `move` | Programs and the learning path editor (path changes kept for the session until saved) |
+| Assignments | P | `q`, `assign` | Instructor assignment per course |
+| Users | A | `q`, `role`, `status`, `sort`, `view`, `limit`, `actions` | Account directory |
+| UserEditor | A | `id` (none or `new` = create), `tab` | Create or manage an account, its activity log and learning |
 
-Admin page removals (2026-10-22): Roles and Verification page pairs were removed. Their old hash URLs redirect to User accounts for Admin, or the appropriate workspace/sign-in screen for other visitors. Platform reports is removed for Admin. Analytics.aspx remains the shared entry for Instructor and Program Leader learning analytics; Admin opens Overview instead.
+## Shared pieces
 
-Admin Active users and Activity & audit were removed on 2026-10-22. ActiveUsers.aspx / ActivityLogs.aspx and their code-behind were deleted; 42 Frontend page pairs remain. Old hash routes redirect to Overview for signed-in users and Log in for guests. Activity.aspx is the learner lesson entry and remains available. The Admin overview activity log widget is retained.
+| File | Used by |
+|---|---|
+| `Controls/SubmitButton.cs` | Every page. A `Button` that renders `<button>`, so it can hold icons and keeps the button styles |
+| `Controls/CourseCard.ascx`, `CourseHero.ascx`, `CourseFiles.ascx` | Catalog, MyCourses, Courses, Course, CourseEditor, CourseReview, Resources |
+| `Controls/TerminalLab.ascx` | Activity (lab activities) |
+| `Controls/LearnerTable.ascx` | CourseEditor (Learners tab), Learners (Program Leader) |
+| `Controls/EnquiryForm.ascx`, `AuthArt.ascx` | Home and Contact; the sign-in pages |
+| `Ui.cs`, `Icons.cs`, `Charts.cs`, `Insights.cs` | Encoding, dates and tags; inline icons; chart drawing; attempts and the leaderboard |
+| `*Art.cs` | Figma artwork kept as markup (course editor, program and leader dashboard illustrations) |
 
-Admin Discussion moderation and Enquiries & feedback were removed on 2026-10-22. Moderation.aspx / Support.aspx and their code-behind were deleted; 40 Frontend page pairs remain. Old hashes redirect to Overview for signed-in users and Log in for guests. Course discussions, visitor enquiry submission and the personal enquiry portal remain available.
+## Scripts
 
-Standalone Assistant, Discussions, LiveSessions and Settings pages were removed on 2026-10-22. There are 36 Frontend Web Forms pairs. Old hashes redirect to Overview for signed-in users or Log in for guests. Profile account controls, activity companion and Messages remain.
+Pages work without JavaScript, except the parts that need the browser:
 
-Correction (2026-10-22): Only the global sidebar is removed. Assistant, Discussions, LiveSessions and Settings page pairs and routes are restored, bringing the current Frontend inventory back to 40 pairs. All retained workspace functions are accessible from the top navigation and its More menu.
+| Script | Purpose |
+|---|---|
+| `js/site.js` | Small enhancements on every page: confirm before deletes, the notice fading, Enter-to-send, print buttons, figures counting up, the request table's tick boxes |
+| `js/activity.js` | Activity page: the quiz timer and the lab terminal, which runs code in a Web Worker |
+| `js/call-preview.js` | The device-only call preview (camera and microphone stay on the computer) |
+
+ASP.NET's own scripts handle validators, Enter in a form (`DefaultButton`) and drop-downs that apply at once (`AutoPostBack`).

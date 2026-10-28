@@ -1,16 +1,16 @@
 using System;
-using System.Web.UI;
 
 namespace SKILL_UP.Frontend
 {
-    public partial class HelpPage : Page
+    /// <summary>The enquiry form on its own page (Controls/EnquiryForm.ascx).</summary>
+    public partial class HelpPage : SkillPage
     {
+        public override string Route => "help";
+        public override bool Secondary => true;
+        public override string BodyClass => "ui-home";
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            string route = "help";
-            ((SkillUpMaster)Master).SetInitialRoute(route);
-            // Backend handoff: add authenticated server-side services here when implementing the backend.
-            // Current form actions remain in JavaScript -> SkillAPI.request; no database implementation is claimed.
         }
     }
 }

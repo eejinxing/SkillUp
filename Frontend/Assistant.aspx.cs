@@ -1,16 +1,25 @@
 using System;
-using System.Web.UI;
 
 namespace SKILL_UP.Frontend
 {
-    public partial class AssistantPage : Page
+    /// <summary>The learning companion: the account's questions and the sample replies (Commands.Ai).</summary>
+    public partial class AssistantPage : SkillPage
     {
+        public override string Route => "assistant";
+        protected override string[] Roles => new string[0];
+        public override bool Secondary => true;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            string route = "assistant";
-            ((SkillUpMaster)Master).SetInitialRoute(route);
-            // Backend handoff: add authenticated server-side services here when implementing the backend.
-            // Current form actions remain in JavaScript -> SkillAPI.request; no database implementation is claimed.
+            var pairs = AiPairs();
+            History.DataSource = pairs;
+            History.DataBind();
+            Welcome.Visible = pairs.Count == 0;
+        }
+
+        protected void Ask_Click(object sender, EventArgs e)
+        {
+            if (IsValid && TryRun("ai", new { text = Question.Text.Trim() })) ReloadPage();
         }
     }
 }

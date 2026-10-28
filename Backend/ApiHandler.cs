@@ -88,10 +88,11 @@ namespace SKILL_UP.Backend
                 {
                     db.Begin();
                     var model = Model.Load(db);
-                    var commands = new Commands(db, model, CurrentUser(context, model));
+                    var commands = new Commands(db, model, CurrentUser(context, model)) { VisitorKey = VisitorCookie.Read(context) };
                     var data = commands.Run(action, payload);
                     db.Commit();
 
+                    if (commands.NewVisitorKey != null) VisitorCookie.Issue(context, commands.NewVisitorKey);
                     if (commands.SignIn != null) AuthCookie.Issue(context, commands.SignIn.Value);
                     if (commands.SignOut) AuthCookie.Clear(context);
                     var reloaded = Model.Load(db);

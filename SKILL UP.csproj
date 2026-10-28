@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -289,53 +289,122 @@
   </Target>
   <!-- Skill UP frontend runtime; preserve script and CSS order in Frontend/index.html. -->
   <ItemGroup>
-    <Content Include="Frontend\index.html;Frontend\*.aspx;Frontend\SkillUp.Master;Frontend\css\*.css;Frontend\js\**\*.js;Frontend\assets\**\*;Frontend\Web.config" Exclude="Frontend\assets\**\*.md;Frontend\assets\**\*.txt" />
+    <Content Include="Frontend\index.html;Frontend\*.aspx;Frontend\Controls\*.ascx;Frontend\SkillUp.Master;Frontend\css\*.css;Frontend\js\**\*.js;Frontend\assets\**\*;Frontend\Web.config" Exclude="Frontend\assets\**\*.md;Frontend\assets\**\*.txt" />
     <None Include="Frontend\README.md;Frontend\package.json;Frontend\server.cjs;Frontend\scripts\**\*.cjs;Frontend\tests\**\*.cjs;Frontend\design\**\*;docs\**\*.md;docs\**\*.json;README.md;Database\create-tables.sql;Database\setup-db.ps1;Database\shift-existing-times-to-local.sql" />
     <!-- Read by the API at run time (Backend/DatabaseSetup.cs), so they are published with the site. -->
     <Content Include="Database\backend-extensions.sql;Database\demo-seed.json" />
   </ItemGroup>
 <ItemGroup>
-    <Compile Include="Frontend\Home.aspx.cs"><DependentUpon>Home.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Login.aspx.cs"><DependentUpon>Login.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Register.aspx.cs"><DependentUpon>Register.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\ForgotPassword.aspx.cs"><DependentUpon>ForgotPassword.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\ResetPassword.aspx.cs"><DependentUpon>ResetPassword.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Dashboard.aspx.cs"><DependentUpon>Dashboard.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\MyCourses.aspx.cs"><DependentUpon>MyCourses.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Catalog.aspx.cs"><DependentUpon>Catalog.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Course.aspx.cs"><DependentUpon>Course.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Activity.aspx.cs"><DependentUpon>Activity.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Leaderboard.aspx.cs"><DependentUpon>Leaderboard.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Certificates.aspx.cs"><DependentUpon>Certificates.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Courses.aspx.cs"><DependentUpon>Courses.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\CourseEditor.aspx.cs"><DependentUpon>CourseEditor.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\QuizEditor.aspx.cs"><DependentUpon>QuizEditor.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\CourseRequests.aspx.cs"><DependentUpon>CourseRequests.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Approvals.aspx.cs"><DependentUpon>Approvals.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\CourseReview.aspx.cs"><DependentUpon>CourseReview.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\RequestReview.aspx.cs"><DependentUpon>RequestReview.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Programs.aspx.cs"><DependentUpon>Programs.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Assignments.aspx.cs"><DependentUpon>Assignments.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Learners.aspx.cs"><DependentUpon>Learners.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Analytics.aspx.cs"><DependentUpon>Analytics.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Resources.aspx.cs"><DependentUpon>Resources.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Messages.aspx.cs"><DependentUpon>Messages.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Users.aspx.cs"><DependentUpon>Users.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\UserEditor.aspx.cs"><DependentUpon>UserEditor.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Profile.aspx.cs"><DependentUpon>Profile.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Discussions.aspx.cs"><DependentUpon>Discussions.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Assistant.aspx.cs"><DependentUpon>Assistant.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\LiveSessions.aspx.cs"><DependentUpon>LiveSessions.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Settings.aspx.cs"><DependentUpon>Settings.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Help.aspx.cs"><DependentUpon>Help.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\EnquiryPortal.aspx.cs"><DependentUpon>EnquiryPortal.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
     <Compile Include="Frontend\About.aspx.cs"><DependentUpon>About.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\About.aspx.designer.cs"><DependentUpon>About.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Activity.aspx.cs"><DependentUpon>Activity.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Activity.aspx.designer.cs"><DependentUpon>Activity.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Analytics.aspx.cs"><DependentUpon>Analytics.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Analytics.aspx.designer.cs"><DependentUpon>Analytics.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Approvals.aspx.cs"><DependentUpon>Approvals.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Approvals.aspx.designer.cs"><DependentUpon>Approvals.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Assignments.aspx.cs"><DependentUpon>Assignments.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Assignments.aspx.designer.cs"><DependentUpon>Assignments.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Assistant.aspx.cs"><DependentUpon>Assistant.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Assistant.aspx.designer.cs"><DependentUpon>Assistant.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Catalog.aspx.cs"><DependentUpon>Catalog.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Catalog.aspx.designer.cs"><DependentUpon>Catalog.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Certificates.aspx.cs"><DependentUpon>Certificates.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Certificates.aspx.designer.cs"><DependentUpon>Certificates.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Charts.cs" />
     <Compile Include="Frontend\Contact.aspx.cs"><DependentUpon>Contact.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Instructors.aspx.cs"><DependentUpon>Instructors.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Contact.aspx.designer.cs"><DependentUpon>Contact.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Controls\AdminDashboard.ascx.cs"><DependentUpon>AdminDashboard.ascx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Controls\AdminDashboard.ascx.designer.cs"><DependentUpon>AdminDashboard.ascx</DependentUpon></Compile>
+    <Compile Include="Frontend\Controls\AuthArt.ascx.cs"><DependentUpon>AuthArt.ascx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Controls\AuthArt.ascx.designer.cs"><DependentUpon>AuthArt.ascx</DependentUpon></Compile>
+    <Compile Include="Frontend\Controls\CourseCard.ascx.cs"><DependentUpon>CourseCard.ascx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Controls\CourseCard.ascx.designer.cs"><DependentUpon>CourseCard.ascx</DependentUpon></Compile>
+    <Compile Include="Frontend\Controls\CourseFiles.ascx.cs"><DependentUpon>CourseFiles.ascx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Controls\CourseFiles.ascx.designer.cs"><DependentUpon>CourseFiles.ascx</DependentUpon></Compile>
+    <Compile Include="Frontend\Controls\EnquiryForm.ascx.cs"><DependentUpon>EnquiryForm.ascx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Controls\EnquiryForm.ascx.designer.cs"><DependentUpon>EnquiryForm.ascx</DependentUpon></Compile>
+    <Compile Include="Frontend\Controls\InstructorDashboard.ascx.cs"><DependentUpon>InstructorDashboard.ascx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Controls\InstructorDashboard.ascx.designer.cs"><DependentUpon>InstructorDashboard.ascx</DependentUpon></Compile>
+    <Compile Include="Frontend\Controls\LeaderDashboard.ascx.cs"><DependentUpon>LeaderDashboard.ascx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Controls\LeaderDashboard.ascx.designer.cs"><DependentUpon>LeaderDashboard.ascx</DependentUpon></Compile>
+    <Compile Include="Frontend\Controls\LearnerDashboard.ascx.cs"><DependentUpon>LearnerDashboard.ascx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Controls\LearnerDashboard.ascx.designer.cs"><DependentUpon>LearnerDashboard.ascx</DependentUpon></Compile>
+    <Compile Include="Frontend\Controls\LearnerTable.ascx.cs"><DependentUpon>LearnerTable.ascx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Controls\LearnerTable.ascx.designer.cs"><DependentUpon>LearnerTable.ascx</DependentUpon></Compile>
+    <Compile Include="Frontend\Controls\SubmitButton.cs" />
+    <Compile Include="Frontend\Controls\TerminalLab.ascx.cs"><DependentUpon>TerminalLab.ascx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Controls\TerminalLab.ascx.designer.cs"><DependentUpon>TerminalLab.ascx</DependentUpon></Compile>
+    <Compile Include="Frontend\Course.aspx.cs"><DependentUpon>Course.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Course.aspx.designer.cs"><DependentUpon>Course.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\CourseEditor.aspx.cs"><DependentUpon>CourseEditor.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\CourseEditor.aspx.designer.cs"><DependentUpon>CourseEditor.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\CourseEditorArt.cs" />
+    <Compile Include="Frontend\CourseRequests.aspx.cs"><DependentUpon>CourseRequests.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\CourseRequests.aspx.designer.cs"><DependentUpon>CourseRequests.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\CourseReview.aspx.cs"><DependentUpon>CourseReview.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\CourseReview.aspx.designer.cs"><DependentUpon>CourseReview.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Courses.aspx.cs"><DependentUpon>Courses.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Courses.aspx.designer.cs"><DependentUpon>Courses.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Dashboard.aspx.cs"><DependentUpon>Dashboard.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Dashboard.aspx.designer.cs"><DependentUpon>Dashboard.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Discussions.aspx.cs"><DependentUpon>Discussions.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Discussions.aspx.designer.cs"><DependentUpon>Discussions.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\EnquiryPortal.aspx.cs"><DependentUpon>EnquiryPortal.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\EnquiryPortal.aspx.designer.cs"><DependentUpon>EnquiryPortal.aspx</DependentUpon></Compile>
     <Compile Include="Frontend\FAQ.aspx.cs"><DependentUpon>FAQ.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Terms.aspx.cs"><DependentUpon>Terms.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\FAQ.aspx.designer.cs"><DependentUpon>FAQ.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\ForgotPassword.aspx.cs"><DependentUpon>ForgotPassword.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\ForgotPassword.aspx.designer.cs"><DependentUpon>ForgotPassword.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Help.aspx.cs"><DependentUpon>Help.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Help.aspx.designer.cs"><DependentUpon>Help.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Home.aspx.cs"><DependentUpon>Home.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Home.aspx.designer.cs"><DependentUpon>Home.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Icons.cs" />
+    <Compile Include="Frontend\Insights.cs" />
+    <Compile Include="Frontend\Instructors.aspx.cs"><DependentUpon>Instructors.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Instructors.aspx.designer.cs"><DependentUpon>Instructors.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\LeaderArt.cs" />
+    <Compile Include="Frontend\Leaderboard.aspx.cs"><DependentUpon>Leaderboard.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Leaderboard.aspx.designer.cs"><DependentUpon>Leaderboard.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Learners.aspx.cs"><DependentUpon>Learners.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Learners.aspx.designer.cs"><DependentUpon>Learners.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\LiveSessions.aspx.cs"><DependentUpon>LiveSessions.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\LiveSessions.aspx.designer.cs"><DependentUpon>LiveSessions.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Login.aspx.cs"><DependentUpon>Login.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Login.aspx.designer.cs"><DependentUpon>Login.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Messages.aspx.cs"><DependentUpon>Messages.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Messages.aspx.designer.cs"><DependentUpon>Messages.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\MyCourses.aspx.cs"><DependentUpon>MyCourses.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\MyCourses.aspx.designer.cs"><DependentUpon>MyCourses.aspx</DependentUpon></Compile>
     <Compile Include="Frontend\Privacy.aspx.cs"><DependentUpon>Privacy.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Privacy.aspx.designer.cs"><DependentUpon>Privacy.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Profile.aspx.cs"><DependentUpon>Profile.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Profile.aspx.designer.cs"><DependentUpon>Profile.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\ProgramArt.cs" />
+    <Compile Include="Frontend\Programs.aspx.cs"><DependentUpon>Programs.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Programs.aspx.designer.cs"><DependentUpon>Programs.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\QuizEditor.aspx.cs"><DependentUpon>QuizEditor.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\QuizEditor.aspx.designer.cs"><DependentUpon>QuizEditor.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Register.aspx.cs"><DependentUpon>Register.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Register.aspx.designer.cs"><DependentUpon>Register.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\RequestReview.aspx.cs"><DependentUpon>RequestReview.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\RequestReview.aspx.designer.cs"><DependentUpon>RequestReview.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\ResetPassword.aspx.cs"><DependentUpon>ResetPassword.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\ResetPassword.aspx.designer.cs"><DependentUpon>ResetPassword.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Resources.aspx.cs"><DependentUpon>Resources.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Resources.aspx.designer.cs"><DependentUpon>Resources.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Settings.aspx.cs"><DependentUpon>Settings.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Settings.aspx.designer.cs"><DependentUpon>Settings.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\SkillPage.cs" />
     <Compile Include="Frontend\SkillUp.Master.cs"><DependentUpon>SkillUp.Master</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
     <Compile Include="Frontend\SkillUp.Master.designer.cs"><DependentUpon>SkillUp.Master</DependentUpon></Compile>
+    <Compile Include="Frontend\Terms.aspx.cs"><DependentUpon>Terms.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Terms.aspx.designer.cs"><DependentUpon>Terms.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Ui.cs" />
+    <Compile Include="Frontend\UserEditor.aspx.cs"><DependentUpon>UserEditor.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\UserEditor.aspx.designer.cs"><DependentUpon>UserEditor.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\Users.aspx.cs"><DependentUpon>Users.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
+    <Compile Include="Frontend\Users.aspx.designer.cs"><DependentUpon>Users.aspx</DependentUpon></Compile>
   </ItemGroup>
 </Project>

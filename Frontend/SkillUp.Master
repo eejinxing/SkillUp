@@ -2,60 +2,56 @@
 <!doctype html>
 <html lang="en">
 <head id="Head1" runat="server">
-<meta charset="utf-8"><meta name="viewport" content="width=1280,initial-scale=1"><meta name="theme-color" content="#0c0e12"><title>Skill UP — Learning workspace</title><link rel="stylesheet" href="css/styles.css"><link rel="stylesheet" href="css/design-alignment.css"><link rel="stylesheet" href="css/role-completion.css"><link rel="stylesheet" href="css/visitor-home.css"><link rel="stylesheet" href="css/learner-dashboard.css"><link rel="stylesheet" href="css/enroll-page.css"><link rel="stylesheet" href="css/answer-page.css"><link rel="stylesheet" href="css/my-courses.css"><link rel="stylesheet" href="css/chat-page.css"><link rel="stylesheet" href="css/leaderboard.css"><link rel="stylesheet" href="css/instructor-dashboard.css"><link rel="stylesheet" href="css/quiz-editor.css"><link rel="stylesheet" href="css/student-performance.css"><link rel="stylesheet" href="css/course-editor.css"><link rel="stylesheet" href="css/course-requests.css"><link rel="stylesheet" href="css/admin-dashboard.css"><link rel="stylesheet" href="css/admin-users.css"><link rel="stylesheet" href="css/user-editor.css"><link rel="stylesheet" href="css/leader-dashboard.css"><link rel="stylesheet" href="css/program-management.css"><link rel="stylesheet" href="css/leader-applications.css"><link rel="stylesheet" href="css/ui-refinement.css"><link rel="stylesheet" href="css/home-refinement.css"><link rel="stylesheet" href="css/secondary-views.css"><link rel="stylesheet" href="css/dashboard-components.css"><link rel="stylesheet" href="css/learning-console.css"><link rel="stylesheet" href="css/learning-console-v2.css"><link rel="stylesheet" href="css/auth-refinement.css"><link rel="stylesheet" href="css/home-dashboard.css"><link rel="stylesheet" href="css/my-courses-v2.css"><link rel="stylesheet" href="css/home-reference.css"><link rel="stylesheet" href="css/admin-dashboard-polish.css"><link rel="stylesheet" href="css/instructor-polish.css"><link rel="stylesheet" href="css/leader-polish.css"><link rel="stylesheet" href="css/course-requests-polish.css"><link rel="stylesheet" href="css/chat-polish.css"><link rel="stylesheet" href="css/course-detail-polish.css"><link rel="stylesheet" href="css/requests-grid.css"><link rel="stylesheet" href="css/performance-blocks.css"><link rel="stylesheet" href="css/admin-users-market.css"><link rel="stylesheet" href="css/leader-board.css"><link rel="stylesheet" href="css/chat-perfect.css"><link rel="stylesheet" href="css/leaderboard-v2.css"><link rel="stylesheet" href="css/leader-perfect.css"><link rel="stylesheet" href="css/menubar.css"><link rel="stylesheet" href="css/answer-skill.css"><link rel="stylesheet" href="css/workspace-nav.css"><link rel="stylesheet" href="css/call-reference.css"><link rel="stylesheet" href="css/profile-page.css"><link rel="stylesheet" href="css/call-polish.css"><link rel="stylesheet" href="css/home-footer.css"><link rel="stylesheet" href="css/call-polish-2.css"><link rel="stylesheet" href="css/call-polish-3.css"><link rel="stylesheet" href="css/catalog-polish.css"><link rel="stylesheet" href="css/answer-companion.css"><link rel="stylesheet" href="css/home-enquiry.css"><link rel="stylesheet" href="css/leaderboard-timing.css"><link rel="stylesheet" href="css/learner-pills.css"><link rel="stylesheet" href="css/learner-orbit.css"><link rel="stylesheet" href="css/staff-refine.css"><link rel="stylesheet" href="css/learner-velo.css"><link rel="stylesheet" href="css/desktop.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0c0e12"><title>Skill UP</title>
+<link rel="stylesheet" href="css/styles.css"><link rel="stylesheet" href="css/design-alignment.css"><link rel="stylesheet" href="css/role-completion.css"><link rel="stylesheet" href="css/visitor-home.css"><link rel="stylesheet" href="css/learner-dashboard.css"><link rel="stylesheet" href="css/enroll-page.css"><link rel="stylesheet" href="css/answer-page.css"><link rel="stylesheet" href="css/my-courses.css"><link rel="stylesheet" href="css/chat-page.css"><link rel="stylesheet" href="css/leaderboard.css"><link rel="stylesheet" href="css/instructor-dashboard.css"><link rel="stylesheet" href="css/quiz-editor.css"><link rel="stylesheet" href="css/student-performance.css"><link rel="stylesheet" href="css/course-editor.css"><link rel="stylesheet" href="css/course-requests.css"><link rel="stylesheet" href="css/admin-dashboard.css"><link rel="stylesheet" href="css/admin-users.css"><link rel="stylesheet" href="css/user-editor.css"><link rel="stylesheet" href="css/leader-dashboard.css"><link rel="stylesheet" href="css/program-management.css"><link rel="stylesheet" href="css/leader-applications.css"><link rel="stylesheet" href="css/ui-refinement.css"><link rel="stylesheet" href="css/home-refinement.css"><link rel="stylesheet" href="css/secondary-views.css"><link rel="stylesheet" href="css/dashboard-components.css"><link rel="stylesheet" href="css/learning-console.css"><link rel="stylesheet" href="css/learning-console-v2.css"><link rel="stylesheet" href="css/auth-refinement.css"><link rel="stylesheet" href="css/home-dashboard.css"><link rel="stylesheet" href="css/my-courses-v2.css"><link rel="stylesheet" href="css/home-reference.css"><link rel="stylesheet" href="css/admin-dashboard-polish.css"><link rel="stylesheet" href="css/instructor-polish.css"><link rel="stylesheet" href="css/leader-polish.css"><link rel="stylesheet" href="css/course-requests-polish.css"><link rel="stylesheet" href="css/chat-polish.css"><link rel="stylesheet" href="css/course-detail-polish.css"><link rel="stylesheet" href="css/requests-grid.css"><link rel="stylesheet" href="css/performance-blocks.css"><link rel="stylesheet" href="css/admin-users-market.css"><link rel="stylesheet" href="css/leader-board.css"><link rel="stylesheet" href="css/chat-perfect.css"><link rel="stylesheet" href="css/leaderboard-v2.css"><link rel="stylesheet" href="css/leader-perfect.css"><link rel="stylesheet" href="css/menubar.css"><link rel="stylesheet" href="css/answer-skill.css"><link rel="stylesheet" href="css/workspace-nav.css"><link rel="stylesheet" href="css/call-reference.css"><link rel="stylesheet" href="css/profile-page.css"><link rel="stylesheet" href="css/call-polish.css"><link rel="stylesheet" href="css/home-footer.css"><link rel="stylesheet" href="css/call-polish-2.css"><link rel="stylesheet" href="css/call-polish-3.css"><link rel="stylesheet" href="css/catalog-polish.css"><link rel="stylesheet" href="css/answer-companion.css"><link rel="stylesheet" href="css/home-enquiry.css"><link rel="stylesheet" href="css/leaderboard-timing.css"><link rel="stylesheet" href="css/learner-pills.css"><link rel="stylesheet" href="css/learner-orbit.css"><link rel="stylesheet" href="css/staff-refine.css"><link rel="stylesheet" href="css/learner-velo.css"><link rel="stylesheet" href="css/webforms.css"><link rel="stylesheet" href="css/responsive.css">
 <asp:ContentPlaceHolder ID="PageHead" runat="server" />
 </head>
-<body id="SkillBody" runat="server" data-runtime-mode="http">
+<body id="SkillBody" runat="server">
+<form id="SkillForm" runat="server">
 <a class="skip" href="#main">Skip to content</a>
-<asp:ContentPlaceHolder ID="PageContent" runat="server" />
-<dialog id="dialog" aria-labelledby="dialog-title"></dialog><div id="toast" role="status" aria-live="polite"></div><div id="busy" role="status" hidden>Saving changes…</div><noscript>This learning workspace requires JavaScript. Please enable it to continue.</noscript>
-<script src="js/route-bootstrap.js"></script>
-<script src="js/runtime-config.js"></script>
-<script src="js/seed.js"></script>
-<script src="js/my-courses-data.js"></script>
-<script src="js/leaderboard-demo-data.js"></script>
-<script src="js/xp-history-data.js"></script>
-<script src="js/request-history-data.js"></script>
-<script src="js/api.js"></script>
-<script src="js/visitor-home.js"></script>
-<script src="js/learner-template.js"></script>
-<script src="js/dashboard-components.js"></script>
-<script src="js/learning-console.js"></script>
-<script src="js/learner-dashboard.js"></script>
-<script src="js/enroll-art.js"></script>
-<script src="js/enroll-page.js"></script>
-<script src="js/answer-page.js"></script>
-<script src="js/my-courses.js"></script>
-<script src="js/chat-art.js"></script>
-<script src="js/chat-page.js"></script>
-<script src="js/leaderboard.js"></script>
-<script src="js/instructor-art.js"></script>
-<script src="js/instructor-dashboard.js"></script>
-<script src="js/pages.js"></script>
-<script src="js/quiz-editor.js"></script>
-<script src="js/student-performance.js"></script>
-<script src="js/course-editor-art.js"></script>
-<script src="js/course-editor.js"></script>
-<script src="js/course-requests.js"></script>
-<script src="js/admin-dashboard-art.js"></script>
-<script src="js/admin-dashboard.js"></script>
-<script src="js/admin-users.js"></script>
-<script src="js/user-editor-art.js"></script>
-<script src="js/user-editor.js"></script>
-<script src="js/leader-dashboard-art.js"></script>
-<script src="js/leader-dashboard.js"></script>
-<script src="js/program-management-art.js"></script>
-<script src="js/program-management.js"></script>
-<script src="js/leader-applications.js"></script>
-<script src="js/home-refinement.js"></script>
-<script src="js/home-dashboard.js"></script>
-<script src="js/home-reference.js"></script>
-<script src="js/ui-refinement.js"></script>
-<script src="js/auth-refinement.js"></script>
-<script src="js/workspace-nav.js"></script>
-<script src="js/profile-page.js"></script>
-<script src="js/enquiry-portal.js"></script>
-<script src="js/assignments-page.js"></script>
-<script src="js/app.js"></script>
+<div id="app">
+<asp:Literal ID="ShellOpen" runat="server" />
+<header class="skill-global-header">
+  <a class="gn-brand" href="<%= Page.Me == null ? "Home" : "Dashboard" %>" aria-label="Skill UP home"><img class="skill-logo" src="assets/skill-logo.png" alt="Skill UP" width="930" height="420"></a>
+  <div class="gn-capsule">
+    <span class="gn-workspace-label"><%= Page.Me == null ? "Explore Skill UP" : "Your workspace" %></span>
+    <span class="gn-date"><%= DateTime.Now.ToString("d MMM", System.Globalization.CultureInfo.GetCultureInfo("en-GB")) %></span>
+    <nav class="gn-links" aria-label="Main navigation">
+      <asp:Repeater ID="NavLinks" runat="server"><ItemTemplate><a href="<%# Eval("Url") %>"<%# (bool)Eval("Current") ? " aria-current=\"page\"" : "" %>><%#: Eval("Label") %></a></ItemTemplate></asp:Repeater>
+    </nav>
+    <div class="gn-call-strip" aria-live="off"></div>
+  </div>
+  <div class="gn-actions">
+    <asp:PlaceHolder ID="GuestActions" runat="server">
+      <a href="Login" class="gn-guest" aria-label="Log in or sign up" title="Log in or sign up"><span class="avatar gn-guest-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span></a>
+      <a href="Register" class="gn-register">Sign up</a>
+    </asp:PlaceHolder>
+    <asp:PlaceHolder ID="UserActions" runat="server">
+      <%-- Temporary call preview triggers (js/call-preview.js). Remove with SHOW_INCOMING_CALL_TEST there. --%>
+      <button type="button" class="gn-demo-call" data-call-test="" title="Temporary: simulate an incoming video meeting">Test video call</button>
+      <button type="button" class="gn-demo-call gn-demo-voice" data-call-test="voice" title="Temporary: simulate an incoming voice call">Receive call</button>
+      <a href="Profile" aria-label="Your profile"><%= Page.Me == null ? "" : Ui.Avatar(Page.Me) %></a>
+    </asp:PlaceHolder>
+  </div>
+</header>
+<main id="main" runat="server" clientidmode="Static">
+  <asp:ContentPlaceHolder ID="PageContent" runat="server" />
+  <asp:PlaceHolder ID="RestrictedPanel" runat="server" Visible="false"><div class="empty"><h3>Access restricted</h3><p>This page belongs to a different role.</p></div></asp:PlaceHolder>
+</main>
+<asp:ContentPlaceHolder ID="AfterMain" runat="server" />
+<asp:PlaceHolder ID="SiteFooter" runat="server">
+<footer class="site-footer">
+  <div><a class="brand has-skill-logo" href="Home"><img class="skill-logo" src="assets/skill-logo.png" alt="Skill UP" width="930" height="420"></a><p>Practical skills. Lasting possibilities.</p></div>
+  <div><a class="button" href="Catalog">Courses</a><a class="button" href="About">About us</a><a class="button" href="Help">Help &amp; enquiries</a><a class="button" href="Terms">Terms</a><a class="button" href="Privacy">Privacy</a></div>
+  <small>&copy; 2026 Skill UP &middot; Learning platform prototype</small>
+</footer>
+</asp:PlaceHolder>
+<asp:Literal ID="ShellClose" runat="server" />
+</div>
+<div id="toast" role="status" aria-live="polite"<%= Notice == null ? "" : " class=\"visible\"" %>><%: Notice %></div>
+</form>
+<script src="js/site.js" defer></script>
+<asp:PlaceHolder ID="CallScript" runat="server"><script type="application/json" id="call-context"><%= CallContext %></script><script src="js/call-preview.js" defer></script></asp:PlaceHolder>
+<asp:ContentPlaceHolder ID="PageScripts" runat="server" />
 </body>
 </html>
