@@ -40,11 +40,12 @@ IF COL_LENGTH(N'QUIZ_QUESTION', N'topic') IS NULL ALTER TABLE QUIZ_QUESTION ADD 
 IF COL_LENGTH(N'ENROLLMENT', N'last_active') IS NULL ALTER TABLE ENROLLMENT ADD last_active DATETIME2 NULL;
 IF COL_LENGTH(N'ACTIVITY_LOG', N'detail') IS NULL ALTER TABLE ACTIVITY_LOG ADD detail NVARCHAR(500) NULL;
 IF COL_LENGTH(N'VOICE_CHANNEL', N'starts_at') IS NULL ALTER TABLE VOICE_CHANNEL ADD starts_at DATETIME2 NULL;
-/* Only a SHA-256 hash of the enquiry access code is stored. */
-IF COL_LENGTH(N'ENQUIRY', N'access_token_hash') IS NULL ALTER TABLE ENQUIRY ADD access_token_hash NVARCHAR(64) NULL;
+/* Enquiries no longer have an access code (the ID + code lookup was removed), so the hash column is dropped from databases
+   that still have it. Visitors reach their enquiries through ENQUIRY_ACCESS below. */
+IF COL_LENGTH(N'ENQUIRY', N'access_token_hash') IS NOT NULL ALTER TABLE ENQUIRY DROP COLUMN access_token_hash;
 GO
 
-/* "My enquiries": which browser may open which enquiry without retyping its access code.
+/* "My enquiries": which browser may open which enquiry.
    The browser keeps only a random key in an HttpOnly cookie; this table stores a SHA-256 hash of it. */
 IF OBJECT_ID(N'ENQUIRY_ACCESS') IS NULL
 CREATE TABLE ENQUIRY_ACCESS (

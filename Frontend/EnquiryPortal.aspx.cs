@@ -8,16 +8,15 @@ namespace SKILL_UP.Frontend
 {
     /// <summary>
     /// The visitor's enquiries: those linked to this browser (ENQUIRY_ACCESS) or sent from the signed-in account.
-    /// An enquiry from another device opens with its ID and access code. The code is shown once, after sending or finding it.
     /// </summary>
     public partial class EnquiryPortalPage : SkillPage
     {
         public override string Route => "enquiries";
 
         protected EnquiryRow Selected;
-        protected string Token;
         protected int Count;
-        protected bool LookupOpen;
+        /// <summary>Right after a new enquiry was sent: the saved message replaces the form.</summary>
+        protected bool Saved;
 
         List<EnquiryRow> mine;
 
@@ -33,11 +32,7 @@ namespace SKILL_UP.Frontend
         {
             var id = QueryInt("id");
             Selected = id == null ? null : Mine().FirstOrDefault(q => q.Id == id);
-            if (Selected != null)
-            {
-                Token = Session[TokenKey(Selected.Id)] as string;
-                Session.Remove(TokenKey(Selected.Id));
-            }
+            Saved = !IsPostBack && Selected != null && Request.QueryString["saved"] == "1";
             if (IsPostBack) return;
             if (Selected != null)
             {
@@ -53,41 +48,44 @@ namespace SKILL_UP.Frontend
             }
         }
 
-        static string TokenKey(int id) => "SkillUp.EnquiryToken." + id;
-
         protected void Save_Click(object sender, EventArgs e)
         {
             if (!IsValid) return;
-            var payload = new { id = Selected?.Id.ToString(), name = NameBox.Text.Trim(), email = EmailBox.Text.Trim(), subject = SubjectBox.Text.Trim(), message = MessageBox.Text.Trim() };
+            var wasNew = Selected == null;
+            // Like the landing page form: picking a topic is enough for the subject of a new enquiry.
+            var subject = SubjectBox.Text.Trim();
+            if (subject.Length == 0 && wasNew)
+                subject = TopicCourse.Checked ? "Choosing a course" : TopicActivity.Checked ? "A practical activity" : TopicAccount.Checked ? "My account" : TopicOther.Checked ? "Something else" : "";
+            if (subject.Length == 0)
+            {
+                EditorError.Text = "Add a short subject so we can route your message.";
+                return;
+            }
+            var payload = new { id = Selected?.Id.ToString(), name = NameBox.Text.Trim(), email = EmailBox.Text.Trim(), subject, message = MessageBox.Text.Trim() };
             object result;
             if (!TryRun("enquirySave", payload, out result)) return;
-            var saved = (JObject)result;
-            var token = (string)saved["token"];
-            if (token != null) Session[TokenKey(int.Parse((string)saved["id"]))] = token;
-            Go("EnquiryPortal?id=" + (string)saved["id"], Selected == null ? "Enquiry sent." : "Changes saved.");
+            // The page is redrawn in place: refresh the list, show the saved enquiry, and say what happened.
+            var id = int.Parse((string)((JObject)result)["id"]);
+            mine = null;
+            Selected = Mine().FirstOrDefault(q => q.Id == id);
+            if (wasNew) Saved = true;
+            else EditorNotice.Text = "Changes saved.";
         }
 
         protected void Delete_Click(object sender, EventArgs e) => DeleteConfirm.Visible = true;
 
+        protected void Cancel_Click(object sender, EventArgs e) => DeleteConfirm.Visible = false;
+
         protected void ConfirmDelete_Click(object sender, EventArgs e)
         {
-            if (Selected != null && TryRun("enquiryDelete", new { id = Selected.Id.ToString() })) Go("EnquiryPortal", "Enquiry deleted.");
-        }
-
-        protected void Find_Click(object sender, EventArgs e)
-        {
-            LookupOpen = true;
-            if (!IsValid) return;
-            try
-            {
-                var found = (JObject)Run("enquiryLookup", new { id = LookupId.Text.Trim(), token = LookupToken.Text.Trim() });
-                Session[TokenKey(int.Parse((string)found["id"]))] = (string)found["token"];
-                Go("EnquiryPortal?id=" + (string)found["id"]);
-            }
-            catch (ApiException ex)
-            {
-                LookupError.Text = Server.HtmlEncode(ex.Message);
-            }
+            if (Selected == null || !TryRun("enquiryDelete", new { id = Selected.Id.ToString() })) return;
+            // Back to an empty form for a new enquiry; the name and email stay.
+            mine = null;
+            Selected = null;
+            DeleteConfirm.Visible = false;
+            TopicCourse.Checked = TopicActivity.Checked = TopicAccount.Checked = TopicOther.Checked = false;
+            SubjectBox.Text = MessageBox.Text = "";
+            EditorNotice.Text = "Enquiry deleted.";
         }
 
         public override void ShowError(string message) => EditorError.Text = Server.HtmlEncode(message);
@@ -100,7 +98,10 @@ namespace SKILL_UP.Frontend
             EnquiryList.DataSource = list.Select(q => new { q.Id, q.Subject, q.Status, Date = Ui.Date(q.CreatedAt), Selected = q.Id == Selected?.Id });
             EnquiryList.DataBind();
             EmptyList.Visible = list.Count == 0;
-            StatusBadge.Visible = AccessPanel.Visible = DeleteButton.Visible = Selected != null;
+            StatusBadge.Visible = DeleteButton.Visible = Selected != null;
+            Topics.Visible = Selected == null;
+            SavedPanel.Visible = Saved;
+            EditorPanel.Visible = DeleteRow.Visible = !Saved;
         }
     }
 }

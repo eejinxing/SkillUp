@@ -6,7 +6,7 @@ These notes override older UI descriptions below:
 - Learning paths page was removed. Program course ordering remains a staff feature.
 - Course announcements remain course data / inline dashboard content; removal of the standalone page does not delete the records.
 - Learner overview retains the current section positions, purple background, black metrics and full-width Active Courses list.
-- Public enquiry form is connected to enquirySave and a private ID/access-code CRUD portal.
+- Public enquiry form is connected to enquirySave and a private portal where a browser (or signed-in account) lists, edits and deletes the enquiries it sent.
 - Runtime transport configuration lives in js/runtime-config.js; js/api.js is the transport boundary.
 - Demo calls, local scratchpad execution and sample AI responses are not server integrations.
 - Browser seed/demo files must be removed/isolated for production; do not distribute demo passwords or quiz answer keys as public production assets.
@@ -96,7 +96,6 @@ Unless noted, `data` is null and state contains the fresh snapshot.
 | profile | name, username, email, location, bio, theme, avatar? | current user only |
 | password | current, password, confirm | validate current password |
 | enquirySave | id?, token?, name, email, subject, message | enquiry with id/access token (create or owner update) |
-| enquiryLookup | id, token | matched enquiry |
 | enquiryDelete | id, token | authorised deletion |
 | enrol | courseId | learner, published course, no duplicate |
 | complete | courseId, lessonId, answer? | `{correct:boolean}`; wrong lab answer records attempt but not completion |

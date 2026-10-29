@@ -130,3 +130,7 @@ a.au-add{text-decoration:none}
 .scroll-top:focus-visible{outline:2px solid #c4b5fd;outline-offset:3px}
 @media (max-width:640px){.scroll-top{left:calc(50% - 20px);bottom:16px;width:40px;height:40px}}
 @media (prefers-reduced-motion:reduce){.scroll-top{transition:none}}
+
+/* Buttons inside an UpdatePanel: ASP.NET AJAX reads the clicked button from the click's target, so the icon and label inside a
+   button must not take the click (otherwise a click on the text posts back without saying which button was pressed). */
+.home-enquiry-submit>*,.ep-landing-form button>*{pointer-events:none}

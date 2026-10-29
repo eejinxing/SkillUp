@@ -3,6 +3,8 @@ namespace SKILL_UP.Frontend.Controls
 {
     public partial class EnquiryForm
     {
+        protected global::System.Web.UI.UpdatePanel FormPanel;
+        protected global::SKILL_UP.Frontend.Controls.SubmitButton NewButton;
         protected global::System.Web.UI.WebControls.MultiView Steps;
         protected global::System.Web.UI.WebControls.RadioButton TopicCourse;
         protected global::System.Web.UI.WebControls.RadioButton TopicActivity;
@@ -14,7 +16,5 @@ namespace SKILL_UP.Frontend.Controls
         protected global::System.Web.UI.WebControls.TextBox MessageBox;
         protected global::System.Web.UI.WebControls.Literal FormError;
         protected global::SKILL_UP.Frontend.Controls.SubmitButton SendButton;
-        protected global::System.Web.UI.WebControls.Literal SavedId;
-        protected global::System.Web.UI.WebControls.Literal SavedToken;
     }
 }

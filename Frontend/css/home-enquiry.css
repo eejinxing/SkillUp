@@ -89,17 +89,14 @@
 #app .enquiry-portal .ep-lookup summary{display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:38px;list-style:none;cursor:pointer;color:#b4b4bc;font-size:12px}
 #app .enquiry-portal .ep-lookup summary::-webkit-details-marker{display:none}
 #app .enquiry-portal .ep-lookup form{display:grid;gap:15px;margin-top:16px}
-#app .enquiry-portal label{display:grid;gap:9px;min-width:0;margin:0;color:#aaaab3;font-size:12px;font-weight:400;line-height:1.5}
-#app .enquiry-portal :is(input,textarea){width:100%;min-width:0;margin:0;padding:12px 13px;background:#09090b;border:1px solid #303036;border-radius:7px;color:#e0e0e5;box-shadow:none;font:14px/1.6 'DM Sans',sans-serif}
-#app .enquiry-portal :is(input,textarea)::placeholder{color:#666670;opacity:1}
-#app .enquiry-portal textarea{min-height:180px;max-height:420px;resize:vertical}
+#app .enquiry-portal label:not(.ep-landing-form *){display:grid;gap:9px;min-width:0;margin:0;color:#aaaab3;font-size:12px;font-weight:400;line-height:1.5}
+#app .enquiry-portal :is(input,textarea):not(.ep-landing-form *){width:100%;min-width:0;margin:0;padding:12px 13px;background:#09090b;border:1px solid #303036;border-radius:7px;color:#e0e0e5;box-shadow:none;font:14px/1.6 'DM Sans',sans-serif}
+#app .enquiry-portal :is(input,textarea):not(.ep-landing-form *)::placeholder{color:#666670;opacity:1}
+#app .enquiry-portal textarea:not(.ep-landing-form *){min-height:180px;max-height:420px;resize:vertical}
 #app .enquiry-portal .ep-detail{min-width:0;padding:4px 0 0}
 #app .enquiry-portal .ep-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin:0 0 28px}
 #app .enquiry-portal .ep-detail-head p{margin:8px 0 0;color:#777780;font-size:11px;line-height:1.6}
 #app .enquiry-portal .ep-status{display:inline-block;padding:5px 9px;border:1px solid #8da69533;border-radius:5px;color:#b4c7b9;font-size:10px}
-#app .enquiry-portal .ep-editor{display:grid;gap:20px;margin:0}
-#app .enquiry-portal .ep-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-#app .enquiry-portal .ep-editor-actions{display:flex;justify-content:space-between;align-items:center;gap:16px}
 #app .enquiry-portal .ep-delete{min-height:42px;padding:8px 0;border:0;background:none;color:#c48b8b;font-size:12px}
 #app .enquiry-portal :is(.ep-form-error,.ep-lookup-error){margin:0;color:#efa7a7;font-size:12px;line-height:1.6}
 #app .enquiry-portal :is(.ep-form-error,.ep-lookup-error):empty{display:none}
@@ -117,7 +114,7 @@
 #app .enquiry-portal .ep-access dt{color:#71717c}
 #app .enquiry-portal .ep-access dd{margin:0;color:#aaaab5;overflow-wrap:anywhere;font-family:ui-monospace,Consolas,monospace}
 #app .enquiry-portal [hidden]{display:none!important}
-#app .enquiry-portal :is(input,textarea,button,a,summary):focus-visible{outline:2px solid #c8c8d3;outline-offset:3px}
+#app .enquiry-portal :is(input,textarea,button,a,summary):not(.ep-landing-form *):focus-visible{outline:2px solid #c8c8d3;outline-offset:3px}
 @media(hover:hover) and (pointer:fine){#app .home-enquiry-form .home-enquiry-submit:hover{background:#fff}#app .home-enquiry-portal>a:hover{color:#fff}#app .enquiry-portal .ep-entry:hover{background:#1b1b1f}#app .enquiry-portal .ep-primary:hover{background:#fff}}
 @media(prefers-reduced-motion:reduce){#app .home-enquiry-form *,#app .enquiry-portal *{transition:none}}
 #app .home-enquiry-portal-arrow svg{width:16px;height:16px}
@@ -143,15 +140,18 @@
 #app .enquiry-portal .ep-detail{padding:30px 32px;border:1px solid #ffffff12;border-radius:20px;background:linear-gradient(180deg,#0f0f12,#0a0a0c)}
 #app .enquiry-portal .ep-detail-head h2{font-size:22px;font-weight:400;letter-spacing:-.02em}
 #app .enquiry-portal .ep-detail-head p{font-size:12.5px;color:#8c8c94}
-#app .enquiry-portal .ep-editor label{font-size:12px;color:#a2a2aa}
-#app .enquiry-portal .ep-label-row{display:flex;justify-content:space-between;gap:12px}
-#app .enquiry-portal .ep-count{font-size:11px;color:#6c6c74;font-variant-numeric:tabular-nums}
-#app .enquiry-portal .ep-editor :is(input,textarea){transition:border-color .15s,background-color .15s}
-#app .enquiry-portal .ep-editor :is(input,textarea):hover{border-color:#ffffff33}
-#app .enquiry-portal .ep-editor :is(input,textarea):focus-visible{border-color:#eeeef0;background:#111114;outline:0}
-#app .enquiry-portal .ep-editor-actions .ep-primary{min-height:48px;padding:0 24px;border-radius:999px;font-size:14px}
 #app .enquiry-portal .ep-head .ep-primary{border-radius:999px;padding:0 20px}
 
 /* #/contact and #/help show this section as the whole page (help() in js/app.js): same width as on the home page, centred. */
 #app .contact-page{max-width:none;padding:clamp(32px,5vw,72px) clamp(22px,4.7vw,60px) 96px}
 #app .contact-page .home-enquiry{max-width:1116px;margin:0 auto}
+/* Portal form: the contact form of the landing page (.home-enquiry-form) outside its section, so it gets the colours the section sets. */
+#app .enquiry-portal .ep-landing-form{--he-action-bg:#eeeef0;--he-action-ink:#141416;--he-secondary:#101012;--he-copy:#efeff1;--he-note:#92929c;--he-radius:12px;--he-hover:#19191c;color:#ededed}
+#app .enquiry-portal .ep-delete-row{margin-top:6px}
+/* + New enquiry above the contact form, and the white button of the saved message (also used on the My enquiries page). */
+#app .home-enquiry-new-row{display:flex;justify-content:flex-end;margin:0 0 18px}
+#app :is(.home-enquiry-new,.home-enquiry-open){display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:42px;padding:0 20px;border:0;border-radius:999px;background:#eeeef0;color:#141416;font:500 13px/1.5 'DM Sans',sans-serif;text-decoration:none;transition:background-color 160ms ease}
+#app .home-enquiry-open{min-height:48px;padding:0 24px}
+#app :is(.home-enquiry-new,.home-enquiry-open):focus-visible{outline:2px solid #c8c8d3;outline-offset:3px}
+@media(hover:hover) and (pointer:fine){#app :is(.home-enquiry-new,.home-enquiry-open):hover{background:#fff}}
+@media(prefers-reduced-motion:reduce){#app :is(.home-enquiry-new,.home-enquiry-open){transition:none}}

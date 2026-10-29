@@ -7,7 +7,7 @@ namespace SKILL_UP.Frontend.Controls
 {
     /// <summary>
     /// "Ready for your next step?" enquiry form, shared by Help and the landing page.
-    /// Saving creates the enquiry, links it to this browser (or account) and shows its ID and access code once.
+    /// Saving creates the enquiry, links it to this browser (or account) and shows a confirmation.
     /// </summary>
     public partial class EnquiryForm : UserControl
     {
@@ -16,6 +16,7 @@ namespace SKILL_UP.Frontend.Controls
 
         SkillPage Host => (SkillPage)Page;
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack && Host.Me != null)
@@ -23,6 +24,14 @@ namespace SKILL_UP.Frontend.Controls
                 NameBox.Text = Host.Me.Name;
                 EmailBox.Text = Host.Me.Email;
             }
+        }
+
+        /// <summary>An empty form replaces the saved message. The name and email stay, since they are likely the same.</summary>
+        protected void New_Click(object sender, EventArgs e)
+        {
+            Steps.ActiveViewIndex = 0;
+            TopicCourse.Checked = TopicActivity.Checked = TopicAccount.Checked = TopicOther.Checked = false;
+            SubjectBox.Text = MessageBox.Text = FormError.Text = "";
         }
 
         protected void Send_Click(object sender, EventArgs e)
@@ -41,9 +50,7 @@ namespace SKILL_UP.Frontend.Controls
             }
             try
             {
-                var saved = (JObject)Host.Run("enquirySave", new { name = NameBox.Text.Trim(), email = EmailBox.Text.Trim(), subject, message = MessageBox.Text.Trim() });
-                SavedId.Text = Server.HtmlEncode((string)saved["id"]);
-                SavedToken.Text = Server.HtmlEncode((string)saved["token"]);
+                Host.Run("enquirySave", new { name = NameBox.Text.Trim(), email = EmailBox.Text.Trim(), subject, message = MessageBox.Text.Trim() });
                 Steps.ActiveViewIndex = 1;
             }
             catch (ApiException ex)

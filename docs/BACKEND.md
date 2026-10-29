@@ -26,9 +26,9 @@ JSON API (optional)    ──GET  /api/workspace──────────�
 | Sign-in | An encrypted, HttpOnly, SameSite=Lax forms-authentication ticket in the `SkillUp.Auth` cookie (12 hours). The account is reloaded on every request, so a deactivated account loses access at once. |
 | CSRF | The sign-in cookie is SameSite=Lax, so a post from another site arrives signed out. Each page's view state is tied to the signed-in account (`ViewStateUserKey`), and ASP.NET checks postbacks against what was rendered. API commands must also send the `X-SkillUp-Request: 1` header. |
 | Authorisation | The role and user ID always come from the cookie, never from the request body. Instructors are limited to courses they are assigned to (`COURSE_INSTRUCTOR`), Program Leaders to their programs, and Admin-only commands check the role. |
-| Data scoping | `Workspace.Build` sends each role only what it may see. Learners and visitors never get lab answers or quiz answer keys. Visitors get no emails, messages or discussions. Enquiries are reachable with their ID and access code, or without it from the browser that sent or found them (`ENQUIRY_ACCESS`, keyed by the hashed `SkillUp.Visitor` cookie) and for the signed-in account that sent them. A code that is sent must be correct. |
+| Data scoping | `Workspace.Build` sends each role only what it may see. Learners and visitors never get lab answers or quiz answer keys. Visitors get no emails, messages or discussions. Enquiries are reachable only from the browser that sent them (`ENQUIRY_ACCESS`, keyed by the hashed `SkillUp.Visitor` cookie) and for the signed-in account that sent them. |
 | Grading | Lab answers and quiz scores are graded on the server. The quiz answer key is revealed only in the `quizSubmit` result. |
-| Tokens | Enquiry access codes, visitor keys and password reset tokens are stored only as SHA-256 hashes. Reset links expire after 15 minutes and work once. |
+| Tokens | Visitor keys and password reset tokens are stored only as SHA-256 hashes. Reset links expire after 15 minutes and work once. |
 | SQL | Every statement is parameterised (`Backend/Db.cs`). |
 | Browser storage | The site saves nothing in `localStorage`. Unsaved quiz and learning-path edits are kept in the server session. Program Leader read / archived alerts are in `USER.preferences` (`leaderInbox`). |
 
@@ -53,7 +53,7 @@ The ERD's 37 tables hold the core records. `Database/backend-extensions.sql` add
 | ai | `AI_CHAT_SESSION` + `AI_CHAT_MESSAGE` (a User row followed by an AI row). |
 | resources | Added table `COURSE_RESOURCE` (file as a data URL, up to 2 MB). |
 | courseRequests / approvals | Added tables `COURSE_REQUEST` and `COURSE_REQUEST_EVENT` (Submitted, Review started, Approved, ...). `approvals` is derived from the Create request events. Program Leader decisions are also written to `CONTENT_REVIEW`. The history has no foreign key to the course, so it survives an approved deletion. |
-| enquiries | `ENQUIRY` (added: `access_token_hash`). |
+| enquiries | `ENQUIRY`; `ENQUIRY_ACCESS` (added) links a browser to the enquiries it sent. |
 | audit | `ACTIVITY_LOG` (added: `detail`). |
 
 Not used by the current UI: `BADGE`, `USER_BADGE`, `NOTIFICATION`, `FAQ`, and the starter code and expected output columns of `LAB_TASK`.

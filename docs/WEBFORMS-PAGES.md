@@ -23,7 +23,7 @@ Roles: **V** visitor, **L** Learner, **I** Instructor, **P** Program Leader, **A
 | Activity | Any | `course`, `lesson` | One activity: article, lab (with the practice terminal) or timed quiz, and the learning companion. Visitors see public previews |
 | About, Terms, Privacy, FAQ, Instructors | Any | | Information pages |
 | Help | Any | | The enquiry form for signed-in accounts. Visitors are sent to the one on Home (`Home#home-enquiry`) |
-| EnquiryPortal | Any | `id` | A visitor's enquiries, looked up with ID and access code |
+| EnquiryPortal | Any | `id` | The enquiries this browser (or the signed-in account) sent: list, edit, delete |
 | Login | V | `return` | The Log in pop-up shown open (sign-in redirects come here). Elsewhere it opens over the page from links to `#login` |
 | Register | V | `email` | The Sign up pop-up shown open. Elsewhere it opens over the page from links to `#register` |
 | ForgotPassword, ResetPassword | V | `token` (reset) | Password reset |
