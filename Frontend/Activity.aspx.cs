@@ -233,7 +233,7 @@ namespace SKILL_UP.Frontend
                 return;
             }
             object result;
-            if (!TryRun("quizSubmit", new JObject { ["courseId"] = C.Id.ToString(), ["lessonId"] = L.Id.ToString(), ["answers"] = answers }, out result)) return;
+            if (!TryRun("quizSubmit", new JObject { ["courseId"] = C.Id.ToString(), ["lessonId"] = L.Id.ToString(), ["answers"] = answers, ["startedAt"] = start?.ToString("o", CultureInfo.InvariantCulture) }, out result)) return;
             Session.Remove(QuizKey + ".Start");
             Session[QuizKey + ".Result"] = ((JObject)result).ToString();
             Go(Request.RawUrl);

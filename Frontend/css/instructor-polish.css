@@ -23,21 +23,21 @@
 .id-chart-axis{position:static;display:flex;justify-content:space-between;margin-top:10px;font-size:11px;color:#a6c9b0}
 .id-chart-axis span:nth-child(2){display:inline;font-size:11px}
 
-/* White cards */
-.id-completion{background:linear-gradient(180deg,#f7fff3,#ffffff 70%);color:#141914}
-.id-quiz{background:#ffffff;color:#141914}
+/* Dark cards (completion + quiz) */
+.id-completion{background:radial-gradient(120% 70% at 50% 0,#0f2a17 0,#070c08 60%,#040604 100%);color:#e3fbe9;box-shadow:inset 0 0 0 1px #ffffff0f}
+.id-quiz{background:radial-gradient(120% 70% at 50% 0,#0f2a17 0,#070c08 60%,#040604 100%);color:#e3fbe9;box-shadow:inset 0 0 0 1px #ffffff0f}
 .id-completion .id-big{margin-top:16px}
-.id-completion .id-metric-note{color:#2b3a2d}
+.id-completion .id-metric-note{color:#9cc7a9}
 .id-quiz-figure{display:flex;flex-direction:column;align-items:center;margin-top:26px;text-align:center}
-.id-quiz-figure small{margin-top:8px;font-size:12px;color:#5d6d5f}
+.id-quiz-figure small{margin-top:8px;font-size:12px;color:#9cc7a9}
 .id-area-wrap{position:relative;flex:1;min-height:0;margin:16px -22px 0;display:flex;flex-direction:column;justify-content:flex-end}
 .id-area{display:block;width:100%;height:clamp(110px,10vw,140px)}
-.id-area-wrap figcaption{margin:10px 22px 0;font-size:12px;color:#7f9bd0}
-.id-quiz .id-area-wrap figcaption{color:#6c7d6d;text-align:center}
-.id-area-badge{position:absolute;right:24%;top:6px;padding:5px 12px;border-radius:999px;background:#d9dcd9;color:#fff;font-size:12px;font-weight:600;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.id-area-wrap figcaption{margin:10px 22px 0;font-size:12px;color:#8fb59b}
+.id-quiz .id-area-wrap figcaption{color:#8fb59b;text-align:center}
+.id-area-badge{position:absolute;right:24%;top:6px;padding:5px 12px;border-radius:999px;background:#ffffff1a;color:#e3fbe9;font-size:12px;font-weight:600;letter-spacing:.01em;font-variant-numeric:tabular-nums}
 .id-analytics-link{position:static;display:flex;align-items:center;justify-content:center;height:44px;margin-top:14px;border-radius:14px;background:#1d2330;color:#e4ebf8;font-size:13px;font-weight:500;text-decoration:none;transition:background-color .15s}
 .id-analytics-link span{font-size:13px}
-.id-quiz-link{position:static;display:block;margin-top:14px;text-align:center;font-size:12.5px;color:#2f4a33;text-decoration:underline;text-decoration-color:#2f4a3355;text-underline-offset:3px}
+.id-quiz-link{position:static;display:block;margin-top:14px;text-align:center;font-size:12.5px;color:#9fd8b2;text-decoration:underline;text-decoration-color:#9fd8b255;text-underline-offset:3px}
 @media(hover:hover){.id-analytics-link:hover{background:#2a3242}.id-enrolled header>a:hover{background:#ffffff14}}
 
 /* ── Course board: no inner scrollbar; the page scrolls ── */

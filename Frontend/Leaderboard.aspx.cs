@@ -9,8 +9,8 @@ using SKILL_UP.Backend;
 namespace SKILL_UP.Frontend
 {
     /// <summary>
-    /// Learning standings styled as a race timing screen (?period=week|all&amp;q=). Points come from Insights.Leaderboard:
-    /// 100 per completed course plus the best quiz score per course (all time), or this week's best quiz scores.
+    /// Learning standings (?period=week|all&amp;q=). The order comes from Insights.Leaderboard: courses completed first, then best quiz
+    /// score, then quiz average, then the earlier quiz time and the earlier course completion time.
     /// </summary>
     public partial class LeaderboardPage : SkillPage
     {
@@ -24,7 +24,7 @@ namespace SKILL_UP.Frontend
         protected Board Board;
         protected List<RankRow> Rows, Shown;
         protected RankRow Mine, AllMine, WeekMine;
-        protected string Period, PeriodLabel, TimeLeft, EmptySlots = "";
+        protected string Period, PeriodLabel, TimeLeft, EmptySlots = "", PodiumHtml = "";
         protected int Gap, MyQuizCount, MyCourseCount;
         protected string Term => (Request.QueryString["q"] ?? "").Trim();
 
@@ -56,8 +56,15 @@ namespace SKILL_UP.Frontend
             var ordered = ranked.Concat(Rows.Where(r => r.Points <= 0)).ToList();
             var term = Term.ToLowerInvariant();
             Shown = term.Length > 0 ? ordered.Where(r => (r.User.Name + " " + r.User.Username).ToLowerInvariant().Contains(term)).ToList() : ordered.Take(10).ToList();
-            var top = ranked.FirstOrDefault()?.Points ?? 0;
-            RankRows.DataSource = Shown.Select(r => RowView(r, top));
+            // Podium of the top three ranked learners, shown as #2, #1, #3 (hidden while searching).
+            if (term.Length == 0 && ranked.Count > 0)
+            {
+                var heights = new[] { 142, 118, 96 };
+                PodiumHtml = string.Concat(new[] { 1, 0, 2 }.Where(i => i < ranked.Count).Select(i =>
+                    "<div class=\"lb-sk-pc" + (i == 0 ? " is-first" : "") + "\"><span class=\"lb-sk-pface\">" + Ui.H(Ui.Initials(ranked[i].User)) + "</span><div class=\"lb-sk-pstep\" style=\"--h:" + heights[i]
+                    + "px\"><b>#" + ranked[i].Rank + "</b><span>" + ranked[i].Points.ToString("N0") + "</span><small>" + Ui.H(ranked[i].User.Name) + "</small></div></div>"));
+            }
+            RankRows.DataSource = Shown.Select(r => RowView(r));
             RankRows.DataBind();
             // Open positions keep the Top 10 at ten rows when fewer learners are active; nobody is invented to fill them.
             if (term.Length == 0)
@@ -87,7 +94,7 @@ namespace SKILL_UP.Frontend
             return "<span class=\"lb-mark " + extraClass + "\" style=\"--mk:" + colour + "\" title=\"" + Ui.H(c.Title) + suffix + "\">" + Ui.H(text.Length > 2 ? text.Substring(0, 2) : text) + "</span>";
         }
 
-        object RowView(RankRow r, int top)
+        object RowView(RankRow r)
         {
             var enrolments = Data.Enrollments.Where(x => x.UserId == r.User.Id && courses.ContainsKey(x.CourseId)).Select(x => courses[x.CourseId]).ToList();
             var progress = enrolments.Select(c => new { c, p = Progress(r.User.Id, c.Id), done = Data.CompletedLessons(r.User.Id, c.Id).Count, total = Data.LessonsOf(c.Id).Count }).ToList();
@@ -109,51 +116,44 @@ namespace SKILL_UP.Frontend
                 AvatarHtml = Ui.Avatar(r.User),
                 Online = r.LastActive != null && (Board.UpdatedAt - r.LastActive.Value).TotalDays < 7,
                 BadgesHtml = badges,
-                Level = r.Points / 100 + 1,
+                Level = r.Completed + 1,
                 CourseTitles = string.Join(", ", enrolments.Select(c => c.Title)),
                 CourseContext = (enrolments.FirstOrDefault()?.Title ?? "No courses yet") + (enrolments.Count > 1 ? " +" + (enrolments.Count - 1) : ""),
                 BestTitle = best == null ? "No quiz score yet" : "Best quiz " + best + "%",
                 PointsText = r.Points.ToString("N0"),
                 LastActive = r.LastActive == null ? "—" : Ui.Day(r.LastActive),
-                TimingHtml = Timing(r, top, progress.Select(x => Tuple.Create(x.c, x.p, x.done, x.total)).ToList()),
+                TimingHtml = Timing(r, progress.Select(x => Tuple.Create(x.c, x.p, x.done, x.total)).ToList()),
                 Status = r.Rank == 1 ? "TOP" : r.Rank != null ? "RANKED" : "UNRANKED",
                 StatusClass = r.Rank == 1 ? "is-top" : r.Rank != null ? "is-ranked" : ""
             };
         }
 
         /// <summary>
-        /// Timing-screen columns: ERS = overall activity progress, DRS = a passed quiz (70%+), INTERVAL = points behind the
-        /// leader, S1-S3 = progress in the first three courses, then best and average quiz score, activities and attempts.
+        /// Ranking columns in ranking order: courses completed, best quiz score, average quiz score, time taken for the best quiz score
+        /// (faster wins a tie) and total time taken to complete the courses (the last tie-breaker).
         /// </summary>
-        string Timing(RankRow r, int top, List<Tuple<CourseRow, int, int, int>> sectors)
+        string Timing(RankRow r, List<Tuple<CourseRow, int, int, int>> sectors)
         {
-            var total = sectors.Sum(s => s.Item4);
-            var done = sectors.Sum(s => s.Item3);
-            var ers = Ui.Percent(done, total);
-            var scores = Scores(r.User.Id);
-            double? best = scores.Count == 0 ? (double?)null : scores.Max(), average = scores.Count == 0 ? (double?)null : scores.Average();
             var inv = CultureInfo.InvariantCulture;
-            Func<double?, string, string> score = (value, kind) => "<span class=\"lb-datum lb-data-" + kind + " " + (value == null ? "is-missing" : value >= 70 ? "is-good" : "is-pending") + "\" title=\""
-                + (kind == "best" ? "Best quiz score" : "Average quiz score") + " (%)\"><b>" + (value == null ? "—" : value.Value.ToString("0.000", inv)) + "</b><small>" + (kind == "best" ? "PERSONAL BEST" : "QUIZ AVERAGE") + "</small></span>";
-            Func<int, string> sector = k =>
-            {
-                if (k >= sectors.Count) return "<span class=\"lb-sector is-none\"><b>—</b><small class=\"lb-sector-detail\">—/— ACT</small></span>";
-                var s = sectors[k];
-                return "<span class=\"lb-sector " + (s.Item2 == 100 ? "is-done" : s.Item2 > 0 ? "is-live" : "") + "\" title=\"" + Ui.H(s.Item1.Title) + " · " + s.Item2 + "% complete\" aria-label=\"" + Ui.H(s.Item1.Title) + ": " + s.Item2
-                    + "% complete\"><b>" + s.Item2.ToString("0.000", inv) + "<small class=\"lb-sector-unit\">%</small></b><small class=\"lb-sector-detail\">" + s.Item3.ToString("00") + "/" + s.Item4.ToString("00") + " ACT</small></span>";
-            };
-            return "<span class=\"lb-ers " + (ers == 100 ? "is-full" : ers == 0 ? "is-empty" : ers < 25 ? "is-low" : ers < 65 ? "is-mid" : "") + "\" style=\"--p:" + ers + "%\" aria-label=\"" + ers + "% of activities complete\"><b>" + ers + "%</b></span>"
-                + "<span class=\"lb-drs " + (scores.Any(s => s >= 70) ? "is-on" : "") + "\" title=\"" + (scores.Any(s => s >= 70) ? "Quiz passed" : "No quiz passed yet") + "\">DRS</span>"
-                + "<span class=\"lb-interval " + (r.Rank == 1 ? "is-leader" : "") + "\" title=\"Points behind the leader\">" + (r.Rank == 1 ? "Interval" : "+" + Math.Max(0, top - r.Points).ToString("0.000", inv)) + "</span>"
-                + sector(0) + sector(1) + sector(2) + score(best, "best") + score(average, "avg")
-                + "<span class=\"lb-datum lb-data-act\" title=\"Completed / enrolled activities\"><b>" + done.ToString("00") + "/" + total.ToString("00") + "</b><small>ACTIVITIES</small></span>"
-                + "<span class=\"lb-datum lb-data-quiz\" title=\"Quiz attempts in this ranking period\"><b>" + scores.Count.ToString("00") + "</b><small>ATTEMPTS</small></span>";
+            var pct = Ui.Percent(r.Completed, r.Enrolled);
+            Func<double?, string, string, string> num = (value, kind, caption) => "<span class=\"lb-sk-num lb-sk-" + kind + " " + (value == null ? "is-missing" : value >= 70 ? "is-good" : "") + "\" title=\""
+                + caption + " (%)\"><b>" + (value == null ? "—" : value.Value.ToString(kind == "best" ? "0" : "0.0", inv)) + "</b></span>";
+            Func<TimeSpan?, string, string> when = (t, caption) => "<span class=\"lb-sk-time" + (t == null ? " is-missing" : "") + "\" title=\"" + caption + "\"><b>" + (t == null ? "—" : Duration(t.Value)) + "</b></span>";
+            return "<span class=\"lb-sk-course\" style=\"--p:" + pct + "%\" title=\"" + r.Completed + " of " + r.Enrolled + " courses completed\"><b>" + r.Completed + "<em>/" + r.Enrolled + "</em></b><i aria-hidden=\"true\"></i></span>"
+                + num(r.Best, "best", "Best quiz score") + num(r.Average, "avg", "Average quiz score")
+                + when(r.QuizTaken, "Time taken for the best quiz score (faster ranks higher on a tie)") + when(r.CourseTaken, "Total time from enrolling to completing the finished courses");
         }
+
+        /// <summary>Compact duration such as 42s, 12m 05s, 3h 20m or 2d 4h.</summary>
+        static string Duration(TimeSpan t) =>
+            t.TotalMinutes < 1 ? Math.Max(1, (int)t.TotalSeconds) + "s"
+            : t.TotalHours < 1 ? (int)t.TotalMinutes + "m " + t.Seconds.ToString("00") + "s"
+            : t.TotalDays < 1 ? (int)t.TotalHours + "h " + t.Minutes.ToString("00") + "m"
+            : (int)t.TotalDays + "d " + t.Hours + "h";
 
         static string EmptySlot(int i) =>
             "<div class=\"lb-rank-card lb-empty-slot\" aria-label=\"Position " + (i + 1) + " open\"><span class=\"lb-timing-position is-unranked\">" + (i + 1).ToString("00") + "</span>"
             + "<div class=\"lb-timing-identity\"><span class=\"lb-empty-dot\" aria-hidden=\"true\"></span><div class=\"lb-driver-copy\"><h2>Open position</h2><p><span class=\"lb-row-context\">Complete a quiz to claim it</span></p></div></div>"
-            + "<span class=\"lb-ers is-empty\" style=\"--p:0%\"><b>—</b></span><span class=\"lb-drs\">DRS</span><span class=\"lb-interval\">—</span><span class=\"lb-sector is-none\">—</span><span class=\"lb-sector is-none\">—</span><span class=\"lb-sector is-none\">—</span>"
-            + "<span class=\"lb-datum lb-data-best is-missing\"><b>—</b></span><span class=\"lb-datum lb-data-avg is-missing\"><b>—</b></span><span class=\"lb-datum lb-data-act is-missing\"><b>—</b></span><span class=\"lb-datum lb-data-quiz is-missing\"><b>—</b></span><span class=\"lb-row-status\">OPEN</span></div>";
+            + "<span class=\"lb-sk-course\" style=\"--p:0%\"><b>—</b><i aria-hidden=\"true\"></i></span><span class=\"lb-sk-num is-missing\"><b>—</b></span><span class=\"lb-sk-num is-missing\"><b>—</b></span><span class=\"lb-sk-time is-missing\"><b>—</b></span><span class=\"lb-sk-time is-missing\"><b>—</b></span><span class=\"lb-row-status\">OPEN</span></div>";
     }
 }
