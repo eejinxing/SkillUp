@@ -43,7 +43,7 @@ The full list of entry pages is in [WEBFORMS-PAGES.md](WEBFORMS-PAGES.md).
 ## Current role scope
 | Role | Pages and main flows |
 |---|---|
-| Visitor | Home, course details, log in / register, FAQ, create an enquiry and use the access-code portal |
+| Visitor | Home, course details, log in / register, FAQ, create an enquiry and manage it from the browser that sent it |
 | Learner | Dashboard, My courses, Explore courses, activities and quizzes, Leaderboard, messages, profile |
 | Instructor | Own courses / activities / quizzes, requests, learner performance, resources, messages |
 | Program Leader | Managed programs, course order and assignment, review and deletion-request decisions, learning analytics |
@@ -55,7 +55,7 @@ The full list of entry pages is in [WEBFORMS-PAGES.md](WEBFORMS-PAGES.md).
 - Course announcement data is kept. Announcements on the dashboard are only a summary and no longer link to the removed pages.
 - `#/paths` has been removed; course ordering within staff programs has not.
 - The Learner dashboard has a purple and black background, black metric cards and an Active Courses list.
-- The enquiry form ends with a simple Send enquiry button; a successful send shows the ID and access code.
+- The enquiry form ends with a simple Send enquiry button; a successful send shows a confirmation and lists the enquiry under My enquiries.
 - The navbar's Test video call / Receive call buttons are temporary previews that the user asked to keep for now.
 
 ## What still needs the backend
@@ -65,7 +65,7 @@ The full list of entry pages is in [WEBFORMS-PAGES.md](WEBFORMS-PAGES.md).
 - Quiz scoring and lab pass/fail must run on the server; do not trust the frontend's calculation. AI currently returns rule-based sample replies.
 - Calls only simulate an incoming call and a local device preview. There is no signalling, remote media, meeting room or live presence. Before release, turn off `SHOW_INCOMING_CALL_TEST` in `js/workspace-nav.js` and connect a real service.
 - Resources and avatars can currently be data URLs. Real files need a storage service, file type and size limits, and access control.
-- An enquiry's ID and access code are access credentials; lookup, update and delete must verify the token on the server. Keep the current browser behaviour of listing only the credentials saved locally. Never publicly list all enquiries.
+- An enquiry can be listed, updated or deleted only from the browser (ENQUIRY_ACCESS, hashed visitor cookie) or signed-in account that sent it; the server checks this on every command. Never publicly list all enquiries.
 - leaderboard-demo-data.js, my-courses-data.js, xp-history-data.js and request-history-data.js are demo / backfill fixtures. They must not be written into real users' history.
 - Password reset, email, registration approval notifications, AI, calls and real file storage are not connected yet.
 - Design source notes in these files are not a guarantee of third-party asset licences. The team must confirm asset rights before a real release.

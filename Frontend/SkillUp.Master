@@ -8,6 +8,8 @@
 </head>
 <body id="SkillBody" runat="server">
 <form id="SkillForm" runat="server">
+<%-- Lets UpdatePanels (the enquiry forms) post back and redraw only their own part of the page. --%>
+<asp:ScriptManager ID="Ajax" runat="server" />
 <a class="skip" href="#main">Skip to content</a>
 <div id="app">
 <asp:Literal ID="ShellOpen" runat="server" />

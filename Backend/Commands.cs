@@ -36,7 +36,7 @@ namespace SKILL_UP.Backend
         /// <summary>The PC's current local time. Stored as is, so the database shows the same clock as the device.</summary>
         static DateTime Now => DateTime.Now;
 
-        /// <summary>Random key from this browser's HttpOnly cookie (VisitorCookie). ENQUIRY_ACCESS links it to the enquiries sent or found here.</summary>
+        /// <summary>Random key from this browser's HttpOnly cookie (VisitorCookie). ENQUIRY_ACCESS links it to the enquiries sent from here.</summary>
         public string VisitorKey { get; set; }
         /// <summary>Set when a command created a visitor key; the handler sends it as a cookie after the transaction commits.</summary>
         public string NewVisitorKey { get; private set; }
@@ -60,7 +60,6 @@ namespace SKILL_UP.Backend
                 case "forgot": return Forgot();
                 case "resetPassword": return ResetPassword();
                 case "enquirySave": return EnquirySave();
-                case "enquiryLookup": return EnquiryLookup();
                 case "enquiryDelete": return EnquiryDelete();
                 case "enquiryList": return EnquiryList();
             }
@@ -324,19 +323,13 @@ namespace SKILL_UP.Backend
         }
 
         // ---- enquiries ---------------------------------------------------------------------
-        // An enquiry opens with its access code, or without it in the browser that sent or found it
-        // (ENQUIRY_ACCESS, keyed by the hashed visitor cookie) and for the signed-in account that sent it.
+        // An enquiry opens in the browser that sent it (ENQUIRY_ACCESS, keyed by the hashed visitor cookie) and for the
+        // signed-in account that sent it.
 
         EnquiryRow FindEnquiry()
         {
             int id;
             return int.TryParse(Str("id"), out id) ? m.Enquiries.FirstOrDefault(x => x.Id == id) : null;
-        }
-
-        bool TokenMatches(EnquiryRow q)
-        {
-            var token = Str("token") ?? "";
-            return token != "" && q.TokenHash == Tokens.Sha256(token);
         }
 
         bool LinkedToBrowser(EnquiryRow q)
@@ -345,9 +338,6 @@ namespace SKILL_UP.Backend
             return VisitorKey != null && (int)db.Scalar("SELECT COUNT(*) FROM ENQUIRY_ACCESS WHERE visitor_key_hash = @p0 AND enquiry_id = @p1",
                 Tokens.Sha256(VisitorKey), q.Id) > 0;
         }
-
-        /// <summary>A code that is sent must be right; without one, this browser or account must be linked to the enquiry.</summary>
-        bool MayOpen(EnquiryRow q) => string.IsNullOrEmpty(Str("token")) ? LinkedToBrowser(q) : TokenMatches(q);
 
         /// <summary>Records in the database that this browser may open the enquiry. Creates the browser's key on first use.</summary>
         void LinkToBrowser(int enquiryId)
@@ -365,12 +355,10 @@ namespace SKILL_UP.Backend
             var email = (Str("email") ?? "").Trim();
             if (!EmailPattern.IsMatch(email) || email.Length > 255) Fail("Enter a valid email address.");
             var existing = FindEnquiry();
-            string token = null;
             var row = new EnquiryRow { Name = name, Email = email, Subject = subject, Message = message, Status = "Open", CreatedAt = Now };
             if (existing != null)
             {
-                if (!MayOpen(existing)) Fail("Invalid enquiry access code.", 403);
-                if (TokenMatches(existing)) token = Str("token");
+                if (!LinkedToBrowser(existing)) Fail("Enquiry not found.", 404);
                 db.Exec("UPDATE ENQUIRY SET name = @p1, email = @p2, subject = @p3, message = @p4, updated_at = @p5 WHERE enquiry_id = @p0", existing.Id, name, email, subject, message, Now);
                 row.Id = existing.Id;
                 row.Status = existing.Status;
@@ -378,39 +366,29 @@ namespace SKILL_UP.Backend
             }
             else
             {
-                token = Tokens.New();
-                row.Id = db.Insert(@"INSERT INTO ENQUIRY (user_id, name, email, subject, message, status, submitted_at, access_token_hash)
-                                     VALUES (@p0, @p1, @p2, @p3, @p4, N'Open', @p5, @p6)", Me?.Id, name, email, subject, message, Now, Tokens.Sha256(token));
+                row.Id = db.Insert(@"INSERT INTO ENQUIRY (user_id, name, email, subject, message, status, submitted_at)
+                                     VALUES (@p0, @p1, @p2, @p3, @p4, N'Open', @p5)", Me?.Id, name, email, subject, message, Now);
                 LinkToBrowser(row.Id);
             }
-            return Workspace.EnquiryDto(row, token);
-        }
-
-        /// <summary>Opens an enquiry from any device with its ID and access code, and links it to this browser.</summary>
-        object EnquiryLookup()
-        {
-            var q = FindEnquiry();
-            if (q == null || !TokenMatches(q)) Fail("Enquiry ID or access code is incorrect.", 404);
-            LinkToBrowser(q.Id);
-            return Workspace.EnquiryDto(q, Str("token"));
+            return Workspace.EnquiryDto(row);
         }
 
         object EnquiryDelete()
         {
             var q = FindEnquiry();
-            if (q == null || !MayOpen(q)) Fail("Enquiry not found.", 404);
+            if (q == null || !LinkedToBrowser(q)) Fail("Enquiry not found.", 404);
             db.Exec("DELETE FROM ENQUIRY WHERE enquiry_id = @p0", q.Id);   // ENQUIRY_ACCESS rows go with it (ON DELETE CASCADE)
             return null;
         }
 
-        /// <summary>"My enquiries": those linked to this browser, plus the signed-in account's own. Access codes are never listed.</summary>
+        /// <summary>"My enquiries": those linked to this browser, plus the signed-in account's own.</summary>
         object EnquiryList()
         {
             var linked = VisitorKey == null ? new HashSet<int>() : new HashSet<int>(db.Query(
                 "SELECT enquiry_id FROM ENQUIRY_ACCESS WHERE visitor_key_hash = @p0", r => r.Int("enquiry_id"), Tokens.Sha256(VisitorKey)));
             return m.Enquiries.Where(q => linked.Contains(q.Id) || (Me != null && q.UserId == Me.Id))
                 .OrderByDescending(q => q.CreatedAt).ThenByDescending(q => q.Id)
-                .Select(q => Workspace.EnquiryDto(q, null)).ToList();
+                .Select(q => Workspace.EnquiryDto(q)).ToList();
         }
 
         // ---- own account -----------------------------------------------------------------

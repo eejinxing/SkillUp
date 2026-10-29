@@ -195,7 +195,7 @@ namespace SKILL_UP.Backend
     {
         public int Id;
         public int? UserId;
-        public string Name, Email, Subject, Message, Status, TokenHash;
+        public string Name, Email, Subject, Message, Status;
         public DateTime CreatedAt;
     }
 
@@ -380,7 +380,7 @@ namespace SKILL_UP.Backend
             m.Enquiries = db.Query("SELECT * FROM ENQUIRY ORDER BY enquiry_id", r => new EnquiryRow
             {
                 Id = r.Int("enquiry_id"), UserId = r.IntN("user_id"), Name = r.Str("name"), Email = r.Str("email"), Subject = r.Str("subject"), Message = r.Str("message"),
-                Status = r.Str("status"), TokenHash = r.Str("access_token_hash"), CreatedAt = r.Date("submitted_at")
+                Status = r.Str("status"), CreatedAt = r.Date("submitted_at")
             });
             return m;
         }

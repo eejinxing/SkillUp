@@ -116,8 +116,8 @@ namespace SKILL_UP.Backend
             {
                 ["id"] = Id(f.Id), ["userId"] = Id(f.UserId), ["text"] = f.Comment ?? "", ["rating"] = f.Rating, ["createdAt"] = Iso(f.CreatedAt)
             }));
-            // Enquiries are only reachable with their ID and access code (enquiryLookup); only Admin gets a list, without tokens.
-            state["enquiries"] = new JArray(admin ? m.Enquiries.Select(q => EnquiryDto(q, null)) : Enumerable.Empty<JObject>());
+            // Enquiries are only reachable from the browser or account that sent them (enquiryList); only Admin gets a list.
+            state["enquiries"] = new JArray(admin ? m.Enquiries.Select(q => EnquiryDto(q)) : Enumerable.Empty<JObject>());
 
             var requests = m.Requests.Where(r => admin
                 || (role == "Instructor" && r.RequesterId == me.Id)
@@ -299,14 +299,12 @@ namespace SKILL_UP.Backend
             }
         }
 
-        public static JObject EnquiryDto(EnquiryRow q, string token)
+        public static JObject EnquiryDto(EnquiryRow q)
         {
-            var dto = new JObject
+            return new JObject
             {
                 ["id"] = Id(q.Id), ["name"] = q.Name, ["email"] = q.Email, ["subject"] = q.Subject, ["message"] = q.Message, ["status"] = q.Status, ["createdAt"] = Iso(q.CreatedAt)
             };
-            if (token != null) dto["token"] = token;
-            return dto;
         }
 
         public static JObject RequestDto(RequestRow r)

@@ -45,5 +45,6 @@ Text is printed with `<%: %>`, `<%#: %>` or `Ui.H(...)`, so it is always HTML-en
 
 - The site stores data only in the database. Unsaved quiz and learning-path edits are kept in the session, not in the browser.
 - Small-screen layouts live in `css/responsive.css`. Check a new screen at 390 px wide as well as on desktop: nothing should scroll sideways.
+- The enquiry forms (`Controls/EnquiryForm.ascx`, `EnquiryPortal.aspx`) sit in UpdatePanels, so sending, saving and deleting redraw only that part of the page. `SkillUp.Master` holds the ScriptManager. A button inside an UpdatePanel must not have its icon or label take the click (see the pointer-events rule in `webforms.css`), or ASP.NET AJAX cannot tell which button was pressed.
 - Camera preview needs `localhost` or HTTPS.
 - The Test video call / Receive call buttons in the navbar are temporary. Turn them off with `SHOW_INCOMING_CALL_TEST` in `js/call-preview.js` (and remove the two buttons from `SkillUp.Master`) before release.

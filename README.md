@@ -10,7 +10,7 @@ The app is an **ASP.NET Web Forms** project (.NET Framework 4.8.1). Each screen 
 
 | Role | What they can do |
 |---|---|
-| Visitor | Home page, course catalogue and details, FAQ, register / log in / reset password, send an enquiry and manage it with an access code |
+| Visitor | Home page, course catalogue and details, FAQ, register / log in / reset password, send an enquiry and manage it from the same browser |
 | Learner | Dashboard, My courses, enrolment, sequential activities, virtual lab terminal, timed quizzes, leaderboard, certificates, messages, profile |
 | Instructor | Create and edit courses, activities and quizzes; upload resources; submit or withdraw review requests; track learner performance |
 | Program Leader | Manage programs and learning-path order; approve, reject or request changes on course requests; learning analytics |
