@@ -78,7 +78,10 @@ namespace SKILL_UP.Backend
             var answers = list.Select(a => (int)a).ToList();
             var correct = questions.Select((q, i) => q.AnswerIndex == answers[i]).ToList();
             var score = (int)Math.Round(correct.Count(x => x) * 100.0 / questions.Count, MidpointRounding.AwayFromZero);
-            var attempt = db.Insert("INSERT INTO QUIZ_ATTEMPT (quiz_id, user_id, score, started_at, submitted_at) VALUES (@p0, @p1, @p2, @p3, @p3)", quiz.Id, Me.Id, (decimal)score, Now);
+            // The quiz page reports when the learner opened the quiz; the leaderboard ranks on the time taken (submitted_at - started_at).
+            DateTime opened;
+            var started = DateTime.TryParse(Str("startedAt"), System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.RoundtripKind, out opened) && opened <= Now && opened > Now.AddHours(-3) ? opened : Now;
+            var attempt = db.Insert("INSERT INTO QUIZ_ATTEMPT (quiz_id, user_id, score, started_at, submitted_at) VALUES (@p0, @p1, @p2, @p3, @p4)", quiz.Id, Me.Id, (decimal)score, started, Now);
             for (int i = 0; i < questions.Count; i++)
                 db.Exec("INSERT INTO ATTEMPT_ANSWER (attempt_id, question_id, selected_option_id, is_correct) VALUES (@p0, @p1, @p2, @p3)",
                     attempt, questions[i].Id, questions[i].Options[answers[i]].Id, correct[i]);

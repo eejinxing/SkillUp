@@ -71,6 +71,8 @@ namespace SKILL_UP.Backend
         public int Id, UserId, CourseId;
         public DateTime EnrolledAt;
         public DateTime? LastActive;
+        /// <summary>ENROLLMENT.completed_at: when the last activity of the course was passed.</summary>
+        public DateTime? CompletedAt;
     }
 
     /// <summary>LAB_SUBMISSION: a Passed submission marks the activity complete; lab-type rows are also lab attempts.</summary>
@@ -87,6 +89,8 @@ namespace SKILL_UP.Backend
         public int Id, QuizId, UserId;
         public decimal? Score;
         public DateTime CreatedAt;
+        /// <summary>QUIZ_ATTEMPT.started_at: when the learner opened the quiz (equal to CreatedAt for older attempts that did not record it).</summary>
+        public DateTime? StartedAt;
         public List<AttemptAnswerRow> Answers = new List<AttemptAnswerRow>();
     }
 
@@ -295,7 +299,7 @@ namespace SKILL_UP.Backend
 
             m.Enrollments = db.Query("SELECT * FROM ENROLLMENT ORDER BY enrollment_id", r => new EnrollmentRow
             {
-                Id = r.Int("enrollment_id"), UserId = r.Int("user_id"), CourseId = r.Int("course_id"), EnrolledAt = r.Date("enroll_date"), LastActive = r.DateN("last_active")
+                Id = r.Int("enrollment_id"), UserId = r.Int("user_id"), CourseId = r.Int("course_id"), EnrolledAt = r.Date("enroll_date"), LastActive = r.DateN("last_active"), CompletedAt = r.DateN("completed_at")
             });
             m.Submissions = db.Query("SELECT * FROM LAB_SUBMISSION ORDER BY submission_id", r => new SubmissionRow
             {
@@ -303,7 +307,7 @@ namespace SKILL_UP.Backend
             });
             m.QuizAttempts = db.Query("SELECT * FROM QUIZ_ATTEMPT WHERE submitted_at IS NOT NULL ORDER BY attempt_id", r => new QuizAttemptRow
             {
-                Id = r.Int("attempt_id"), QuizId = r.Int("quiz_id"), UserId = r.Int("user_id"), Score = r.DecN("score"), CreatedAt = r.Date("submitted_at")
+                Id = r.Int("attempt_id"), QuizId = r.Int("quiz_id"), UserId = r.Int("user_id"), Score = r.DecN("score"), CreatedAt = r.Date("submitted_at"), StartedAt = r.DateN("started_at")
             });
             var answers = db.Query("SELECT * FROM ATTEMPT_ANSWER ORDER BY attempt_id, attempt_answer_id", r => new AttemptAnswerRow
             {
