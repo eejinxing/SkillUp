@@ -30,7 +30,6 @@
           <span>rank <strong class="lb-personal-rank"><%= RankText(Mine) %></strong></span>
         </div>
       </div>
-      <a class="lb-profile-settings" href="Settings">SETTINGS</a>
     </section>
     <nav class="lb-period-nav" aria-label="Leaderboard period">
       <skill:SubmitButton ID="WeekButton" runat="server" CausesValidation="false" CommandArgument="week" OnCommand="Period_Command" aria-label="This-week ranking">This week<sup><%= WeekMine?.Points.ToString("N0") ?? "0" %> pts<em><%= Standing(Board.Week) %></em></sup></skill:SubmitButton>
