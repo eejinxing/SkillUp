@@ -1,11 +1,1195 @@
-/* Native responsive flow from Figma Frame 197 / 296:448. */
-.my-courses{color:#fff;background:#000;padding-top:12px;--mc-line:#777777}
-.mc-page-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}.mc-page-header h1{font-size:23px;font-weight:500;letter-spacing:-.4px}.mc-page-header>a{font-size:12px;color:#b8c6da}
-.mc-layout{display:grid;grid-template-columns:minmax(0,30%) minmax(0,70%);height:clamp(620px,calc(100vh - 145px),1000px);gap:0;min-width:0}
-.mc-programs{min-height:0;min-width:0;display:flex;flex-direction:column;padding-right:24px;position:relative}.mc-program-heading{display:flex;flex-direction:column;gap:4px;padding:0 0 16px 16px;flex-shrink:0}.mc-program-heading h2{font-size:14px;font-weight:500}.mc-program-heading span{font-size:10px;color:#8e9aa8}
-.mc-program-scroll{min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-color:#444952 #111318;scrollbar-width:thin;overscroll-behavior:contain;padding:10px 12px 35px 20px;flex:1;position:relative;isolation:isolate}
-.mc-program-scroll::-webkit-scrollbar{width:8px}.mc-program-scroll::-webkit-scrollbar-track{background:#111318;border:1px solid #232630;border-radius:20px}.mc-program-scroll::-webkit-scrollbar-thumb{background:#444952;border:2px solid #111318;border-radius:20px}
-.mc-program{display:block;position:relative;background:none;border:0;padding:0;width:90%;aspect-ratio:4354.38/5982.141;border-radius:0;margin-left:auto;color:#fff;isolation:isolate;transition:transform .18s ease,filter .18s ease;filter:brightness(.88);text-align:center}
-.mc-program+.mc-program{margin-top:-12%;margin-left:0}.mc-program:nth-child(3n){margin-left:auto}.mc-program>img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}.mc-program-name{position:absolute;top:13.8%;left:6%;right:6%;font-family:'Archivo Black',Arial,sans-serif;font-weight:900;font-size:clamp(17px,2.25vw,31px);line-height:1.05;overflow-wrap:anywhere;text-shadow:0 2px 5px #003d5c55}.mc-program-count{position:absolute;bottom:12%;left:15%;right:15%;font-size:11px;font-weight:600;color:#103c50;background:#e0ffffc9;border-radius:20px;padding:5px}.mc-selected{display:none;position:absolute;bottom:4%;left:18%;right:18%;background:#122930;color:#8cffe0;padding:5px 3px;font-size:10px;border:1px solid #a6fff099;border-radius:18px}.mc-program[aria-selected=true]{z-index:4;filter:none;transform:translateY(-3px);outline:0;filter:drop-shadow(0 0 4px #9cffff55)}.mc-program[aria-selected=true] .mc-selected{display:block}.my-courses button.mc-program:hover:not(:disabled){z-index:5;filter:none;background:transparent}.mc-program:focus-visible{z-index:6;outline:3px solid #fff;outline-offset:4px}
-.mc-courses-panel{min-height:0;border:1px solid #b4b4b4;border-radius:32px;min-width:0;display:flex;flex-direction:column;overflow:hidden;background:#000}.mc-panel-header{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 27px 12px;border-bottom:1px solid #272727;flex-shrink:0}.mc-panel-header small{font-size:10px;color:#8d96a1}.mc-panel-header h2{font-size:16px;margin-top:3px;font-weight:500}.mc-panel-header>span{font-size:10px;color:#9aa4b2;white-space:nowrap}.mc-course-scroll{overflow:auto;overscroll-behavior:contain;scrollbar-color:#444 #000;scrollbar-width:thin;flex:1;min-height:0;padding:0 26px 20px}.mc-course{display:grid;grid-template-columns:33% minmax(0,67%);gap:12px 0;align-items:center;min-width:0;padding:17px 0 22px}.mc-course-index{min-width:0;padding-right:13px}.mc-number{font-family:'Archivo Black',Arial,sans-serif;font-size:clamp(72px,9.2vw,133px);font-weight:900;letter-spacing:0;line-height:.95;display:block;color:white}.mc-course-controls{display:flex;gap:9px;align-items:center;margin-top:10px}.mc-progress{position:relative;width:clamp(42px,5.5vw,74px);aspect-ratio:1;flex-shrink:0;display:grid;place-items:center}.mc-progress svg{position:absolute;inset:0;width:100%;height:100%}.mc-progress strong{font-size:clamp(13px,1.6vw,23px);color:#fff;line-height:1}.mc-progress sup{font-size:8px;vertical-align:super;margin-left:1px}.mc-arrow{display:grid;place-items:center;flex:1;min-width:35px;max-width:100px;height:42px;background:#393939;border-radius:10px}.mc-arrow>img{width:27px;height:27px}.mc-arrow:hover{background:#b3f7d6}.mc-arrow:focus-visible,.mc-course-art:focus-visible{outline:2px solid #b2f8d7;outline-offset:4px}.mc-course-main{min-width:0}.mc-course-art{display:block;height:clamp(130px,calc((100dvh - 500px)/3),230px);overflow:hidden}.mc-course-art img{display:block;width:100%;height:100%;object-fit:contain}.mc-course-caption{padding:8px 4px 0}.mc-course-caption h3{font-size:13px;font-weight:500;line-height:1.4}.mc-course-caption p{font-size:10px;color:#929aa6;margin-top:4px}.mc-course-caption p span{color:#b8e7d2;display:inline-block;margin-left:10px}.mc-divider{grid-column:1/-1;width:100%;height:auto;display:block;margin-top:10px}.mc-empty{padding:55px 24px;text-align:center}.mc-empty p{margin:12px 0 22px;color:#9ba8b8}.mc-program-scroll:focus-visible,.mc-course-scroll:focus-visible{outline:2px solid #b2f8d7;outline-offset:-3px}
-@media(max-width:1000px){.mc-layout{grid-template-columns:30% minmax(0,70%)}.mc-programs{padding-right:16px}.mc-program-scroll{padding-left:8px;padding-right:8px}.mc-program-name{font-size:22px}.mc-course-scroll{padding:0 17px 18px}.mc-panel-header{padding:15px 18px 10px}.mc-course-index{padding-right:9px}.mc-course-controls{gap:4px}.mc-arrow{height:35px;min-width:30px}.mc-arrow>img{width:24px;height:24px}.mc-number{font-size:85px}}
+/* My courses: program wheel and course cards */
+
+/* ==== Native responsive flow from Figma Frame 197 / 296:448. */
+
+.my-courses {
+    --mc-line: #777777;
+}
+
+.mc-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.mc-page-header h1 {
+    font-size: 23px;
+    font-weight: 500;
+    letter-spacing: -.4px;
+}
+
+.mc-page-header>a {
+    font-size: 12px;
+    color: #b8c6da;
+}
+
+.mc-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 30%) minmax(0, 70%);
+    height: clamp(620px, calc(100vh - 145px), 1000px);
+    gap: 0;
+    min-width: 0;
+}
+
+.mc-programs {
+    min-height: 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding-right: 24px;
+    position: relative;
+}
+
+.mc-program-scroll {
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: #444952 #111318;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+    padding: 10px 12px 35px 20px;
+    flex: 1;
+    position: relative;
+    isolation: isolate;
+}
+
+.mc-program-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.mc-program-scroll::-webkit-scrollbar-track {
+    background: #111318;
+    border: 1px solid #232630;
+    border-radius: 20px;
+}
+
+.mc-program-scroll::-webkit-scrollbar-thumb {
+    background: #444952;
+    border: 2px solid #111318;
+    border-radius: 20px;
+}
+
+.mc-program {
+    display: block;
+    position: relative;
+    background: none;
+    border: 0;
+    padding: 0;
+    width: 90%;
+    aspect-ratio: 4354.38/5982.141;
+    border-radius: 0;
+    margin-left: auto;
+    color: #fff;
+    isolation: isolate;
+    transition: transform .18s ease, filter .18s ease;
+    filter: brightness(.88);
+    text-align: center;
+}
+
+.mc-program+.mc-program {
+    margin-top: -12%;
+    margin-left: 0;
+}
+
+.mc-program:nth-child(3n) {
+    margin-left: auto;
+}
+
+.mc-program>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+
+.mc-program[aria-selected=true] {
+    z-index: 4;
+    filter: none;
+    transform: translateY(-3px);
+    outline: 0;
+    filter: drop-shadow(0 0 4px #9cffff55);
+}
+
+.my-courses button.mc-program:hover:not(:disabled) {
+    z-index: 5;
+    filter: none;
+    background: transparent;
+}
+
+.mc-program:focus-visible {
+    z-index: 6;
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+}
+
+.mc-courses-panel {
+    min-height: 0;
+    border: 1px solid #b4b4b4;
+    border-radius: 32px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #000;
+}
+
+.mc-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 17px 27px 12px;
+    border-bottom: 1px solid #272727;
+    flex-shrink: 0;
+}
+
+.mc-panel-header small {
+    font-size: 10px;
+    color: #8d96a1;
+}
+
+.mc-panel-header h2 {
+    font-size: 16px;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+.mc-panel-header>span {
+    font-size: 10px;
+    color: #9aa4b2;
+    white-space: nowrap;
+}
+
+.mc-course-scroll {
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-color: #444 #000;
+    scrollbar-width: thin;
+    flex: 1;
+    min-height: 0;
+    padding: 0 26px 20px;
+}
+
+.mc-course {
+    display: grid;
+    grid-template-columns: 33% minmax(0, 67%);
+    gap: 12px 0;
+    align-items: center;
+    min-width: 0;
+    padding: 17px 0 22px;
+}
+
+.mc-course-index {
+    min-width: 0;
+    padding-right: 13px;
+}
+
+.mc-number {
+    font-family: 'Archivo Black', Arial, sans-serif;
+    font-size: clamp(72px, 9.2vw, 133px);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: .95;
+    display: block;
+    color: white;
+}
+
+.mc-course-art:focus-visible {
+    outline: 2px solid #b2f8d7;
+    outline-offset: 4px;
+}
+
+.mc-course-art {
+    display: block;
+    height: clamp(130px, calc((100dvh - 500px)/3), 230px);
+    overflow: hidden;
+}
+
+.mc-course-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.mc-empty {
+    padding: 55px 24px;
+    text-align: center;
+}
+
+.mc-empty p {
+    margin: 12px 0 22px;
+    color: #9ba8b8;
+}
+
+.mc-program-scroll:focus-visible,
+.mc-course-scroll:focus-visible {
+    outline: 2px solid #b2f8d7;
+    outline-offset: -3px;
+}
+
+@media (max-width: 1000px) {
+    .mc-layout {
+        grid-template-columns: 30% minmax(0, 70%);
+    }
+
+    .mc-programs {
+        padding-right: 16px;
+    }
+
+    .mc-program-scroll {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .mc-course-scroll {
+        padding: 0 17px 18px;
+    }
+
+    .mc-panel-header {
+        padding: 15px 18px 10px;
+    }
+
+    .mc-course-index {
+        padding-right: 9px;
+    }
+
+    .mc-number {
+        font-size: 85px;
+    }
+}
+
+/* ==== My courses — rolling program wheel (no scrollbar), black labels on the foil cards, refined panel, buttons and type. */
+
+/* Page ground: the same soft purple haze as the dashboard */
+body:has(.my-courses) {
+    background: linear-gradient(180deg, #05040700 0, #050407 380px) top/100% 380px no-repeat, linear-gradient(#0504078c, #0504078c) top/100% 380px no-repeat, url(../assets/dashboard-gradient.webp) top/100% 380px no-repeat, #050407;
+}
+
+body:has(.my-courses) :is(.shell,.shell>div,.main,.figma-secondary) {
+    background: transparent;
+}
+
+/* Header controls: glass pills */
+/* Page heading */
+.my-courses {
+    position: relative;
+    color: #fff;
+    background: transparent;
+    padding-top: 6px;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: .01em;
+    --mc-violet: #b79cff;
+}
+
+.my-courses .mc-page-header {
+    align-items: center;
+}
+
+.my-courses .mc-page-header h1 {
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: -.035em;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.my-courses .mc-page-header>a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .02em;
+    color: #e6e0f3;
+    background: linear-gradient(180deg, #ffffff1f, #ffffff08);
+    border: 1px solid #ffffff1a;
+    backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 #ffffff24;
+    transition: background-color .2s;
+}
+
+.my-courses .mc-layout {
+    grid-template-columns: minmax(250px, 32%) minmax(0, 1fr);
+    gap: 32px;
+}
+
+/* ── Programs: a vertical wheel. No scrollbar; cards roll toward you as you scroll ── */
+.my-courses .mc-programs {
+    padding: 0;
+}
+
+.my-courses .mc-program-scroll {
+    container-type: size;
+    padding: 0;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior: contain;
+    border-radius: 24px;
+    -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+}
+
+.my-courses .mc-program-scroll::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.my-courses .mc-program,
+.my-courses .mc-program-scroll::before,
+.my-courses .mc-program-scroll::after {
+    --w: min(74cqw,44cqh);
+    --h: calc(var(--w) * var(--mc-pouch-ratio));
+}
+
+.my-courses .mc-program-scroll::before,
+.my-courses .mc-program-scroll::after {
+    content: "";
+    display: block;
+    height: calc(50cqh - var(--h) / 2);
+    pointer-events: none;
+}
+
+.my-courses .mc-program {
+    position: relative;
+    display: block;
+    width: var(--w);
+    height: var(--h);
+    aspect-ratio: auto;
+    margin: 0 auto;
+    padding: 0;
+    scroll-snap-align: center;
+    filter: brightness(.9);
+    transform: none;
+    transition: filter .25s;
+    container-type: inline-size;
+    cursor: pointer;
+}
+
+.my-courses .mc-program>img {
+    width: 100%;
+    height: 100%;
+}
+
+.my-courses .mc-program[aria-selected=true] {
+    transform: none;
+    filter: drop-shadow(0 0 18px #8b5cf688) drop-shadow(0 0 3px #c4b5fd88);
+}
+
+@media (hover: hover) {
+    .my-courses button.mc-program:hover:not(:disabled) {
+        filter: brightness(1.04);
+    }
+}
+
+.my-courses .mc-program:focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: -6px;
+    border-radius: 24px;
+}
+
+/* Black foil labels, centred and sized from the card itself */
+/* Scroll-driven roll: the card nearest the middle faces you; the next rolls in toward you from below and the one before rolls back */
+@supports (animation-timeline: view()) {
+    .my-courses .mc-program {
+        animation: mc-roll linear both;
+        animation-timeline: view(block);
+        animation-range: cover 0% cover 100%;
+    }
+}
+
+/* ── Selected program panel ── */
+.my-courses .mc-courses-panel {
+    border: 1px solid #ffffff1c;
+    border-radius: 30px;
+    background: linear-gradient(180deg, #ffffff0d, #ffffff03 45%), #050407;
+    box-shadow: inset 0 1px 0 #ffffff14, 0 30px 80px #00000066;
+}
+
+.my-courses .mc-panel-header {
+    padding: 26px 34px 20px;
+    border-bottom: 1px solid #ffffff10;
+}
+
+.my-courses .mc-panel-header small {
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #8f89a1;
+}
+
+.my-courses .mc-panel-header h2 {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1.15;
+    margin: 8px 0 0;
+}
+
+.my-courses .mc-panel-header>span {
+    font-size: 12px;
+    letter-spacing: .03em;
+    color: #ddd6ec;
+    padding: 7px 15px;
+    border-radius: 999px;
+    background: #ffffff0d;
+    border: 1px solid #ffffff17;
+}
+
+.my-courses .mc-course-scroll {
+    padding: 0 34px 26px;
+}
+
+.my-courses .mc-course {
+    border-bottom: 1px solid #ffffff10;
+}
+
+.my-courses .mc-course:last-child {
+    border-bottom: 0;
+}
+
+.my-courses .mc-number {
+    font: 800 clamp(64px, 7.4vw, 112px)/.9 'DM Sans', sans-serif;
+    color: #fff;
+}
+
+.my-courses .mc-empty h2 {
+    font-size: 24px;
+    letter-spacing: -.02em;
+}
+
+.my-courses .mc-empty .button {
+    border-radius: 999px;
+}
+
+.my-courses :is(a,button):focus-visible,
+.my-courses .mc-course-scroll:focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 3px;
+}
+
+/* ── Tablet and phone: the wheel turns sideways above the panel ── */
+@media (prefers-reduced-motion: reduce) {
+    .my-courses .mc-program {
+        animation: none !important;
+    }
+}
+
+.my-courses .mc-page-header>a {
+    white-space: nowrap;
+}
+
+/* ── Course caption: tech avatar, title with status dot, short description (matches the supplied reference) ── */
+/* ── Polish pass: fit the screen, calm the wheel, editorial index ─────────────────────────────── */
+/* Fit the viewport on desktop: header + title + layout fill exactly one screen (taller content scrolls inside the panels). */
+body:has(.my-courses) .shell>div {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    min-height: 620px;
+}
+
+body:has(.my-courses) .main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 28px;
+}
+
+.my-courses {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.my-courses .mc-page-header {
+    flex: none;
+    margin: 6px 0 22px;
+}
+
+.my-courses .mc-layout {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+}
+
+/* Calm wheel: no 3D tilt, at most a 6% size change, neighbours dim instead of zooming; gentle snapping. */
+.my-courses .mc-program-scroll {
+    scroll-snap-type: y proximity;
+}
+
+.my-courses .mc-program {
+    scroll-snap-stop: normal;
+}
+
+@keyframes mc-roll {
+    0% {
+        opacity: .34;
+        z-index: 1;
+        transform: scale(.94);
+    }
+
+    50% {
+        opacity: 1;
+        z-index: 3;
+        transform: none;
+    }
+
+    100% {
+        opacity: .34;
+        z-index: 1;
+        transform: scale(.94);
+    }
+}
+
+/* Editorial index beside the heading: current / total, tabular figures. */
+/* Drawn icons */
+.my-courses .mc-ico {
+    width: 16px;
+    height: 16px;
+    flex: none;
+}
+
+.my-courses .mc-page-header>a .mc-ico {
+    width: 15px;
+    height: 15px;
+    transition: transform .2s cubic-bezier(.16, 1, .3, 1);
+}
+
+@media (hover: hover) {
+    .my-courses .mc-page-header>a:hover {
+        background: linear-gradient(180deg, #ffffff2e, #ffffff10);
+    }
+
+    .my-courses .mc-page-header>a:hover .mc-ico {
+        transform: translate(2px, -2px);
+    }
+}
+
+/* Browser surfaces carry the palette */
+.my-courses ::selection {
+    background: #8b5cf6;
+    color: #fff;
+}
+
+.my-courses .mc-course-scroll {
+    scrollbar-color: #ffffff26 transparent;
+}
+
+/* Header and content share one column edge at every width */
+body:has(.my-courses) .main {
+    width: 100%;
+    max-width: 1500px;
+    margin-inline: auto;
+    padding-inline: clamp(18px, 3vw, 42px);
+}
+
+/* First program sits under the heading instead of floating mid-rail (later cards still centre) */
+.my-courses .mc-program-scroll::before {
+    height: max(8px, calc(40cqh - var(--h) / 2));
+}
+
+/* The panel title speaks for itself; the "Selected program" label stays for screen readers only */
+.my-courses .mc-panel-header small {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.my-courses .mc-panel-header h2 {
+    margin-top: 0;
+}
+
+/* Pixel heading and bold black print on cyan foil, matching the supplied references. */
+.my-courses .mc-page-header h1 {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.my-courses .mc-pixel-title {
+    display: block;
+    width: clamp(190px, 29vw, 390px);
+    max-width: 100%;
+    height: 90px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Number and gauge share the artwork height; course information sits beneath it. */
+.my-courses .mc-program+.mc-program {
+    margin: 28px auto 0;
+}
+
+.my-courses .mc-course {
+    display: grid;
+    gap: 22px 24px;
+    align-items: start;
+    padding: 30px 0 34px;
+}
+
+.my-courses .mc-course-metrics {
+    grid-area: metrics;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    align-self: stretch;
+}
+
+.my-courses .mc-course-index {
+    display: block;
+    padding: 0;
+}
+
+.my-courses .mc-number {
+    font-size: 112px;
+    line-height: 1;
+    letter-spacing: -.075em;
+}
+
+.my-courses .mc-course-art {
+    grid-area: artwork;
+    display: block;
+    max-width: none;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.my-courses .mc-course-art img {
+    display: block;
+}
+
+.my-courses .mc-course-gauge {
+    flex: none;
+}
+
+.my-courses .mc-task-ring {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 150px;
+    height: 150px;
+}
+
+.my-courses .mc-task-ring svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.my-courses .mc-task-ring strong {
+    position: relative;
+    font-size: 31px;
+    font-weight: 400;
+    letter-spacing: -1px;
+    color: #f5f5f5;
+    line-height: 1;
+}
+
+.my-courses .mc-task-ring sup {
+    font-size: 11px;
+    vertical-align: baseline;
+    margin-left: 1px;
+    letter-spacing: 0;
+    color: #a5a5aa;
+}
+
+@media (max-width: 1100px) {
+    .my-courses .mc-course {
+        gap: 18px;
+    }
+
+    .my-courses .mc-number {
+        font-size: 88px;
+    }
+
+    .my-courses .mc-task-ring {
+        width: 110px;
+        height: 110px;
+    }
+
+    .my-courses .mc-course-summary {
+        gap: 12px;
+    }
+}
+
+/* Split course tile based on the red-and-black reference. */
+.my-courses .mc-course-summary {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #0b0b0c;
+    color: #eee;
+    box-shadow: inset 0 0 0 1px #ffffff06;
+}
+
+.my-courses .mc-market-accent {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    background: linear-gradient(165deg, #591b25 0%, #9d222b 47%, #e83235 100%);
+    overflow: hidden;
+}
+
+.my-courses .mc-market-accent:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 140%;
+    height: 18px;
+    left: -20%;
+    top: 53%;
+    transform: rotate(-43deg);
+    border-radius: 20px;
+    background: #ffffff04;
+}
+
+.my-courses .mc-market-marks {
+    display: flex;
+    align-items: center;
+    margin-bottom: auto;
+    padding-bottom: 21px;
+}
+
+.my-courses .mc-market-marks>span {
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: #101010;
+    color: #fff;
+}
+
+.my-courses .mc-market-marks>span+span {
+    margin-left: -8px;
+    background: #f5f5f6;
+    color: #202023;
+}
+
+.my-courses .mc-market-marks .mc-ico {
+    width: 17px;
+    height: 17px;
+    stroke-width: 1.7;
+}
+
+.my-courses .mc-market-accent strong {
+    font: 400 43px/1.1 'DM Sans', sans-serif;
+    letter-spacing: -1.8px;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+}
+
+.my-courses .mc-market-accent sup {
+    font-size: 20px;
+    vertical-align: super;
+    margin-left: 3px;
+    letter-spacing: 0;
+}
+
+.my-courses .mc-market-accent p {
+    margin: 3px 0 0;
+    color: #f0bdc0;
+    line-height: 1.4;
+}
+
+.my-courses .mc-market-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.my-courses .mc-market-main header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 8px 10px;
+}
+
+.my-courses .mc-market-main h3 {
+    flex: 1 1 140px;
+    min-width: 0;
+    line-height: 1.35;
+    color: #eee;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.my-courses .mc-market-tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.my-courses .mc-market-tags span {
+    border: 1px solid #ffffff12;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.my-courses .mc-market-subtitle {
+    margin: 6px 0 0;
+    line-height: 1.4;
+}
+
+.my-courses .mc-market-date {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 8px;
+    line-height: 1.4;
+}
+
+.my-courses .mc-market-date time {
+    color: #b0b0b7;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.my-courses .mc-market-main footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 5px;
+}
+
+.my-courses .mc-market-details {
+    display: grid;
+    place-items: center;
+    color: #7c7c83;
+}
+
+.my-courses .mc-market-action {
+    display: grid;
+    place-items: center;
+    background: #242426;
+    color: #ddd;
+    border-radius: 999px;
+}
+
+.my-courses .mc-market-main .mc-ico {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5;
+}
+
+@media (hover: hover) {
+    .my-courses .mc-market-action:hover {
+        background: #39393d;
+        color: #fff;
+    }
+
+    .my-courses .mc-market-details:hover {
+        color: #fff;
+        background: #ffffff08;
+    }
+}
+
+@media (max-width: 1100px) {
+    .my-courses .mc-market-accent strong {
+        font-size: 35px;
+    }
+}
+
+/* ── Course panel: no scrollbar and a staggered, scroll-linked reveal ──
+ Each part of a course has its own role as it scrolls into view: the number rises, the ring turns into place,
+ the artwork opens from the centre like a curtain, the completion block sweeps in, and the card glides up.
+ Every element follows its own view timeline, so the stagger comes from the layout itself. Distinct from the
+ program wheel (fade + 6% scale in both directions). Reduced motion shows the final state. */
+
+.my-courses .mc-course-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.my-courses .mc-course-scroll::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+@supports (animation-timeline: view()) {
+    .my-courses :is(.mc-number,.mc-task-ring svg,.mc-course-art,.mc-course-art img,.mc-course-summary,.mc-market-accent) {
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view(block);
+        animation-range: entry 0% entry 100%;
+    }
+
+    .my-courses .mc-number {
+        animation-name: mc-rise-in;
+    }
+
+    .my-courses .mc-task-ring svg {
+        animation-name: mc-dial;
+    }
+
+    .my-courses .mc-course-art {
+        animation-name: mc-curtain;
+    }
+
+    .my-courses .mc-course-art img {
+        animation-name: mc-settle;
+    }
+
+    /* overflow:clip clips like hidden but is not a scroll container, so the image tracks the panel scroll */
+
+    .my-courses .mc-course-art {
+        overflow: clip;
+    }
+
+    .my-courses .mc-course-summary {
+        animation-name: mc-glide;
+    }
+
+    .my-courses .mc-market-accent {
+        animation-name: mc-sweep;
+        animation-range: entry 15% entry 100%;
+    }
+}
+
+@keyframes mc-rise-in {
+    from {
+        opacity: .15;
+        transform: translateY(.35em);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes mc-dial {
+    from {
+        opacity: .3;
+        transform: rotate(-110deg) scale(.88);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes mc-curtain {
+    from {
+        clip-path: inset(0 46% 0 46% round 22px);
+    }
+
+    to {
+        clip-path: inset(0 0 0 0 round 12px);
+    }
+}
+
+@keyframes mc-settle {
+    from {
+        scale: 1.08;
+        opacity: .7;
+    }
+
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+@keyframes mc-glide {
+    from {
+        opacity: .2;
+        transform: translateY(32px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes mc-sweep {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .my-courses :is(.mc-number,.mc-task-ring svg,.mc-course-art,.mc-course-art img,.mc-course-summary,.mc-market-accent) {
+        animation: none !important;
+    }
+}
+
+/* ── Course card spans the full row; its red block lines up under the number/ring column ── */
+.my-courses .mc-course {
+    --mc-meta: 150px;
+    grid-template-columns: var(--mc-meta) minmax(0, 1fr);
+    grid-template-areas: "metrics artwork" "summary summary";
+    column-gap: 24px;
+}
+
+.my-courses .mc-course-summary {
+    grid-area: summary;
+    grid-template-columns: calc(var(--mc-meta) + 24px) minmax(0, 1fr);
+    min-height: 200px;
+    border-radius: 20px;
+}
+
+.my-courses .mc-market-accent {
+    padding: 22px;
+}
+
+.my-courses .mc-market-main {
+    padding: 22px 24px;
+}
+
+@media (max-width: 1100px) {
+    .my-courses .mc-course {
+        --mc-meta: 110px;
+        column-gap: 18px;
+    }
+
+    .my-courses .mc-course-summary {
+        grid-template-columns: calc(var(--mc-meta) + 18px) minmax(0, 1fr);
+    }
+}
+
+.my-courses .mc-market-main h3 {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -.02em;
+}
+
+.my-courses .mc-market-tags {
+    gap: 6px;
+}
+
+.my-courses .mc-market-tags span {
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: .02em;
+    color: #c9c9d0;
+    border-color: #ffffff1a;
+}
+
+.my-courses .mc-market-subtitle {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #8c8c94;
+}
+
+.my-courses .mc-market-date {
+    margin: 14px 0;
+    font-size: 12.5px;
+    color: #85858d;
+}
+
+.my-courses .mc-market-accent p {
+    font-size: 12px;
+    letter-spacing: .02em;
+}
+
+.my-courses .mc-market-details {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+}
+
+.my-courses .mc-market-action {
+    width: 52px;
+    height: 36px;
+    transition: background-color .2s, transform .15s;
+}
+
+.my-courses .mc-market-action .mc-ico {
+    transition: transform .2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.my-courses .mc-market-action:active {
+    transform: scale(.96);
+}
+
+@media (hover: hover) {
+    .my-courses .mc-market-action:hover .mc-ico {
+        transform: translate(2px, -2px);
+    }
+}
+
+/* Details from the audit */
+.my-courses .mc-course-art img {
+    transition: transform .5s cubic-bezier(.16, 1, .3, 1), filter .3s;
+}
+
+@media (hover: hover) {
+    .my-courses .mc-course-art:hover img {
+        transform: translateY(-4px);
+        filter: drop-shadow(0 18px 30px #7c3aed55);
+    }
+}
+
+/* Kit artwork: Dev Kit pouches for programs (name printed in the art, so the drawn name becomes a caption);
+ Computer Essentials cards fill the course artwork column in landscape format. */
+
+.my-courses .mc-program,
+.my-courses .mc-program-scroll::before,
+.my-courses .mc-program-scroll::after {
+    --mc-pouch-ratio: 1.34;
+}
+
+.my-courses .mc-program>img {
+    object-fit: contain;
+    border-radius: 14px;
+}
+
+.my-courses .mc-program-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #c9c3d8;
+    pointer-events: none;
+}
+
+.my-courses .mc-course-art {
+    width: 100%;
+    aspect-ratio: 5/2;
+    height: auto;
+    justify-self: stretch;
+    background: none;
+}
+
+.my-courses .mc-course-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}

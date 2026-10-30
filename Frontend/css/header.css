@@ -1,0 +1,3262 @@
+/* Workspace header (capsule navigation) and the call preview */
+
+/* ==== Shared schedule-style header, with lime reserved for an active device preview. */
+
+#app .skill-global-header .gn-actions .gn-demo-call {
+    border-style: dashed;
+}
+
+#skill-incoming-call {
+    position: fixed;
+    right: 22px;
+    top: 100px;
+    z-index: 130;
+    display: grid;
+    justify-items: center;
+    gap: 9px;
+    width: 300px;
+    max-width: calc(100vw - 30px);
+    padding: 23px;
+    border: 1px solid #ffffff28;
+    border-radius: 22px;
+    background: #181a18;
+    box-shadow: 0 20px 65px #0009;
+    color: #eee;
+    text-align: center;
+}
+
+#skill-incoming-call .incoming-demo-label {
+    font: 9px/1.5 system-ui, sans-serif;
+    letter-spacing: .08em;
+    color: #a6b79b;
+}
+
+#skill-incoming-call .incoming-avatar {
+    display: grid;
+    place-items: center;
+    width: 62px;
+    height: 62px;
+    margin: 6px;
+    border-radius: 50%;
+    background: #b8ec7d;
+    color: #27351a;
+    font-size: 23px;
+}
+
+#skill-incoming-call h2 {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -.02em;
+}
+
+#skill-incoming-call p {
+    font-size: 11px;
+    color: #b6bcb0;
+}
+
+#skill-incoming-call small {
+    font-size: 10px;
+    color: #8b9483;
+}
+
+#skill-incoming-call button {
+    flex: 1;
+    min-height: 39px;
+    padding: 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    border: 1px solid #ffffff18;
+    background: #30322f;
+    color: #ddd;
+}
+
+#skill-incoming-call [data-incoming-call=accept] {
+    background: #baf36e;
+    border-color: #baf36e;
+    color: #203011;
+}
+
+body.ui-refined.shared-capsule-nav #app {
+    padding-top: 0 !important;
+}
+
+/* The capsule replaces the old edge rail, so pages drop its 66px gutter and every page lines the bar up the same way. */
+body.ui-refined.shared-capsule-nav {
+    padding-left: 0;
+}
+
+html {
+    scrollbar-gutter: stable;
+}
+
+body.shared-capsule-nav .learning-console .lx-top {
+    display: none;
+}
+
+#app .skill-global-header {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1424px;
+    flex: none;
+    align-self: stretch;
+    margin: 0 auto;
+    padding: 18px clamp(16px, 3vw, 42px);
+    position: relative;
+    z-index: 30;
+}
+
+#app .skill-global-header .gn-brand {
+    display: flex;
+    align-items: center;
+    flex: none;
+    gap: 5px;
+    width: 70px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #fff;
+}
+
+#app .skill-global-header .gn-brand img {
+    width: 58px;
+    height: 30px;
+    object-fit: contain;
+}
+
+#app .skill-global-header .gn-brand>span {
+    display: none;
+}
+
+#app .skill-global-header .gn-capsule {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    border-radius: 999px;
+    border: 1px solid #ffffff18;
+    box-shadow: inset 0 1px 0 #ffffff07;
+}
+
+#app .skill-global-header .gn-workspace-label {
+    color: #ececec;
+    white-space: nowrap;
+}
+
+#app .skill-global-header .gn-date {
+    color: #9b9b9f;
+    border: 1px solid #ffffff10;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+#app .skill-global-header .gn-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+    min-width: 0;
+    margin-left: auto;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+#app .skill-global-header .gn-links>a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 0 13px;
+    border-radius: 999px;
+    font-size: 11px;
+    white-space: nowrap;
+    color: #999;
+    background: none;
+}
+
+#app .skill-global-header .gn-links>a[aria-current=page] {
+    background: #252525;
+    color: #fff;
+}
+
+#app .skill-global-header .gn-more {
+    position: relative;
+    flex: none;
+}
+
+#app .skill-global-header .gn-more>summary {
+    display: grid;
+    place-items: center;
+    width: 33px;
+    height: 34px;
+    list-style: none;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid #ffffff12;
+    color: #aaa;
+    font-size: 12px;
+}
+
+#app .skill-global-header .gn-more>summary::-webkit-details-marker {
+    display: none;
+}
+
+#app .skill-global-header .gn-more>nav {
+    position: absolute;
+    right: 0;
+    top: 44px;
+    display: grid;
+    min-width: 230px;
+    max-height: 65vh;
+    overflow: auto;
+    padding: 6px;
+    border: 1px solid #ffffff20;
+    border-radius: 14px;
+    background: #181819;
+    box-shadow: 0 14px 35px #0008;
+}
+
+#app .skill-global-header .gn-more a {
+    font-size: 12px;
+    padding: 10px 12px;
+    color: #ccc;
+}
+
+#app .skill-global-header .gn-more>nav>button {
+    background: none;
+    border: 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-align: left;
+    min-height: 36px;
+    color: #bdbdc7;
+    font-size: 12px;
+}
+
+#app .skill-global-header .gn-actions {
+    flex: none;
+}
+
+#app .skill-global-header .gn-actions button,
+#app .skill-global-header .gn-actions>a:not(:has(.avatar)) {
+    min-height: 32px;
+    padding: 7px 10px;
+    border: 1px solid #ffffff18;
+    border-radius: 999px;
+    background: #151516;
+    color: #c6c6cb;
+    box-shadow: none;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+#app .skill-global-header .gn-call-strip {
+    display: none;
+}
+
+#app .skill-global-header .gn-capsule.is-calling .gn-links,
+#app .skill-global-header .gn-capsule.is-calling .gn-more,
+#app .skill-global-header .gn-capsule.is-calling .gn-date {
+    display: none;
+}
+
+#app .skill-global-header .gn-capsule.is-calling .gn-call-strip {
+    align-items: center;
+}
+
+#app .skill-global-header .gn-call-strip>button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    min-height: 0;
+    height: 36px;
+    flex: 1;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: inherit;
+    padding: 0 13px;
+    font-size: 10px;
+    box-shadow: none;
+}
+
+#app .skill-global-header .gn-call-strip strong {
+    max-width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+#app .skill-global-header .gn-call-strip time {
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+}
+
+#app .skill-global-header .gn-call-strip i {
+    width: 6px;
+    height: 6px;
+    background: #223d0b;
+    border-radius: 50%;
+    flex: none;
+}
+
+#app .skill-global-header .gn-call-strip>button:last-child {
+    flex: none;
+    padding: 0 10px;
+    border-left: 1px solid #17230c25;
+    border-radius: 0 20px 20px 0;
+}
+
+#app .skill-global-header svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+}
+
+.sc-call-actions {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+}
+
+#app .sc-call-actions button {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    min-height: 0;
+    padding: 7px;
+    border: 1px solid #ffffff12;
+    border-radius: 50%;
+    background: #ffffff04;
+    color: #babac4;
+    box-shadow: none;
+}
+
+#app .sc-call-actions svg {
+    width: 16px;
+    height: 16px;
+}
+
+#skill-call-dock {
+    position: fixed;
+    z-index: 120;
+    max-height: calc(100dvh - 125px);
+    color: #eee;
+    font: 13px/1.5 Inter, system-ui, sans-serif;
+}
+
+#skill-call-dock[hidden] {
+    display: none;
+}
+
+#skill-call-dock button {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    min-height: 0;
+    padding: 7px;
+    border: 1px solid #ffffff1c;
+    border-radius: 50%;
+    background: #ffffff12;
+    color: #eee;
+    box-shadow: none;
+}
+
+#skill-call-dock svg {
+    width: 16px;
+    height: 16px;
+}
+
+#skill-call-dock .call-picture {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+#skill-call-dock video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+    z-index: 1;
+}
+
+#skill-call-dock video[hidden] {
+    display: none;
+}
+
+#skill-call-dock .call-controls {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#skill-call-dock .call-summary>header {
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+#skill-call-dock h2 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #eee;
+}
+
+#skill-call-dock time {
+    font-size: 10px;
+    color: #aaa;
+    font-variant-numeric: tabular-nums;
+}
+
+#skill-call-dock .call-status {
+    margin-bottom: 14px;
+}
+
+#skill-call-dock .call-context {
+    border: 1px solid #ffffff0c;
+    border-radius: 12px;
+    background: #1c1c1e;
+    padding: 12px;
+    margin-bottom: 14px;
+}
+
+#skill-call-dock .call-context small {
+    color: #8b8b95;
+    font-size: 8px;
+    letter-spacing: .08em;
+}
+
+#skill-call-dock h3 {
+    font-size: 12px;
+    color: #ddd;
+    margin: 7px 0;
+    font-weight: 500;
+}
+
+#skill-call-dock .call-context p {
+    font-size: 10px;
+    color: #999;
+}
+
+#skill-call-dock textarea {
+    min-height: 65px;
+    background: #161618;
+    border-color: #ffffff14;
+    font-size: 11px;
+    padding: 10px;
+    color: #ddd;
+}
+
+#skill-call-dock .call-local-note {
+    display: block;
+    margin-top: 12px;
+}
+
+@media (max-width: 1100px) {
+    #app .skill-global-header .gn-links {
+        margin-left: 0;
+        flex: 1;
+    }
+
+    #app .skill-global-header .gn-links>a {
+        padding: 0 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #skill-call-dock *,
+    #app .skill-global-header * {
+        transition: none;
+    }
+}
+
+/* Temporary call-test buttons: stack "Receive call" above "Test video call" (remove with SHOW_INCOMING_CALL_TEST) */
+#app .skill-global-header .gn-actions .gn-demo-call.gn-demo-voice {
+    bottom: 62px;
+    border-color: #7dfa1466;
+    color: #b8f582;
+}
+
+/* Visitor nav: jump links to sections of the current page and a plain icon avatar. */
+#app .skill-global-header .gn-links>button,
+#app .skill-global-header .gn-more button[data-gn-section] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 0 13px;
+    border: 0;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 11px;
+    white-space: nowrap;
+    color: #999;
+    background: none;
+    cursor: pointer;
+}
+
+#app .skill-global-header .gn-links>button:hover,
+#app .skill-global-header .gn-links>button[aria-current=true] {
+    background: #252525;
+    color: #fff;
+}
+
+#app .skill-global-header .gn-actions .gn-guest-avatar {
+    display: grid;
+    place-items: center;
+    background: #1c1c1c;
+    border: 2px solid #ffffff2e;
+    color: #cfcfcf;
+}
+
+#app .skill-global-header .gn-actions .gn-guest-avatar svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ==== Reference proportions: schedule capsule and glass video over a black summary rail. */
+
+#app .skill-global-header {
+    gap: 24px;
+    min-height: 86px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#app .skill-global-header .gn-capsule {
+    height: 46px;
+    padding: 4px 5px 4px 17px;
+    border-color: #ffffff15;
+    background: #030303;
+    gap: 8px;
+}
+
+#app .skill-global-header .gn-workspace-label {
+    font-size: 11px;
+    font-weight: 400;
+    margin-right: 2px;
+}
+
+#app .skill-global-header .gn-date {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    height: 28px;
+    padding: 0 10px;
+    font-size: 9px;
+    border-color: #ffffff0e;
+    background: #ffffff03;
+}
+
+#app .skill-global-header .gn-date:before {
+    content: '▦';
+    font-size: 12px;
+    color: #999;
+}
+
+#app .skill-global-header .gn-actions .gn-demo-call {
+    position: fixed;
+    left: 20px;
+    bottom: 18px;
+    z-index: 115;
+    padding: 8px 12px;
+    border: 1px dashed #ffffff40;
+    border-radius: 999px;
+    background: #151515;
+    color: #c0c0c5;
+    font-size: 10px;
+    box-shadow: 0 4px 15px #0006;
+}
+
+#app .skill-global-header .gn-capsule.is-calling .gn-date {
+    display: flex;
+}
+
+#app .skill-global-header .gn-capsule.is-calling .gn-call-strip {
+    display: block;
+    min-width: 0;
+    flex: 1;
+    color: #24401a;
+}
+
+#app .skill-global-header .gn-call-strip>.gn-timeline-open {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, .75fr) minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 0;
+    width: 100%;
+    height: 34px;
+    min-height: 0;
+    padding: 0 7px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    overflow: visible;
+    color: #24331b;
+    text-align: left;
+    box-shadow: none;
+}
+
+#app .skill-global-header .gn-attendees {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    flex: none;
+    padding-right: 1px;
+}
+
+#app .skill-global-header .gn-face {
+    display: grid;
+    place-items: center;
+    flex: none;
+    overflow: hidden;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #eaffdd;
+    border-radius: 50%;
+    background: #e5efd9;
+    color: #446133;
+    font-size: 9px;
+    line-height: 1;
+    box-shadow: 0 1px 2px #2e5a161c;
+}
+
+#app .skill-global-header .gn-face img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 25%;
+}
+
+#app .skill-global-header .gn-attendees .gn-face+.gn-face {
+    margin-left: -9px;
+}
+
+#app .skill-global-header .gn-playhead {
+    position: absolute;
+    left: 51%;
+    top: -1px;
+    bottom: 0;
+    width: 1px;
+    background: #24331b;
+    pointer-events: none;
+}
+
+#app .skill-global-header .gn-playhead time {
+    position: absolute;
+    left: 50%;
+    top: -6px;
+    transform: translateX(-50%);
+    padding: 1px 4px;
+    border-radius: 4px;
+    background: #31402b;
+    color: #c9e8ab;
+    font-size: 7px;
+    line-height: 1.25;
+    white-space: nowrap;
+}
+
+#app .skill-global-header .gn-playhead i {
+    position: absolute;
+    bottom: 0;
+    left: -2px;
+    width: 5px;
+    height: 5px;
+    border-radius: 0;
+    background: #24331b;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+#skill-call-dock {
+    top: clamp(155px, 25vh, 260px);
+    bottom: auto;
+    right: 24px;
+    width: 310px;
+    max-height: calc(100dvh - clamp(155px, 25vh, 260px) - 20px);
+    border: 0;
+    border-radius: 27px 27px 22px 22px;
+    background: transparent;
+    box-shadow: 0 18px 40px -15px #0008;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+#skill-call-dock.is-expanded {
+    width: min(510px, calc(100vw - 100px));
+    top: 130px;
+    max-height: calc(100dvh - 150px);
+}
+
+#skill-call-dock .call-picture {
+    aspect-ratio: 1.4;
+    border: 1px solid #ffffff5e;
+    border-radius: 21px;
+    background: linear-gradient(130deg, #737e6c, #3d493a);
+    box-shadow: inset 0 0 0 1px #fff5;
+}
+
+#skill-call-dock .call-demo-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 44%;
+}
+
+#skill-call-dock.is-demo #skill-call-video {
+    inset: auto auto 44px 9px;
+    width: 49px;
+    height: 36px;
+    border: 1px solid #ffffff6e;
+    border-radius: 7px;
+    z-index: 3;
+    box-shadow: 0 2px 6px #0003;
+}
+
+#skill-call-dock .call-picture-tools {
+    position: absolute;
+    z-index: 3;
+    right: 8px;
+    top: 8px;
+    display: flex;
+    gap: 5px;
+}
+
+#skill-call-dock .call-picture-tools button {
+    width: 29px;
+    height: 29px;
+    padding: 8px;
+    border: 1px solid #ffffff14;
+    background: #7d837b85;
+    backdrop-filter: blur(8px);
+    color: #d5d7d2;
+}
+
+#skill-call-dock .call-picture-tools svg {
+    width: 12px;
+    height: 12px;
+}
+
+#skill-call-dock .call-controls {
+    bottom: 12px;
+    gap: 4px;
+    padding-left: 5px;
+}
+
+#skill-call-dock .call-controls button {
+    width: 34px;
+    height: 34px;
+    padding: 10px;
+    background: #8d948b96;
+    border: 1px solid #ffffff25;
+    backdrop-filter: blur(12px);
+    color: #eff3e9;
+    box-shadow: 0 2px 5px #0001;
+}
+
+#skill-call-dock .call-controls svg {
+    width: 13px;
+    height: 13px;
+}
+
+#skill-call-dock .call-controls button[aria-pressed=true] {
+    background: #929b8f9c;
+    border-color: #ffffff39;
+}
+
+#skill-call-dock .call-controls .call-device-menu {
+    font-size: 12px;
+    font-weight: 400;
+    color: #e1e6dc;
+}
+
+#skill-call-dock .call-controls .call-end {
+    background: #fb666b;
+    border-color: #ff909455;
+    color: #fff;
+}
+
+#skill-call-dock .call-summary {
+    padding: 14px 12px 14px 9px;
+    border-radius: 27px 27px 0 0;
+    background: #030303;
+    min-height: 320px;
+}
+
+#skill-call-dock .call-summary>header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin: 0 0 14px;
+    padding: 0 2px;
+}
+
+#skill-call-dock .call-summary>header h2 {
+    flex: 1;
+    margin: 0;
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: -.04em;
+    color: #f7f7f7;
+}
+
+#skill-call-dock .call-summary>header button {
+    width: 34px;
+    height: 34px;
+    min-height: 0;
+    border: 1px solid #ffffff0e;
+    background: #080808;
+    color: #959598;
+    font-size: 15px;
+}
+
+#skill-call-dock .call-summary>header svg {
+    width: 13px;
+    height: 13px;
+}
+
+#skill-call-dock[data-summary=closed] .call-summary {
+    min-height: 0;
+}
+
+#skill-call-dock .call-documents,
+#skill-call-dock .call-goal {
+    padding: 11px 12px 12px;
+    border: 1px solid #ffffff06;
+    border-radius: 21px;
+    background: linear-gradient(125deg, #242426, #202020);
+}
+
+#skill-call-dock .call-paper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 114px;
+    padding: 8px 6px 5px;
+    background: #f3f3ee;
+    border-radius: 2px;
+    color: #242628;
+    overflow: hidden;
+    box-shadow: 0 1px 7px #0003;
+}
+
+#skill-call-dock .call-paper>b {
+    font-size: 4px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+#skill-call-dock .call-paper>strong {
+    font-size: 4px;
+    line-height: 1.3;
+    margin: 1px 0 4px;
+}
+
+#skill-call-dock .paper-rule {
+    height: 2px;
+    background: #4e595c;
+    margin-bottom: 2px;
+}
+
+#skill-call-dock .paper-copy {
+    font-size: 3px;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#skill-call-dock .call-paper>i {
+    height: 1px;
+    width: 100%;
+    background: #b8b8b4;
+}
+
+#skill-call-dock .call-paper>i:nth-of-type(2n) {
+    width: 73%;
+    margin-bottom: 2px;
+}
+
+#skill-call-dock .call-goal {
+    padding: 11px 12px 13px;
+    min-height: 111px;
+}
+
+#skill-call-dock .call-status {
+    margin: 0;
+    padding: 0 3px;
+    color: #8c9a7e;
+    font-size: 8px;
+    line-height: 1.5;
+}
+
+#skill-call-dock .call-local-note {
+    margin: 0;
+    padding: 0 3px;
+    font-size: 7px;
+    color: #7b7b80;
+    line-height: 1.5;
+}
+
+#skill-call-document {
+    width: min(620px, calc(100vw - 40px));
+    max-height: 85vh;
+    padding: 0;
+    border: 1px solid #ffffff25;
+    border-radius: 16px;
+    background: #f5f4ef;
+    color: #262626;
+}
+
+#skill-call-document::backdrop {
+    background: #0008;
+    backdrop-filter: blur(5px);
+}
+
+#skill-call-document>header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: #e4e4df;
+    border-bottom: 1px solid #0001;
+}
+
+#skill-call-document>header strong {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#skill-call-document button {
+    width: 29px;
+    height: 29px;
+    min-height: 0;
+    padding: 0;
+    border: 1px solid #0002;
+    border-radius: 50%;
+    background: transparent;
+    color: #333;
+}
+
+#skill-call-document article {
+    padding: 34px 38px;
+}
+
+#skill-call-document article small {
+    font-size: 9px;
+    color: #666;
+    letter-spacing: .08em;
+}
+
+#skill-call-document article h2 {
+    font-size: 26px;
+    margin: 18px 0 25px;
+    color: #151515;
+}
+
+#skill-call-document article p,
+#skill-call-document article li {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #555;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 1100px) {
+    #app .skill-global-header {
+        gap: 14px;
+    }
+
+    #app .skill-global-header .gn-workspace-label {
+        display: block;
+        font-size: 10px;
+    }
+
+    #app .skill-global-header .gn-capsule {
+        padding-left: 12px;
+    }
+}
+
+/* ==== Call polish: dark header background, bottom-right incoming call with a "Book a call" style accept,
+   compact dock without drag handle, and an expanded meeting room (stage, people, insights, chat). */
+
+/* Header sits on the page, no light band */
+#app .skill-global-header {
+    background: transparent !important;
+    color: #eaeaea;
+}
+
+/* ---------- Incoming call ---------- */
+#skill-incoming-call.incoming-v2 {
+    --lime-a: #4ef037;
+    --lime-b: #c8ff2e;
+    position: fixed;
+    top: auto;
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    z-index: 130;
+    display: grid;
+    gap: 14px;
+    width: min(360px, calc(100vw - 32px));
+    margin: 0;
+    padding: 16px;
+    border: 1px solid #ffffff1c;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #18181b, #101012);
+    color: #f2f2f4;
+    text-align: left;
+    box-shadow: 0 30px 60px -20px #000, inset 0 1px 0 #ffffff14;
+    transform-origin: bottom right;
+    animation: ic-in .5s cubic-bezier(.2, .9, .25, 1.1) both;
+}
+
+#skill-incoming-call.incoming-v2 .incoming-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#skill-incoming-call.incoming-v2 .incoming-avatar {
+    position: relative;
+    flex: none;
+    width: 52px;
+    height: 52px;
+    margin: 0;
+    border-radius: 50%;
+    background: none;
+}
+
+#skill-incoming-call.incoming-v2 .incoming-avatar img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 2px #c8ff2e;
+}
+
+#skill-incoming-call.incoming-v2 .incoming-avatar i {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid #c8ff2e;
+    opacity: 0;
+    animation: ic-ring 1.8s ease-out infinite;
+}
+
+#skill-incoming-call.incoming-v2 .incoming-avatar i+i {
+    animation-delay: .9s;
+}
+
+#skill-incoming-call.incoming-v2 .incoming-copy {
+    flex: 1;
+    min-width: 0;
+}
+
+#skill-incoming-call.incoming-v2 .incoming-demo-label {
+    display: block;
+    margin: 0 0 3px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .02em;
+    text-transform: none;
+    color: #9a9aa4;
+}
+
+#skill-incoming-call.incoming-v2 h2 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#skill-incoming-call.incoming-v2 p {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    color: #a8a8b2;
+}
+
+#skill-incoming-call.incoming-v2 .incoming-decline {
+    flex: none;
+    height: 34px;
+    min-height: 0;
+    padding: 0 14px;
+    border: 1px solid #ffffff24;
+    border-radius: 999px;
+    background: #ffffff08;
+    color: #f2a1a3;
+    font-size: 12.5px;
+    font-weight: 500;
+    box-shadow: none;
+    transition: background-color .15s;
+}
+
+#skill-incoming-call.incoming-v2 .incoming-decline:hover {
+    background: #e5484d22;
+}
+
+#skill-incoming-call.incoming-v2 small {
+    font-size: 11px;
+    color: #6f6f78;
+    text-align: center;
+}
+
+/* Book-a-call pill: lime knob with a dotted arrow; on hover the lime fills and a phone appears */
+#skill-incoming-call .book-call {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 62px;
+    min-height: 0;
+    padding: 0;
+    border: 1px solid #ffffff2e;
+    border-radius: 999px;
+    background: #0b0b0c;
+    color: #fff;
+    box-shadow: inset 0 1px 0 #ffffff1a, 0 6px 18px -8px #000;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#skill-incoming-call .book-knob {
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    bottom: 6px;
+    width: 38%;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--lime-a), var(--lime-b));
+    transition: width .45s cubic-bezier(.2, .8, .2, 1);
+}
+
+#skill-incoming-call .book-dots {
+    width: 22px;
+    height: 22px;
+    fill: #0b0b0b;
+    transition: opacity .2s;
+}
+
+#skill-incoming-call .book-dots circle {
+    animation: ic-dot 1.2s ease-in-out infinite;
+    animation-delay: calc(var(--n) * 90ms);
+}
+
+#skill-incoming-call .book-label {
+    position: absolute;
+    left: calc(38% + 6px);
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -.01em;
+    text-align: center;
+    white-space: nowrap;
+    transition: opacity .25s;
+}
+
+#skill-incoming-call .book-phone {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    color: #0b0b0b;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.6) rotate(-20deg);
+    transition: opacity .25s .1s, transform .35s .1s cubic-bezier(.2, .9, .25, 1.3);
+}
+
+#skill-incoming-call .book-phone svg {
+    width: 26px;
+    height: 26px;
+    stroke-width: 1.8;
+}
+
+#skill-incoming-call .book-call:is(:hover,:focus-visible) .book-knob {
+    width: calc(100% - 12px);
+}
+
+#skill-incoming-call .book-call:is(:hover,:focus-visible) .book-dots,
+#skill-incoming-call .book-call:is(:hover,:focus-visible) .book-label {
+    opacity: 0;
+}
+
+#skill-incoming-call .book-call:is(:hover,:focus-visible) .book-phone {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0);
+    animation: ic-shake 1s .4s ease-in-out infinite;
+}
+
+#skill-incoming-call .book-call:focus-visible {
+    outline: 2px solid #c8ff2e;
+    outline-offset: 3px;
+}
+
+#skill-incoming-call .book-call:active {
+    transform: scale(.98);
+}
+
+@keyframes ic-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes ic-ring {
+    0% {
+        opacity: .8;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.7);
+    }
+}
+
+@keyframes ic-dot {
+    0%,
+    100% {
+        opacity: .35;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes ic-shake {
+    0%,
+    100% {
+        rotate: 0deg;
+    }
+
+    20% {
+        rotate: -14deg;
+    }
+
+    40% {
+        rotate: 12deg;
+    }
+
+    60% {
+        rotate: -8deg;
+    }
+
+    80% {
+        rotate: 4deg;
+    }
+}
+
+/* ---------- Compact dock ---------- */
+#skill-call-dock button svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ---------- Expanded meeting room ---------- */
+#skill-call-dock.is-room {
+    position: fixed;
+    inset: 20px;
+    left: 20px;
+    right: 20px;
+    top: 20px;
+    bottom: 20px;
+    z-index: 125;
+    width: auto;
+    height: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ffffff1a;
+    border-radius: 28px;
+    background: radial-gradient(120% 90% at 0% 0%, #1d3a26 0%, #11221a 45%, #0b140f 100%);
+    color: #eef5ee;
+    box-shadow: 0 40px 90px -30px #000;
+    overflow: hidden;
+    animation: room-in .45s cubic-bezier(.2, .8, .2, 1) both;
+    transform: none;
+}
+
+#skill-call-dock.is-room .room {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    height: 100%;
+}
+
+#skill-call-dock.is-room .room-main {
+    display: grid;
+    gap: 14px;
+    min-height: 0;
+    padding: 22px 22px 22px 26px;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+#skill-call-dock.is-room .room-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+#skill-call-dock.is-room .room-head h2 {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: -.01em;
+    color: #fff;
+}
+
+#skill-call-dock.is-room .room-head p {
+    margin: 4px 0 0;
+    font-size: 13.5px;
+    color: #a9c2ad;
+}
+
+#skill-call-dock.is-room .room-head p span {
+    margin: 0 4px;
+    color: #5d7a63;
+}
+
+#skill-call-dock.is-room .room-head p b {
+    color: #d8ff6e;
+    font-weight: 500;
+}
+
+#skill-call-dock.is-room .room-head-tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#skill-call-dock.is-room .room-head-tools button {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    min-height: 0;
+    padding: 0;
+    border: 1px solid #ffffff22;
+    border-radius: 50%;
+    background: #ffffff0a;
+    color: #fff;
+    box-shadow: none;
+}
+
+#skill-call-dock.is-room .room-head-tools button:hover {
+    background: #ffffff18;
+}
+
+#skill-call-dock.is-room .room-timer {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: #0008;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+#skill-call-dock.is-room .room-timer i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff5a5a;
+    animation: room-blink 1.4s infinite;
+}
+
+#skill-call-dock.is-room .room-stage {
+    position: relative;
+    border-radius: 24px;
+    background: #0b130e;
+    overflow: hidden;
+}
+
+#skill-call-dock.is-room .room-stage>img,
+#skill-call-dock.is-room .room-stage>video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#skill-call-dock.is-room .room-stage-empty {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 6px;
+    color: #cfe0d2;
+}
+
+#skill-call-dock.is-room .room-stage-empty span {
+    display: grid;
+    place-items: center;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: #d8ff6e;
+    color: #11221a;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+#skill-call-dock.is-room .room-stage-empty small {
+    color: #86a38b;
+}
+
+#skill-call-dock.is-room .room-live {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: #0b0b0bd9;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#skill-call-dock.is-room .room-live i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff5a5a;
+    box-shadow: 0 0 0 4px #ff5a5a33;
+    animation: room-blink 1.4s infinite;
+}
+
+#skill-call-dock.is-room .room-level {
+    position: absolute;
+    right: 18px;
+    bottom: 22px;
+    width: 22px;
+    height: 110px;
+    padding: 4px;
+    border-radius: 999px;
+    background: #0b0b0bcc;
+}
+
+#skill-call-dock.is-room .room-level i {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    height: 55%;
+    border-radius: 999px;
+    background: linear-gradient(0deg, #c8ff2e, #eaff9e);
+    animation: room-level 1.6s ease-in-out infinite;
+}
+
+#skill-call-dock.is-room .room-controls {
+    position: absolute;
+    bottom: 18px;
+    display: flex;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 999px;
+    background: #0b0b0bcc;
+    backdrop-filter: blur(8px);
+}
+
+#skill-call-dock.is-room .room-controls button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #ffffff1a;
+    color: #fff;
+    box-shadow: none;
+    transition: background-color .15s, transform .15s;
+}
+
+#skill-call-dock.is-room .room-controls button:hover {
+    background: #ffffff2e;
+    transform: translateY(-2px);
+}
+
+#skill-call-dock.is-room .room-controls button[aria-pressed=false] {
+    background: #ffffff0d;
+    color: #a3a3ad;
+}
+
+#skill-call-dock.is-room .room-controls .call-end {
+    background: #e5484d;
+    width: 54px;
+    border-radius: 999px;
+}
+
+#skill-call-dock.is-room .room-controls .call-end:hover {
+    background: #ff5a5f;
+}
+
+#skill-call-dock.is-room .room-controls svg {
+    width: 19px;
+    height: 19px;
+}
+
+#skill-call-dock.is-room .room-people {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+#skill-call-dock.is-room .room-tile {
+    position: relative;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #ffffff14;
+    border-radius: 18px;
+    background: #ffffff0a;
+}
+
+#skill-call-dock.is-room .room-tile>img,
+#skill-call-dock.is-room .room-tile>span {
+    grid-row: 1/3;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#skill-call-dock.is-room .room-tile>span {
+    display: grid;
+    place-items: center;
+    background: #2c4a34;
+    color: #d8ff6e;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#skill-call-dock.is-room .room-tile.is-bot>span {
+    background: #d8ff6e;
+    color: #11221a;
+}
+
+#skill-call-dock.is-room .room-tile b {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#skill-call-dock.is-room .room-tile small {
+    font-size: 12px;
+    color: #9bb59f;
+}
+
+#skill-call-dock.is-room .room-tile.is-speaking {
+    border-color: #c8ff2e80;
+    box-shadow: 0 0 0 3px #c8ff2e1f;
+}
+
+#skill-call-dock.is-room .room-insights {
+    display: grid;
+    gap: 8px;
+}
+
+#skill-call-dock.is-room .room-insights>header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+#skill-call-dock.is-room .room-insights h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+}
+
+#skill-call-dock.is-room .room-insights .call-status {
+    margin: 0;
+    font-size: 12px;
+    color: #86a38b;
+}
+
+#skill-call-dock.is-room .room-row {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) auto auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: #ffffff0a;
+    border: 1px solid #ffffff10;
+}
+
+#skill-call-dock.is-room .room-row-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ffffff12;
+    color: #d8ff6e;
+}
+
+#skill-call-dock.is-room .room-row-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+#skill-call-dock.is-room .room-row b {
+    display: block;
+    font-size: 13.5px;
+    color: #fff;
+}
+
+#skill-call-dock.is-room .room-row small {
+    font-size: 12px;
+    color: #9bb59f;
+}
+
+#skill-call-dock.is-room .room-progress {
+    display: block;
+    width: 120px;
+    height: 10px;
+    border-radius: 999px;
+    background: repeating-linear-gradient(90deg, #ffffff1a 0 6px, transparent 6px 9px);
+    overflow: hidden;
+}
+
+#skill-call-dock.is-room .room-progress i {
+    display: block;
+    height: 100%;
+    width: calc(var(--p) * 1%);
+    background: repeating-linear-gradient(90deg, #c8ff2e 0 6px, transparent 6px 9px);
+}
+
+#skill-call-dock.is-room .room-row em {
+    font-style: normal;
+    font-size: 12.5px;
+    color: #d8ff6e;
+    font-variant-numeric: tabular-nums;
+}
+
+#skill-call-dock.is-room .room-row button {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    min-height: 0;
+    padding: 0;
+    border: 1px solid #ffffff22;
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    box-shadow: none;
+}
+
+#skill-call-dock.is-room .room-row button:hover {
+    background: #ffffff14;
+}
+
+#skill-call-dock.is-room .room-goal {
+    grid-template-columns: 40px minmax(0, 1fr);
+}
+
+#skill-call-dock.is-room .room-goal textarea {
+    width: 100%;
+    min-height: 0;
+    margin-top: 4px;
+    padding: 6px 10px;
+    border: 1px solid #ffffff1a;
+    border-radius: 10px;
+    background: #0b130e;
+    color: #eef5ee;
+    font: 13px/1.5 'DM Sans', sans-serif;
+    resize: none;
+}
+
+#skill-call-dock.is-room .room-goal textarea:focus {
+    border-color: #c8ff2e80;
+    outline: none;
+}
+
+#skill-call-dock.is-room .room-chat {
+    display: grid;
+    gap: 12px;
+    min-height: 0;
+    padding: 22px 20px;
+    border-left: 1px solid #ffffff12;
+    background: #0000002e;
+}
+
+#skill-call-dock.is-room .room-chat>header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#skill-call-dock.is-room .room-chat h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+#skill-call-dock.is-room .room-chat>header span {
+    font-size: 12px;
+    color: #9bb59f;
+}
+
+#skill-call-dock.is-room .room-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+#skill-call-dock.is-room .room-messages li {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    max-width: 92%;
+    animation: room-msg .35s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+#skill-call-dock.is-room .room-messages li.is-me {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+#skill-call-dock.is-room .room-msg-face {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #2c4a34;
+    color: #d8ff6e;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+#skill-call-dock.is-room .room-msg-face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#skill-call-dock.is-room .room-messages li>div {
+    padding: 9px 12px;
+    border-radius: 14px 14px 14px 4px;
+    background: #3a6b47;
+    color: #fff;
+}
+
+#skill-call-dock.is-room .room-messages li.is-me>div {
+    border-radius: 14px 14px 4px 14px;
+    background: #1f3a28;
+    border: 1px solid #c8ff2e33;
+}
+
+#skill-call-dock.is-room .room-messages header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 3px;
+    font-size: 11.5px;
+}
+
+#skill-call-dock.is-room .room-messages header time {
+    color: #b8d0bb;
+}
+
+#skill-call-dock.is-room .room-messages p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+#skill-call-dock.is-room .room-empty {
+    align-self: center;
+    font-size: 13px;
+    color: #86a38b;
+}
+
+#skill-call-dock.is-room .room-compose {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 48px;
+    padding: 0 6px 0 16px;
+    border: 1px solid #c8ff2e55;
+    border-radius: 999px;
+    background: #0b130e;
+}
+
+#skill-call-dock.is-room .room-compose input {
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 13.5px;
+    box-shadow: none;
+    outline: none;
+}
+
+#skill-call-dock.is-room .room-compose button {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #d8ff6e;
+    color: #11221a;
+    box-shadow: none;
+}
+
+#skill-call-dock.is-room .room-compose button svg {
+    width: 16px;
+    height: 16px;
+}
+
+#skill-call-dock.is-room .call-local-note {
+    font-size: 11.5px;
+    color: #6f8b74;
+    text-align: center;
+}
+
+@keyframes room-in {
+    from {
+        opacity: 0;
+        transform: scale(.97) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes room-blink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .35;
+    }
+}
+
+@keyframes room-level {
+    0%,
+    100% {
+        height: 35%;
+    }
+
+    30% {
+        height: 72%;
+    }
+
+    60% {
+        height: 48%;
+    }
+
+    80% {
+        height: 85%;
+    }
+}
+
+@keyframes room-msg {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (max-width: 980px) {
+    #skill-call-dock.is-room .room {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr) 300px;
+        overflow: auto;
+    }
+
+    #skill-call-dock.is-room .room-chat {
+        border-left: 0;
+        border-top: 1px solid #ffffff12;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #skill-incoming-call.incoming-v2,
+    #skill-incoming-call .incoming-avatar i,
+    #skill-incoming-call .book-dots circle,
+    #skill-call-dock.is-room,
+    #skill-call-dock.is-room * {
+        animation: none !important;
+    }
+}
+
+/* Logo was darkened for the old light header */
+#app .skill-global-header .gn-brand {
+    filter: none !important;
+}
+
+/* Meeting room: keep the stage tall enough so the participant tiles never slide under it */
+#skill-call-dock.is-room .room-main {
+    grid-template-rows: auto minmax(280px, 1fr) auto auto;
+}
+
+#skill-call-dock.is-room .room-stage {
+    min-height: 280px;
+}
+
+#skill-call-dock.is-room .room-stage #skill-call-video {
+    position: absolute;
+    inset: auto 54px auto auto;
+    top: 16px;
+    left: auto;
+    bottom: auto;
+    width: 180px;
+    height: auto;
+    aspect-ratio: 16/10;
+    border: 2px solid #c8ff2e;
+    border-radius: 14px;
+    object-fit: cover;
+    box-shadow: 0 10px 24px -8px #000;
+    z-index: 2;
+}
+
+#skill-call-dock.is-room .room-controls {
+    left: 50% !important;
+    right: auto !important;
+    width: max-content !important;
+    transform: translateX(-50%);
+}
+
+/* ==== Call polish, round 2: header actions, 30-minute strip timeline, compact dock self-view, meeting room extras. */
+
+/* ---------- Header actions: one bell + avatar, dark and aligned with the capsule ---------- */
+#app .skill-global-header .gn-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#app .skill-global-header .gn-actions .avatar {
+    width: 42px;
+    height: 42px;
+    border: 2px solid #c8ff2e66;
+    background: linear-gradient(150deg, #a78bfa, #6d28d9);
+    color: #fff;
+    font-size: 12.5px;
+    font-weight: 700;
+    transition: border-color .2s;
+}
+
+#app .skill-global-header .gn-actions a:hover .avatar {
+    border-color: #c8ff2e;
+}
+
+/* ---------- Call strip: a 30-minute timeline ---------- */
+#app .skill-global-header .gn-call-strip>.cs-bar {
+    all: unset;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    height: 40px;
+    padding: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #b7f24a, #c8ff2e);
+    box-shadow: inset 0 1px 0 #ffffff80, inset 0 -1px 0 #00000014;
+    color: #18220f;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+}
+
+#app .skill-global-header .cs-bar:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+#app .skill-global-header .cs-who {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: none;
+    height: 34px;
+    padding: 0 14px 0 3px;
+    border-radius: 999px;
+    background: #ffffff59;
+}
+
+#app .skill-global-header .cs-who .gn-face {
+    width: 28px;
+    height: 28px;
+    border: 2px solid #fff;
+}
+
+#app .skill-global-header .cs-who-copy {
+    display: grid;
+    line-height: 1.1;
+}
+
+#app .skill-global-header .cs-who-copy b {
+    font-size: 12.5px;
+    font-weight: 700;
+}
+
+#app .skill-global-header .cs-who-copy small {
+    font-size: 10.5px;
+    color: #3d4f2b;
+}
+
+#app .skill-global-header .cs-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: calc(var(--p) * 100%);
+    min-width: 16px;
+    border-radius: 999px;
+    background: #18220f1f;
+    transition: width 1s linear;
+}
+
+#app .skill-global-header .cs-time {
+    position: relative;
+    font-size: 12px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+#app .skill-global-header .gn-playhead.cs-head {
+    position: absolute;
+    left: calc(14px + var(--p) * (100% - 28px));
+    top: -6px;
+    bottom: -6px;
+    width: 2px;
+    margin-left: -1px;
+    background: #18220f;
+    transition: left 1s linear;
+}
+
+#app .skill-global-header .cs-head time {
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    transform: translateX(-50%);
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #18220f;
+    color: #c8ff2e;
+    font-size: 10.5px;
+    font-weight: 700;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
+#app .skill-global-header .cs-head i {
+    position: absolute;
+    left: -4px;
+    bottom: -2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #18220f;
+    clip-path: none;
+}
+
+#app .skill-global-header .cs-open {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #18220f;
+    color: #c8ff2e;
+    transition: transform .2s;
+}
+
+#app .skill-global-header .cs-open svg {
+    width: 15px;
+    height: 15px;
+}
+
+@media (max-width: 1100px) {
+    #app .skill-global-header .cs-who-copy {
+        display: none;
+    }
+}
+
+/* ---------- Compact dock ---------- */
+#skill-call-dock:not(.is-room) {
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+#skill-call-dock:not(.is-room)::-webkit-scrollbar {
+    display: none;
+}
+
+#skill-call-dock .call-self {
+    position: absolute;
+    left: 12px;
+    bottom: 56px;
+    z-index: 3;
+    width: 64px;
+    height: 64px;
+    border: 2px solid #c8ff2e;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 18px -6px #000;
+}
+
+#skill-call-dock .call-self img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#skill-call-dock .call-self small {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: #000a;
+    color: #fff;
+    font-size: 9.5px;
+}
+
+/* ---------- Meeting room extras ---------- */
+#skill-call-dock.is-room .room-head {
+    align-items: center;
+}
+
+#skill-call-dock.is-room .room-attendees {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 12px;
+}
+
+#skill-call-dock.is-room .room-attendees>img,
+#skill-call-dock.is-room .room-attendees>span {
+    width: 34px;
+    height: 34px;
+    margin-left: -8px;
+    border: 2px solid #11221a;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#skill-call-dock.is-room .room-attendees>:first-child {
+    margin-left: 0;
+}
+
+#skill-call-dock.is-room .room-attendees>span {
+    display: grid;
+    place-items: center;
+    background: #2c4a34;
+    color: #d8ff6e;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+#skill-call-dock.is-room .room-attendees>span.is-bot {
+    background: #d8ff6e;
+    color: #11221a;
+}
+
+#skill-call-dock.is-room .room-attendees small {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #a9c2ad;
+}
+
+#skill-call-dock.is-room .room-self {
+    position: absolute;
+    right: 56px;
+    top: 16px;
+    z-index: 2;
+    width: 150px;
+    aspect-ratio: 4/3;
+    border: 2px solid #c8ff2e;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 26px -10px #000;
+}
+
+#skill-call-dock.is-room .room-self img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#skill-call-dock.is-room .room-self small {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #000a;
+    color: #fff;
+    font-size: 11px;
+}
+
+#skill-call-dock.is-room .room-tile.is-speaking:after {
+    content: "";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    width: 18px;
+    height: 14px;
+    transform: translateY(-50%);
+    background: linear-gradient(#c8ff2e, #c8ff2e) 0 100%/3px 40% no-repeat, linear-gradient(#c8ff2e, #c8ff2e) 5px 100%/3px 90% no-repeat, linear-gradient(#c8ff2e, #c8ff2e) 10px 100%/3px 60% no-repeat, linear-gradient(#c8ff2e, #c8ff2e) 15px 100%/3px 30% no-repeat;
+    animation: room-eq .9s ease-in-out infinite alternate;
+}
+
+@keyframes room-eq {
+    to {
+        background-size: 3px 80%, 3px 35%, 3px 95%, 3px 55%;
+    }
+}
+
+#skill-call-dock.is-room .room-day {
+    align-self: center !important;
+    max-width: none !important;
+    animation: none !important;
+}
+
+#skill-call-dock.is-room .room-day span {
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #ffffff10;
+    font-size: 11px;
+    color: #a9c2ad;
+}
+
+#skill-call-dock.is-room .room-quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+#skill-call-dock.is-room .room-quick button {
+    height: 30px;
+    min-height: 0;
+    padding: 0 12px;
+    border: 1px solid #c8ff2e40;
+    background: #c8ff2e0f;
+    color: #e8ffc0;
+    font-size: 12px;
+    box-shadow: none;
+    transition: background-color .15s, transform .15s;
+}
+
+#skill-call-dock.is-room .room-quick button:hover {
+    background: #c8ff2e24;
+    transform: translateY(-1px);
+}
+
+#skill-call-dock.is-room .room-chat {
+    grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #skill-call-dock.is-room .room-tile.is-speaking:after {
+        animation: none;
+    }
+}
+
+/* Strip rail: the playhead travels between the start and end times, never over them */
+#app .skill-global-header .cs-rail {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    min-width: 0;
+    margin: 4px 0;
+    border-radius: 999px;
+    background: #18220f0d;
+}
+
+#app .skill-global-header .cs-rail .cs-fill {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    min-width: 10px;
+}
+
+#app .skill-global-header .cs-rail .gn-playhead.cs-head {
+    left: calc(var(--p) * 100%);
+    top: -10px;
+    bottom: -10px;
+}
+
+/* Quick replies keep their natural size */
+#skill-call-dock.is-room .room-quick button {
+    width: auto !important;
+    min-width: 0;
+    white-space: nowrap;
+    line-height: 1;
+    border-radius: 999px !important;
+}
+
+/* Stage: whole portrait over a blurred copy of itself */
+#skill-call-dock.is-room .room-stage {
+    isolation: isolate;
+}
+
+#skill-call-dock.is-room .room-stage:before {
+    content: "";
+    position: absolute;
+    inset: -30px;
+    z-index: -1;
+    background: var(--stage-img, none) center/cover;
+    filter: blur(28px) brightness(.55) saturate(1.1);
+}
+
+#skill-call-dock.is-room .room-stage>.call-demo-photo {
+    object-fit: contain;
+    object-position: center;
+}
+
+/* The room covers the page; hide the strip timer pill peeking above it */
+body:has(#skill-call-dock.is-room) #app .skill-global-header .cs-head time {
+    visibility: hidden;
+}
+
+/* ==== Call polish, round 3: rounded strip that fits the capsule, larger compact call window with a working camera tile. */
+
+/* ---------- Strip ---------- */
+#app .skill-global-header .gn-capsule.is-calling .gn-call-strip {
+    height: 38px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    box-shadow: none;
+    overflow: visible;
+}
+
+#app .skill-global-header .gn-capsule .gn-call-strip>button.cs-bar {
+    all: unset;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    width: 100%;
+    height: 38px;
+    padding: 3px 3px 3px 3px;
+    border: 1px solid #e4ffa8;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #b4f04e, #c6ff3d 55%, #d4ff6a);
+    box-shadow: inset 0 1px 0 #ffffffa6, 0 6px 18px -10px #c6ff3d;
+    color: #17210c;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+#app .skill-global-header .gn-capsule .gn-call-strip>button.cs-bar:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+#app .skill-global-header .cs-bar .cs-who {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: none;
+    height: 30px;
+    padding: 0 14px 0 2px;
+    border-radius: 999px;
+    background: #ffffff73;
+    box-shadow: inset 0 0 0 1px #ffffff99;
+}
+
+#app .skill-global-header .cs-bar .cs-who .gn-face {
+    width: 26px;
+    height: 26px;
+    border: 2px solid #fff;
+    box-shadow: none;
+}
+
+#app .skill-global-header .cs-bar .cs-who-copy {
+    display: grid;
+    line-height: 1.1;
+}
+
+#app .skill-global-header .cs-bar .cs-who-copy b {
+    font-size: 12.5px;
+    font-weight: 700;
+}
+
+#app .skill-global-header .cs-bar .cs-who-copy small {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10.5px;
+    font-weight: 500;
+    color: #3a4b25;
+}
+
+#app .skill-global-header .cs-bar .cs-who-copy small i {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ef4444;
+    box-shadow: 0 0 0 2px #ef444433;
+    animation: room-blink 1.4s infinite;
+}
+
+#app .skill-global-header .cs-bar .cs-time {
+    flex: none;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+#app .skill-global-header .cs-bar .cs-rail {
+    position: relative;
+    flex: 1;
+    min-width: 60px;
+    height: 24px;
+    margin: 0;
+    border-radius: 999px;
+    background: #17210c14;
+    box-shadow: inset 0 1px 2px #17210c1f;
+    overflow: hidden;
+}
+
+#app .skill-global-header .cs-bar .cs-rail .cs-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: calc(var(--p) * 100%);
+    min-width: 0;
+    border-radius: 999px;
+    background: repeating-linear-gradient(90deg, #17210c33 0 3px, transparent 3px 6px);
+    transition: width 1s linear;
+}
+
+#app .skill-global-header .cs-bar .cs-rail .gn-playhead.cs-head {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: clamp(26px, calc(var(--p) * 100%), calc(100% - 26px));
+    width: auto;
+    margin: 0;
+    transform: translateX(-50%);
+    background: none;
+    pointer-events: none;
+    transition: left 1s linear;
+}
+
+#app .skill-global-header .cs-bar .cs-head time {
+    position: static;
+    display: grid;
+    place-items: center;
+    height: 20px;
+    margin: 0;
+    padding: 0 8px;
+    transform: none;
+    border-radius: 999px;
+    background: #17210c;
+    color: #d4ff6a;
+    font-size: 10.5px;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    visibility: visible;
+}
+
+#app .skill-global-header .cs-bar .gn-attendees {
+    display: flex;
+    flex: none;
+}
+
+#app .skill-global-header .cs-bar .gn-attendees .gn-face {
+    width: 24px;
+    height: 24px;
+    margin-left: -7px;
+    border: 2px solid #fff;
+    box-shadow: none;
+}
+
+#app .skill-global-header .cs-bar .gn-attendees .gn-face:first-child {
+    margin-left: 0;
+}
+
+#app .skill-global-header .cs-bar .cs-open {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #17210c;
+    color: #d4ff6a;
+    transition: transform .25s;
+}
+
+#app .skill-global-header .cs-bar:hover .cs-open {
+    transform: rotate(45deg);
+}
+
+#app .skill-global-header .cs-bar .cs-open svg {
+    width: 14px;
+    height: 14px;
+}
+
+#app .skill-global-header .cs-bar>span {
+    display: flex;
+}
+
+@media (max-width: 1100px) {
+    #app .skill-global-header .cs-bar .cs-who-copy,
+    #app .skill-global-header .cs-bar .gn-attendees {
+        display: none;
+    }
+
+    #app .skill-global-header .cs-bar .cs-who {
+        padding: 0 2px;
+    }
+}
+
+/* ---------- Compact call window ---------- */
+#skill-call-dock.cd {
+    position: fixed;
+    top: 96px;
+    right: 24px;
+    bottom: auto;
+    left: auto;
+    z-index: 120;
+    width: min(400px, calc(100vw - 32px));
+    max-height: calc(100dvh - 112px);
+    padding: 8px;
+    border: 1px solid #ffffff1c;
+    border-radius: 28px;
+    background: linear-gradient(180deg, #141416, #0c0c0e);
+    box-shadow: 0 30px 70px -24px #000, inset 0 1px 0 #ffffff12;
+    color: #f2f2f4;
+    font: 13px/1.5 'DM Sans', sans-serif;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    animation: cd-in .4s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+#skill-call-dock.cd::-webkit-scrollbar {
+    display: none;
+}
+
+#skill-call-dock.cd .cd-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5/4;
+    height: auto;
+    margin: 0;
+    border: 0;
+    border-radius: 22px;
+    background: radial-gradient(ellipse at 50% 0%, #2b3626, #131712 75%);
+    box-shadow: none;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+#skill-call-dock.cd .cd-stage:before,
+#skill-call-dock.cd .cd-stage:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#skill-call-dock.cd .cd-stage:before {
+    top: 0;
+    height: 90px;
+    background: linear-gradient(#000a, transparent);
+}
+
+#skill-call-dock.cd .cd-stage:after {
+    bottom: 0;
+    height: 110px;
+    background: linear-gradient(transparent, #000b);
+}
+
+#skill-call-dock.cd .call-demo-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 22%;
+    border-radius: 0;
+}
+
+#skill-call-dock.cd .cd-waiting {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 6px;
+    color: #e4e4e8;
+}
+
+#skill-call-dock.cd .cd-waiting span {
+    display: grid;
+    place-items: center;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: #c6ff3d;
+    color: #17210c;
+    font-size: 28px;
+    font-weight: 700;
+    box-shadow: 0 0 0 8px #c6ff3d22;
+}
+
+#skill-call-dock.cd .cd-waiting b {
+    font-size: 16px;
+}
+
+#skill-call-dock.cd .cd-waiting small {
+    font-size: 12px;
+    color: #a1a1aa;
+}
+
+#skill-call-dock.cd .cd-top {
+    position: absolute;
+    z-index: 3;
+    left: 12px;
+    right: 12px;
+    top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#skill-call-dock.cd .cd-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: #000000a6;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    backdrop-filter: blur(8px);
+}
+
+#skill-call-dock.cd .cd-live i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ef4444;
+    animation: room-blink 1.4s infinite;
+}
+
+#skill-call-dock.cd .cd-who {
+    display: grid;
+    min-width: 0;
+    line-height: 1.15;
+    text-shadow: 0 1px 6px #0009;
+}
+
+#skill-call-dock.cd .cd-who b {
+    font-size: 14px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#skill-call-dock.cd .cd-who small {
+    font-size: 11.5px;
+    color: #e4e4e8cc;
+}
+
+#skill-call-dock.cd .call-picture-tools {
+    position: static;
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+}
+
+#skill-call-dock.cd .call-picture-tools button {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #000000a6;
+    color: #fff;
+    box-shadow: none;
+    backdrop-filter: blur(8px);
+    transition: background-color .15s;
+}
+
+#skill-call-dock.cd .call-picture-tools button:hover {
+    background: #000000d9;
+}
+
+#skill-call-dock.cd .call-picture-tools svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* You tile: live camera when on, portrait or initials when off */
+#skill-call-dock.cd .cd-self {
+    position: absolute;
+    z-index: 3;
+    right: 12px;
+    bottom: 72px;
+    left: auto;
+    display: grid;
+    place-items: center;
+    width: 104px;
+    height: auto;
+    aspect-ratio: 3/4;
+    border: 2px solid #c6ff3d;
+    border-radius: 16px;
+    background: #1d2419;
+    overflow: hidden;
+    box-shadow: 0 12px 24px -10px #000;
+}
+
+#skill-call-dock.cd .cd-self>img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#skill-call-dock.cd .cd-self>b {
+    font-size: 22px;
+    font-weight: 700;
+    color: #c6ff3d;
+}
+
+#skill-call-dock.cd .cd-self #skill-call-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    object-fit: cover;
+    transform: scaleX(-1);
+    box-shadow: none;
+    z-index: 1;
+}
+
+#skill-call-dock.cd .cd-self.is-live>img,
+#skill-call-dock.cd .cd-self.is-live>b {
+    visibility: hidden;
+}
+
+#skill-call-dock.cd .cd-self small {
+    position: absolute;
+    z-index: 2;
+    left: 6px;
+    bottom: 6px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #000000b3;
+    color: #fff;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+#skill-call-dock.cd .cd-controls {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    right: auto;
+    bottom: 14px;
+    display: flex;
+    gap: 8px;
+    width: max-content;
+    padding: 6px;
+    border-radius: 999px;
+    background: #000000a6;
+    transform: translateX(-50%);
+    backdrop-filter: blur(10px);
+}
+
+#skill-call-dock.cd .cd-controls button {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #ffffff26;
+    color: #fff;
+    box-shadow: none;
+    transition: background-color .15s, transform .15s;
+}
+
+#skill-call-dock.cd .cd-controls button:hover {
+    background: #ffffff3d;
+    transform: translateY(-2px);
+}
+
+#skill-call-dock.cd .cd-controls button[aria-pressed=false] {
+    background: #ffffff12;
+    color: #a1a1aa;
+}
+
+#skill-call-dock.cd .cd-controls .call-end {
+    width: 56px;
+    border-radius: 999px;
+    background: #ef4444;
+    color: #fff;
+}
+
+#skill-call-dock.cd .cd-controls .call-end:hover {
+    background: #f05252;
+}
+
+#skill-call-dock.cd .cd-controls svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Summary */
+#skill-call-dock.cd .cd-summary {
+    margin: 0;
+    padding: 14px 8px 6px;
+    border: 0;
+    background: none;
+}
+
+#skill-call-dock.cd .cd-summary>header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+}
+
+#skill-call-dock.cd .cd-summary h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+#skill-call-dock.cd .cd-sub {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #8f8f99;
+}
+
+#skill-call-dock.cd .cd-summary>header button {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    min-height: 0;
+    padding: 0;
+    border: 1px solid #ffffff22;
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    box-shadow: none;
+    transition: transform .25s, background-color .15s;
+}
+
+#skill-call-dock.cd .cd-summary>header button:hover {
+    background: #ffffff10;
+}
+
+#skill-call-dock.cd .cd-summary>header svg {
+    width: 14px;
+    height: 14px;
+}
+
+#skill-call-dock.cd[data-summary=closed] .cd-summary>header button {
+    transform: rotate(180deg);
+}
+
+#skill-call-dock.cd[data-summary=closed] .cd-summary-body {
+    display: none;
+}
+
+#skill-call-dock.cd .cd-summary-body {
+    display: grid;
+    gap: 10px;
+}
+
+#skill-call-dock.cd .cd-docs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+}
+
+#skill-call-dock.cd .cd-docs button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    height: auto;
+    min-height: 0;
+    padding: 8px;
+    border: 1px solid #ffffff14;
+    border-radius: 16px;
+    background: #ffffff08;
+    color: #fff;
+    text-align: left;
+    box-shadow: none;
+    transition: background-color .15s, border-color .15s;
+}
+
+#skill-call-dock.cd .cd-docs button:hover {
+    background: #ffffff10;
+    border-color: #ffffff26;
+}
+
+#skill-call-dock.cd .cd-docs .call-paper {
+    position: relative;
+    flex: none;
+    display: block;
+    width: 40px;
+    height: 52px;
+    margin: 0;
+    padding: 5px 4px;
+    border-radius: 6px;
+    background: #f4f2ea;
+    overflow: hidden;
+    box-shadow: 0 4px 10px -4px #000;
+    transform: none;
+}
+
+#skill-call-dock.cd .cd-docs .call-paper>* {
+    display: block;
+    margin: 0 0 2px;
+    font-size: 3.2px !important;
+    line-height: 1.4;
+    color: #33332f;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#skill-call-dock.cd .cd-docs .call-paper i {
+    height: 1px;
+    background: #0000001f;
+}
+
+#skill-call-dock.cd .cd-docs button>span:not(.call-paper) {
+    display: grid;
+    min-width: 0;
+}
+
+#skill-call-dock.cd .cd-docs b {
+    font-size: 12.5px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#skill-call-dock.cd .cd-docs small {
+    font-size: 11px;
+    color: #8f8f99;
+}
+
+#skill-call-dock.cd .cd-goal {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 12px;
+    border: 1px solid #ffffff14;
+    border-radius: 16px;
+    background: #ffffff08;
+}
+
+#skill-call-dock.cd .cd-goal-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #c6ff3d;
+}
+
+#skill-call-dock.cd .cd-goal-head svg {
+    width: 16px;
+    height: 16px;
+}
+
+#skill-call-dock.cd .cd-goal-head b {
+    flex: 1;
+    font-size: 13px;
+    color: #fff;
+}
+
+#skill-call-dock.cd .cd-goal-head button {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #a1a1aa;
+    box-shadow: none;
+}
+
+#skill-call-dock.cd .cd-goal-head button:hover {
+    background: #ffffff10;
+    color: #fff;
+}
+
+#skill-call-dock.cd .cd-goal-head button svg {
+    width: 13px;
+    height: 13px;
+}
+
+#skill-call-dock.cd .cd-goal textarea {
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: 4px 0;
+    border: 0;
+    background: transparent;
+    color: #e4e4e8;
+    font: 13px/1.55 'DM Sans', sans-serif;
+    resize: none;
+    box-shadow: none;
+    outline: none;
+}
+
+#skill-call-dock.cd .cd-goal textarea::placeholder {
+    color: #71717a;
+}
+
+#skill-call-dock.cd .cd-goal:focus-within {
+    border-color: #c6ff3d66;
+}
+
+#skill-call-dock.cd .call-status {
+    margin: 2px 4px 0;
+    font-size: 11.5px;
+    color: #a3c97a;
+}
+
+#skill-call-dock.cd .call-local-note {
+    display: block;
+    margin: 0 4px 4px;
+    font-size: 10.5px;
+    color: #6b6b74;
+}
+
+/* Room: the camera lives in the "You" tile too */
+#skill-call-dock.is-room .room-self {
+    display: grid;
+    place-items: center;
+    background: #1d2419;
+}
+
+#skill-call-dock.is-room .room-self>b {
+    font-size: 26px;
+    color: #c6ff3d;
+}
+
+#skill-call-dock.is-room .room-self #skill-call-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    aspect-ratio: auto;
+    object-fit: cover;
+    transform: scaleX(-1);
+    box-shadow: none;
+    z-index: 1;
+}
+
+#skill-call-dock.is-room .room-self.is-live>img,
+#skill-call-dock.is-room .room-self.is-live>b {
+    visibility: hidden;
+}
+
+#skill-call-dock.is-room .room-self small {
+    z-index: 2;
+}
+
+@keyframes cd-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #skill-call-dock.cd,
+    #skill-call-dock.cd .cd-live i,
+    #app .skill-global-header .cs-bar .cs-who-copy small i {
+        animation: none;
+    }
+}
+
+/* Document tiles: override the older thumbnail rules */
+#skill-call-dock.cd section.call-documents.cd-docs {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+
+#skill-call-dock.cd .cd-docs>button {
+    flex-direction: row;
+    width: 100%;
+    min-height: 0;
+    padding: 8px 10px 8px 8px;
+    font-size: 12px;
+}
+
+#skill-call-dock.cd .cd-docs>button>.call-paper {
+    flex: none;
+    width: 38px;
+    height: 50px;
+    min-height: 0;
+    gap: 2px;
+    padding: 5px 4px;
+}
+
+#skill-call-dock.cd .cd-docs>button>span:last-child {
+    position: static;
+    display: grid;
+    flex: 1;
+    max-width: none;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+#skill-call-dock.cd .cd-docs>button>span:last-child b {
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+#skill-call-dock.cd .cd-docs>button>span:last-child small {
+    font-size: 11px;
+    line-height: 1.3;
+    color: #8f8f99;
+}
+
+#skill-call-dock.cd .call-goal.cd-goal {
+    padding: 12px;
+    border: 1px solid #ffffff14;
+    border-radius: 16px;
+    background: #ffffff08;
+}

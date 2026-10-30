@@ -1,136 +1,577 @@
-/* Styles for pieces that exist only in the server-rendered pages: the sign-in screen overlay,
+/* ==== Styles for pieces that exist only in the server-rendered pages: the sign-in screen overlay,
    validator messages and buttons that replace links. Loaded after the page stylesheets, before responsive.css. */
 
 /* Wide screens scale the layout a little, as the original design does (1440px is 100%, in steps of 5%).
-   Set here rather than by a script, so every page is painted at its final size instead of jumping after it appears. */
-@media (1024px <= width < 1260px){html{zoom:.85}}
-@media (1260px <= width < 1332px){html{zoom:.9}}
-@media (1332px <= width < 1404px){html{zoom:.95}}
-@media (1476px <= width < 1548px){html{zoom:1.05}}
-@media (1548px <= width < 1620px){html{zoom:1.1}}
-@media (1620px <= width < 1692px){html{zoom:1.15}}
-@media (1692px <= width < 1764px){html{zoom:1.2}}
-@media (1764px <= width < 1836px){html{zoom:1.25}}
-@media (1836px <= width < 1908px){html{zoom:1.3}}
-@media (width >= 1908px){html{zoom:1.35}}
+ Set here rather than by a script, so every page is painted at its final size instead of jumping after it appears. */
+
+@media (1024px <= width < 1260px) {
+    html {
+        zoom: .85;
+    }
+}
+
+@media (1260px <= width < 1332px) {
+    html {
+        zoom: .9;
+    }
+}
+
+@media (1332px <= width < 1404px) {
+    html {
+        zoom: .95;
+    }
+}
+
+@media (1476px <= width < 1548px) {
+    html {
+        zoom: 1.05;
+    }
+}
+
+@media (1548px <= width < 1620px) {
+    html {
+        zoom: 1.1;
+    }
+}
+
+@media (1620px <= width < 1692px) {
+    html {
+        zoom: 1.15;
+    }
+}
+
+@media (1692px <= width < 1764px) {
+    html {
+        zoom: 1.2;
+    }
+}
+
+@media (1764px <= width < 1836px) {
+    html {
+        zoom: 1.25;
+    }
+}
+
+@media (1836px <= width < 1908px) {
+    html {
+        zoom: 1.3;
+    }
+}
+
+@media (width >= 1908px) {
+    html {
+        zoom: 1.35;
+    }
+}
 
 /* Every link loads a new page from the server. Browsers with cross-document view transitions (Chrome and Edge 126+,
-   Safari 18.2+) fade from one page to the next and keep the top navigation in place; others simply load the page. */
-@view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.2s}
-.skill-global-header{view-transition-name:global-nav}
-@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}
+ Safari 18.2+) fade from one page to the next and keep the top navigation in place; others simply load the page. */
+
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: .2s;
+}
+
+.skill-global-header {
+    view-transition-name: global-nav;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    @view-transition {
+        navigation: none;
+    }
+}
 
 /* Pages that set body.smooth-scroll (the landing page) glide to a section a link points at, such as #home-enquiry,
-   also when another page opens them at that section. */
-@media (prefers-reduced-motion:no-preference){html:has(>body.smooth-scroll){scroll-behavior:smooth}}
+ also when another page opens them at that section. */
+
+@media (prefers-reduced-motion: no-preference) {
+    html:has(>body.smooth-scroll) {
+        scroll-behavior: smooth;
+    }
+}
 
 /* Visitor navigation: a tab lights up under the pointer (or keyboard focus), a step softer than the current tab. */
-body.ui-public #app .skill-global-header .gn-links>a{transition:background-color .18s ease,color .18s ease}
-body.ui-public #app .skill-global-header .gn-links>a:not([aria-current=page]):is(:hover,:focus-visible){background:#1a1a1c;color:#f2f2f4}
-@media (prefers-reduced-motion:reduce){body.ui-public #app .skill-global-header .gn-links>a{transition:none}}
+body.ui-public #app .skill-global-header .gn-links>a {
+    transition: background-color .18s ease, color .18s ease;
+}
+
+body.ui-public #app .skill-global-header .gn-links>a:not([aria-current=page]):is(:hover,:focus-visible) {
+    background: #1a1a1c;
+    color: #f2f2f4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.ui-public #app .skill-global-header .gn-links>a {
+        transition: none;
+    }
+}
 
 /* Sign-in screens: the dialog sits over a dimmed backdrop instead of a modal opened by script. */
-.auth-screen{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px;overflow:auto;background:#000000b3;backdrop-filter:blur(6px)}
-.auth-screen>:is(#dialog,#login-dialog,#register-dialog).auth-dialog{position:relative;inset:auto;display:block;margin:auto}
-:is(#dialog,#login-dialog,#register-dialog).auth-dialog a.dialog-close{position:absolute;text-decoration:none;line-height:1}
+.auth-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    overflow: auto;
+    background: #000000b3;
+    backdrop-filter: blur(6px);
+}
+
+.auth-screen>:is(#dialog,#login-dialog,#register-dialog).auth-dialog {
+    position: relative;
+    inset: auto;
+    display: block;
+    margin: auto;
+}
+
+:is(#dialog,#login-dialog,#register-dialog).auth-dialog a.dialog-close {
+    position: absolute;
+    text-decoration: none;
+    line-height: 1;
+}
 
 /* Log in and Sign up pop-ups (Controls/LoginDialog, RegisterDialog, on every visitor page). A link to #login or #register
-   makes that wrapper the :target, so its screen opens over the current page without a script; the Login and Register
-   pages and replies to a refused form add .is-open. The wrapper is display:contents, so the browser has no box to scroll to and the page stays put.
-   The dialog rises from the bottom to the centre. Closing links go to #close (an empty span), which also hides one drawn open; the page behind stops scrolling. */
-.auth-popup{display:none}
-.auth-popup:is(:target,.is-open){display:contents}
-body:has(.auth-popup:target) :is(.auth-popup.is-open:not(:target),.auth-screen:not(.auth-popup .auth-screen)){display:none}
-body:has(#close:target) .auth-popup.is-open{display:none}
-html:has(.auth-popup:is(:target,.is-open)):not(:has(#close:target)){overflow:hidden}
-.auth-popup .auth-backdrop{position:fixed;inset:0;cursor:default}
-.auth-popup .auth-dialog{z-index:1}
-@media (prefers-reduced-motion:no-preference){
-  .auth-popup:is(:target,.is-open)>.auth-screen{animation:auth-fade .25s ease both}
-  .auth-popup:is(:target,.is-open)>.auth-screen>.auth-dialog{animation:auth-rise .5s cubic-bezier(.16,1,.3,1) both}
+ makes that wrapper the :target, so its screen opens over the current page without a script; the Login and Register
+ pages and replies to a refused form add .is-open. The wrapper is display:contents, so the browser has no box to scroll to and the page stays put.
+ The dialog rises from the bottom to the centre. Closing links go to #close (an empty span), which also hides one drawn open; the page behind stops scrolling. */
+
+.auth-popup {
+    display: none;
 }
-@keyframes auth-fade{from{opacity:0}}
-@keyframes auth-rise{from{transform:translateY(60vh);opacity:0}}
+
+.auth-popup:is(:target,.is-open) {
+    display: contents;
+}
+
+body:has(.auth-popup:target) :is(.auth-popup.is-open:not(:target),.auth-screen:not(.auth-popup .auth-screen)) {
+    display: none;
+}
+
+body:has(#close:target) .auth-popup.is-open {
+    display: none;
+}
+
+html:has(.auth-popup:is(:target,.is-open)):not(:has(#close:target)) {
+    overflow: hidden;
+}
+
+.auth-popup .auth-backdrop {
+    position: fixed;
+    inset: 0;
+    cursor: default;
+}
+
+.auth-popup .auth-dialog {
+    z-index: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .auth-popup:is(:target,.is-open)>.auth-screen {
+        animation: auth-fade .25s ease both;
+    }
+
+    .auth-popup:is(:target,.is-open)>.auth-screen>.auth-dialog {
+        animation: auth-rise .5s cubic-bezier(.16, 1, .3, 1) both;
+    }
+}
+
+@keyframes auth-fade {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes auth-rise {
+    from {
+        transform: translateY(60vh);
+        opacity: 0;
+    }
+}
 
 /* Validator messages under a field. */
-.field-error{display:block;margin-top:6px;font-size:12px;color:#ff8a8a}
-.form-error:empty{display:none}
+.field-error {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #ff8a8a;
+}
+
+.form-error:empty {
+    display: none;
+}
 
 /* Buttons that post back but look like the links they replace. */
-.link-button{all:unset;cursor:pointer;color:inherit}
-.link-button:focus-visible{outline:2px solid #c4b5fd;outline-offset:2px}
-
 /* Enquiry form: the confirmation that replaces the form after sending. */
-.home-enquiry-saved h3{margin:0 0 10px;font-size:22px;font-weight:500;color:#f2f2f4}
-.home-enquiry-saved p{margin:0 0 16px;color:#a9a9b3;line-height:1.6}
-.home-enquiry-saved pre{margin:0 0 18px;padding:14px 16px;border:1px solid #ffffff1c;border-radius:12px;background:#ffffff08;color:#eee;font-size:13px;white-space:pre-wrap}
+.home-enquiry-saved h3 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    font-weight: 500;
+    color: #f2f2f4;
+}
+
+.home-enquiry-saved p {
+    margin: 0 0 16px;
+    color: #a9a9b3;
+    line-height: 1.6;
+}
+
+.home-enquiry-saved pre {
+    margin: 0 0 18px;
+    padding: 14px 16px;
+    border: 1px solid #ffffff1c;
+    border-radius: 12px;
+    background: #ffffff08;
+    color: #eee;
+    font-size: 13px;
+    white-space: pre-wrap;
+}
 
 /* Forms that used to open in a dialog now unfold in place (details.inline-form). */
-details.inline-form{margin:12px 0}
-details.inline-form>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;font-weight:500}
-details.inline-form>summary::-webkit-details-marker{display:none}
-details.inline-form[open]>summary{margin-bottom:14px}
-details.inline-form label{display:grid;gap:6px;margin-bottom:12px}
-details.panel.inline-form{padding:18px 22px}
-.pf-image-form,.pf-demo-switch{display:grid;gap:10px}
-.pf-image-form>summary,.pf-demo-switch>summary{list-style:none;cursor:pointer}
-.pf-image-form>summary::-webkit-details-marker,.pf-demo-switch>summary::-webkit-details-marker{display:none}
-.pf-demo-switch .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.sc-compose{display:grid;gap:12px;margin:0 0 18px;padding:18px}
-.sc-compose label{display:grid;gap:6px}
+details.inline-form {
+    margin: 12px 0;
+}
+
+details.inline-form>summary {
+    cursor: pointer;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+details.inline-form>summary::-webkit-details-marker {
+    display: none;
+}
+
+details.inline-form[open]>summary {
+    margin-bottom: 14px;
+}
+
+details.inline-form label {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+details.panel.inline-form {
+    padding: 18px 22px;
+}
+
+.pf-image-form,
+.pf-demo-switch {
+    display: grid;
+    gap: 10px;
+}
+
+.pf-image-form>summary,
+.pf-demo-switch>summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+.pf-image-form>summary::-webkit-details-marker,
+.pf-demo-switch>summary::-webkit-details-marker {
+    display: none;
+}
+
+.pf-demo-switch .demo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.sc-compose {
+    display: grid;
+    gap: 12px;
+    margin: 0 0 18px;
+    padding: 18px;
+}
+
+.sc-compose label {
+    display: grid;
+    gap: 6px;
+}
 
 /* Forms that open in place of a dialog on the staff pages (course editor, programs, requests, users, assignments). */
-.ci-assign-form,.ci-lesson-editor,.pm-dialog,.rq-new-form,.sp-enrol-form,.asg-assign-form,.au-actions-dialog{display:grid;gap:12px;margin:14px 0;padding:18px 20px;border:1px solid #ffffff1f;border-radius:16px;background:#0f0f12}
-:is(.ci-assign-form,.ci-lesson-editor,.pm-dialog,.rq-new-form,.sp-enrol-form,.asg-assign-form,.au-actions-dialog) h2,.ci-lesson-editor h3{margin:0;font-size:16px;font-weight:600;color:#f2f2f4}
-:is(.ci-assign-form,.ci-lesson-editor,.pm-dialog,.rq-new-form,.sp-enrol-form,.asg-assign-form,.la-decision-form) label:not(.check){display:grid;gap:6px}
-:is(.ci-assign-form,.ci-lesson-editor,.pm-dialog,.rq-new-form,.sp-enrol-form,.asg-assign-form,.au-actions-dialog) p{margin:0}
-.ci-assign-form{margin:14px 0 0}
-.la-decision-form{display:grid;gap:12px}
-.qe-hint{margin:12px 0 0}
-.qe-hint p{margin:0 0 6px}
+.ci-assign-form,
+.ci-lesson-editor,
+.pm-dialog,
+.rq-new-form,
+.sp-enrol-form,
+.asg-assign-form,
+.au-actions-dialog {
+    display: grid;
+    gap: 12px;
+    margin: 14px 0;
+    padding: 18px 20px;
+    border: 1px solid #ffffff1f;
+    border-radius: 16px;
+    background: #0f0f12;
+}
+
+:is(.ci-assign-form,.ci-lesson-editor,.pm-dialog,.rq-new-form,.sp-enrol-form,.asg-assign-form,.au-actions-dialog) h2,
+.ci-lesson-editor h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #f2f2f4;
+}
+
+:is(.ci-assign-form,.ci-lesson-editor,.pm-dialog,.rq-new-form,.sp-enrol-form,.asg-assign-form,.la-decision-form) label:not(.check) {
+    display: grid;
+    gap: 6px;
+}
+
+:is(.ci-assign-form,.ci-lesson-editor,.pm-dialog,.rq-new-form,.sp-enrol-form,.asg-assign-form,.au-actions-dialog) p {
+    margin: 0;
+}
+
+.ci-assign-form {
+    margin: 14px 0 0;
+}
+
+.la-decision-form {
+    display: grid;
+    gap: 12px;
+}
+
+.qe-hint {
+    margin: 12px 0 0;
+}
+
+.qe-hint p {
+    margin: 0 0 6px;
+}
 
 /* Student performance: the filters gain an Apply button. */
-#app .student-performance .sp-filters{grid-template-columns:minmax(150px,1.4fr) minmax(0,1.3fr) minmax(0,1fr) minmax(0,1.2fr) auto}
-#app .student-performance .sp-apply{height:40px;padding:0 16px;border:1px solid #ffffff26;border-radius:10px;background:#ffffff0d;color:#f2f2f4;font-size:13.5px}
+#app .student-performance .sp-filters {
+    grid-template-columns: minmax(150px, 1.4fr) minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1.2fr) auto;
+}
+
+#app .student-performance .sp-apply {
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid #ffffff26;
+    border-radius: 10px;
+    background: #ffffff0d;
+    color: #f2f2f4;
+    font-size: 13.5px;
+}
 
 /* Course requests: links take the place of the tab, page and sort buttons, and the active tab and page are marked
-   directly instead of by the sliding highlight the old script positioned. */
-#app .rq-grid-view :is(a.rq-tab,a.rq-page-num,a.rq-page-step,a.rq-sort-head){text-decoration:none;color:inherit}
-#app .rq-grid-view a.rq-tab{display:inline-flex;align-items:center;justify-content:center}
-#app .rq-grid-view :is(.rq-tab-glider,.rq-pager-glider){display:none}
-#app .rq-grid-view .rq-tab[aria-selected=true]{background:#ffffff12;box-shadow:inset 0 0 0 1px #ffffff24,0 1px 2px #0006}
-#app .rq-grid-view .rq-pager .rq-page-num[aria-current=page]{background:var(--g-accent,#8b5cf6);box-shadow:0 6px 16px -6px #8b5cf6}
-#app .rq-grid-view .rq-pager .rq-page-step[aria-disabled=true]{opacity:.35;cursor:default}
-#app .rq-grid-view .rq-pager-info select{min-height:0}
+ directly instead of by the sliding highlight the old script positioned. */
+
+#app .rq-grid-view :is(a.rq-tab,a.rq-page-num,a.rq-page-step,a.rq-sort-head) {
+    text-decoration: none;
+    color: inherit;
+}
+
+#app .rq-grid-view a.rq-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#app .rq-grid-view :is(.rq-tab-glider,.rq-pager-glider) {
+    display: none;
+}
+
+#app .rq-grid-view .rq-tab[aria-selected=true] {
+    background: #ffffff12;
+    box-shadow: inset 0 0 0 1px #ffffff24, 0 1px 2px #0006;
+}
+
+#app .rq-grid-view .rq-pager .rq-page-num[aria-current=page] {
+    background: var(--g-accent, #8b5cf6);
+    box-shadow: 0 6px 16px -6px #8b5cf6;
+}
+
+#app .rq-grid-view .rq-pager .rq-page-step[aria-disabled=true] {
+    opacity: .35;
+    cursor: default;
+}
+
+#app .rq-grid-view .rq-pager-info select {
+    min-height: 0;
+}
 
 /* Artwork that the old script scaled to its box: the images fill their box, and the drawn illustrations sit in an
-   SVG whose viewBox does the scaling. */
-.pm-native>img,.leader-dashboard .ld-native>img{width:100%;height:100%;transform:none}
-.pm-new-art>.pm-new-svg{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}
-.pm-new-svg .pm-new-plane{position:relative;width:5277.583px;height:4474.472px}
-.ld-mini-clip>.ld-mini-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.ld-mini-svg .ld-mini-plane{position:relative;transform:none}
+ SVG whose viewBox does the scaling. */
+
+.pm-native>img,
+.leader-dashboard .ld-native>img {
+    width: 100%;
+    height: 100%;
+    transform: none;
+}
+
+.pm-new-art>.pm-new-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.pm-new-svg .pm-new-plane {
+    position: relative;
+    width: 5277.583px;
+    height: 4474.472px;
+}
+
+.ld-mini-clip>.ld-mini-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.ld-mini-svg .ld-mini-plane {
+    position: relative;
+    transform: none;
+}
 
 /* Links that replace buttons: program card menu, Add user. */
-a.pm-menu{text-decoration:none;display:inline-block}
-a.au-add{text-decoration:none}
+a.pm-menu {
+    text-decoration: none;
+    display: inline-block;
+}
+
+a.au-add {
+    text-decoration: none;
+}
 
 /* Buttons whose old ids (ad-export-logs, au-more, pm-discard) cannot be server control IDs: the same rules by class. */
-.admin-dashboard .ad-logs-panel .ad-export-logs{display:inline-flex;align-items:center;gap:7px}
-.admin-dashboard .ad-logs-panel .ad-export-logs svg{width:15px;height:15px}
-#app .au-market .au-more{height:38px;padding:0 18px;border:1px solid var(--m-line-2);border-radius:10px;background:#ffffff06;color:#fff;font-size:13px}
-.pm-editor .pm-discard{background:transparent;font-size:11px;color:#999}
+.admin-dashboard .ad-logs-panel .ad-export-logs {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.admin-dashboard .ad-logs-panel .ad-export-logs svg {
+    width: 15px;
+    height: 15px;
+}
+
+#app .au-market .au-more {
+    height: 38px;
+    padding: 0 18px;
+    border: 1px solid var(--m-line-2);
+    border-radius: 10px;
+    background: #ffffff06;
+    color: #fff;
+    font-size: 13px;
+}
+
+.pm-editor .pm-discard {
+    background: transparent;
+    font-size: 11px;
+    color: #999;
+}
 
 /* Back to top button on every page, bottom centre: fades in once the page is scrolled (js/site.js adds .is-visible). Sits under the pop-ups and the call windows. */
-.scroll-top{position:fixed;left:calc(50% - 22px);bottom:24px;z-index:80;display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #ffffff26;border-radius:50%;background:#101012e6;color:#f2f2f4;cursor:pointer;box-shadow:0 8px 24px #0006;backdrop-filter:blur(6px);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s,transform .2s,visibility .2s,background-color .15s,border-color .15s}
-.scroll-top svg{width:20px;height:20px}
-.scroll-top.is-visible{opacity:1;visibility:visible;transform:none}
-.scroll-top:is(:hover,:focus-visible){background:#26262b;border-color:#ffffff4d}
-.scroll-top:focus-visible{outline:2px solid #c4b5fd;outline-offset:3px}
-@media (max-width:640px){.scroll-top{left:calc(50% - 20px);bottom:16px;width:40px;height:40px}}
-@media (prefers-reduced-motion:reduce){.scroll-top{transition:none}}
+.scroll-top {
+    position: fixed;
+    left: calc(50% - 22px);
+    bottom: 24px;
+    z-index: 80;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid #ffffff26;
+    border-radius: 50%;
+    background: #101012e6;
+    color: #f2f2f4;
+    cursor: pointer;
+    box-shadow: 0 8px 24px #0006;
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity .2s, transform .2s, visibility .2s, background-color .15s, border-color .15s;
+}
+
+.scroll-top svg {
+    width: 20px;
+    height: 20px;
+}
+
+.scroll-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+.scroll-top:is(:hover,:focus-visible) {
+    background: #26262b;
+    border-color: #ffffff4d;
+}
+
+.scroll-top:focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+    .scroll-top {
+        left: calc(50% - 20px);
+        bottom: 16px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-top {
+        transition: none;
+    }
+}
 
 /* Buttons inside an UpdatePanel: ASP.NET AJAX reads the clicked button from the click's target, so the icon and label inside a
-   button must not take the click (otherwise a click on the text posts back without saying which button was pressed). */
-.home-enquiry-submit>*,.ep-landing-form button>*{pointer-events:none}
+ button must not take the click (otherwise a click on the text posts back without saying which button was pressed). */
+
+.home-enquiry-submit>*,
+.ep-landing-form button>* {
+    pointer-events: none;
+}
+
+/* Profile side buttons: a closed <details> is one plain row (the grid gap used to add a blank strip under it), so the buttons sit evenly and closer together */
+#app .pf-side-card {
+    gap: 10px;
+}
+
+#app .pf-side-actions {
+    gap: 6px;
+    margin-top: -2px;
+}
+
+#app .pf-side-actions :is(.pf-image-form,.pf-demo-switch):not([open]) {
+    display: block;
+}
+
+#app .pf-side-actions :is(.pf-image-form,.pf-demo-switch)[open] {
+    display: grid;
+    gap: 8px;
+}
+
+#app .pf-side-actions summary.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    padding: 0;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+}
