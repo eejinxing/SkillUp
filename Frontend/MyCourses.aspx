@@ -15,7 +15,7 @@
       <div class="mc-program-scroll" role="tablist" aria-label="Choose a program" aria-orientation="vertical">
         <asp:Repeater ID="ProgramTabs" runat="server">
           <ItemTemplate>
-            <div class="mc-program" data-selected="<%# (bool)Eval("Selected") ? "true" : "false" %>">
+            <div class="mc-program" data-selected="<%# (bool)Eval("Selected") ? "true" : "false" %>" data-kit="<%# (bool)Eval("Enrolled") ? "open" : (bool)Eval("HasCourses") ? "closed" : "empty" %>"<%# (bool)Eval("JustOpened") ? " data-just-opened=\"true\"" : "" %>>
               <a class="mc-program-link" id="mc-tab-<%# Container.ItemIndex %>" role="tab" aria-selected="<%# (bool)Eval("Selected") ? "true" : "false" %>" aria-controls="mc-courses-panel" href="MyCourses?program=<%# Eval("Id") %>" aria-label="<%#: Eval("Name") %><%# (bool)Eval("Enrolled") ? ", enrolled" : ", not enrolled" %>"><img src="assets/my-courses/skillup-kit-<%# (bool)Eval("Enrolled") ? "open" : "closed" %>.jpg" alt=""><span class="mc-program-caption"><%#: Eval("Name") %></span></a>
               <%# (bool)Eval("Enrolled") ? "<span class=\"mc-program-cta is-enrolled\" aria-hidden=\"true\"><span class=\"mc-cta-label\">Enrolled</span><span class=\"mc-cta-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m5 12.5 4.5 4.5L19 7.5\"/></svg></span></span>" : "" %>
               <skill:SubmitButton runat="server" CssClass="mc-program-cta" CausesValidation="false" Visible='<%# !(bool)Eval("Enrolled") %>' CommandArgument='<%# Eval("Id") %>' OnCommand="EnrolProgram_Command" aria-label='<%# "Enroll in " + Eval("Name") %>'><span class="mc-cta-label">Enroll</span><span class="mc-cta-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 4.5 20 12 4.5 19.5 7.5 12Z"/><path d="M7.5 12H13"/></svg></span></skill:SubmitButton>
@@ -59,4 +59,7 @@
   </div>
 </section>
 <% } %>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="PageScripts" runat="server">
+  <script src="js/pack-opening.js" defer></script>
 </asp:Content>

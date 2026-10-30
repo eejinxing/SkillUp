@@ -23,7 +23,7 @@ PrecompiledWeb/
 *.publishsettings
 
 # The earlier JavaScript version of the frontend, replaced by the Web Forms pages. None of it is loaded any more:
-# the pages use only Frontend/js/site.js, activity.js and call-preview.js. The files may stay on your PC.
+# the pages use only Frontend/js/site.js, activity.js, pack-opening.js and call-preview.js. The files may stay on your PC.
 node_modules/
 npm-debug.log*
 Frontend/previews/

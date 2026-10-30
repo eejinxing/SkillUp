@@ -136,7 +136,7 @@ The user confirmed that only the global sidebar should be removed. The four Web 
 
 - Every page is now a real Web Forms page: the `.aspx` markup uses server controls, the code-behind reads the data and handles the buttons, and saves are postbacks. The JavaScript router (`js/app.js`), the hash routes and `SkillAPI.request` are no longer used.
 - Pages inherit `Frontend/SkillPage.cs`, which loads `Backend/Model`, checks the page's roles and saves through `Backend/Commands` (`Run` / `TryRun`), the same commands as the JSON API. After a save the page redirects with a notice.
-- The only scripts the pages load are `js/site.js` (small enhancements), `js/activity.js` (quiz timer and lab terminal) and `js/call-preview.js` (device-only call preview).
+- The only scripts the pages load are `js/site.js` (small enhancements), `js/activity.js` (quiz timer and lab terminal), `js/pack-opening.js` (tearing program packs open) and `js/call-preview.js` (device-only call preview).
 - The look is unchanged: the same stylesheets and class names. Rules needed only by the server-rendered pages are in `css/webforms.css`.
 - The rest of `Frontend/js/`, `index.html`, `server.cjs`, `package.json`, `tests/` and `scripts/` belong to the JavaScript version, are no longer loaded and are listed in `.gitignore`. `docs/LOAD-ORDER.json`, `docs/ROUTES.json`, `docs/WEBFORMS-PAGES.json` and `docs/MODULE-MAP.md` describe that version. The sections above that mention hash routes, `SkillAPI` or `npm test` describe it too.
 - [WEBFORMS-PAGES.md](WEBFORMS-PAGES.md) lists every page, who can open it and its query parameters.

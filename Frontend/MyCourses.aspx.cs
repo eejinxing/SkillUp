@@ -16,10 +16,19 @@ namespace SKILL_UP.Frontend
         public override string Route => "learning";
         protected override string[] Roles => new[] { "Learner" };
 
+        const string OpenedKey = "SkillUp.MyCourses.Opened";
+
         protected ProgramRow Selected;
+
+        /// <summary>The program whose pack was opened on the previous request: its light fades out over this page, once.</summary>
+        int? justOpened;
+
+        public override string BodyClass => justOpened == null ? "" : "mc-kit-arrival";
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            justOpened = Session[OpenedKey] as int?;
+            Session.Remove(OpenedKey);
             var programs = Data.Programs.Where(p => p.Published).ToList();
             var enrolled = new HashSet<int>(MyEnrollments.Select(x => x.CourseId));
             var chosen = QueryInt("program");
@@ -28,7 +37,7 @@ namespace SKILL_UP.Frontend
                 ?? programs.FirstOrDefault();
             if (Selected == null) return;
 
-            ProgramTabs.DataSource = programs.Select(p => new { p.Id, p.Name, Selected = p.Id == Selected.Id, Enrolled = CoursesOf(p).Any(c => enrolled.Contains(c.Id)) });
+            ProgramTabs.DataSource = programs.Select(p => new { p.Id, p.Name, Selected = p.Id == Selected.Id, Enrolled = CoursesOf(p).Any(c => enrolled.Contains(c.Id)), HasCourses = CoursesOf(p).Any(), JustOpened = p.Id == justOpened });
             ProgramTabs.DataBind();
             var courses = CoursesOf(Selected);
             CourseList.DataSource = courses.Select((c, i) =>
@@ -53,14 +62,19 @@ namespace SKILL_UP.Frontend
             NoCourses.Visible = courses.Count == 0;
         }
 
-        /// <summary>Enroll button on a program pouch: enrols the learner in the program's first course (path order) and opens that program.</summary>
+        /// <summary>
+        /// Enroll button on a program pouch: enrols the learner in the program's first course (path order) and opens that program.
+        /// js/pack-opening.js presses this button when a pouch has been torn open.
+        /// </summary>
         protected void EnrolProgram_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
             int id;
             var program = int.TryParse((string)e.CommandArgument, out id) ? Data.Programs.FirstOrDefault(p => p.Id == id && p.Published) : null;
             var course = program == null ? null : CoursesOf(program).FirstOrDefault();
             if (course == null) { Go("MyCourses", "This program has no open courses yet."); return; }
-            if (TryRun("enrol", new { courseId = course.Id.ToString() })) Go("MyCourses?program=" + program.Id, "You’re enrolled in " + course.Title + ".");
+            if (!TryRun("enrol", new { courseId = course.Id.ToString() })) return;
+            Session[OpenedKey] = program.Id;
+            Go("MyCourses?program=" + program.Id, "You’re enrolled in " + course.Title + ".");
         }
 
         /// <summary>Published courses of a program: those on its learning path first, in path order.</summary>

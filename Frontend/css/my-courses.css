@@ -1223,3 +1223,30 @@ body:has(.my-courses) .main {
 .my-courses button.mc-program-cta:focus-visible{outline:2px solid #fff;outline-offset:3px}
 @keyframes mc-cta-shine{to{transform:translateX(120%)}}
 @media(prefers-reduced-motion:reduce){.my-courses .mc-program-cta{transition:opacity .01s}.my-courses .mc-program:hover .mc-program-cta::after{animation:none}}
+
+/* Tearing a pack open (js/pack-opening.js): a closed pack whose art has loaded swaps the Enroll pill for a dotted tear line
+   across its top and a "Drag to open" hint. The real button stays for keyboard users, who reach it with Tab. */
+.my-courses .mc-program.mc-can-tear button.mc-program-cta{opacity:0;pointer-events:none}
+.my-courses .mc-program.mc-can-tear button.mc-program-cta:focus-visible{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.my-courses .mc-program.mc-can-tear:has(button:focus-visible) .mc-tear-hint{visibility:hidden}
+.my-courses .mc-tear{position:absolute;left:0;right:0;top:0;z-index:1;height:24%;cursor:grab;touch-action:pan-y}
+.my-courses .mc-tear svg{position:absolute;left:0;top:0;width:100%;height:calc(100%/.24);overflow:visible;pointer-events:none}
+.my-courses .mc-tear path{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round}
+.my-courses .mc-tear-line{stroke-width:3.5;stroke-dasharray:.2 1.7;opacity:.5;transition:opacity .2s}
+.my-courses .mc-tear-glint{stroke-width:7;stroke-dasharray:9 200;stroke-dashoffset:9;opacity:0;filter:drop-shadow(0 0 6px #c4b5fd)}
+.my-courses .mc-can-tear:hover .mc-tear-line,.my-courses .mc-can-tear:focus-within .mc-tear-line{opacity:1}
+.my-courses .mc-can-tear:hover .mc-tear-glint,.my-courses .mc-can-tear:focus-within .mc-tear-glint{opacity:1;animation:mc-tear-glint 1.8s cubic-bezier(.45,0,.55,1) infinite}
+.my-courses .mc-tear-hint{top:29%;padding:9px 16px;font-size:13px;gap:7px}
+.my-courses .mc-tear-hint .mc-cta-icon svg{width:15px;height:15px;animation:mc-tear-nudge 1.8s ease-in-out infinite}
+.my-courses .mc-program.is-tearing .mc-program-link>img,.my-courses .mc-program.is-tearing .mc-program-caption,.my-courses .mc-program.is-tearing .mc-tear,.my-courses .mc-program.is-tearing .mc-program-cta{visibility:hidden}
+.mc-tear-stage{position:fixed;left:0;top:0;z-index:1000;width:100%;height:100%;pointer-events:none}
+html.mc-tearing,html.mc-tearing *{cursor:grabbing!important;-webkit-user-select:none;user-select:none}
+@keyframes mc-tear-glint{to{stroke-dashoffset:-100}}
+@keyframes mc-tear-nudge{50%{transform:translateX(3px)}}
+@media(hover:none){.my-courses .mc-can-tear .mc-tear-hint{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+
+/* The page after a pack was opened starts in the light that ended the last one; the script then fades it away over the page.
+   The animation is only a safety net in case the script never runs. */
+@keyframes mc-arrival-fade{to{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:no-preference){body.mc-kit-arrival::after{content:"";position:fixed;inset:0;z-index:1000;background:#f4f0ff;pointer-events:none;animation:mc-arrival-fade .5s 1s forwards}}
+@media(prefers-reduced-motion:reduce){.my-courses .mc-tear-glint,.my-courses .mc-tear-hint .mc-cta-icon svg{animation:none}}
