@@ -56,6 +56,11 @@ namespace SKILL_UP.Backend
                     if (context.Request.Headers["X-SkillUp-Request"] != "1") throw new ApiException(403, "This request is missing the Skill UP request header.");
                     Write(context, 200, RunCommand(context, path.Substring("commands/".Length)));
                 }
+                else if (path.StartsWith("call/", StringComparison.Ordinal) && method == "POST")
+                {
+                    if (context.Request.Headers["X-SkillUp-Request"] != "1") throw new ApiException(403, "This request is missing the Skill UP request header.");
+                    Write(context, 200, CallSignals.Handle(context, path.Substring("call/".Length)));
+                }
                 else throw new ApiException(404, "Not found.");
             }
             catch (ApiException e)

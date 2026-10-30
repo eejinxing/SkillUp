@@ -1,6 +1,8 @@
-/* Device-only call preview: the camera and microphone stay on this computer, nothing is transmitted.
-   Opened by [data-start-call] buttons (data-call-name / data-call-role / data-call-title) and, for testing, by the
-   header's [data-call-test] buttons, which simulate an incoming call. The page supplies #call-context (SkillUp.Master). */
+/* Calls. A button with data-call-peer (a user id) rings that signed-in person; the audio and video then go straight
+   between the two browsers over WebRTC, and only the small set-up messages pass through the site (Backend/CallSignals.cs,
+   polled below). Buttons without a peer (live sessions) open a device-only preview, and the header's [data-call-test]
+   buttons simulate an incoming call. Opened by [data-start-call] (data-call-name / data-call-role / data-call-title).
+   The page supplies #call-context (SkillUp.Master). No STUN or TURN server: both people must be on the same network. */
 (function () {
     'use strict';
 
@@ -16,7 +18,9 @@
     let stream = null;    // camera / microphone
     let timer = null;     // updates the elapsed time every second
     let request = 0;      // device requests; a newer one makes an older answer stale
-    let incoming = null;  // the simulated incoming call waiting for Accept / Decline
+    let incoming = null;  // the incoming call (real or simulated) waiting for Accept / Decline
+    let net = null;       // the live connection to the other person: {peer, id, callee, pc, queue, ring}
+    let remote = null;    // the other person's audio and video
 
     // ---- Helpers -----------------------------------------------------------------------------------------
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -63,7 +67,7 @@
     async function media(video, audio) {
         if (!call) return;
         const id = ++request, owner = call;
-        owner.status = 'Requesting device access…';
+        if (!net) owner.status = 'Requesting device access…';
         paint();
         try {
             if (!navigator.mediaDevices?.getUserMedia) throw Error('unavailable');
@@ -75,10 +79,13 @@
             stream?.getTracks().forEach(t => t.stop());
             stream = next;
             if (!owner.demo) owner.video = video;
-            owner.status = 'Local preview ready · no remote connection';
+            if (net?.pc) next.getTracks().forEach(t => net.pc.getSenders().find(x => x.track === null || x.track?.kind === t.kind)?.replaceTrack(t).catch(() => {}));
+            if (!net) owner.status = 'Local preview ready · no remote connection';
         } catch {
             if (id !== request || call !== owner) return;
-            owner.status = 'Device access unavailable. Check browser permissions or continue without a device.';
+            owner.status = net
+                ? 'Camera or microphone unavailable here (browsers need HTTPS or localhost for them). You can still see and hear the other person.'
+                : 'Device access unavailable. Check browser permissions or continue without a device.';
         }
         paint();
     }
@@ -93,7 +100,148 @@
         video.play()?.catch(() => {});
     }
 
-    // ---- Simulated incoming call --------------------------------------------------------------------------
+    function attachRemote() {
+        const video = document.querySelector('#skill-call-remote');
+        if (!video) return;
+        if (video.srcObject !== remote) video.srcObject = remote;
+        const seen = !!remote?.getVideoTracks().some(t => t.readyState === 'live' && !t.muted);
+        video.hidden = !seen;
+        video.closest('.cd-stage, .room-stage')?.classList.toggle('has-remote', seen);
+        video.play()?.catch(() => {});
+    }
+
+    // ---- Connection to the other person --------------------------------------------------------------------
+    const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+
+    async function post(op, body) {
+        const r = await fetch(ctx.api + op, {
+            method: 'POST', credentials: 'same-origin', keepalive: true,
+            headers: { 'Content-Type': 'application/json', 'X-SkillUp-Request': '1' }, body: JSON.stringify(body || {})
+        });
+        if (!r.ok) throw Error(String(r.status));
+        return r.json();
+    }
+
+    function signal(type, data, to = net?.peer, id = net?.id) {
+        if (!to) return Promise.resolve();
+        return post('send', { to, type, call: id, data, video: !!call?.video }).catch(() => {});
+    }
+
+    function say(text) {
+        if (!call) return;
+        call.status = text;
+        paint();
+    }
+
+    function connection() {
+        const owner = net, pc = new RTCPeerConnection({ iceServers: [] });
+        owner.pc = pc;
+        pc.onicecandidate = e => { if (e.candidate && net === owner) signal('ice', e.candidate.toJSON()); };
+        pc.ontrack = e => {
+            remote = remote || new MediaStream();
+            remote.addTrack(e.track);
+            e.track.onunmute = e.track.onmute = e.track.onended = attachRemote;
+            attachRemote();
+        };
+        pc.onconnectionstatechange = () => {
+            if (net !== owner || !call) return;
+            if (pc.connectionState === 'connected') {
+                if (!call.linked) call.started = Date.now();
+                call.linked = true;
+                say('Connected');
+            } else if (pc.connectionState === 'failed') say('Could not connect. Both devices need to be on the same network.');
+            else if (pc.connectionState === 'disconnected') say('Connection lost…');
+        };
+        return pc;
+    }
+
+    async function addLocal(pc, offering) {
+        await call.mediaPromise;
+        if (stream) stream.getTracks().forEach(t => pc.addTrack(t, stream));
+        if (!offering) return;
+        // A device without a microphone or camera can still hear and see the other person.
+        if (!stream?.getAudioTracks().length) pc.addTransceiver('audio', { direction: 'recvonly' });
+        if (call.video && !stream?.getVideoTracks().length) pc.addTransceiver('video', { direction: 'recvonly' });
+    }
+
+    async function flushIce(n) {
+        const waiting = n.queue.splice(0);
+        for (const c of waiting) await n.pc.addIceCandidate(c).catch(() => {});
+    }
+
+    async function sendOffer() {
+        const owner = net, pc = connection();
+        await addLocal(pc, true);
+        if (net !== owner) return;
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+        signal('offer', { type: offer.type, sdp: offer.sdp });
+    }
+
+    async function sendAnswer(offer) {
+        const owner = net, pc = owner.pc || connection();
+        await pc.setRemoteDescription(offer);
+        await flushIce(owner);
+        await addLocal(pc, false);
+        if (net !== owner) return;
+        const answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        signal('answer', { type: answer.type, sdp: answer.sdp });
+    }
+
+    function ended(text) {
+        if (!call) return;
+        const owner = call;
+        say(text);
+        setTimeout(() => { if (call === owner) stop(true); }, 2500);
+    }
+
+    async function receive(m) {
+        if (m.type === 'invite') {
+            if (call || incoming) {
+                signal('decline', null, m.from, m.call);
+                return;
+            }
+            showIncoming({ peer: m.from, callId: m.call, video: !!m.video, name: m.name, role: m.role, title: (m.video ? 'Video call with ' : 'Voice call with ') + m.name });
+            return;
+        }
+        if (incoming && incoming.callId === m.call && m.type === 'hangup') {
+            dismissIncoming();
+            return;
+        }
+        if (!call || !net || net.id !== m.call || net.peer !== m.from) return;
+        try {
+            if (m.type === 'accept') {
+                clearTimeout(net.ring);
+                say('Connecting…');
+                await sendOffer();
+            } else if (m.type === 'offer') await sendAnswer(m.data);
+            else if (m.type === 'answer') {
+                await net.pc.setRemoteDescription(m.data);
+                await flushIce(net);
+            } else if (m.type === 'ice') {
+                if (net.pc?.remoteDescription) await net.pc.addIceCandidate(m.data).catch(() => {});
+                else net.queue.push(m.data);
+            } else if (m.type === 'decline') ended(call.name + ' declined the call.');
+            else if (m.type === 'hangup') ended(call.name + ' ended the call.');
+        } catch {
+            say('Could not set up the call. Please try again.');
+        }
+    }
+
+    async function poll() {
+        let wait = 2500;
+        try {
+            const { messages } = await post('poll');
+            for (const m of messages) await receive(m);
+            wait = call || incoming ? 500 : 2000;
+        } catch {
+            wait = 6000;
+        }
+        setTimeout(poll, wait);
+    }
+
+    // ---- Incoming call card (real or simulated) -----------------------------------------------------------
     function dismissIncoming() {
         incoming = null;
         document.getElementById('skill-incoming-call')?.remove();
@@ -103,7 +251,12 @@
     function simulateIncoming(kind) {
         const video = kind !== 'voice', peer = ctx.peer;
         if (!peer || call || incoming) return;
-        incoming = { demo: true, video, name: peer.name, role: peer.role, title: (video ? 'Demo meeting with ' : 'Demo call with ') + peer.name };
+        showIncoming({ demo: true, video, name: peer.name, role: peer.role, title: (video ? 'Demo meeting with ' : 'Demo call with ') + peer.name });
+    }
+
+    function showIncoming(info) {
+        incoming = info;
+        const video = info.video, peer = info, demo = !!info.demo;
         const card = document.createElement('aside');
         card.id = 'skill-incoming-call';
         card.setAttribute('role', 'alertdialog');
@@ -116,9 +269,9 @@
             + '</svg>';
         card.innerHTML =
             '<div class="incoming-top">'
-            + `<span class="incoming-avatar"><img src="${demoCaller}" alt=""><i></i><i></i></span>`
+            + `<span class="incoming-avatar">${demo ? `<img src="${demoCaller}" alt="">` : `<b>${initials(peer.name)}</b>`}<i></i><i></i></span>`
             + '<div class="incoming-copy">'
-            + `<span class="incoming-demo-label">Demo · Incoming ${video ? 'video' : 'voice'} call</span>`
+            + `<span class="incoming-demo-label">${demo ? 'Demo · ' : ''}Incoming ${video ? 'video' : 'voice'} call</span>`
             + `<h2 id="incoming-call-title">${esc(peer.name)}</h2>`
             + `<p id="incoming-call-description">${esc(peer.role)} · ${video ? 'Video meeting invitation' : 'Voice call'}</p>`
             + '</div>'
@@ -129,7 +282,7 @@
             + `<span class="book-label">${video ? 'Accept video call' : 'Accept call'}</span>`
             + `<span class="book-phone" aria-hidden="true">${video ? icons.video : icons.phone}</span>`
             + '</button>'
-            + '<small>Simulated invitation for testing</small>';
+            + (demo ? '<small>Simulated invitation for testing</small>' : '');
         document.body.append(card);
         document.querySelectorAll('[data-call-test]').forEach(b => { b.disabled = true; });
         card.querySelector('[data-incoming-call=accept]').focus();
@@ -237,7 +390,8 @@
             + `<button type="button" data-call-control="minimize" aria-label="Minimize call">${icons.min}</button>`
             + '</div></header>';
         const stage = `<div class="room-stage"${call.demo ? ` style="--stage-img:url(${demoCaller})"` : ''}>`
-            + (call.demo ? demoPhoto : `<div class="room-stage-empty"><span>${initials(call.name)}</span><b>${esc(call.name)}</b><small>No remote participant connected</small></div>`)
+            + (call.demo ? demoPhoto : `<div class="room-stage-empty"><span>${initials(call.name)}</span><b>${esc(call.name)}</b><small>${net ? esc(call.status) : 'No remote participant connected'}</small></div>`)
+            + (call.demo ? '' : '<video id="skill-call-remote" class="call-remote" autoplay playsinline hidden></video>')
             + selfTile('room-self', video)
             + '<span class="room-live">Live <i></i></span><span class="room-level" aria-hidden="true"><i></i></span>'
             + controls('room-controls', video, mic)
@@ -268,7 +422,8 @@
     // The compact call window: picture with controls, and a summary card with documents and the goal.
     function compact(video, mic) {
         const picture = '<div class="cd-stage call-picture">'
-            + (call.demo ? demoPhoto : `<div class="cd-waiting"><span>${initials(call.name)}</span><b>${esc(call.name)}</b><small>Waiting to connect · local preview</small></div>`)
+            + (call.demo ? demoPhoto : `<div class="cd-waiting"><span>${initials(call.name)}</span><b>${esc(call.name)}</b><small>${net ? esc(call.status) : 'Waiting to connect · local preview'}</small></div>`)
+            + (call.demo ? '' : '<video id="skill-call-remote" class="call-remote" autoplay playsinline hidden></video>')
             + '<div class="cd-top">'
             + `<span class="cd-live"><i></i><time data-call-time>${elapsed()}</time></span>`
             + `<span class="cd-who"><b>${esc(call.name)}</b><small>${esc(call.role || 'Guest')}${call.demo ? ' · demo' : ''}</small></span>`
@@ -292,7 +447,7 @@
             + `<textarea id="skill-call-notes" rows="3" placeholder="${goalPlaceholder()}">${esc(call.notes)}</textarea>`
             + '</label>'
             + `<p class="call-status" role="status">${esc(call.status)}</p>`
-            + `<small class="call-local-note">${call.demo ? 'Illustrative demo portrait · ' : ''}Device preview only; audio and video are not transmitted.</small>`
+            + `<small class="call-local-note">${net ? 'Audio and video go directly between the two browsers on this network.' : (call.demo ? 'Illustrative demo portrait · ' : '') + 'Device preview only; audio and video are not transmitted.'}</small>`
             + '</div></section>';
         return picture + summary;
     }
@@ -317,6 +472,7 @@
             dock.className = 'is-room' + (call.demo ? ' is-demo' : '');
             dock.innerHTML = room(video, mic);
             attachVideo();
+            attachRemote();
             document.body.classList.add('has-local-call');
             updateStrip();
             const list = dock.querySelector('.room-messages');
@@ -330,14 +486,16 @@
         dock.className = 'cd' + (call.demo ? ' is-demo' : '');
         dock.innerHTML = compact(video, mic);
         attachVideo();
+        attachRemote();
         document.body.classList.add('has-local-call');
         updateStrip();
     }
 
     // ---- Start / stop ---------------------------------------------------------------------------------------
     function start(options) {
-        stop();
+        stop(true);
         const now = Date.now();
+        net = ctx.api && me.id && options.peer ? { peer: Number(options.peer), id: options.callId || uid(), callee: !!options.callId, pc: null, queue: [], ring: 0 } : null;
         call = {
             name: options.name || 'Live session',
             title: options.title || 'Private conversation',
@@ -350,7 +508,7 @@
                 { from: 'peer', text: 'I added the course outline to Documents so we can go through it.', at: now },
             ] : [],
             started: now,
-            status: 'Local preview · no remote connection',
+            status: !net ? 'Local preview · no remote connection' : net.callee ? 'Connecting…' : 'Calling ' + (options.name || 'them') + '…',
         };
         paint();
         timer = setInterval(() => {
@@ -358,10 +516,25 @@
             document.querySelectorAll('[data-call-time], .gn-call-strip time').forEach(t => { t.textContent = elapsed(); });
             document.querySelectorAll('.cs-bar').forEach(n => n.style.setProperty('--p', stripProgress()));
         }, 1000);
-        media(!!options.video, true);
+        call.mediaPromise = media(!!options.video, true);
+        if (!net) return;
+        if (net.callee) signal('accept');
+        else {
+            signal('invite');
+            const owner = net;
+            net.ring = setTimeout(() => { if (net === owner && !owner.pc) { signal('hangup'); ended('No answer.'); } }, 45000);
+        }
     }
 
-    function stop() {
+    // quiet: the other side already knows (it hung up, declined, or the call never connected)
+    function stop(quiet) {
+        if (net) {
+            clearTimeout(net.ring);
+            if (!quiet) signal('hangup');
+            net.pc?.close();
+            net = null;
+        }
+        remote = null;
         call = null;
         dismissIncoming();
         release();
@@ -379,7 +552,7 @@
         const begin = e.target.closest('[data-start-call]');
         if (begin) {
             const name = begin.dataset.callName || 'Live session';
-            start({ name, role: begin.dataset.callRole, title: begin.dataset.callTitle || 'Conversation with ' + name, video: begin.dataset.startCall === 'video' });
+            start({ name, peer: begin.dataset.callPeer, role: begin.dataset.callRole, title: begin.dataset.callTitle || 'Conversation with ' + name, video: begin.dataset.startCall === 'video' });
             return;
         }
         const button = e.target.closest('[data-call-control]');
@@ -387,7 +560,7 @@
         switch (button.dataset.callControl) {
             case 'goal': document.getElementById('skill-call-notes')?.focus(); return;
             case 'summary': call.summaryClosed = !call.summaryClosed; paint(); return;
-            case 'device': call.status = stream ? 'Browser devices active · no remote connection' : 'No device enabled · local preview only'; paint(); return;
+            case 'device': if (!net) call.status = stream ? 'Browser devices active · no remote connection' : 'No device enabled · local preview only'; paint(); return;
             case 'end': stop(); return;
             case 'minimize': call.minimized = true; paint(); return;
             case 'show': call.minimized = false; paint(); return;
@@ -423,7 +596,10 @@
         const options = { ...incoming };
         dismissIncoming();
         if (button.dataset.incomingCall === 'accept') start(options);
-        else document.querySelector('[data-call-test]')?.focus();
+        else {
+            if (options.peer) signal('decline', null, options.peer, options.callId);
+            document.querySelector('[data-call-test]')?.focus();
+        }
     });
 
     // Course outline / meeting notes documents.
@@ -466,6 +642,10 @@
         if (e.target.id === 'skill-call-notes' && call) call.notes = e.target.value;
     });
 
-    addEventListener('pagehide', stop);
+    addEventListener('pagehide', () => {
+        if (incoming?.peer) signal('decline', null, incoming.peer, incoming.callId);
+        stop();
+    });
     updateStrip();
+    if (ctx.api && me.id) poll();
 })();

@@ -181,6 +181,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Backend\ApiHandler.cs" />
+    <Compile Include="Backend\CallSignals.cs" />
     <Compile Include="Backend\Commands.cs" />
     <Compile Include="Backend\CommandsCourses.cs" />
     <Compile Include="Backend\CommandsLearning.cs" />
