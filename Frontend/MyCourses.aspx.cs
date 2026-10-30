@@ -28,7 +28,7 @@ namespace SKILL_UP.Frontend
                 ?? programs.FirstOrDefault();
             if (Selected == null) return;
 
-            ProgramTabs.DataSource = programs.Select(p => new { p.Id, p.Name, Selected = p.Id == Selected.Id });
+            ProgramTabs.DataSource = programs.Select(p => new { p.Id, p.Name, Selected = p.Id == Selected.Id, Enrolled = CoursesOf(p).Any(c => enrolled.Contains(c.Id)) });
             ProgramTabs.DataBind();
             var courses = CoursesOf(Selected);
             CourseList.DataSource = courses.Select((c, i) =>
@@ -51,6 +51,16 @@ namespace SKILL_UP.Frontend
             }).ToList();
             CourseList.DataBind();
             NoCourses.Visible = courses.Count == 0;
+        }
+
+        /// <summary>Enroll button on a program pouch: enrols the learner in the program's first course (path order) and opens that program.</summary>
+        protected void EnrolProgram_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)
+        {
+            int id;
+            var program = int.TryParse((string)e.CommandArgument, out id) ? Data.Programs.FirstOrDefault(p => p.Id == id && p.Published) : null;
+            var course = program == null ? null : CoursesOf(program).FirstOrDefault();
+            if (course == null) { Go("MyCourses", "This program has no open courses yet."); return; }
+            if (TryRun("enrol", new { courseId = course.Id.ToString() })) Go("MyCourses?program=" + program.Id, "You’re enrolled in " + course.Title + ".");
         }
 
         /// <summary>Published courses of a program: those on its learning path first, in path order.</summary>

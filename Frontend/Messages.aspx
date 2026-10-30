@@ -58,10 +58,10 @@
       <article class="sc-announcement" data-announcement-id="<%= Announcement.Id %>">
         <div class="sc-announcement-eyebrow"><span class="sc-announcement-symbol" aria-hidden="true">&#8599;</span><span>COURSE UPDATE</span><time><%= Ui.Date(Announcement.CreatedAt) %></time></div>
         <h2><%: Announcement.Title %></h2>
-        <div class="sc-announcement-tags"><a href="Course?id=<%= ActiveCourse.Id %>"><%: ActiveCourse.Title %></a><span><i aria-hidden="true"></i>Announcement</span></div>
-        <div class="sc-announcement-author"><%= Author == null ? "" : Face(Author, "") %><div><strong><%: Author?.Name ?? "Former instructor" %></strong><small><%: Author?.Role ?? "Course team" %> &middot; Posted <%= Ui.Date(Announcement.CreatedAt) %></small></div></div>
+        <div class="sc-announcement-tags"><% if (Channel != 0) { %><a href="Course?id=<%= ActiveCourse.Id %>"><%: ActiveCourse.Title %></a><% } %><span><i aria-hidden="true"></i>Announcement</span></div>
+        <% if (Channel != 0) { %><div class="sc-announcement-author"><%= Author == null ? "" : Face(Author, "") %><div><strong><%: Author?.Name ?? "Former instructor" %></strong><small><%: Author?.Role ?? "Course team" %> &middot; Posted <%= Ui.Date(Announcement.CreatedAt) %></small></div></div>
         <p class="sc-announcement-body"><%: Announcement.Message %></p>
-        <a class="sc-open-course" href="Course?id=<%= ActiveCourse.Id %>">Open course <%= SendIcon %></a>
+        <a class="sc-open-course" href="Course?id=<%= ActiveCourse.Id %>">Open course <%= SendIcon %></a><% } %>
       </article>
       <section class="sc-comments sc-discussion" aria-labelledby="sc-discussion-title">
         <header><h3 id="sc-discussion-title">Comments</h3><span><%= CommentCount %></span><% if (CommentCount == 0) { %><small>Questions and tips for the class go here.</small><% } %></header>
@@ -80,7 +80,7 @@
         <asp:Panel runat="server" CssClass="sc-comment-form" DefaultButton="PostCommentButton">
           <div class="sc-comment-box">
             <div class="sc-comment-input"><%= Face(Me, "") %><label class="sr-only" for="CommentBox">Write a comment</label><asp:TextBox ID="CommentBox" runat="server" ClientIDMode="Static" TextMode="MultiLine" Rows="1" MaxLength="1000" /></div>
-            <div class="sc-comment-bar"><span class="sc-comment-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4Z"/></svg><span>Visible to everyone in <%: ActiveCourse.Title %></span></span><skill:SubmitButton ID="PostCommentButton" runat="server" CssClass="sc-comment-post" Text="Post" CausesValidation="false" OnClick="PostComment_Click" /></div>
+            <div class="sc-comment-bar"><span class="sc-comment-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4Z"/></svg><span>Visible to everyone in <%: ActiveCourse.Title %></span></span><skill:SubmitButton ID="PostCommentButton" runat="server" CssClass="sc-comment-post" CausesValidation="false" OnClick="PostComment_Click">Post<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 4.5 20 12 4.5 19.5 7.5 12Z"/><path d="M7.5 12H13"/></svg></skill:SubmitButton></div>
           </div>
         </asp:Panel>
       </section>
@@ -95,7 +95,7 @@
         </asp:Repeater>
       </section>
       <% } %>
-      <% if (ActiveCourse != null) { %>
+      <% if (ActiveCourse != null && Channel != 0) { %>
       <section class="sc-course-context">
         <header><h3>In this course</h3><a href="Course?id=<%= ActiveCourse.Id %>">View course</a></header>
         <div>
