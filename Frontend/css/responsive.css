@@ -197,6 +197,13 @@
         object-fit: contain;
     }
 
+    /* The pack rail sizes its packs from its own height, so in one column it needs a height of its own. */
+    #app .my-courses .mc-program-scroll {
+        flex: none;
+        height: clamp(340px, 52svh, 460px);
+        overscroll-behavior: auto;
+    }
+
     #app .my-courses .mc-course-summary {
         grid-template-columns: 104px minmax(0, 1fr);
     }

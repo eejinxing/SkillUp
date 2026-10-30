@@ -30,7 +30,7 @@ Roles: **V** visitor, **L** Learner, **I** Instructor, **P** Program Leader, **A
 | Dashboard | Signed in | Admin: `q`, `role`, `source` | Loads `Controls/<Role>Dashboard.ascx`: LearnerDashboard, InstructorDashboard, LeaderDashboard or AdminDashboard |
 | Messages | Signed in | `id`, `channel`, `announcement`, `compose`, `q` | Direct messages, course channels and announcements |
 | Discussions, LiveSessions, Assistant, Profile | Signed in | | Course discussions, live sessions, the companion and the profile |
-| MyCourses | L | `program` | Enrolled courses and learning paths |
+| MyCourses | L | `program` | Enrolled courses and learning paths; drag across a closed program pack to enrol |
 | Leaderboard | L | `period`, `q` | Weekly and all-time ranking |
 | Certificates | L | `id` | Certificates of completed courses |
 | Courses | I, P | `q`, `status` | Courses the account manages |
@@ -70,6 +70,7 @@ Pages work without JavaScript, except the parts that need the browser:
 |---|---|
 | `js/site.js` | Small enhancements on every page: confirm before deletes, the notice fading, Enter-to-send, print buttons, figures counting up, the request table's tick boxes |
 | `js/activity.js` | Activity page: the quiz timer and the lab terminal, which runs code in a Web Worker |
+| `js/pack-opening.js` | My courses: keeps the selected pack in view and tears closed packs open with a drag; the tear and its light are drawn on a canvas over the page, then the pack's Enroll button posts back. Uses `assets/my-courses/skillup-kit-*-cut.webp`, the kit JPGs without their black background |
 | `js/call-preview.js` | The device-only call preview (camera and microphone stay on the computer) |
 
 ASP.NET's own scripts handle validators, Enter in a form (`DefaultButton`) and drop-downs that apply at once (`AutoPostBack`).

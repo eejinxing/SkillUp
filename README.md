@@ -68,7 +68,7 @@ Skill-Up/
 │   ├── Controls/                      Shared user controls (course card, files, learner table, lab, dashboards)
 │   ├── Ui.cs, Icons.cs, Charts.cs, …  Display helpers, icons, charts, Figma artwork kept as markup
 │   ├── css/                           Stylesheets, loaded in a fixed order
-│   ├── js/                            site.js, activity.js and call-preview.js (small browser-only extras)
+│   ├── js/                            site.js, activity.js, pack-opening.js and call-preview.js (small browser-only extras)
 │   ├── assets/                        Images, icons and fonts
 │   └── design/                        Figma exports and reference images
 │
@@ -103,7 +103,7 @@ Skill-Up/
 
 - **Pages:** Every page inherits `Frontend/SkillPage.cs`. It loads the database snapshot (`Backend/Model.cs`) and the signed-in account, checks the role, and the page renders its markup on the server. Links are page names without `.aspx`, such as `Course?id=3`; filters and tabs are query parameters.
 - **Saving:** Buttons are `skill:SubmitButton` controls that post back. The handler calls `TryRun(action, payload)`, which runs `Backend/Commands*.cs` in one transaction, the same commands the JSON API uses, so every rule and permission check is shared. After a save the page redirects with a short notice, so a refresh never repeats it.
-- **Scripts:** Pages work without JavaScript. `js/site.js` adds small conveniences, `js/activity.js` runs the quiz timer and the lab terminal, and `js/call-preview.js` the device-only call preview.
+- **Scripts:** Pages work without JavaScript. `js/site.js` adds small conveniences, `js/activity.js` runs the quiz timer and the lab terminal, `js/pack-opening.js` tears program packs open on My courses (without it, the pack's Enroll button still works), and `js/call-preview.js` the device-only call preview.
 - **Styles:** Stylesheets in `Frontend/css/` override each other in load order, so order matters; they are linked in `Frontend/SkillUp.Master`. Asset URLs inside the CSS are relative to `css/`, for example `url('../assets/…')`.
 
 [Frontend/README.md](Frontend/README.md) has notes for working on the pages, and [docs/WEBFORMS-PAGES.md](docs/WEBFORMS-PAGES.md) lists every page.
