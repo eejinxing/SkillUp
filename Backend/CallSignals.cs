@@ -19,7 +19,7 @@ namespace SKILL_UP.Backend
     /// </summary>
     static class CallSignals
     {
-        static readonly string[] Types = { "invite", "accept", "decline", "offer", "answer", "ice", "hangup" };
+        static readonly string[] Types = { "invite", "accept", "decline", "offer", "answer", "ice", "hangup", "chat" };
         static readonly Dictionary<int, List<Letter>> Mailboxes = new Dictionary<int, List<Letter>>();
         static readonly TimeSpan Keep = TimeSpan.FromSeconds(90);
         const int MaxBody = 64 * 1024, MaxQueued = 200;
@@ -57,7 +57,7 @@ namespace SKILL_UP.Backend
                 ["type"] = type,
                 ["call"] = Clip((string)payload["call"], 40),
                 ["video"] = (bool?)payload["video"] ?? false,
-                ["data"] = type == "offer" || type == "answer" || type == "ice" ? payload["data"] : null
+                ["data"] = type == "offer" || type == "answer" || type == "ice" ? payload["data"] : type == "chat" ? Clip((string)payload["data"], 1000) : null
             };
             using (var db = new Db())
             {

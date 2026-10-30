@@ -148,6 +148,35 @@
         }
     });
 
+    // Messages: pick up new messages from the other person every few seconds, without a refresh. The page is fetched in the
+    // background and only the conversation and the contact list are swapped, so a half-typed message is never touched.
+    const liveThread = document.querySelector('#conversation-messages .sc-thread');
+    if (liveThread) {
+        const contactList = document.querySelector('.sc-contact-scroll'), unreadBadge = document.querySelector('.sc-contacts-head');
+        let checking = false;
+        const check = async () => {
+            if (checking || document.hidden) return;
+            checking = true;
+            try {
+                const r = await fetch(location.href, { credentials: 'same-origin', headers: { 'X-SkillUp-Live': '1' } });
+                if (!r.ok) return;
+                const page = new DOMParser().parseFromString(await r.text(), 'text/html');
+                const next = page.querySelector('#conversation-messages .sc-thread');
+                if (!next) return;
+                if (next.innerHTML !== liveThread.innerHTML) {
+                    const box = liveThread.parentElement, atEnd = box.scrollHeight - box.scrollTop - box.clientHeight < 90;
+                    liveThread.innerHTML = next.innerHTML;
+                    if (atEnd) box.scrollTop = box.scrollHeight;
+                }
+                const list = page.querySelector('.sc-contact-scroll'), head = page.querySelector('.sc-contacts-head');
+                if (list && contactList && list.innerHTML !== contactList.innerHTML) contactList.innerHTML = list.innerHTML;
+                if (head && unreadBadge && head.innerHTML !== unreadBadge.innerHTML) unreadBadge.innerHTML = head.innerHTML;
+            } catch { /* offline for a moment: try again next time */ } finally { checking = false; }
+        };
+        setInterval(check, 3000);
+        document.addEventListener('visibilitychange', check);
+    }
+
     // Print buttons, and the leader overview's "more updates" arrow scrolls the alert list.
     document.addEventListener('click', e => {
         if (e.target.closest('[data-action=print]')) print();
