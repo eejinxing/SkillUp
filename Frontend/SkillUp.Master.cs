@@ -112,7 +112,8 @@ namespace SKILL_UP.Frontend
             SkillBody.Attributes["class"] = string.Join(" ", classes);
 
             var flash = Session["SkillUp.Flash"] as string;
-            if (flash != null)
+            // A background refresh (X-SkillUp-Live, see js/site.js) must not use up a notice meant for the person's next page.
+            if (flash != null && Request.Headers["X-SkillUp-Live"] != "1")
             {
                 Session.Remove("SkillUp.Flash");
                 if (Notice == null) Notice = flash;

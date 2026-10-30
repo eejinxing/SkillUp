@@ -203,7 +203,7 @@ Rows created before 2026-10-26 were saved in UTC, so in Malaysia they appear 8 h
 ## Known limitations
 
 - No email service: the password reset link is shown on screen (development setting).
-- AI replies are templates. The lab terminal runs JavaScript in a local Web Worker. Calls work only between two users on the same network (no STUN/TURN relay), the in-call chat stays on the sender's device, and live sessions still open a local camera preview only. Messages update on refresh, not in real time.
+- AI replies are templates. The lab terminal runs JavaScript in a local Web Worker. Calls work only between two users on the same network (no STUN/TURN relay), and live sessions still open a local camera preview only. In-call chat goes to the other person through the same relay and is not saved. The Messages page checks for new messages every 3 seconds while it is open (it is not instant, and a hidden tab pauses).
 - Course files are stored in the database as data URLs (2 MB limit), not in file storage.
 - The old JavaScript files in `Frontend/js/` (for example `seed.js` and the `*-data.js` fixtures) contain demo passwords and answers. No page loads them, but remove them before any real deployment.
 - Every page adapts to desktop, tablet and phone widths. The small-screen rules live in `Frontend/css/responsive.css`, which loads last.

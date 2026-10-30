@@ -223,7 +223,10 @@
                 if (net.pc?.remoteDescription) await net.pc.addIceCandidate(m.data).catch(() => {});
                 else net.queue.push(m.data);
             } else if (m.type === 'decline') ended(call.name + ' declined the call.');
-            else if (m.type === 'hangup') ended(call.name + ' ended the call.');
+            else if (m.type === 'chat') {
+                call.chat.push({ from: 'peer', text: String(m.data || '').slice(0, 1000), at: Date.now() });
+                paint();
+            } else if (m.type === 'hangup') ended(call.name + ' ended the call.');
         } catch {
             say('Could not set up the call. Please try again.');
         }
@@ -414,7 +417,7 @@
             + '<div class="room-quick" aria-label="Quick replies">' + quickReplies.map(q => `<button type="button" data-call-quick="${esc(q)}">${esc(q)}</button>`).join('') + '</div>'
             + '<form class="room-compose" data-call-chat><label class="sr-only" for="room-message">Message</label><input id="room-message" name="msg" autocomplete="off" placeholder="Type your message…">'
             + `<button type="submit" aria-label="Send message to meeting">${icons.send}</button></form>`
-            + `<small class="call-local-note">${call.demo ? 'Illustrative demo · ' : ''}Messages stay on this device.</small>`
+            + `<small class="call-local-note">${call.demo ? 'Illustrative demo · ' : ''}${net ? 'Messages in this call go to the other person only.' : 'Messages stay on this device.'}</small>`
             + '</aside>';
         return `<div class="room"><div class="room-main">${head}${stage}${people}${insights}</div>${chat}</div>`;
     }
@@ -627,6 +630,7 @@
         const input = form.querySelector('input'), text = input.value.trim();
         if (!text) return;
         call.chat.push({ from: 'me', text, at: Date.now() });
+        if (net) signal('chat', text);
         call.focusChat = true;
         paint();
         if (call.demo) {
