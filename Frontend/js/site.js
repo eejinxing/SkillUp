@@ -154,8 +154,10 @@
     if (liveThread) {
         const contactList = document.querySelector('.sc-contact-scroll'), unreadBadge = document.querySelector('.sc-contacts-head');
         let checking = false;
-        const check = async () => {
-            if (checking || document.hidden) return;
+        // force: after sending, wait for any check already under way, then look now (even in a hidden tab) and show the newest message.
+        const check = async force => {
+            if (force === true) while (checking) await new Promise(done => setTimeout(done, 40));
+            else if (checking || document.hidden) return;
             checking = true;
             try {
                 const r = await fetch(location.href, { credentials: 'same-origin', headers: { 'X-SkillUp-Live': '1' } });
@@ -164,7 +166,7 @@
                 const next = page.querySelector('#conversation-messages .sc-thread');
                 if (!next) return;
                 if (next.innerHTML !== liveThread.innerHTML) {
-                    const box = liveThread.parentElement, atEnd = box.scrollHeight - box.scrollTop - box.clientHeight < 90;
+                    const box = liveThread.parentElement, atEnd = force === true || box.scrollHeight - box.scrollTop - box.clientHeight < 90;
                     liveThread.innerHTML = next.innerHTML;
                     if (atEnd) box.scrollTop = box.scrollHeight;
                 }
@@ -174,7 +176,35 @@
             } catch { /* offline for a moment: try again next time */ } finally { checking = false; }
         };
         setInterval(check, 3000);
-        document.addEventListener('visibilitychange', check);
+        document.addEventListener('visibilitychange', () => check());
+
+        // Sending: post the message in the background and update the conversation in place, so the page never reloads.
+        // If that fails for any reason, the button falls back to its normal form post, which shows the server's message.
+        const chat = document.querySelector('.skill-chat');
+        let sending = false, plain = false;
+        document.addEventListener('click', async e => {
+            const send = e.target.closest('.sc-send');
+            if (!send || plain || !chat?.dataset.api || !chat.dataset.with) return;
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            const field = document.getElementById('MessageBox'), text = field.value.trim();
+            if (!text || sending) return;
+            sending = true;
+            try {
+                const r = await fetch(chat.dataset.api + 'message', {
+                    method: 'POST', credentials: 'same-origin',
+                    headers: { 'Content-Type': 'application/json', 'X-SkillUp-Request': '1' },
+                    body: JSON.stringify({ to: chat.dataset.with, text })
+                });
+                if (!r.ok) throw Error(String(r.status));
+                field.value = '';
+                await check(true);
+                field.focus();
+            } catch {
+                plain = true;
+                send.click();
+            } finally { sending = false; }
+        }, true);
     }
 
     // Print buttons, and the leader overview's "more updates" arrow scrolls the alert list.
