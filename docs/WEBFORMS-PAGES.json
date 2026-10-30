@@ -242,13 +242,6 @@
     "fallback": null
   },
   {
-    "page": "Frontend/Settings.aspx",
-    "codeBehind": "Frontend/Settings.aspx.cs",
-    "initialRoute": "settings",
-    "queryParameters": [],
-    "fallback": null
-  },
-  {
     "page": "Frontend/Help.aspx",
     "codeBehind": "Frontend/Help.aspx.cs",
     "initialRoute": "help",

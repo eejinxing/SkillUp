@@ -29,7 +29,7 @@ Roles: **V** visitor, **L** Learner, **I** Instructor, **P** Program Leader, **A
 | ForgotPassword, ResetPassword | V | `token` (reset) | Password reset |
 | Dashboard | Signed in | Admin: `q`, `role`, `source` | Loads `Controls/<Role>Dashboard.ascx`: LearnerDashboard, InstructorDashboard, LeaderDashboard or AdminDashboard |
 | Messages | Signed in | `id`, `channel`, `announcement`, `compose`, `q` | Direct messages, course channels and announcements |
-| Discussions, LiveSessions, Assistant, Profile, Settings | Signed in | Settings: `tab` | Course discussions, live sessions, the companion, profile and account settings |
+| Discussions, LiveSessions, Assistant, Profile | Signed in | | Course discussions, live sessions, the companion and the profile |
 | MyCourses | L | `program` | Enrolled courses and learning paths |
 | Leaderboard | L | `period`, `q` | Weekly and all-time ranking |
 | Certificates | L | `id` | Certificates of completed courses |

@@ -33,10 +33,8 @@
           <div class="demo-grid">
             <skill:SubmitButton runat="server" CssClass="auth-social" Text="Learner" CommandArgument="Learner" OnCommand="Demo_Command" CausesValidation="false" />
             <skill:SubmitButton runat="server" CssClass="auth-social" Text="Instructor" CommandArgument="Instructor" OnCommand="Demo_Command" CausesValidation="false" />
-            <skill:SubmitButton runat="server" CssClass="auth-social" Text="Program Leader" CommandArgument="Program Leader" OnCommand="Demo_Command" CausesValidation="false" />
-            <skill:SubmitButton runat="server" CssClass="auth-social" Text="Admin" CommandArgument="Admin" OnCommand="Demo_Command" CausesValidation="false" />
           </div>
-          <p class="auth-notice">Demo usernames: alex, john, sarah, admin. Password: <span class="auth-code">Demo1234!</span></p>
+          <p class="auth-notice">Demo usernames: alex, john. Password: <span class="auth-code">Demo1234!</span></p>
         </section>
         </asp:PlaceHolder>
       </div>

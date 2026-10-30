@@ -25,7 +25,6 @@
         <% if (!string.IsNullOrEmpty(Me.Avatar)) { %><skill:SubmitButton runat="server" CssClass="ghost" Text="Remove image" CausesValidation="false" OnClick="RemoveAvatar_Click" /><% } %>
       </details>
       <a class="button pf-prefs" href="#pf-account">Account security</a>
-      <a class="button pf-prefs" href="Settings">Account preferences</a>
       <asp:PlaceHolder ID="DemoSwitch" runat="server">
         <details class="pf-demo-switch">
           <summary class="button pf-prefs">Switch demo role</summary>
@@ -33,8 +32,6 @@
           <div class="demo-grid">
             <skill:SubmitButton runat="server" Text="Learner" CommandArgument="Learner" OnCommand="Demo_Command" CausesValidation="false" />
             <skill:SubmitButton runat="server" Text="Instructor" CommandArgument="Instructor" OnCommand="Demo_Command" CausesValidation="false" />
-            <skill:SubmitButton runat="server" Text="Program Leader" CommandArgument="Program Leader" OnCommand="Demo_Command" CausesValidation="false" />
-            <skill:SubmitButton runat="server" Text="Admin" CommandArgument="Admin" OnCommand="Demo_Command" CausesValidation="false" />
           </div>
         </details>
       </asp:PlaceHolder>
@@ -91,7 +88,6 @@
     <details class="pf-card pf-section" id="pf-account" open>
       <summary><h2>Account</h2><%= Icon("chevron", "pf-chev") %></summary>
       <div class="pf-rows">
-        <div class="pf-row pf-row-action"><span class="pf-row-label"><%= Icon("key") %>Password</span><div class="pf-row-value"><span>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></div><a class="button ghost pf-row-btn" href="Settings?tab=security">Change password</a></div>
         <div class="pf-row pf-row-action"><span class="pf-row-label"><%= Icon("chat") %>Feedback</span><div class="pf-row-value"><span>Tell us about your learning experience</span></div><a class="button ghost pf-row-btn" href="#pf-feedback">Give feedback</a></div>
       </div>
       <details class="inline-form pf-feedback" id="pf-feedback">
