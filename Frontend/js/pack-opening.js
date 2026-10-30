@@ -65,6 +65,36 @@
 
     const frontOf = o => o.direction > 0 ? TEAR_START + o.torn * TEAR_LENGTH : TEAR_START + TEAR_LENGTH - o.torn * TEAR_LENGTH;
 
+    // ---- The tearing sound ----------------------------------------------------------------------------------
+    // Played once, the moment the pack is fully torn. Web Audio so it starts without lag; the context is made on the first
+    // press, which is the gesture browsers want before any sound, and the file is fetched then so it is ready by the end.
+
+    let audio = null, tearBuffer = null, tearLoading = false;
+
+    function prepareSound() {
+        if (!audio) {
+            const Context = window.AudioContext || window.webkitAudioContext;
+            if (!Context) return;
+            audio = new Context();
+        }
+        if (audio.state === 'suspended') audio.resume().catch(() => {});
+        if (tearBuffer || tearLoading) return;
+        tearLoading = true;
+        fetch('assets/my-courses/tearing_pack.mp3')
+            .then(r => r.arrayBuffer())
+            .then(data => audio.decodeAudioData(data))
+            .then(buffer => { tearBuffer = buffer; })
+            .catch(() => { tearLoading = false; });
+    }
+
+    function playTearSound() {
+        if (!audio || !tearBuffer || reducedMotion()) return;
+        const source = audio.createBufferSource();
+        source.buffer = tearBuffer;
+        source.connect(audio.destination);
+        source.start();
+    }
+
     // ---- Light, drawn once and reused every frame ---------------------------------------------------------
 
     const HALO_PAD = 150;
@@ -181,6 +211,7 @@
 
     function finishTear(o) {
         o.torn = 1;
+        playTearSound();
         if (reducedMotion()) {
             o.phase = 'held';
             save(o);
@@ -588,6 +619,7 @@
 
         zone.addEventListener('pointerdown', e => {
             swallowClick = false;
+            prepareSound();
             if (e.isPrimary && e.button === 0 && !opening && !saving) press = { id: e.pointerId, x: e.clientX, y: e.clientY, dragging: false };
         });
         pack.addEventListener('pointermove', e => {
@@ -630,6 +662,7 @@
         const pack = e.target.closest('button.mc-program-cta')?.closest('.mc-can-tear');
         if (!pack || saving || reducedMotion()) return;
         e.preventDefault();
+        prepareSound();
         if (!opening) startTear(pack, 1, true);
     });
 
