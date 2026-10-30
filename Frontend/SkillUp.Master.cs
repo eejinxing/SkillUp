@@ -69,7 +69,8 @@ namespace SKILL_UP.Frontend
             var course = enrolled ?? data.Courses.FirstOrDefault(c => c.InstructorId == me.Id);
             return JsonConvert.SerializeObject(new
             {
-                me = new { name = me.Name, avatar = me.Avatar },
+                api = ResolveUrl("~/api/call/"),
+                me = new { id = me.Id, name = me.Name, avatar = me.Avatar },
                 peer = peer == null ? null : new { name = peer.Name, role = peer.Role },
                 course = course == null ? null : new
                 {

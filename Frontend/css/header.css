@@ -3260,3 +3260,32 @@ body:has(#skill-call-dock.is-room) #app .skill-global-header .cs-head time {
     border-radius: 16px;
     background: #ffffff08;
 }
+
+/* Live calls: the other person's picture fills the stage, behind the controls; initials stand in for a missing photo */
+#skill-call-dock .call-remote {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #0b130e;
+}
+
+#skill-call-dock .call-remote[hidden] {
+    display: none;
+}
+
+#skill-incoming-call.incoming-v2 .incoming-avatar b {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #b8ec7d;
+    color: #27351a;
+    font-size: 18px;
+    box-shadow: 0 0 0 2px #c8ff2e;
+}
