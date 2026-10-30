@@ -20,8 +20,26 @@ namespace SKILL_UP.Backend
         public Db()
         {
             Connection = new SqlConnection(ConnectionString);
-            Connection.Open();
+            // LocalDB stops itself after a few idle minutes, and its first start attempts afterwards often fail
+            // ("SQL Server process failed to start") before one succeeds. Retry for a short while instead of failing the request.
+            for (var attempt = 1; ; attempt++)
+            {
+                try
+                {
+                    Connection.Open();
+                    return;
+                }
+                catch (SqlException e) when (attempt < 8 && IsLocalDbStartup(e))
+                {
+                    SqlConnection.ClearPool(Connection);
+                    System.Threading.Thread.Sleep(Math.Min(4000, 750 * attempt));
+                }
+            }
         }
+
+        /// <summary>LocalDB could not be reached or started yet (error 50 / -1, or a LocalDB startup message).</summary>
+        static bool IsLocalDbStartup(SqlException e) =>
+            e.Number == 50 || e.Number == -1 || e.Message.IndexOf("LocalDB", StringComparison.OrdinalIgnoreCase) >= 0;
 
         public void Begin() => Transaction = Connection.BeginTransaction();
 

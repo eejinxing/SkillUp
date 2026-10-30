@@ -1158,7 +1158,7 @@ body:has(.my-courses) .main {
 .my-courses .mc-program,
 .my-courses .mc-program-scroll::before,
 .my-courses .mc-program-scroll::after {
-    --mc-pouch-ratio: 1.34;
+    --mc-pouch-ratio: 1.357;
 }
 
 .my-courses .mc-program>img {
@@ -1193,3 +1193,33 @@ body:has(.my-courses) .main {
     object-fit: contain;
     object-position: center;
 }
+
+/* Program pouch: a wrapper holding the program link (fills it) and, beside the link, the enrol state button - a button
+   cannot live inside a link. Closed pouch until the learner enrols in one of the program's courses, then the torn-open one. */
+.my-courses .mc-program{filter:none}
+.my-courses .mc-program-link{position:absolute;inset:0;display:block;border-radius:14px;filter:brightness(.9);transition:filter .2s ease}
+.my-courses .mc-program-link>img{display:block;width:100%;height:100%;object-fit:contain;border-radius:14px;pointer-events:none;transition:filter .22s ease}
+.my-courses .mc-program[data-selected=true] .mc-program-link{filter:drop-shadow(0 0 18px #8b5cf688) drop-shadow(0 0 3px #c4b5fd88)}
+.my-courses .mc-program-link:focus-visible{outline:2px solid #c4b5fd;outline-offset:-6px}
+.my-courses .mc-program:hover .mc-program-link>img,.my-courses .mc-program:focus-within .mc-program-link>img{filter:brightness(.72)}
+
+/* Program name as a sticker label in black Archivo Black, like the DEV KIT tag on the pouch. */
+.my-courses .mc-program-caption{left:50%;right:auto;bottom:7%;max-width:86%;padding:6px 12px 5px;border-radius:7px;background:#cfe8f7;box-shadow:0 2px 0 #0000002e,inset 0 0 0 1px #ffffff99;color:#0b0b0d;font:400 12px/1.1 'Archivo Black','DM Sans',sans-serif;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transform:translateX(-50%) rotate(-2deg)}
+
+/* Enroll / Enrolled pill: glowing violet glass - translucent violet fill with grain, bright lavender rim, white glow along
+   the bottom edge and a soft violet halo; plain line icon (paper plane / check). Appears on hover or keyboard focus. */
+.my-courses .mc-program-cta{position:absolute;left:50%;top:50%;z-index:2;display:inline-flex;align-items:center;gap:10px;margin:0;padding:13px 26px;border:1px solid #c9bdff;border-bottom-color:#f6f3ff;border-radius:999px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(180deg,#6f5cf2e6 0%,#5b48e0e6 55%,#7a68f5f0 100%);color:#f4f1ff;font:500 15px/1 'DM Sans',sans-serif;letter-spacing:.01em;white-space:nowrap;text-shadow:0 0 10px #ffffff59;box-shadow:inset 0 1px 0 #ffffff73,inset 0 -9px 14px -5px #ffffffee,inset 0 0 0 1px #ffffff1f,0 3px 10px -2px #e9e4ffcc,0 0 22px #9b8cffcc,0 0 64px #7a6aff8c,0 10px 30px #00000066;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);overflow:hidden;opacity:0;transform:translate(-50%,-30%) scale(.92);transition:opacity .22s ease,transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .2s;pointer-events:none}
+.my-courses button.mc-program-cta{height:auto;min-height:0;cursor:pointer;font-family:'DM Sans',sans-serif!important}
+.my-courses .mc-cta-label{position:relative;z-index:1}
+.my-courses .mc-cta-icon{position:relative;z-index:1;display:grid;place-items:center;filter:drop-shadow(0 0 6px #ffffff80);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.my-courses .mc-cta-icon svg{width:17px;height:17px}
+.my-courses .mc-program-cta::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(105deg,transparent 30%,#ffffff26 48%,transparent 66%);transform:translateX(-120%);pointer-events:none}
+.my-courses .mc-program:hover .mc-program-cta,.my-courses .mc-program:focus-within .mc-program-cta{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.my-courses .mc-program:hover button.mc-program-cta,.my-courses .mc-program:focus-within button.mc-program-cta{pointer-events:auto}
+.my-courses .mc-program:hover .mc-program-cta::after{animation:mc-cta-shine 1.1s .15s ease-out both}
+.my-courses button.mc-program-cta:hover{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(180deg,#7c6af7f0 0%,#6553e8f0 55%,#8676f8f5 100%);box-shadow:inset 0 1px 0 #ffffff80,inset 0 -9px 14px -5px #fffffff2,inset 0 0 0 1px #ffffff26,0 3px 12px -2px #eee9ffdd,0 0 28px #9a8cffdd,0 0 72px #6c5cffa0,0 10px 30px #00000066}
+.my-courses button.mc-program-cta:hover .mc-cta-icon{transform:translateX(3px)}
+.my-courses button.mc-program-cta:active{transform:translate(-50%,-50%) scale(.96)}
+.my-courses button.mc-program-cta:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@keyframes mc-cta-shine{to{transform:translateX(120%)}}
+@media(prefers-reduced-motion:reduce){.my-courses .mc-program-cta{transition:opacity .01s}.my-courses .mc-program:hover .mc-program-cta::after{animation:none}}

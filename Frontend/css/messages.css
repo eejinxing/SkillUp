@@ -2464,3 +2464,76 @@ body:has(.sc-workspace) {
         transition: none;
     }
 }
+
+/* ── Sidebar: every course channel visible and the whole sidebar scrolls as one (courses, direct messages and contacts
+   move together), Help pinned to the bottom. Rows get a soft hover and a violet active state (tint + left bar + glowing
+   dot), a violet workspace mark with a sheen, gradient hairlines under section labels, pulsing unread counts, avatar
+   rings and staggered entrances. ── */
+#app .skill-chat.sc-workspace .sc-contacts{overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:transparent transparent;transition:scrollbar-color .35s ease;overscroll-behavior:contain}
+#app .skill-chat.sc-workspace .sc-contacts:hover{scrollbar-color:#ffffff2e transparent}
+#app .skill-chat.sc-workspace .sc-contacts>*{flex-shrink:0}
+#app .skill-chat.sc-workspace .sc-channels{max-height:none;overflow:visible;padding:4px 12px 18px}
+#app .skill-chat.sc-workspace .sc-contact-scroll{flex:none;min-height:auto;max-height:none;overflow:visible;padding:2px 12px 14px}
+#app .skill-chat.sc-workspace .sc-sidebar-help{position:sticky;bottom:0;z-index:2;margin-top:auto;background:linear-gradient(180deg,#14141400,#141414 35%);transition:color .2s}
+#app .skill-chat.sc-workspace .sc-sidebar-help:hover{color:#ececf1}
+
+#app .skill-chat.sc-workspace .sc-sidebar-label,#app .skill-chat.sc-workspace .sc-contacts-head h2{display:flex;align-items:center;gap:10px;font-size:10.5px;font-weight:500;letter-spacing:.14em;color:#7b7b86}
+#app .skill-chat.sc-workspace .sc-sidebar-label{padding:0 10px 10px}
+#app .skill-chat.sc-workspace .sc-sidebar-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#a78bfa40,transparent)}
+#app .skill-chat.sc-workspace .sc-contacts-head{margin:0 12px;padding:18px 10px 12px;border-top:1px solid #ffffff0d}
+#app .skill-chat.sc-workspace .sc-total{display:grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#8b5cf6;color:#fff;font-size:11px;font-weight:600}
+
+#app .skill-chat.sc-workspace .sc-workspace-mark{position:relative;overflow:hidden;background:linear-gradient(140deg,#a78bfa,#6d4fe0);color:#fff;box-shadow:0 0 0 1px #c4b5fd59,0 6px 16px #8b5cf640}
+#app .skill-chat.sc-workspace .sc-workspace-mark::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,#ffffff73 50%,transparent 65%);transform:translateX(-120%);animation:sc-sheen 4.5s 1s ease-in-out infinite}
+@keyframes sc-sheen{0%,70%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+
+#app .skill-chat.sc-workspace :is(.sc-channel,.sc-contact){position:relative;color:#b4b4bd;border-radius:10px;transition:background-color .2s,color .2s,transform .25s var(--cp-ease)}
+#app .skill-chat.sc-workspace .sc-channel{min-height:42px;margin:2px 0;padding:0 12px}
+#app .skill-chat.sc-workspace .sc-contact{padding:11px 10px}
+#app .skill-chat.sc-workspace :is(.sc-channel,.sc-contact)::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:linear-gradient(#c4b5fd,#8b5cf6);opacity:0;transform:scaleY(.3);transition:opacity .2s,transform .3s var(--cp-ease)}
+#app .skill-chat.sc-workspace :is(.sc-channel,.sc-contact):hover{background:#ffffff08;color:#ececf1;transform:translateX(2px)}
+#app .skill-chat.sc-workspace :is(.sc-channel,.sc-contact).active{background:linear-gradient(90deg,#8b5cf624,#8b5cf60a 70%,transparent);color:#fff}
+#app .skill-chat.sc-workspace :is(.sc-channel,.sc-contact).active::before{opacity:1;transform:none}
+#app .skill-chat.sc-workspace .sc-channel-dot{width:8px;height:8px;border-radius:50%;transition:box-shadow .2s,transform .2s}
+#app .skill-chat.sc-workspace .sc-channel-dot.all{background:#c4b5fd}
+#app .skill-chat.sc-workspace .sc-channel:hover .sc-channel-dot{transform:scale(1.2)}
+#app .skill-chat.sc-workspace .sc-channel.active .sc-channel-dot{box-shadow:0 0 0 3px #ffffff14,0 0 10px var(--channel-color,#c4b5fd)}
+#app .skill-chat.sc-workspace .sc-channel>small{transition:background-color .2s,color .2s}
+#app .skill-chat.sc-workspace .sc-channel.active>small{background:#8b5cf6;color:#fff}
+#app .skill-chat.sc-workspace .sc-unread,#app .skill-chat.sc-workspace .sc-unread b{background:#8b5cf6;color:#fff}
+#app .skill-chat.sc-workspace :is(.sc-total,.sc-unread,.sc-channel.active>small){animation:sc-pulse 2.4s ease-in-out infinite}
+@keyframes sc-pulse{0%,100%{box-shadow:0 0 0 0 #8b5cf666}50%{box-shadow:0 0 0 5px #8b5cf600}}
+#app .skill-chat.sc-workspace .sc-contact .sc-face{transition:box-shadow .25s,transform .25s var(--cp-ease)}
+#app .skill-chat.sc-workspace .sc-contact:hover .sc-face{box-shadow:0 0 0 2px #141414,0 0 0 3px #ffffff33;transform:scale(1.04)}
+#app .skill-chat.sc-workspace .sc-contact.active .sc-face{box-shadow:0 0 0 2px #141414,0 0 0 3.5px #a78bfa}
+#app .skill-chat.sc-workspace .sc-contact.has-unread .sc-contact-line strong{color:#fff}
+#app .skill-chat.sc-workspace .sc-search{margin:0 14px 10px;height:38px;border:1px solid #ffffff0f;border-radius:10px;background:#1b1b1f;transition:border-color .2s,box-shadow .2s,background-color .2s}
+#app .skill-chat.sc-workspace .sc-search:hover{border-color:#ffffff1f}
+#app .skill-chat.sc-workspace .sc-search:focus-within{border-color:#a78bfa99;background:#1d1b24;box-shadow:0 0 0 3px #a78bfa1f}
+@media(prefers-reduced-motion:no-preference){
+ #app .skill-chat.sc-workspace .sc-workspace-identity{animation:cp-slide .45s var(--cp-ease) both}
+ #app .skill-chat.sc-workspace .sc-contacts-head,#app .skill-chat.sc-workspace .sc-search{animation:cp-slide .45s .18s var(--cp-ease) both}
+}
+@media(prefers-reduced-motion:reduce){#app .skill-chat.sc-workspace :is(.sc-total,.sc-unread,.sc-channel>small){animation:none}#app .skill-chat.sc-workspace .sc-workspace-mark::after{animation:none}}
+
+/* ── Comment composer: a lighter surface that matches the panel, avatar with a violet ring, the box grows a little when
+   you type, the hint as a soft chip, and a glowing violet Post pill with a paper-plane icon. ── */
+#app .skill-chat .sc-discussion .sc-comment-box{border:1px solid #ffffff1f;border-radius:16px;background:linear-gradient(180deg,#303036,#2a2a30);box-shadow:inset 0 1px 0 #ffffff0f,0 8px 24px #00000033}
+#app .skill-chat .sc-discussion .sc-comment-box:hover{border-color:#ffffff33}
+#app .skill-chat .sc-discussion .sc-comment-box:focus-within{border-color:#a78bfaa6;background:linear-gradient(180deg,#33313b,#2c2a33);box-shadow:0 0 0 4px #a78bfa1f,0 10px 28px #00000040}
+#app .skill-chat .sc-discussion .sc-comment-input .sc-face{background:#3d3b46;color:#e8e6f0;box-shadow:0 0 0 2px #2f2f35,0 0 0 3px #a78bfa66;transition:box-shadow .2s}
+#app .skill-chat .sc-discussion .sc-comment-box:focus-within .sc-comment-input .sc-face{box-shadow:0 0 0 2px #2f2f35,0 0 0 3.5px #a78bfa}
+#app .skill-chat .sc-discussion .sc-comment-box textarea{transition:min-height .25s var(--cp-ease)}
+#app .skill-chat .sc-discussion .sc-comment-box:focus-within textarea{min-height:84px}
+#app .skill-chat .sc-discussion .sc-comment-box textarea::placeholder{color:#9a98a6}
+#app .skill-chat .sc-discussion .sc-comment-bar{justify-content:space-between;border-top-color:#ffffff12}
+#app .skill-chat .sc-discussion .sc-comment-hint{display:inline-flex;align-items:center;gap:7px;flex:0 1 auto;padding:5px 11px;border:1px solid #ffffff0f;border-radius:999px;background:#ffffff08;color:#9a98a6;font-size:12px}
+#app .skill-chat .sc-discussion .sc-comment-post{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 16px 0 18px;border:1px solid #c9bdff;border-radius:999px;background:linear-gradient(180deg,#7c6af7,#5f4ce4);color:#fff;font-weight:600;box-shadow:inset 0 1px 0 #ffffff59,inset 0 -6px 10px -5px #ffffffcc,0 0 16px #8b7bff66,0 6px 18px #00000059;transition:background-color .15s,transform .15s,box-shadow .2s}
+#app .skill-chat .sc-discussion .sc-comment-post svg{width:15px;height:15px;transition:transform .2s var(--cp-ease)}
+#app .skill-chat .sc-discussion .sc-comment-post:hover:not(:disabled){background:linear-gradient(180deg,#8a79fa,#6a57ea);transform:translateY(-1px);box-shadow:inset 0 1px 0 #ffffff66,inset 0 -6px 10px -5px #ffffffe6,0 0 24px #9b8cffaa,0 8px 22px #00000066}
+#app .skill-chat .sc-discussion .sc-comment-post:hover:not(:disabled) svg{transform:translateX(3px)}
+#app .skill-chat .sc-discussion .sc-comment-post:active:not(:disabled){transform:scale(.97)}
+
+/* ── Chat thread scrollbar: slim and quiet, shows while you hover. The middle announcement scrollbar keeps its original look. ── */
+#app .skill-chat .sc-messages{scrollbar-width:thin;scrollbar-color:transparent transparent;transition:scrollbar-color .35s ease}
+#app .skill-chat .sc-messages:hover{scrollbar-color:#ffffff2e transparent}
