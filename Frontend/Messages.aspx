@@ -1,6 +1,6 @@
 <%@ Page Title="Communication workspace" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Messages.aspx.cs" Inherits="SKILL_UP.Frontend.MessagesPage" %>
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
-<section class="skill-chat sc-v2 sc-workspace <%= Selected != null && QueryInt("id") != null ? "sc-conversation-open" : "" %>">
+<section class="skill-chat sc-v2 sc-workspace <%= Selected != null && QueryInt("id") != null ? "sc-conversation-open" : "" %>" data-api="<%= ResolveUrl("~/api/commands/") %>" data-with="<%= SelectedId %>">
   <h1 class="sc-sr-only" id="page-title" tabindex="-1">Communication workspace</h1>
   <aside class="sc-contacts chat-contacts" aria-label="Workspace and contacts">
     <header class="sc-workspace-identity"><span class="sc-workspace-mark">S</span><div><strong>Skill workspace</strong><small><%: Me.Name %></small></div></header>
