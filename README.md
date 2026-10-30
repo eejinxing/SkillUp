@@ -59,7 +59,7 @@ Voice and video calls go straight from one browser to the other (WebRTC). The si
 Only one device runs the site; the other just opens it in a browser.
 
 1. On the host PC, build the project in Visual Studio (**Ctrl+Shift+B**), then stop any run Visual Studio started (**F5**).
-2. Double-click `Start-LAN.cmd` and accept the administrator prompt. It opens the firewall for ports 8080 and 44390, starts IIS Express on your network address, and prints the links to use, for example `https://192.168.1.20:44390/`. You do not need to set or type an IP address anywhere.
+2. Double-click `Start-LAN.cmd` and accept the administrator prompt. It opens the firewall for ports 8080 and 44390 (only to devices on your own network, and only while the rule exists), starts IIS Express on your network address, and prints the links to use, for example `https://192.168.1.20:44390/`. You do not need to set or type an IP address anywhere.
 3. On the other device, open the printed **https** link and continue past the certificate warning once. The camera and microphone only work on a secure page; on the `http://` link that device can still hear and see the other person but cannot send its own camera or microphone.
 4. Log in as a **different user** on each device (for example `alex` and `john`), open **Messages**, choose the other person and press the voice or video button. The other device shows an Accept / Decline card on any page.
 5. The launcher window lists each device when it joins, with the name it shares with the network (for example `Hongs-iPhone`) or just its address when it keeps its name private. Names depend on your router; they are a best guess.

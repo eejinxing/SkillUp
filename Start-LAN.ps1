@@ -14,9 +14,21 @@ if (-not (Test-Path $iis)) { throw 'IIS Express was not found. It is installed w
 if (-not (Test-Path (Join-Path $root 'bin\SKILL UP.dll'))) { throw 'The project has not been built yet. Build it in Visual Studio first (Ctrl+Shift+B).' }
 
 # The address other devices type in: the first private IPv4 address on this PC.
-$ip = Get-NetIPAddress -AddressFamily IPv4 |
-    Where-Object { $_.IPAddress -match '^(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)' -and $_.PrefixOrigin -ne 'WellKnown' } |
-    Select-Object -First 1 -ExpandProperty IPAddress
+# Virtual adapters (VirtualBox, VMware, Hyper-V, WSL) also have private addresses, but other devices cannot reach those, so
+# the address comes from the adapter that carries the PC's internet route (the Wi-Fi or cable to the router).
+$route = Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction SilentlyContinue |
+    Sort-Object { $_.RouteMetric + (Get-NetIPInterface -InterfaceIndex $_.InterfaceIndex -AddressFamily IPv4).InterfaceMetric } |
+    Select-Object -First 1
+$ip = $null
+if ($route) {
+    $ip = Get-NetIPAddress -AddressFamily IPv4 -InterfaceIndex $route.InterfaceIndex -ErrorAction SilentlyContinue |
+        Where-Object { $_.IPAddress -notlike '169.254.*' } | Select-Object -First 1 -ExpandProperty IPAddress
+}
+if (-not $ip) {
+    $ip = Get-NetIPAddress -AddressFamily IPv4 |
+        Where-Object { $_.IPAddress -match '^(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)' -and $_.InterfaceAlias -notmatch 'VMware|VirtualBox|Virtual|vEthernet|WSL|Loopback|Host-Only' } |
+        Select-Object -First 1 -ExpandProperty IPAddress
+}
 if (-not $ip) { throw 'No network address found. Connect this PC to the same Wi-Fi as the other device.' }
 
 # A private copy of IIS Express's own settings with just this site, listening on every address.
@@ -31,12 +43,12 @@ $sites.InnerXml = '<site name="' + $siteName + '" id="1"><application path="/" a
     '<binding protocol="https" bindingInformation="*:' + $https + ':" /></bindings></site>'
 $xml.Save($config)
 
-# Windows Firewall: allow the two ports in, for this PC's private networks only.
+# Windows Firewall: allow the two ports in, but only from devices on this PC's own network (same subnet). Home Wi-Fi is
+# often marked "Public" by Windows, so the rule applies to every profile; the subnet limit is what keeps it narrow.
 foreach ($port in $http, $https) {
     $rule = "Skill UP test $port"
-    if (-not (Get-NetFirewallRule -DisplayName $rule -ErrorAction SilentlyContinue)) {
-        New-NetFirewallRule -DisplayName $rule -Direction Inbound -Protocol TCP -LocalPort $port -Action Allow -Profile Private, Domain | Out-Null
-    }
+    Get-NetFirewallRule -DisplayName $rule -ErrorAction SilentlyContinue | Remove-NetFirewallRule
+    New-NetFirewallRule -DisplayName $rule -Direction Inbound -Protocol TCP -LocalPort $port -Action Allow -Profile Any -RemoteAddress LocalSubnet | Out-Null
 }
 
 # HTTPS uses IIS Express's own development certificate (the browser shows a warning once; choose Advanced > Continue).
