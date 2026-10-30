@@ -4,7 +4,7 @@ Skill UP is a role-based online learning platform built for the WAPP group assig
 
 The app is an **ASP.NET Web Forms** project (.NET Framework 4.8.1). Each screen is a Web Forms page: `.aspx` markup with server controls and an `.aspx.cs` code-behind, rendered on the server and saved through postbacks.
 
-> **Status:** The Web Forms site now runs on a C# backend (`Backend/`) and the SQL Server database in `App_Data/SkillUp.mdf`. Sign-in, permissions, grading and every save happen on the server; nothing is stored in `localStorage`. The only thing kept in the browser is two HttpOnly cookies: the sign-in cookie and a random key that links the browser to its enquiries (`ENQUIRY_ACCESS`). Email, real AI, video calls and file storage services are not connected yet. [docs/BACKEND.md](docs/BACKEND.md) explains how the backend works.
+> **Status:** The Web Forms site now runs on a C# backend (`Backend/`) and the SQL Server database in `App_Data/SkillUp.mdf`. Sign-in, permissions, grading and every save happen on the server; nothing is stored in `localStorage`. The only thing kept in the browser is two HttpOnly cookies: the sign-in cookie and a random key that links the browser to its enquiries (`ENQUIRY_ACCESS`). Voice and video calls work between two signed-in users on the same network (see [Testing calls between two devices](#testing-calls-between-two-devices)). Email, real AI and file storage services are not connected yet. [docs/BACKEND.md](docs/BACKEND.md) explains how the backend works.
 
 ## Features
 
@@ -52,6 +52,35 @@ All accounts and records are fictional. In Visual Studio they live in your `App_
 
 The demo role buttons (no password), the demo data and the on-screen password reset link are development switches in `Web.config` (`SkillUp:*` app settings). A Release publish turns all three off.
 
+### Testing calls between two devices
+
+Voice and video calls go straight from one browser to the other (WebRTC). The site only passes the small set-up messages (`Backend/CallSignals.cs`), keeps them in memory for up to 90 seconds, and stores nothing in the database or logs. There is no STUN or TURN server, so **both devices must be on the same network**.
+
+Only one device runs the site; the other just opens it in a browser.
+
+1. On the host PC, build the project in Visual Studio (**Ctrl+Shift+B**), then stop any run Visual Studio started (**F5**).
+2. Double-click `Start-LAN.cmd` and accept the administrator prompt. It opens the firewall for ports 8080 and 44390, starts IIS Express on your network address, and prints the links to use, for example `https://192.168.1.20:44390/`. You do not need to set or type an IP address anywhere.
+3. On the other device, open the printed **https** link and continue past the certificate warning once. The camera and microphone only work on a secure page; on the `http://` link that device can still hear and see the other person but cannot send its own camera or microphone.
+4. Log in as a **different user** on each device (for example `alex` and `john`), open **Messages**, choose the other person and press the voice or video button. The other device shows an Accept / Decline card on any page.
+5. The launcher window lists each device when it joins, with the name it shares with the network (for example `Hongs-iPhone`) or just its address when it keeps its name private. Names depend on your router; they are a best guess.
+
+Testing on one PC needs none of this: use a normal window and a private window on `https://localhost:44353/`.
+
+**If a call does not connect:** check both devices are on the same Wi-Fi (guest networks often block device-to-device traffic; a phone hotspot is a good alternative) and that you are on the `https://` link.
+
+**Security notes**
+
+- Use the `https://` link. On `http://` the sign-in cookie and call set-up messages can be read by others on the Wi-Fi. The call's audio and video are encrypted either way.
+- While the launcher runs, anyone on the same network who knows the address can open the site, and the demo role buttons log in with no password. Turn off the `SkillUp:*` demo switches in `Web.config` before sharing the link, and use a network you control.
+- The launcher adds two Windows Firewall rules that stay after it closes. Remove them when you finish:
+
+  ```powershell
+  netsh advfirewall firewall delete rule name="Skill UP test 8080"
+  netsh advfirewall firewall delete rule name="Skill UP test 44390"
+  ```
+- Any signed-in user can ring any active user and there is no rate limit. This is fine for a demo; a real product needs contact rules and limits.
+- Each device sees the other's local network address inside the call set-up data. No IP address is stored in the code or the database.
+
 ## Project structure
 
 ```text
@@ -59,6 +88,7 @@ Skill-Up/
 ├── SKILL UP.slnx / SKILL UP.csproj   Visual Studio solution and Web Forms project
 ├── Default.aspx(.cs)                  Start page; redirects to Frontend/Home.aspx
 ├── Global.asax, Web.config, …         ASP.NET application setup
+├── Start-LAN.cmd / Start-LAN.ps1      Runs the site on the local network for two-device call tests
 ├── App_Start/ Content/ Scripts/       Visual Studio template: routing, bundling, Bootstrap, jQuery
 │
 ├── Frontend/                          The Skill UP application
@@ -74,6 +104,7 @@ Skill-Up/
 │
 ├── Backend/                           C# commands used by the pages, plus the JSON API /api/workspace and /api/commands
 │   ├── ApiHandler.cs                  HTTP endpoint, sign-in cookie, CSRF header, error responses
+│   ├── CallSignals.cs                 In-memory mailbox that passes call set-up messages between two users (/api/call)
 │   ├── Commands*.cs                   Every command: rules, permissions, grading, SQL writes
 │   ├── Workspace.cs                   Builds the role-scoped workspace JSON for each user
 │   ├── Model.cs, Db.cs                Loads the tables; parameterised ADO.NET helper
@@ -103,7 +134,7 @@ Skill-Up/
 
 - **Pages:** Every page inherits `Frontend/SkillPage.cs`. It loads the database snapshot (`Backend/Model.cs`) and the signed-in account, checks the role, and the page renders its markup on the server. Links are page names without `.aspx`, such as `Course?id=3`; filters and tabs are query parameters.
 - **Saving:** Buttons are `skill:SubmitButton` controls that post back. The handler calls `TryRun(action, payload)`, which runs `Backend/Commands*.cs` in one transaction, the same commands the JSON API uses, so every rule and permission check is shared. After a save the page redirects with a short notice, so a refresh never repeats it.
-- **Scripts:** Pages work without JavaScript. `js/site.js` adds small conveniences, `js/activity.js` runs the quiz timer and the lab terminal, `js/pack-opening.js` tears program packs open on My courses (without it, the pack's Enroll button still works), and `js/call-preview.js` the device-only call preview.
+- **Scripts:** Pages work without JavaScript. `js/site.js` adds small conveniences, `js/activity.js` runs the quiz timer and the lab terminal, `js/pack-opening.js` tears program packs open on My courses (without it, the pack's Enroll button still works), and `js/call-preview.js` voice and video calls (WebRTC, with the set-up messages polled from `/api/call`), plus a device-only preview for live sessions.
 - **Styles:** Stylesheets in `Frontend/css/` override each other in load order, so order matters; they are linked in `Frontend/SkillUp.Master`. Asset URLs inside the CSS are relative to `css/`, for example `url('../assets/…')`.
 
 [Frontend/README.md](Frontend/README.md) has notes for working on the pages, and [docs/WEBFORMS-PAGES.md](docs/WEBFORMS-PAGES.md) lists every page.
@@ -172,7 +203,7 @@ Rows created before 2026-10-26 were saved in UTC, so in Malaysia they appear 8 h
 ## Known limitations
 
 - No email service: the password reset link is shown on screen (development setting).
-- AI replies are templates. The lab terminal runs JavaScript in a local Web Worker. Calls show a local camera preview only. Messages update on refresh, not in real time.
+- AI replies are templates. The lab terminal runs JavaScript in a local Web Worker. Calls work only between two users on the same network (no STUN/TURN relay), the in-call chat stays on the sender's device, and live sessions still open a local camera preview only. Messages update on refresh, not in real time.
 - Course files are stored in the database as data URLs (2 MB limit), not in file storage.
 - The old JavaScript files in `Frontend/js/` (for example `seed.js` and the `*-data.js` fixtures) contain demo passwords and answers. No page loads them, but remove them before any real deployment.
 - Every page adapts to desktop, tablet and phone widths. The small-screen rules live in `Frontend/css/responsive.css`, which loads last.
