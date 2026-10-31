@@ -952,3 +952,19 @@
 #app .pf-badge:hover {
     transform: translateY(-4px) rotate(-8deg) scale(1.08);
 }
+
+/* My Certificates: same cards as the course grid, with the completion date, hours and a link to the certificate */
+#app .pf-cert footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+}
+
+#app .pf-cert footer span {
+    white-space: nowrap;
+}
+
+#app .pf-cert footer span:last-child {
+    margin-left: auto;
+    color: #fff;
+}

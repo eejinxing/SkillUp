@@ -65,6 +65,7 @@ namespace SKILL_UP.Frontend
             BuildHeatmap(days);
             BindBadges(days);
             BindCourses();
+            BindCertificates();
             if (!IsPostBack)
             {
                 NameBox.Text = Me.Name;
@@ -164,6 +165,24 @@ namespace SKILL_UP.Frontend
             Earned = list.Count(x => (bool)x.GetType().GetProperty("Earned").GetValue(x));
             Badges.DataSource = list;
             Badges.DataBind();
+        }
+
+        /// <summary>The learner's earned certificates (every activity done), newest first. Learners only.</summary>
+        void BindCertificates()
+        {
+            CertSection.Visible = Me.Role == "Learner";
+            if (!CertSection.Visible) return;
+            var enGb = System.Globalization.CultureInfo.GetCultureInfo("en-GB");
+            var earned = MyEnrollments.Where(x => Data.LessonsOf(x.CourseId).Count > 0 && Progress(Me.Id, x.CourseId) == 100)
+                .Select(x => new { Course = Data.Course(x.CourseId), When = x.CompletedAt ?? x.LastActive ?? x.EnrolledAt })
+                .Where(x => x.Course != null).OrderByDescending(x => x.When).ToList();
+            CertCards.DataSource = earned.Select(x =>
+            {
+                var hours = Math.Max(1, (int)Math.Ceiling(Data.LessonsOf(x.Course.Id).Sum(l => l.Minutes) / 60.0));
+                return new { x.Course.Id, x.Course.Title, Date = x.When.ToString("dd MMMM yyyy", enGb), Iso = x.When.ToString("s"), Hours = hours + (hours == 1 ? " Hour" : " Hours") };
+            }).ToList();
+            CertCards.DataBind();
+            NoCerts.Visible = earned.Count == 0;
         }
 
         void BindCourses()
