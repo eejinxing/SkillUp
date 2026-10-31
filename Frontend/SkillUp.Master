@@ -57,9 +57,6 @@
       <a href="#register" class="gn-register">Sign up</a>
     </asp:PlaceHolder>
     <asp:PlaceHolder ID="UserActions" runat="server">
-      <%-- Temporary call preview triggers (js/call-preview.js). Remove with SHOW_INCOMING_CALL_TEST there. --%>
-      <button type="button" class="gn-demo-call" data-call-test="" title="Temporary: simulate an incoming video meeting">Test video call</button>
-      <button type="button" class="gn-demo-call gn-demo-voice" data-call-test="voice" title="Temporary: simulate an incoming voice call">Receive call</button>
       <a href="Profile" aria-label="Your profile"><%= Page.Me == null ? "" : Ui.Avatar(Page.Me) %></a>
     </asp:PlaceHolder>
   </div>

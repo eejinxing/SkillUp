@@ -1,5 +1,5 @@
 /* ==== Small-screen layout for every page. Loaded last so it wins over the page stylesheets.
-   Up to 1100px Messages stacks its panes, up to 1024px the dashboards drop their side rail, up to 900px course requests
+   Up to 760px Messages stacks its panes (conversation first), up to 1024px the dashboards drop their side rail, up to 900px course requests
    stacks, and up to 760px (phones) every layout becomes a single column. */
 
 @media (max-width: 1024px) {
@@ -12,8 +12,9 @@
     }
 }
 
-/* Messages: below 1100px the three panes stack and the page scrolls instead of filling the window. */
-@media (max-width: 1100px) {
+/* Messages: down to 761px the three panes stay side by side and fill the window (messages.css narrows the columns), so the
+   message box is always on screen. Below that the panes stack, with the conversation first and as tall as the screen. */
+@media (max-width: 760px) {
     #app :is(.skill-chat,.skill-chat.sc-workspace) {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas: none;
@@ -61,7 +62,8 @@
     }
 
     #app .skill-chat .sc-pane {
-        height: min(620px, calc(100dvh - 32px));
+        order: -1;
+        height: max(420px, calc(100dvh - 150px));
     }
 
     #app .skill-chat .sc-heading-copy {

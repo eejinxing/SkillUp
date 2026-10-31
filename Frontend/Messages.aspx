@@ -3,7 +3,6 @@
 <section class="skill-chat sc-v2 sc-workspace <%= Selected != null && QueryInt("id") != null ? "sc-conversation-open" : "" %>" data-api="<%= ResolveUrl("~/api/commands/") %>" data-with="<%= SelectedId %>">
   <h1 class="sc-sr-only" id="page-title" tabindex="-1">Communication workspace</h1>
   <aside class="sc-contacts chat-contacts" aria-label="Workspace and contacts">
-    <header class="sc-workspace-identity"><span class="sc-workspace-mark">S</span><div><strong>Skill workspace</strong><small><%: Me.Name %></small></div></header>
     <nav class="sc-channels" aria-label="Course announcement channels">
       <span class="sc-sidebar-label">COURSES</span>
       <a href="<%= Url(0, 0, SelectedId) %>" class="sc-channel <%= Channel == 0 ? "active" : "" %>"<%= Channel == 0 ? " aria-current=\"true\"" : "" %>><span class="sc-channel-dot all"></span><span>All announcements</span><small><%= AllAnnouncementCount %></small></a>
