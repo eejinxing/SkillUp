@@ -8,6 +8,7 @@
     <nav class="pf-nav" aria-label="Profile sections">
       <a href="#pf-overview" class="is-active"><%= Icon("overview") %>Overview</a>
       <a href="#pf-activity"><%= Icon("activity") %>Activity<em><%= HeatTotal %></em></a>
+      <% if (Me.Role == "Learner") { %><a href="#pf-certificates"><%= Icon("badge") %>My Certificates<em><%= Certificates %></em></a><% } %>
       <a href="#pf-info"><%= Icon("info") %>Information</a>
       <a href="#pf-account"><%= Icon("account") %>Account</a>
     </nav>
@@ -71,6 +72,17 @@
         <asp:PlaceHolder ID="NoCourses" runat="server"><p class="pf-empty">No courses yet.</p></asp:PlaceHolder>
       </div>
     </section>
+    <asp:PlaceHolder ID="CertSection" runat="server">
+    <section class="pf-card pf-certs" id="pf-certificates" aria-labelledby="pf-certs-title">
+      <header><h2 id="pf-certs-title">My Certificates</h2><a class="pf-link" href="Certificates">View all</a></header>
+      <div class="pf-course-grid">
+        <asp:Repeater ID="CertCards" runat="server">
+          <ItemTemplate><a class="pf-course pf-cert" href="Certificates?id=<%# Eval("Id") %>"><header><%= Icon("badge") %><strong><%#: Eval("Title") %></strong></header><footer><span>Completed <time data-local-date="<%# Eval("Iso") %>"><%#: Eval("Date") %></time></span><span><%#: Eval("Hours") %></span><span>View certificate &rarr;</span></footer></a></ItemTemplate>
+        </asp:Repeater>
+        <asp:PlaceHolder ID="NoCerts" runat="server"><p class="pf-empty">No certificates yet. Finish every activity in a course to earn one.</p></asp:PlaceHolder>
+      </div>
+    </section>
+    </asp:PlaceHolder>
     <details class="pf-card pf-section" id="pf-info" open>
       <summary><h2>Information</h2><%= Icon("chevron", "pf-chev") %></summary>
       <asp:Panel runat="server" DefaultButton="SaveProfileButton">

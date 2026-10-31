@@ -8,6 +8,9 @@ namespace SKILL_UP.Frontend
         protected global::System.Web.UI.WebControls.Repeater Badges;
         protected global::System.Web.UI.WebControls.Repeater CourseCards;
         protected global::System.Web.UI.WebControls.PlaceHolder NoCourses;
+        protected global::System.Web.UI.WebControls.PlaceHolder CertSection;
+        protected global::System.Web.UI.WebControls.Repeater CertCards;
+        protected global::System.Web.UI.WebControls.PlaceHolder NoCerts;
         protected global::System.Web.UI.WebControls.TextBox NameBox;
         protected global::System.Web.UI.WebControls.TextBox UsernameBox;
         protected global::System.Web.UI.WebControls.TextBox EmailBox;

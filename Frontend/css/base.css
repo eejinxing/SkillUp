@@ -136,20 +136,6 @@ small {
     color: var(--muted);
 }
 
-.skip {
-    position: fixed;
-    left: 10px;
-    top: -80px;
-    z-index: 100;
-    background: var(--accent);
-    color: #000;
-    padding: 12px;
-}
-
-.skip:focus {
-    top: 10px;
-}
-
 .shell {
     display: grid;
     grid-template-columns: 225px minmax(0, 1fr);
@@ -1498,4 +1484,135 @@ body.ui-refined .light :focus-visible {
 /* Give the page a little room under the floating bar when it is not inside a header */
 body.ui-refined:not(:has(.figma-workspace-header.has-menubar)) #app {
     padding-top: 58px;
+}
+
+/* Certificate: the border and the name use the logo's colours (white, periwinkle, electric blue, cyan, violet); the logo keeps
+   its transparent background, so the certificate stays dark when printed as well. */
+.certificate {
+    --logo-gradient: linear-gradient(135deg, #ffffff 0%, #b9c4ff 22%, #5b7cff 46%, #22d3ee 62%, #7c6bff 82%, #c4b5fd 100%);
+    border: 6px solid transparent;
+    border-image: var(--logo-gradient) 1;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.certificate .name {
+    display: inline-block;
+    padding: 0 6px 4px;
+    background: var(--logo-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.certificate-logo img {
+    display: block;
+    margin: 0 auto;
+    height: 64px;
+    width: auto;
+}
+
+.certificate-facts {
+    display: flex;
+    justify-content: center;
+    gap: 14px 56px;
+    flex-wrap: wrap;
+    margin: 26px 0 8px;
+}
+
+.certificate-facts dt {
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.certificate-facts dd {
+    margin: 6px 0 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+@media print {
+    .certificate {
+        background: #050407;
+        color: #f4f4f4;
+    }
+
+    .certificate p,
+    .certificate small,
+    .certificate-facts dt {
+        color: #b8b8c4;
+    }
+}
+
+/* Icon beside a button's label (certificate page). */
+.btn-icon {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+}
+
+.button:has(.btn-icon),
+button:has(.btn-icon) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Printing or saving a certificate gives the certificate alone: the page has no margin (which also drops the browser's own
+   date and address lines), the dark certificate fills a landscape A4 sheet edge to edge, and nothing white shows around it. */
+@page {
+    size: A4 landscape;
+    margin: 0;
+}
+
+@media print {
+    /* The screen zoom (webforms.css) would shrink a 100vw certificate on the paper, so print at true size. */
+    html:has(.certificate) {
+        zoom: 1 !important;
+        --page-zoom: 1 !important;
+        /* The screen layout keeps room for a scrollbar; paper has none, so that room would show as a gap at the right. */
+        scrollbar-gutter: auto !important;
+    }
+
+    html:has(.certificate),
+    body:has(.certificate) {
+        margin: 0;
+        padding: 0;
+        background: #050407;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    body:has(.certificate) :is(.skill-global-header, .scroll-top, #toast, .page-head, .page-crumbs) {
+        display: none !important;
+    }
+
+    body:has(.certificate) :is(.shell, .shell > div, main, .main, #app, form) {
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        height: auto !important;
+        background: transparent !important;
+    }
+
+    .certificate {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* Pinned to the page itself (not 100vw, which can come out a scrollbar's width short) so no gap shows at the right. */
+        position: fixed;
+        inset: 0;
+        width: auto;
+        max-width: none;
+        height: auto;
+        margin: 0;
+        padding: 6vh 8vw;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
 }

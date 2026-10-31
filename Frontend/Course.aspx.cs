@@ -21,6 +21,14 @@ namespace SKILL_UP.Frontend
         public override bool StayAfterSignIn => true;
 
         protected CourseRow C;
+
+        /// <summary>
+        /// The breadcrumb's back link. A learner who opened the course from My courses (?from=mycourses) goes back there, to
+        /// the program the course belongs to; everyone else goes to the catalogue (visitors to the landing page's courses).
+        /// </summary>
+        protected string BackUrl => Me?.Role == "Learner" && Request.QueryString["from"] == "mycourses" && C != null ? "MyCourses?program=" + C.ProgramId
+            : Me == null ? HomeCourses : "Catalog";
+        protected string BackLabel => Me?.Role == "Learner" && Request.QueryString["from"] == "mycourses" ? "My courses" : Me == null ? "Our Courses" : "All courses";
         protected List<LessonRow> Lessons;
         protected EnrollmentRow Enrollment;
         protected List<int> Completed = new List<int>();
@@ -147,7 +155,7 @@ namespace SKILL_UP.Frontend
             {
                 var next = Lessons.FirstOrDefault(l => !Completed.Contains(l.Id));
                 ActionLink.Text = next != null ? "Continue learning" : "View certificate";
-                ActionLink.NavigateUrl = next != null ? "Activity?course=" + C.Id + "&lesson=" + next.Id : "Certificates?id=" + C.Id;
+                ActionLink.NavigateUrl = next != null ? "Activity?course=" + C.Id + "&lesson=" + next.Id : "Certificates?id=" + C.Id + "&from=course" + (Request.QueryString["from"] == "mycourses" ? "&via=mycourses" : "");
             }
             else if (Me?.Role == "Learner")
             {

@@ -6,7 +6,7 @@
 <asp:PlaceHolder ID="Detail" runat="server">
 <article class="course-enroll" data-course-id="<%= C.Id %>">
   <nav class="ce-breadcrumb" aria-label="Course navigation">
-    <a href="<%= Me == null ? HomeCourses : "Catalog" %>" class="ce-back"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><%= Me == null ? "Our Courses" : "All courses" %></a>
+    <a href="<%= BackUrl %>" class="ce-back"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><%: BackLabel %></a>
     <span aria-hidden="true">/</span><span><%: C.Title %></span>
     <% if (Me?.Role == "Learner") { %><a href="Dashboard" class="ce-dashboard-link">My dashboard</a><% } %>
   </nav>
