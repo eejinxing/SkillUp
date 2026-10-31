@@ -75,7 +75,7 @@
   </section>
   <div class="home-footer-base">
     <a href="Home" class="has-skill-logo">
-      <img class="skill-logo" src="assets/skill-logo.png" alt="Skill UP" width="930" height="420">
+      <img class="skill-logo" src="assets/skill-up-logo.png" alt="Skill UP" width="930" height="420">
     </a>
     <small>© 2026 Skill UP · Learning, one step at a time. All rights reserved.</small>
     <nav aria-label="Legal">

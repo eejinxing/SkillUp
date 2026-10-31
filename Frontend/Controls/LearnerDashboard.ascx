@@ -1,7 +1,7 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="LearnerDashboard.ascx.cs" Inherits="SKILL_UP.Frontend.Controls.LearnerDashboard" %>
 <div class="registered-home">
 <div class="learning-console lc-x lc-velo">
-  <header class="lx-top"><a class="lx-logo" href="Dashboard" aria-label="Skill UP overview"><img class="skill-logo" src="assets/skill-logo.png" alt="Skill UP" width="930" height="420"></a></header>
+  <header class="lx-top"><a class="lx-logo" href="Dashboard" aria-label="Skill UP overview"><img class="skill-logo" src="assets/skill-up-logo.png" alt="Skill UP" width="930" height="420"></a></header>
   <section class="vd-hero" aria-labelledby="vd-title">
     <div class="vd-hero-top">
       <div>

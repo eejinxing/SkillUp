@@ -1,4 +1,4 @@
-<%@ Page Title="Unlock Your Potential Future" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="SKILL_UP.Frontend.HomePage" %>
+<%@ Page Title="Learning, one step at a time" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="SKILL_UP.Frontend.HomePage" %>
 <%-- The landing page. Its sections are static marketing content; topic cards link to matching published courses. --%>
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
 <section class="home-hero">
@@ -9,8 +9,8 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"></path></svg>
     </a>
     <h1>
-      <span>Unlock Your</span>
-      <span>Potential Future</span>
+      <span>Learning,</span>
+      <span>one step at a time</span>
     </h1>
     <p>Your next skill starts here. Learn, practise and grow.</p>
     <div class="home-actions">
