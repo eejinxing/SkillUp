@@ -58,15 +58,6 @@
     padding-left: 0;
 }
 
-.has-learning-console .skip:not(:focus) {
-    position: absolute;
-    left: -10000px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-}
-
 /* SKILL logo (replaces every Skill UP wordmark) */
 .skill-logo {
     display: block;

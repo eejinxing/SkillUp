@@ -482,3 +482,71 @@
         animation-delay: .25s;
     }
 }
+
+/* ── Short windows: the first row of cards still fits ─────────────────────────────────────────────────────────────── */
+/* js/site.js adds is-compact when the window, measured the way the page sees it (height divided by the page zoom), is under
+   800px tall. The title block, filters and card text then tighten up and the cover art gets shorter, so the whole first row
+   is on screen without scrolling. Taller windows keep the full-size layout. A media query on height cannot do this: the zoom
+   changes how tall the page really is. */
+#app .catalog-page.is-compact {
+    margin-top: 0;
+}
+
+#app .catalog-page.is-compact .cat-head {
+    padding-bottom: 10px;
+}
+
+#app .catalog-page.is-compact .cat-head h1 {
+    font-size: 28px;
+}
+
+#app .catalog-page.is-compact .cat-head p {
+    margin-top: 4px;
+    font-size: 13px;
+}
+
+#app .catalog-page.is-compact .cat-stats>div {
+    min-width: 84px;
+    padding: 6px 12px;
+}
+
+#app .catalog-page.is-compact .cat-stats dd {
+    font-size: 18px;
+}
+
+#app .catalog-page.is-compact .cat-toolbar {
+    margin: 12px 0 4px;
+}
+
+#app .catalog-page.is-compact .cat-count {
+    margin: 0 0 8px;
+}
+
+#app .catalog-page.is-compact .figma-course-cover {
+    max-height: 92px;
+}
+
+#app .catalog-page.is-compact .course-body {
+    padding: 10px 10px 6px;
+}
+
+#app .catalog-page.is-compact .course-body>.row.between {
+    margin-bottom: 4px;
+}
+
+#app .catalog-page.is-compact .course-body>p {
+    margin-bottom: 8px;
+}
+
+#app .catalog-page.is-compact .course-body .progress,
+#app .catalog-page.is-compact .course-body .bar {
+    margin-top: 8px;
+}
+
+#app .catalog-page.is-compact .course-body .actions {
+    padding-top: 10px;
+}
+
+#app .catalog-page.is-compact .course-body .actions .button {
+    height: 36px;
+}

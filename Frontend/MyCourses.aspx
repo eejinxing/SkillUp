@@ -34,7 +34,7 @@
                 <div class="mc-course-index"><span class="mc-number"><%# (Container.ItemIndex + 1).ToString("00") %></span></div>
                 <div class="mc-course-gauge"><%# Eval("Ring") %></div>
               </div>
-              <a class="mc-course-art" href="Course?id=<%# Eval("Id") %>" aria-label="View course: <%#: Eval("Title") %>"><img src="<%#: Eval("Art") %>" alt="" loading="eager"></a>
+              <a class="mc-course-art" href="Course?id=<%# Eval("Id") %>&amp;from=mycourses" aria-label="View course: <%#: Eval("Title") %>"><img src="<%#: Eval("Art") %>" alt="" loading="eager"></a>
               <section class="mc-course-summary" aria-label="<%#: Eval("Title") %> progress">
                 <div class="mc-market-accent">
                   <div class="mc-market-marks" aria-hidden="true"><span><svg class="mc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h6c1 0 1.5 1 1.5 1S13 5 14 5h5v14h-5c-1 0-1.5 1-1.5 1s-.5-1-1.5-1H5Z"/><path d="M12.5 6v14"/></svg></span><span><svg class="mc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 12 4 4 8-8"/></svg></span></div>
@@ -45,7 +45,7 @@
                   <p class="mc-market-subtitle"><%#: Eval("Difficulty") %> &middot; <%# Eval("Lessons") %> activities</p>
                   <p class="mc-market-date"><span>Due date</span><time><%# Eval("Due") %></time></p>
                   <footer>
-                    <a href="Course?id=<%# Eval("Id") %>" class="mc-market-details" aria-label="Course details: <%#: Eval("Title") %>"><svg class="mc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="4" height="4" rx="1"/><rect x="15" y="5" width="4" height="4" rx="1"/><rect x="5" y="15" width="4" height="4" rx="1"/><rect x="15" y="15" width="4" height="4" rx="1"/></svg></a>
+                    <a href="Course?id=<%# Eval("Id") %>&amp;from=mycourses" class="mc-market-details" aria-label="Course details: <%#: Eval("Title") %>"><svg class="mc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="4" height="4" rx="1"/><rect x="15" y="5" width="4" height="4" rx="1"/><rect x="5" y="15" width="4" height="4" rx="1"/><rect x="15" y="15" width="4" height="4" rx="1"/></svg></a>
                     <a class="mc-market-action" href="<%# Eval("Href") %>" aria-label="<%# Eval("Action") %>: <%#: Eval("Title") %>" title="<%# Eval("Action") %>"><svg class="mc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
                   </footer>
                 </div>

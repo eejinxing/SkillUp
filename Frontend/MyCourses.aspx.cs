@@ -54,7 +54,7 @@ namespace SKILL_UP.Frontend
                     Due = c.Deadline?.ToString("MMM d, yyyy", CultureInfo.GetCultureInfo("en-US")) ?? "—",
                     Art = string.IsNullOrEmpty(c.Thumbnail) ? "assets/my-courses/computer-essentials-wide-" + (i % 4 + 1).ToString("00") + ".webp" : c.Thumbnail,
                     Action = enrolment == null ? "View course" : value == 100 ? "Review course" : "Continue learning",
-                    Href = next != null ? "Activity?course=" + c.Id + "&lesson=" + next.Id : "Course?id=" + c.Id,
+                    Href = next != null ? "Activity?course=" + c.Id + "&lesson=" + next.Id : "Course?id=" + c.Id + "&from=mycourses",
                     Ring = Ring(value, c.Title)
                 };
             }).ToList();
@@ -63,18 +63,26 @@ namespace SKILL_UP.Frontend
         }
 
         /// <summary>
-        /// Enroll button on a program pouch: enrols the learner in the program's first course (path order) and opens that program.
-        /// js/pack-opening.js presses this button when a pouch has been torn open.
+        /// Enroll button on a program pouch: enrols the learner in every course of the program that they are not in yet, and
+        /// opens that program. js/pack-opening.js presses this button when a pouch has been torn open.
         /// </summary>
         protected void EnrolProgram_Command(object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
             int id;
             var program = int.TryParse((string)e.CommandArgument, out id) ? Data.Programs.FirstOrDefault(p => p.Id == id && p.Published) : null;
-            var course = program == null ? null : CoursesOf(program).FirstOrDefault();
-            if (course == null) { Go("MyCourses", "This program has no open courses yet."); return; }
-            if (!TryRun("enrol", new { courseId = course.Id.ToString() })) return;
+            var courses = program == null ? new List<CourseRow>() : CoursesOf(program);
+            if (courses.Count == 0) { Go("MyCourses", "This program has no open courses yet."); return; }
+            var joined = new List<CourseRow>();
+            foreach (var course in courses)
+            {
+                if (MyEnrollments.Any(x => x.CourseId == course.Id)) continue;
+                if (!TryRun("enrol", new { courseId = course.Id.ToString() })) return;
+                joined.Add(course);
+            }
             Session[OpenedKey] = program.Id;
-            Go("MyCourses?program=" + program.Id, "You’re enrolled in " + course.Title + ".");
+            Go("MyCourses?program=" + program.Id, joined.Count == 0 ? "You’re already enrolled in " + program.Name + "."
+                : joined.Count == 1 ? "You’re enrolled in " + joined[0].Title + "."
+                : "You’re enrolled in " + joined.Count + " courses of " + program.Name + ".");
         }
 
         /// <summary>Published courses of a program: those on its learning path first, in path order.</summary>

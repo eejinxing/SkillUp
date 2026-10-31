@@ -24,7 +24,7 @@ namespace SKILL_UP.Frontend
         /// <summary>Navigation per role: route, label and page. The bar shows the main destinations only.</summary>
         static readonly Dictionary<string, string[][]> Menus = new Dictionary<string, string[][]>
         {
-            ["Learner"] = new[] { L("dashboard", "Overview", "Dashboard"), L("learning", "My courses", "MyCourses"), L("catalog", "Explore courses", "Catalog"), L("leaderboard", "Leaderboard", "Leaderboard"), L("messages", "Messages", "Messages") },
+            ["Learner"] = new[] { L("dashboard", "Overview", "Dashboard"), L("learning", "My courses", "MyCourses"), L("catalog", "Explore courses", "Catalog"), L("certificates", "Certificates", "Certificates"), L("leaderboard", "Leaderboard", "Leaderboard"), L("messages", "Messages", "Messages") },
             ["Instructor"] = new[] { L("dashboard", "Overview", "Dashboard"), L("courses", "My courses", "Courses"), L("requests", "My requests", "CourseRequests"), L("learners", "Learners", "Learners"), L("resources", "Learning resources", "Resources"), L("analytics", "Course analytics", "Analytics"), L("messages", "Messages", "Messages") },
             ["Program Leader"] = new[] { L("dashboard", "Overview", "Dashboard"), L("programs", "Programs", "Programs"), L("assignments", "Instructors", "Assignments"), L("approvals", "Course approvals", "Approvals"), L("messages", "Messages", "Messages") },
             ["Admin"] = new[] { L("dashboard", "Overview", "Dashboard"), L("users", "User accounts", "Users") },

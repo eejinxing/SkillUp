@@ -348,20 +348,64 @@
             - (navLinks.clientWidth - currentLink.offsetWidth) / 2;
     }
 
-    // My courses: the program pack nearest the middle of the rail lights up as the rail scrolls (CSS: .mc-program.is-lit).
+    // My courses: the program pack nearest the middle of the rail lights up as the rail scrolls (CSS: .mc-program.is-lit), and
+    // once the rail settles the course panel switches to that program's courses, so scrolling to a pack is choosing it.
     const packRail = document.querySelector('.my-courses .mc-program-scroll');
     if (packRail) {
         const packs = [...packRail.querySelectorAll('.mc-program')];
-        const light = () => {
+        const idOf = pack => +new URL(pack.querySelector('.mc-program-link').href).searchParams.get('program');
+        let shown = packs.find(pack => pack.dataset.selected === 'true') || packs[0];
+        let request = 0, settle = 0;
+
+        const nearestPack = () => {
             const mid = packRail.scrollTop + packRail.clientHeight / 2;
-            let nearest = null, gap = Infinity;
-            packs.forEach(pack => {
-                const d = Math.abs(pack.offsetTop + pack.offsetHeight / 2 - mid);
-                if (d < gap) { gap = d; nearest = pack; }
-            });
+            return packs.reduce((best, pack) =>
+                Math.abs(pack.offsetTop + pack.offsetHeight / 2 - mid) < Math.abs(best.offsetTop + best.offsetHeight / 2 - mid) ? pack : best);
+        };
+
+        // Swaps in the course panel of another program from a background copy of the page; the rail itself is left alone.
+        const showProgram = async pack => {
+            const mine = ++request;
+            const link = pack.querySelector('.mc-program-link');
+            try {
+                const reply = await fetch(link.href, { credentials: 'same-origin', headers: { 'X-SkillUp-Live': '1' } });
+                if (!reply.ok || mine !== request) return;
+                const next = new DOMParser().parseFromString(await reply.text(), 'text/html').querySelector('.mc-courses-panel');
+                const panel = document.querySelector('.mc-courses-panel');
+                if (!next || !panel) return;
+                panel.innerHTML = next.innerHTML;
+                packs.forEach(other => {
+                    other.dataset.selected = other === pack ? 'true' : 'false';
+                    other.querySelector('.mc-program-link').setAttribute('aria-selected', other === pack ? 'true' : 'false');
+                });
+                shown = pack;
+                history.replaceState(null, '', link.href);
+            } catch (error) { /* offline: the panel keeps the program it had */ }
+        };
+
+        const light = () => {
+            const nearest = nearestPack();
             packs.forEach(pack => pack.classList.toggle('is-lit', pack === nearest));
+            clearTimeout(settle);
+            if (nearest !== shown) settle = setTimeout(() => { if (nearestPack() === nearest) showProgram(nearest); }, 220);
         };
         packRail.addEventListener('scroll', light, { passive: true });
         light();
+    }
+    // Certificate: write the completion date in the viewing device's own date and time zone, e.g. 06 October 2026.
+    document.querySelectorAll('time[data-local-date]').forEach(stamp => {
+        const given = stamp.dataset.localDate;
+        const date = given && given !== 'today' ? new Date(given) : new Date();
+        if (!isNaN(date)) stamp.textContent = date.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+    });
+    // Catalog: on a window too short for the full layout, tighten it (CSS: .is-compact) so the first row of cards fits.
+    const catalogPage = document.querySelector('.catalog-page');
+    if (catalogPage) {
+        const fit = () => {
+            const zoom = parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
+            catalogPage.classList.toggle('is-compact', innerHeight / zoom < 800);
+        };
+        fit();
+        addEventListener('resize', fit);
     }
 })();
