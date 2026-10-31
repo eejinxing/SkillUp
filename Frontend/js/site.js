@@ -134,8 +134,12 @@
     });
 
     // Messages: show the newest message, Enter sends (Shift + Enter adds a line), Ctrl + Enter posts a comment.
-    const thread = document.getElementById('conversation-messages');
-    if (thread) thread.scrollTop = thread.scrollHeight;
+    const chatRoot = () => document.querySelector('.skill-chat');
+    const showNewest = () => {
+        const box = document.getElementById('conversation-messages');
+        if (box) box.scrollTop = box.scrollHeight;
+    };
+    showNewest();
     document.addEventListener('keydown', e => {
         const box = e.target;
         if (box.id === 'MessageBox' && e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
@@ -148,42 +152,84 @@
         }
     });
 
-    // Messages: pick up new messages from the other person every few seconds, without a refresh. The page is fetched in the
-    // background and only the conversation and the contact list are swapped, so a half-typed message is never touched.
-    const liveThread = document.querySelector('#conversation-messages .sc-thread');
-    if (liveThread) {
-        const contactList = document.querySelector('.sc-contact-scroll'), unreadBadge = document.querySelector('.sc-contacts-head');
-        let checking = false;
+    // Messages without page reloads: new messages arrive every few seconds, sending happens in the background, and a
+    // channel, contact or announcement opens in place. Each fetches the page itself and swaps in the part that changed, so a
+    // half-typed message is never touched by a refresh. If anything fails, the link or button works as it always did.
+    if (chatRoot()) {
+        const live = { credentials: 'same-origin', headers: { 'X-SkillUp-Live': '1' } };
+        const parse = async response => new DOMParser().parseFromString(await response.text(), 'text/html');
+        let checking = false, switching = false, sending = false, plain = false;
+
         // force: after sending, wait for any check already under way, then look now (even in a hidden tab) and show the newest message.
         const check = async force => {
             if (force === true) while (checking) await new Promise(done => setTimeout(done, 40));
-            else if (checking || document.hidden) return;
+            else if (checking || switching || document.hidden) return;
             checking = true;
+            const url = location.href;
             try {
-                const r = await fetch(location.href, { credentials: 'same-origin', headers: { 'X-SkillUp-Live': '1' } });
+                const r = await fetch(url, live);
                 if (!r.ok) return;
-                const page = new DOMParser().parseFromString(await r.text(), 'text/html');
-                const next = page.querySelector('#conversation-messages .sc-thread');
-                if (!next) return;
-                if (next.innerHTML !== liveThread.innerHTML) {
-                    const box = liveThread.parentElement, atEnd = force === true || box.scrollHeight - box.scrollTop - box.clientHeight < 90;
-                    liveThread.innerHTML = next.innerHTML;
+                const page = await parse(r);
+                const thread = document.querySelector('#conversation-messages .sc-thread'), next = page.querySelector('#conversation-messages .sc-thread');
+                if (switching || url !== location.href || !thread || !next) return;
+                if (next.innerHTML !== thread.innerHTML) {
+                    const box = thread.parentElement, atEnd = force === true || box.scrollHeight - box.scrollTop - box.clientHeight < 90;
+                    thread.innerHTML = next.innerHTML;
                     if (atEnd) box.scrollTop = box.scrollHeight;
                 }
-                const list = page.querySelector('.sc-contact-scroll'), head = page.querySelector('.sc-contacts-head');
-                if (list && contactList && list.innerHTML !== contactList.innerHTML) contactList.innerHTML = list.innerHTML;
-                if (head && unreadBadge && head.innerHTML !== unreadBadge.innerHTML) unreadBadge.innerHTML = head.innerHTML;
+                for (const part of ['.sc-contact-scroll', '.sc-contacts-head']) {
+                    const here = document.querySelector(part), there = page.querySelector(part);
+                    if (here && there && here.innerHTML !== there.innerHTML) here.innerHTML = there.innerHTML;
+                }
             } catch { /* offline for a moment: try again next time */ } finally { checking = false; }
         };
         setInterval(check, 3000);
         document.addEventListener('visibilitychange', () => check());
 
+        // Opening another channel, contact or announcement: swap the whole workspace. The page's hidden state fields and the
+        // form's address come from the new page too, so Mark as read, Send and the other buttons act on what is on screen.
+        const open = async (address, push) => {
+            switching = true;
+            try {
+                const target = new URL(address, location.href);
+                const r = await fetch(target.pathname + target.search, live);
+                const page = r.ok ? await parse(r) : null;
+                const next = page?.querySelector('.skill-chat');
+                if (!next || new URL(r.url).pathname !== location.pathname) throw Error('not the messages page');
+                page.querySelectorAll('input[type=hidden][name^="__"]').forEach(field => {
+                    const same = [...document.querySelectorAll('input[type=hidden]')].find(x => x.name === field.name);
+                    if (same) same.value = field.value;
+                });
+                const form = chatRoot().closest('form');
+                if (form) form.setAttribute('action', target.pathname + target.search);
+                // The sidebar keeps its scroll position, so choosing someone far down the list does not send it back to the top.
+                const sidebarScroll = chatRoot().querySelector('.sc-contacts')?.scrollTop || 0;
+                chatRoot().replaceWith(document.importNode(next, true));
+                const sidebar = chatRoot().querySelector('.sc-contacts');
+                if (sidebar) sidebar.scrollTop = sidebarScroll;
+                document.title = page.title || document.title;
+                if (push) history.pushState(null, '', target.href);
+                if (target.hash && document.getElementById(target.hash.slice(1))) document.getElementById(target.hash.slice(1)).scrollIntoView();
+                else showNewest();
+            } catch {
+                location.href = address;
+            } finally { switching = false; }
+        };
+        document.addEventListener('click', e => {
+            if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            const link = e.target.closest('.skill-chat a[href]');
+            if (!link || link.target) return;
+            const target = new URL(link.href, location.href);
+            if (target.origin !== location.origin || target.pathname !== location.pathname) return;
+            e.preventDefault();
+            if (target.href !== location.href) open(target.href, true);
+        });
+        addEventListener('popstate', () => open(location.href, false));
+
         // Sending: post the message in the background and update the conversation in place, so the page never reloads.
         // If that fails for any reason, the button falls back to its normal form post, which shows the server's message.
-        const chat = document.querySelector('.skill-chat');
-        let sending = false, plain = false;
         document.addEventListener('click', async e => {
-            const send = e.target.closest('.sc-send');
+            const send = e.target.closest('.sc-send'), chat = chatRoot();
             if (!send || plain || !chat?.dataset.api || !chat.dataset.with) return;
             e.preventDefault();
             e.stopImmediatePropagation();
@@ -203,6 +249,7 @@
             } catch {
                 plain = true;
                 send.click();
+                plain = false;
             } finally { sending = false; }
         }, true);
     }

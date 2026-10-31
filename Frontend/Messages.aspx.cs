@@ -46,6 +46,10 @@ namespace SKILL_UP.Frontend
             var contacts = Data.Users.Where(u => u.Id != Me.Id && u.Status == "Active").ToList();
             Selected = contacts.FirstOrDefault(u => u.Id == QueryInt("id")) ?? contacts.FirstOrDefault();
             SelectedId = Selected?.Id ?? 0;
+            // Opening a conversation reads it, and so does the page's background refresh while it stays open. Otherwise the
+            // unread badges and "Mark as read" would stay on messages the person is already looking at.
+            if (!IsPostBack && Selected != null && QueryInt("id") != null && Data.Messages.Any(m => m.ReceiverId == Me.Id && m.SenderId == Selected.Id && !m.Read))
+                TryRun("readMessages", new { from = SelectedId.ToString() });
             TotalUnread = Data.Messages.Count(m => m.ReceiverId == Me.Id && !m.Read && contacts.Any(c => c.Id == m.SenderId));
 
             Channels.DataSource = Courses.Select((c, i) => new { Url = Url(c.Id, 0, SelectedId), c.Title, Colour = ChannelColours[i % 4], Count = all.Count(a => a.CourseId == c.Id), Active = Channel == c.Id });

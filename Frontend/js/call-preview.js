@@ -6,8 +6,9 @@
 (function () {
     'use strict';
 
-    // Temporary demo trigger: set false (or remove this block and the header buttons) when testing is finished.
-    const SHOW_INCOMING_CALL_TEST = true;
+    // The header's simulated-call buttons were removed from SkillUp.Master now that real calls work. Put them back there
+    // (buttons with data-call-test, and data-call-test="voice") and set this to true to simulate an incoming call again.
+    const SHOW_INCOMING_CALL_TEST = false;
 
     let ctx = {};
     try { ctx = JSON.parse(document.getElementById('call-context')?.textContent || '{}'); } catch { ctx = {}; }
