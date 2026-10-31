@@ -347,4 +347,21 @@
         navLinks.scrollLeft += currentLink.getBoundingClientRect().left - navLinks.getBoundingClientRect().left
             - (navLinks.clientWidth - currentLink.offsetWidth) / 2;
     }
+
+    // My courses: the program pack nearest the middle of the rail lights up as the rail scrolls (CSS: .mc-program.is-lit).
+    const packRail = document.querySelector('.my-courses .mc-program-scroll');
+    if (packRail) {
+        const packs = [...packRail.querySelectorAll('.mc-program')];
+        const light = () => {
+            const mid = packRail.scrollTop + packRail.clientHeight / 2;
+            let nearest = null, gap = Infinity;
+            packs.forEach(pack => {
+                const d = Math.abs(pack.offsetTop + pack.offsetHeight / 2 - mid);
+                if (d < gap) { gap = d; nearest = pack; }
+            });
+            packs.forEach(pack => pack.classList.toggle('is-lit', pack === nearest));
+        };
+        packRail.addEventListener('scroll', light, { passive: true });
+        light();
+    }
 })();

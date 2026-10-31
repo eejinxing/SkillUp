@@ -3,6 +3,8 @@
 <html lang="en">
 <head id="Head1" runat="server">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0c0e12"><title>Skill UP</title>
+<%-- Named explicitly, with a version in the address, so browsers fetch the current icon instead of a cached one. Bump v when favicon.ico changes. --%>
+<link rel="icon" href="~/favicon.ico?v=2" type="image/x-icon" runat="server">
 <%-- The order matters: later stylesheets override earlier ones (base first, webforms and responsive last). --%>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/secondary-pages.css">
@@ -42,7 +44,7 @@
 <div id="app">
 <asp:Literal ID="ShellOpen" runat="server" />
 <header class="skill-global-header">
-  <a class="gn-brand" href="<%= Page.Me == null ? "Home" : "Dashboard" %>" aria-label="Skill UP home"><img class="skill-logo" src="assets/skill-logo.png" alt="Skill UP" width="930" height="420"></a>
+  <a class="gn-brand" href="<%= Page.Me == null ? "Home" : "Dashboard" %>" aria-label="Skill UP home"><img class="skill-logo" src="assets/skill-up-logo.png" alt="Skill UP" width="930" height="420"></a>
   <div class="gn-capsule">
     <span class="gn-workspace-label"><%= Page.Me == null ? "Explore Skill UP" : "Your workspace" %></span>
     <span class="gn-date"><%= DateTime.Now.ToString("d MMM", System.Globalization.CultureInfo.GetCultureInfo("en-GB")) %></span>

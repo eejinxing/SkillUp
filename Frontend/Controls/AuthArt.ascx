@@ -1,7 +1,7 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AuthArt.ascx.cs" Inherits="SKILL_UP.Frontend.Controls.AuthArt" %>
 <section class="auth-art" aria-hidden="true">
   <div class="auth-grain"></div>
-  <a class="brand auth-brand has-skill-logo" href="Home" tabindex="-1"><img class="skill-logo" src="assets/skill-logo.png" alt="Skill UP" width="930" height="420"></a>
+  <a class="brand auth-brand has-skill-logo" href="Home" tabindex="-1"><img class="skill-logo" src="assets/skill-up-logo.png" alt="Skill UP" width="930" height="420"></a>
   <div class="auth-orbit">
     <span class="auth-orb"></span>
     <span class="auth-chip" style="--d:0"><i>01</i> Guided labs</span>

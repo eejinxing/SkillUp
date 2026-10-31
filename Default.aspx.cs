@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using SKILL_UP.Backend;
 
 namespace SKILL_UP
 {
@@ -11,7 +12,12 @@ namespace SKILL_UP
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect(ResolveUrl("~/Frontend/Home.aspx"), false);
+            // A signed-in account opens its own role's overview; only visitors see the landing page.
+            DatabaseSetup.EnsureReady(Context);
+            UserRow user;
+            using (var db = new Db()) user = Model.Load(db).User(AuthCookie.Read(Context));
+            var page = user != null && user.Status == "Active" ? "Dashboard" : "Home";
+            Response.Redirect(ResolveUrl("~/Frontend/" + page + ".aspx"), false);
             Context.ApplicationInstance.CompleteRequest();
         }
     }

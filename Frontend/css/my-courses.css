@@ -203,7 +203,7 @@
 
 .mc-course-art {
     display: block;
-    height: clamp(130px, calc((100dvh - 500px)/3), 230px);
+    height: clamp(130px, calc((100dvh / var(--page-zoom, 1) - 500px)/3), 230px);
     overflow: hidden;
 }
 
@@ -483,10 +483,15 @@ body:has(.my-courses) :is(.shell,.shell>div,.main,.figma-secondary) {
 
 /* ── Polish pass: fit the screen, calm the wheel, editorial index ─────────────────────────────── */
 /* Fit the viewport on desktop: header + title + layout fill exactly one screen (taller content scrolls inside the panels). */
+body:has(.my-courses) .shell {
+    min-height: calc(100vh / var(--page-zoom, 1));
+}
+
 body:has(.my-courses) .shell>div {
     display: flex;
     flex-direction: column;
-    height: 100dvh;
+    /* html{zoom} scales dvh too, so divide it back out (see webforms.css) or the page ends past, or short of, the window. */
+    height: calc(100dvh / var(--page-zoom, 1));
     min-height: 620px;
 }
 
@@ -614,9 +619,11 @@ body:has(.my-courses) .main {
 
 .my-courses .mc-pixel-title {
     display: block;
-    width: clamp(190px, 29vw, 390px);
+    /* Shrinks with the window height too (zoom divided back out), so a short screen keeps room for the panels. */
+    --mc-title-h: clamp(52px, calc(9dvh / var(--page-zoom, 1)), 90px);
+    width: min(clamp(190px, 29vw, 390px), calc(var(--mc-title-h) * 4.33));
     max-width: 100%;
-    height: 90px;
+    height: var(--mc-title-h);
     object-fit: cover;
     object-position: center;
 }
@@ -1513,4 +1520,98 @@ html.mc-tearing * {
     .my-courses .mc-tear-hint .mc-cta-icon svg {
         animation: none;
     }
+}
+
+/* ── One course fits the panel: the number, ring and artwork share a row whose height follows the window height ────── */
+/* The panel shows about 480px less than the window (navigation, panel heading), and a course also needs its summary tile
+   (200px) and padding, so the row gets what is left. A tall window keeps the full size (274px); a short one shrinks the row
+   instead of cutting the course off. The height is divided by the page zoom (see webforms.css). */
+.my-courses {
+    --mc-row: clamp(150px, calc(100dvh / var(--page-zoom, 1) - 480px), 274px);
+}
+
+.my-courses .mc-course {
+    padding-block: 18px;
+}
+
+.my-courses .mc-number {
+    font-size: calc(var(--mc-row) * .4);
+}
+
+.my-courses .mc-task-ring {
+    width: calc(var(--mc-row) * .5);
+    height: calc(var(--mc-row) * .5);
+}
+
+.my-courses .mc-course-art {
+    max-height: var(--mc-row);
+}
+
+/* ── Wide screens: the course panel rises beside the title ────────────────────────────────────────────────────────── */
+/* The title sits above the program column only, so the panel can start right under the navigation and use the height the
+   title row used to leave empty. mc-layout dissolves (display: contents) so its two children join the page grid. */
+@media (min-width: 1001px) {
+    .my-courses {
+        display: grid;
+        grid-template-columns: minmax(0, 30%) minmax(0, 70%);
+        grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .my-courses .mc-page-header {
+        grid-column: 1;
+        grid-row: 1;
+        margin: 6px 0 12px;
+    }
+
+    .my-courses .mc-layout {
+        display: contents;
+    }
+
+    .my-courses .mc-programs {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .my-courses .mc-courses-panel {
+        grid-column: 2;
+        grid-row: 1 / 3;
+    }
+}
+
+/* ── Scrolling settles on one item at a time ──────────────────────────────────────────────────────────────────────── */
+/* Both lists snap: a scroll of the program packs lands on the next pack, and a scroll of the course panel lands on the next
+   course. "always" stops a hard flick on the very next item instead of skipping past it. */
+.my-courses .mc-program-scroll {
+    scroll-snap-type: y mandatory;
+}
+
+.my-courses .mc-program {
+    scroll-snap-stop: always;
+}
+
+.my-courses .mc-course-scroll {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.my-courses .mc-course {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .my-courses .mc-course-scroll {
+        scroll-behavior: auto;
+    }
+}
+
+/* ── The pack in the middle of the rail lights up ─────────────────────────────────────────────────────────────────── */
+/* The selected pack always glows. js/site.js also marks the pack nearest the middle of the rail as is-lit while the rail
+   scrolls, so the one you scrolled to is lit before you open it, and the one you leave fades back. */
+.my-courses .mc-program-link {
+    transition: filter .3s ease;
+}
+
+.my-courses .mc-program.is-lit .mc-program-link {
+    filter: drop-shadow(0 0 22px #8b5cf6bb) drop-shadow(0 0 4px #c4b5fdcc);
 }
