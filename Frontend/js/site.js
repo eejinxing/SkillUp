@@ -127,6 +127,33 @@
 
     // ---- Workspace pages --------------------------------------------------------------------------------
 
+    // A link to a folded form (such as Profile's "Give feedback") opens it, scrolls to it and puts the cursor in its first field.
+    document.addEventListener('click', e => {
+        const link = e.target.closest('a[href^="#"]');
+        const form = link && link.getAttribute('href').length > 1 ? document.getElementById(link.getAttribute('href').slice(1)) : null;
+        if (!form || !form.matches('details.inline-form')) return;
+        e.preventDefault();
+        form.open = true;
+        form.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
+        form.querySelector('textarea, input, select')?.focus({ preventScroll: true });
+    });
+
+    // Profile: the side menu highlights the section you chose (also when another link on the page, such as "Account security",
+    // takes you there), and the section named in the address is highlighted when the page opens.
+    const profileNav = [...document.querySelectorAll('.pf-nav a[href^="#"]')];
+    if (profileNav.length) {
+        const mark = hash => {
+            const tab = profileNav.find(a => a.getAttribute('href') === hash);
+            if (tab) profileNav.forEach(a => a.classList.toggle('is-active', a === tab));
+        };
+        if (location.hash) mark(location.hash);
+        document.addEventListener('click', e => {
+            const link = e.target.closest('a[href^="#pf-"]');
+            if (link) mark(link.getAttribute('href'));
+        });
+        addEventListener('hashchange', () => mark(location.hash));
+    }
+
     // Buttons that jump to a section of the page (learner dashboard).
     document.addEventListener('click', e => {
         const button = e.target.closest('[data-vd-scroll]');
