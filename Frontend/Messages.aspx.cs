@@ -93,7 +93,7 @@ namespace SKILL_UP.Frontend
         void BindContacts(List<UserRow> contacts)
         {
             var term = (Request.QueryString["q"] ?? "").Trim().ToLowerInvariant();
-            var rows = contacts.Where(c => term.Length == 0 || (c.Name + " " + c.Role).ToLowerInvariant().Contains(term)).Select(c =>
+            var rows = contacts.Where(c => SearchMatch.Matches(term, c.Name, c.Role)).Select(c =>
             {
                 var last = Conversation(c.Id).LastOrDefault();
                 return new { c, last, unread = Data.Messages.Count(m => m.ReceiverId == Me.Id && m.SenderId == c.Id && !m.Read) };

@@ -1,6 +1,8 @@
-<%@ Page Title="Find your next skill" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Catalog.aspx.cs" Inherits="SKILL_UP.Frontend.CatalogPage" %>
+<%@ Page Title="Explore courses" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Catalog.aspx.cs" Inherits="SKILL_UP.Frontend.CatalogPage" %>
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
 <section class="catalog-page">
+  <%-- Picks the compact layout (see js/site.js, which keeps it right on resize) before the page is first drawn, so the cards do not visibly change size once the scripts load. --%>
+  <script>(function (page) { var zoom = parseFloat(getComputedStyle(document.documentElement).zoom) || 1; page.classList.toggle('is-compact', innerHeight / zoom < 800); })(document.currentScript.parentElement);</script>
   <header class="cat-head">
     <div>
       <h1 id="page-title" tabindex="-1">Find your next skill</h1>

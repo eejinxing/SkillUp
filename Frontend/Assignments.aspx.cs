@@ -75,8 +75,8 @@ namespace SKILL_UP.Frontend
             var shown = courses.Where(c =>
             {
                 var instructor = Data.User(c.InstructorId);
-                var text = string.Join(" ", new[] { c.Title, Data.Program(c.ProgramId)?.Name, instructor?.Name ?? "unassigned", instructor?.Email }.Where(s => !string.IsNullOrEmpty(s)));
-                return text.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0;
+                var text = string.Join(" ", new[] { c.Title, Data.Program(c.ProgramId)?.Name, instructor?.Name ?? "unassigned" }.Where(s => !string.IsNullOrEmpty(s)));
+                return SearchMatch.Matches(term, text, instructor?.Email);
             }).ToList();
             Cards = shown.Count == 0 ? "<p class=\"asg-empty\" id=\"asg-empty\">No matching courses or instructors.</p>"
                 : "<div class=\"asg-grid\" id=\"asg-grid\">" + string.Concat(shown.Select(Card)) + "</div>";

@@ -29,9 +29,11 @@ namespace SKILL_UP.Frontend
             EnrolledStat.Visible = Me != null;
             if (!IsPostBack) SearchBox.Text = Term;
 
-            var term = Term.ToLowerInvariant();
+            // Words that start with what was typed; titles that start with it come first.
+            var term = Term;
             Shown = Published.Where(c => (Level == "All levels" || c.Difficulty == Level)
-                && (term.Length == 0 || (c.Title + " " + c.Description + " " + Data.User(c.InstructorId)?.Name).ToLowerInvariant().Contains(term))).ToList();
+                && SearchMatch.Matches(term, c.Title + " " + Data.User(c.InstructorId)?.Name, c.Description, true))
+                .OrderBy(c => SearchMatch.Rank(term, c.Title)).ToList();
 
             Levels.DataSource = LevelNames.Select(l => new
             {

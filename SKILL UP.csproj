@@ -376,6 +376,7 @@
     <Compile Include="Frontend\ResetPassword.aspx.designer.cs"><DependentUpon>ResetPassword.aspx</DependentUpon></Compile>
     <Compile Include="Frontend\Resources.aspx.cs"><DependentUpon>Resources.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
     <Compile Include="Frontend\Resources.aspx.designer.cs"><DependentUpon>Resources.aspx</DependentUpon></Compile>
+    <Compile Include="Frontend\SearchMatch.cs" />
     <Compile Include="Frontend\SkillPage.cs" />
     <Compile Include="Frontend\SkillUp.Master.cs"><DependentUpon>SkillUp.Master</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
     <Compile Include="Frontend\SkillUp.Master.designer.cs"><DependentUpon>SkillUp.Master</DependentUpon></Compile>

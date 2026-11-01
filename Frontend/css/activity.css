@@ -3094,3 +3094,74 @@
         transition: none;
     }
 }
+
+/* ==== Companion panel, refined: both shortcuts show side by side (they wrap, never hide, as more are added), and the orb and
+   heading shrink smoothly once a conversation starts so the answers get the room. ==== */
+#app .answer-page .answer-ai-reference .answer-ai-suggest {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+    overflow: visible;
+    scroll-snap-type: none;
+}
+
+#app .answer-page .answer-ai-reference .answer-ai-suggest button {
+    flex: none;
+    height: auto;
+    min-height: 70px;
+    scroll-snap-align: none;
+}
+
+#app .answer-ai-reference .answer-orb {
+    transition: width .7s cubic-bezier(.4, 0, .2, 1), margin .7s cubic-bezier(.4, 0, .2, 1);
+}
+
+#app .answer-page .answer-ai-reference h2 {
+    transition: font-size .7s cubic-bezier(.4, 0, .2, 1), margin .7s cubic-bezier(.4, 0, .2, 1), line-height .7s cubic-bezier(.4, 0, .2, 1);
+}
+
+#app .answer-ai-reference.has-conversation {
+    min-height: 780px;
+}
+
+#app .answer-ai-reference.has-conversation .answer-orb {
+    width: 22%;
+    margin-bottom: 0;
+}
+
+#app .answer-page .answer-ai-reference.has-conversation h2 {
+    margin: 2px 24px 10px;
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+#app .answer-ai-reference .answer-ai-conversation>div.is-new {
+    animation: companion-in .35s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+#app .answer-ai-reference .answer-ai-reply.is-wait p {
+    color: #8f9cc4;
+    animation: companion-think 1.2s ease-in-out infinite;
+}
+
+@keyframes companion-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+}
+
+@keyframes companion-think {
+    50% {
+        opacity: .4;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #app .answer-ai-reference .answer-orb,
+    #app .answer-page .answer-ai-reference h2,
+    #app .answer-ai-reference .answer-ai-conversation>div.is-new,
+    #app .answer-ai-reference .answer-ai-reply.is-wait p {
+        transition: none;
+        animation: none;
+    }
+}

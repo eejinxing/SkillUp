@@ -2,13 +2,24 @@
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
 <asp:MultiView ID="Views" runat="server" ActiveViewIndex="0">
   <asp:View runat="server">
-    <div class="page-head"><div><h1 tabindex="-1" id="page-title">Certificates</h1><p>Your completed courses, recognised.</p></div><div class="actions tight"></div></div>
+    <div class="page-head"><div><h1 tabindex="-1" id="page-title">Certificates</h1><p>Your completed courses, recognised.</p></div>
+      <div class="actions tight">
+        <asp:Panel ID="SearchPanel" runat="server" DefaultButton="SearchButton" CssClass="cert-search-form">
+          <label class="cert-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <asp:TextBox ID="SearchBox" runat="server" TextMode="Search" aria-label="Search certificates" placeholder="Search certificates…" autocomplete="off" />
+            <skill:SubmitButton ID="SearchButton" runat="server" CssClass="sr-only" Text="Search" CausesValidation="false" OnClick="Search_Click" />
+          </label>
+        </asp:Panel>
+      </div>
+    </div>
     <div class="grid">
       <asp:Repeater ID="Earned" runat="server">
         <ItemTemplate>
           <article class="panel"><span class="tag green">&#10003; Completed</span><h2 style="margin:20px 0"><%#: Eval("Title") %></h2><p><%# Eval("Lessons") %> activities completed</p><div class="actions"><a class="button primary" href="Certificates?id=<%# Eval("Id") %>"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>View certificate</a></div></article>
         </ItemTemplate>
       </asp:Repeater>
+      <asp:PlaceHolder ID="NoMatch" runat="server" Visible="false"><div class="empty"><h3>No certificates match</h3><p>Try another search.</p></div></asp:PlaceHolder>
       <asp:PlaceHolder ID="NoneYet" runat="server"><div class="empty"><h3>Your first certificate is ahead</h3><p>Complete every activity and pass the quiz to unlock your certificate.</p></div></asp:PlaceHolder>
     </div>
   </asp:View>

@@ -95,7 +95,7 @@ namespace SKILL_UP.Frontend
             Shown = all.Where(r => (Filters.Kind.Length == 0 || r.Kind == Filters.Kind)
                 && (Filters.Program.Length == 0 || r.ProgramId?.ToString(CultureInfo.InvariantCulture) == Filters.Program)
                 && (Filters.Date.Length == 0 || DayKey(r.CreatedAt) == Filters.Date)
-                && (r.CourseTitle + " " + r.Reason + " " + r.Id + " " + Data.User(r.RequesterId)?.Name + " " + ProgramName(r)).IndexOf(Filters.Q.Trim(), StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                && SearchMatch.Matches(Filters.Q, r.CourseTitle + " " + r.Id + " " + Data.User(r.RequesterId)?.Name + " " + ProgramName(r), r.Reason)).ToList();
             Results = Filters.View == "table" ? Table(Shown) : Board(Shown);
         }
 

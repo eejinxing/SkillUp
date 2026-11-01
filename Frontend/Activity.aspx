@@ -10,7 +10,7 @@
     <% if (Guest) { %><span>Preview</span><% } else if (QuizReady) { %><span class="timer" id="quiz-timer" aria-label="Quiz time remaining" data-seconds-left="<%= SecondsLeft %>"><%= SecondsLeft / 60 %>:<%= (SecondsLeft % 60).ToString("00") %> remaining</span><% } else { %><span><%= Percent %>% complete</span><% } %>
   </header>
   <div class="answer-layout">
-    <aside class="answer-ai answer-ai-reference <%= History.Count > 0 ? "has-conversation" : "" %>" aria-label="AI learning companion">
+    <aside class="answer-ai answer-ai-reference <%= History.Count > 0 ? "has-conversation" : "" %>" aria-label="AI learning companion" data-api="<%= ResolveUrl("~/api/commands/") %>">
       <header class="answer-ai-top">
         <a href="Assistant" class="answer-ai-brand" aria-label="Open Skill UP companion">SKILL<span>companion</span></a>
         <details class="answer-ai-options"><summary aria-label="Companion options"><span aria-hidden="true">&bull;&bull;&bull;</span></summary><div><a href="Assistant">Open companion &#8599;</a></div></details>
@@ -29,7 +29,7 @@
           <div class="answer-ai-book"><small>FIELD NOTES</small><b>Make it<br>click.</b><i></i></div>
         </div>
         <div class="answer-ai-suggest" role="group" aria-label="Suggested questions">
-          <asp:Repeater ID="Suggestions" runat="server"><ItemTemplate><skill:SubmitButton runat="server" CausesValidation="false" Enabled="<%# !Guest %>" CommandArgument='<%# Eval("Question") %>' OnCommand="Ask_Command"><span><%#: Eval("Title") %></span><small><%#: Eval("Detail") %></small></skill:SubmitButton></ItemTemplate></asp:Repeater>
+          <asp:Repeater ID="Suggestions" runat="server"><ItemTemplate><skill:SubmitButton runat="server" CausesValidation="false" Enabled="<%# !Guest %>" CommandArgument='<%# Eval("Question") %>' data-question='<%# Eval("Question") %>' OnCommand="Ask_Command"><span><%#: Eval("Title") %></span><small><%#: Eval("Detail") %></small></skill:SubmitButton></ItemTemplate></asp:Repeater>
         </div>
         <asp:Panel runat="server" CssClass="answer-ai-composer" DefaultButton="AskButton">
           <div class="answer-ai-input-wrap">

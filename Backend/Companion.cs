@@ -21,7 +21,7 @@ namespace SKILL_UP.Backend
     public static class Companion
     {
         const string Endpoint = "https://generativelanguage.googleapis.com/v1beta/interactions";
-        const string DefaultModel = "gemini-3.5-flash";
+        const string DefaultModel = "gemini-3.5-flash-lite";
 
         /// <summary>The free tier shares one quota across all learners, so each account gets a small allowance.</summary>
         const int PerMinute = 5;

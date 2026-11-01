@@ -53,7 +53,9 @@
 
     // Back to top button: appears once the page is scrolled down a screen, scrolls up smoothly (instantly with reduced motion).
     if (scrollTopButton) {
-        const sync = () => scrollTopButton.classList.toggle('is-visible', scrollY > Math.max(400, innerHeight / 2));
+        // The certificate pages are only a little taller than the window, so the button shows after a small scroll there.
+        const early = !!document.querySelector('main[data-view="certificates"]');
+        const sync = () => scrollTopButton.classList.toggle('is-visible', scrollY > (early ? 40 : Math.max(400, innerHeight / 2)));
         addEventListener('scroll', sync, { passive: true });
         sync();
         scrollTopButton.addEventListener('click', () => {
@@ -187,6 +189,39 @@
         const parse = async response => new DOMParser().parseFromString(await response.text(), 'text/html');
         let checking = false, switching = false, sending = false, plain = false;
 
+        // Announcements and their comments refresh like direct messages do. The compose form and the comment box move into the
+        // new content as they are, so half-typed text, the cursor and the focus are never lost. If a newer announcement has
+        // replaced the one on screen while a comment is half-written, the swap waits, so the comment is never posted to the wrong one.
+        const syncAnnouncements = page => {
+            const here = document.querySelector('.sc-announcements-scroll'), there = page.querySelector('.sc-announcements-scroll');
+            if (!here || !there) return;
+            const keep = '.sc-comment-form, #ComposePanel';
+            const signature = root => {
+                const copy = root.cloneNode(true);
+                copy.querySelectorAll(keep).forEach(part => part.remove());
+                return copy.innerHTML;
+            };
+            if (signature(here) === signature(there)) return;
+            const shown = root => root.querySelector('[data-announcement-id]')?.dataset.announcementId;
+            if (shown(here) !== shown(there) && document.getElementById('CommentBox')?.value.trim()) return;
+            const active = document.activeElement, focused = here.contains(active) ? active : null;
+            const cursor = focused && 'selectionStart' in focused ? [focused.selectionStart, focused.selectionEnd] : null;
+            for (const live of here.querySelectorAll(keep)) {
+                const same = live.id ? there.querySelector('#' + live.id) : there.querySelector(keep.split(',')[0].trim());
+                if (same) same.replaceWith(live);
+            }
+            here.replaceChildren(...there.childNodes);
+            // Keep the page's hidden state fields current, so Delete on a comment that just arrived is accepted.
+            page.querySelectorAll('input[type=hidden][name^="__"]').forEach(field => {
+                const old = [...document.querySelectorAll('input[type=hidden]')].find(x => x.name === field.name);
+                if (old) old.value = field.value;
+            });
+            if (focused?.isConnected) {
+                focused.focus({ preventScroll: true });
+                if (cursor) try { focused.setSelectionRange(cursor[0], cursor[1]); } catch { /* no cursor in this field */ }
+            }
+        };
+
         // force: after sending, wait for any check already under way, then look now (even in a hidden tab) and show the newest message.
         const check = async force => {
             if (force === true) while (checking) await new Promise(done => setTimeout(done, 40));
@@ -198,16 +233,17 @@
                 if (!r.ok) return;
                 const page = await parse(r);
                 const thread = document.querySelector('#conversation-messages .sc-thread'), next = page.querySelector('#conversation-messages .sc-thread');
-                if (switching || url !== location.href || !thread || !next) return;
-                if (next.innerHTML !== thread.innerHTML) {
+                if (switching || url !== location.href) return;
+                if (thread && next && next.innerHTML !== thread.innerHTML) {
                     const box = thread.parentElement, atEnd = force === true || box.scrollHeight - box.scrollTop - box.clientHeight < 90;
                     thread.innerHTML = next.innerHTML;
                     if (atEnd) box.scrollTop = box.scrollHeight;
                 }
-                for (const part of ['.sc-contact-scroll', '.sc-contacts-head']) {
+                for (const part of ['.sc-contact-scroll', '.sc-contacts-head', '.sc-channels']) {
                     const here = document.querySelector(part), there = page.querySelector(part);
                     if (here && there && here.innerHTML !== there.innerHTML) here.innerHTML = there.innerHTML;
                 }
+                syncAnnouncements(page);
             } catch { /* offline for a moment: try again next time */ } finally { checking = false; }
         };
         setInterval(check, 3000);
@@ -278,6 +314,73 @@
                 send.click();
                 plain = false;
             } finally { sending = false; }
+        }, true);
+
+        // Announcements without a page reload: posting or deleting a comment and publishing an announcement are sent in the
+        // background and the page updates in place, like sending a direct message. If anything fails, the button falls back
+        // to its normal form post, which shows the server's message.
+        const notice = text => {
+            const toast = document.getElementById('toast');
+            if (!toast) return;
+            toast.textContent = text;
+            toast.classList.add('visible');
+            setTimeout(() => toast.classList.remove('visible'), 3000);
+        };
+        const postJson = async (command, body) => {
+            const r = await fetch(chatRoot().dataset.api + command, {
+                method: 'POST', credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json', 'X-SkillUp-Request': '1' }, body: JSON.stringify(body)
+            });
+            if (!r.ok) throw Error(String(r.status));
+        };
+        const announcementId = () => document.querySelector('[data-announcement-id]')?.dataset.announcementId;
+        document.addEventListener('click', async e => {
+            if (plain || e.button !== 0 || !chatRoot()?.dataset.api) return;
+            const post = e.target.closest('.sc-comment-post'), del = e.target.closest('.sc-comment-delete'), publish = e.target.closest('[id$="PublishButton"]');
+            const button = post || del || publish;
+            if (!button) return;
+            const fallback = () => { plain = true; button.click(); plain = false; };
+            if (post) {
+                const field = document.getElementById('CommentBox'), text = field?.value.trim(), id = announcementId();
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                if (!text || !id || sending) return;
+                sending = true;
+                try {
+                    await postJson('announcementComment', { id, comment: text });
+                    field.value = '';
+                    await check(true);
+                    field.focus({ preventScroll: true });
+                    field.scrollIntoView({ block: 'nearest', behavior: scrollBehavior() });
+                    notice('Comment posted');
+                } catch { fallback(); } finally { sending = false; }
+            } else if (del) {
+                const id = announcementId(), commentId = del.dataset.commentId;
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                if (!id || !commentId || sending || !confirm(del.dataset.confirm || 'Delete your comment?')) return;
+                sending = true;
+                try {
+                    await postJson('announcementCommentDelete', { id, commentId });
+                    await check(true);
+                    notice('Comment deleted');
+                } catch { fallback(); } finally { sending = false; }
+            } else {
+                // Publish: the page's own validators run first; if they object, the normal click shows their messages.
+                if (window.Page_ClientValidate && !window.Page_ClientValidate('compose')) return;
+                const course = document.querySelector('[id$="ComposeCourse"]')?.value;
+                const title = document.querySelector('[id$="ComposeTitle"]')?.value.trim(), body = document.querySelector('[id$="ComposeBody"]')?.value.trim();
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                if (!course || !title || !body || sending) return;
+                sending = true;
+                try {
+                    await postJson('announcementSave', { courseId: course, title, body });
+                    const conversation = chatRoot().dataset.with;
+                    await open('Messages?channel=' + course + (conversation && conversation !== '0' ? '&id=' + conversation : ''), true);
+                    notice('Announcement published');
+                } catch { fallback(); } finally { sending = false; }
+            }
         }, true);
     }
 
@@ -407,5 +510,133 @@
         };
         fit();
         addEventListener('resize', fit);
+    }
+    // Live search: every search box filters as you type. A moment after the last keystroke the box is applied exactly as
+    // pressing Enter would (its panel's default button is posted in the background, so each page's own filter code runs),
+    // and only the results are swapped in. The box keeps focus and the cursor. If anything fails, Enter still works.
+    // Only the results are swapped on the catalog and the contact list; on the other pages the whole page content is.
+    const searchParts = box => box.closest('.catalog-page') ? ['#cat-count', '#results'] : box.id === 'ContactSearch' ? ['.sc-contact-scroll'] : ['#main'];
+    let searchTimer = 0, searchRun = 0, searchCall = null;
+    const searchButton = box => {
+        for (let el = box.parentElement; el && el !== document.body; el = el.parentElement) {
+            const match = /WebForm_FireDefaultButton\(event,\s*'([^']+)'/.exec(el.getAttribute('onkeypress') || '');
+            if (match) return document.getElementById(match[1]);
+        }
+        return null;
+    };
+    const searchNow = async (box, form, button) => {
+        const mine = ++searchRun;
+        searchCall?.abort();
+        searchCall = new AbortController();
+        try {
+            const data = new FormData(form);
+            data.set(button.name, button.value || '');
+            const reply = await fetch(form.getAttribute('action') || location.href, {
+                method: 'POST', body: data, credentials: 'same-origin', headers: { 'X-SkillUp-Live': '1' }, signal: searchCall.signal
+            });
+            if (!reply.ok) return;
+            const page = new DOMParser().parseFromString(await reply.text(), 'text/html');
+            const target = new URL(reply.url);
+            if (mine !== searchRun || target.pathname !== location.pathname) return;
+            const focused = document.activeElement === box, start = box.selectionStart, end = box.selectionEnd;
+            for (const selector of searchParts(box)) {
+                const here = document.querySelector(selector), there = page.querySelector(selector);
+                if (!here || !there) continue;
+                // The live box moves into the new content, so it is never recreated.
+                const same = [...there.querySelectorAll('input')].find(x => x.name === box.name);
+                if (same) same.replaceWith(box);
+                here.replaceChildren(...there.childNodes);
+            }
+            // The page's hidden state fields and the form's address come from the new page too, so later buttons act on what is shown.
+            page.querySelectorAll('input[type=hidden][name^="__"]').forEach(field => {
+                const old = [...document.querySelectorAll('input[type=hidden]')].find(x => x.name === field.name);
+                if (old) old.value = field.value;
+            });
+            form.setAttribute('action', target.pathname + target.search);
+            history.replaceState(null, '', target.pathname + target.search);
+            if (focused) {
+                box.focus({ preventScroll: true });
+                try { box.setSelectionRange(start, end); } catch { /* not every input type has a cursor */ }
+            }
+        } catch { /* offline, or a newer search replaced this one: leave the page as it is */ }
+    };
+    document.addEventListener('input', e => {
+        const box = e.target;
+        if (!(box instanceof HTMLInputElement) || !(box.type === 'search' || box.type === 'text' && /search/i.test(box.getAttribute('aria-label') || '')) || e.isComposing || !box.form) return;
+        const button = searchButton(box);
+        if (!button) return;
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => searchNow(box, box.form, button), 250);
+    });
+    // Lesson companion: a question is sent in the background (api/commands/ai) and the answer appears in place, so the page
+    // never reloads. The first question shrinks the orb and heading to make room (css: .has-conversation). Without this script
+    // the shortcuts and the Send button post the page as before.
+    const lessonAi = document.querySelector('.answer-ai-reference[data-api]');
+    if (lessonAi) {
+        const log = lessonAi.querySelector('.answer-ai-conversation');
+        const field = document.getElementById('AskBox');
+        const sendButton = lessonAi.querySelector('.answer-ai-send');
+        const problem = lessonAi.querySelector('.form-error');
+        let asking = false;
+        const toEnd = () => { log.scrollTop = log.scrollHeight; };
+        toEnd();
+        const bubble = (kind, label, text) => {
+            const box = document.createElement('div');
+            box.className = kind + ' is-new';
+            const small = document.createElement('small');
+            small.textContent = label;
+            const p = document.createElement('p');
+            p.textContent = text;
+            box.append(small, p);
+            log.appendChild(box);
+            toEnd();
+            return box;
+        };
+        const askCompanion = async question => {
+            question = (question || '').trim();
+            if (!question || asking) return;
+            asking = true;
+            if (problem) problem.textContent = '';
+            const first = !lessonAi.classList.contains('has-conversation');
+            lessonAi.classList.add('has-conversation');
+            if (field) field.value = '';
+            if (sendButton) sendButton.disabled = true;
+            bubble('answer-ai-prompt', 'You', question);
+            const reply = bubble('answer-ai-reply is-wait', 'Skill UP companion', 'Thinking\u2026');
+            try {
+                const r = await fetch(lessonAi.dataset.api + 'ai', {
+                    method: 'POST', credentials: 'same-origin',
+                    headers: { 'Content-Type': 'application/json', 'X-SkillUp-Request': '1' },
+                    body: JSON.stringify({ text: question })
+                });
+                const body = await r.json().catch(() => ({}));
+                if (!r.ok || !body.data?.response) throw Error(body.detail || 'The companion could not answer. Please try again.');
+                reply.classList.remove('is-wait');
+                reply.querySelector('p').textContent = body.data.response;
+            } catch (err) {
+                // Take the unanswered question back out and give it back to the box, so nothing is lost.
+                reply.previousElementSibling.remove();
+                reply.remove();
+                if (first) lessonAi.classList.remove('has-conversation');
+                if (field) field.value = question;
+                if (problem) problem.textContent = err instanceof TypeError ? 'Could not reach the server. Check your connection and try again.' : err.message;
+            }
+            asking = false;
+            if (sendButton) sendButton.disabled = false;
+            field?.focus({ preventScroll: true });
+            toEnd();
+        };
+        // Capture phase: this runs before the button's own form post. Pressing Enter in the box clicks Send, so it comes through here too.
+        lessonAi.addEventListener('click', e => {
+            const button = e.target.closest('button');
+            if (!button || button.disabled) return;
+            let question = null;
+            if (button.closest('.answer-ai-suggest') || button.classList.contains('answer-ai-add')) question = button.dataset.question;
+            else if (button.classList.contains('answer-ai-send')) question = field?.value;
+            if (question == null) return;
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            askCompanion(question);
+        }, true);
     }
 })();

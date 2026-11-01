@@ -129,7 +129,7 @@ namespace SKILL_UP.Frontend
                 r.Average = scores.Count == 0 ? (int?)null : Charts.Avg(scores);
             }
             var shown = records.Where(r => (course == null || r.C.Id == course)
-                && (r.U.Name + " " + r.U.Email + " " + r.C.Title).IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0
+                && SearchMatch.Matches(term, r.U.Name + " " + r.C.Title, r.U.Email)
                 && (state == "" || state == "completed" && r.Completion == 100 || state == "progress" && r.Completion > 0 && r.Completion < 100
                     || state == "not-started" && r.Completion == 0 || state == "needs-support" && r.Average < 70));
             var byName = StringComparer.CurrentCultureIgnoreCase;
@@ -322,10 +322,10 @@ namespace SKILL_UP.Frontend
             LeaderTable.Enrollments = es.Where(x =>
             {
                 var user = Data.User(x.UserId);
-                var text = (user?.Name ?? "") + " " + (user?.Email ?? "") + " " + (Data.Course(x.CourseId)?.Title ?? "");
+                var text = (user?.Name ?? "") + " " + (Data.Course(x.CourseId)?.Title ?? "");
                 var p = Progress(x.UserId, x.CourseId);
                 var key = p == 100 ? "done" : p > 0 ? "progress" : "idle";
-                return text.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0 && (Status == "all" || key == Status);
+                return SearchMatch.Matches(term, text, user?.Email) && (Status == "all" || key == Status);
             }).ToList();
         }
 

@@ -55,7 +55,7 @@ namespace SKILL_UP.Frontend
             // The Top 10: ranked learners first, then unranked ones; a search filters the whole field.
             var ordered = ranked.Concat(Rows.Where(r => r.Points <= 0)).ToList();
             var term = Term.ToLowerInvariant();
-            Shown = term.Length > 0 ? ordered.Where(r => (r.User.Name + " " + r.User.Username).ToLowerInvariant().Contains(term)).ToList() : ordered.Take(10).ToList();
+            Shown = term.Length > 0 ? ordered.Where(r => SearchMatch.Matches(term, r.User.Name + " " + r.User.Username)).ToList() : ordered.Take(10).ToList();
             // Podium of the top three ranked learners, shown as #2, #1, #3 (hidden while searching).
             if (term.Length == 0 && ranked.Count > 0)
             {

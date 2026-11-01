@@ -1,4 +1,4 @@
-<%@ Page Title="Communication workspace" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Messages.aspx.cs" Inherits="SKILL_UP.Frontend.MessagesPage" %>
+<%@ Page Title="Messages" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Messages.aspx.cs" Inherits="SKILL_UP.Frontend.MessagesPage" %>
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
 <section class="skill-chat sc-v2 sc-workspace <%= Selected != null && QueryInt("id") != null ? "sc-conversation-open" : "" %>" data-api="<%= ResolveUrl("~/api/commands/") %>" data-with="<%= SelectedId %>">
   <h1 class="sc-sr-only" id="page-title" tabindex="-1">Communication workspace</h1>
@@ -69,7 +69,7 @@
           <ItemTemplate>
             <li class="sc-comment">
               <header class="sc-announcement-author sc-comment-author"><%# Eval("FaceHtml") %><div><strong><%#: Eval("Name") %></strong><small><%#: Eval("Role") %> &middot; <time><%# Eval("When") %></time></small></div>
-                <skill:SubmitButton runat="server" CssClass="sc-comment-delete" Text="Delete" CausesValidation="false" Visible='<%# Eval("Mine") %>' CommandArgument='<%# Eval("Id") %>' OnCommand="DeleteComment_Command" aria-label="Delete your comment" data-confirm="Delete your comment?" />
+                <skill:SubmitButton runat="server" CssClass="sc-comment-delete" Text="Delete" CausesValidation="false" Visible='<%# Eval("Mine") %>' CommandArgument='<%# Eval("Id") %>' data-comment-id='<%# Eval("Id") %>' OnCommand="DeleteComment_Command" aria-label="Delete your comment" data-confirm="Delete your comment?" />
               </header>
               <p class="sc-announcement-body sc-comment-body"><%#: Eval("Text") %></p>
             </li>
