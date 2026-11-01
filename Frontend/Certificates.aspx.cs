@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Web;
 using SKILL_UP.Backend;
 
 namespace SKILL_UP.Frontend
@@ -43,9 +44,18 @@ namespace SKILL_UP.Frontend
                 }
                 return;
             }
-            Earned.DataSource = completed.Select(c => new { c.Id, c.Title, Lessons = Data.LessonsOf(c.Id).Count });
+            // Search (?q=): words that start with what was typed; one letter matches only titles that start with it.
+            var term = (Request.QueryString["q"] ?? "").Trim();
+            if (!IsPostBack) SearchBox.Text = term;
+            var shown = completed.Where(c => SearchMatch.Matches(term, c.Title, c.Description, true)).OrderBy(c => SearchMatch.Rank(term, c.Title)).ToList();
+            Earned.DataSource = shown.Select(c => new { c.Id, c.Title, Lessons = Data.LessonsOf(c.Id).Count });
             Earned.DataBind();
+            SearchPanel.Visible = completed.Count > 0;
             NoneYet.Visible = completed.Count == 0;
+            NoMatch.Visible = completed.Count > 0 && shown.Count == 0;
         }
+
+        protected void Search_Click(object sender, EventArgs e) =>
+            Go("Certificates" + (SearchBox.Text.Trim().Length == 0 ? "" : "?q=" + HttpUtility.UrlEncode(SearchBox.Text.Trim())));
     }
 }

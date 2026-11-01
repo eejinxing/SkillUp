@@ -26,7 +26,7 @@ namespace SKILL_UP.Frontend
                 if (StatusFilter.Items.FindByText(status) != null) StatusFilter.SelectedValue = status;
             }
             var shown = Mine.Where(c => (status == "All statuses" || c.Status == status)
-                && (term.Length == 0 || (c.Title + " " + c.Description).IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
+                && SearchMatch.Matches(term, c.Title, c.Description, true)).OrderBy(c => SearchMatch.Rank(term, c.Title)).ToList();
             Results.DataSource = shown;
             Results.DataBind();
             NoCourses.Visible = shown.Count == 0;

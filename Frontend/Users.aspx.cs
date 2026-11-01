@@ -80,7 +80,7 @@ namespace SKILL_UP.Frontend
             ClearButton.Visible = term.Length > 0 || role.Length > 0 || status.Length > 0;
 
             var users = Data.Users.Where(u => (role == "" || u.Role == role) && (status == "" || u.Status == status)
-                && (term == "" || new[] { u.Name, u.Email, u.Username, u.Id.ToString(CultureInfo.InvariantCulture) }.Any(v => (v ?? "").IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)));
+                && SearchMatch.Matches(term, string.Join(" ", u.Name, u.Username, u.Id.ToString(CultureInfo.InvariantCulture)), u.Email));
             var byName = StringComparer.CurrentCultureIgnoreCase;
             var sorted = (sort == "name-desc" ? users.OrderByDescending(u => u.Name, byName)
                 : sort == "role" ? users.OrderBy(u => Array.IndexOf(RoleNames, u.Role)).ThenBy(u => u.Name, byName)

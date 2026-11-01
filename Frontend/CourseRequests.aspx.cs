@@ -98,7 +98,7 @@ namespace SKILL_UP.Frontend
             }
 
             Filtered = Sorted(mine.Where(r => (kind == "" || r.Row.Kind == kind) && (status == "" || r.Row.Status == status)
-                && (r.Row.CourseTitle + " " + r.Row.Reason + " " + r.Row.Id + " " + r.Program + " " + r.Reviewer + " " + r.NextStep).IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
+                && SearchMatch.Matches(term, r.Row.CourseTitle + " " + r.Row.Id + " " + r.Program + " " + r.Reviewer, r.Row.Reason + " " + r.NextStep))).ToList();
             var id = QueryInt("id");
             Active = Filtered.FirstOrDefault(r => r.Row.Id == id) ?? Filtered.FirstOrDefault();
             var pages = Math.Max(1, (Filtered.Count + size - 1) / size);

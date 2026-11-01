@@ -63,6 +63,14 @@ namespace SKILL_UP.Frontend
                 completed = Data.CompletedLessons(Me.Id, C.Id);
                 if (index > 0 && !completed.Contains(lessons[index - 1].Id)) { Screens.ActiveViewIndex = 3; return; }
                 Percent = Progress(Me.Id, C.Id);
+                // Remember where this learner is, so "Continue learning" on the dashboard returns here (a cookie per account).
+                if (!IsPostBack)
+                    Response.Cookies.Add(new System.Web.HttpCookie("SkillUp.Resume." + Me.Id, C.Id + "." + L.Id)
+                    {
+                        HttpOnly = true,
+                        Secure = Request.IsSecureConnection,
+                        Expires = DateTime.Now.AddYears(1)
+                    });
             }
 
             Title = C.Title + " / " + L.Title;
@@ -89,6 +97,7 @@ namespace SKILL_UP.Frontend
             foreach (var b in new[] { HintArticle, HintLab, HintQuiz, LabSubmit, QuizSubmit, ContextButton, AskButton }) b.Enabled = !Guest;
             LabAnswer.Enabled = !Guest;
             LabAnswer.Attributes["placeholder"] = Guest ? "Log in to answer" : "Type your answer…";
+            ContextButton.Attributes["data-question"] = "Help me understand " + C.Title + " — " + L.Title + ".";
             AskBox.Enabled = !Guest;
             AskBox.Attributes["placeholder"] = Guest ? "Log in to ask the companion" : "Curious? Let’s explore together";
 

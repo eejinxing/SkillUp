@@ -197,7 +197,7 @@ namespace SKILL_UP.Frontend.Controls
                 if (LogSource.Items.FindByValue(source) != null) LogSource.SelectedValue = source;
             }
             filtered = logs.Where(r => (role == "" || r.Role == role) && (source == "" || r.Source == source)
-                && string.Join(" ", r.Name, r.Role, r.Action, r.Detail, r.Source).IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                && SearchMatch.Matches(term, string.Join(" ", r.Name, r.Role, r.Action), string.Join(" ", r.Detail, r.Source))).ToList();
             LogCount = term.Length + role.Length + source.Length == 0 ? logs.Count + " activities" : filtered.Count + " of " + logs.Count + " activities";
             if (filtered.Count == 0)
             {

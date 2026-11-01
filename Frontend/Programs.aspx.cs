@@ -89,12 +89,9 @@ namespace SKILL_UP.Frontend
             var term = (Request.QueryString["q"] ?? "").Trim();
             if (!IsPostBack) SearchBox.Text = term;
             var html = new StringBuilder();
-            for (int i = 0; i < Rows.Count; i++)
-            {
-                var r = Rows[i];
-                if ((r.P.Name + " " + r.P.Description).IndexOf(term, StringComparison.OrdinalIgnoreCase) < 0) continue;
-                html.Append(Card(r, i));
-            }
+            // Names that start with what was typed come first; each card keeps its own position number (its colour).
+            foreach (var i in Enumerable.Range(0, Rows.Count).Where(i => SearchMatch.Matches(term, Rows[i].P.Name, Rows[i].P.Description, true)).OrderBy(i => SearchMatch.Rank(term, Rows[i].P.Name)))
+                html.Append(Card(Rows[i], i));
             Cards = html.ToString();
             NoMatches = Rows.Count > 0 && Cards.Length == 0;
         }

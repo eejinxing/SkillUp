@@ -2541,3 +2541,9 @@ body:has(.sc-workspace) {
 /* ── Chat thread scrollbar: slim and quiet, shows while you hover. The middle announcement scrollbar keeps its original look. ── */
 #app .skill-chat .sc-messages{scrollbar-width:thin;scrollbar-color:transparent transparent;transition:scrollbar-color .35s ease}
 #app .skill-chat .sc-messages:hover{scrollbar-color:#ffffff2e transparent}
+
+/* The search box already shows focus on its frame (:focus-within); the page-wide ring around the text made a second, nested outline. */
+#app .skill-chat .sc-search input:is(:focus, :focus-visible) {
+    outline: none;
+    box-shadow: none;
+}

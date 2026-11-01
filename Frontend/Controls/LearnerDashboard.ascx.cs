@@ -62,9 +62,7 @@ namespace SKILL_UP.Frontend.Controls
             AnnouncementCount = notes.Count;
             LatestTitle = notes.FirstOrDefault()?.Title ?? "Your learning workspace is ready";
             LatestDate = notes.Count > 0 ? Ui.Date(notes[0].CreatedAt) : "Course updates will appear here";
-            var open = mine.Select(x => new { x, next = data.LessonsOf(x.CourseId).FirstOrDefault(l => !data.CompletedLessons(Me.Id, x.CourseId).Contains(l.Id)) })
-                .Where(o => o.next != null).OrderByDescending(o => o.x.LastActive).FirstOrDefault();
-            ResumeUrl = open == null ? "Catalog" : "Activity?course=" + open.x.CourseId + "&lesson=" + open.next.Id;
+            ResumeUrl = ResumeLink(mine) ?? "Catalog";
 
             BindRanking(now);
             BindActivity(mine, now);
@@ -73,6 +71,33 @@ namespace SKILL_UP.Frontend.Controls
             YearlyButton.Attributes["aria-pressed"] = Range == "year" ? "true" : "false";
             SortButton.Attributes["aria-pressed"] = SortByProgress ? "true" : "false";
             SortButton.Attributes["aria-label"] = SortByProgress ? "Sort courses by name" : "Sort courses by progress";
+        }
+
+        /// <summary>
+        /// Where "Continue learning" goes: the activity this learner last opened (Activity.aspx saves it in a cookie), or the
+        /// next unfinished one in that course when they had already completed it. With no usable memory it falls back to the
+        /// next unfinished activity of the most recently active course. Null when everything is finished.
+        /// </summary>
+        string ResumeLink(List<EnrollmentRow> mine)
+        {
+            var saved = Request.Cookies["SkillUp.Resume." + Me.Id]?.Value;
+            var parts = (saved ?? "").Split('.');
+            int courseId, lessonId;
+            if (parts.Length == 2 && int.TryParse(parts[0], out courseId) && int.TryParse(parts[1], out lessonId)
+                && mine.Any(x => x.CourseId == courseId) && Host.Data.Course(courseId)?.Status == "Published")
+            {
+                var lessons = Host.Data.LessonsOf(courseId);
+                var done = Host.Data.CompletedLessons(Me.Id, courseId);
+                var last = lessons.FirstOrDefault(l => l.Id == lessonId);
+                if (last != null)
+                {
+                    var next = done.Contains(last.Id) ? lessons.FirstOrDefault(l => !done.Contains(l.Id)) : last;
+                    return "Activity?course=" + courseId + "&lesson=" + (next ?? last).Id;
+                }
+            }
+            var open = mine.Select(x => new { x, next = Host.Data.LessonsOf(x.CourseId).FirstOrDefault(l => !Host.Data.CompletedLessons(Me.Id, x.CourseId).Contains(l.Id)) })
+                .Where(o => o.next != null).OrderByDescending(o => o.x.LastActive).FirstOrDefault();
+            return open == null ? null : "Activity?course=" + open.x.CourseId + "&lesson=" + open.next.Id;
         }
 
         /// <summary>Same all-time and weekly ranks as the Leaderboard page; an unranked learner sees the current top three.</summary>
