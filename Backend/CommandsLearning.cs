@@ -236,12 +236,13 @@ namespace SKILL_UP.Backend
             return null;
         }
 
-        /// <summary>The AI companion still returns rule-based sample replies; no AI service is connected yet.</summary>
+        /// <summary>Saves the question and the companion's reply: Gemini's (AiReply) or, with no API key, a rule-based sample.</summary>
         object Ai()
         {
             var prompt = Text("text", "Question", 4000);
-            string response;
-            if (Regex.IsMatch(prompt, "aggregation|match|group", RegexOptions.IgnoreCase))
+            var response = AiReply;
+            if (response != null) { }
+            else if (Regex.IsMatch(prompt, "aggregation|match|group", RegexOptions.IgnoreCase))
                 response = "Try a small pipeline first: $match filters documents, $group summarises them, and $sort orders the result. Which stage does your question need?";
             else if (Regex.IsMatch(prompt, "progress|complete", RegexOptions.IgnoreCase))
                 response = "Open My learning to find your next unlocked activity. Complete the reading and lab before taking the quiz. A score of 70% unlocks completion.";

@@ -6,6 +6,9 @@
 *.userosscache
 *.sln.docstates
 
+# Secrets: the Gemini API key lives here (copy secrets.config.example)
+secrets.config
+
 # Build output and NuGet packages (restored on build)
 bin/
 obj/

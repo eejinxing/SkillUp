@@ -120,12 +120,14 @@ namespace SKILL_UP.Frontend
         public object Run(string action, object payload = null)
         {
             var body = payload as JObject ?? (payload == null ? new JObject() : JObject.FromObject(payload));
+            // Gemini answers in seconds, so ask it before taking the gate that serialises every command.
+            var aiReply = action == "ai" ? Companion.Reply(Data, Me, (string)body["text"]) : null;
             lock (CommandGate)
             {
                 using (var db = new Db())
                 {
                     db.Begin();
-                    var commands = new Commands(db, Model.Load(db), Active(Data)) { VisitorKey = VisitorCookie.Read(Context) };
+                    var commands = new Commands(db, Model.Load(db), Active(Data)) { VisitorKey = VisitorCookie.Read(Context), AiReply = aiReply };
                     var data = commands.Run(action, body);
                     db.Commit();
                     if (commands.NewVisitorKey != null) VisitorCookie.Issue(Context, commands.NewVisitorKey);

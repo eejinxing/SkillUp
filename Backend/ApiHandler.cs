@@ -87,13 +87,21 @@ namespace SKILL_UP.Backend
                 try { payload = string.IsNullOrWhiteSpace(body) ? new JObject() : JObject.Parse(body); }
                 catch (JsonReaderException) { throw new ApiException(400, "The request body is not valid JSON."); }
             }
+            // Gemini answers in seconds, so ask it before taking the gate that serialises every command.
+            string aiReply = null;
+            if (action == "ai")
+                using (var db = new Db())
+                {
+                    var model = Model.Load(db);
+                    aiReply = Companion.Reply(model, CurrentUser(context, model), (string)payload["text"]);
+                }
             lock (CommandGate)
             {
                 using (var db = new Db())
                 {
                     db.Begin();
                     var model = Model.Load(db);
-                    var commands = new Commands(db, model, CurrentUser(context, model)) { VisitorKey = VisitorCookie.Read(context) };
+                    var commands = new Commands(db, model, CurrentUser(context, model)) { VisitorKey = VisitorCookie.Read(context), AiReply = aiReply };
                     var data = commands.Run(action, payload);
                     db.Commit();
 

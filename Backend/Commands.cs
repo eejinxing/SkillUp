@@ -29,6 +29,8 @@ namespace SKILL_UP.Backend
         bool logged;
 
         public UserRow Me { get; private set; }
+        /// <summary>The companion's reply from Gemini (Companion.Reply), fetched before the command gate; null uses the sample replies.</summary>
+        public string AiReply { get; set; }
         /// <summary>Set by login/demo: the handler issues the sign-in cookie after the transaction commits.</summary>
         public int? SignIn { get; private set; }
         public bool SignOut { get; private set; }
