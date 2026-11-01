@@ -185,6 +185,7 @@
     <Compile Include="Backend\Commands.cs" />
     <Compile Include="Backend\CommandsCourses.cs" />
     <Compile Include="Backend\CommandsLearning.cs" />
+    <Compile Include="Backend\Companion.cs" />
     <Compile Include="Backend\DatabaseSetup.cs" />
     <Compile Include="Backend\Db.cs" />
     <Compile Include="Backend\Model.cs" />

@@ -272,7 +272,9 @@ namespace SKILL_UP.Frontend
                 AskError.Text = "Type a question first.";
                 return;
             }
-            if (TryRun("ai", new { text = question })) Go(Request.RawUrl);
+            object ignored;
+            // A refusal (over the allowance, Gemini unavailable) shows under the question box, not in the quiz or lab messages.
+            if (TryRun("ai", new { text = question }, out ignored, message => AskError.Text = Server.HtmlEncode(message))) Go(Request.RawUrl);
         }
 
         public override void ShowError(string message)
