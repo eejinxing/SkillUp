@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/D:/Git/Frontend/RequestReview.aspx" hash="10c604ecd" filehash="8a5e891599fd1381" flags="110000" assembly="App_Web_muaeicda" type="ASP.frontend_requestreview_aspx">
+    <filedeps>
+        <filedep name="/D:/Git/Frontend/Controls/AuthArt.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/LoginDialog.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/RegisterDialog.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/SiteFooter.ascx" />
+        <filedep name="/D:/Git/Frontend/RequestReview.aspx" />
+        <filedep name="/D:/Git/Frontend/SkillUp.Master" />
+    </filedeps>
+</preserve>

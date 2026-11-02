@@ -34,7 +34,7 @@ JSON API (optional)    ──GET  /api/workspace──────────�
 
 ## Where each part of the app is stored
 
-The ERD's 37 tables hold the core records. `Database/backend-extensions.sql` adds what the UI needs and the ERD does not have; ERD columns and constraints are never removed. The only constraint it replaces is `CK_DISCUSSION_POST_status`, which gains `Flagged`.
+The ERD's tables hold the core records; the web app added a few columns to them and 7 tables of its own. `Database/create-tables.sql` creates all of them (the additions are marked), and `Database/backend-extensions.sql` adds them to a database made with an older create-tables.sql; ERD columns and constraints are never removed. The only constraint it replaces is `CK_DISCUSSION_POST_status`, which gains `Flagged`.
 
 | Workspace data | Tables |
 |---|---|
@@ -56,7 +56,7 @@ The ERD's 37 tables hold the core records. `Database/backend-extensions.sql` add
 | enquiries | `ENQUIRY`; `ENQUIRY_ACCESS` (added) links a browser to the enquiries it sent. |
 | audit | `ACTIVITY_LOG` (added: `detail`). |
 
-Not used by the current UI: `BADGE`, `USER_BADGE`, `NOTIFICATION`, `FAQ`, and the starter code and expected output columns of `LAB_TASK`.
+Dropped because nothing used them (they are still in the proposal ERD): the `BADGE`, `USER_BADGE`, `NOTIFICATION` and `FAQ` tables, and the columns `[USER].total_points` and `current_streak`, `INSTRUCTOR_PROFILE.expertise`, `qualification`, `teaching_experience` and `certification`, `LAB_TASK.starter_code` and `expected_output` (a lab keeps its code in `LAB`), `TASK_ANSWER.code_output` and `QUIZ.is_ai_generated`. `backend-extensions.sql` drops them from older databases.
 
 ## Database setup
 

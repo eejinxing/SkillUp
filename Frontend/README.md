@@ -14,7 +14,6 @@ Notes for working on the pages. For setup, demo accounts and the overall project
 | `css/` | Stylesheets, one per screen or area (see below) |
 | `js/site.js`, `js/activity.js`, `js/call-preview.js` | The only scripts the pages load (see below) |
 | `assets/` | Images, icons and fonts used at runtime |
-| `design/` | Figma exports and reference images |
 
 The other files in `js/`, and `index.html`, `server.cjs`, `package.json`, `tests/` and `scripts/`, belong to the earlier JavaScript version of the frontend. No page loads them any more, and `.gitignore` keeps them out of the repository.
 

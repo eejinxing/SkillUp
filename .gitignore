@@ -17,7 +17,7 @@ packages/
 # ASP.NET precompiled site output (Publish, or aspnet_compiler)
 PrecompiledWeb/
 
-# SQL Server LocalDB database files (App_Data). Each teammate builds theirs with Database/create-tables.sql.
+# SQL Server LocalDB database files (App_Data). Each teammate creates theirs with Database/setup-db.ps1.
 *.mdf
 *.ldf
 
@@ -25,79 +25,19 @@ PrecompiledWeb/
 *.pubxml.user
 *.publishsettings
 
-# The earlier JavaScript version of the frontend, replaced by the Web Forms pages. None of it is loaded any more:
-# the pages use only Frontend/js/site.js, activity.js, pack-opening.js and call-preview.js. The files may stay on your PC.
+# Course covers uploaded in the course editor (Frontend/uploads/course-art)
+Frontend/uploads/
+
+# Local test tools and their output (not part of the site)
 node_modules/
 npm-debug.log*
 Frontend/previews/
 Frontend/.test-output/
-Frontend/.taste-skill/
-Frontend/index.html
-Frontend/server.cjs
-Frontend/package.json
-Frontend/package-lock.json
-Frontend/tests/
-Frontend/scripts/
-Frontend/js/admin-dashboard-art.js
-Frontend/js/admin-dashboard.js
-Frontend/js/admin-users.js
-Frontend/js/answer-page.js
-Frontend/js/api.js
-Frontend/js/app.js
-Frontend/js/assignments-page.js
-Frontend/js/auth-refinement.js
-Frontend/js/chat-art.js
-Frontend/js/chat-page.js
-Frontend/js/course-editor-art.js
-Frontend/js/course-editor.js
-Frontend/js/course-requests.js
-Frontend/js/dashboard-components.js
-Frontend/js/enquiry-portal.js
-Frontend/js/enroll-art.js
-Frontend/js/enroll-page.js
-Frontend/js/home-dashboard.js
-Frontend/js/home-reference.js
-Frontend/js/home-refinement.js
-Frontend/js/instructor-art.js
-Frontend/js/instructor-dashboard.js
-Frontend/js/leader-applications.js
-Frontend/js/leader-dashboard-art.js
-Frontend/js/leader-dashboard.js
-Frontend/js/leaderboard-demo-data.js
-Frontend/js/leaderboard.js
-Frontend/js/learner-dashboard.js
-Frontend/js/learner-template.js
-Frontend/js/learning-console.js
-Frontend/js/my-courses-data.js
-Frontend/js/my-courses.js
-Frontend/js/pages.js
-Frontend/js/profile-page.js
-Frontend/js/program-management-art.js
-Frontend/js/program-management.js
-Frontend/js/quiz-editor.js
-Frontend/js/request-history-data.js
-Frontend/js/route-bootstrap.js
-Frontend/js/runtime-config.js
-Frontend/js/seed.js
-Frontend/js/student-performance.js
-Frontend/js/ui-refinement.js
-Frontend/js/user-editor-art.js
-Frontend/js/user-editor.js
-Frontend/js/visitor-home.js
-Frontend/js/workspace-nav.js
-Frontend/js/xp-history-data.js
 
 # OS and Office temporary files
 Thumbs.db
 desktop.ini
 ~$*
 
-# Local integration backups / handoff archives
-App_Data/HandoffBackups/
-handoff/*.zip
-
 # Local Claude Code permissions
 .claude/settings.local.json
-
-# Uploaded course images (Frontend/uploads/course-art)
-Frontend/uploads/

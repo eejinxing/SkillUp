@@ -1,14 +1,19 @@
-/* Skill UP - create all 37 tables from the ERD (docs/proposal/WAPP.drawio).
+/* Skill UP - create every table of the database: the tables of the ERD (docs/proposal/WAPP.drawio), with the columns the
+   web app added to them, and the 7 tables the web app added (marked "Added for the web app"). The ERD's BADGE, USER_BADGE,
+   NOTIFICATION and FAQ tables, and ten of its columns, were left out because nothing in the web app used them.
 
-   How to set up your database in Visual Studio:
+   Database/setup-db.ps1 runs this file for you. To run it yourself in Visual Studio:
    1. View > Server Explorer. Right-click Data Connections > Add Connection...
    2. Data source: Microsoft SQL Server Database File. Database file name: browse to this
       project's App_Data folder and type SkillUp.mdf. Click OK, then Yes to create it.
    3. Right-click the new SkillUp.mdf connection > New Query.
-   4. Paste this whole file and press Ctrl+Shift+E. It ends with "Done: 37 tables created."
+   4. Paste this whole file and press Ctrl+Shift+E. It ends with "Done: 40 tables created."
    5. Right-click Tables > Refresh.
 
-   Run it once. Running it again stops with a message and changes nothing.
+   Run it once, on an empty database. Running it again stops with a message and changes nothing.
+   A database created with an older version of this file is brought up to date by Database/backend-extensions.sql,
+   which the web app runs itself when it starts. The demo accounts and courses are loaded by the web app on its first
+   start (Database/demo-seed.json); this file only adds the four roles.
    Note: USER is a reserved word, so write it as [USER] in queries. */
 SET XACT_ABORT ON;
 IF OBJECT_ID(N'ROLE') IS NOT NULL
@@ -17,6 +22,8 @@ BEGIN
     RETURN;
 END
 BEGIN TRANSACTION;
+
+/* ---- Accounts ---------------------------------------------------------------------------------------------------- */
 
 CREATE TABLE ROLE (
     role_id INT IDENTITY(1,1) NOT NULL,
@@ -34,30 +41,26 @@ CREATE TABLE [USER] (
     username NVARCHAR(50) NOT NULL,
     password NVARCHAR(255) NOT NULL,
     email NVARCHAR(255) NOT NULL,
-    profile_picture NVARCHAR(500) NULL,
+    profile_picture NVARCHAR(MAX) NULL,                 -- an uploaded image is kept as a data URL
     bio NVARCHAR(1000) NULL,
     preferred_language NVARCHAR(10) NOT NULL DEFAULT N'en',
     account_status NVARCHAR(20) NOT NULL DEFAULT N'Active',
-    total_points INT NOT NULL DEFAULT 0,
-    current_streak INT NOT NULL DEFAULT 0,
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     last_login DATETIME2 NULL,
+    -- Added for the web app: profile page fields
+    location NVARCHAR(100) NULL,
+    theme NVARCHAR(10) NOT NULL CONSTRAINT DF_USER_theme DEFAULT N'dark',
+    preferences NVARCHAR(MAX) NULL,
     CONSTRAINT PK_USER PRIMARY KEY (user_id),
     CONSTRAINT FK_USER_role_id FOREIGN KEY (role_id) REFERENCES ROLE (role_id),
     CONSTRAINT UQ_USER_username UNIQUE (username),
     CONSTRAINT UQ_USER_email UNIQUE (email),
-    CONSTRAINT CK_USER_account_status CHECK (account_status IN (N'Active', N'Pending', N'Inactive')),
-    CONSTRAINT CK_USER_total_points CHECK (total_points >= 0),
-    CONSTRAINT CK_USER_current_streak CHECK (current_streak >= 0)
+    CONSTRAINT CK_USER_account_status CHECK (account_status IN (N'Active', N'Pending', N'Inactive'))
 );
 
 CREATE TABLE INSTRUCTOR_PROFILE (
     instructor_profile_id INT IDENTITY(1,1) NOT NULL,
     user_id INT NOT NULL,
-    expertise NVARCHAR(200) NULL,
-    qualification NVARCHAR(200) NULL,
-    teaching_experience NVARCHAR(500) NULL,
-    certification NVARCHAR(500) NULL,
     verification_status NVARCHAR(20) NOT NULL DEFAULT N'Pending',
     verified_by INT NULL,
     verified_at DATETIME2 NULL,
@@ -79,6 +82,8 @@ CREATE TABLE PASSWORD_RESET (
     CONSTRAINT FK_PASSWORD_RESET_user_id FOREIGN KEY (user_id) REFERENCES [USER] (user_id) ON DELETE CASCADE,
     CONSTRAINT CK_PASSWORD_RESET_expires_at CHECK (expires_at > created_at)
 );
+
+/* ---- Programs and courses ----------------------------------------------------------------------------------------- */
 
 CREATE TABLE PROGRAM (
     program_id INT IDENTITY(1,1) NOT NULL,
@@ -105,6 +110,12 @@ CREATE TABLE COURSE (
     approval_status NVARCHAR(30) NOT NULL DEFAULT N'Draft',
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     updated_at DATETIME2 NULL,
+    -- Added for the web app: schedule and card styling
+    start_date DATE NULL,
+    deadline DATE NULL,
+    duration_weeks INT NOT NULL CONSTRAINT DF_COURSE_duration_weeks DEFAULT 1,
+    color NVARCHAR(20) NULL,
+    icon NVARCHAR(10) NULL,
     CONSTRAINT PK_COURSE PRIMARY KEY (course_id),
     CONSTRAINT FK_COURSE_program_id FOREIGN KEY (program_id) REFERENCES PROGRAM (program_id),
     CONSTRAINT FK_COURSE_created_by FOREIGN KEY (created_by) REFERENCES [USER] (user_id),
@@ -174,6 +185,8 @@ CREATE TABLE ENROLLMENT (
     status NVARCHAR(20) NOT NULL DEFAULT N'In progress',
     progress_percent DECIMAL(5,2) NOT NULL DEFAULT 0,
     completed_at DATETIME2 NULL,
+    -- Added for the web app
+    last_active DATETIME2 NULL,
     CONSTRAINT PK_ENROLLMENT PRIMARY KEY (enrollment_id),
     CONSTRAINT FK_ENROLLMENT_user_id FOREIGN KEY (user_id) REFERENCES [USER] (user_id),
     CONSTRAINT FK_ENROLLMENT_course_id FOREIGN KEY (course_id) REFERENCES COURSE (course_id),
@@ -182,6 +195,8 @@ CREATE TABLE ENROLLMENT (
     CONSTRAINT CK_ENROLLMENT_status CHECK (status IN (N'In progress', N'Completed', N'Dropped')),
     CONSTRAINT CK_ENROLLMENT_progress_percent CHECK (progress_percent BETWEEN 0 AND 100)
 );
+
+/* ---- Activities (LAB rows are a course's ordered activities: an article, a lab task or the course quiz) ---------- */
 
 CREATE TABLE LAB (
     lab_id INT IDENTITY(1,1) NOT NULL,
@@ -192,10 +207,18 @@ CREATE TABLE LAB (
     is_preview BIT NOT NULL DEFAULT 0,
     status NVARCHAR(20) NOT NULL DEFAULT N'Draft',
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    -- Added for the web app. workspace 'javascript' shows the in-browser JavaScript terminal, 'none' shows no terminal.
+    -- starter_code is what the terminal starts with or, for a lab without a terminal, the code the learner completes.
+    lesson_type NVARCHAR(10) NOT NULL CONSTRAINT DF_LAB_lesson_type DEFAULT N'article',
+    minutes INT NOT NULL CONSTRAINT DF_LAB_minutes DEFAULT 15,
+    workspace NVARCHAR(12) NOT NULL CONSTRAINT DF_LAB_workspace DEFAULT N'none',
+    starter_code NVARCHAR(MAX) NULL,
     CONSTRAINT PK_LAB PRIMARY KEY (lab_id),
     CONSTRAINT FK_LAB_course_id FOREIGN KEY (course_id) REFERENCES COURSE (course_id),
     CONSTRAINT CK_LAB_status CHECK (status IN (N'Draft', N'Published')),
-    CONSTRAINT CK_LAB_sequence_no CHECK (sequence_no > 0)
+    CONSTRAINT CK_LAB_sequence_no CHECK (sequence_no > 0),
+    CONSTRAINT CK_LAB_lesson_type CHECK (lesson_type IN (N'article', N'lab', N'quiz')),
+    CONSTRAINT CK_LAB_workspace CHECK (workspace IN (N'none', N'javascript'))
 );
 
 CREATE TABLE LAB_TASK (
@@ -204,8 +227,6 @@ CREATE TABLE LAB_TASK (
     question_text NVARCHAR(2000) NOT NULL,
     task_type NVARCHAR(20) NOT NULL DEFAULT N'Text',
     correct_answer NVARCHAR(1000) NULL,
-    starter_code NVARCHAR(MAX) NULL,
-    expected_output NVARCHAR(MAX) NULL,
     points INT NOT NULL DEFAULT 1,
     sequence_no INT NOT NULL,
     CONSTRAINT PK_LAB_TASK PRIMARY KEY (task_id),
@@ -232,7 +253,6 @@ CREATE TABLE TASK_ANSWER (
     submission_id INT NOT NULL,
     task_id INT NOT NULL,
     user_answer NVARCHAR(MAX) NULL,
-    code_output NVARCHAR(MAX) NULL,
     is_correct BIT NOT NULL DEFAULT 0,
     CONSTRAINT PK_TASK_ANSWER PRIMARY KEY (task_answer_id),
     CONSTRAINT FK_TASK_ANSWER_submission_id FOREIGN KEY (submission_id) REFERENCES LAB_SUBMISSION (submission_id) ON DELETE CASCADE,
@@ -246,7 +266,6 @@ CREATE TABLE QUIZ (
     created_by INT NOT NULL,
     title NVARCHAR(200) NOT NULL,
     time_limit_minutes INT NULL,
-    is_ai_generated BIT NOT NULL DEFAULT 0,
     status NVARCHAR(20) NOT NULL DEFAULT N'Draft',
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
     CONSTRAINT PK_QUIZ PRIMARY KEY (quiz_id),
@@ -263,6 +282,8 @@ CREATE TABLE QUIZ_QUESTION (
     question_type NVARCHAR(30) NOT NULL DEFAULT N'Multiple choice',
     points INT NOT NULL DEFAULT 1,
     sequence_no INT NOT NULL,
+    -- Added for the web app
+    topic NVARCHAR(100) NULL,
     CONSTRAINT PK_QUIZ_QUESTION PRIMARY KEY (question_id),
     CONSTRAINT FK_QUIZ_QUESTION_quiz_id FOREIGN KEY (quiz_id) REFERENCES QUIZ (quiz_id) ON DELETE CASCADE,
     CONSTRAINT CK_QUIZ_QUESTION_question_type CHECK (question_type IN (N'Multiple choice', N'True/False')),
@@ -305,26 +326,7 @@ CREATE TABLE ATTEMPT_ANSWER (
     CONSTRAINT UQ_ATTEMPT_ANSWER_attempt_question UNIQUE (attempt_id, question_id)
 );
 
-CREATE TABLE BADGE (
-    badge_id INT IDENTITY(1,1) NOT NULL,
-    badge_name NVARCHAR(100) NOT NULL,
-    description NVARCHAR(500) NULL,
-    icon NVARCHAR(500) NULL,
-    criteria NVARCHAR(500) NULL,
-    CONSTRAINT PK_BADGE PRIMARY KEY (badge_id),
-    CONSTRAINT UQ_BADGE_badge_name UNIQUE (badge_name)
-);
-
-CREATE TABLE USER_BADGE (
-    user_badge_id INT IDENTITY(1,1) NOT NULL,
-    user_id INT NOT NULL,
-    badge_id INT NOT NULL,
-    earned_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    CONSTRAINT PK_USER_BADGE PRIMARY KEY (user_badge_id),
-    CONSTRAINT FK_USER_BADGE_user_id FOREIGN KEY (user_id) REFERENCES [USER] (user_id) ON DELETE CASCADE,
-    CONSTRAINT FK_USER_BADGE_badge_id FOREIGN KEY (badge_id) REFERENCES BADGE (badge_id) ON DELETE CASCADE,
-    CONSTRAINT UQ_USER_BADGE_user_badge UNIQUE (user_id, badge_id)
-);
+/* ---- Announcements, discussions and messages ----------------------------------------------------------------------- */
 
 CREATE TABLE ANNOUNCEMENT (
     announcement_id INT IDENTITY(1,1) NOT NULL,
@@ -355,7 +357,8 @@ CREATE TABLE DISCUSSION_POST (
     CONSTRAINT FK_DISCUSSION_POST_course_id FOREIGN KEY (course_id) REFERENCES COURSE (course_id),
     CONSTRAINT FK_DISCUSSION_POST_lab_id FOREIGN KEY (lab_id) REFERENCES LAB (lab_id),
     CONSTRAINT FK_DISCUSSION_POST_parent_post_id FOREIGN KEY (parent_post_id) REFERENCES DISCUSSION_POST (post_id),
-    CONSTRAINT CK_DISCUSSION_POST_status CHECK (status IN (N'Visible', N'Hidden', N'Removed'))
+    -- 'Flagged' added for the web app: moderators can also flag a post
+    CONSTRAINT CK_DISCUSSION_POST_status CHECK (status IN (N'Visible', N'Hidden', N'Removed', N'Flagged'))
 );
 
 CREATE TABLE TAG (
@@ -404,6 +407,8 @@ CREATE TABLE AI_CHAT_SESSION (
     session_id INT IDENTITY(1,1) NOT NULL,
     user_id INT NOT NULL,
     started_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    -- Added for the web app: one conversation per learner and activity (the LAB row); NULL is the AI Assistant page
+    lesson_id INT NULL,
     CONSTRAINT PK_AI_CHAT_SESSION PRIMARY KEY (session_id),
     CONSTRAINT FK_AI_CHAT_SESSION_user_id FOREIGN KEY (user_id) REFERENCES [USER] (user_id) ON DELETE CASCADE
 );
@@ -414,6 +419,8 @@ CREATE TABLE AI_CHAT_MESSAGE (
     sender_type NVARCHAR(10) NOT NULL,
     content NVARCHAR(MAX) NOT NULL,
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    -- Added for the web app: whether the learner has seen an AI reply
+    is_read BIT NOT NULL CONSTRAINT DF_AI_CHAT_MESSAGE_is_read DEFAULT 1,
     CONSTRAINT PK_AI_CHAT_MESSAGE PRIMARY KEY (ai_message_id),
     CONSTRAINT FK_AI_CHAT_MESSAGE_session_id FOREIGN KEY (session_id) REFERENCES AI_CHAT_SESSION (session_id) ON DELETE CASCADE,
     CONSTRAINT CK_AI_CHAT_MESSAGE_sender_type CHECK (sender_type IN (N'User', N'AI'))
@@ -426,6 +433,8 @@ CREATE TABLE VOICE_CHANNEL (
     channel_name NVARCHAR(100) NOT NULL,
     status NVARCHAR(20) NOT NULL DEFAULT N'Open',
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    -- Added for the web app: when a live session starts
+    starts_at DATETIME2 NULL,
     CONSTRAINT PK_VOICE_CHANNEL PRIMARY KEY (channel_id),
     CONSTRAINT FK_VOICE_CHANNEL_course_id FOREIGN KEY (course_id) REFERENCES COURSE (course_id),
     CONSTRAINT FK_VOICE_CHANNEL_created_by FOREIGN KEY (created_by) REFERENCES [USER] (user_id),
@@ -445,22 +454,12 @@ CREATE TABLE CHANNEL_PARTICIPANT (
     CONSTRAINT CK_CHANNEL_PARTICIPANT_left_at CHECK (left_at IS NULL OR left_at >= joined_at)
 );
 
-CREATE TABLE NOTIFICATION (
-    notification_id INT IDENTITY(1,1) NOT NULL,
-    user_id INT NOT NULL,
-    type NVARCHAR(50) NOT NULL,
-    message NVARCHAR(1000) NOT NULL,
-    link NVARCHAR(500) NULL,
-    is_read BIT NOT NULL DEFAULT 0,
-    created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
-    CONSTRAINT PK_NOTIFICATION PRIMARY KEY (notification_id),
-    CONSTRAINT FK_NOTIFICATION_user_id FOREIGN KEY (user_id) REFERENCES [USER] (user_id) ON DELETE CASCADE
-);
+/* ---- Feedback, enquiries and the activity log ------------------------------------------------------------------ */
 
 CREATE TABLE WEBSITE_FEEDBACK (
     feedback_id INT IDENTITY(1,1) NOT NULL,
     user_id INT NOT NULL,
-    course_id INT NULL,
+    course_id INT NULL,                                  -- set for a course review
     rating TINYINT NOT NULL,
     comment NVARCHAR(2000) NULL,
     is_public BIT NOT NULL DEFAULT 1,
@@ -486,14 +485,6 @@ CREATE TABLE ENQUIRY (
     CONSTRAINT CK_ENQUIRY_status CHECK (status IN (N'Open', N'In progress', N'Resolved', N'Closed'))
 );
 
-CREATE TABLE FAQ (
-    faq_id INT IDENTITY(1,1) NOT NULL,
-    question NVARCHAR(500) NOT NULL,
-    answer NVARCHAR(2000) NOT NULL,
-    category NVARCHAR(50) NULL,
-    CONSTRAINT PK_FAQ PRIMARY KEY (faq_id)
-);
-
 CREATE TABLE ACTIVITY_LOG (
     log_id INT IDENTITY(1,1) NOT NULL,
     user_id INT NULL,
@@ -501,9 +492,103 @@ CREATE TABLE ACTIVITY_LOG (
     target_type NVARCHAR(50) NULL,
     target_id INT NULL,
     created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    -- Added for the web app
+    detail NVARCHAR(500) NULL,
     CONSTRAINT PK_ACTIVITY_LOG PRIMARY KEY (log_id),
     CONSTRAINT FK_ACTIVITY_LOG_user_id FOREIGN KEY (user_id) REFERENCES [USER] (user_id)
 );
+
+/* ---- Added for the web app ------------------------------------------------------------------------------------------ */
+
+/* "My enquiries": which browser may open which enquiry. The browser keeps only a random key in an HttpOnly cookie;
+   this table stores a SHA-256 hash of it. */
+CREATE TABLE ENQUIRY_ACCESS (
+    access_id INT IDENTITY(1,1) NOT NULL,
+    visitor_key_hash NVARCHAR(64) NOT NULL,
+    enquiry_id INT NOT NULL,
+    granted_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    CONSTRAINT PK_ENQUIRY_ACCESS PRIMARY KEY (access_id),
+    CONSTRAINT FK_ENQUIRY_ACCESS_enquiry_id FOREIGN KEY (enquiry_id) REFERENCES ENQUIRY (enquiry_id) ON DELETE CASCADE,
+    CONSTRAINT UQ_ENQUIRY_ACCESS_visitor_enquiry UNIQUE (visitor_key_hash, enquiry_id)
+);
+
+/* Course files attached by staff. The demo stores small files (up to 2 MB) as data URLs. */
+CREATE TABLE COURSE_RESOURCE (
+    resource_id INT IDENTITY(1,1) NOT NULL,
+    course_id INT NOT NULL,
+    uploaded_by INT NOT NULL,
+    file_name NVARCHAR(255) NOT NULL,
+    size_label NVARCHAR(50) NULL,
+    data_url NVARCHAR(MAX) NOT NULL,
+    created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    CONSTRAINT PK_COURSE_RESOURCE PRIMARY KEY (resource_id),
+    CONSTRAINT FK_COURSE_RESOURCE_course_id FOREIGN KEY (course_id) REFERENCES COURSE (course_id) ON DELETE CASCADE,
+    CONSTRAINT FK_COURSE_RESOURCE_uploaded_by FOREIGN KEY (uploaded_by) REFERENCES [USER] (user_id)
+);
+
+/* Create / Delete requests that instructors send to the Program Leader, with their timeline. course_id, program_id and
+   the user IDs have no foreign key on purpose: the history must survive an approved deletion of the course, or the
+   deletion of an account. */
+CREATE TABLE COURSE_REQUEST (
+    request_id INT IDENTITY(1,1) NOT NULL,
+    kind NVARCHAR(10) NOT NULL,
+    course_id INT NOT NULL,
+    course_title NVARCHAR(200) NOT NULL,
+    program_id INT NULL,
+    requester_id INT NULL,
+    status NVARCHAR(30) NOT NULL DEFAULT N'Pending review',
+    reason NVARCHAR(2000) NULL,
+    created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    CONSTRAINT PK_COURSE_REQUEST PRIMARY KEY (request_id),
+    CONSTRAINT CK_COURSE_REQUEST_kind CHECK (kind IN (N'Create', N'Delete')),
+    CONSTRAINT CK_COURSE_REQUEST_status CHECK (status IN (N'Pending review', N'Approved', N'Changes requested', N'Rejected', N'Withdrawn'))
+);
+
+CREATE TABLE COURSE_REQUEST_EVENT (
+    event_id INT IDENTITY(1,1) NOT NULL,
+    request_id INT NOT NULL,
+    actor_id INT NULL,
+    action NVARCHAR(30) NOT NULL,
+    comment NVARCHAR(2000) NULL,
+    created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    CONSTRAINT PK_COURSE_REQUEST_EVENT PRIMARY KEY (event_id),
+    CONSTRAINT FK_COURSE_REQUEST_EVENT_request_id FOREIGN KEY (request_id) REFERENCES COURSE_REQUEST (request_id) ON DELETE CASCADE,
+    CONSTRAINT CK_COURSE_REQUEST_EVENT_action CHECK (action IN (N'Submitted', N'Review started', N'Approved', N'Changes requested', N'Rejected', N'Withdrawn'))
+);
+
+CREATE TABLE ANNOUNCEMENT_COMMENT (
+    comment_id INT IDENTITY(1,1) NOT NULL,
+    announcement_id INT NOT NULL,
+    user_id INT NOT NULL,
+    content NVARCHAR(1000) NOT NULL,
+    created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    CONSTRAINT PK_ANNOUNCEMENT_COMMENT PRIMARY KEY (comment_id),
+    CONSTRAINT FK_ANNOUNCEMENT_COMMENT_announcement_id FOREIGN KEY (announcement_id) REFERENCES ANNOUNCEMENT (announcement_id) ON DELETE CASCADE,
+    CONSTRAINT FK_ANNOUNCEMENT_COMMENT_user_id FOREIGN KEY (user_id) REFERENCES [USER] (user_id)
+);
+
+/* Replies to a course review (course reviews are WEBSITE_FEEDBACK rows with a course_id). */
+CREATE TABLE FEEDBACK_REPLY (
+    reply_id INT IDENTITY(1,1) NOT NULL,
+    feedback_id INT NOT NULL,
+    user_id INT NOT NULL,
+    content NVARCHAR(2000) NOT NULL,
+    created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    CONSTRAINT PK_FEEDBACK_REPLY PRIMARY KEY (reply_id),
+    CONSTRAINT FK_FEEDBACK_REPLY_feedback_id FOREIGN KEY (feedback_id) REFERENCES WEBSITE_FEEDBACK (feedback_id) ON DELETE CASCADE,
+    CONSTRAINT FK_FEEDBACK_REPLY_user_id FOREIGN KEY (user_id) REFERENCES [USER] (user_id)
+);
+
+/* Which announcements each person has opened, so their badge goes away and stays away. No foreign keys, like the other
+   added columns: a leftover row is harmless. */
+CREATE TABLE ANNOUNCEMENT_READ (
+    user_id INT NOT NULL,
+    announcement_id INT NOT NULL,
+    read_at DATETIME2 NOT NULL CONSTRAINT DF_ANNOUNCEMENT_READ_read_at DEFAULT SYSDATETIME(),
+    CONSTRAINT PK_ANNOUNCEMENT_READ PRIMARY KEY (user_id, announcement_id)
+);
+
+/* ---- The four roles. [USER].role_id points here, so the order (and the IDs 1-4) must not change. ---------------- */
 
 INSERT INTO ROLE (role_name, description) VALUES
     (N'Learner', N'Enrols in courses, completes activities and quizzes.'),
@@ -512,4 +597,4 @@ INSERT INTO ROLE (role_name, description) VALUES
     (N'Admin', N'Manages user accounts and the platform.');
 
 COMMIT TRANSACTION;
-PRINT N'Done: 37 tables created.';
+PRINT N'Done: 40 tables created.';

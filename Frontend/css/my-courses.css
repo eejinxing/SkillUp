@@ -1,337 +1,169 @@
-/* My courses: program wheel and course cards */
+/* My courses (MyCourses.aspx): the learner's program packs on the left, the selected program's courses on the right.
+   Sections: page · heading · layout · program packs · Enroll pill · tearing a pack open · course panel · course row ·
+   course summary tile · scroll-linked reveal · empty states. Tablet and phone rules are in responsive.css. */
 
-/* ==== Native responsive flow from Figma Frame 197 / 296:448. */
-
-.my-courses {
-    --mc-line: #777777;
-}
-
-.mc-page-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.mc-page-header h1 {
-    font-size: 23px;
-    font-weight: 500;
-    letter-spacing: -.4px;
-}
-
-.mc-page-header>a {
-    font-size: 12px;
-    color: #b8c6da;
-}
-
-.mc-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 30%) minmax(0, 70%);
-    height: clamp(620px, calc(100vh - 145px), 1000px);
-    gap: 0;
-    min-width: 0;
-}
-
-.mc-programs {
-    min-height: 0;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    padding-right: 24px;
-    position: relative;
-}
-
-.mc-program-scroll {
-    min-height: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-color: #444952 #111318;
-    scrollbar-width: thin;
-    overscroll-behavior: contain;
-    padding: 10px 12px 35px 20px;
-    flex: 1;
-    position: relative;
-    isolation: isolate;
-}
-
-.mc-program-scroll::-webkit-scrollbar {
-    width: 8px;
-}
-
-.mc-program-scroll::-webkit-scrollbar-track {
-    background: #111318;
-    border: 1px solid #232630;
-    border-radius: 20px;
-}
-
-.mc-program-scroll::-webkit-scrollbar-thumb {
-    background: #444952;
-    border: 2px solid #111318;
-    border-radius: 20px;
-}
-
-.mc-program {
-    display: block;
-    position: relative;
-    background: none;
-    border: 0;
-    padding: 0;
-    width: 90%;
-    aspect-ratio: 4354.38/5982.141;
-    border-radius: 0;
-    margin-left: auto;
-    color: #fff;
-    isolation: isolate;
-    transition: transform .18s ease, filter .18s ease;
-    filter: brightness(.88);
-    text-align: center;
-}
-
-.mc-program+.mc-program {
-    margin-top: -12%;
-    margin-left: 0;
-}
-
-.mc-program:nth-child(3n) {
-    margin-left: auto;
-}
-
-.mc-program>img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    pointer-events: none;
-}
-
-.mc-program[aria-selected=true] {
-    z-index: 4;
-    transform: translateY(-3px);
-    outline: 0;
-    filter: drop-shadow(0 0 4px #9cffff55);
-}
-
-.my-courses button.mc-program:hover:not(:disabled) {
-    z-index: 5;
-    filter: none;
-    background: transparent;
-}
-
-.mc-program:focus-visible {
-    z-index: 6;
-    outline: 3px solid #fff;
-    outline-offset: 4px;
-}
-
-.mc-courses-panel {
-    min-height: 0;
-    border: 1px solid #b4b4b4;
-    border-radius: 32px;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background: #000;
-}
-
-.mc-panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    padding: 17px 27px 12px;
-    border-bottom: 1px solid #272727;
-    flex-shrink: 0;
-}
-
-.mc-panel-header small {
-    font-size: 10px;
-    color: #8d96a1;
-}
-
-.mc-panel-header h2 {
-    font-size: 16px;
-    margin-top: 3px;
-    font-weight: 500;
-}
-
-.mc-panel-header>span {
-    font-size: 10px;
-    color: #9aa4b2;
-    white-space: nowrap;
-}
-
-.mc-course-scroll {
-    overflow: auto;
-    overscroll-behavior: contain;
-    scrollbar-color: #444 #000;
-    scrollbar-width: thin;
-    flex: 1;
-    min-height: 0;
-    padding: 0 26px 20px;
-}
-
-.mc-course {
-    display: grid;
-    grid-template-columns: 33% minmax(0, 67%);
-    gap: 12px 0;
-    align-items: center;
-    min-width: 0;
-    padding: 17px 0 22px;
-}
-
-.mc-course-index {
-    min-width: 0;
-    padding-right: 13px;
-}
-
-.mc-number {
-    font-family: 'Archivo Black', Arial, sans-serif;
-    font-size: clamp(72px, 9.2vw, 133px);
-    font-weight: 900;
-    letter-spacing: 0;
-    line-height: .95;
-    display: block;
-    color: white;
-}
-
-.mc-course-art:focus-visible {
-    outline: 2px solid #b2f8d7;
-    outline-offset: 4px;
-}
-
-.mc-course-art {
-    display: block;
-    height: clamp(130px, calc((100dvh / var(--page-zoom, 1) - 500px)/3), 230px);
-    overflow: hidden;
-}
-
-.mc-course-art img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.mc-empty {
-    padding: 55px 24px;
-    text-align: center;
-}
-
-.mc-empty p {
-    margin: 12px 0 22px;
-    color: #9ba8b8;
-}
-
-.mc-program-scroll:focus-visible,
-.mc-course-scroll:focus-visible {
-    outline: 2px solid #b2f8d7;
-    outline-offset: -3px;
-}
-
-@media (max-width: 1000px) {
-    .mc-layout {
-        grid-template-columns: 30% minmax(0, 70%);
-    }
-
-    .mc-programs {
-        padding-right: 16px;
-    }
-
-    .mc-program-scroll {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .mc-course-scroll {
-        padding: 0 17px 18px;
-    }
-
-    .mc-panel-header {
-        padding: 15px 18px 10px;
-    }
-
-    .mc-course-index {
-        padding-right: 9px;
-    }
-
-    .mc-number {
-        font-size: 85px;
-    }
-}
-
-/* ==== My courses — rolling program wheel (no scrollbar), black labels on the foil cards, refined panel, buttons and type. */
+/* ==== Page */
 
 /* Page ground: the same soft purple haze as the dashboard */
 body:has(.my-courses) {
     background: linear-gradient(180deg, #05040700 0, #050407 380px) top/100% 380px no-repeat, linear-gradient(#0504078c, #0504078c) top/100% 380px no-repeat, url(../assets/dashboard-gradient.webp) top/100% 380px no-repeat, #050407;
 }
 
-body:has(.my-courses) :is(.shell,.shell>div,.main,.figma-secondary) {
+body:has(.my-courses) :is(.shell,.shell>div,.main) {
     background: transparent;
 }
 
-/* Page heading and its glass-pill link */
+/* Fit the viewport on desktop: header, title and layout fill exactly one screen (taller content scrolls inside the panels).
+   html{zoom} scales vh and dvh too, so they are divided back out (see webforms.css), or the page ends past, or short of, the window. */
+body:has(.my-courses) .shell {
+    min-height: calc(100vh / var(--page-zoom, 1));
+}
+
+body:has(.my-courses) .shell>div {
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh / var(--page-zoom, 1));
+    min-height: 620px;
+}
+
+/* The heading and the panels share one column edge at every width */
+body:has(.my-courses) .main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    max-width: 1500px;
+    min-height: 0;
+    margin-inline: auto;
+    padding-inline: clamp(18px, 3vw, 42px);
+    padding-bottom: 28px;
+}
+
+/* --mc-row is the height of one course row, which follows the window height: the panel shows about 480px less than the
+   window (navigation, panel heading), and a course also needs its summary tile (200px) and padding, so the row gets what is
+   left. A tall window keeps the full size (274px); a short one shrinks the row instead of cutting the course off. */
 .my-courses {
+    --mc-row: clamp(150px, calc(100dvh / var(--page-zoom, 1) - 480px), 274px);
     position: relative;
-    color: #fff;
-    background: transparent;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
     padding-top: 6px;
+    background: transparent;
+    color: #fff;
     font-family: 'DM Sans', sans-serif;
     letter-spacing: .01em;
-    --mc-violet: #b79cff;
 }
 
+.my-courses ::selection {
+    background: #8b5cf6;
+    color: #fff;
+}
+
+.my-courses :is(a,button):focus-visible,
+.my-courses .mc-course-scroll:focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: 3px;
+}
+
+/* ==== Heading: the pixel-art "My course" title */
+
 .my-courses .mc-page-header {
+    display: flex;
+    flex: none;
     align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 6px 0 22px;
 }
 
 .my-courses .mc-page-header h1 {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    margin: 0;
     font-size: 34px;
     font-weight: 500;
-    letter-spacing: -.035em;
     line-height: 1.1;
-    margin: 0;
+    letter-spacing: -.035em;
 }
 
-.my-courses .mc-page-header>a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: .02em;
-    white-space: nowrap;
-    color: #e6e0f3;
-    background: linear-gradient(180deg, #ffffff1f, #ffffff08);
-    border: 1px solid #ffffff1a;
-    backdrop-filter: blur(14px);
-    box-shadow: inset 0 1px 0 #ffffff24;
-    transition: background-color .2s;
+/* The title shrinks with the window height too (zoom divided back out), so a short screen keeps room for the panels. */
+.my-courses .mc-pixel-title {
+    --mc-title-h: clamp(52px, calc(9dvh / var(--page-zoom, 1)), 90px);
+    display: block;
+    width: min(clamp(190px, 29vw, 390px), calc(var(--mc-title-h) * 4.33));
+    max-width: 100%;
+    height: var(--mc-title-h);
+    object-fit: cover;
 }
+
+/* ==== Layout: the program packs beside the course panel */
 
 .my-courses .mc-layout {
+    display: grid;
     grid-template-columns: minmax(250px, 32%) minmax(0, 1fr);
     gap: 32px;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
 }
 
-/* ── Programs: a vertical wheel. No scrollbar; cards roll toward you as you scroll ── */
+/* Wide screens: the course panel rises beside the title. The title sits above the program column only, so the panel can start
+   right under the navigation and use the height the title row used to leave empty. mc-layout dissolves (display: contents)
+   so its two children join the page grid. */
+@media (min-width: 1001px) {
+    .my-courses {
+        display: grid;
+        grid-template-columns: minmax(0, 30%) minmax(0, 70%);
+        grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .my-courses .mc-page-header {
+        grid-column: 1;
+        grid-row: 1;
+        margin: 6px 0 12px;
+    }
+
+    .my-courses .mc-layout {
+        display: contents;
+    }
+
+    .my-courses .mc-programs {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .my-courses .mc-courses-panel {
+        grid-column: 2;
+        grid-row: 1 / 3;
+    }
+}
+
+/* ==== Program packs: a vertical rail of kit pouches, one per program
+   No scrollbar. The rail snaps to one pack at a time ("always" stops a hard flick on the very next pack instead of skipping
+   past it), and the pack nearest the middle faces you while its neighbours dim. */
+
 .my-courses .mc-programs {
-    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
 }
 
 .my-courses .mc-program-scroll {
-    container-type: size;
-    padding: 0;
-    display: block;
+    position: relative;
+    isolation: isolate;
+    flex: 1;
+    min-height: 0;
     overflow-x: hidden;
     overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
     overscroll-behavior: contain;
+    scrollbar-width: none;
+    scroll-snap-type: y mandatory;
+    container-type: size;
     border-radius: 24px;
     -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
     mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
@@ -339,13 +171,14 @@ body:has(.my-courses) :is(.shell,.shell>div,.main,.figma-secondary) {
 
 .my-courses .mc-program-scroll::-webkit-scrollbar {
     display: none;
-    width: 0;
-    height: 0;
 }
 
+/* A pack's size (--w, --h) follows the rail's size and the pouch artwork's proportions. The spacers before and after the packs
+   use it too, so the first and the last pack can reach the middle of the rail. */
 .my-courses .mc-program,
 .my-courses .mc-program-scroll::before,
 .my-courses .mc-program-scroll::after {
+    --mc-pouch-ratio: 1.357;
     --w: min(74cqw,44cqh);
     --h: calc(var(--w) * var(--mc-pouch-ratio));
 }
@@ -358,176 +191,38 @@ body:has(.my-courses) :is(.shell,.shell>div,.main,.figma-secondary) {
     pointer-events: none;
 }
 
+/* The first pack sits under the heading instead of floating mid-rail (later packs still centre) */
+.my-courses .mc-program-scroll::before {
+    height: max(8px, calc(40cqh - var(--h) / 2));
+}
+
+/* A pack wraps the program link (which fills it) and, beside the link, the Enroll button: a button cannot live inside a link.
+   The pouch is closed until the learner enrols in one of the program's courses, then the torn-open one shows. */
 .my-courses .mc-program {
     position: relative;
-    display: block;
+    isolation: isolate;
     width: var(--w);
     height: var(--h);
-    aspect-ratio: auto;
     margin: 0 auto;
-    padding: 0;
-    scroll-snap-align: center;
-    filter: brightness(.9);
-    transform: none;
-    transition: filter .25s;
     container-type: inline-size;
+    text-align: center;
     cursor: pointer;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
 }
 
-.my-courses .mc-program>img {
-    width: 100%;
-    height: 100%;
+.my-courses .mc-program+.mc-program {
+    margin: 28px auto 0;
 }
 
-.my-courses .mc-program[aria-selected=true] {
-    transform: none;
-    filter: drop-shadow(0 0 18px #8b5cf688) drop-shadow(0 0 3px #c4b5fd88);
-}
-
-@media (hover: hover) {
-    .my-courses button.mc-program:hover:not(:disabled) {
-        filter: brightness(1.04);
-    }
-}
-
-.my-courses .mc-program:focus-visible {
-    outline: 2px solid #c4b5fd;
-    outline-offset: -6px;
-    border-radius: 24px;
-}
-
-/* Scroll-driven roll: the card nearest the middle faces you; the next rolls in toward you from below and the one before rolls back */
+/* Scroll-driven roll: the pack nearest the middle faces you, the next rolls in from below and the one before rolls back.
+   At most a 6% size change; neighbours dim instead of zooming. */
 @supports (animation-timeline: view()) {
     .my-courses .mc-program {
         animation: mc-roll linear both;
         animation-timeline: view(block);
         animation-range: cover 0% cover 100%;
     }
-}
-
-/* ── Selected program panel ── */
-.my-courses .mc-courses-panel {
-    border: 1px solid #ffffff1c;
-    border-radius: 30px;
-    background: linear-gradient(180deg, #ffffff0d, #ffffff03 45%), #050407;
-    box-shadow: inset 0 1px 0 #ffffff14, 0 30px 80px #00000066;
-}
-
-.my-courses .mc-panel-header {
-    padding: 26px 34px 20px;
-    border-bottom: 1px solid #ffffff10;
-}
-
-.my-courses .mc-panel-header small {
-    font-size: 11px;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: #8f89a1;
-}
-
-.my-courses .mc-panel-header h2 {
-    font-size: 26px;
-    font-weight: 500;
-    letter-spacing: -.03em;
-    line-height: 1.15;
-    margin: 8px 0 0;
-}
-
-.my-courses .mc-panel-header>span {
-    font-size: 12px;
-    letter-spacing: .03em;
-    color: #ddd6ec;
-    padding: 7px 15px;
-    border-radius: 999px;
-    background: #ffffff0d;
-    border: 1px solid #ffffff17;
-}
-
-.my-courses .mc-course-scroll {
-    padding: 0 34px 26px;
-}
-
-.my-courses .mc-course {
-    border-bottom: 1px solid #ffffff10;
-}
-
-.my-courses .mc-course:last-child {
-    border-bottom: 0;
-}
-
-.my-courses .mc-number {
-    font: 800 clamp(64px, 7.4vw, 112px)/.9 'DM Sans', sans-serif;
-    color: #fff;
-}
-
-.my-courses .mc-empty h2 {
-    font-size: 24px;
-    letter-spacing: -.02em;
-}
-
-.my-courses .mc-empty .button {
-    border-radius: 999px;
-}
-
-.my-courses :is(a,button):focus-visible,
-.my-courses .mc-course-scroll:focus-visible {
-    outline: 2px solid #c4b5fd;
-    outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .my-courses .mc-program {
-        animation: none !important;
-    }
-}
-
-/* ── Polish pass: fit the screen, calm the wheel, editorial index ─────────────────────────────── */
-/* Fit the viewport on desktop: header + title + layout fill exactly one screen (taller content scrolls inside the panels). */
-body:has(.my-courses) .shell {
-    min-height: calc(100vh / var(--page-zoom, 1));
-}
-
-body:has(.my-courses) .shell>div {
-    display: flex;
-    flex-direction: column;
-    /* html{zoom} scales dvh too, so divide it back out (see webforms.css) or the page ends past, or short of, the window. */
-    height: calc(100dvh / var(--page-zoom, 1));
-    min-height: 620px;
-}
-
-body:has(.my-courses) .main {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 28px;
-}
-
-.my-courses {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.my-courses .mc-page-header {
-    flex: none;
-    margin: 6px 0 22px;
-}
-
-.my-courses .mc-layout {
-    flex: 1;
-    min-height: 0;
-    height: auto;
-}
-
-/* Calm wheel: no 3D tilt, at most a 6% size change, neighbours dim instead of zooming; gentle snapping. */
-.my-courses .mc-program-scroll {
-    scroll-snap-type: y proximity;
-}
-
-.my-courses .mc-program {
-    scroll-snap-stop: normal;
 }
 
 @keyframes mc-roll {
@@ -550,50 +245,375 @@ body:has(.my-courses) .main {
     }
 }
 
-/* Drawn icons */
-.my-courses .mc-ico {
-    width: 16px;
-    height: 16px;
-    flex: none;
+@media (prefers-reduced-motion: reduce) {
+    .my-courses .mc-program {
+        animation: none !important;
+    }
 }
 
-.my-courses .mc-page-header>a .mc-ico {
+.my-courses .mc-program-link {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: 14px;
+    filter: brightness(.9);
+    transition: filter .3s ease;
+}
+
+.my-courses .mc-program-link>img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 14px;
+    pointer-events: none;
+    transition: filter .22s ease;
+}
+
+/* The selected pack glows. js/site.js also marks the pack nearest the middle of the rail as is-lit while the rail scrolls,
+   so the one you scrolled to is lit before you open it, and the one you leave fades back. */
+.my-courses .mc-program[data-selected=true] .mc-program-link {
+    filter: drop-shadow(0 0 18px #8b5cf688) drop-shadow(0 0 3px #c4b5fd88);
+}
+
+.my-courses .mc-program.is-lit .mc-program-link {
+    filter: drop-shadow(0 0 22px #8b5cf6bb) drop-shadow(0 0 4px #c4b5fdcc);
+}
+
+.my-courses .mc-program:hover .mc-program-link>img,
+.my-courses .mc-program:focus-within .mc-program-link>img {
+    filter: brightness(.72);
+}
+
+.my-courses .mc-program-link:focus-visible {
+    outline: 2px solid #c4b5fd;
+    outline-offset: -6px;
+}
+
+/* The program name as a sticker label in black Archivo Black, like the DEV KIT tag printed on the pouch. */
+.my-courses .mc-program-caption {
+    position: absolute;
+    left: 50%;
+    bottom: 7%;
+    max-width: 86%;
+    padding: 6px 12px 5px;
+    border-radius: 7px;
+    background: #cfe8f7;
+    box-shadow: 0 2px 0 #0000002e, inset 0 0 0 1px #ffffff99;
+    color: #0b0b0d;
+    font: 400 12px/1.1 'Archivo Black', 'DM Sans', sans-serif;
+    letter-spacing: .02em;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform: translateX(-50%) rotate(-2deg);
+    pointer-events: none;
+}
+
+/* ==== Enroll / Enrolled pill
+   Glowing violet glass: a translucent violet fill with grain, a bright lavender rim, a white glow along the bottom edge and a
+   soft violet halo, with a plain line icon (paper plane / check). It appears on hover or keyboard focus. */
+
+.my-courses .mc-program-cta {
+    --mc-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 13px 26px;
+    overflow: hidden;
+    border: 1px solid #c9bdff;
+    border-bottom-color: #f6f3ff;
+    border-radius: 999px;
+    background: var(--mc-grain), linear-gradient(180deg, #6f5cf2e6 0%, #5b48e0e6 55%, #7a68f5f0 100%);
+    box-shadow: inset 0 1px 0 #ffffff73, inset 0 -9px 14px -5px #ffffffee, inset 0 0 0 1px #ffffff1f, 0 3px 10px -2px #e9e4ffcc, 0 0 22px #9b8cffcc, 0 0 64px #7a6aff8c, 0 10px 30px #00000066;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: #f4f1ff;
+    font: 500 15px/1 'DM Sans', sans-serif;
+    letter-spacing: .01em;
+    white-space: nowrap;
+    text-shadow: 0 0 10px #ffffff59;
+    opacity: 0;
+    transform: translate(-50%, -30%) scale(.92);
+    transition: opacity .22s ease, transform .28s cubic-bezier(.2, .8, .2, 1), box-shadow .2s;
+    pointer-events: none;
+}
+
+.my-courses button.mc-program-cta {
+    height: auto;
+    min-height: 0;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif !important;
+}
+
+.my-courses .mc-cta-label {
+    position: relative;
+    z-index: 1;
+}
+
+.my-courses .mc-cta-icon {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    filter: drop-shadow(0 0 6px #ffffff80);
+    transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+
+.my-courses .mc-cta-icon svg {
+    width: 17px;
+    height: 17px;
+}
+
+/* A light streak sweeps across the pill when it appears */
+.my-courses .mc-program-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(105deg, transparent 30%, #ffffff26 48%, transparent 66%);
+    transform: translateX(-120%);
+    pointer-events: none;
+}
+
+.my-courses .mc-program:hover .mc-program-cta,
+.my-courses .mc-program:focus-within .mc-program-cta {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.my-courses .mc-program:hover button.mc-program-cta,
+.my-courses .mc-program:focus-within button.mc-program-cta {
+    pointer-events: auto;
+}
+
+.my-courses .mc-program:hover .mc-program-cta::after {
+    animation: mc-cta-shine 1.1s .15s ease-out both;
+}
+
+.my-courses button.mc-program-cta:hover {
+    background: var(--mc-grain), linear-gradient(180deg, #7c6af7f0 0%, #6553e8f0 55%, #8676f8f5 100%);
+    box-shadow: inset 0 1px 0 #ffffff80, inset 0 -9px 14px -5px #fffffff2, inset 0 0 0 1px #ffffff26, 0 3px 12px -2px #eee9ffdd, 0 0 28px #9a8cffdd, 0 0 72px #6c5cffa0, 0 10px 30px #00000066;
+}
+
+.my-courses button.mc-program-cta:hover .mc-cta-icon {
+    transform: translateX(3px);
+}
+
+.my-courses button.mc-program-cta:active {
+    transform: translate(-50%, -50%) scale(.96);
+}
+
+.my-courses button.mc-program-cta:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+@keyframes mc-cta-shine {
+    to {
+        transform: translateX(120%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .my-courses .mc-program-cta {
+        transition: opacity .01s;
+    }
+
+    .my-courses .mc-program:hover .mc-program-cta::after {
+        animation: none;
+    }
+}
+
+/* ==== Tearing a pack open (js/pack-opening.js)
+   A closed pack whose art has loaded swaps the Enroll pill for a dotted tear line across its top and a "Drag to open" hint.
+   The real button stays for keyboard users, who reach it with Tab. */
+
+.my-courses .mc-program.mc-can-tear button.mc-program-cta {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.my-courses .mc-program.mc-can-tear button.mc-program-cta:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.my-courses .mc-program.mc-can-tear:has(button:focus-visible) .mc-tear-hint {
+    visibility: hidden;
+}
+
+.my-courses .mc-tear {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    height: 24%;
+    cursor: grab;
+    touch-action: pan-y;
+}
+
+.my-courses .mc-tear svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: calc(100%/.24);
+    overflow: visible;
+    pointer-events: none;
+}
+
+.my-courses .mc-tear path {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.my-courses .mc-tear-line {
+    stroke-width: 3.5;
+    stroke-dasharray: .2 1.7;
+    opacity: .5;
+    transition: opacity .2s;
+}
+
+.my-courses .mc-tear-glint {
+    stroke-width: 7;
+    stroke-dasharray: 9 200;
+    stroke-dashoffset: 9;
+    opacity: 0;
+    filter: drop-shadow(0 0 6px #c4b5fd);
+}
+
+.my-courses .mc-can-tear:hover .mc-tear-line,
+.my-courses .mc-can-tear:focus-within .mc-tear-line {
+    opacity: 1;
+}
+
+.my-courses .mc-can-tear:hover .mc-tear-glint,
+.my-courses .mc-can-tear:focus-within .mc-tear-glint {
+    opacity: 1;
+    animation: mc-tear-glint 1.8s cubic-bezier(.45, 0, .55, 1) infinite;
+}
+
+/* The "Drag to open" hint is a smaller Enroll pill */
+.my-courses .mc-tear-hint {
+    top: 29%;
+    gap: 7px;
+    padding: 9px 16px;
+    font-size: 13px;
+}
+
+.my-courses .mc-tear-hint .mc-cta-icon svg {
     width: 15px;
     height: 15px;
-    transition: transform .2s cubic-bezier(.16, 1, .3, 1);
+    animation: mc-tear-nudge 1.8s ease-in-out infinite;
 }
 
-@media (hover: hover) {
-    .my-courses .mc-page-header>a:hover {
-        background: linear-gradient(180deg, #ffffff2e, #ffffff10);
-    }
-
-    .my-courses .mc-page-header>a:hover .mc-ico {
-        transform: translate(2px, -2px);
-    }
+.my-courses .mc-program.is-tearing .mc-program-link>img,
+.my-courses .mc-program.is-tearing .mc-program-caption,
+.my-courses .mc-program.is-tearing .mc-tear,
+.my-courses .mc-program.is-tearing .mc-program-cta {
+    visibility: hidden;
 }
 
-/* Browser surfaces carry the palette */
-.my-courses ::selection {
-    background: #8b5cf6;
-    color: #fff;
-}
-
-.my-courses .mc-course-scroll {
-    scrollbar-color: #ffffff26 transparent;
-}
-
-/* Header and content share one column edge at every width */
-body:has(.my-courses) .main {
+/* The canvas the opening is drawn on, over the whole page */
+.mc-tear-stage {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
     width: 100%;
-    max-width: 1500px;
-    margin-inline: auto;
-    padding-inline: clamp(18px, 3vw, 42px);
+    height: 100%;
+    pointer-events: none;
 }
 
-/* First program sits under the heading instead of floating mid-rail (later cards still centre) */
-.my-courses .mc-program-scroll::before {
-    height: max(8px, calc(40cqh - var(--h) / 2));
+html.mc-tearing,
+html.mc-tearing * {
+    cursor: grabbing !important;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+@keyframes mc-tear-glint {
+    to {
+        stroke-dashoffset: -100;
+    }
+}
+
+@keyframes mc-tear-nudge {
+    50% {
+        transform: translateX(3px);
+    }
+}
+
+/* Touch screens have no hover, so the hint always shows */
+@media (hover: none) {
+    .my-courses .mc-can-tear .mc-tear-hint {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .my-courses .mc-tear-glint,
+    .my-courses .mc-tear-hint .mc-cta-icon svg {
+        animation: none;
+    }
+}
+
+/* The page after a pack was opened starts in the light that ended the opening; the script then fades it away over the page.
+   The animation is only a safety net in case the script never runs. */
+@media (prefers-reduced-motion: no-preference) {
+    body.mc-kit-arrival::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: #f4f0ff;
+        pointer-events: none;
+        animation: mc-arrival-fade .5s 1s forwards;
+    }
+}
+
+@keyframes mc-arrival-fade {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* ==== Course panel: the selected program's courses */
+
+.my-courses .mc-courses-panel {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    border: 1px solid #ffffff1c;
+    border-radius: 30px;
+    background: linear-gradient(180deg, #ffffff0d, #ffffff03 45%), #050407;
+    box-shadow: inset 0 1px 0 #ffffff14, 0 30px 80px #00000066;
+}
+
+.my-courses .mc-panel-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 26px 34px 20px;
+    border-bottom: 1px solid #ffffff10;
 }
 
 /* The panel title speaks for itself; the "Selected program" label stays for screen readers only */
@@ -607,39 +627,57 @@ body:has(.my-courses) .main {
 }
 
 .my-courses .mc-panel-header h2 {
-    margin-top: 0;
+    margin: 0;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -.03em;
 }
 
-/* Pixel heading and bold black print on cyan foil, matching the supplied references. */
-.my-courses .mc-page-header h1 {
-    display: flex;
-    align-items: center;
-    min-width: 0;
+/* No scrollbar; scrolling settles on one course at a time */
+.my-courses .mc-course-scroll {
+    flex: 1;
+    min-height: 0;
+    padding: 0 34px 26px;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
 }
 
-.my-courses .mc-pixel-title {
-    display: block;
-    /* Shrinks with the window height too (zoom divided back out), so a short screen keeps room for the panels. */
-    --mc-title-h: clamp(52px, calc(9dvh / var(--page-zoom, 1)), 90px);
-    width: min(clamp(190px, 29vw, 390px), calc(var(--mc-title-h) * 4.33));
-    max-width: 100%;
-    height: var(--mc-title-h);
-    object-fit: cover;
-    object-position: center;
+.my-courses .mc-course-scroll::-webkit-scrollbar {
+    display: none;
 }
 
-/* Number and gauge share the artwork height; course information sits beneath it. */
-.my-courses .mc-program+.mc-program {
-    margin: 28px auto 0;
+@media (prefers-reduced-motion: reduce) {
+    .my-courses .mc-course-scroll {
+        scroll-behavior: auto;
+    }
 }
+
+/* ==== Course row: the number and the progress ring beside the artwork, the summary tile across the full row
+   The tile's red block lines up under the number / ring column (--mc-meta wide). */
 
 .my-courses .mc-course {
+    --mc-meta: 150px;
     display: grid;
+    grid-template-columns: var(--mc-meta) minmax(0, 1fr);
+    grid-template-areas: "metrics artwork" "summary summary";
     gap: 22px 24px;
     align-items: start;
-    padding: 30px 0 34px;
+    min-width: 0;
+    padding: 18px 0;
+    border-bottom: 1px solid #ffffff10;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
+.my-courses .mc-course:last-child {
+    border-bottom: 0;
+}
+
+/* The number and the ring share the artwork's height */
 .my-courses .mc-course-metrics {
     grid-area: metrics;
     display: flex;
@@ -650,26 +688,13 @@ body:has(.my-courses) .main {
 }
 
 .my-courses .mc-course-index {
-    display: block;
-    padding: 0;
+    min-width: 0;
 }
 
 .my-courses .mc-number {
-    font-size: 112px;
-    line-height: 1;
+    display: block;
+    font: 800 calc(var(--mc-row) * .4)/1 'DM Sans', sans-serif;
     letter-spacing: -.075em;
-}
-
-.my-courses .mc-course-art {
-    grid-area: artwork;
-    display: block;
-    max-width: none;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.my-courses .mc-course-art img {
-    display: block;
 }
 
 .my-courses .mc-course-gauge {
@@ -680,8 +705,8 @@ body:has(.my-courses) .main {
     position: relative;
     display: grid;
     place-items: center;
-    width: 150px;
-    height: 150px;
+    width: calc(var(--mc-row) * .5);
+    height: calc(var(--mc-row) * .5);
 }
 
 .my-courses .mc-task-ring svg {
@@ -693,50 +718,76 @@ body:has(.my-courses) .main {
 
 .my-courses .mc-task-ring strong {
     position: relative;
+    color: #f5f5f5;
     font-size: 31px;
     font-weight: 400;
-    letter-spacing: -1px;
-    color: #f5f5f5;
     line-height: 1;
+    letter-spacing: -1px;
 }
 
 .my-courses .mc-task-ring sup {
-    font-size: 11px;
-    vertical-align: baseline;
     margin-left: 1px;
-    letter-spacing: 0;
     color: #a5a5aa;
+    font-size: 11px;
+    letter-spacing: 0;
+    vertical-align: baseline;
+}
+
+/* Landscape course artwork */
+.my-courses .mc-course-art {
+    grid-area: artwork;
+    display: block;
+    justify-self: stretch;
+    width: 100%;
+    max-height: var(--mc-row);
+    aspect-ratio: 5/2;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.my-courses .mc-course-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform .5s cubic-bezier(.16, 1, .3, 1), filter .3s;
+}
+
+@media (hover: hover) {
+    .my-courses .mc-course-art:hover img {
+        transform: translateY(-4px);
+        filter: drop-shadow(0 18px 30px #7c3aed55);
+    }
 }
 
 @media (max-width: 1100px) {
     .my-courses .mc-course {
+        --mc-meta: 110px;
         gap: 18px;
-    }
-
-    .my-courses .mc-number {
-        font-size: 88px;
-    }
-
-    .my-courses .mc-task-ring {
-        width: 110px;
-        height: 110px;
-    }
-
-    .my-courses .mc-course-summary {
-        gap: 12px;
     }
 }
 
-/* Split course tile based on the red-and-black reference. */
+/* ==== Course summary tile: a red completion block beside the course details (from the red-and-black reference) */
+
 .my-courses .mc-course-summary {
+    grid-area: summary;
     display: grid;
+    grid-template-columns: calc(var(--mc-meta) + 24px) minmax(0, 1fr);
     width: 100%;
     min-width: 0;
-    padding: 0;
+    min-height: 200px;
     overflow: hidden;
+    border-radius: 20px;
     background: #0b0b0c;
     color: #eee;
     box-shadow: inset 0 0 0 1px #ffffff06;
+}
+
+/* Line icons */
+.my-courses .mc-ico {
+    width: 16px;
+    height: 16px;
+    flex: none;
 }
 
 .my-courses .mc-market-accent {
@@ -746,11 +797,12 @@ body:has(.my-courses) .main {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
-    background: linear-gradient(165deg, #591b25 0%, #9d222b 47%, #e83235 100%);
+    padding: 22px;
     overflow: hidden;
+    background: linear-gradient(165deg, #591b25 0%, #9d222b 47%, #e83235 100%);
 }
 
-.my-courses .mc-market-accent:before {
+.my-courses .mc-market-accent::before {
     content: "";
     position: absolute;
     z-index: -1;
@@ -793,29 +845,32 @@ body:has(.my-courses) .main {
 }
 
 .my-courses .mc-market-accent strong {
+    color: #fff;
     font: 400 43px/1.1 'DM Sans', sans-serif;
     letter-spacing: -1.8px;
-    color: #fff;
     font-variant-numeric: tabular-nums;
 }
 
 .my-courses .mc-market-accent sup {
-    font-size: 20px;
-    vertical-align: super;
     margin-left: 3px;
+    font-size: 20px;
     letter-spacing: 0;
+    vertical-align: super;
 }
 
 .my-courses .mc-market-accent p {
     margin: 3px 0 0;
     color: #f0bdc0;
+    font-size: 12px;
     line-height: 1.4;
+    letter-spacing: .02em;
 }
 
 .my-courses .mc-market-main {
     display: flex;
     flex-direction: column;
     min-width: 0;
+    padding: 22px 24px;
 }
 
 .my-courses .mc-market-main header {
@@ -828,26 +883,37 @@ body:has(.my-courses) .main {
 .my-courses .mc-market-main h3 {
     flex: 1 1 140px;
     min-width: 0;
-    line-height: 1.35;
-    color: #eee;
     margin: 0;
+    color: #eee;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -.02em;
     overflow-wrap: anywhere;
 }
 
 .my-courses .mc-market-tags {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
 }
 
 .my-courses .mc-market-tags span {
-    border: 1px solid #ffffff12;
+    padding: 4px 9px;
+    border: 1px solid #ffffff1a;
+    border-radius: 999px;
+    color: #c9c9d0;
+    font-size: 11px;
     line-height: 1.2;
+    letter-spacing: .02em;
     white-space: nowrap;
 }
 
 .my-courses .mc-market-subtitle {
-    margin: 6px 0 0;
+    margin: 8px 0 0;
+    color: #8c8c94;
+    font-size: 13px;
     line-height: 1.4;
 }
 
@@ -855,6 +921,9 @@ body:has(.my-courses) .main {
     display: flex;
     flex-wrap: wrap;
     gap: 5px 8px;
+    margin: 14px 0;
+    color: #85858d;
+    font-size: 12.5px;
     line-height: 1.4;
 }
 
@@ -873,24 +942,38 @@ body:has(.my-courses) .main {
     padding-top: 5px;
 }
 
+.my-courses .mc-market-main .mc-ico {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5;
+}
+
 .my-courses .mc-market-details {
     display: grid;
     place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
     color: #7c7c83;
 }
 
 .my-courses .mc-market-action {
     display: grid;
     place-items: center;
+    width: 52px;
+    height: 36px;
+    border-radius: 999px;
     background: #242426;
     color: #ddd;
-    border-radius: 999px;
+    transition: background-color .2s, transform .15s;
 }
 
-.my-courses .mc-market-main .mc-ico {
-    width: 18px;
-    height: 18px;
-    stroke-width: 1.5;
+.my-courses .mc-market-action .mc-ico {
+    transition: transform .2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.my-courses .mc-market-action:active {
+    transform: scale(.96);
 }
 
 @media (hover: hover) {
@@ -899,34 +982,31 @@ body:has(.my-courses) .main {
         color: #fff;
     }
 
+    .my-courses .mc-market-action:hover .mc-ico {
+        transform: translate(2px, -2px);
+    }
+
     .my-courses .mc-market-details:hover {
-        color: #fff;
         background: #ffffff08;
+        color: #fff;
     }
 }
 
 @media (max-width: 1100px) {
+    .my-courses .mc-course-summary {
+        grid-template-columns: calc(var(--mc-meta) + 18px) minmax(0, 1fr);
+        gap: 12px;
+    }
+
     .my-courses .mc-market-accent strong {
         font-size: 35px;
     }
 }
 
-/* ── Course panel: no scrollbar and a staggered, scroll-linked reveal ──
- Each part of a course has its own role as it scrolls into view: the number rises, the ring turns into place,
- the artwork opens from the centre like a curtain, the completion block sweeps in, and the card glides up.
- Every element follows its own view timeline, so the stagger comes from the layout itself. Distinct from the
- program wheel (fade + 6% scale in both directions). Reduced motion shows the final state. */
-
-.my-courses .mc-course-scroll {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.my-courses .mc-course-scroll::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
-}
+/* ==== Scroll-linked reveal of each course
+   Each part of a course has its own role as it scrolls into view: the number rises, the ring turns into place, the artwork
+   opens from the centre like a curtain, the completion block sweeps in, and the tile glides up. Every element follows its
+   own view timeline, so the stagger comes from the layout itself. Reduced motion shows the final state. */
 
 @supports (animation-timeline: view()) {
     .my-courses :is(.mc-number,.mc-task-ring svg,.mc-course-art,.mc-course-art img,.mc-course-summary,.mc-market-accent) {
@@ -944,18 +1024,14 @@ body:has(.my-courses) .main {
         animation-name: mc-dial;
     }
 
+    /* overflow: clip clips like hidden but is not a scroll container, so the image tracks the panel scroll */
     .my-courses .mc-course-art {
+        overflow: clip;
         animation-name: mc-curtain;
     }
 
     .my-courses .mc-course-art img {
         animation-name: mc-settle;
-    }
-
-    /* overflow:clip clips like hidden but is not a scroll container, so the image tracks the panel scroll */
-
-    .my-courses .mc-course-art {
-        overflow: clip;
     }
 
     .my-courses .mc-course-summary {
@@ -964,7 +1040,6 @@ body:has(.my-courses) .main {
 
     .my-courses .mc-market-accent {
         animation-name: mc-sweep;
-        animation-range: entry 15% entry 100%;
     }
 }
 
@@ -1042,576 +1117,29 @@ body:has(.my-courses) .main {
     }
 }
 
-/* ── Course card spans the full row; its red block lines up under the number/ring column ── */
-.my-courses .mc-course {
-    --mc-meta: 150px;
-    grid-template-columns: var(--mc-meta) minmax(0, 1fr);
-    grid-template-areas: "metrics artwork" "summary summary";
-    column-gap: 24px;
+/* ==== Empty states
+   No programs at all (the whole section is .my-courses.mc-empty), or a program without published courses (in the panel). */
+
+.mc-empty {
+    padding: 55px 24px;
+    text-align: center;
 }
 
-.my-courses .mc-course-summary {
-    grid-area: summary;
-    grid-template-columns: calc(var(--mc-meta) + 24px) minmax(0, 1fr);
-    min-height: 200px;
-    border-radius: 20px;
+/* The page's own top padding applies on the no-programs page */
+.my-courses.mc-empty {
+    padding-top: 6px;
 }
 
-.my-courses .mc-market-accent {
-    padding: 22px;
+.mc-empty p {
+    margin: 12px 0 22px;
+    color: #9ba8b8;
 }
 
-.my-courses .mc-market-main {
-    padding: 22px 24px;
-}
-
-@media (max-width: 1100px) {
-    .my-courses .mc-course {
-        --mc-meta: 110px;
-        column-gap: 18px;
-    }
-
-    .my-courses .mc-course-summary {
-        grid-template-columns: calc(var(--mc-meta) + 18px) minmax(0, 1fr);
-    }
-}
-
-.my-courses .mc-market-main h3 {
-    font-size: 19px;
-    font-weight: 500;
+.my-courses .mc-empty h2 {
+    font-size: 24px;
     letter-spacing: -.02em;
 }
 
-.my-courses .mc-market-tags {
-    gap: 6px;
-}
-
-.my-courses .mc-market-tags span {
-    padding: 4px 9px;
+.my-courses .mc-empty .button {
     border-radius: 999px;
-    font-size: 11px;
-    letter-spacing: .02em;
-    color: #c9c9d0;
-    border-color: #ffffff1a;
-}
-
-.my-courses .mc-market-subtitle {
-    margin-top: 8px;
-    font-size: 13px;
-    color: #8c8c94;
-}
-
-.my-courses .mc-market-date {
-    margin: 14px 0;
-    font-size: 12.5px;
-    color: #85858d;
-}
-
-.my-courses .mc-market-accent p {
-    font-size: 12px;
-    letter-spacing: .02em;
-}
-
-.my-courses .mc-market-details {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-}
-
-.my-courses .mc-market-action {
-    width: 52px;
-    height: 36px;
-    transition: background-color .2s, transform .15s;
-}
-
-.my-courses .mc-market-action .mc-ico {
-    transition: transform .2s cubic-bezier(.16, 1, .3, 1);
-}
-
-.my-courses .mc-market-action:active {
-    transform: scale(.96);
-}
-
-@media (hover: hover) {
-    .my-courses .mc-market-action:hover .mc-ico {
-        transform: translate(2px, -2px);
-    }
-}
-
-/* Details from the audit */
-.my-courses .mc-course-art img {
-    transition: transform .5s cubic-bezier(.16, 1, .3, 1), filter .3s;
-}
-
-@media (hover: hover) {
-    .my-courses .mc-course-art:hover img {
-        transform: translateY(-4px);
-        filter: drop-shadow(0 18px 30px #7c3aed55);
-    }
-}
-
-/* Kit artwork: Dev Kit pouches for programs (name printed in the art, so the drawn name becomes a caption);
- Computer Essentials cards fill the course artwork column in landscape format. */
-
-.my-courses .mc-program,
-.my-courses .mc-program-scroll::before,
-.my-courses .mc-program-scroll::after {
-    --mc-pouch-ratio: 1.357;
-}
-
-.my-courses .mc-program>img {
-    object-fit: contain;
-    border-radius: 14px;
-}
-
-.my-courses .mc-program-caption {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -2px;
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: #c9c3d8;
-    pointer-events: none;
-}
-
-.my-courses .mc-course-art {
-    width: 100%;
-    aspect-ratio: 5/2;
-    height: auto;
-    justify-self: stretch;
-    background: none;
-}
-
-.my-courses .mc-course-art img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-}
-
-/* Program pouch: a wrapper holding the program link (fills it) and, beside the link, the enrol state button - a button
-   cannot live inside a link. Closed pouch until the learner enrols in one of the program's courses, then the torn-open one. */
-.my-courses .mc-program {
-    filter: none;
-}
-
-.my-courses .mc-program-link {
-    position: absolute;
-    inset: 0;
-    display: block;
-    border-radius: 14px;
-    filter: brightness(.9);
-    transition: filter .2s ease;
-}
-
-.my-courses .mc-program-link>img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 14px;
-    pointer-events: none;
-    transition: filter .22s ease;
-}
-
-.my-courses .mc-program[data-selected=true] .mc-program-link {
-    filter: drop-shadow(0 0 18px #8b5cf688) drop-shadow(0 0 3px #c4b5fd88);
-}
-
-.my-courses .mc-program-link:focus-visible {
-    outline: 2px solid #c4b5fd;
-    outline-offset: -6px;
-}
-
-.my-courses .mc-program:hover .mc-program-link>img,
-.my-courses .mc-program:focus-within .mc-program-link>img {
-    filter: brightness(.72);
-}
-
-/* Program name as a sticker label in black Archivo Black, like the DEV KIT tag on the pouch. */
-.my-courses .mc-program-caption {
-    left: 50%;
-    right: auto;
-    bottom: 7%;
-    max-width: 86%;
-    padding: 6px 12px 5px;
-    border-radius: 7px;
-    background: #cfe8f7;
-    box-shadow: 0 2px 0 #0000002e,inset 0 0 0 1px #ffffff99;
-    color: #0b0b0d;
-    font: 400 12px/1.1 'Archivo Black','DM Sans',sans-serif;
-    letter-spacing: .02em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transform: translateX(-50%) rotate(-2deg);
-}
-
-/* Enroll / Enrolled pill: glowing violet glass - translucent violet fill with grain, bright lavender rim, white glow along
-   the bottom edge and a soft violet halo; plain line icon (paper plane / check). Appears on hover or keyboard focus. */
-.my-courses .mc-program-cta {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0;
-    padding: 13px 26px;
-    border: 1px solid #c9bdff;
-    border-bottom-color: #f6f3ff;
-    border-radius: 999px;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(180deg,#6f5cf2e6 0%,#5b48e0e6 55%,#7a68f5f0 100%);
-    color: #f4f1ff;
-    font: 500 15px/1 'DM Sans',sans-serif;
-    letter-spacing: .01em;
-    white-space: nowrap;
-    text-shadow: 0 0 10px #ffffff59;
-    box-shadow: inset 0 1px 0 #ffffff73,inset 0 -9px 14px -5px #ffffffee,inset 0 0 0 1px #ffffff1f,0 3px 10px -2px #e9e4ffcc,0 0 22px #9b8cffcc,0 0 64px #7a6aff8c,0 10px 30px #00000066;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    overflow: hidden;
-    opacity: 0;
-    transform: translate(-50%,-30%) scale(.92);
-    transition: opacity .22s ease,transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .2s;
-    pointer-events: none;
-}
-
-.my-courses button.mc-program-cta {
-    height: auto;
-    min-height: 0;
-    cursor: pointer;
-    font-family: 'DM Sans',sans-serif!important;
-}
-
-.my-courses .mc-cta-label {
-    position: relative;
-    z-index: 1;
-}
-
-.my-courses .mc-cta-icon {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    place-items: center;
-    filter: drop-shadow(0 0 6px #ffffff80);
-    transition: transform .3s cubic-bezier(.2,.8,.2,1);
-}
-
-.my-courses .mc-cta-icon svg {
-    width: 17px;
-    height: 17px;
-}
-
-.my-courses .mc-program-cta::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(105deg,transparent 30%,#ffffff26 48%,transparent 66%);
-    transform: translateX(-120%);
-    pointer-events: none;
-}
-
-.my-courses .mc-program:hover .mc-program-cta,
-.my-courses .mc-program:focus-within .mc-program-cta {
-    opacity: 1;
-    transform: translate(-50%,-50%) scale(1);
-}
-
-.my-courses .mc-program:hover button.mc-program-cta,
-.my-courses .mc-program:focus-within button.mc-program-cta {
-    pointer-events: auto;
-}
-
-.my-courses .mc-program:hover .mc-program-cta::after {
-    animation: mc-cta-shine 1.1s .15s ease-out both;
-}
-
-.my-courses button.mc-program-cta:hover {
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(180deg,#7c6af7f0 0%,#6553e8f0 55%,#8676f8f5 100%);
-    box-shadow: inset 0 1px 0 #ffffff80,inset 0 -9px 14px -5px #fffffff2,inset 0 0 0 1px #ffffff26,0 3px 12px -2px #eee9ffdd,0 0 28px #9a8cffdd,0 0 72px #6c5cffa0,0 10px 30px #00000066;
-}
-
-.my-courses button.mc-program-cta:hover .mc-cta-icon {
-    transform: translateX(3px);
-}
-
-.my-courses button.mc-program-cta:active {
-    transform: translate(-50%,-50%) scale(.96);
-}
-
-.my-courses button.mc-program-cta:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: 3px;
-}
-
-@keyframes mc-cta-shine {
-    to {
-        transform: translateX(120%);
-    }
-}
-
-@media (prefers-reduced-motion:reduce) {
-    .my-courses .mc-program-cta {
-        transition: opacity .01s;
-    }
-
-    .my-courses .mc-program:hover .mc-program-cta::after {
-        animation: none;
-    }
-}
-
-/* Tearing a pack open (js/pack-opening.js): a closed pack whose art has loaded swaps the Enroll pill for a dotted tear line
-   across its top and a "Drag to open" hint. The real button stays for keyboard users, who reach it with Tab. */
-.my-courses .mc-program.mc-can-tear button.mc-program-cta {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.my-courses .mc-program.mc-can-tear button.mc-program-cta:focus-visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translate(-50%,-50%) scale(1);
-}
-
-.my-courses .mc-program.mc-can-tear:has(button:focus-visible) .mc-tear-hint {
-    visibility: hidden;
-}
-
-.my-courses .mc-tear {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 1;
-    height: 24%;
-    cursor: grab;
-    touch-action: pan-y;
-}
-
-.my-courses .mc-tear svg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: calc(100%/.24);
-    overflow: visible;
-    pointer-events: none;
-}
-
-.my-courses .mc-tear path {
-    fill: none;
-    stroke: #fff;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.my-courses .mc-tear-line {
-    stroke-width: 3.5;
-    stroke-dasharray: .2 1.7;
-    opacity: .5;
-    transition: opacity .2s;
-}
-
-.my-courses .mc-tear-glint {
-    stroke-width: 7;
-    stroke-dasharray: 9 200;
-    stroke-dashoffset: 9;
-    opacity: 0;
-    filter: drop-shadow(0 0 6px #c4b5fd);
-}
-
-.my-courses .mc-can-tear:hover .mc-tear-line,
-.my-courses .mc-can-tear:focus-within .mc-tear-line {
-    opacity: 1;
-}
-
-.my-courses .mc-can-tear:hover .mc-tear-glint,
-.my-courses .mc-can-tear:focus-within .mc-tear-glint {
-    opacity: 1;
-    animation: mc-tear-glint 1.8s cubic-bezier(.45,0,.55,1) infinite;
-}
-
-.my-courses .mc-tear-hint {
-    top: 29%;
-    padding: 9px 16px;
-    font-size: 13px;
-    gap: 7px;
-}
-
-.my-courses .mc-tear-hint .mc-cta-icon svg {
-    width: 15px;
-    height: 15px;
-    animation: mc-tear-nudge 1.8s ease-in-out infinite;
-}
-
-.my-courses .mc-program.is-tearing .mc-program-link>img,
-.my-courses .mc-program.is-tearing .mc-program-caption,
-.my-courses .mc-program.is-tearing .mc-tear,
-.my-courses .mc-program.is-tearing .mc-program-cta {
-    visibility: hidden;
-}
-
-.mc-tear-stage {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-html.mc-tearing,
-html.mc-tearing * {
-    cursor: grabbing!important;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-@keyframes mc-tear-glint {
-    to {
-        stroke-dashoffset: -100;
-    }
-}
-
-@keyframes mc-tear-nudge {
-    50% {
-        transform: translateX(3px);
-    }
-}
-
-@media (hover:none) {
-    .my-courses .mc-can-tear .mc-tear-hint {
-        opacity: 1;
-        transform: translate(-50%,-50%) scale(1);
-    }
-}
-
-/* The page after a pack was opened starts in the light that ended the last one; the script then fades it away over the page.
-   The animation is only a safety net in case the script never runs. */
-@keyframes mc-arrival-fade {
-    to {
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-
-@media (prefers-reduced-motion:no-preference) {
-    body.mc-kit-arrival::after {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: 1000;
-        background: #f4f0ff;
-        pointer-events: none;
-        animation: mc-arrival-fade .5s 1s forwards;
-    }
-}
-
-@media (prefers-reduced-motion:reduce) {
-    .my-courses .mc-tear-glint,
-    .my-courses .mc-tear-hint .mc-cta-icon svg {
-        animation: none;
-    }
-}
-
-/* ── One course fits the panel: the number, ring and artwork share a row whose height follows the window height ────── */
-/* The panel shows about 480px less than the window (navigation, panel heading), and a course also needs its summary tile
-   (200px) and padding, so the row gets what is left. A tall window keeps the full size (274px); a short one shrinks the row
-   instead of cutting the course off. The height is divided by the page zoom (see webforms.css). */
-.my-courses {
-    --mc-row: clamp(150px, calc(100dvh / var(--page-zoom, 1) - 480px), 274px);
-}
-
-.my-courses .mc-course {
-    padding-block: 18px;
-}
-
-.my-courses .mc-number {
-    font-size: calc(var(--mc-row) * .4);
-}
-
-.my-courses .mc-task-ring {
-    width: calc(var(--mc-row) * .5);
-    height: calc(var(--mc-row) * .5);
-}
-
-.my-courses .mc-course-art {
-    max-height: var(--mc-row);
-}
-
-/* ── Wide screens: the course panel rises beside the title ────────────────────────────────────────────────────────── */
-/* The title sits above the program column only, so the panel can start right under the navigation and use the height the
-   title row used to leave empty. mc-layout dissolves (display: contents) so its two children join the page grid. */
-@media (min-width: 1001px) {
-    .my-courses {
-        display: grid;
-        grid-template-columns: minmax(0, 30%) minmax(0, 70%);
-        grid-template-rows: auto minmax(0, 1fr);
-    }
-
-    .my-courses .mc-page-header {
-        grid-column: 1;
-        grid-row: 1;
-        margin: 6px 0 12px;
-    }
-
-    .my-courses .mc-layout {
-        display: contents;
-    }
-
-    .my-courses .mc-programs {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
-    .my-courses .mc-courses-panel {
-        grid-column: 2;
-        grid-row: 1 / 3;
-    }
-}
-
-/* ── Scrolling settles on one item at a time ──────────────────────────────────────────────────────────────────────── */
-/* Both lists snap: a scroll of the program packs lands on the next pack, and a scroll of the course panel lands on the next
-   course. "always" stops a hard flick on the very next item instead of skipping past it. */
-.my-courses .mc-program-scroll {
-    scroll-snap-type: y mandatory;
-}
-
-.my-courses .mc-program {
-    scroll-snap-stop: always;
-}
-
-.my-courses .mc-course-scroll {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-}
-
-.my-courses .mc-course {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .my-courses .mc-course-scroll {
-        scroll-behavior: auto;
-    }
-}
-
-/* ── The pack in the middle of the rail lights up ─────────────────────────────────────────────────────────────────── */
-/* The selected pack always glows. js/site.js also marks the pack nearest the middle of the rail as is-lit while the rail
-   scrolls, so the one you scrolled to is lit before you open it, and the one you leave fades back. */
-.my-courses .mc-program-link {
-    transition: filter .3s ease;
-}
-
-.my-courses .mc-program.is-lit .mc-program-link {
-    filter: drop-shadow(0 0 22px #8b5cf6bb) drop-shadow(0 0 4px #c4b5fdcc);
 }
