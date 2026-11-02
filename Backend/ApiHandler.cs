@@ -101,14 +101,14 @@ namespace SKILL_UP.Backend
                 {
                     db.Begin();
                     var model = Model.Load(db);
-                    var commands = new Commands(db, model, CurrentUser(context, model)) { VisitorKey = VisitorCookie.Read(context), AiReply = aiReply };
+                    var commands = new Commands(db, model, CurrentUser(context, model)) { VisitorKey = VisitorCookie.Read(context), AiReply = aiReply, ClientIp = context.Request.UserHostAddress };
                     var data = commands.Run(action, payload);
                     db.Commit();
 
                     if (commands.NewVisitorKey != null) VisitorCookie.Issue(context, commands.NewVisitorKey);
-                    if (commands.SignIn != null) AuthCookie.Issue(context, commands.SignIn.Value);
                     if (commands.SignOut) AuthCookie.Clear(context);
                     var reloaded = Model.Load(db);
+                    if (commands.SignIn != null) AuthCookie.Issue(context, reloaded.User(commands.SignIn.Value));
                     var deferred = data as Deferred;
                     if (deferred != null) data = deferred(reloaded);
                     var me = commands.Me == null ? null : reloaded.User(commands.Me.Id);
@@ -124,11 +124,7 @@ namespace SKILL_UP.Backend
         /// <summary>The signed-in, still active account, or null for a visitor.</summary>
         static UserRow CurrentUser(HttpContext context, Model model)
         {
-            var id = AuthCookie.Read(context);
-            var user = model.User(id);
-            if (user != null && user.Status == "Active") return user;
-            if (id != null) AuthCookie.Clear(context);
-            return null;
+            return AuthCookie.Resolve(context, model);
         }
 
         static void Write(HttpContext context, int status, JObject body)
