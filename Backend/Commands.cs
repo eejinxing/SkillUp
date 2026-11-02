@@ -115,6 +115,7 @@ namespace SKILL_UP.Backend
                 case "announcementRead": result = AnnouncementRead(); break;
                 case "userSave": result = UserSave(); break;
                 case "userDelete": result = UserDelete(); break;
+                case "staffTransfer": result = StaffTransfer(); break;
                 default: throw new ApiException(404, "Unknown action: " + action);
             }
             var inboxClick = action == "preferences" && Str("section") == "leaderInbox";   // marking an alert read is not audit-worthy

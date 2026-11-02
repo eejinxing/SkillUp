@@ -25,9 +25,16 @@ namespace SKILL_UP.Frontend.Controls
 
         static readonly Dictionary<string, string> Phrasing = new Dictionary<string, string>
         {
-            ["Community message sent"] = "Sent a message in", ["Direct message sent"] = "Sent a direct message", ["Quiz submitted"] = "Submitted a quiz for", ["Lab submitted"] = "Submitted a lab for",
-            ["Enrolled in course"] = "Enrolled in", ["Learning activity recorded"] = "Continued learning in", ["Discussion posted"] = "Started a discussion in",
-            ["Discussion reply posted"] = "Replied to a discussion in", ["Course review posted"] = "Reviewed", ["Announcement published"] = "Published an announcement in"
+            ["Community message sent"] = "Sent a message in",
+            ["Direct message sent"] = "Sent a direct message",
+            ["Quiz submitted"] = "Submitted a quiz for",
+            ["Lab submitted"] = "Submitted a lab for",
+            ["Enrolled in course"] = "Enrolled in",
+            ["Learning activity recorded"] = "Continued learning in",
+            ["Discussion posted"] = "Started a discussion in",
+            ["Discussion reply posted"] = "Replied to a discussion in",
+            ["Course review posted"] = "Reviewed",
+            ["Announcement published"] = "Published an announcement in"
         };
         static string TimelineIcon(string paths) =>
             "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">" + paths + "</svg>";
@@ -47,6 +54,8 @@ namespace SKILL_UP.Frontend.Controls
 
         protected int Days = 30, Active, Completed, Enrolments, PendingUsers, PendingCourses, PendingDeletions;
         protected string Pulse, Summary, Growth, ActiveChart, CompletionChart, LogRows, LogCount;
+        /// <summary>"Needs attention": which courses wait for a Program Leader, and which deletions are pending.</summary>
+        protected string PendingCourseList, PendingDeletionList;
         List<Activity> logs = new List<Activity>(), filtered = new List<Activity>();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -92,6 +101,17 @@ namespace SKILL_UP.Frontend.Controls
             PendingUsers = data.Users.Count(u => u.Status == "Pending");
             PendingCourses = data.Courses.Count(c => c.Status == "Pending review");
             PendingDeletions = data.Requests.Count(r => r.Kind == "Delete" && r.Status == "Pending review");
+            // The admin cannot open the Program Leader's approval pages, so the card lists what is waiting and who it waits for.
+            var waitingCourses = data.Courses.Where(c => c.Status == "Pending review").Select(c => new
+            {
+                Course = c,
+                Since = data.Requests.Where(r => r.CourseId == c.Id && r.Kind == "Create" && r.Status == "Pending review").Select(r => (DateTime?)r.CreatedAt).FirstOrDefault()
+            }).OrderBy(x => x.Since ?? DateTime.MaxValue).ToList();
+            PendingCourseList = AttentionList(waitingCourses.Select(x => AttentionItem(x.Course.Title, x.Course.ProgramId,
+                "by " + (data.User(x.Course.InstructorId)?.Name ?? "no instructor"), x.Since, null)), "No courses are waiting for review.");
+            var deletions = data.Requests.Where(r => r.Kind == "Delete" && r.Status == "Pending review").OrderBy(r => r.CreatedAt).ToList();
+            PendingDeletionList = AttentionList(deletions.Select(r => AttentionItem(data.Course(r.CourseId)?.Title ?? r.CourseTitle, data.Course(r.CourseId)?.ProgramId ?? r.ProgramId,
+                "requested by " + (data.User(r.RequesterId)?.Name ?? "a former user"), r.CreatedAt, r.Reason)), "No deletion requests are pending.");
 
             var quizzes = data.Courses.Count(c => (data.QuizFor(c.Id)?.Questions.Count ?? 0) > 0);
             var assessments = data.Lessons.Count(l => l.Type == "lab" || l.Type == "quiz");
@@ -254,6 +274,25 @@ namespace SKILL_UP.Frontend.Controls
             if (LogRole.SelectedValue.Length > 0) query.Add("role=" + HttpUtility.UrlEncode(LogRole.SelectedValue));
             if (LogSource.SelectedValue.Length > 0) query.Add("source=" + HttpUtility.UrlEncode(LogSource.SelectedValue));
             Host.Go("Dashboard" + (query.Count == 0 ? "" : "?" + string.Join("&", query)) + "#admin-activity");
+        }
+
+        static string AttentionList(IEnumerable<string> items, string empty)
+        {
+            var list = items.ToList();
+            return list.Count == 0 ? "<p class=\"ad-attention-empty\">" + Ui.H(empty) + "</p>" : "<ul class=\"ad-attention-list\">" + string.Concat(list) + "</ul>";
+        }
+
+        /// <summary>One waiting course: title, who submitted it, which Program Leader must act, and for how long it has waited.</summary>
+        string AttentionItem(string title, int? programId, string by, DateTime? since, string reason)
+        {
+            var program = programId == null ? null : Host.Data.Program(programId.Value);
+            var leader = Host.Data.User(program?.LeaderId);
+            var days = since == null ? (int?)null : Math.Max(0, (int)(DateTime.Now - since.Value).TotalDays);
+            var waiting = days == null ? "" : days == 0 ? "today" : days == 1 ? "1 day" : days + " days";
+            return "<li><strong>" + Ui.H(title) + "</strong><small>" + Ui.H(by) + " &middot; waiting for " + Ui.H(leader?.Name ?? "a Program Leader")
+                + (program == null ? "" : " (" + Ui.H(program.Name) + ")") + "</small>"
+                + (waiting.Length == 0 ? "" : "<em class=\"" + (days >= 7 ? "is-late" : "") + "\">" + waiting + "</em>")
+                + (string.IsNullOrWhiteSpace(reason) ? "" : "<q>" + Ui.H(reason) + "</q>") + "</li>";
         }
 
         protected void Export_Click(object sender, EventArgs e) =>
