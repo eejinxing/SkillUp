@@ -1312,3 +1312,142 @@
     opacity: .45;
     cursor: not-allowed;
 }
+
+/* ==== Standard look for the whole course editor ====
+   The Information form sets the look: tall dark fields with 12px corners, small muted labels. Every other form in the editor (course
+   image, activity, assignment, deletion request, course files) uses the same fields, and every button is the same white pill. */
+#app .course-info-page :is(.ci-cover, .ci-activities, .ci-assign-form, .ci-delete-request, [data-ci-panel=resources]) label:not(.check) {
+    display: grid;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--sr-dim);
+}
+
+#app .course-info-page :is(.ci-cover, .ci-activities, .ci-assign-form, .ci-delete-request, [data-ci-panel=resources]) :is(input:not([type=checkbox], [type=radio], [type=file], [type=hidden], [type=submit], [type=button]), select) {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+    border: 1px solid var(--sr-line);
+    border-radius: 12px;
+    background: var(--sr-panel);
+    color: var(--sr-text);
+    font: 14px/1.4 'DM Sans', sans-serif;
+    transition: border-color .15s, box-shadow .15s;
+}
+
+#app .course-info-page :is(.ci-cover, .ci-activities, .ci-assign-form, .ci-delete-request, [data-ci-panel=resources]) textarea {
+    width: 100%;
+    min-height: 110px;
+    padding: 14px 16px;
+    border: 1px solid var(--sr-line);
+    border-radius: 12px;
+    background: var(--sr-panel);
+    color: var(--sr-text);
+    font: 14px/1.5 'DM Sans', sans-serif;
+    resize: vertical;
+    transition: border-color .15s, box-shadow .15s;
+}
+
+#app .course-info-page :is(.ci-cover, .ci-activities, .ci-assign-form, .ci-delete-request, [data-ci-panel=resources]) input[type=file] {
+    width: 100%;
+    height: 46px;
+    padding: 0 8px;
+    border: 1px solid var(--sr-line);
+    border-radius: 12px;
+    background: var(--sr-panel);
+    color: var(--sr-dim);
+    font: 14px/44px 'DM Sans', sans-serif;
+}
+
+#app .course-info-page input[type=file]::file-selector-button {
+    height: 30px;
+    margin-right: 12px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 999px;
+    background: #f2f2f4;
+    color: #101012;
+    font: 600 13px 'DM Sans', sans-serif;
+    cursor: pointer;
+}
+
+#app .course-info-page input[type=file]::file-selector-button:hover {
+    background: #fff;
+}
+
+#app .course-info-page :is(.ci-cover, .ci-activities, .ci-assign-form, .ci-delete-request, [data-ci-panel=resources]) :is(input, select, textarea):hover:not(:disabled) {
+    border-color: var(--sr-line2);
+}
+
+#app .course-info-page :is(.ci-cover, .ci-activities, .ci-assign-form, .ci-delete-request, [data-ci-panel=resources]) :is(input, select, textarea):focus-visible {
+    outline: 0;
+    border-color: var(--sr-accent);
+    box-shadow: 0 0 0 3px #9ff07e24;
+}
+
+#app .course-info-page :is(.ci-cover, .ci-activities, .ci-assign-form, .ci-delete-request, [data-ci-panel=resources]) :is(input, select, textarea)::placeholder {
+    color: var(--sr-faint);
+}
+
+#app .course-info-page .ci-lesson-editor .form-grid {
+    gap: 18px 16px;
+}
+
+#app .course-info-page .ci-lesson-editor label small,
+#app .course-info-page .ci-cover label small {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--sr-faint);
+}
+
+/* Every button: the same white pill (the Save button's look). Tabs are not buttons of this kind and keep their own look. */
+#app .course-info-page :is(button:not([role=tab]), a.button, input[type=submit], input[type=button]) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 999px;
+    background: #f2f2f4;
+    color: #101012;
+    font: 600 13.5px/1 'DM Sans', sans-serif;
+    text-decoration: none;
+    box-shadow: none;
+    cursor: pointer;
+    transition: background-color .15s, transform .15s;
+}
+
+#app .course-info-page :is(button:not([role=tab]), a.button, input[type=submit], input[type=button]):hover:not(:disabled) {
+    background: #fff;
+    color: #101012;
+    transform: none;
+}
+
+#app .course-info-page :is(button:not([role=tab]), a.button, input[type=submit], input[type=button]):disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* A destructive action is still a white button, with dark red text so it is not mistaken for the others. */
+#app .course-info-page :is(button.danger, a.button.danger, .ci-danger-actions>.danger) {
+    background: #f2f2f4;
+    color: #b42318;
+}
+
+#app .course-info-page :is(button.danger, a.button.danger, .ci-danger-actions>.danger):hover:not(:disabled) {
+    background: #fff;
+    color: #9d1c12;
+}
+
+/* Buttons inside a list row (Edit, Delete) are a little smaller so rows stay tidy. */
+#app .course-info-page .ci-activity :is(button, a.button) {
+    min-height: 36px;
+    padding: 0 16px;
+}
+
+#app .course-info-page .ci-tabs>button[role=tab] {
+    min-height: 0;
+}

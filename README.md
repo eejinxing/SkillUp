@@ -4,7 +4,7 @@ Skill UP is a role-based online learning platform built for the WAPP group assig
 
 The app is an **ASP.NET Web Forms** project (.NET Framework 4.8.1). Each screen is a Web Forms page: `.aspx` markup with server controls and an `.aspx.cs` code-behind, rendered on the server and saved through postbacks.
 
-> **Status:** The Web Forms site now runs on a C# backend (`Backend/`) and the SQL Server database in `App_Data/SkillUp.mdf`. Sign-in, permissions, grading and every save happen on the server; nothing is stored in `localStorage`. The only thing kept in the browser is two HttpOnly cookies: the sign-in cookie and a random key that links the browser to its enquiries (`ENQUIRY_ACCESS`). Voice and video calls work between two signed-in users on the same network (see [Testing calls between two devices](#testing-calls-between-two-devices)). Email, real AI and file storage services are not connected yet. [docs/BACKEND.md](docs/BACKEND.md) explains how the backend works.
+> **Status:** The Web Forms site now runs on a C# backend (`Backend/`) and the SQL Server database in `App_Data/SkillUp.mdf`. Sign-in, permissions, grading and every save happen on the server; nothing is stored in `localStorage`. The only thing kept in the browser is two HttpOnly cookies: the sign-in cookie and a random key that links the browser to its enquiries (`ENQUIRY_ACCESS`). Voice and video calls work between two signed-in users on the same network (see [Testing calls between two devices](#testing-calls-between-two-devices)). Email and file storage services are not connected yet; the AI companion uses Google Gemini once you add an API key (see [AI companion](#ai-companion-optional)). [docs/BACKEND.md](docs/BACKEND.md) explains how the backend works.
 
 ## Features
 
@@ -16,7 +16,7 @@ The app is an **ASP.NET Web Forms** project (.NET Framework 4.8.1). Each screen 
 | Program Leader | Manage programs and learning-path order; approve, reject or request changes on course requests; learning analytics |
 | Admin | Platform overview with activity log and CSV export; create, edit, approve, deactivate and delete user accounts |
 
-Every signed-in role also has messages, discussions, live sessions, an AI companion (sample replies) and profile settings in the top navigation.
+Every signed-in account opens its profile from the avatar in the top navigation. Learners, instructors and program leaders also have Messages, and learners an AI Assistant.
 
 ## Getting started
 
@@ -30,8 +30,8 @@ Every signed-in role also has messages, discussions, live sessions, an AI compan
    powershell -File Database\setup-db.ps1
    ```
 
-   This creates `App_Data\SkillUp.mdf` on LocalDB and runs `Database/create-tables.sql` (37 tables) and `Database/backend-extensions.sql`. It does nothing if the file already exists.
-4. Press **F5**. IIS Express serves `https://localhost:44353/`, and `Default.aspx` redirects to `Frontend/Home.aspx`. On the first page load the app finishes the database setup itself: it applies `Database/backend-extensions.sql` if needed and loads the demo accounts and courses into an empty database.
+   This creates `App_Data\SkillUp.mdf` on LocalDB and runs `Database/create-tables.sql` (all 40 tables) and `Database/backend-extensions.sql`. It does nothing if the file already exists.
+4. Press **F5**. IIS Express serves `https://localhost:44353/`, and `Default.aspx` redirects to `Frontend/Home.aspx`. On the first page load the app finishes the database setup itself: it runs `Database/backend-extensions.sql` (which brings an older database up to date) and loads the demo accounts and courses into an empty database.
 
 `.aspx` pages need IIS or IIS Express. Opening them directly from disk does not work.
 
@@ -39,7 +39,7 @@ If the page shows `Could not find a part of the path '...\bin\roslyn\csc.exe'`, 
 
 ### Demo accounts
 
-Choose **Log in** and pick a demo role, or sign in with one of these accounts:
+Choose **Log in** and sign in with one of these accounts:
 
 | Role | Username | Password |
 |---|---|---|
@@ -50,7 +50,11 @@ Choose **Log in** and pick a demo role, or sign in with one of these accounts:
 
 All accounts and records are fictional. In Visual Studio they live in your `App_Data\SkillUp.mdf`, loaded from `Database/demo-seed.json` the first time the app starts with an empty database. To start fresh, stop the site, delete `App_Data\SkillUp.mdf` and `SkillUp_log.ldf`, and run `Database\setup-db.ps1` again.
 
-The demo role buttons (no password), the demo data and the on-screen password reset link are development switches in `Web.config` (`SkillUp:*` app settings). A Release publish turns all three off.
+The demo data and the on-screen password reset link are development switches in `Web.config` (`SkillUp:*` app settings). A Release publish turns both off.
+
+### AI companion (optional)
+
+The AI Assistant and the companion on each activity answer with Google Gemini when the site has an API key; without one they give sample replies. Copy `secrets.config.example` to `secrets.config` (next to `Web.config`), paste a free key from [Google AI Studio](https://aistudio.google.com/apikey), and restart the site. `secrets.config` is in `.gitignore`, so the key is never committed; the call to Gemini runs on the server, so the key never reaches the browser.
 
 ### Testing calls between two devices
 
@@ -71,7 +75,7 @@ Testing on one PC needs none of this: use a normal window and a private window o
 **Security notes**
 
 - Use the `https://` link. On `http://` the sign-in cookie and call set-up messages can be read by others on the Wi-Fi. The call's audio and video are encrypted either way.
-- While the launcher runs, anyone on the same network who knows the address can open the site, and the demo role buttons log in with no password. Turn off the `SkillUp:*` demo switches in `Web.config` before sharing the link, and use a network you control.
+- While the launcher runs, anyone on the same network who knows the address can open the site and sign in with the demo accounts, whose password is in this README. Use a network you control.
 - The launcher adds two Windows Firewall rules that stay after it closes. Remove them when you finish:
 
   ```powershell
@@ -88,11 +92,12 @@ Skill-Up/
 ├── SKILL UP.slnx / SKILL UP.csproj   Visual Studio solution and Web Forms project
 ├── Default.aspx(.cs)                  Start page; redirects to Frontend/Home.aspx
 ├── Global.asax, Web.config, …         ASP.NET application setup
+├── secrets.config.example             Copy to secrets.config for the Gemini API key (secrets.config is not in git)
 ├── Start-LAN.cmd / Start-LAN.ps1      Runs the site on the local network for two-device call tests
-├── App_Start/ Content/ Scripts/       Visual Studio template: routing, bundling, Bootstrap, jQuery
+├── App_Start/ Scripts/WebForms/       Routing (friendly URLs, /api); the Microsoft Ajax scripts the ScriptManager loads
 │
 ├── Frontend/                          The Skill UP application
-│   ├── *.aspx + *.aspx.cs             39 Web Forms pages, one per screen, rendered on the server
+│   ├── *.aspx + *.aspx.cs             37 Web Forms pages, one per screen, rendered on the server
 │   ├── SkillPage.cs                   Base page: signed-in account, role check, saves through Backend commands
 │   ├── SkillUp.Master(.cs)            Shared master page: stylesheets, navigation, page frame, notices
 │   ├── Controls/                      Shared user controls (course card, files, learner table, lab, dashboards)
@@ -100,21 +105,23 @@ Skill-Up/
 │   ├── css/                           Stylesheets, loaded in a fixed order
 │   ├── js/                            site.js, activity.js, pack-opening.js and call-preview.js (small browser-only extras)
 │   ├── assets/                        Images, icons and fonts
-│   └── design/                        Figma exports and reference images
+│   └── uploads/                       Course covers uploaded in the course editor; not in git
 │
 ├── Backend/                           C# commands used by the pages, plus the JSON API /api/workspace and /api/commands
 │   ├── ApiHandler.cs                  HTTP endpoint, sign-in cookie, CSRF header, error responses
 │   ├── CallSignals.cs                 In-memory mailbox that passes call set-up messages between two users (/api/call)
+│   ├── Companion.cs                   The learning companion's replies from Google Gemini (sample replies without a key)
 │   ├── Commands*.cs                   Every command: rules, permissions, grading, SQL writes
 │   ├── Workspace.cs                   Builds the role-scoped workspace JSON for each user
 │   ├── Model.cs, Db.cs                Loads the tables; parameterised ADO.NET helper
 │   ├── Security.cs                    Password hashing, tokens, auth cookie, Web.config switches
 │   └── DatabaseSetup.cs               Applies the extension script and loads the demo data
 │
-├── App_Data/SkillUp.mdf               SQL Server database (37 ERD tables + extensions); not in git
+├── App_Data/SkillUp.mdf               SQL Server database (33 ERD tables + 7 added by the web app); not in git
 ├── Database/
-│   ├── create-tables.sql              Creates the 37 ERD tables in a new SkillUp.mdf
-│   ├── backend-extensions.sql         Extra columns and tables the web app needs (idempotent)
+│   ├── create-tables.sql              Creates all 40 tables in a new SkillUp.mdf
+│   ├── backend-extensions.sql         Brings a database made with an older create-tables.sql up to date (idempotent)
+│   ├── reset-demo-data.sql            Clears all data; the app then loads the demo data again
 │   ├── setup-db.ps1                   Creates App_Data\SkillUp.mdf and runs both scripts
 │   └── demo-seed.json                 Demo accounts and courses (from the frontend fixtures)
 │
@@ -124,10 +131,7 @@ Skill-Up/
     ├── API-CONTRACT.md                Workspace and command API contract for the C# service
     ├── WEBFORMS-PAGES.md              Every page: who can open it, its query parameters and shared controls
     ├── COMMANDS.json                  All command names
-    ├── INTEGRATION-CHANGES.md         What changed when the frontend joined the Web Forms project
-    ├── verification/                  Dated verification log and result files
-    ├── proposal/                      Assignment proposal and architecture diagram (WAPP.drawio)
-    └── history/                       Earlier frontend documentation (archive)
+    └── proposal/                      Assignment proposal and architecture diagram (WAPP.drawio)
 ```
 
 ## How it works
@@ -141,11 +145,11 @@ Skill-Up/
 
 ## Testing
 
-Build in Visual Studio: the pages compile with the project, and markup errors show when a page is opened. There are no automated tests for the Web Forms pages yet. The earlier JavaScript frontend's npm scripts and tests (`Frontend/tests/`, `Frontend/scripts/`) no longer apply to the pages and are listed in `.gitignore`.
+Build in Visual Studio: the pages compile with the project, and markup errors show when a page is opened. There are no automated tests for the Web Forms pages yet.
 
 ## Database
 
-The database is `App_Data/SkillUp.mdf`, a SQL Server LocalDB file built from the ERD in `docs/proposal/WAPP.drawio`. It has the ERD's 37 tables, plus the columns and five tables in `Database/backend-extensions.sql` that the web app needs. [docs/BACKEND.md](docs/BACKEND.md) lists which table stores each part of the app.
+The database is `App_Data/SkillUp.mdf`, a SQL Server LocalDB file built from the ERD in `docs/proposal/WAPP.drawio`. It has the ERD's tables, with the columns the web app added to them, and 7 tables the web app added. Four ERD tables (`BADGE`, `USER_BADGE`, `NOTIFICATION`, `FAQ`) and ten ERD columns were dropped because nothing used them. [`Database/create-tables.sql`](Database/create-tables.sql) creates all of them and marks what was added. [docs/BACKEND.md](docs/BACKEND.md) lists which table stores each part of the app.
 
 **View or edit the tables.** In Solution Explorer, double-click `App_Data/SkillUp.mdf`. It opens in **Server Explorer** under **Data Connections**. Expand **Tables**, then right-click a table:
 
@@ -157,10 +161,12 @@ The database is `App_Data/SkillUp.mdf`, a SQL Server LocalDB file built from the
 1. Go to **View → Server Explorer**. Right-click **Data Connections** and choose **Add Connection…**.
 2. Set **Data source** to **Microsoft SQL Server Database File**. For **Database file name**, browse to the project's `App_Data` folder and type `SkillUp.mdf`. Click **OK**, then **Yes** to create the file.
 3. Right-click the new **SkillUp.mdf** connection and choose **New Query**.
-4. Paste the contents of [`Database/create-tables.sql`](Database/create-tables.sql) and press **Ctrl+Shift+E**. It ends with `Done: 37 tables created.`
+4. Paste the contents of [`Database/create-tables.sql`](Database/create-tables.sql) and press **Ctrl+Shift+E**. It ends with `Done: 40 tables created.`
 5. Right-click **Tables** and choose **Refresh**.
 
-You do not need to run `backend-extensions.sql` by hand: the app applies it on first start. Until the file exists, Solution Explorer shows `SkillUp.mdf` with a missing-file warning. If the tables change, update `Database/create-tables.sql` or `Database/backend-extensions.sql` so everyone can rebuild the same database.
+You do not need to run `backend-extensions.sql` by hand: the app runs it on every start, and it brings a database made with an older `create-tables.sql` up to date. Until the file exists, Solution Explorer shows `SkillUp.mdf` with a missing-file warning. If the tables change, update `Database/create-tables.sql` (for new databases) and add the same change to `Database/backend-extensions.sql` with an `IF COL_LENGTH(...) IS NULL` or `IF OBJECT_ID(...) IS NULL` check (for existing ones), so everyone ends up with the same database.
+
+**Start again from the demo data.** [`Database/reset-demo-data.sql`](Database/reset-demo-data.sql) deletes every row (accounts, courses, enquiries, messages, anything typed while testing) except the four roles and restarts the ID counters; on its next start the site loads the demo data again. Stop the site first and keep a copy of `App_Data` if you may want the old data back. The steps are at the top of the file.
 
 **Connect from C#.** `Web.config` has a connection string named `SkillUp`:
 
@@ -192,8 +198,6 @@ FROM [USER] u JOIN ROLE r ON r.role_id = u.role_id;
 
 Pages show these times as stored, in the site PC's local time (the Program Leader request board shows Malaysia time, MYT). The JSON API sends them as UTC. Times you type into forms, such as a live session's start time, are stored exactly as entered.
 
-Rows created before 2026-10-26 were saved in UTC, so in Malaysia they appear 8 hours earlier than the PC clock. To fix a database that has such rows, run [`Database/shift-existing-times-to-local.sql`](Database/shift-existing-times-to-local.sql) **once**, before using the updated site: stop the site, open a **New Query** on your `SkillUp.mdf` connection in Server Explorer, paste the file and press **Ctrl+Shift+E**. A marker in the database stops a second run from shifting the times again. A database created after 2026-10-26 does not need it.
-
 **Things to know:**
 
 - `USER` is a reserved word in SQL Server, so write the table as `[USER]` in every query.
@@ -203,7 +207,6 @@ Rows created before 2026-10-26 were saved in UTC, so in Malaysia they appear 8 h
 ## Known limitations
 
 - No email service: the password reset link is shown on screen (development setting).
-- AI replies are templates. The lab terminal runs JavaScript in a local Web Worker. Calls work only between two users on the same network (no STUN/TURN relay), and live sessions still open a local camera preview only. In-call chat goes to the other person through the same relay and is not saved. The Messages page checks for new messages every 3 seconds while it is open (it is not instant, and a hidden tab pauses).
+- The AI companion gives sample replies until a Gemini API key is set, and with a key every account gets a small share of the free tier's quota. The lab terminal runs JavaScript in a local Web Worker. Calls work only between two users on the same network (no STUN/TURN relay), and live sessions still open a local camera preview only. In-call chat goes to the other person through the same relay and is not saved. The Messages page checks for new messages every 3 seconds while it is open (it is not instant, and a hidden tab pauses).
 - Course files are stored in the database as data URLs (2 MB limit), not in file storage.
-- The old JavaScript files in `Frontend/js/` (for example `seed.js` and the `*-data.js` fixtures) contain demo passwords and answers. No page loads them, but remove them before any real deployment.
 - Every page adapts to desktop, tablet and phone widths. The small-screen rules live in `Frontend/css/responsive.css`, which loads last.

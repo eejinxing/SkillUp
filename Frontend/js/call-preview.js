@@ -32,6 +32,11 @@
         phone: svg('<path d="m5 3 4 1 1 5-3 2c2 3 3 4 6 6l2-3 5 1 1 4c-1 4-6 3-11-1S0 5 5 3Z"/>'),
         video: svg('<rect x="3" y="6" width="12" height="12" rx="3"/><path d="m15 10 6-4v12l-6-4"/>'),
         mic: svg('<rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3m-4 0h8"/>'),
+        // The same pictures with a line through them, shown while the microphone, camera or speaker is off.
+        micOff: svg('<path d="M9 9V5a3 3 0 0 1 5.1-2.1M15 9.3V12a3 3 0 0 1-4.6 2.5"/><path d="M5 10v2a7 7 0 0 0 11.3 5.5M19 10v2c0 .8-.1 1.5-.4 2.2M12 19v3m-4 0h8"/><path d="m3 3 18 18"/>'),
+        videoOff: svg('<path d="M15 10.5V9a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-1.5"/><path d="m15 10 6-4v12l-4-2.7"/><path d="m3 3 18 18"/>'),
+        speaker: svg('<path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>'),
+        speakerOff: svg('<path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="m17 9.5 4.5 5M21.5 9.5l-4.5 5"/>'),
         end: svg('<path d="M3 15c4-6 14-6 18 0l-2 4-5-2v-3h-4v3l-5 2Z"/>'),
         expand: svg('<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>'),
         min: svg('<path d="m7 7 10 10M17 7 7 17"/>'),
@@ -107,8 +112,81 @@
         if (video.srcObject !== remote) video.srcObject = remote;
         const seen = !!remote?.getVideoTracks().some(t => t.readyState === 'live' && !t.muted);
         video.hidden = !seen;
+        // The speaker button: off silences the other person's voice (the video element is what plays it).
+        video.muted = !!call?.speakerOff;
         video.closest('.cd-stage, .room-stage')?.classList.toggle('has-remote', seen);
         video.play()?.catch(() => {});
+    }
+
+    // ---- Sound level -------------------------------------------------------------------------------------------
+    // The level bar in the meeting room moves with real sound: the voice frequencies (about 100 Hz to 4 kHz) of the other person's
+    // audio and of your own microphone are measured many times a second with the Web Audio analyser, and the louder of the two sets
+    // the bar and lights the speaking person's tile. Nothing is played back from here, so there is no echo.
+    let audioCtx = null, levelFrame = 0, shown = 0;
+    const taps = new Map();   // MediaStream -> {analyser, data, ids}
+
+    function tapOf(source) {
+        if (!source || !source.getAudioTracks().length || !audioCtx) return null;
+        const ids = source.getAudioTracks().map(t => t.id).join();
+        let tap = taps.get(source);
+        if (tap && tap.ids === ids) return tap;
+        try {
+            const analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 512;
+            analyser.smoothingTimeConstant = 0.5;
+            audioCtx.createMediaStreamSource(source).connect(analyser);
+            tap = { analyser, data: new Uint8Array(analyser.frequencyBinCount), ids };
+            taps.set(source, tap);
+            return tap;
+        } catch {
+            return null;
+        }
+    }
+
+    // 0 (silence) to 1 (loud) for one stream, from the strength of its voice-range frequencies.
+    function levelOf(source) {
+        const tap = tapOf(source);
+        if (!tap) return 0;
+        tap.analyser.getByteFrequencyData(tap.data);
+        const binHz = audioCtx.sampleRate / tap.analyser.fftSize;
+        const from = Math.max(1, Math.floor(100 / binHz)), to = Math.min(tap.data.length - 1, Math.ceil(4000 / binHz));
+        let sum = 0, peak = 0;
+        for (let i = from; i <= to; i++) {
+            sum += tap.data[i];
+            if (tap.data[i] > peak) peak = tap.data[i];
+        }
+        // The average strength across the voice range, plus the strongest single frequency, so a quiet voice still moves the bar.
+        return Math.min(1, (sum / (to - from + 1) / 255) * 4 + (peak / 255) * 0.4);
+    }
+
+    function levelLoop() {
+        levelFrame = 0;
+        if (!call) return;
+        const theirs = call.speakerOff ? 0 : levelOf(remote), mine = micOn() ? levelOf(stream) : 0;
+        const now = Math.max(theirs, mine);
+        // Rises at once, falls back smoothly.
+        shown = now > shown ? now : shown * 0.86 + now * 0.14;
+        document.querySelectorAll('#skill-call-dock .room-level').forEach(bar => bar.style.setProperty('--lvl', (3 + shown * 97).toFixed(1) + '%'));
+        const tiles = document.querySelectorAll('#skill-call-dock .room-tile');
+        tiles[0]?.classList.toggle('is-speaking', theirs > 0.12);
+        tiles[1]?.classList.toggle('is-speaking', mine > 0.12);
+        levelFrame = requestAnimationFrame(levelLoop);
+    }
+
+    function startLevel() {
+        stopLevel();
+        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch { audioCtx = null; }
+        audioCtx?.resume().catch(() => {});
+        shown = 0;
+        levelFrame = requestAnimationFrame(levelLoop);
+    }
+
+    function stopLevel() {
+        cancelAnimationFrame(levelFrame);
+        levelFrame = 0;
+        taps.clear();
+        audioCtx?.close().catch(() => {});
+        audioCtx = null;
     }
 
     // ---- Connection to the other person --------------------------------------------------------------------
@@ -360,10 +438,11 @@
     }
 
     function controls(cls, video, mic) {
+        const speaker = !call.speakerOff;
         return `<div class="call-controls ${cls}">`
-            + `<button type="button" data-call-control="mic" aria-label="${mic ? 'Mute microphone' : 'Enable microphone'}" aria-pressed="${mic}">${icons.mic}</button>`
-            + `<button type="button" data-call-control="video" aria-label="${video ? 'Turn camera off' : 'Turn camera on'}" aria-pressed="${video}">${icons.video}</button>`
-            + `<button type="button" class="call-device-menu" data-call-control="device" aria-label="Device information">${icons.gear}</button>`
+            + `<button type="button" data-call-control="mic" aria-label="${mic ? 'Mute microphone' : 'Enable microphone'}" aria-pressed="${mic}">${mic ? icons.mic : icons.micOff}</button>`
+            + `<button type="button" data-call-control="video" aria-label="${video ? 'Turn camera off' : 'Turn camera on'}" aria-pressed="${video}">${video ? icons.video : icons.videoOff}</button>`
+            + `<button type="button" data-call-control="speaker" aria-label="${speaker ? 'Turn the other person’s sound off' : 'Turn the other person’s sound on'}" aria-pressed="${speaker}">${speaker ? icons.speaker : icons.speakerOff}</button>`
             + `<button type="button" class="call-end" data-call-control="end" aria-label="End call">${icons.end}</button>`
             + '</div>';
     }
@@ -380,14 +459,10 @@
             const avatar = mine ? '' : '<span class="room-msg-face">' + (call.demo ? `<img src="${demoCaller}" alt="">` : initials(call.name)) + '</span>';
             return `<li class="${mine ? 'is-me' : ''}">${avatar}<div><header><b>${esc(mine ? 'You' : call.name)}</b><time>${time(m.at)}</time></header><p>${esc(m.text)}</p></div></li>`;
         }).join('') || '<li class="room-empty">No messages yet. Say hello.</li>';
-        const attendees = call.demo
-            ? `<img src="${demoCaller}" alt=""><img src="${demoYou}" alt="">`
-            : `<span>${initials(call.name)}</span><span>${initials(me.name)}</span>`;
         const quickReplies = ['Sounds good', 'Can you share the outline?', 'One moment please'];
 
         const head = '<header class="room-head">'
             + `<div><h2>Hello, ${esc(firstName(me.name))}!</h2><p>${esc(call.title)} <span>|</span> <b>Live now</b></p></div>`
-            + `<div class="room-attendees" aria-label="3 participants">${attendees}<span class="is-bot">SU</span><small>3 in call</small></div>`
             + '<div class="room-head-tools">'
             + `<span class="room-timer"><i></i><time data-call-time>${elapsed()}</time></span>`
             + `<button type="button" data-call-control="expand" aria-label="Shrink call">${icons.shrink}</button>`
@@ -401,9 +476,8 @@
             + controls('room-controls', video, mic)
             + '</div>';
         const people = '<div class="room-people">'
-            + tile(call.name, call.role || 'Guest', call.demo ? demoCaller : '', 'is-speaking')
+            + tile(call.name, call.role || 'Guest', call.demo ? demoCaller : '')
             + tile(me.name + ' (you)', mic ? 'Microphone on' : 'Muted', call.demo ? demoYou : '')
-            + tile('Skill UP assistant', 'Taking notes', '', 'is-bot')
             + '</div>';
         const insights = '<section class="room-insights">'
             + `<header><h3>Meeting insights</h3><span class="call-status" role="status">${esc(call.status)}</span></header>`
@@ -515,6 +589,7 @@
             status: !net ? 'Local preview · no remote connection' : net.callee ? 'Connecting…' : 'Calling ' + (options.name || 'them') + '…',
         };
         paint();
+        startLevel();
         timer = setInterval(() => {
             if (!call) return;
             document.querySelectorAll('[data-call-time], .gn-call-strip time').forEach(t => { t.textContent = elapsed(); });
@@ -540,6 +615,7 @@
         }
         remote = null;
         call = null;
+        stopLevel();
         dismissIncoming();
         release();
         clearInterval(timer);
@@ -564,7 +640,7 @@
         switch (button.dataset.callControl) {
             case 'goal': document.getElementById('skill-call-notes')?.focus(); return;
             case 'summary': call.summaryClosed = !call.summaryClosed; paint(); return;
-            case 'device': if (!net) call.status = stream ? 'Browser devices active · no remote connection' : 'No device enabled · local preview only'; paint(); return;
+            case 'speaker': call.speakerOff = !call.speakerOff; paint(); return;
             case 'end': stop(); return;
             case 'minimize': call.minimized = true; paint(); return;
             case 'show': call.minimized = false; paint(); return;

@@ -22,7 +22,7 @@ The full list of entry pages is in [WEBFORMS-PAGES.md](WEBFORMS-PAGES.md).
 1. `Frontend/js/runtime-config.js`: mock / HTTP mode and the API base URL.
 2. `Frontend/js/api.js`: `SkillAPI.request(action, payload)`, shared by every page.
 3. [API contract](API-CONTRACT.md): DTOs, command payloads, permissions and transaction rules.
-4. [Module map](MODULE-MAP.md), [route list](ROUTES.json), [command list](COMMANDS.json).
+4. [Command list](COMMANDS.json).
 5. `Frontend/js/seed.js` and `*-data.js`: mock DTO references only. They are not a database or real accounts.
 
 ## HTTP boundary to implement
@@ -85,8 +85,8 @@ The current design is snapshot/command. If the team prefers REST controllers, tr
 - The general browser tools no longer use the original machine's Playwright/Sharp module paths. They use the package.json dev dependencies instead, and `BROWSER_EXECUTABLE_PATH` can point to an installed browser.
 
 ## Protecting the original project
-The existing C#, NuGet and Web Forms template setup is kept (App_Start, Content, Scripts, Global.asax, Web.config). The template's own pages (About.aspx, Contact.aspx, Site.Master) were removed on 2026-10-29 because nothing used them; Default.aspx is now only the start-up redirect. Added: one .aspx/.aspx.cs pair per page and a shared master page. Changed: the Default.aspx.cs startup redirect, the .csproj content/compile items, and the local start page setting.
-Backups of the original integration files are in App_Data/HandoffBackups (not web-accessible). Older frontend visual history docs are in docs/history.
+The Web Forms template setup is kept where the site uses it (App_Start for routing, Scripts/WebForms for the ScriptManager, Global.asax, Web.config); its Bootstrap, jQuery, Modernizr and bundling files were removed on 2026-11-02 because no page loaded them. The template's own pages (About.aspx, Contact.aspx, Site.Master) were removed on 2026-10-29 because nothing used them; Default.aspx is now only the start-up redirect. Added: one .aspx/.aspx.cs pair per page and a shared master page. Changed: the Default.aspx.cs startup redirect, the .csproj content/compile items, and the local start page setting.
+Backups of the original integration files are in App_Data/HandoffBackups (not web-accessible).
 Do not hand over .vs, bin, obj, node_modules, test output or local backups as backend source.
 
 ## Desktop support
@@ -128,7 +128,7 @@ The user confirmed that only the global sidebar should be removed. The four Web 
 
 - The 62 stylesheets moved from the Frontend/ root to Frontend/css/ with the same file names and load order. `assets/` paths inside the CSS were changed to `../assets/`. index.html, SkillUp.Master and the .csproj were updated to match. The CSS parsed by the browser is identical to before the move.
 - learner-fusion.css, which no page loaded, was deleted.
-- API-CONTRACT.md moved to docs/; the verification records moved to docs/verification/; the old handoff-manifest.json moved to docs/history/.
+- API-CONTRACT.md moved to docs/; the verification records and the old handoff-manifest.json moved to docs/verification/ and docs/history/ (both deleted on 2026-11-02).
 - The one-off integration scripts scripts/activate-*.cjs (already applied), two tests that only called other tests, and inspect-visitor.cjs (whose output path no longer existed) were deleted.
 - For the project overview and folder layout, see the root [README.md](../README.md).
 
@@ -138,5 +138,5 @@ The user confirmed that only the global sidebar should be removed. The four Web 
 - Pages inherit `Frontend/SkillPage.cs`, which loads `Backend/Model`, checks the page's roles and saves through `Backend/Commands` (`Run` / `TryRun`), the same commands as the JSON API. After a save the page redirects with a notice.
 - The only scripts the pages load are `js/site.js` (small enhancements), `js/activity.js` (quiz timer and lab terminal), `js/pack-opening.js` (tearing program packs open) and `js/call-preview.js` (device-only call preview).
 - The look is unchanged: the same stylesheets and class names. Rules needed only by the server-rendered pages are in `css/webforms.css`.
-- The rest of `Frontend/js/`, `index.html`, `server.cjs`, `package.json`, `tests/` and `scripts/` belong to the JavaScript version, are no longer loaded and are listed in `.gitignore`. `docs/LOAD-ORDER.json`, `docs/ROUTES.json`, `docs/WEBFORMS-PAGES.json` and `docs/MODULE-MAP.md` describe that version. The sections above that mention hash routes, `SkillAPI` or `npm test` describe it too.
+- The rest of `Frontend/js/`, `index.html`, `server.cjs`, `package.json`, `tests/` and `scripts/` belong to the JavaScript version, are no longer loaded and are listed in `.gitignore`. The docs that described that version (load order, route list, module map) were deleted on 2026-11-02. The sections above that mention hash routes, `SkillAPI` or `npm test` describe it too.
 - [WEBFORMS-PAGES.md](WEBFORMS-PAGES.md) lists every page, who can open it and its query parameters.
