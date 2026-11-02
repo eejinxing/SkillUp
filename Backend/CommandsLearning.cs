@@ -236,10 +236,20 @@ namespace SKILL_UP.Backend
             return null;
         }
 
-        /// <summary>Saves the question and the companion's reply: Gemini's (AiReply) or, with no API key, a rule-based sample.</summary>
+        /// <summary>
+        /// Saves the question and the companion's reply: Gemini's (AiReply) or, with no API key, a rule-based sample. Each activity
+        /// (lessonId) has its own conversation; without a lessonId it is the general one on the AI Assistant page.
+        /// </summary>
         object Ai()
         {
             var prompt = Text("text", "Question", 4000);
+            var lessonId = Companion.LessonOf(d);
+            if (lessonId != null)
+            {
+                var lesson = m.Lessons.FirstOrDefault(l => l.Id == lessonId.Value);
+                if (lesson == null) Fail("Activity not found.", 404);
+                CourseAccess(lesson.CourseId);
+            }
             var response = AiReply;
             if (response != null) { }
             else if (Regex.IsMatch(prompt, "aggregation|match|group", RegexOptions.IgnoreCase))
@@ -248,11 +258,27 @@ namespace SKILL_UP.Backend
                 response = "Open My learning to find your next unlocked activity. Complete the reading and lab before taking the quiz. A score of 70% unlocks completion.";
             else
                 response = "Break the problem into one small step. Review the course explanation, try an example, then compare the output with what you expected. Tell me the concept you want to practise.";
-            var session = db.Scalar("SELECT TOP 1 session_id FROM AI_CHAT_SESSION WHERE user_id = @p0 ORDER BY session_id DESC", Me.Id);
-            var sessionId = session == null ? db.Insert("INSERT INTO AI_CHAT_SESSION (user_id, started_at) VALUES (@p0, @p1)", Me.Id, Now) : (int)session;
+            var session = lessonId == null
+                ? db.Scalar("SELECT TOP 1 session_id FROM AI_CHAT_SESSION WHERE user_id = @p0 AND lesson_id IS NULL ORDER BY session_id DESC", Me.Id)
+                : db.Scalar("SELECT TOP 1 session_id FROM AI_CHAT_SESSION WHERE user_id = @p0 AND lesson_id = @p1 ORDER BY session_id DESC", Me.Id, lessonId.Value);
+            var sessionId = session == null
+                ? db.Insert("INSERT INTO AI_CHAT_SESSION (user_id, started_at, lesson_id) VALUES (@p0, @p1, @p2)", Me.Id, Now, lessonId.HasValue ? (object)lessonId.Value : null)
+                : (int)session;
             db.Exec("INSERT INTO AI_CHAT_MESSAGE (session_id, sender_type, content, created_at) VALUES (@p0, N'User', @p1, @p2)", sessionId, prompt, Now);
-            db.Exec("INSERT INTO AI_CHAT_MESSAGE (session_id, sender_type, content, created_at) VALUES (@p0, N'AI', @p1, @p2)", sessionId, response, Now);
+            // The reply stays "unread" (its badge in the AI Assistant list) until the person's page shows it and says so (aiRead).
+            db.Exec("INSERT INTO AI_CHAT_MESSAGE (session_id, sender_type, content, created_at, is_read) VALUES (@p0, N'AI', @p1, @p2, 0)", sessionId, response, Now);
             return new JObject { ["response"] = response };
+        }
+
+        /// <summary>The conversation (lessonId, or the general one) has been opened: its AI replies are read, so no badge shows for them.</summary>
+        object AiRead()
+        {
+            var lessonId = Companion.LessonOf(d);
+            if (lessonId == null)
+                db.Exec("UPDATE AI_CHAT_MESSAGE SET is_read = 1 WHERE is_read = 0 AND session_id IN (SELECT session_id FROM AI_CHAT_SESSION WHERE user_id = @p0 AND lesson_id IS NULL)", Me.Id);
+            else
+                db.Exec("UPDATE AI_CHAT_MESSAGE SET is_read = 1 WHERE is_read = 0 AND session_id IN (SELECT session_id FROM AI_CHAT_SESSION WHERE user_id = @p0 AND lesson_id = @p1)", Me.Id, lessonId.Value);
+            return null;
         }
 
         // ---- Admin: user accounts -------------------------------------------------------

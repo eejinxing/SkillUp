@@ -330,8 +330,6 @@
     <Compile Include="Frontend\Courses.aspx.designer.cs"><DependentUpon>Courses.aspx</DependentUpon></Compile>
     <Compile Include="Frontend\Dashboard.aspx.cs"><DependentUpon>Dashboard.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
     <Compile Include="Frontend\Dashboard.aspx.designer.cs"><DependentUpon>Dashboard.aspx</DependentUpon></Compile>
-    <Compile Include="Frontend\Discussions.aspx.cs"><DependentUpon>Discussions.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Frontend\Discussions.aspx.designer.cs"><DependentUpon>Discussions.aspx</DependentUpon></Compile>
     <Compile Include="Frontend\EnquiryPortal.aspx.cs"><DependentUpon>EnquiryPortal.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
     <Compile Include="Frontend\EnquiryPortal.aspx.designer.cs"><DependentUpon>EnquiryPortal.aspx</DependentUpon></Compile>
     <Compile Include="Frontend\FAQ.aspx.cs"><DependentUpon>FAQ.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>

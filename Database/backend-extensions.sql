@@ -144,4 +144,21 @@ CREATE TABLE FEEDBACK_REPLY (
 );
 GO
 
+-- AI companion: one conversation per learner and activity (lesson_id is the LAB row). NULL is the general conversation of the AI Assistant page.
+IF COL_LENGTH(N'AI_CHAT_SESSION', N'lesson_id') IS NULL ALTER TABLE AI_CHAT_SESSION ADD lesson_id INT NULL;
+GO
+
+-- Read tracking: which announcements each person has opened (so their badge goes away and stays away), and whether an AI reply
+-- has been seen (existing replies count as seen). Not tied by foreign keys, like the other extension columns: a leftover row is harmless.
+IF OBJECT_ID(N'ANNOUNCEMENT_READ', N'U') IS NULL
+    CREATE TABLE ANNOUNCEMENT_READ (
+        user_id INT NOT NULL,
+        announcement_id INT NOT NULL,
+        read_at DATETIME2 NOT NULL CONSTRAINT DF_ANNOUNCEMENT_READ_read_at DEFAULT SYSDATETIME(),
+        CONSTRAINT PK_ANNOUNCEMENT_READ PRIMARY KEY (user_id, announcement_id)
+    );
+GO
+IF COL_LENGTH(N'AI_CHAT_MESSAGE', N'is_read') IS NULL ALTER TABLE AI_CHAT_MESSAGE ADD is_read BIT NOT NULL CONSTRAINT DF_AI_CHAT_MESSAGE_is_read DEFAULT 1;
+GO
+
 PRINT N'Done: backend extensions applied.';

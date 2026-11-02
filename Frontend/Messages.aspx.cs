@@ -26,7 +26,7 @@ namespace SKILL_UP.Frontend
         protected AnnouncementRow Announcement;
         protected CourseRow ActiveCourse;
         protected UserRow Author, Selected;
-        protected int Channel, AnnouncementId, SelectedId, AllAnnouncementCount, TotalUnread, Unread, ContactCount, CommentCount, ActivityCount;
+        protected int Channel, AnnouncementId, SelectedId, AllAnnouncementUnread, TotalUnread, Unread, ContactCount, CommentCount, ActivityCount;
         protected string Thread;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -36,10 +36,15 @@ namespace SKILL_UP.Frontend
             var ids = new HashSet<int>(Courses.Select(c => c.Id));
             Channel = ids.Contains(QueryInt("channel") ?? 0) ? QueryInt("channel").Value : 0;
             var all = Data.Announcements.Where(a => a.CourseId != null && ids.Contains(a.CourseId.Value)).ToList();
-            AllAnnouncementCount = all.Count;
             ChannelAnnouncements = all.Where(a => Channel == 0 || a.CourseId == Channel).OrderByDescending(a => a.CreatedAt).ToList();
             Announcement = ChannelAnnouncements.FirstOrDefault(a => a.Id == QueryInt("announcement")) ?? ChannelAnnouncements.FirstOrDefault();
             AnnouncementId = Announcement?.Id ?? 0;
+            // Showing an announcement reads it, so its badge goes away and stays away (the page's background refresh reads one that
+            // arrives while the page is open). Your own announcements are never unread for you.
+            if (!IsPostBack && Announcement != null && Announcement.PostedBy != Me.Id && !Data.HasRead(Me.Id, Announcement.Id))
+                TryRun("announcementRead", new { id = Announcement.Id.ToString() });
+            Func<int?, int> unread = course => all.Count(a => (course == null || a.CourseId == course) && a.PostedBy != Me.Id && !Data.HasRead(Me.Id, a.Id));
+            AllAnnouncementUnread = unread(null);
             ActiveCourse = Courses.FirstOrDefault(c => c.Id == (Announcement?.CourseId ?? Channel));
             Author = Announcement == null ? null : Data.User(Announcement.PostedBy);
 
@@ -52,7 +57,7 @@ namespace SKILL_UP.Frontend
                 TryRun("readMessages", new { from = SelectedId.ToString() });
             TotalUnread = Data.Messages.Count(m => m.ReceiverId == Me.Id && !m.Read && contacts.Any(c => c.Id == m.SenderId));
 
-            Channels.DataSource = Courses.Select((c, i) => new { Url = Url(c.Id, 0, SelectedId), c.Title, Colour = ChannelColours[i % 4], Count = all.Count(a => a.CourseId == c.Id), Active = Channel == c.Id });
+            Channels.DataSource = Courses.Select((c, i) => new { Url = Url(c.Id, 0, SelectedId), c.Title, Colour = ChannelColours[i % 4], Count = unread(c.Id), Active = Channel == c.Id });
             Channels.DataBind();
             NewAnnouncementLink.Visible = Me.Role != "Learner" && Courses.Count > 0;
             if (Request.QueryString["compose"] == "1" && NewAnnouncementLink.Visible)

@@ -16,7 +16,6 @@ namespace SKILL_UP.Frontend
         protected global::System.Web.UI.WebControls.TextBox EmailBox;
         protected global::System.Web.UI.WebControls.TextBox LocationBox;
         protected global::System.Web.UI.WebControls.TextBox BioBox;
-        protected global::System.Web.UI.WebControls.DropDownList ThemeList;
         protected global::SKILL_UP.Frontend.Controls.SubmitButton SaveProfileButton;
         protected global::System.Web.UI.WebControls.DropDownList FeedbackRating;
         protected global::System.Web.UI.WebControls.TextBox FeedbackText;

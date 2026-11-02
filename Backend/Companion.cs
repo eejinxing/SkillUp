@@ -45,14 +45,14 @@ namespace SKILL_UP.Backend
         /// usable (the command then answers or refuses as before). Throws ApiException(429/503) when the learner is
         /// over their allowance or Gemini cannot answer. Call it before the command gate: it waits on the network.
         /// </summary>
-        public static string Reply(Model m, UserRow me, string text)
+        public static string Reply(Model m, UserRow me, string text, int? lessonId = null)
         {
             text = (text ?? "").Trim();
             if (!Configured || me == null || text.Length == 0 || text.Length > 4000) return null;
             CheckAllowance(me.Id);
 
             var prompt = new StringBuilder();
-            var history = m.AiMessages.Where(x => x.UserId == me.Id).OrderBy(x => x.Id).ToList();
+            var history = m.AiMessages.Where(x => x.UserId == me.Id && x.LessonId == lessonId).OrderBy(x => x.Id).ToList();
             history = history.Skip(Math.Max(0, history.Count - 8)).ToList();
             if (history.Count > 0)
             {
@@ -63,7 +63,7 @@ namespace SKILL_UP.Backend
             prompt.AppendLine("Learner's new message:");
             prompt.Append(text);
 
-            var system = SystemPrompt(m, me);
+            var system = SystemPrompt(m, me, lessonId);
             string reply;
             try { reply = Ask(system, prompt.ToString()); }
             catch (ApiException e) when (e.Status == 503)
@@ -75,7 +75,14 @@ namespace SKILL_UP.Backend
             return reply.Length > 3000 ? reply.Substring(0, 3000) : reply;
         }
 
-        static string SystemPrompt(Model m, UserRow me)
+        /// <summary>The activity a question was asked from (the "lessonId" of the command), or null for the general conversation.</summary>
+        public static int? LessonOf(Newtonsoft.Json.Linq.JObject payload)
+        {
+            int id;
+            return int.TryParse((string)payload?["lessonId"], out id) && id > 0 ? id : (int?)null;
+        }
+
+        static string SystemPrompt(Model m, UserRow me, int? lessonId)
         {
             var courses = m.Enrollments.Where(e => e.UserId == me.Id).Select(e =>
             {
@@ -95,6 +102,15 @@ namespace SKILL_UP.Backend
             s.AppendLine(courses.Count == 0
                 ? "They are not enrolled in any course yet; you may suggest browsing the catalog."
                 : "Their courses and progress:\n" + string.Join("\n", courses));
+            var lesson = lessonId == null ? null : m.Lessons.FirstOrDefault(l => l.Id == lessonId.Value);
+            if (lesson != null)
+            {
+                // This conversation belongs to one activity. The lab's correct answer is never sent, only the task text.
+                s.AppendLine("This conversation is about one activity: \"" + lesson.Title + "\" (" + lesson.Type + ") in the course \"" + (m.Course(lesson.CourseId)?.Title ?? "") + "\". Keep your help about it.");
+                var text = System.Text.RegularExpressions.Regex.Replace(System.Text.RegularExpressions.Regex.Replace(lesson.Body ?? "", "<[^>]+>", " "), @"\s+", " ").Trim();
+                if (text.Length > 0) s.AppendLine("The activity text: " + (text.Length > 700 ? text.Substring(0, 700) : text));
+                if (lesson.Type == "quiz" || lesson.Type == "lab") s.AppendLine("This is graded work: guide them with hints and explanations, but never give the answer.");
+            }
             return s.ToString();
         }
 

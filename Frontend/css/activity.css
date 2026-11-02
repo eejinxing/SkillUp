@@ -3165,3 +3165,262 @@
         animation: none;
     }
 }
+
+/* ==== Activity page: the companion and the activity scroll on their own. ====
+   The page itself fits the window (as on My Courses and the AI Assistant): the course bar stays on top (the quiz timer with it), the
+   companion keeps its own height and scrolls its conversation, and the activity (banner, task, quiz, terminal) scrolls in its own column.
+   html{zoom} scales dvh too, so it is divided back out (see webforms.css). Narrow windows keep the normal single scrolling page. */
+@media (min-width: 861px) {
+    body:has(.answer-page .answer-layout) .shell {
+        min-height: calc(100vh / var(--page-zoom, 1));
+    }
+
+    /* The page is as tall as the window, but never shorter than 1000px: on a shorter window it extends downward and the page scrolls,
+       so the conversation is never squeezed into a thin strip. */
+    body:has(.answer-page .answer-layout) .shell>div {
+        display: flex;
+        flex-direction: column;
+        height: max(calc(100dvh / var(--page-zoom, 1)), 1000px);
+        min-height: 560px;
+    }
+
+    body:has(.answer-page .answer-layout) .main {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        box-sizing: border-box;
+        padding-bottom: 14px;
+    }
+
+    /* The course breadcrumb is a full-width row on top. Below it the companion and the activity start on the same line and end on the same
+       line, and both run to the bottom of the page. */
+    body:has(.answer-page .answer-layout) .main {
+        padding-top: 6px;
+        padding-bottom: 10px;
+    }
+
+    #app .answer-page:has(>.answer-layout) {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 0;
+    }
+
+    #app .answer-page:has(>.answer-layout) .answer-breadcrumb {
+        flex: none;
+        padding: 6px 0 12px;
+    }
+
+    #app .answer-page:has(>.answer-layout) .answer-layout {
+        flex: 1;
+        min-height: 0;
+        grid-template-rows: minmax(0, 1fr);
+        align-items: stretch;
+    }
+
+    /* The companion fills its column; what does not fit scrolls inside it (the conversation). */
+    #app .answer-page:has(>.answer-layout) .answer-ai-reference {
+        position: static;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+    }
+
+    #app .answer-page:has(>.answer-layout) .answer-ai-reference .answer-ai-conversation {
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+        scrollbar-color: #3a3a44 transparent;
+    }
+
+    /* A fresh chat keeps the orb in proportion to the height; a started chat is compact so the conversation gets the room. */
+    #app .answer-page:has(>.answer-layout) .answer-ai-reference:not(.has-conversation) .answer-orb {
+        width: min(69.56%, calc(24dvh / var(--page-zoom, 1)));
+    }
+
+    #app .answer-page:has(>.answer-layout) .answer-ai-reference:not(.has-conversation) h2 {
+        font-size: clamp(20px, calc(3.4dvh / var(--page-zoom, 1)), 34px);
+    }
+
+    /* The bottom of the companion (books, shortcut cards, question box) stays as designed. To give a started chat the room, the top
+       gets slimmer: a thinner header bar, and the orb and heading shrink to one small line. */
+    #app .answer-page:has(>.answer-layout) .answer-ai-reference .answer-ai-top {
+        min-height: 44px;
+        padding: 12px 24px 4px;
+    }
+
+    #app .answer-page:has(>.answer-layout) .answer-ai-reference.has-conversation .answer-orb {
+        width: 44px;
+    }
+
+    #app .answer-page:has(>.answer-layout) .answer-ai-reference.has-conversation h2 {
+        margin: 4px 24px 8px;
+        font-size: 14.5px;
+    }
+
+    #app .answer-page:has(>.answer-layout) .answer-ai-reference.has-conversation h2 span {
+        display: inline;
+    }
+
+    #app .answer-page:has(>.answer-layout) .answer-ai-reference.has-conversation h2 span:first-child {
+        margin-right: .3em;
+    }
+
+    #app .answer-page:has(>.answer-layout) .answer-ai-reference.has-conversation .answer-ai-bottom {
+        margin-top: 6px;
+        padding-bottom: 14px;
+    }
+
+    /* The activity column scrolls by itself. It is a plain column (not a grid) so the banner keeps its own height instead of a
+       collapsed grid row. */
+    #app .answer-page:has(>.answer-layout) .answer-workspace {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding-right: 4px;
+        scrollbar-width: thin;
+        scrollbar-color: #3a3a44 transparent;
+    }
+
+    #app .answer-page:has(>.answer-layout) .answer-workspace>* {
+        flex: none;
+    }
+}
+
+/* ==== Companion chat: each message bubble hugs its text instead of stretching across the panel. Your questions sit on the right,
+   the companion's answers on the left; a long answer grows only up to the maximum width and then wraps. ==== */
+#app .answer-ai-reference .answer-ai-conversation>div {
+    position: relative;
+    box-sizing: border-box;
+    width: fit-content;
+    max-width: min(calc(100% - 46px), 760px);
+}
+
+#app .answer-ai-reference .answer-ai-conversation>.answer-ai-prompt {
+    margin-left: auto;
+    margin-right: 46px;
+}
+
+#app .answer-ai-reference .answer-ai-conversation>.answer-ai-reply {
+    margin-left: 46px;
+}
+
+/* The sender's avatar, outside the bubble on the side it speaks from: yours on the right, the companion's on the left. */
+.ai-avatar {
+    position: absolute;
+    top: 2px;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.answer-ai-prompt>.ai-avatar {
+    right: -43px;
+}
+
+.answer-ai-reply>.ai-avatar {
+    left: -43px;
+}
+
+.ai-avatar .avatar {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(140deg, #a78bfa, #6d4fe0);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0;
+}
+
+.ai-avatar .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ai-avatar.bot {
+    background: #05060c url('../assets/answer/imgRectangle4.png') center / 150% no-repeat;
+    box-shadow: 0 0 0 1px #5072cf66, 0 0 14px #4f6bff55;
+}
+
+#app .answer-ai-reference .answer-ai-conversation>.answer-ai-prompt small,
+#app .answer-ai-reference .answer-ai-conversation>.answer-ai-reply small {
+    white-space: nowrap;
+}
+
+/* ==== Activity breadcrumb: the same look as the course page's (css/course.css): 13px, a soft lavender-white link with a chevron,
+   muted "/" separators, and the current activity in white. ==== */
+#app .answer-page .answer-breadcrumb {
+    justify-content: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #a39cb4;
+}
+
+#app .answer-page .answer-breadcrumb>a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #d9d4e4;
+    text-decoration: none;
+    transition: color .15s;
+}
+
+#app .answer-page .answer-breadcrumb>a:hover {
+    color: #fff;
+}
+
+#app .answer-page .answer-breadcrumb>a svg {
+    flex: none;
+    width: 16px;
+    height: 16px;
+}
+
+#app .answer-page .answer-breadcrumb h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 400;
+    color: #d9d4e4;
+}
+
+#app .answer-page .answer-breadcrumb h1 i {
+    flex: none;
+    font-style: normal;
+    color: #a39cb4;
+}
+
+#app .answer-page .answer-breadcrumb h1 b {
+    font-weight: 400;
+    color: #d9d4e4;
+}
+
+#app .answer-page .answer-breadcrumb h1 span {
+    color: #fff;
+}
+
+#app .answer-page .answer-breadcrumb>span {
+    margin-left: auto;
+    flex: none;
+    font-size: 12px;
+    color: #a39cb4;
+}
+
+#app .answer-page .answer-breadcrumb>.timer {
+    color: #b4c5de;
+}

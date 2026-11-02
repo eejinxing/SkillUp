@@ -93,7 +93,7 @@ namespace SKILL_UP.Backend
                 using (var db = new Db())
                 {
                     var model = Model.Load(db);
-                    aiReply = Companion.Reply(model, CurrentUser(context, model), (string)payload["text"]);
+                    aiReply = Companion.Reply(model, CurrentUser(context, model), (string)payload["text"], Companion.LessonOf(payload));
                 }
             lock (CommandGate)
             {

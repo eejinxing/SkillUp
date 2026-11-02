@@ -568,7 +568,26 @@
         clearTimeout(searchTimer);
         searchTimer = setTimeout(() => searchNow(box, box.form, button), 250);
     });
-    // Lesson companion: a question is sent in the background (api/commands/ai) and the answer appears in place, so the page
+    // Message times in the companion chat: in the viewer's own clock and style, today's as a time and older ones with the day.
+    const chatClock = date => {
+        const time = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        return date.toDateString() === new Date().toDateString() ? time : date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ', ' + time;
+    };
+    const stampTime = (label, date) => {
+        const mark = document.createElement('time');
+        mark.className = 'ai-time';
+        mark.dateTime = date.toISOString();
+        mark.title = date.toLocaleString();
+        mark.textContent = chatClock(date);
+        label.append(' \u00b7 ', mark);
+    };
+    document.querySelectorAll('time.ai-time[datetime]').forEach(mark => {
+        const date = new Date(mark.getAttribute('datetime'));
+        if (isNaN(date)) return;
+        mark.textContent = chatClock(date);
+        mark.title = date.toLocaleString();
+    });
+    // Lesson companion (also the AI Assistant page): a question is sent in the background (api/commands/ai) and the answer appears in place, so the page
     // never reloads. The first question shrinks the orb and heading to make room (css: .has-conversation). Without this script
     // the shortcuts and the Send button post the page as before.
     const lessonAi = document.querySelector('.answer-ai-reference[data-api]');
@@ -580,14 +599,25 @@
         let asking = false;
         const toEnd = () => { log.scrollTop = log.scrollHeight; };
         toEnd();
-        const bubble = (kind, label, text) => {
+        // Who a bubble belongs to: your own avatar (copied from the top bar, so a profile picture shows too), or the companion's orb.
+        const avatarFor = kind => {
+            const holder = document.createElement('span');
+            holder.className = kind.includes('prompt') ? 'ai-avatar' : 'ai-avatar bot';
+            if (kind.includes('prompt')) {
+                const mine = document.querySelector('.gn-actions .avatar');
+                if (mine) holder.append(mine.cloneNode(true));
+            } else holder.setAttribute('aria-hidden', 'true');
+            return holder;
+        };
+        const bubble = (kind, label, text, stamped) => {
             const box = document.createElement('div');
             box.className = kind + ' is-new';
             const small = document.createElement('small');
             small.textContent = label;
+            if (stamped) stampTime(small, new Date());
             const p = document.createElement('p');
             p.textContent = text;
-            box.append(small, p);
+            box.append(avatarFor(kind), small, p);
             log.appendChild(box);
             toEnd();
             return box;
@@ -601,18 +631,27 @@
             lessonAi.classList.add('has-conversation');
             if (field) field.value = '';
             if (sendButton) sendButton.disabled = true;
-            bubble('answer-ai-prompt', 'You', question);
+            bubble('answer-ai-prompt', 'You', question, true);
             const reply = bubble('answer-ai-reply is-wait', 'Skill UP companion', 'Thinking\u2026');
             try {
                 const r = await fetch(lessonAi.dataset.api + 'ai', {
                     method: 'POST', credentials: 'same-origin',
                     headers: { 'Content-Type': 'application/json', 'X-SkillUp-Request': '1' },
-                    body: JSON.stringify({ text: question })
+                    body: JSON.stringify({ text: question, lessonId: lessonAi.dataset.lesson })
                 });
                 const body = await r.json().catch(() => ({}));
                 if (!r.ok || !body.data?.response) throw Error(body.detail || 'The companion could not answer. Please try again.');
                 reply.classList.remove('is-wait');
                 reply.querySelector('p').textContent = body.data.response;
+                stampTime(reply.querySelector('small'), new Date());
+                // The reply is on screen, so it is read: tell the server (its badge in the AI Assistant list never shows), and the open
+                // conversation's row in that list counts as started.
+                fetch(lessonAi.dataset.api + 'aiRead', {
+                    method: 'POST', credentials: 'same-origin',
+                    headers: { 'Content-Type': 'application/json', 'X-SkillUp-Request': '1' },
+                    body: JSON.stringify({ lessonId: lessonAi.dataset.lesson })
+                }).catch(() => { /* it is marked read the next time the page opens */ });
+                document.querySelector('.assistant-convo.is-active')?.classList.remove('is-empty');
             } catch (err) {
                 // Take the unanswered question back out and give it back to the box, so nothing is lost.
                 reply.previousElementSibling.remove();
@@ -639,4 +678,188 @@
             askCompanion(question);
         }, true);
     }
+    // AI Assistant page: find a conversation in the list, keep the short-window marker right when the window changes (the page also sets it before the first paint),
+    // and show a "scroll to the latest message" button while the conversation is scrolled up.
+    const assistantSplit = document.querySelector('.assistant-split');
+    if (assistantSplit) {
+        const fitAssistant = () => {
+            const zoom = parseFloat(getComputedStyle(document.documentElement).zoom) || 1, height = innerHeight / zoom;
+            assistantSplit.classList.toggle('is-short', height < 800);
+            assistantSplit.classList.toggle('is-tiny', height < 660);
+        };
+        fitAssistant();
+        addEventListener('resize', fitAssistant);
+        // Find a conversation: hides the rows that do not match and opens the courses that have a match; clearing it puts the courses back.
+        const findBox = assistantSplit.querySelector('[data-conversation-search]');
+        if (findBox) {
+            const rows = [...assistantSplit.querySelectorAll('.assistant-convo')], groups = [...assistantSplit.querySelectorAll('.assistant-group')];
+            const noMatch = assistantSplit.querySelector('.assistant-nomatch');
+            const find = () => {
+                const term = findBox.value.trim().toLowerCase();
+                let shown = 0;
+                for (const group of groups) {
+                    if (group.dataset.was === undefined) group.dataset.was = group.open ? '1' : '0';
+                    const courseHit = !term || group.querySelector(':scope > summary').textContent.toLowerCase().includes(term);
+                    let any = false;
+                    for (const row of group.querySelectorAll('.assistant-convo')) {
+                        const hit = courseHit || row.textContent.toLowerCase().includes(term);
+                        row.hidden = !hit;
+                        any = any || hit;
+                    }
+                    group.hidden = !any;
+                    if (term) group.open = any; else { group.open = group.dataset.was === '1'; delete group.dataset.was; }
+                    shown += any ? 1 : 0;
+                }
+                for (const row of rows.filter(r => !r.closest('.assistant-group'))) {
+                    row.hidden = !!term && !row.textContent.toLowerCase().includes(term);
+                    shown += row.hidden ? 0 : 1;
+                }
+                if (noMatch) noMatch.hidden = shown > 0;
+            };
+            findBox.addEventListener('input', find);
+            findBox.addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); });
+        }
+        const assistantPanel = assistantSplit.querySelector('.assistant-companion');
+        const assistantLog = assistantPanel?.querySelector('.answer-ai-conversation');
+        if (assistantLog) {
+            const jump = document.createElement('button');
+            jump.type = 'button';
+            jump.className = 'assistant-jump';
+            jump.setAttribute('aria-label', 'Scroll to the latest message');
+            jump.title = 'Latest message';
+            jump.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6"/></svg>';
+            assistantPanel.appendChild(jump);
+            const syncJump = () => {
+                jump.classList.toggle('is-visible', assistantLog.scrollHeight - assistantLog.scrollTop - assistantLog.clientHeight > 120);
+                jump.style.bottom = (assistantPanel.querySelector('.answer-ai-bottom').offsetHeight + 12) + 'px';
+            };
+            assistantLog.addEventListener('scroll', syncJump, { passive: true });
+            new MutationObserver(syncJump).observe(assistantLog, { childList: true });
+            addEventListener('resize', syncJump);
+            jump.addEventListener('click', () => assistantLog.scrollTo({ top: assistantLog.scrollHeight, behavior: scrollBehavior() }));
+            syncJump();
+        }
+    }
+    // Messages: drag the dividers. Two handles sit on the borders between the course list, the announcements and the conversation;
+    // dragging one resizes that side (the announcements take the rest). The widths are remembered in this browser, a double-click
+    // (or Home) puts a divider back to the default, and the arrow keys move a focused one (Shift for bigger steps).
+    const widthsKey = 'skillup.messages.widths';
+    const pageRoot = document.documentElement;
+    const pageZoom = () => parseFloat(getComputedStyle(pageRoot).zoom) || 1;
+    const savedWidths = () => {
+        try {
+            const value = JSON.parse(localStorage.getItem(widthsKey) || 'null');
+            return value && isFinite(value.left) && isFinite(value.right) ? value : null;
+        } catch { return null; }
+    };
+    const rememberWidths = widths => {
+        try { widths ? localStorage.setItem(widthsKey, JSON.stringify(widths)) : localStorage.removeItem(widthsKey); } catch { /* private window: the widths last until the page closes */ }
+    };
+    const showWidths = widths => {
+        pageRoot.classList.toggle('sc-sized', !!widths);
+        if (widths) {
+            pageRoot.style.setProperty('--sc-left', widths.left + 'px');
+            pageRoot.style.setProperty('--sc-right', widths.right + 'px');
+        } else {
+            pageRoot.style.removeProperty('--sc-left');
+            pageRoot.style.removeProperty('--sc-right');
+        }
+    };
+    // Keeps each side between its limits and leaves at least 300px for the announcements.
+    const limitWidths = (widths, total) => {
+        let left = Math.min(Math.max(widths.left, 170), 420), right = Math.min(Math.max(widths.right, 240), 560);
+        const over = left + right + 300 - total;
+        if (over > 0) {
+            const fromRight = Math.min(over, right - 240);
+            right -= fromRight;
+            left -= Math.min(over - fromRight, left - 170);
+        }
+        return { left: Math.round(left), right: Math.round(right) };
+    };
+    const mountResizers = () => {
+        const chat = chatRoot();
+        if (!chat || !chat.classList.contains('sc-workspace') || chat.querySelector(':scope > .sc-resizer')) return;
+        const contacts = chat.querySelector(':scope > .sc-contacts'), middle = chat.querySelector(':scope > .sc-announcements'), pane = chat.querySelector(':scope > .sc-pane');
+        if (!contacts || !middle || !pane) return;
+        const make = (side, label) => {
+            const handle = document.createElement('div');
+            handle.className = 'sc-resizer';
+            handle.dataset.side = side;
+            handle.tabIndex = 0;
+            handle.setAttribute('role', 'separator');
+            handle.setAttribute('aria-orientation', 'vertical');
+            handle.setAttribute('aria-label', label);
+            handle.title = label + ': drag to resize, double-click to reset';
+            chat.appendChild(handle);
+            return handle;
+        };
+        const handles = { left: make('left', 'Resize the course list'), right: make('right', 'Resize the conversation') };
+        const place = () => {
+            const zoom = pageZoom(), box = chat.getBoundingClientRect();
+            handles.left.style.left = (contacts.getBoundingClientRect().right - box.left) / zoom + 'px';
+            handles.right.style.left = (middle.getBoundingClientRect().right - box.left) / zoom + 'px';
+        };
+        const current = () => {
+            const zoom = pageZoom();
+            return { left: contacts.getBoundingClientRect().width / zoom, right: pane.getBoundingClientRect().width / zoom };
+        };
+        const resize = (side, width) => {
+            const base = savedWidths() || current();
+            const next = limitWidths({ left: side === 'left' ? width : base.left, right: side === 'right' ? width : base.right }, chat.getBoundingClientRect().width / pageZoom());
+            showWidths(next);
+            rememberWidths(next);
+            place();
+        };
+        const reset = () => {
+            showWidths(null);
+            rememberWidths(null);
+            requestAnimationFrame(place);
+        };
+        for (const side of ['left', 'right']) {
+            const handle = handles[side];
+            handle.addEventListener('pointerdown', e => {
+                if (e.button !== 0) return;
+                e.preventDefault();
+                handle.setPointerCapture(e.pointerId);
+                handle.classList.add('is-dragging');
+                document.body.classList.add('sc-resizing');
+            });
+            handle.addEventListener('pointermove', e => {
+                if (!handle.hasPointerCapture(e.pointerId)) return;
+                const zoom = pageZoom(), box = chat.getBoundingClientRect();
+                resize(side, side === 'left' ? (e.clientX - box.left) / zoom : (box.right - e.clientX) / zoom);
+            });
+            const release = e => {
+                if (handle.hasPointerCapture(e.pointerId)) handle.releasePointerCapture(e.pointerId);
+                handle.classList.remove('is-dragging');
+                document.body.classList.remove('sc-resizing');
+            };
+            handle.addEventListener('pointerup', release);
+            handle.addEventListener('pointercancel', release);
+            handle.addEventListener('dblclick', reset);
+            handle.addEventListener('keydown', e => {
+                if (e.key === 'Home') { e.preventDefault(); reset(); return; }
+                if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+                e.preventDefault();
+                const step = (e.shiftKey ? 48 : 16) * (e.key === 'ArrowRight' ? 1 : -1), base = savedWidths() || current();
+                resize(side, side === 'left' ? base.left + step : base.right - step);
+            });
+        }
+        // The handles follow the columns whenever they change (dragging, a window resize, a media-query change).
+        const watch = new ResizeObserver(place);
+        watch.observe(contacts);
+        watch.observe(middle);
+        place();
+    };
+    mountResizers();
+    // Opening another conversation replaces the whole workspace; the handles are put back on the new one.
+    const workspaceHost = document.getElementById('main');
+    if (workspaceHost && chatRoot()) new MutationObserver(mountResizers).observe(workspaceHost, { childList: true, subtree: true });
+    // A window narrower than the saved widths allow shrinks them to fit.
+    addEventListener('resize', () => {
+        const chat = chatRoot(), saved = savedWidths();
+        if (!chat || !saved) return;
+        const fitted = limitWidths(saved, chat.getBoundingClientRect().width / pageZoom());
+        if (fitted.left !== saved.left || fitted.right !== saved.right) showWidths(fitted);
+    });
 })();

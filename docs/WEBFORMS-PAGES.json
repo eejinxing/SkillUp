@@ -189,13 +189,6 @@
     "fallback": null
   },
   {
-    "page": "Frontend/Discussions.aspx",
-    "codeBehind": "Frontend/Discussions.aspx.cs",
-    "initialRoute": "discussions",
-    "queryParameters": [],
-    "fallback": null
-  },
-  {
     "page": "Frontend/Messages.aspx",
     "codeBehind": "Frontend/Messages.aspx.cs",
     "initialRoute": "messages",

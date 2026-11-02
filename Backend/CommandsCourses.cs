@@ -609,6 +609,15 @@ namespace SKILL_UP.Backend
             return null;
         }
 
+        /// <summary>The announcement has been opened by this person: its badge in the course list goes away and stays away.</summary>
+        object AnnouncementRead()
+        {
+            var a = FindAnnouncement(Str("id"));
+            CourseAccess(a.CourseId);
+            db.Exec("IF NOT EXISTS (SELECT 1 FROM ANNOUNCEMENT_READ WHERE user_id = @p0 AND announcement_id = @p1) INSERT INTO ANNOUNCEMENT_READ (user_id, announcement_id, read_at) VALUES (@p0, @p1, @p2)", Me.Id, a.Id, Now);
+            return null;
+        }
+
         object AnnouncementDelete()
         {
             var a = FindAnnouncement(Str("id"));
