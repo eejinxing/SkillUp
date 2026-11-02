@@ -109,12 +109,14 @@ namespace SKILL_UP.Backend
                 case "sessionSave": result = SessionSave(); break;
                 case "sessionJoin": result = SessionJoin(); break;
                 case "ai": result = Ai(); break;
+                case "aiRead": result = AiRead(); break;
+                case "announcementRead": result = AnnouncementRead(); break;
                 case "userSave": result = UserSave(); break;
                 case "userDelete": result = UserDelete(); break;
                 default: throw new ApiException(404, "Unknown action: " + action);
             }
             var inboxClick = action == "preferences" && Str("section") == "leaderInbox";   // marking an alert read is not audit-worthy
-            if (!logged && action != "ai" && action != "readMessages" && !inboxClick) Log(action, Str("title") ?? Str("courseId") ?? Str("id") ?? Me.Name);
+            if (!logged && action != "ai" && action != "aiRead" && action != "announcementRead" && action != "readMessages" && !inboxClick) Log(action, Str("title") ?? Str("courseId") ?? Str("id") ?? Me.Name);
             return result;
         }
 

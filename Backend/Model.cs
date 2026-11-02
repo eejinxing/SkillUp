@@ -146,6 +146,10 @@ namespace SKILL_UP.Backend
     public sealed class AiMessageRow
     {
         public int Id, UserId;
+        /// <summary>The activity this conversation belongs to; null for the general conversation on the AI Assistant page.</summary>
+        public int? LessonId;
+        /// <summary>False for an AI reply the person has not seen yet (their badge shows until they open the conversation).</summary>
+        public bool Read;
         public string Sender, Content;
         public DateTime CreatedAt;
     }
@@ -219,6 +223,8 @@ namespace SKILL_UP.Backend
         public List<PostRow> Posts;
         public List<AnnouncementRow> Announcements;
         public List<ReplyRow> AnnouncementComments;
+        /// <summary>"userId:announcementId" for each announcement a person has opened (ANNOUNCEMENT_READ).</summary>
+        public HashSet<string> AnnouncementReads;
         public List<ChatRow> Messages;
         public List<AiMessageRow> AiMessages;
         public List<ChannelRow> Channels;
@@ -228,6 +234,7 @@ namespace SKILL_UP.Backend
         public List<EnquiryRow> Enquiries;
 
         public UserRow User(int? id) => id == null ? null : Users.FirstOrDefault(u => u.Id == id);
+        public bool HasRead(int userId, int announcementId) => AnnouncementReads.Contains(userId + ":" + announcementId);
         public CourseRow Course(int id) => Courses.FirstOrDefault(c => c.Id == id);
         public ProgramRow Program(int id) => Programs.FirstOrDefault(p => p.Id == id);
         public QuizRow QuizFor(int courseId) => Quizzes.FirstOrDefault(q => q.CourseId == courseId);
@@ -339,14 +346,15 @@ namespace SKILL_UP.Backend
             {
                 Id = r.Int("comment_id"), ParentId = r.Int("announcement_id"), UserId = r.Int("user_id"), Text = r.Str("content"), CreatedAt = r.Date("created_at")
             });
+            m.AnnouncementReads = new HashSet<string>(db.Query("SELECT user_id, announcement_id FROM ANNOUNCEMENT_READ", r => r.Int("user_id") + ":" + r.Int("announcement_id")));
             m.Messages = db.Query("SELECT * FROM CHAT_MESSAGE ORDER BY sent_at, message_id", r => new ChatRow
             {
                 Id = r.Int("message_id"), SenderId = r.Int("sender_id"), ReceiverId = r.Int("receiver_id"), Content = r.Str("content"), Read = r.Bool("is_read"), SentAt = r.Date("sent_at")
             });
-            m.AiMessages = db.Query(@"SELECT m.*, s.user_id FROM AI_CHAT_MESSAGE m JOIN AI_CHAT_SESSION s ON s.session_id = m.session_id
+            m.AiMessages = db.Query(@"SELECT m.*, s.user_id, s.lesson_id FROM AI_CHAT_MESSAGE m JOIN AI_CHAT_SESSION s ON s.session_id = m.session_id
                                       ORDER BY m.ai_message_id", r => new AiMessageRow
             {
-                Id = r.Int("ai_message_id"), UserId = r.Int("user_id"), Sender = r.Str("sender_type"), Content = r.Str("content"), CreatedAt = r.Date("created_at")
+                Id = r.Int("ai_message_id"), UserId = r.Int("user_id"), LessonId = r.IntN("lesson_id"), Read = r.Bool("is_read"), Sender = r.Str("sender_type"), Content = r.Str("content"), CreatedAt = r.Date("created_at")
             });
             m.Channels = db.Query("SELECT * FROM VOICE_CHANNEL ORDER BY channel_id", r => new ChannelRow
             {

@@ -4,8 +4,10 @@ namespace SKILL_UP.Frontend
     public partial class AssistantPage
     {
         protected global::System.Web.UI.WebControls.Repeater History;
-        protected global::System.Web.UI.WebControls.PlaceHolder Welcome;
-        protected global::System.Web.UI.WebControls.TextBox Question;
+        protected global::System.Web.UI.WebControls.Repeater Suggestions;
+        protected global::SKILL_UP.Frontend.Controls.SubmitButton ContextButton;
+        protected global::System.Web.UI.WebControls.TextBox AskBox;
         protected global::SKILL_UP.Frontend.Controls.SubmitButton AskButton;
+        protected global::System.Web.UI.WebControls.Literal AskError;
     }
 }

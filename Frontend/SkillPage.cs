@@ -27,6 +27,8 @@ namespace SKILL_UP.Frontend
         public string Prompt { get; set; }
         public string Response { get; set; }
         public string Date { get; set; }
+        public DateTime PromptAt { get; set; }
+        public DateTime ResponseAt { get; set; }
     }
 
     /// <summary>
@@ -121,7 +123,7 @@ namespace SKILL_UP.Frontend
         {
             var body = payload as JObject ?? (payload == null ? new JObject() : JObject.FromObject(payload));
             // Gemini answers in seconds, so ask it before taking the gate that serialises every command.
-            var aiReply = action == "ai" ? Companion.Reply(Data, Me, (string)body["text"]) : null;
+            var aiReply = action == "ai" ? Companion.Reply(Data, Me, (string)body["text"], Companion.LessonOf(body)) : null;
             lock (CommandGate)
             {
                 using (var db = new Db())
@@ -266,16 +268,31 @@ namespace SKILL_UP.Frontend
             return total == 0 ? 0 : (int)Math.Round(100.0 * Data.CompletedLessons(userId, courseId).Count / total);
         }
 
-        /// <summary>The account's conversation with the learning companion, oldest first. AI_CHAT_MESSAGE rows come in pairs: the prompt, then the reply.</summary>
-        public List<AiPair> AiPairs()
+        /// <summary>
+        /// A message time for the companion chat: the time today, the day and time before that. js/site.js rewrites it in the viewer's own
+        /// clock and style; this text is what shows without it.
+        /// </summary>
+        public static string ChatTime(object when)
+        {
+            var t = (DateTime)when;
+            var gb = System.Globalization.CultureInfo.GetCultureInfo("en-GB");
+            return "<time class=\"ai-time\" datetime=\"" + t.ToString("s", System.Globalization.CultureInfo.InvariantCulture) + "\" title=\"" + t.ToString("d MMM yyyy, HH:mm:ss", gb) + "\">"
+                + (t.Date == DateTime.Today ? t.ToString("HH:mm", gb) : t.ToString("d MMM, HH:mm", gb)) + "</time>";
+        }
+
+        /// <summary>
+        /// The account's conversation with the learning companion, oldest first: the one for an activity (lessonId), or the general
+        /// one on the AI Assistant page. AI_CHAT_MESSAGE rows come in pairs: the prompt, then the reply.
+        /// </summary>
+        public List<AiPair> AiPairs(int? lessonId = null)
         {
             var pairs = new List<AiPair>();
             AiMessageRow prompt = null;
-            foreach (var row in Data.AiMessages.Where(x => x.UserId == Me.Id))
+            foreach (var row in Data.AiMessages.Where(x => x.UserId == Me.Id && x.LessonId == lessonId))
             {
                 if (row.Sender == "User") { prompt = row; continue; }
                 if (prompt == null) continue;
-                pairs.Add(new AiPair { Prompt = prompt.Content, Response = row.Content, Date = Ui.Date(prompt.CreatedAt) });
+                pairs.Add(new AiPair { Prompt = prompt.Content, Response = row.Content, Date = Ui.Date(prompt.CreatedAt), PromptAt = prompt.CreatedAt, ResponseAt = row.CreatedAt });
                 prompt = null;
             }
             return pairs;

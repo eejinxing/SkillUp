@@ -10,7 +10,7 @@
       <div class="answer-orb"><img src="assets/quiz-editor/imgRectangle4.png" alt="Blue and violet AI companion orb"></div>
       <h2>Lets Go Through It</h2>
       <div class="answer-ai-conversation" id="qe-ai-history" aria-live="polite">
-        <asp:Repeater ID="Conversation" runat="server"><ItemTemplate><div class="answer-ai-prompt"><small>You</small><p><%#: Eval("Prompt") %></p></div><div class="answer-ai-reply"><small>Teaching companion &middot; sample reply</small><p><%#: Eval("Response") %></p></div></ItemTemplate></asp:Repeater>
+        <asp:Repeater ID="Conversation" runat="server"><ItemTemplate><div class="answer-ai-prompt"><span class="ai-avatar"><%= Ui.Avatar(Me) %></span><small>You &middot; <%# ChatTime(Eval("PromptAt")) %></small><p><%#: Eval("Prompt") %></p></div><div class="answer-ai-reply"><span class="ai-avatar bot" aria-hidden="true"></span><small>Teaching companion &middot; sample reply &middot; <%# ChatTime(Eval("ResponseAt")) %></small><p><%#: Eval("Response") %></p></div></ItemTemplate></asp:Repeater>
       </div>
       <asp:Panel runat="server" CssClass="answer-ai-composer" DefaultButton="AskButton">
         <img class="answer-composer-surface" src="assets/quiz-editor/imgFrame177.svg" alt="">

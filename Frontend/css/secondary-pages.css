@@ -376,80 +376,6 @@
     }
 }
 
-/* AI Assistant: fits one screen like My Courses. The page stays still and only the conversation scrolls.
-   html{zoom} scales dvh too, so divide it back out (see webforms.css). Below 1150px the two columns stack and the page scrolls as usual. */
-@media (min-width: 1151px) {
-    body:has(.assistant-split) .shell {
-        min-height: calc(100vh / var(--page-zoom, 1));
-    }
-
-    body:has(.assistant-split) .shell>div {
-        display: flex;
-        flex-direction: column;
-        height: calc(100dvh / var(--page-zoom, 1));
-        min-height: 560px;
-    }
-
-    body:has(.assistant-split) .main {
-        flex: 1;
-        min-height: 0;
-        display: flex;
-        flex-direction: column;
-        padding-bottom: 24px;
-    }
-
-    body:has(.assistant-split) .main>.page-head {
-        flex: none;
-        margin-bottom: 16px;
-    }
-
-    .assistant-split {
-        flex: 1;
-        min-height: 0;
-        grid-template-rows: minmax(0, 1fr);
-    }
-
-    .assistant-split>.panel {
-        display: flex;
-        flex-direction: column;
-        min-height: 0;
-        overflow: hidden;
-    }
-
-    .assistant-split>aside.panel {
-        overflow-y: auto;
-    }
-
-    .assistant-split .bubbles {
-        flex: 1;
-        min-height: 0;
-        max-height: none;
-        margin: 0 0 14px;
-        padding-block: 14px;
-    }
-
-    .assistant-ask {
-        flex: none;
-    }
-
-    .assistant-ask textarea {
-        resize: none;
-    }
-
-    .figma-secondary[data-view=assistant] .orb {
-        width: clamp(90px, calc(24dvh / var(--page-zoom, 1)), 170px);
-        height: clamp(90px, calc(24dvh / var(--page-zoom, 1)), 170px);
-        margin-block: 8px 12px;
-    }
-}
-
-@media (max-width: 1150px) {
-    .assistant-split .bubbles {
-        max-height: none;
-        height: clamp(240px, calc(52dvh / var(--page-zoom, 1)), 480px);
-    }
-}
-
 /* Certificates: the search box beside the heading. */
 .cert-search-form {
     margin: 0;
@@ -495,4 +421,554 @@
     font-size: 14.5px;
     box-shadow: none;
     outline: none;
+}
+
+/* ==== AI Assistant: the same companion as on an activity page (css/activity.css), widened, beside the conversation tree. ====
+   The page keeps still and fits one screen on wide windows; only the conversation scrolls. html{zoom} scales dvh too, so it is
+   divided back out (see webforms.css). Below 1150px the two columns stack and the page scrolls as usual. */
+body:has(.assistant-split) .main {
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 6px;
+}
+
+body:has(.assistant-split) .main>.page-head {
+    padding: 0 0 12px;
+    margin-bottom: 14px;
+}
+
+body:has(.assistant-split) .main>.page-head h1 {
+    margin: 0;
+    line-height: 1.1;
+}
+
+body:has(.assistant-split) .main>.page-head p {
+    margin: 4px 0 0;
+}
+
+.assistant-split {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 14px;
+}
+
+#app .assistant-stage {
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    background: none;
+}
+
+#app .assistant-stage .answer-ai-reference.assistant-companion {
+    flex: 1;
+    min-width: 0;
+    height: clamp(560px, calc(80dvh / var(--page-zoom, 1)), 860px);
+    min-height: 0;
+    max-height: none;
+    position: static;
+}
+
+/* Wide panel: the content sits in a centred column, the intro is centred, the orb keeps a sensible size. */
+#app .assistant-companion :is(.answer-ai-intro, .answer-ai-conversation, .answer-ai-bottom) {
+    width: min(100%, 860px);
+    margin-inline: auto;
+}
+
+#app .assistant-companion .answer-ai-top {
+    padding-inline: 26px;
+}
+
+#app .assistant-companion .answer-ai-where {
+    flex: 1;
+    min-width: 0;
+    margin: 0 14px;
+    overflow: hidden;
+    color: #8a8a94;
+    font-size: 12px;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#app .answer-ai-reference.assistant-companion .answer-orb {
+    width: clamp(90px, calc(20dvh / var(--page-zoom, 1)), 170px);
+}
+
+#app .answer-page .answer-ai-reference.assistant-companion h2 {
+    font-size: clamp(22px, calc(3.8dvh / var(--page-zoom, 1)), 36px);
+}
+
+#app .assistant-companion .answer-ai-conversation {
+    min-height: 0;
+}
+
+#app .answer-ai-reference.assistant-companion.has-conversation .answer-orb {
+    width: 62px;
+}
+
+#app .answer-page .answer-ai-reference.assistant-companion h2 {
+    text-align: center;
+    margin-inline: auto;
+}
+
+#app .answer-page .answer-ai-reference.assistant-companion.has-conversation h2 {
+    margin: 2px auto 10px;
+}
+
+#app .assistant-companion .answer-ai-conversation {
+    padding: 0 10px;
+}
+
+#app .assistant-companion .answer-ai-conversation>div {
+    font-size: 13.5px;
+    line-height: 1.7;
+}
+
+#app .assistant-companion .answer-ai-conversation small {
+    font-size: 10.5px;
+}
+
+#app .assistant-companion .answer-ai-input-wrap input {
+    font-size: 13.5px;
+}
+
+/* The conversation list, styled like the Messages sidebar (css/messages.css): a labelled header with a gradient hairline, a search box,
+   rows with a coloured dot and a count pill, a violet bar and tint on the open one, and each course folding over its activities. */
+#app .assistant-split>.assistant-convos {
+    min-height: 0;
+    padding: 20px 12px 14px;
+    overflow-y: auto;
+    border: 1px solid #ffffff24;
+    border-radius: 22px;
+    background: #000;
+    font-family: 'DM Sans', sans-serif;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color .35s ease;
+}
+
+#app .assistant-split>.assistant-convos:hover {
+    scrollbar-color: #ffffff2e transparent;
+}
+
+#app .assistant-convos .assistant-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+    padding: 0 10px;
+    color: #7b7b86;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+#app .assistant-convos .assistant-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #a78bfa40, transparent);
+}
+
+#app .assistant-convos .assistant-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+    margin: 0 2px 12px;
+    padding: 0 12px;
+    border: 1px solid #ffffff0f;
+    border-radius: 10px;
+    background: #1b1b1f;
+    color: #777;
+    transition: border-color .2s, background-color .2s, box-shadow .2s;
+}
+
+.assistant-search:hover {
+    border-color: #ffffff1f;
+}
+
+.assistant-search:focus-within {
+    border-color: #a78bfa99;
+    background: #1d1b24;
+    box-shadow: 0 0 0 3px #a78bfa1f;
+}
+
+.assistant-search svg {
+    flex: none;
+    width: 15px;
+    height: 15px;
+}
+
+#app .assistant-search input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #e5e5e5;
+    font: 13px 'DM Sans', sans-serif;
+    box-shadow: none;
+    outline: none;
+}
+
+#app .assistant-search input::placeholder {
+    color: #777;
+}
+
+.assistant-convo-list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+
+#app .assistant-convos :is(.assistant-channel, .assistant-item) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    color: #b4b4bd;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color .2s, color .2s, transform .25s cubic-bezier(.2, .8, .2, 1);
+}
+
+#app .assistant-convos .assistant-channel {
+    min-height: 42px;
+    margin: 2px 0;
+    padding: 0 12px;
+    font-size: 13.5px;
+}
+
+#app .assistant-convos .assistant-item {
+    min-height: 36px;
+    margin: 1px 0;
+    padding: 0 10px;
+    color: #e9e9ed;
+    font-size: 13px;
+}
+
+#app .assistant-convos .assistant-item.is-empty {
+    color: #7d7d88;
+}
+
+#app .assistant-convos :is(.assistant-channel, .assistant-item)::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: 0;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: linear-gradient(#c4b5fd, #8b5cf6);
+    opacity: 0;
+    transform: scaleY(.3);
+    transition: opacity .2s, transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+
+#app .assistant-convos :is(.assistant-channel, .assistant-item):hover {
+    background: #ffffff08;
+    color: #ececf1;
+    transform: translateX(2px);
+}
+
+#app .assistant-convos :is(.assistant-channel, .assistant-item).is-active {
+    background: linear-gradient(90deg, #8b5cf624, #8b5cf60a 70%, transparent);
+    color: #fff;
+}
+
+#app .assistant-convos :is(.assistant-channel, .assistant-item).is-active::before {
+    opacity: 1;
+    transform: none;
+}
+
+.assistant-convos .assistant-name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.assistant-convos .assistant-dot {
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--channel-color, #c4b5fd);
+    transition: box-shadow .2s, transform .2s;
+}
+
+.assistant-convos .assistant-dot.all {
+    background: #c4b5fd;
+}
+
+.assistant-convos .assistant-channel:hover .assistant-dot {
+    transform: scale(1.2);
+}
+
+.assistant-convos :is(.assistant-channel.is-active, .assistant-group.has-active>summary) .assistant-dot {
+    box-shadow: 0 0 0 3px #ffffff14, 0 0 10px var(--channel-color, #c4b5fd);
+}
+
+.assistant-convos .assistant-group.has-active>summary {
+    color: #fff;
+}
+
+.assistant-convos :is(.assistant-channel, .assistant-item)>small {
+    display: grid;
+    place-items: center;
+    flex: none;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: #ffffff12;
+    color: #9a9aa5;
+    font-size: 11px;
+    font-weight: 600;
+    transition: background-color .2s, color .2s;
+}
+
+.assistant-convos :is(.assistant-channel, .assistant-item).is-active>small {
+    background: #8b5cf6;
+    color: #fff;
+}
+
+/* A course folds over its activities; the thin line on the left ties them to it. */
+#app .assistant-convos details.assistant-group {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.assistant-convos .assistant-group>summary {
+    list-style: none;
+    user-select: none;
+}
+
+.assistant-convos .assistant-group>summary::-webkit-details-marker {
+    display: none;
+}
+
+.assistant-convos .assistant-group>summary::after {
+    content: '';
+    flex: none;
+    width: 6px;
+    height: 6px;
+    margin: -3px 2px 0 2px;
+    border-right: 1.5px solid #8a8a94;
+    border-bottom: 1.5px solid #8a8a94;
+    transform: rotate(45deg);
+    transition: transform .2s, margin .2s;
+}
+
+.assistant-convos .assistant-group:not([open])>summary::after {
+    margin-top: 0;
+    transform: rotate(-45deg);
+}
+
+.assistant-convos .assistant-items {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 6px 17px;
+    padding-left: 10px;
+    border-left: 1px solid #ffffff10;
+}
+
+.assistant-convos .assistant-nomatch {
+    margin: 0 0 14px;
+    padding: 0 12px;
+    color: #7d7d88;
+    font-size: 12.5px;
+}
+
+#app .assistant-convos .assistant-note {
+    margin: 0;
+    padding: 12px 12px 0;
+    border-top: 1px solid #ffffff0d;
+    color: #6f6f79;
+    font-size: 11.5px;
+    line-height: 1.55;
+}
+
+#app .assistant-convos [hidden] {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #app .assistant-convos :is(.assistant-channel, .assistant-item),
+    #app .assistant-convos :is(.assistant-channel, .assistant-item)::before,
+    .assistant-convos .assistant-group>summary::after {
+        transition: none;
+    }
+
+    #app .assistant-convos :is(.assistant-channel, .assistant-item):hover {
+        transform: none;
+    }
+}
+
+@media (min-width: 1151px) {
+    body:has(.assistant-split) .shell {
+        min-height: calc(100vh / var(--page-zoom, 1));
+    }
+
+    /* As tall as the window, but never shorter than 1000px: on a shorter window the page extends downward and scrolls, so the
+       conversation is never squeezed into a thin strip. */
+    body:has(.assistant-split) .shell>div {
+        display: flex;
+        flex-direction: column;
+        height: max(calc(100dvh / var(--page-zoom, 1)), 1000px);
+        min-height: 560px;
+    }
+
+    body:has(.assistant-split) .main {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 18px;
+    }
+
+    /* The heading is a full-width row on top. Below it the chat and the conversation list start on the same line and end on the same
+       line, and both run to the bottom of the page. */
+    body:has(.assistant-split) .main>.page-head {
+        flex: none;
+    }
+
+    .assistant-split {
+        flex: 1;
+        min-height: 0;
+        grid-template-rows: minmax(0, 1fr);
+    }
+
+    #app .assistant-stage .answer-ai-reference.assistant-companion {
+        height: auto;
+    }
+}
+
+@media (max-width: 1150px) {
+    .assistant-split {
+        grid-template-columns: 1fr;
+    }
+
+    #app .assistant-split>.assistant-convos {
+        max-height: 420px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #app .assistant-convos .assistant-group>summary::after {
+        transition: none;
+    }
+}
+
+/* ==== AI Assistant: more room for the conversation, and the question box always in view. ====
+   While chatting the decoration goes away (the floating books), the shortcuts become one slim row of pills, and the orb and heading
+   shrink to a single small line. On a short window the page heading also gives up its subtitle. The panel never gets shorter than
+   540px: below that the page scrolls instead of cutting the question box off. */
+#app .answer-ai-reference.assistant-companion .answer-ai-top {
+    min-height: 44px;
+    padding: 12px 24px 4px;
+}
+
+#app .assistant-companion .answer-ai-conversation {
+    min-height: 90px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #3a3a44 transparent;
+}
+
+#app .answer-ai-reference.assistant-companion.has-conversation .answer-orb {
+    width: 44px;
+}
+
+#app .answer-page .answer-ai-reference.assistant-companion.has-conversation h2 {
+    margin: 4px auto 8px;
+    font-size: 14.5px;
+}
+
+#app .answer-page .assistant-companion.has-conversation h2 span {
+    display: inline;
+}
+
+/* Short windows: the page heading shrinks and a fresh chat uses a smaller orb. */
+body:has(.assistant-split.is-short) .main {
+    padding-top: 4px;
+}
+
+body:has(.assistant-split.is-short) .main>.page-head {
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+}
+
+body:has(.assistant-split.is-short) .main>.page-head h1 {
+    font-size: 28px;
+}
+
+body:has(.assistant-split.is-short) .main>.page-head p {
+    display: none;
+}
+
+#app .assistant-split.is-short .answer-ai-reference.assistant-companion:not(.has-conversation) .answer-orb {
+    width: clamp(70px, calc(15dvh / var(--page-zoom, 1)), 130px);
+}
+
+#app .assistant-split.is-short .answer-page .answer-ai-reference.assistant-companion:not(.has-conversation) h2 {
+    font-size: clamp(20px, calc(3.2dvh / var(--page-zoom, 1)), 28px);
+}
+
+@media (min-width: 1151px) {
+    #app .assistant-stage .answer-ai-reference.assistant-companion {
+        min-height: 540px;
+    }
+}
+
+/* "Scroll to the latest message": shows while the conversation is scrolled up. */
+#app .assistant-jump {
+    position: absolute;
+    right: 26px;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid #ffffff2a;
+    border-radius: 50%;
+    background: #101218ee;
+    color: #e9e9ed;
+    box-shadow: 0 6px 18px #0009;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity .2s, transform .2s, visibility .2s, background-color .15s;
+}
+
+#app .assistant-jump.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+#app .assistant-jump:hover {
+    background: #064be9;
+}
+
+#app .assistant-jump svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #app .assistant-jump {
+        transition: none;
+    }
 }

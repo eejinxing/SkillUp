@@ -73,7 +73,6 @@ namespace SKILL_UP.Frontend
                 EmailBox.Text = Me.Email;
                 LocationBox.Text = Me.Location;
                 BioBox.Text = Me.Bio;
-                ThemeList.SelectedValue = Me.Theme == "light" ? "light" : "dark";
             }
         }
 
@@ -209,7 +208,7 @@ namespace SKILL_UP.Frontend
         protected void SaveProfile_Click(object sender, EventArgs e)
         {
             // Without an avatar field the command keeps the current picture.
-            var payload = new { name = NameBox.Text.Trim(), username = UsernameBox.Text.Trim(), email = EmailBox.Text.Trim(), location = LocationBox.Text.Trim(), bio = BioBox.Text, theme = ThemeList.SelectedValue, language = Me.Language };
+            var payload = new { name = NameBox.Text.Trim(), username = UsernameBox.Text.Trim(), email = EmailBox.Text.Trim(), location = LocationBox.Text.Trim(), bio = BioBox.Text, theme = Me.Theme, language = Me.Language };
             if (IsValid && TryRun("profile", payload)) ReloadPage("Profile saved");
         }
 

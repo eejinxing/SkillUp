@@ -115,8 +115,11 @@ namespace SKILL_UP.Frontend
         {
             if (!Guest)
             {
+                // Showing the conversation reads it (the badge in the AI Assistant list goes away).
+                if (!IsPostBack && Data.AiMessages.Any(x => x.UserId == Me.Id && x.LessonId == L.Id && x.Sender == "AI" && !x.Read))
+                    TryRun("aiRead", new { lessonId = L.Id.ToString() });
                 // The last three questions and replies.
-                var pairs = AiPairs();
+                var pairs = AiPairs(L.Id);
                 History = pairs.Skip(Math.Max(0, pairs.Count - 3)).ToList();
             }
             Conversation.DataSource = History;
@@ -283,7 +286,7 @@ namespace SKILL_UP.Frontend
             }
             object ignored;
             // A refusal (over the allowance, Gemini unavailable) shows under the question box, not in the quiz or lab messages.
-            if (TryRun("ai", new { text = question }, out ignored, message => AskError.Text = Server.HtmlEncode(message))) Go(Request.RawUrl);
+            if (TryRun("ai", new { text = question, lessonId = L.Id.ToString() }, out ignored, message => AskError.Text = Server.HtmlEncode(message))) Go(Request.RawUrl);
         }
 
         public override void ShowError(string message)

@@ -1,13 +1,15 @@
 <%@ Page Title="Messages" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Messages.aspx.cs" Inherits="SKILL_UP.Frontend.MessagesPage" %>
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
+<%-- Puts back the column widths this person dragged last time before the page is first drawn (see "Messages: drag the dividers" in js/site.js). --%>
+<script>(function () { try { var w = JSON.parse(localStorage.getItem('skillup.messages.widths') || 'null'); if (w && isFinite(w.left) && isFinite(w.right)) { var r = document.documentElement; r.classList.add('sc-sized'); r.style.setProperty('--sc-left', w.left + 'px'); r.style.setProperty('--sc-right', w.right + 'px'); } } catch (e) { } })();</script>
 <section class="skill-chat sc-v2 sc-workspace <%= Selected != null && QueryInt("id") != null ? "sc-conversation-open" : "" %>" data-api="<%= ResolveUrl("~/api/commands/") %>" data-with="<%= SelectedId %>">
   <h1 class="sc-sr-only" id="page-title" tabindex="-1">Communication workspace</h1>
   <aside class="sc-contacts chat-contacts" aria-label="Workspace and contacts">
     <nav class="sc-channels" aria-label="Course announcement channels">
       <span class="sc-sidebar-label">COURSES</span>
-      <a href="<%= Url(0, 0, SelectedId) %>" class="sc-channel <%= Channel == 0 ? "active" : "" %>"<%= Channel == 0 ? " aria-current=\"true\"" : "" %>><span class="sc-channel-dot all"></span><span>All announcements</span><small><%= AllAnnouncementCount %></small></a>
+      <a href="<%= Url(0, 0, SelectedId) %>" class="sc-channel <%= Channel == 0 ? "active" : "" %>"<%= Channel == 0 ? " aria-current=\"true\"" : "" %>><span class="sc-channel-dot all"></span><span>All announcements</span><%= AllAnnouncementUnread > 0 ? "<small>" + AllAnnouncementUnread + "</small>" : "" %></a>
       <asp:Repeater ID="Channels" runat="server">
-        <ItemTemplate><a href="<%# Eval("Url") %>" class="sc-channel <%# (bool)Eval("Active") ? "active" : "" %>"<%# (bool)Eval("Active") ? " aria-current=\"true\"" : "" %>><span class="sc-channel-dot" style="--channel-color:<%# Eval("Colour") %>"></span><span><%#: Eval("Title") %></span><small><%# Eval("Count") %></small></a></ItemTemplate>
+        <ItemTemplate><a href="<%# Eval("Url") %>" class="sc-channel <%# (bool)Eval("Active") ? "active" : "" %>"<%# (bool)Eval("Active") ? " aria-current=\"true\"" : "" %>><span class="sc-channel-dot" style="--channel-color:<%# Eval("Colour") %>"></span><span><%#: Eval("Title") %></span><%# (int)Eval("Count") > 0 ? "<small>" + Eval("Count") + "</small>" : "" %></a></ItemTemplate>
       </asp:Repeater>
       <% if (Courses.Count == 0) { %><p class="sc-sidebar-empty">Your courses will appear here.</p><% } %>
     </nav>

@@ -5,22 +5,22 @@
   <asp:View runat="server">
 <div class="answer-page" data-answer-course="<%= C.Id %>" data-answer-lesson="<%= L.Id %>">
   <header class="answer-breadcrumb">
-    <a href="Course?id=<%= C.Id %>">&larr; Course overview</a>
-    <h1><%: C.Title %> <span>/ <%: L.Title %></span></h1>
+    <a href="Course?id=<%= C.Id %>"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Course overview</a>
+    <h1><i aria-hidden="true">/</i><b><%: C.Title %></b><i aria-hidden="true">/</i><span><%: L.Title %></span></h1>
     <% if (Guest) { %><span>Preview</span><% } else if (QuizReady) { %><span class="timer" id="quiz-timer" aria-label="Quiz time remaining" data-seconds-left="<%= SecondsLeft %>"><%= SecondsLeft / 60 %>:<%= (SecondsLeft % 60).ToString("00") %> remaining</span><% } else { %><span><%= Percent %>% complete</span><% } %>
   </header>
   <div class="answer-layout">
-    <aside class="answer-ai answer-ai-reference <%= History.Count > 0 ? "has-conversation" : "" %>" aria-label="AI learning companion" data-api="<%= ResolveUrl("~/api/commands/") %>">
+    <aside class="answer-ai answer-ai-reference <%= History.Count > 0 ? "has-conversation" : "" %>" aria-label="AI learning companion" data-api="<%= ResolveUrl("~/api/commands/") %>" data-lesson="<%= L?.Id %>">
       <header class="answer-ai-top">
-        <a href="Assistant" class="answer-ai-brand" aria-label="Open Skill UP companion">SKILL<span>companion</span></a>
-        <details class="answer-ai-options"><summary aria-label="Companion options"><span aria-hidden="true">&bull;&bull;&bull;</span></summary><div><a href="Assistant">Open companion &#8599;</a></div></details>
+        <a href="Assistant?lesson=<%= L?.Id %>" class="answer-ai-brand" aria-label="Open Skill UP companion">SKILL<span>companion</span></a>
+        <details class="answer-ai-options"><summary aria-label="Companion options"><span aria-hidden="true">&bull;&bull;&bull;</span></summary><div><a href="Assistant?lesson=<%= L?.Id %>">Open companion &#8599;</a></div></details>
       </header>
       <div class="answer-ai-intro">
         <div class="answer-orb"><img src="assets/answer/imgRectangle4.png" alt="Blue and violet AI companion orb"></div>
         <h2><span>Your next <em>big</em></span><span><em>move</em> starts here.</span></h2>
       </div>
       <div class="answer-ai-conversation" aria-live="polite">
-        <asp:Repeater ID="Conversation" runat="server"><ItemTemplate><div class="answer-ai-prompt"><small>You</small><p><%#: Eval("Prompt") %></p></div><div class="answer-ai-reply"><small>Skill UP companion</small><p><%#: Eval("Response") %></p></div></ItemTemplate></asp:Repeater>
+        <asp:Repeater ID="Conversation" runat="server"><ItemTemplate><div class="answer-ai-prompt"><span class="ai-avatar"><%= Ui.Avatar(Me) %></span><small>You &middot; <%# ChatTime(Eval("PromptAt")) %></small><p><%#: Eval("Prompt") %></p></div><div class="answer-ai-reply"><span class="ai-avatar bot" aria-hidden="true"></span><small>Skill UP companion &middot; <%# ChatTime(Eval("ResponseAt")) %></small><p><%#: Eval("Response") %></p></div></ItemTemplate></asp:Repeater>
       </div>
       <div class="answer-ai-bottom">
         <div class="answer-ai-books" aria-hidden="true">
