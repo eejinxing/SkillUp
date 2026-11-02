@@ -34,6 +34,8 @@ namespace SKILL_UP.Backend
         /// <summary>Set by login/demo: the handler issues the sign-in cookie after the transaction commits.</summary>
         public int? SignIn { get; private set; }
         public bool SignOut { get; private set; }
+        /// <summary>The caller's network address, used only to limit repeated sign-in and reset attempts.</summary>
+        public string ClientIp { get; set; }
 
         /// <summary>The PC's current local time. Stored as is, so the database shows the same clock as the device.</summary>
         static DateTime Now => DateTime.Now;
@@ -257,9 +259,22 @@ namespace SKILL_UP.Backend
         object Login()
         {
             var login = (Str("email") ?? "").Trim();
+            // Failed attempts are counted per typed name and per address, whether or not the account exists.
+            var nameKey = "login:" + login.ToLowerInvariant();
+            var addressKey = "login-ip:" + (ClientIp ?? "unknown");
+            AttemptGuard.Check(nameKey, addressKey);
             var u = m.Users.FirstOrDefault(x => string.Equals(x.Email, login, StringComparison.OrdinalIgnoreCase) || string.Equals(x.Username, login, StringComparison.OrdinalIgnoreCase));
-            if (u == null || !Passwords.Verify(Str("password") ?? "", u.Password)) Fail("Email or password is incorrect.", 401);
+            // An unknown account is checked against a dummy hash, so the response time does not reveal whether it exists.
+            var correct = Passwords.Verify(Str("password") ?? "", u?.Password ?? Passwords.DummyHash);
+            if (u == null || !correct)
+            {
+                AttemptGuard.Fail(nameKey, 5);
+                AttemptGuard.Fail(addressKey, 30);
+                Fail("Email or password is incorrect.", 401);
+            }
             if (u.Status != "Active") Fail(u.Status == "Pending" ? "Your instructor application is awaiting administrator approval." : "This account has been deactivated.", 403);
+            AttemptGuard.Clear(nameKey);
+            if (Passwords.NeedsRehash(u.Password)) db.Exec("UPDATE [USER] SET password = @p1 WHERE user_id = @p0", u.Id, Passwords.Hash(Str("password")));
             db.Exec("UPDATE [USER] SET last_login = @p1 WHERE user_id = @p0", u.Id, Now);
             Me = u;
             SignIn = u.Id;
@@ -290,7 +305,7 @@ namespace SKILL_UP.Backend
             var role = Str("role");
             if (role != "Learner" && role != "Instructor") Fail("Select a valid registration role.");
             var password = Str("password") ?? "";
-            if (password.Length < 8 || password != Str("confirm")) Fail("Passwords must match and contain at least 8 characters.");
+            CheckNewPassword(password, Str("confirm"));
             var parts = SplitName(name);
             var status = role == "Instructor" ? "Pending" : "Active";
             var id = db.Insert(@"INSERT INTO [USER] (role_id, first_name, last_name, username, password, email, preferred_language, account_status, theme, created_at)
@@ -304,8 +319,12 @@ namespace SKILL_UP.Backend
         object Forgot()
         {
             var email = (Str("email") ?? "").Trim();
+            var addressKey = "forgot-ip:" + (ClientIp ?? "unknown");
+            AttemptGuard.Check(addressKey);
+            AttemptGuard.Fail(addressKey, 10);
             var u = m.Users.FirstOrDefault(x => string.Equals(x.Email, email, StringComparison.OrdinalIgnoreCase));
-            if (u == null) Fail("No account matches that email.");
+            // The answer is the same whether or not the email has an account, so this form cannot be used to find accounts.
+            if (u == null) return new JObject { ["sent"] = true };
             var token = Tokens.New();
             db.Exec("UPDATE PASSWORD_RESET SET is_used = 1 WHERE user_id = @p0 AND is_used = 0", u.Id);
             db.Exec("INSERT INTO PASSWORD_RESET (user_id, token_hash, created_at, expires_at) VALUES (@p0, @p1, @p2, @p3)", u.Id, Tokens.Sha256(token), Now, Now.AddMinutes(15));
@@ -320,7 +339,7 @@ namespace SKILL_UP.Backend
                 r => new { Id = r.Int("reset_id"), User = r.Int("user_id") }, Tokens.Sha256(Str("token") ?? ""), Now).FirstOrDefault();
             if (reset == null) Fail("Reset link is invalid or expired.");
             var password = Str("password") ?? "";
-            if (password.Length < 8 || password != Str("confirm")) Fail("Passwords must match and contain at least 8 characters.");
+            CheckNewPassword(password, Str("confirm"));
             db.Exec("UPDATE [USER] SET password = @p1 WHERE user_id = @p0", reset.User, Passwords.Hash(password));
             db.Exec("UPDATE PASSWORD_RESET SET is_used = 1 WHERE reset_id = @p0", reset.Id);
             Log("Password reset", "", "User", reset.User);
@@ -450,12 +469,29 @@ namespace SKILL_UP.Backend
 
         object Password()
         {
-            if (!Passwords.Verify(Str("current") ?? "", Me.Password)) Fail("Current password is incorrect.");
+            // A stolen session cannot be used to guess the current password.
+            var key = "password:" + Me.Id;
+            AttemptGuard.Check(key);
+            if (!Passwords.Verify(Str("current") ?? "", Me.Password))
+            {
+                AttemptGuard.Fail(key, 5);
+                Fail("Current password is incorrect.");
+            }
+            AttemptGuard.Clear(key);
             var password = Str("password") ?? "";
-            if (password.Length < 8 || password != Str("confirm")) Fail("Passwords must match and contain at least 8 characters.");
+            CheckNewPassword(password, Str("confirm"));
             db.Exec("UPDATE [USER] SET password = @p1 WHERE user_id = @p0", Me.Id, Passwords.Hash(password));
             Log("Password changed", Me.Name, "User", Me.Id);
+            // Every other session of this account ends (the cookie is tied to the password); this browser gets a fresh one.
+            SignIn = Me.Id;
             return null;
+        }
+
+        static void CheckNewPassword(string password, string confirm)
+        {
+            if (password != confirm) Fail("The two passwords do not match.");
+            var problem = Passwords.Problem(password);
+            if (problem != null) Fail(problem);
         }
     }
 }

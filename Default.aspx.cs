@@ -15,7 +15,7 @@ namespace SKILL_UP
             // A signed-in account opens its own role's overview; only visitors see the landing page.
             DatabaseSetup.EnsureReady(Context);
             UserRow user;
-            using (var db = new Db()) user = Model.Load(db).User(AuthCookie.Read(Context));
+            using (var db = new Db()) user = AuthCookie.Resolve(Context, Model.Load(db));
             var page = user != null && user.Status == "Active" ? "Dashboard" : "Home";
             Response.Redirect(ResolveUrl("~/Frontend/" + page + ".aspx"), false);
             Context.ApplicationInstance.CompleteRequest();

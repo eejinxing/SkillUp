@@ -106,11 +106,7 @@ namespace SKILL_UP.Frontend
         /// <summary>The signed-in, still active account, or null for a visitor.</summary>
         UserRow Active(Model model)
         {
-            var id = AuthCookie.Read(Context);
-            var user = model.User(id);
-            if (user != null && user.Status == "Active") return user;
-            if (id != null) AuthCookie.Clear(Context);
-            return null;
+            return AuthCookie.Resolve(Context, model);
         }
 
         // ---- saving ------------------------------------------------------------------------
@@ -129,13 +125,13 @@ namespace SKILL_UP.Frontend
                 using (var db = new Db())
                 {
                     db.Begin();
-                    var commands = new Commands(db, Model.Load(db), Active(Data)) { VisitorKey = VisitorCookie.Read(Context), AiReply = aiReply };
+                    var commands = new Commands(db, Model.Load(db), Active(Data)) { VisitorKey = VisitorCookie.Read(Context), AiReply = aiReply, ClientIp = Request.UserHostAddress };
                     var data = commands.Run(action, body);
                     db.Commit();
                     if (commands.NewVisitorKey != null) VisitorCookie.Issue(Context, commands.NewVisitorKey);
-                    if (commands.SignIn != null) AuthCookie.Issue(Context, commands.SignIn.Value);
                     if (commands.SignOut) AuthCookie.Clear(Context);
                     Data = Model.Load(db);
+                    if (commands.SignIn != null) AuthCookie.Issue(Context, Data.User(commands.SignIn.Value));
                     Me = commands.SignOut ? null : Data.User(commands.SignIn ?? commands.Me?.Id);
                     var deferred = data as Deferred;
                     return deferred != null ? deferred(Data) : data;

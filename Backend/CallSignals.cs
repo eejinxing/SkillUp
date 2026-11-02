@@ -32,7 +32,8 @@ namespace SKILL_UP.Backend
 
         public static JObject Handle(HttpContext context, string op)
         {
-            var me = AuthCookie.Read(context);
+            int? me;
+            using (var db = new Db()) me = AuthCookie.Resolve(context, db);
             if (me == null) throw new ApiException(401, "Sign in to make calls.");
             if (op == "poll") return new JObject { ["messages"] = new JArray(Take(me.Value)) };
             if (op != "send") throw new ApiException(404, "Not found.");

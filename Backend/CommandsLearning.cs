@@ -333,7 +333,8 @@ namespace SKILL_UP.Backend
             else
             {
                 var password = Str("password") ?? "";
-                if (password.Length < 8) Fail("Temporary password needs at least 8 characters.");
+                var problem = Passwords.Problem(password);
+                if (problem != null) Fail(problem);
                 id = db.Insert(@"INSERT INTO [USER] (role_id, first_name, last_name, username, password, email, bio, preferred_language, account_status, theme, created_at)
                                  VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, N'en', @p7, N'dark', @p8)",
                     RoleId(role), parts[0], parts[1], username, Passwords.Hash(password), email.ToLowerInvariant(), bio, status, Now);
