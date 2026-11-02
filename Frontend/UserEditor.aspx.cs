@@ -34,8 +34,20 @@ namespace SKILL_UP.Frontend
         };
         static readonly Dictionary<string, string> Past = new Dictionary<string, string>
         {
-            ["Delete"] = "deleted", ["Create"] = "created", ["Update"] = "updated", ["Add"] = "added", ["Remove"] = "removed", ["Submit"] = "submitted", ["Save"] = "saved",
-            ["Edit"] = "edited", ["Post"] = "posted", ["Approve"] = "approved", ["Reject"] = "rejected", ["Complete"] = "completed", ["Publish"] = "published", ["Enroll"] = "enrolled"
+            ["Delete"] = "deleted",
+            ["Create"] = "created",
+            ["Update"] = "updated",
+            ["Add"] = "added",
+            ["Remove"] = "removed",
+            ["Submit"] = "submitted",
+            ["Save"] = "saved",
+            ["Edit"] = "edited",
+            ["Post"] = "posted",
+            ["Approve"] = "approved",
+            ["Reject"] = "rejected",
+            ["Complete"] = "completed",
+            ["Publish"] = "published",
+            ["Enroll"] = "enrolled"
         };
 
         public override string Route => "users";
@@ -44,6 +56,8 @@ namespace SKILL_UP.Frontend
         protected UserRow U;
         protected bool Self;
         protected string Tab = "information", Summary, Tabs, Joined, LastActive, AccessText, Recent, TabPanel;
+        protected int TeachCount, LeadCount;
+        protected string TeachList, LeadList, CourseNoTarget, ProgramNoTarget;
         List<AuditRow> logs = new List<AuditRow>();
 
         protected static string Icon(string name) => Glyphs[name];
@@ -114,6 +128,7 @@ namespace SKILL_UP.Frontend
             Recent = logs.Count == 0 ? "<p class=\"uem-empty\">No activity recorded for this account.</p>"
                 : "<ol>" + string.Concat(logs.Take(3).Select((a, i) => "<li><span>" + (i + 1).ToString("00", CultureInfo.InvariantCulture) + "</span><div><strong>" + Ui.H(ActionLabel(a.Action)) + "</strong><p>"
                     + Ui.H(string.IsNullOrEmpty(a.Detail) ? "—" : a.Detail) + "</p></div><time>" + Ui.Date(a.CreatedAt) + "</time></li>")) + "</ol>";
+            ShowResponsibilities();
             if (IsPostBack) return;
             EditName.Text = U.Name;
             EditEmail.Text = U.Email;
@@ -121,6 +136,32 @@ namespace SKILL_UP.Frontend
             EditBio.Text = U.Bio;
             EditRole.SelectedValue = U.Role;
             EditStatus.SelectedValue = U.Status;
+        }
+
+        /// <summary>The Responsibilities panel: the courses this account teaches and the programs it leads, and who can take them over.</summary>
+        void ShowResponsibilities()
+        {
+            var courses = Data.Courses.Where(c => c.InstructorId == U.Id).OrderBy(c => c.Title).ToList();
+            var programs = Data.Programs.Where(p => p.LeaderId == U.Id).OrderBy(p => p.Name).ToList();
+            TeachCount = courses.Count;
+            LeadCount = programs.Count;
+            Responsibilities.Visible = TeachCount + LeadCount > 0;
+            CourseTransfer.Visible = TeachCount > 0;
+            ProgramTransfer.Visible = LeadCount > 0;
+            TeachList = Ui.H(string.Join(", ", courses.Select(c => c.Title)));
+            LeadList = Ui.H(string.Join(", ", programs.Select(p => p.Name)));
+
+            var instructors = Data.Users.Where(u => u.Id != U.Id && u.Role == "Instructor" && u.Status == "Active").OrderBy(u => u.Name).Select(u => new { u.Id, u.Name }).ToList();
+            var leaders = Data.Users.Where(u => u.Id != U.Id && u.Role == "Program Leader" && u.Status == "Active").OrderBy(u => u.Name).Select(u => new { u.Id, u.Name }).ToList();
+            CourseTarget.Visible = CourseTransferButton.Visible = instructors.Count > 0;
+            ProgramTarget.Visible = ProgramTransferButton.Visible = leaders.Count > 0;
+            CourseNoTarget = instructors.Count > 0 ? "" : "<small class=\"uem-transfer-none\">No other active instructor. Create or activate one first.</small>";
+            ProgramNoTarget = leaders.Count > 0 ? "" : "<small class=\"uem-transfer-none\">No other active Program Leader. Create or activate one first.</small>";
+            if (IsPostBack) return;
+            CourseTarget.DataSource = instructors;
+            CourseTarget.DataBind();
+            ProgramTarget.DataSource = leaders;
+            ProgramTarget.DataBind();
         }
 
         string AuditPanel()
@@ -173,7 +214,14 @@ namespace SKILL_UP.Frontend
             object result;
             if (TryRun("userSave", new
             {
-                id = "", name = NewName.Text.Trim(), email = NewEmail.Text.Trim(), username = NewUsername.Text.Trim(), bio = NewBio.Text, role = NewRole.SelectedValue, status = NewStatus.SelectedValue, password = NewPassword.Text
+                id = "",
+                name = NewName.Text.Trim(),
+                email = NewEmail.Text.Trim(),
+                username = NewUsername.Text.Trim(),
+                bio = NewBio.Text,
+                role = NewRole.SelectedValue,
+                status = NewStatus.SelectedValue,
+                password = NewPassword.Text
             }, out result)) Go("UserEditor?id=" + ((JObject)result)["id"], "User account created");
         }
 
@@ -182,8 +230,13 @@ namespace SKILL_UP.Frontend
             if (!IsValid) return;
             if (TryRun("userSave", new
             {
-                id = U.Id.ToString(CultureInfo.InvariantCulture), name = EditName.Text.Trim(), email = EditEmail.Text.Trim(), username = EditUsername.Text.Trim(), bio = EditBio.Text,
-                role = EditRole.SelectedValue, status = EditStatus.SelectedValue
+                id = U.Id.ToString(CultureInfo.InvariantCulture),
+                name = EditName.Text.Trim(),
+                email = EditEmail.Text.Trim(),
+                username = EditUsername.Text.Trim(),
+                bio = EditBio.Text,
+                role = EditRole.SelectedValue,
+                status = EditStatus.SelectedValue
             })) ReloadPage("User account saved");
         }
 
@@ -193,8 +246,27 @@ namespace SKILL_UP.Frontend
         {
             if (TryRun("userSave", new
             {
-                id = U.Id.ToString(CultureInfo.InvariantCulture), name = U.Name, email = U.Email, username = U.Username, bio = U.Bio ?? "", role = U.Role, status = U.Status == "Active" ? "Inactive" : "Active"
+                id = U.Id.ToString(CultureInfo.InvariantCulture),
+                name = U.Name,
+                email = U.Email,
+                username = U.Username,
+                bio = U.Bio ?? "",
+                role = U.Role,
+                status = U.Status == "Active" ? "Inactive" : "Active"
             })) ReloadPage(U.Status == "Active" ? "Account deactivated" : "Account activated");
+        }
+
+        protected void TransferCourses_Click(object sender, EventArgs e) => Transfer("courses", CourseTarget.SelectedValue);
+
+        protected void TransferPrograms_Click(object sender, EventArgs e) => Transfer("programs", ProgramTarget.SelectedValue);
+
+        void Transfer(string what, string toId)
+        {
+            object result;
+            if (!TryRun("staffTransfer", new { fromId = U.Id.ToString(CultureInfo.InvariantCulture), toId, what }, out result)) return;
+            var r = (JObject)result;
+            var moved = (int)r["moved"];
+            ReloadPage(Ui.Plural(moved, what == "courses" ? "course" : "program") + " transferred to " + (string)r["to"]);
         }
 
         protected void Delete_Click(object sender, EventArgs e)

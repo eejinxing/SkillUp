@@ -28,8 +28,17 @@ namespace SKILL_UP.Frontend
         protected LessonRow EditingLesson;
         protected string Mark, ProgramName, InstructorName, Status, QuizSummary, History;
 
+        protected bool IsLeader => Me.Role == "Program Leader";
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            // A Program Leader has no one to ask for approval, so the review button publishes directly.
+            if (IsLeader)
+            {
+                SubmitReview.Text = "Publish";
+                SubmitReview.CommandArgument = "publish";
+                SubmitReview.Attributes["data-confirm"] = "Publish this course and its current materials? Learners will be able to open it.";
+            }
             var id = QueryInt("id");
             C = id == null ? null : OwnCourses.FirstOrDefault(c => c.Id == id);
             if (id != null && C == null)
@@ -171,8 +180,9 @@ namespace SKILL_UP.Frontend
             }
             AssignToggle.Visible = !Fresh && Me.Role == "Program Leader" && !AssignForm.Visible;
             WithdrawReview.Visible = !Fresh && !Deleting && Status == "Pending review";
-            // Only a course with changes since its last approval (Draft) can be submitted; anything else has nothing new to review.
-            SubmitReview.Visible = !Fresh && !Deleting && Status == "Draft";
+            // An instructor can only submit a course with changes since its last approval (Draft): anything else has nothing new to
+            // review. A Program Leader publishes directly, so the button stays for any course that is not pending or already published.
+            SubmitReview.Visible = !Fresh && !Deleting && (IsLeader ? Status != "Pending review" && Status != "Published" : Status == "Draft");
             SavedParts.Visible = !Fresh;
             CoverRemove.Visible = HasCover;
             DeleteCourse.Visible = Me.Role != "Instructor";
@@ -275,7 +285,7 @@ namespace SKILL_UP.Frontend
             var op = e.CommandArgument.ToString();
             if (!TryRun("courseAction", new { id = C.Id.ToString(CultureInfo.InvariantCulture), action = op })) return;
             if (op == "delete") Go("Courses", "Course deleted");
-            ReloadPage(op == "submit" ? "Course submitted for review" : op == "withdraw" ? "Submission withdrawn" : "Course hidden");
+            ReloadPage(op == "publish" ? "Course published" : op == "submit" ? "Course submitted for review" : op == "withdraw" ? "Submission withdrawn" : "Course hidden");
         }
 
         protected void AssignToggle_Click(object sender, EventArgs e)

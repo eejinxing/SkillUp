@@ -23,14 +23,14 @@
     margin: 0 18px 42px 0;
 }
 
-.ue-header h1 {
-    font-size: 17px;
-    line-height: 1.4;
-    letter-spacing: 0;
-    font-weight: 700;
-    flex: 1;
-    color: #f2f2f2;
-}
+    .ue-header h1 {
+        font-size: 17px;
+        line-height: 1.4;
+        letter-spacing: 0;
+        font-weight: 700;
+        flex: 1;
+        color: #f2f2f2;
+    }
 
 .ue-save {
     display: flex;
@@ -48,10 +48,10 @@
     font-weight: 600;
 }
 
-.ue-save:hover:not(:disabled) {
-    background: #dedede;
-    color: #000;
-}
+    .ue-save:hover:not(:disabled) {
+        background: #dedede;
+        color: #000;
+    }
 
 .user-editor-page .ue-tabs {
     position: relative;
@@ -68,25 +68,25 @@
     flex-wrap: wrap;
 }
 
-.user-editor-page .ue-tabs a,
-.ue-tabs>span:not(.ue-native) {
-    position: relative;
-    border: 0;
-    border-radius: 0;
-    padding: 0;
-    color: #aaa;
-    font-size: 11px;
-    line-height: 1.7;
-    background: transparent;
-    min-height: 0;
-}
+    .user-editor-page .ue-tabs a,
+    .ue-tabs > span:not(.ue-native) {
+        position: relative;
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        color: #aaa;
+        font-size: 11px;
+        line-height: 1.7;
+        background: transparent;
+        min-height: 0;
+    }
 
-.user-editor-page .ue-tabs a.active {
-    color: #eee;
-    background: transparent;
-}
+        .user-editor-page .ue-tabs a.active {
+            color: #eee;
+            background: transparent;
+        }
 
-.ue-tabs>span[aria-disabled] {
+.ue-tabs > span[aria-disabled] {
     color: #6b6b6b;
 }
 
@@ -117,39 +117,39 @@
     line-height: 1.6;
 }
 
-.user-editor-page .form-error:empty {
-    display: none;
-}
+    .user-editor-page .form-error:empty {
+        display: none;
+    }
 
 .ue-log-panel {
     padding: 0 24px 30px;
     min-width: 0;
 }
 
-.ue-log-panel h2 {
-    font-size: 22px;
-    color: #fff;
-    margin: 0 0 18px;
-}
+    .ue-log-panel h2 {
+        font-size: 22px;
+        color: #fff;
+        margin: 0 0 18px;
+    }
 
-.ue-log-panel>p {
-    font-size: 12px;
-    color: #aaa;
-    margin: 0 0 24px;
-}
+    .ue-log-panel > p {
+        font-size: 12px;
+        color: #aaa;
+        margin: 0 0 24px;
+    }
 
-.ue-log-panel .table-wrap {
-    max-width: 100%;
-    overflow: auto;
-}
+    .ue-log-panel .table-wrap {
+        max-width: 100%;
+        overflow: auto;
+    }
 
-.ue-log-panel table {
-    min-width: 600px;
-}
+    .ue-log-panel table {
+        min-width: 600px;
+    }
 
-.ue-log-panel h2:not(:first-child) {
-    margin-top: 30px;
-}
+    .ue-log-panel h2:not(:first-child) {
+        margin-top: 30px;
+    }
 
 .user-editor-page [hidden] {
     display: none !important;
@@ -182,297 +182,297 @@
     color: #ededf0;
 }
 
-#app .ue-account-form .ue-back {
-    margin-bottom: 24px;
-    color: #9999a4;
-    font-size: 12px;
-}
+    #app .ue-account-form .ue-back {
+        margin-bottom: 24px;
+        color: #9999a4;
+        font-size: 12px;
+    }
 
-#app .ue-account-form .ue-header {
-    margin: 0 0 26px;
-}
+    #app .ue-account-form .ue-header {
+        margin: 0 0 26px;
+    }
 
-#app .ue-account-form .ue-header h1 {
-    margin: 0;
-    color: #f1f1f4;
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: -.035em;
-    line-height: 1.3;
-}
+        #app .ue-account-form .ue-header h1 {
+            margin: 0;
+            color: #f1f1f4;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -.035em;
+            line-height: 1.3;
+        }
 
-#app .ue-account-form .ue-header p {
-    margin: 7px 0 0;
-    color: #9999a4;
-    font-size: 13px;
-    line-height: 1.6;
-}
+        #app .ue-account-form .ue-header p {
+            margin: 7px 0 0;
+            color: #9999a4;
+            font-size: 13px;
+            line-height: 1.6;
+        }
 
-#app .ue-account-form #user-editor-form {
-    display: grid;
-    gap: 16px;
-    padding: 0;
-    margin: 0;
-}
+    #app .ue-account-form #user-editor-form {
+        display: grid;
+        gap: 16px;
+        padding: 0;
+        margin: 0;
+    }
 
-#app .ue-account-form .ue-create-panel {
-    min-width: 0;
-    margin: 0;
-    padding: 18px 20px;
-    border: 1px solid #ffffff1c;
-    border-radius: 18px;
-    background: #111114;
-}
+    #app .ue-account-form .ue-create-panel {
+        min-width: 0;
+        margin: 0;
+        padding: 18px 20px;
+        border: 1px solid #ffffff1c;
+        border-radius: 18px;
+        background: #111114;
+    }
 
-#app .ue-account-form .ue-create-panel>summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    cursor: pointer;
-    user-select: none;
-}
+        #app .ue-account-form .ue-create-panel > summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            cursor: pointer;
+            user-select: none;
+        }
 
-#app .ue-account-form .ue-create-panel>summary::-webkit-details-marker {
-    display: none;
-}
+            #app .ue-account-form .ue-create-panel > summary::-webkit-details-marker {
+                display: none;
+            }
 
-#app .ue-account-form .ue-create-panel[open]>summary {
-    margin-bottom: 16px;
-}
+        #app .ue-account-form .ue-create-panel[open] > summary {
+            margin-bottom: 16px;
+        }
 
-#app .ue-account-form .ue-create-panel h2 {
-    margin: 0;
-    color: #eeeef1;
-    font-size: 15px;
-    font-weight: 650;
-    line-height: 1.5;
-    letter-spacing: -.02em;
-}
+        #app .ue-account-form .ue-create-panel h2 {
+            margin: 0;
+            color: #eeeef1;
+            font-size: 15px;
+            font-weight: 650;
+            line-height: 1.5;
+            letter-spacing: -.02em;
+        }
 
-#app .ue-account-form .ue-create-panel>summary>span {
-    display: grid;
-    place-items: center;
-    width: 20px;
-    height: 20px;
-    color: #898993;
-}
+        #app .ue-account-form .ue-create-panel > summary > span {
+            display: grid;
+            place-items: center;
+            width: 20px;
+            height: 20px;
+            color: #898993;
+        }
 
-#app .ue-account-form .ue-create-panel>summary svg {
-    width: 15px;
-    height: 15px;
-}
+        #app .ue-account-form .ue-create-panel > summary svg {
+            width: 15px;
+            height: 15px;
+        }
 
-#app .ue-account-form .ue-create-panel:not([open])>summary svg {
-    transform: rotate(180deg);
-}
+        #app .ue-account-form .ue-create-panel:not([open]) > summary svg {
+            transform: rotate(180deg);
+        }
 
-#app .ue-account-form .ue-create-rows {
-    display: grid;
-    overflow: hidden;
-    border: 1px solid #ffffff1c;
-    border-radius: 13px;
-    background: #17171b;
-}
+    #app .ue-account-form .ue-create-rows {
+        display: grid;
+        overflow: hidden;
+        border: 1px solid #ffffff1c;
+        border-radius: 13px;
+        background: #17171b;
+    }
 
-#app .ue-account-form .ue-create-row {
-    display: grid;
-    grid-template-columns: 180px minmax(0, 1fr) 28px;
-    align-items: center;
-    gap: 16px;
-    min-height: 52px;
-    margin: 0;
-    padding: 6px 14px 6px 18px;
-    color: #ededf0;
-    cursor: text;
-}
+    #app .ue-account-form .ue-create-row {
+        display: grid;
+        grid-template-columns: 180px minmax(0, 1fr) 28px;
+        align-items: center;
+        gap: 16px;
+        min-height: 52px;
+        margin: 0;
+        padding: 6px 14px 6px 18px;
+        color: #ededf0;
+        cursor: text;
+    }
 
-#app .ue-account-form .ue-create-row+.ue-create-row {
-    border-top: 1px solid #ffffff14;
-}
+        #app .ue-account-form .ue-create-row + .ue-create-row {
+            border-top: 1px solid #ffffff14;
+        }
 
-#app .ue-account-form .ue-create-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: #9898a3;
-    line-height: 1.5;
-}
+    #app .ue-account-form .ue-create-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: #9898a3;
+        line-height: 1.5;
+    }
 
-#app .ue-account-form .ue-create-label>svg {
-    width: 16px;
-    height: 16px;
-    flex: none;
-}
+        #app .ue-account-form .ue-create-label > svg {
+            width: 16px;
+            height: 16px;
+            flex: none;
+        }
 
-#app .ue-account-form .ue-create-label b {
-    font-weight: 400;
-    color: #d99393;
-}
+        #app .ue-account-form .ue-create-label b {
+            font-weight: 400;
+            color: #d99393;
+        }
 
-#app .ue-account-form .ue-create-value {
-    display: block;
-    min-width: 0;
-    color: #e4e4e8;
-    font-size: 13px;
-    line-height: 1.6;
-}
+    #app .ue-account-form .ue-create-value {
+        display: block;
+        min-width: 0;
+        color: #e4e4e8;
+        font-size: 13px;
+        line-height: 1.6;
+    }
 
-#app .ue-account-form .ue-create-value :is(input,textarea,select) {
-    display: block;
-    min-width: 0;
-    width: 100%;
-    min-height: 36px;
-    height: 36px;
-    margin: 0;
-    padding: 7px 10px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    background: transparent;
-    box-shadow: none;
-    color: #ededf0;
-    font: 500 13px/1.6 'DM Sans', Inter, sans-serif;
-    transition: border-color .15s, background-color .15s;
-}
+        #app .ue-account-form .ue-create-value :is(input,textarea,select) {
+            display: block;
+            min-width: 0;
+            width: 100%;
+            min-height: 36px;
+            height: 36px;
+            margin: 0;
+            padding: 7px 10px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background: transparent;
+            box-shadow: none;
+            color: #ededf0;
+            font: 500 13px/1.6 'DM Sans', Inter, sans-serif;
+            transition: border-color .15s, background-color .15s;
+        }
 
-#app .ue-account-form .ue-create-value input[type=email] {
-    color: #79b8ff;
-}
+        #app .ue-account-form .ue-create-value input[type=email] {
+            color: #79b8ff;
+        }
 
-#app .ue-account-form .ue-create-value ::placeholder {
-    color: #74747f;
-    opacity: 1;
-    font-weight: 400;
-}
+        #app .ue-account-form .ue-create-value ::placeholder {
+            color: #74747f;
+            opacity: 1;
+            font-weight: 400;
+        }
 
-#app .ue-account-form .ue-create-value textarea {
-    height: 56px;
-    min-height: 56px;
-    resize: vertical;
-}
+        #app .ue-account-form .ue-create-value textarea {
+            height: 56px;
+            min-height: 56px;
+            resize: vertical;
+        }
 
-#app .ue-account-form .ue-create-value select {
-    cursor: pointer;
-    max-width: 340px;
-    color-scheme: dark;
-}
+        #app .ue-account-form .ue-create-value select {
+            cursor: pointer;
+            max-width: 340px;
+            color-scheme: dark;
+        }
 
-#app .ue-account-form .ue-create-value select option {
-    background: #202024;
-    color: #ededf0;
-}
+            #app .ue-account-form .ue-create-value select option {
+                background: #202024;
+                color: #ededf0;
+            }
 
-#app .ue-account-form .ue-create-pencil {
-    display: grid;
-    place-items: center;
-    justify-self: end;
-    width: 24px;
-    height: 28px;
-    color: #8c8c98;
-}
+    #app .ue-account-form .ue-create-pencil {
+        display: grid;
+        place-items: center;
+        justify-self: end;
+        width: 24px;
+        height: 28px;
+        color: #8c8c98;
+    }
 
-#app .ue-account-form .ue-create-pencil svg {
-    width: 14px;
-    height: 14px;
-}
+        #app .ue-account-form .ue-create-pencil svg {
+            width: 14px;
+            height: 14px;
+        }
 
-#app .ue-account-form .ue-create-row:focus-within {
-    background: #ffffff03;
-}
+    #app .ue-account-form .ue-create-row:focus-within {
+        background: #ffffff03;
+    }
 
-#app .ue-account-form .ue-create-row:focus-within .ue-create-pencil {
-    color: #c4b5fd;
-}
+        #app .ue-account-form .ue-create-row:focus-within .ue-create-pencil {
+            color: #c4b5fd;
+        }
 
-#app .ue-account-form .ue-create-value :is(input,textarea,select):focus {
-    border-color: #a78bfa80;
-    background: #0f0f12;
-    outline: 2px solid #a78bfa25;
-    outline-offset: 1px;
-}
+    #app .ue-account-form .ue-create-value :is(input,textarea,select):focus {
+        border-color: #a78bfa80;
+        background: #0f0f12;
+        outline: 2px solid #a78bfa25;
+        outline-offset: 1px;
+    }
 
-#app .ue-account-form .ue-create-readonly {
-    grid-template-columns: 180px minmax(0, 1fr);
-    cursor: default;
-}
+    #app .ue-account-form .ue-create-readonly {
+        grid-template-columns: 180px minmax(0, 1fr);
+        cursor: default;
+    }
 
-#app .ue-account-form .ue-create-readonly .ue-create-value {
-    padding: 7px 10px;
-    color: #85858f;
-    font-weight: 400;
-}
+        #app .ue-account-form .ue-create-readonly .ue-create-value {
+            padding: 7px 10px;
+            color: #85858f;
+            font-weight: 400;
+        }
 
-#app .ue-account-form .ue-create-help {
-    margin: 12px 0 0;
-    color: #92929e;
-    font-size: 12px;
-    line-height: 1.65;
-}
+    #app .ue-account-form .ue-create-help {
+        margin: 12px 0 0;
+        color: #92929e;
+        font-size: 12px;
+        line-height: 1.65;
+    }
 
-#app .ue-account-form .ue-create-bottom {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 0 2px;
-}
+    #app .ue-account-form .ue-create-bottom {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 0 2px;
+    }
 
-#app .ue-account-form .ue-draft-state {
-    margin: 9px 0 0;
-    color: #92929e;
-    font-size: 12px;
-    line-height: 1.6;
-}
+    #app .ue-account-form .ue-draft-state {
+        margin: 9px 0 0;
+        color: #92929e;
+        font-size: 12px;
+        line-height: 1.6;
+    }
 
-#app .ue-account-form .form-error {
-    max-width: 620px;
-    margin: 8px 0 0;
-    color: #ffb2b2;
-    font-size: 13px;
-    line-height: 1.6;
-}
+    #app .ue-account-form .form-error {
+        max-width: 620px;
+        margin: 8px 0 0;
+        color: #ffb2b2;
+        font-size: 13px;
+        line-height: 1.6;
+    }
 
-#app .ue-account-form .ue-create-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: none;
-}
+    #app .ue-account-form .ue-create-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: none;
+    }
 
-#app .ue-account-form .ue-create-actions button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 38px;
-    margin: 0;
-    padding: 0 16px;
-    border: 1px solid #ffffff24;
-    border-radius: 10px;
-    background: transparent;
-    color: #c6c6ce;
-    font: 600 12px 'DM Sans', Inter, sans-serif;
-    box-shadow: none;
-    transition: background-color .15s, transform .15s;
-}
+        #app .ue-account-form .ue-create-actions button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            margin: 0;
+            padding: 0 16px;
+            border: 1px solid #ffffff24;
+            border-radius: 10px;
+            background: transparent;
+            color: #c6c6ce;
+            font: 600 12px 'DM Sans', Inter, sans-serif;
+            box-shadow: none;
+            transition: background-color .15s, transform .15s;
+        }
 
-#app .ue-account-form .ue-create-actions .ue-save {
-    background: #f1f1f3;
-    color: #111114;
-    border-color: #f1f1f3;
-}
+        #app .ue-account-form .ue-create-actions .ue-save {
+            background: #f1f1f3;
+            color: #111114;
+            border-color: #f1f1f3;
+        }
 
-#app .ue-account-form :is(summary,a,button):focus-visible {
-    outline: 2px solid #c4b5fd;
-    outline-offset: 4px;
-}
+    #app .ue-account-form :is(summary,a,button):focus-visible {
+        outline: 2px solid #c4b5fd;
+        outline-offset: 4px;
+    }
 
-#app .ue-account-form .ue-create-actions button:active {
-    transform: scale(.97);
-}
+    #app .ue-account-form .ue-create-actions button:active {
+        transform: scale(.97);
+    }
 
 @media (hover: hover) {
     #app .ue-account-form .ue-create-actions .ue-save:hover {
@@ -519,11 +519,11 @@
     cursor: default;
 }
 
-#app .ue-account-form .ue-create-readonly input[readonly]:focus {
-    outline: 2px solid #a78bfa40;
-    outline-offset: 3px;
-    box-shadow: none;
-}
+    #app .ue-account-form .ue-create-readonly input[readonly]:focus {
+        outline: 2px solid #a78bfa40;
+        outline-offset: 3px;
+        box-shadow: none;
+    }
 
 /* Account management follows the compact course-editor composition. */
 #app .ue-course-editor {
@@ -531,344 +531,344 @@
     margin: 0 auto;
 }
 
-#app .ue-course-editor .ue-back {
-    margin: 0;
-}
+    #app .ue-course-editor .ue-back {
+        margin: 0;
+    }
 
-#app .ue-course-editor .ue-header {
-    display: flex;
-    align-items: center;
-}
+    #app .ue-course-editor .ue-header {
+        display: flex;
+        align-items: center;
+    }
 
-#app .ue-course-editor .ue-header h1 {
-    margin: 0;
-    flex: 1;
-    line-height: 1.5;
-}
+        #app .ue-course-editor .ue-header h1 {
+            margin: 0;
+            flex: 1;
+            line-height: 1.5;
+        }
 
-#app .ue-course-editor .uem-title-icon {
-    display: grid;
-    place-items: center;
-    border: 1px solid #ffffff12;
-}
+    #app .ue-course-editor .uem-title-icon {
+        display: grid;
+        place-items: center;
+        border: 1px solid #ffffff12;
+    }
 
-#app .ue-course-editor .ue-save {
-    gap: 7px;
-    min-width: 70px;
-    border-radius: 999px;
-    background: #f1f1f3;
-    color: #131316;
-    box-shadow: none;
-}
+    #app .ue-course-editor .ue-save {
+        gap: 7px;
+        min-width: 70px;
+        border-radius: 999px;
+        background: #f1f1f3;
+        color: #131316;
+        box-shadow: none;
+    }
 
-#app .ue-course-editor .uem-layout {
-    display: grid;
-    align-items: start;
-}
+    #app .ue-course-editor .uem-layout {
+        display: grid;
+        align-items: start;
+    }
 
-#app .ue-course-editor .uem-summary {
-    position: sticky;
-    top: 16px;
-    border: 1px solid #ffffff20;
-    min-width: 0;
-    overflow: hidden;
-}
+    #app .ue-course-editor .uem-summary {
+        position: sticky;
+        top: 16px;
+        border: 1px solid #ffffff20;
+        min-width: 0;
+        overflow: hidden;
+    }
 
-#app .ue-course-editor .uem-avatar {
-    display: grid;
-    place-items: center;
-    margin: 0 auto 22px;
-    border: 1px solid #ffffff2b;
-    letter-spacing: -.04em;
-    overflow: hidden;
-}
+    #app .ue-course-editor .uem-avatar {
+        display: grid;
+        place-items: center;
+        margin: 0 auto 22px;
+        border: 1px solid #ffffff2b;
+        letter-spacing: -.04em;
+        overflow: hidden;
+    }
 
-#app .ue-course-editor .uem-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+        #app .ue-course-editor .uem-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-#app .ue-course-editor .uem-directory {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    border: 1px solid #ffffff1c;
-}
+    #app .ue-course-editor .uem-directory {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        border: 1px solid #ffffff1c;
+    }
 
-#app .ue-course-editor .uem-directory svg {
-    flex: none;
-}
+        #app .ue-course-editor .uem-directory svg {
+            flex: none;
+        }
 
-#app .ue-course-editor .uem-directory>span:nth-child(2) {
-    flex: 1;
-    min-width: 0;
-    overflow-wrap: anywhere;
-}
+        #app .ue-course-editor .uem-directory > span:nth-child(2) {
+            flex: 1;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
 
-#app .ue-course-editor .uem-summary dl {
-    margin: 17px 0 0;
-    display: grid;
-    gap: 0;
-}
+    #app .ue-course-editor .uem-summary dl {
+        margin: 17px 0 0;
+        display: grid;
+        gap: 0;
+    }
 
-#app .ue-course-editor .uem-summary dl>div {
-    border-top: 1px solid #ffffff0f;
-}
+        #app .ue-course-editor .uem-summary dl > div {
+            border-top: 1px solid #ffffff0f;
+        }
 
-#app .ue-course-editor .uem-summary dt {
-    line-height: 1.5;
-}
+    #app .ue-course-editor .uem-summary dt {
+        line-height: 1.5;
+    }
 
-#app .ue-course-editor .uem-summary dd {
-    margin: 0;
-    font-weight: 500;
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-}
+    #app .ue-course-editor .uem-summary dd {
+        margin: 0;
+        font-weight: 500;
+        line-height: 1.6;
+        overflow-wrap: anywhere;
+    }
 
-#app .ue-course-editor .uem-status-dot {
-    display: inline-block;
-    border-radius: 50%;
-    background: #86868f;
-    vertical-align: middle;
-}
+    #app .ue-course-editor .uem-status-dot {
+        display: inline-block;
+        border-radius: 50%;
+        background: #86868f;
+        vertical-align: middle;
+    }
 
-#app .ue-course-editor .uem-content {
-    min-width: 0;
-}
+    #app .ue-course-editor .uem-content {
+        min-width: 0;
+    }
 
-#app .ue-course-editor .uem-tabs {
-    display: inline-flex;
-    flex-direction: row;
-    gap: 4px;
-    margin: 0 0 22px;
-    border: 1px solid #ffffff18;
-    border-radius: 999px;
-    flex-wrap: nowrap;
-}
+    #app .ue-course-editor .uem-tabs {
+        display: inline-flex;
+        flex-direction: row;
+        gap: 4px;
+        margin: 0 0 22px;
+        border: 1px solid #ffffff18;
+        border-radius: 999px;
+        flex-wrap: nowrap;
+    }
 
-#app .ue-course-editor .uem-tabs a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    border-radius: 999px;
-    background: transparent;
-    white-space: nowrap;
-}
+        #app .ue-course-editor .uem-tabs a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 999px;
+            background: transparent;
+            white-space: nowrap;
+        }
 
-#app .ue-course-editor #user-editor-form {
-    padding: 0;
-    margin: 0;
-}
+    #app .ue-course-editor #user-editor-form {
+        padding: 0;
+        margin: 0;
+    }
 
-#app .ue-course-editor .uem-fields {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    min-width: 0;
-}
+    #app .ue-course-editor .uem-fields {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        min-width: 0;
+    }
 
-#app .ue-course-editor .uem-field-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
+    #app .ue-course-editor .uem-field-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 
-#app .ue-course-editor .uem-field {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    min-width: 0;
-    line-height: 1.5;
-}
+    #app .ue-course-editor .uem-field {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        min-width: 0;
+        line-height: 1.5;
+    }
 
-#app .ue-course-editor .uem-field b {
-    font-weight: 400;
-}
+        #app .ue-course-editor .uem-field b {
+            font-weight: 400;
+        }
 
-#app .ue-course-editor .uem-field :is(input,select,textarea) {
-    display: block;
-    width: 100%;
-    min-width: 0;
-    min-height: 38px;
-    height: 38px;
-    margin: 0;
-    padding: 9px 12px;
-    border: 1px solid #ffffff20;
-    border-radius: 7px;
-    background: #101013;
-    box-shadow: none;
-    color: #ddddE3;
-    font-size: 12px;
-    line-height: 1.5;
-    color-scheme: dark;
-    transition: border-color .15s, background-color .15s;
-}
+        #app .ue-course-editor .uem-field :is(input,select,textarea) {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            min-height: 38px;
+            height: 38px;
+            margin: 0;
+            padding: 9px 12px;
+            border: 1px solid #ffffff20;
+            border-radius: 7px;
+            background: #101013;
+            box-shadow: none;
+            color: #ddddE3;
+            font-size: 12px;
+            line-height: 1.5;
+            color-scheme: dark;
+            transition: border-color .15s, background-color .15s;
+        }
 
-#app .ue-course-editor .uem-field select {
-    cursor: pointer;
-}
+        #app .ue-course-editor .uem-field select {
+            cursor: pointer;
+        }
 
-#app .ue-course-editor .uem-field select option {
-    background: #1a1a20;
-}
+            #app .ue-course-editor .uem-field select option {
+                background: #1a1a20;
+            }
 
-#app .ue-course-editor .uem-readonly input {
-    cursor: default;
-}
+    #app .ue-course-editor .uem-readonly input {
+        cursor: default;
+    }
 
-#app .ue-course-editor .uem-field :is(input,select,textarea):focus-visible {
-    outline-offset: 2px;
-}
+    #app .ue-course-editor .uem-field :is(input,select,textarea):focus-visible {
+        outline-offset: 2px;
+    }
 
-#app .ue-course-editor .uem-bio textarea {
-    min-height: 90px;
-    resize: vertical;
-    line-height: 1.75;
-}
+    #app .ue-course-editor .uem-bio textarea {
+        min-height: 90px;
+        resize: vertical;
+        line-height: 1.75;
+    }
 
-#app .ue-course-editor .ue-draft-state {
-    margin: 15px 0 0;
-}
+    #app .ue-course-editor .ue-draft-state {
+        margin: 15px 0 0;
+    }
 
-#app .ue-course-editor .form-error {
-    margin: 12px 0 0;
-    font-size: 12px;
-}
+    #app .ue-course-editor .form-error {
+        margin: 12px 0 0;
+        font-size: 12px;
+    }
 
-#app .ue-course-editor .uem-form-actions {
-    display: flex;
-    align-items: center;
-}
+    #app .ue-course-editor .uem-form-actions {
+        display: flex;
+        align-items: center;
+    }
 
-#app .ue-course-editor .uem-form-actions button,
-#app .ue-course-editor .uem-access-panel button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ffffff25;
-    border-radius: 999px;
-    background: transparent;
-    box-shadow: none;
-}
+        #app .ue-course-editor .uem-form-actions button,
+        #app .ue-course-editor .uem-access-panel button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ffffff25;
+            border-radius: 999px;
+            background: transparent;
+            box-shadow: none;
+        }
 
-#app .ue-course-editor .uem-form-actions .uem-save-changes,
-#app .ue-course-editor .uem-access-panel button {
-    border-color: #f1f1f3;
-    background: #f1f1f3;
-    color: #151518;
-    font-weight: 600;
-}
+        #app .ue-course-editor .uem-form-actions .uem-save-changes,
+        #app .ue-course-editor .uem-access-panel button {
+            border-color: #f1f1f3;
+            background: #f1f1f3;
+            color: #151518;
+            font-weight: 600;
+        }
 
-#app .ue-course-editor .uem-access-panel {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    border: 1px solid #ffffff1e;
-}
+    #app .ue-course-editor .uem-access-panel {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        border: 1px solid #ffffff1e;
+    }
 
-#app .ue-course-editor .uem-access-panel small {
-    display: block;
-    letter-spacing: .08em;
-}
+        #app .ue-course-editor .uem-access-panel small {
+            display: block;
+            letter-spacing: .08em;
+        }
 
-#app .ue-course-editor .uem-access-panel p {
-    margin: 5px 0 0;
-}
+        #app .ue-course-editor .uem-access-panel p {
+            margin: 5px 0 0;
+        }
 
-#app .ue-course-editor .uem-access-panel button {
-    flex: none;
-}
+        #app .ue-course-editor .uem-access-panel button {
+            flex: none;
+        }
 
-#app .ue-course-editor .uem-recent {
-    padding-top: 20px;
-    border-top: 1px solid #ffffff19;
-}
+    #app .ue-course-editor .uem-recent {
+        padding-top: 20px;
+        border-top: 1px solid #ffffff19;
+    }
 
-#app .ue-course-editor .uem-recent>header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    margin-bottom: 4px;
-}
+        #app .ue-course-editor .uem-recent > header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 4px;
+        }
 
-#app .ue-course-editor :is(.uem-recent,.uem-danger) h2 {
-    margin: 0;
-    font-weight: 600;
-}
+    #app .ue-course-editor :is(.uem-recent,.uem-danger) h2 {
+        margin: 0;
+        font-weight: 600;
+    }
 
-#app .ue-course-editor .uem-recent ol {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+    #app .ue-course-editor .uem-recent ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 
-#app .ue-course-editor .uem-recent li {
-    display: flex;
-    min-width: 0;
-}
+    #app .ue-course-editor .uem-recent li {
+        display: flex;
+        min-width: 0;
+    }
 
-#app .ue-course-editor .uem-recent li>span {
-    padding-top: 2px;
-}
+        #app .ue-course-editor .uem-recent li > span {
+            padding-top: 2px;
+        }
 
-#app .ue-course-editor .uem-recent li>div {
-    flex: 1;
-    min-width: 0;
-}
+        #app .ue-course-editor .uem-recent li > div {
+            flex: 1;
+            min-width: 0;
+        }
 
-#app .ue-course-editor .uem-recent strong {
-    font-weight: 500;
-}
+    #app .ue-course-editor .uem-recent strong {
+        font-weight: 500;
+    }
 
-#app .ue-course-editor .uem-recent li p {
-    margin: 3px 0 0;
-    overflow-wrap: anywhere;
-}
+    #app .ue-course-editor .uem-recent li p {
+        margin: 3px 0 0;
+        overflow-wrap: anywhere;
+    }
 
-#app .ue-course-editor .uem-recent time {
-    white-space: nowrap;
-    padding-top: 2px;
-}
+    #app .ue-course-editor .uem-recent time {
+        white-space: nowrap;
+        padding-top: 2px;
+    }
 
-#app .ue-course-editor .uem-danger {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    border-top: 1px solid #ffffff19;
-}
+    #app .ue-course-editor .uem-danger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        border-top: 1px solid #ffffff19;
+    }
 
-#app .ue-course-editor .uem-danger p {
-    margin: 5px 0 0;
-}
+        #app .ue-course-editor .uem-danger p {
+            margin: 5px 0 0;
+        }
 
-#app .ue-course-editor .uem-danger button {
-    flex: none;
-    border: 1px solid #b86f7338;
-    background: transparent;
-    box-shadow: none;
-}
+        #app .ue-course-editor .uem-danger button {
+            flex: none;
+            border: 1px solid #b86f7338;
+            background: transparent;
+            box-shadow: none;
+        }
 
-#app .ue-course-editor .ue-log-panel {
-    padding: 0;
-}
+    #app .ue-course-editor .ue-log-panel {
+        padding: 0;
+    }
 
-#app .ue-course-editor .ue-log-panel h2 {
-    margin-bottom: 12px;
-}
+        #app .ue-course-editor .ue-log-panel h2 {
+            margin-bottom: 12px;
+        }
 
-#app .ue-course-editor :is(button,a):focus-visible {
-    outline: 2px solid #b0c5b5;
-    outline-offset: 4px;
-}
+    #app .ue-course-editor :is(button,a):focus-visible {
+        outline: 2px solid #b0c5b5;
+        outline-offset: 4px;
+    }
 
-#app .ue-course-editor button:active:not(:disabled) {
-    transform: translateY(1px);
-}
+    #app .ue-course-editor button:active:not(:disabled) {
+        transform: translateY(1px);
+    }
 
 @media (hover: hover) {
     #app .ue-course-editor .uem-tabs a:hover {
@@ -914,422 +914,422 @@
     color: var(--sr-dim);
 }
 
-#app .ue-course-editor .ue-back {
-    font-size: 13px;
-    color: var(--sr-dim);
-    transition: color .15s;
-}
-
-#app .ue-course-editor .ue-back:hover {
-    color: #fff;
-}
-
-#app .ue-course-editor .ue-header {
-    gap: 14px;
-    margin: 22px 0 28px;
-}
-
-#app .ue-course-editor .ue-header h1 {
-    font-size: 28px;
-    font-weight: 500;
-    letter-spacing: -.025em;
-    color: var(--sr-text);
-}
-
-#app .ue-course-editor .uem-title-icon {
-    width: 40px;
-    height: 40px;
-    border-color: var(--sr-line2);
-    border-radius: 12px;
-    background: var(--sr-panel2);
-    color: var(--sr-accent);
-}
-
-#app .ue-course-editor .uem-title-icon svg {
-    width: 19px;
-    height: 19px;
-}
-
-#app .ue-course-editor .ue-save {
-    min-height: 42px;
-    padding: 0 20px;
-    border: 0;
-    font-size: 13.5px;
-    font-weight: 600;
-}
-
-#app .ue-course-editor .uem-layout {
-    grid-template-columns: 300px minmax(0, 1fr);
-    gap: 22px;
-}
-
-#app .ue-course-editor .uem-summary {
-    padding: 30px 24px 22px;
-    border-color: var(--sr-line);
-    border-radius: 20px;
-    background: linear-gradient(180deg, var(--sr-panel2), var(--sr-panel));
-}
-
-#app .ue-course-editor .uem-avatar {
-    width: 92px;
-    height: 92px;
-    margin-bottom: 26px;
-    border-color: var(--sr-line2);
-    border-radius: 26px;
-    background: radial-gradient(circle at 30% 25%, #9ff07e33, transparent 60%), #16161b;
-    color: #eaffe0;
-    font-size: 30px;
-    font-weight: 600;
-}
-
-#app .ue-course-editor .uem-directory {
-    padding: 12px 14px;
-    border-color: var(--sr-line);
-    border-radius: 12px;
-    background: #ffffff06;
-    color: var(--sr-text);
-    font-size: 13px;
-    transition: border-color .15s;
-}
-
-#app .ue-course-editor .uem-directory:hover {
-    border-color: var(--sr-line2);
-}
-
-#app .ue-course-editor .uem-directory svg {
-    width: 16px;
-    height: 16px;
-    color: var(--sr-accent);
-}
-
-#app .ue-course-editor .uem-summary dl {
-    margin-top: 22px;
-}
-
-#app .ue-course-editor .uem-summary dl>div {
-    padding: 12px 2px;
-    border-top-color: var(--sr-line);
-}
-
-#app .ue-course-editor .uem-summary dt {
-    margin: 0;
-    font-size: 12px;
-    color: var(--sr-faint);
-}
-
-#app .ue-course-editor .uem-summary dd {
-    margin-top: 2px;
-    font-size: 14px;
-    color: var(--sr-text);
-}
-
-#app .ue-course-editor .uem-status-dot {
-    width: 8px;
-    height: 8px;
-    margin-right: 8px;
-}
-
-#app .ue-course-editor .uem-status-dot[data-status=Active] {
-    background: var(--sr-accent);
-    box-shadow: 0 0 0 3px #9ff07e1f;
-}
-
-#app .ue-course-editor .uem-status-dot[data-status=Pending] {
-    background: #f2c46b;
-    box-shadow: 0 0 0 3px #f2c46b1f;
-}
-
-#app .ue-course-editor .uem-status-dot[data-status=Inactive] {
-    background: #f0a3a3;
-    box-shadow: 0 0 0 3px #f0a3a31f;
-}
-
-#app .ue-course-editor .uem-tabs {
-    min-height: 0;
-    margin-bottom: 22px;
-    padding: 5px;
-    border-color: var(--sr-line);
-    background: var(--sr-panel);
-}
-
-#app .ue-course-editor .uem-tabs a {
-    min-height: 0;
-    padding: 9px 20px;
-    font-size: 13.5px;
-    color: var(--sr-dim);
-    transition: background-color .15s, color .15s;
-}
-
-#app .ue-course-editor .uem-tabs a.active {
-    background: #ffffff1c;
-    color: #fff;
-}
-
-#app .ue-course-editor .uem-field-grid {
-    gap: 18px 16px;
-}
-
-#app .ue-course-editor .uem-field {
-    gap: 7px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--sr-dim);
-}
-
-#app .ue-course-editor .uem-field b {
-    color: #e8a0a0;
-}
-
-#app .ue-course-editor .uem-field :is(input,select) {
-    height: 46px;
-    min-height: 46px;
-    padding: 0 14px;
-    border-color: var(--sr-line);
-    border-radius: 12px;
-    background: var(--sr-panel);
-    color: var(--sr-text);
-    font: 14px/1.4 'DM Sans', sans-serif;
-}
-
-#app .ue-course-editor .uem-field textarea {
-    padding: 14px 16px;
-    border-color: var(--sr-line);
-    border-radius: 14px;
-    background: var(--sr-panel);
-    color: var(--sr-text);
-    font: 14px/1.6 'DM Sans', sans-serif;
-}
-
-#app .ue-course-editor .uem-field select {
-    appearance: none;
-    -webkit-appearance: none;
-    padding-right: 40px;
-    background: var(--sr-panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a4a4ae' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 14px center/16px;
-}
-
-#app .ue-course-editor .uem-field :is(input,select,textarea):hover:not([readonly]) {
-    border-color: var(--sr-line2);
-}
-
-#app .ue-course-editor .uem-field :is(input,select,textarea):focus-visible {
-    outline: 0;
-    border-color: var(--sr-accent);
-    box-shadow: 0 0 0 3px #9ff07e24;
-}
-
-#app .ue-course-editor .uem-readonly input {
-    border-style: dashed;
-    border-color: var(--sr-line);
-    background: #0a0a0c;
-    color: var(--sr-faint);
-}
-
-#app .ue-course-editor .uem-bio {
-    margin-top: 22px;
-}
-
-#app .ue-course-editor .uem-bio textarea {
-    height: 130px;
-}
-
-#app .ue-course-editor .uem-dates {
-    margin-top: 18px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-#app .ue-course-editor .ue-draft-state {
-    margin-top: 16px;
-    font-size: 12.5px;
-    color: var(--sr-faint);
-}
-
-#app .ue-course-editor .uem-form-actions {
-    gap: 10px;
-    margin-top: 14px;
-}
-
-#app .ue-course-editor .uem-form-actions button {
-    min-height: 44px;
-    padding: 0 18px;
-    border-color: var(--sr-line2);
-    color: var(--sr-dim);
-    font-size: 13.5px;
-    transition: background-color .15s, border-color .15s, color .15s;
-}
-
-#app .ue-course-editor .uem-form-actions button:not(.uem-save-changes):hover {
-    color: #fff;
-    border-color: #ffffff55;
-}
-
-#app .ue-course-editor .uem-form-actions .uem-save-changes {
-    color: #101012;
-    font-weight: 600;
-}
-
-#app .ue-course-editor .uem-access-panel {
-    margin: 28px 0 0;
-    padding: 18px 20px;
-    border-color: var(--sr-line);
-    border-radius: 16px;
-    background: linear-gradient(180deg, var(--sr-panel2), var(--sr-panel));
-}
-
-#app .ue-course-editor .uem-access-panel small {
-    font-size: 11.5px;
-    color: var(--sr-faint);
-}
-
-#app .ue-course-editor .uem-access-panel p {
-    margin-top: 4px;
-    font-size: 14px;
-    color: var(--sr-text);
-}
-
-#app .ue-course-editor .uem-access-panel button {
-    min-height: 40px;
-    padding: 0 18px;
-    font-size: 13.5px;
-}
-
-#app .ue-course-editor .uem-recent {
-    margin-top: 14px;
-    padding: 0;
-    border: 1px solid var(--sr-line);
-    border-radius: 16px;
-    background: var(--sr-panel);
-    overflow: hidden;
-}
-
-#app .ue-course-editor .uem-recent>header {
-    margin: 0;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--sr-line);
-}
-
-#app .ue-course-editor :is(.uem-recent,.uem-danger) h2 {
-    font-size: 16px;
-    letter-spacing: -.01em;
-    color: var(--sr-text);
-}
-
-#app .ue-course-editor .uem-recent header a {
-    padding: 6px 14px;
-    border: 1px solid var(--sr-line2);
-    border-radius: 999px;
-    font-size: 13px;
-    color: var(--sr-text);
-    transition: background-color .15s, border-color .15s;
-}
-
-#app .ue-course-editor .uem-recent header a:hover {
-    background: #ffffff0f;
-    border-color: #ffffff40;
-}
-
-#app .ue-course-editor .uem-recent li {
-    align-items: center;
-    gap: 16px;
-    padding: 14px 20px;
-    border-bottom: 0;
-    transition: background-color .15s;
-}
-
-#app .ue-course-editor .uem-recent li+li {
-    border-top: 1px solid var(--sr-line);
-}
-
-#app .ue-course-editor .uem-recent li:hover {
-    background: #ffffff05;
-}
-
-#app .ue-course-editor .uem-recent li>span {
-    display: grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    flex: none;
-    padding: 0;
-    border: 1px solid var(--sr-line);
-    border-radius: 10px;
-    background: var(--sr-panel2);
-    font-size: 12px;
-    font-variant-numeric: tabular-nums;
-    color: var(--sr-dim);
-}
-
-#app .ue-course-editor .uem-recent strong {
-    font-size: 14.5px;
-    color: var(--sr-text);
-}
-
-#app .ue-course-editor .uem-recent li p {
-    margin-top: 2px;
-    font-size: 12.5px;
-    color: var(--sr-faint);
-}
-
-#app .ue-course-editor .uem-recent time {
-    padding: 0;
-    font-size: 12.5px;
-    color: var(--sr-faint);
-}
-
-#app .ue-course-editor .uem-empty {
-    margin: 0;
-    padding: 28px 20px;
-    text-align: center;
-    font-size: 13.5px;
-    color: var(--sr-faint);
-}
-
-#app .ue-course-editor .uem-danger {
-    margin-top: 14px;
-    padding: 16px 20px;
-    border: 1px solid #f0a3a31f;
-    border-radius: 16px;
-    background: #f0a3a305;
-}
-
-#app .ue-course-editor .uem-danger p {
-    margin-top: 2px;
-    font-size: 12.5px;
-    color: var(--sr-faint);
-}
-
-#app .ue-course-editor .uem-danger button {
-    min-height: 38px;
-    padding: 0 16px;
-    border-color: #f0a3a333;
-    border-radius: 999px;
-    color: #f0a3a3;
-    font-size: 13px;
-    font-weight: 500;
-    transition: background-color .15s, border-color .15s, color .15s;
-}
-
-#app .ue-course-editor .uem-danger button:hover:not(:disabled) {
-    background: #f0a3a314;
-    border-color: #f0a3a366;
-    color: #ffc2c2;
-}
-
-#app .ue-course-editor button:disabled {
-    opacity: .4;
-    cursor: not-allowed;
-}
-
-#app .ue-course-editor .ue-log-panel h2 {
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: -.015em;
-    color: var(--sr-text);
-}
-
-#app .ue-course-editor .ue-log-panel>p {
-    font-size: 13px;
-    color: var(--sr-faint);
-}
+    #app .ue-course-editor .ue-back {
+        font-size: 13px;
+        color: var(--sr-dim);
+        transition: color .15s;
+    }
+
+        #app .ue-course-editor .ue-back:hover {
+            color: #fff;
+        }
+
+    #app .ue-course-editor .ue-header {
+        gap: 14px;
+        margin: 22px 0 28px;
+    }
+
+        #app .ue-course-editor .ue-header h1 {
+            font-size: 28px;
+            font-weight: 500;
+            letter-spacing: -.025em;
+            color: var(--sr-text);
+        }
+
+    #app .ue-course-editor .uem-title-icon {
+        width: 40px;
+        height: 40px;
+        border-color: var(--sr-line2);
+        border-radius: 12px;
+        background: var(--sr-panel2);
+        color: var(--sr-accent);
+    }
+
+        #app .ue-course-editor .uem-title-icon svg {
+            width: 19px;
+            height: 19px;
+        }
+
+    #app .ue-course-editor .ue-save {
+        min-height: 42px;
+        padding: 0 20px;
+        border: 0;
+        font-size: 13.5px;
+        font-weight: 600;
+    }
+
+    #app .ue-course-editor .uem-layout {
+        grid-template-columns: 300px minmax(0, 1fr);
+        gap: 22px;
+    }
+
+    #app .ue-course-editor .uem-summary {
+        padding: 30px 24px 22px;
+        border-color: var(--sr-line);
+        border-radius: 20px;
+        background: linear-gradient(180deg, var(--sr-panel2), var(--sr-panel));
+    }
+
+    #app .ue-course-editor .uem-avatar {
+        width: 92px;
+        height: 92px;
+        margin-bottom: 26px;
+        border-color: var(--sr-line2);
+        border-radius: 26px;
+        background: radial-gradient(circle at 30% 25%, #9ff07e33, transparent 60%), #16161b;
+        color: #eaffe0;
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    #app .ue-course-editor .uem-directory {
+        padding: 12px 14px;
+        border-color: var(--sr-line);
+        border-radius: 12px;
+        background: #ffffff06;
+        color: var(--sr-text);
+        font-size: 13px;
+        transition: border-color .15s;
+    }
+
+        #app .ue-course-editor .uem-directory:hover {
+            border-color: var(--sr-line2);
+        }
+
+        #app .ue-course-editor .uem-directory svg {
+            width: 16px;
+            height: 16px;
+            color: var(--sr-accent);
+        }
+
+    #app .ue-course-editor .uem-summary dl {
+        margin-top: 22px;
+    }
+
+        #app .ue-course-editor .uem-summary dl > div {
+            padding: 12px 2px;
+            border-top-color: var(--sr-line);
+        }
+
+    #app .ue-course-editor .uem-summary dt {
+        margin: 0;
+        font-size: 12px;
+        color: var(--sr-faint);
+    }
+
+    #app .ue-course-editor .uem-summary dd {
+        margin-top: 2px;
+        font-size: 14px;
+        color: var(--sr-text);
+    }
+
+    #app .ue-course-editor .uem-status-dot {
+        width: 8px;
+        height: 8px;
+        margin-right: 8px;
+    }
+
+        #app .ue-course-editor .uem-status-dot[data-status=Active] {
+            background: var(--sr-accent);
+            box-shadow: 0 0 0 3px #9ff07e1f;
+        }
+
+        #app .ue-course-editor .uem-status-dot[data-status=Pending] {
+            background: #f2c46b;
+            box-shadow: 0 0 0 3px #f2c46b1f;
+        }
+
+        #app .ue-course-editor .uem-status-dot[data-status=Inactive] {
+            background: #f0a3a3;
+            box-shadow: 0 0 0 3px #f0a3a31f;
+        }
+
+    #app .ue-course-editor .uem-tabs {
+        min-height: 0;
+        margin-bottom: 22px;
+        padding: 5px;
+        border-color: var(--sr-line);
+        background: var(--sr-panel);
+    }
+
+        #app .ue-course-editor .uem-tabs a {
+            min-height: 0;
+            padding: 9px 20px;
+            font-size: 13.5px;
+            color: var(--sr-dim);
+            transition: background-color .15s, color .15s;
+        }
+
+            #app .ue-course-editor .uem-tabs a.active {
+                background: #ffffff1c;
+                color: #fff;
+            }
+
+    #app .ue-course-editor .uem-field-grid {
+        gap: 18px 16px;
+    }
+
+    #app .ue-course-editor .uem-field {
+        gap: 7px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--sr-dim);
+    }
+
+        #app .ue-course-editor .uem-field b {
+            color: #e8a0a0;
+        }
+
+        #app .ue-course-editor .uem-field :is(input,select) {
+            height: 46px;
+            min-height: 46px;
+            padding: 0 14px;
+            border-color: var(--sr-line);
+            border-radius: 12px;
+            background: var(--sr-panel);
+            color: var(--sr-text);
+            font: 14px/1.4 'DM Sans', sans-serif;
+        }
+
+        #app .ue-course-editor .uem-field textarea {
+            padding: 14px 16px;
+            border-color: var(--sr-line);
+            border-radius: 14px;
+            background: var(--sr-panel);
+            color: var(--sr-text);
+            font: 14px/1.6 'DM Sans', sans-serif;
+        }
+
+        #app .ue-course-editor .uem-field select {
+            appearance: none;
+            -webkit-appearance: none;
+            padding-right: 40px;
+            background: var(--sr-panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a4a4ae' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 14px center/16px;
+        }
+
+        #app .ue-course-editor .uem-field :is(input,select,textarea):hover:not([readonly]) {
+            border-color: var(--sr-line2);
+        }
+
+        #app .ue-course-editor .uem-field :is(input,select,textarea):focus-visible {
+            outline: 0;
+            border-color: var(--sr-accent);
+            box-shadow: 0 0 0 3px #9ff07e24;
+        }
+
+    #app .ue-course-editor .uem-readonly input {
+        border-style: dashed;
+        border-color: var(--sr-line);
+        background: #0a0a0c;
+        color: var(--sr-faint);
+    }
+
+    #app .ue-course-editor .uem-bio {
+        margin-top: 22px;
+    }
+
+        #app .ue-course-editor .uem-bio textarea {
+            height: 130px;
+        }
+
+    #app .ue-course-editor .uem-dates {
+        margin-top: 18px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #app .ue-course-editor .ue-draft-state {
+        margin-top: 16px;
+        font-size: 12.5px;
+        color: var(--sr-faint);
+    }
+
+    #app .ue-course-editor .uem-form-actions {
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+        #app .ue-course-editor .uem-form-actions button {
+            min-height: 44px;
+            padding: 0 18px;
+            border-color: var(--sr-line2);
+            color: var(--sr-dim);
+            font-size: 13.5px;
+            transition: background-color .15s, border-color .15s, color .15s;
+        }
+
+            #app .ue-course-editor .uem-form-actions button:not(.uem-save-changes):hover {
+                color: #fff;
+                border-color: #ffffff55;
+            }
+
+        #app .ue-course-editor .uem-form-actions .uem-save-changes {
+            color: #101012;
+            font-weight: 600;
+        }
+
+    #app .ue-course-editor .uem-access-panel {
+        margin: 28px 0 0;
+        padding: 18px 20px;
+        border-color: var(--sr-line);
+        border-radius: 16px;
+        background: linear-gradient(180deg, var(--sr-panel2), var(--sr-panel));
+    }
+
+        #app .ue-course-editor .uem-access-panel small {
+            font-size: 11.5px;
+            color: var(--sr-faint);
+        }
+
+        #app .ue-course-editor .uem-access-panel p {
+            margin-top: 4px;
+            font-size: 14px;
+            color: var(--sr-text);
+        }
+
+        #app .ue-course-editor .uem-access-panel button {
+            min-height: 40px;
+            padding: 0 18px;
+            font-size: 13.5px;
+        }
+
+    #app .ue-course-editor .uem-recent {
+        margin-top: 14px;
+        padding: 0;
+        border: 1px solid var(--sr-line);
+        border-radius: 16px;
+        background: var(--sr-panel);
+        overflow: hidden;
+    }
+
+        #app .ue-course-editor .uem-recent > header {
+            margin: 0;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--sr-line);
+        }
+
+    #app .ue-course-editor :is(.uem-recent,.uem-danger) h2 {
+        font-size: 16px;
+        letter-spacing: -.01em;
+        color: var(--sr-text);
+    }
+
+    #app .ue-course-editor .uem-recent header a {
+        padding: 6px 14px;
+        border: 1px solid var(--sr-line2);
+        border-radius: 999px;
+        font-size: 13px;
+        color: var(--sr-text);
+        transition: background-color .15s, border-color .15s;
+    }
+
+        #app .ue-course-editor .uem-recent header a:hover {
+            background: #ffffff0f;
+            border-color: #ffffff40;
+        }
+
+    #app .ue-course-editor .uem-recent li {
+        align-items: center;
+        gap: 16px;
+        padding: 14px 20px;
+        border-bottom: 0;
+        transition: background-color .15s;
+    }
+
+        #app .ue-course-editor .uem-recent li + li {
+            border-top: 1px solid var(--sr-line);
+        }
+
+        #app .ue-course-editor .uem-recent li:hover {
+            background: #ffffff05;
+        }
+
+        #app .ue-course-editor .uem-recent li > span {
+            display: grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            flex: none;
+            padding: 0;
+            border: 1px solid var(--sr-line);
+            border-radius: 10px;
+            background: var(--sr-panel2);
+            font-size: 12px;
+            font-variant-numeric: tabular-nums;
+            color: var(--sr-dim);
+        }
+
+    #app .ue-course-editor .uem-recent strong {
+        font-size: 14.5px;
+        color: var(--sr-text);
+    }
+
+    #app .ue-course-editor .uem-recent li p {
+        margin-top: 2px;
+        font-size: 12.5px;
+        color: var(--sr-faint);
+    }
+
+    #app .ue-course-editor .uem-recent time {
+        padding: 0;
+        font-size: 12.5px;
+        color: var(--sr-faint);
+    }
+
+    #app .ue-course-editor .uem-empty {
+        margin: 0;
+        padding: 28px 20px;
+        text-align: center;
+        font-size: 13.5px;
+        color: var(--sr-faint);
+    }
+
+    #app .ue-course-editor .uem-danger {
+        margin-top: 14px;
+        padding: 16px 20px;
+        border: 1px solid #f0a3a31f;
+        border-radius: 16px;
+        background: #f0a3a305;
+    }
+
+        #app .ue-course-editor .uem-danger p {
+            margin-top: 2px;
+            font-size: 12.5px;
+            color: var(--sr-faint);
+        }
+
+        #app .ue-course-editor .uem-danger button {
+            min-height: 38px;
+            padding: 0 16px;
+            border-color: #f0a3a333;
+            border-radius: 999px;
+            color: #f0a3a3;
+            font-size: 13px;
+            font-weight: 500;
+            transition: background-color .15s, border-color .15s, color .15s;
+        }
+
+            #app .ue-course-editor .uem-danger button:hover:not(:disabled) {
+                background: #f0a3a314;
+                border-color: #f0a3a366;
+                color: #ffc2c2;
+            }
+
+    #app .ue-course-editor button:disabled {
+        opacity: .4;
+        cursor: not-allowed;
+    }
+
+    #app .ue-course-editor .ue-log-panel h2 {
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: -.015em;
+        color: var(--sr-text);
+    }
+
+    #app .ue-course-editor .ue-log-panel > p {
+        font-size: 13px;
+        color: var(--sr-faint);
+    }
 
 @media (max-width: 1050px) {
     #app .ue-course-editor .uem-layout {
@@ -1346,19 +1346,19 @@
     margin: 0 0 14px;
 }
 
-#app .ue-course-editor .uem-panel-head h2 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: -.015em;
-    color: var(--sr-text);
-}
+    #app .ue-course-editor .uem-panel-head h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: -.015em;
+        color: var(--sr-text);
+    }
 
-#app .ue-course-editor .uem-panel-head p {
-    margin: 4px 0 0;
-    font-size: 13px;
-    color: var(--sr-faint);
-}
+    #app .ue-course-editor .uem-panel-head p {
+        margin: 4px 0 0;
+        font-size: 13px;
+        color: var(--sr-faint);
+    }
 
 #app .ue-course-editor .uem-sub-head {
     margin-top: 30px;
@@ -1387,43 +1387,43 @@
     list-style: none;
 }
 
-#app .ue-course-editor :is(.uem-log-list,.uem-course-list)>li {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 20px;
-    transition: background-color .15s;
-}
+    #app .ue-course-editor :is(.uem-log-list,.uem-course-list) > li {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 20px;
+        transition: background-color .15s;
+    }
 
-#app .ue-course-editor :is(.uem-log-list,.uem-course-list)>li+li {
-    border-top: 1px solid var(--sr-line);
-}
+        #app .ue-course-editor :is(.uem-log-list,.uem-course-list) > li + li {
+            border-top: 1px solid var(--sr-line);
+        }
 
-#app .ue-course-editor :is(.uem-log-list,.uem-course-list)>li:hover {
-    background: #ffffff05;
-}
+        #app .ue-course-editor :is(.uem-log-list,.uem-course-list) > li:hover {
+            background: #ffffff05;
+        }
 
-#app .ue-course-editor :is(.uem-log-list,.uem-course-list)>li>div:first-of-type {
-    flex: 1;
-    min-width: 0;
-}
+        #app .ue-course-editor :is(.uem-log-list,.uem-course-list) > li > div:first-of-type {
+            flex: 1;
+            min-width: 0;
+        }
 
-#app .ue-course-editor :is(.uem-log-list,.uem-course-list) strong {
-    display: block;
-    font-size: 14.5px;
-    font-weight: 500;
-    color: var(--sr-text);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+    #app .ue-course-editor :is(.uem-log-list,.uem-course-list) strong {
+        display: block;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--sr-text);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
-#app .ue-course-editor :is(.uem-log-list,.uem-course-list) p {
-    margin: 3px 0 0;
-    font-size: 12.5px;
-    color: var(--sr-faint);
-    overflow-wrap: anywhere;
-}
+    #app .ue-course-editor :is(.uem-log-list,.uem-course-list) p {
+        margin: 3px 0 0;
+        font-size: 12.5px;
+        color: var(--sr-faint);
+        overflow-wrap: anywhere;
+    }
 
 #app .ue-course-editor .uem-log-dot {
     width: 10px;
@@ -1448,28 +1448,28 @@
     margin: 0 0 14px;
 }
 
-#app .ue-course-editor .uem-stats>div {
-    padding: 16px 18px;
-    border: 1px solid var(--sr-line);
-    border-radius: 16px;
-    background: linear-gradient(180deg, var(--sr-panel2), var(--sr-panel));
-}
+    #app .ue-course-editor .uem-stats > div {
+        padding: 16px 18px;
+        border: 1px solid var(--sr-line);
+        border-radius: 16px;
+        background: linear-gradient(180deg, var(--sr-panel2), var(--sr-panel));
+    }
 
-#app .ue-course-editor .uem-stats small {
-    display: block;
-    font-size: 12px;
-    color: var(--sr-faint);
-}
+    #app .ue-course-editor .uem-stats small {
+        display: block;
+        font-size: 12px;
+        color: var(--sr-faint);
+    }
 
-#app .ue-course-editor .uem-stats strong {
-    display: block;
-    margin-top: 4px;
-    font-size: 24px;
-    font-weight: 500;
-    letter-spacing: -.02em;
-    color: var(--sr-text);
-    font-variant-numeric: tabular-nums;
-}
+    #app .ue-course-editor .uem-stats strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 24px;
+        font-weight: 500;
+        letter-spacing: -.02em;
+        color: var(--sr-text);
+        font-variant-numeric: tabular-nums;
+    }
 
 #app .ue-course-editor .uem-progress {
     display: flex;
@@ -1479,30 +1479,30 @@
     width: 220px;
 }
 
-#app .ue-course-editor .uem-progress>span {
-    flex: 1;
-    height: 6px;
-    border-radius: 999px;
-    background: #ffffff12;
-    overflow: hidden;
-}
+    #app .ue-course-editor .uem-progress > span {
+        flex: 1;
+        height: 6px;
+        border-radius: 999px;
+        background: #ffffff12;
+        overflow: hidden;
+    }
 
-#app .ue-course-editor .uem-progress i {
-    display: block;
-    height: 100%;
-    min-width: 0;
-    border-radius: inherit;
-    background: var(--sr-accent);
-}
+    #app .ue-course-editor .uem-progress i {
+        display: block;
+        height: 100%;
+        min-width: 0;
+        border-radius: inherit;
+        background: var(--sr-accent);
+    }
 
-#app .ue-course-editor .uem-progress b {
-    width: 40px;
-    text-align: right;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--sr-text);
-    font-variant-numeric: tabular-nums;
-}
+    #app .ue-course-editor .uem-progress b {
+        width: 40px;
+        text-align: right;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--sr-text);
+        font-variant-numeric: tabular-nums;
+    }
 
 #app .ue-course-editor .uem-pill {
     flex: none;
@@ -1513,14 +1513,126 @@
     color: var(--sr-dim);
 }
 
-#app .ue-course-editor .uem-pill[data-status=Published] {
-    border-color: #9ff07e33;
-    background: #9ff07e0f;
-    color: #bff3a8;
+    #app .ue-course-editor .uem-pill[data-status=Published] {
+        border-color: #9ff07e33;
+        background: #9ff07e0f;
+        color: #bff3a8;
+    }
+
+    #app .ue-course-editor .uem-pill[data-status="Pending review"] {
+        border-color: #f2c46b33;
+        background: #f2c46b0f;
+        color: #f5d899;
+    }
+
+/* ---- Responsibilities: transfer an account's courses or programs before its role or status changes ---- */
+#app .ue-course-editor .uem-transfer {
+    margin-top: 28px;
+    border: 1px solid #e0b56333;
+    border-radius: 16px;
+    background: #e0b56308;
+    overflow: hidden;
 }
 
-#app .ue-course-editor .uem-pill[data-status="Pending review"] {
-    border-color: #f2c46b33;
-    background: #f2c46b0f;
-    color: #f5d899;
+    #app .ue-course-editor .uem-transfer > header {
+        padding: 16px 20px;
+        border-bottom: 1px solid #e0b5631f;
+    }
+
+    #app .ue-course-editor .uem-transfer h2 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -.01em;
+        color: var(--sr-text);
+    }
+
+    #app .ue-course-editor .uem-transfer > header p {
+        margin: 4px 0 0;
+        font-size: 12.5px;
+        color: var(--sr-faint);
+    }
+
+#app .ue-course-editor .uem-transfer-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px 20px;
+}
+
+    #app .ue-course-editor .uem-transfer-row + .uem-transfer-row {
+        border-top: 1px solid var(--sr-line);
+    }
+
+#app .ue-course-editor .uem-transfer-what {
+    flex: 1 1 260px;
+    min-width: 0;
+}
+
+    #app .ue-course-editor .uem-transfer-what strong {
+        font-size: 14.5px;
+        font-weight: 600;
+        color: #efcf8d;
+    }
+
+    #app .ue-course-editor .uem-transfer-what p {
+        margin: 3px 0 0;
+        font-size: 12.5px;
+        color: var(--sr-faint);
+        overflow-wrap: anywhere;
+    }
+
+#app .ue-course-editor .uem-transfer-action {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    flex: 0 1 auto;
+}
+
+    #app .ue-course-editor .uem-transfer-action select {
+        width: auto;
+        min-width: 180px;
+        min-height: 38px;
+        padding: 0 12px;
+        border: 1px solid var(--sr-line2);
+        border-radius: 10px;
+        background: var(--sr-panel2);
+        color: var(--sr-text);
+        font-size: 13px;
+    }
+
+    #app .ue-course-editor .uem-transfer-action button {
+        min-height: 38px;
+        padding: 0 16px;
+        border: 1px solid #f1f1f3;
+        border-radius: 999px;
+        background: #f1f1f3;
+        color: #151518;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+#app .ue-course-editor .uem-transfer-none {
+    max-width: 240px;
+    font-size: 12.5px;
+    color: #efcf8d;
+}
+
+@media (max-width: 760px) {
+    #app .ue-course-editor .uem-transfer-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #app .ue-course-editor .uem-transfer-what {
+        flex: none;
+    }
+
+    #app .ue-course-editor .uem-transfer-action select {
+        flex: 1;
+    }
 }

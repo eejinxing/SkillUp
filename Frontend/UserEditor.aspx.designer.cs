@@ -26,5 +26,68 @@ namespace SKILL_UP.Frontend
         protected global::System.Web.UI.WebControls.PlaceHolder InformationExtras;
         protected global::SKILL_UP.Frontend.Controls.SubmitButton StatusButton;
         protected global::SKILL_UP.Frontend.Controls.SubmitButton DeleteButton;
+
+        /// <summary>
+        /// Responsibilities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder Responsibilities;
+
+        /// <summary>
+        /// CourseTransfer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder CourseTransfer;
+
+        /// <summary>
+        /// CourseTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CourseTarget;
+
+        /// <summary>
+        /// CourseTransferButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SKILL_UP.Frontend.Controls.SubmitButton CourseTransferButton;
+
+        /// <summary>
+        /// ProgramTransfer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder ProgramTransfer;
+
+        /// <summary>
+        /// ProgramTarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ProgramTarget;
+
+        /// <summary>
+        /// ProgramTransferButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SKILL_UP.Frontend.Controls.SubmitButton ProgramTransferButton;
     }
 }
