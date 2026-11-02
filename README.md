@@ -45,6 +45,8 @@ Choose **Log in** and pick a demo role, or sign in with one of these accounts:
 |---|---|---|
 | Learner | `alex` | `Demo1234!` |
 | Instructor | `john` | `Demo1234!` |
+| Instructor | `mark` | `Demo1234!` |
+| Instructor | `lena` | `Demo1234!` |
 | Program Leader | `sarah` | `Demo1234!` |
 | Admin | `admin` | `Demo1234!` |
 
