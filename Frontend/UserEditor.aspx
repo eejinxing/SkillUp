@@ -58,6 +58,33 @@
         <div class="uem-form-actions"><skill:SubmitButton ID="SaveButton" runat="server" CssClass="uem-save-changes" Text="Save changes" ValidationGroup="user" OnClick="Save_Click" /><skill:SubmitButton runat="server" Text="Discard changes" CausesValidation="false" OnClick="Discard_Click" /></div>
       </div></asp:PlaceHolder>
       <asp:PlaceHolder ID="InformationExtras" runat="server">
+        <%-- Courses and programs this account owns. They move to another active account of the same role before the role changes,
+             the account is deactivated or it is deleted (Backend: staffTransfer). --%>
+        <asp:PlaceHolder ID="Responsibilities" runat="server" Visible="false">
+        <section class="uem-transfer" aria-labelledby="uem-transfer-title">
+          <header><h2 id="uem-transfer-title">Responsibilities</h2><p>Only the assigned instructor or Program Leader can manage these. Transfer them before changing this account&rsquo;s role, deactivating it or deleting it.</p></header>
+          <asp:PlaceHolder ID="CourseTransfer" runat="server" Visible="false">
+          <div class="uem-transfer-row">
+            <div class="uem-transfer-what"><strong>Teaches <%= Ui.Plural(TeachCount, "course") %></strong><p><%= TeachList %></p></div>
+            <div class="uem-transfer-action">
+              <asp:DropDownList ID="CourseTarget" runat="server" DataTextField="Name" DataValueField="Id" aria-label="Transfer courses to" />
+              <skill:SubmitButton ID="CourseTransferButton" runat="server" Text="Transfer courses" CausesValidation="false" OnClick="TransferCourses_Click" data-confirm="Make the selected instructor the instructor of all these courses?" />
+              <%= CourseNoTarget %>
+            </div>
+          </div>
+          </asp:PlaceHolder>
+          <asp:PlaceHolder ID="ProgramTransfer" runat="server" Visible="false">
+          <div class="uem-transfer-row">
+            <div class="uem-transfer-what"><strong>Leads <%= Ui.Plural(LeadCount, "program") %></strong><p><%= LeadList %></p></div>
+            <div class="uem-transfer-action">
+              <asp:DropDownList ID="ProgramTarget" runat="server" DataTextField="Name" DataValueField="Id" aria-label="Transfer programs to" />
+              <skill:SubmitButton ID="ProgramTransferButton" runat="server" Text="Transfer programs" CausesValidation="false" OnClick="TransferPrograms_Click" data-confirm="Make the selected Program Leader the leader of all these programs? They will also review the programs' course requests." />
+              <%= ProgramNoTarget %>
+            </div>
+          </div>
+          </asp:PlaceHolder>
+        </section>
+        </asp:PlaceHolder>
         <section class="uem-access-panel" aria-label="Account access"><div><small>ACCOUNT ACCESS</small><p><%= AccessText %></p></div><skill:SubmitButton ID="StatusButton" runat="server" CausesValidation="false" OnClick="Status_Click" /></section>
         <section class="uem-recent"><header><h2>Recent account activity</h2><a href="UserEditor?id=<%= U?.Id %>&amp;tab=audit">View all &#8599;</a></header><%= Recent %></section>
         <section class="uem-danger"><div><h2>Account actions</h2><p><%= Self ? "You cannot deactivate or delete your own administrator account." : "Permanently remove this user account from the workspace." %></p></div><skill:SubmitButton ID="DeleteButton" runat="server" CssClass="ue-delete" Text="Delete account" CausesValidation="false" OnClick="Delete_Click" data-confirm="Delete this user account? This removes the account and its enrolments. Assigned staff must be reassigned first." /></section>

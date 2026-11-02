@@ -92,13 +92,22 @@ namespace SKILL_UP.Backend
             RecalculateProgress(c.Id);
             return new JObject
             {
-                ["id"] = "quiz-" + attempt, ["userId"] = Me.Id.ToString(), ["courseId"] = c.Id.ToString(), ["lessonId"] = lessons[index].Id.ToString(), ["type"] = "quiz",
-                ["answers"] = new JArray(answers), ["score"] = score, ["createdAt"] = Workspace.Iso(Now),
+                ["id"] = "quiz-" + attempt,
+                ["userId"] = Me.Id.ToString(),
+                ["courseId"] = c.Id.ToString(),
+                ["lessonId"] = lessons[index].Id.ToString(),
+                ["type"] = "quiz",
+                ["answers"] = new JArray(answers),
+                ["score"] = score,
+                ["createdAt"] = Workspace.Iso(Now),
                 ["wrongTopics"] = new JArray(questions.Where((q, i) => !correct[i]).Select(q => q.Topic ?? "")),
                 // The answer key is only revealed after submission, never in the workspace.
                 ["feedback"] = new JArray(questions.Select((q, i) => new JObject
                 {
-                    ["text"] = q.Text, ["selectedText"] = q.Options[answers[i]].Text, ["correctText"] = q.AnswerIndex >= 0 ? q.Options[q.AnswerIndex].Text : "", ["correct"] = correct[i]
+                    ["text"] = q.Text,
+                    ["selectedText"] = q.Options[answers[i]].Text,
+                    ["correctText"] = q.AnswerIndex >= 0 ? q.Options[q.AnswerIndex].Text : "",
+                    ["correct"] = correct[i]
                 }))
             };
         }
@@ -301,6 +310,17 @@ namespace SKILL_UP.Backend
             var status = Str("status");
             if (!Roles.Contains(role) || !Statuses.Contains(status)) Fail("Choose a valid role and status.");
             if (x != null && x.Id == Me.Id && (status != "Active" || role != "Admin")) Fail("You cannot remove your own administrator access.");
+            // Courses and programs need an active owner: only their instructor or Program Leader can manage them, so the owner
+            // keeps the role and stays active until an admin transfers them (staffTransfer, the Responsibilities panel).
+            if (x != null)
+            {
+                var teaches = m.Courses.Count(c => c.InstructorId == x.Id);
+                var leads = m.Programs.Count(p => p.LeaderId == x.Id);
+                if (teaches > 0 && (role != x.Role && role != "Instructor" || status != "Active" && x.Status == "Active"))
+                    Fail(x.Name + " still teaches " + (teaches == 1 ? "1 course" : teaches + " courses") + ". Transfer them to another instructor under Responsibilities before changing the role or account status.");
+                if (leads > 0 && (role != x.Role && role != "Program Leader" || status != "Active" && x.Status == "Active"))
+                    Fail(x.Name + " still leads " + (leads == 1 ? "1 program" : leads + " programs") + ". Transfer them to another Program Leader under Responsibilities before changing the role or account status.");
+            }
             var parts = SplitName(name);
             var bio = Limit(Str("bio") ?? "", 1000);
             int id;
@@ -339,7 +359,7 @@ namespace SKILL_UP.Backend
             if (id == Me.Id) Fail("You cannot delete your own account.");
             var x = m.User(id);
             if (x == null) Fail("User not found.");
-            if (m.Courses.Any(c => c.InstructorId == id) || m.Programs.Any(p => p.LeaderId == id)) Fail("Reassign this user’s courses or programs first.");
+            if (m.Courses.Any(c => c.InstructorId == id) || m.Programs.Any(p => p.LeaderId == id)) Fail("Transfer this user’s courses or programs under Responsibilities before deleting the account.");
             // Content they authored as staff moves to the admin; their own learning and messages are removed.
             db.Exec(@"DECLARE @u INT = @p0, @admin INT = @p1;
                       UPDATE COURSE SET created_by = @admin WHERE created_by = @u;
@@ -373,6 +393,48 @@ namespace SKILL_UP.Backend
                       DELETE FROM [USER] WHERE user_id = @u;", id, Me.Id);
             Log("User deleted", x.Name, "User", id);
             return null;
+        }
+
+        /// <summary>
+        /// Admin: moves everything a staff member is responsible for to another active account of the same role, so their role
+        /// can change or the account can be deactivated or deleted. what = "courses" (the instructor of each course) or
+        /// "programs" (the Program Leader of each program, who also reviews its course requests).
+        /// </summary>
+        object StaffTransfer()
+        {
+            Must("Admin");
+            int fromId, toId;
+            int.TryParse(Str("fromId"), out fromId);
+            int.TryParse(Str("toId"), out toId);
+            var from = m.User(fromId);
+            if (from == null) Fail("User not found.", 404);
+            var what = Str("what");
+            if (what != "courses" && what != "programs") Fail("Choose what to transfer.");
+            var role = what == "courses" ? "Instructor" : "Program Leader";
+            var to = m.User(toId);
+            if (to == null || to.Id == from.Id || to.Role != role || to.Status != "Active")
+                Fail("Choose another active " + (what == "courses" ? "instructor." : "Program Leader."));
+            int moved;
+            if (what == "courses")
+            {
+                var courses = m.Courses.Where(c => c.InstructorId == from.Id).ToList();
+                if (courses.Count == 0) Fail(from.Name + " has no courses to transfer.");
+                foreach (var c in courses)
+                {
+                    db.Exec("DELETE FROM COURSE_INSTRUCTOR WHERE course_id = @p0", c.Id);
+                    db.Exec("INSERT INTO COURSE_INSTRUCTOR (course_id, instructor_id, assigned_by, assigned_at) VALUES (@p0, @p1, @p2, @p3)", c.Id, to.Id, Me.Id, Now);
+                }
+                moved = courses.Count;
+            }
+            else
+            {
+                moved = m.Programs.Count(p => p.LeaderId == from.Id);
+                if (moved == 0) Fail(from.Name + " has no programs to transfer.");
+                db.Exec("UPDATE PROGRAM SET program_leader_id = @p1 WHERE program_leader_id = @p0", from.Id, to.Id);
+            }
+            Log(what == "courses" ? "Courses transferred" : "Programs transferred",
+                moved + " " + (what == "courses" ? (moved == 1 ? "course" : "courses") : (moved == 1 ? "program" : "programs")) + " from " + from.Name + " to " + to.Name, "User", from.Id);
+            return new JObject { ["moved"] = moved, ["to"] = to.Name };
         }
     }
 }
