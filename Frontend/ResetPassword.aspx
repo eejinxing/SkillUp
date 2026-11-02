@@ -8,13 +8,13 @@
     <section class="auth-form">
       <div class="auth-card">
         <h2 id="dialog-title">Choose a new password</h2>
-        <p class="auth-modal-sub">Use at least 8 characters. You&rsquo;ll log in with it next time.</p>
+        <p class="auth-modal-sub">Use 8 or more characters with a letter and a number. You&rsquo;ll log in with it next time.</p>
         <asp:Panel runat="server" DefaultButton="SaveButton">
           <div class="auth-control">
             <div class="auth-label-row"><label for="AuthPassword">New password</label></div>
             <span class="auth-field"><asp:TextBox ID="AuthPassword" runat="server" ClientIDMode="Static" TextMode="Password" placeholder="8+ characters" autocomplete="new-password" /><button type="button" class="auth-eye" data-auth-eye="" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></span>
             <asp:RequiredFieldValidator runat="server" ControlToValidate="AuthPassword" ErrorMessage="Choose a password." Display="Dynamic" CssClass="field-error" />
-            <asp:RegularExpressionValidator runat="server" ControlToValidate="AuthPassword" ValidationExpression="^[\s\S]{8,}$" ErrorMessage="Use at least 8 characters." Display="Dynamic" CssClass="field-error" />
+            <asp:RegularExpressionValidator runat="server" ControlToValidate="AuthPassword" ValidationExpression="^(?=.*[A-Za-z])(?=.*[0-9])[\s\S]{8,128}$" ErrorMessage="Use 8 or more characters with a letter and a number." Display="Dynamic" CssClass="field-error" />
           </div>
           <div class="auth-control">
             <div class="auth-label-row"><label for="AuthConfirm">Confirm new password</label></div>

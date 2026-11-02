@@ -43,7 +43,7 @@
             <div class="auth-label-row"><label for="SignUpPassword">Password</label></div>
             <span class="auth-field"><asp:TextBox ID="SignUpPassword" runat="server" ClientIDMode="Static" TextMode="Password" placeholder="8+ characters" autocomplete="new-password" /><button type="button" class="auth-eye" data-auth-eye="" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></span>
             <asp:RequiredFieldValidator runat="server" ControlToValidate="SignUpPassword" ErrorMessage="Choose a password." Display="Dynamic" CssClass="field-error" ValidationGroup="register" />
-            <asp:RegularExpressionValidator runat="server" ControlToValidate="SignUpPassword" ValidationExpression="^[\s\S]{8,}$" ErrorMessage="Use at least 8 characters." Display="Dynamic" CssClass="field-error" ValidationGroup="register" />
+            <asp:RegularExpressionValidator runat="server" ControlToValidate="SignUpPassword" ValidationExpression="^(?=.*[A-Za-z])(?=.*[0-9])[\s\S]{8,128}$" ErrorMessage="Use 8 or more characters with a letter and a number." Display="Dynamic" CssClass="field-error" ValidationGroup="register" />
           </div>
           <div class="auth-control">
             <div class="auth-label-row"><label for="SignUpConfirm">Confirm password</label></div>

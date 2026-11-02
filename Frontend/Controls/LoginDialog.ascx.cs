@@ -31,7 +31,7 @@ namespace SKILL_UP.Frontend.Controls
             get
             {
                 var target = Request.QueryString["return"];
-                if (!string.IsNullOrEmpty(target) && target.StartsWith("/") && !target.StartsWith("//")) return target;
+                if (!string.IsNullOrEmpty(target) && target.StartsWith("/") && !target.StartsWith("//") && target.IndexOf('\\') < 0 && target.IndexOfAny(new[] { '\r', '\n' }) < 0) return target;
                 return Host.StayAfterSignIn ? Request.RawUrl : "Dashboard";
             }
         }
