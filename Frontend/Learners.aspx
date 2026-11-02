@@ -4,7 +4,7 @@
 
 <%-- One learner in one course: completion, the activities done, the topics they get wrong and every attempt. --%>
 <asp:View runat="server">
-  <div class="page-head"><div><h1 tabindex="-1" id="page-title"><%: LearnerName %></h1><p><%: DetailCourse?.Title %> &middot; Enrolled <%= Ui.Date(DetailEnrolment?.EnrolledAt) %></p></div><div class="actions tight"><a class="button ghost" href="Learners">&larr; Learners</a></div></div>
+  <div class="page-head"><div><h1 tabindex="-1" id="page-title"><%: LearnerName %></h1><p><%: DetailCourse?.Title %> &middot; Enrolled <%= Ui.Date(DetailEnrolment?.EnrolledAt) %></p></div><div class="actions tight"><a class="button ghost crumb-button" href="<%: BackUrl %>"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><%: BackLabel %></a></div></div>
   <div class="metrics">
     <asp:Repeater ID="Metrics" runat="server"><ItemTemplate><div class="metric"><small><%# Eval("Label") %></small><strong class="number"><%# Eval("Value") %></strong><small><%# Eval("Note") %></small><span class="spark" aria-hidden="true">▂▃▅▆</span></div></ItemTemplate></asp:Repeater>
   </div>
@@ -37,14 +37,17 @@
     <header class="sp-heading"><div><h1>Student performance</h1><p><%: RosterNote %></p></div><skill:SubmitButton ID="EnrolToggle" runat="server" CssClass="sp-enrol" Text="+ Enrol learner" CausesValidation="false" OnClick="EnrolToggle_Click" /></header>
     <asp:Panel ID="EnrolForm" runat="server" CssClass="panel sp-enrol-form" DefaultButton="EnrolButton" Visible="false">
       <h2>Enrol a learner</h2>
-      <div class="form-grid">
-        <label>Course<asp:DropDownList ID="EnrolCourse" runat="server" DataTextField="Title" DataValueField="Id" /></label>
-        <label>Learner<asp:DropDownList ID="EnrolLearner" runat="server" DataTextField="Name" DataValueField="Id" /></label>
+      <%-- The same row of controls as the learners filter bar below: the course, a search by user ID, and the learners it leaves. --%>
+      <div class="sp-filters sp-enrol-fields">
+        <label><span class="sr-only">Course to enrol the learner in</span><asp:DropDownList ID="EnrolCourse" runat="server" DataTextField="Title" DataValueField="Id" aria-label="Course to enrol the learner in" /></label>
+        <label><span class="sr-only">Search learners by user ID</span><input type="search" class="sp-enrol-search" data-filter-select="EnrolLearner" data-match="id" inputmode="numeric" placeholder="Search by learner user ID…" aria-label="Search learners by user ID" autocomplete="off"></label>
+        <label><span class="sr-only">Learner to enrol</span><asp:DropDownList ID="EnrolLearner" runat="server" ClientIDMode="Static" DataTextField="Name" DataValueField="Id" aria-label="Learner to enrol" /></label>
       </div>
-      <div class="actions"><skill:SubmitButton ID="EnrolButton" runat="server" CssClass="primary" Text="Enrol learner" CausesValidation="false" OnClick="Enrol_Click" /><a class="button ghost" href="<%: Request.RawUrl %>">Cancel</a></div>
+      <p class="sp-enrol-count" data-filter-count="EnrolLearner" aria-live="polite"></p>
+      <div class="actions"><skill:SubmitButton ID="EnrolButton" runat="server" CssClass="primary sp-enrol-submit" Text="Enrol learner" CausesValidation="false" OnClick="Enrol_Click" /><a class="button ghost" href="<%: Request.RawUrl %>">Cancel</a></div>
     </asp:Panel>
     <asp:Panel runat="server" CssClass="sp-filters" DefaultButton="RosterFilter">
-      <label class="sp-search"><span class="sr-only">Search learners</span><asp:TextBox ID="RosterSearch" runat="server" TextMode="Search" placeholder="Search learners or courses…" aria-label="Search learners" /></label>
+      <label class="sp-search"><span class="sr-only">Search learners</span><asp:TextBox ID="RosterSearch" runat="server" TextMode="Search" placeholder="Search by learner user ID…" inputmode="numeric" aria-label="Search learners by user ID" /></label>
       <label><span class="sr-only">Filter by course</span><asp:DropDownList ID="RosterCourse" runat="server" aria-label="Filter by course" /></label>
       <label><span class="sr-only">Filter by progress</span><asp:DropDownList ID="RosterState" runat="server" aria-label="Filter by progress"><asp:ListItem Value="">All progress</asp:ListItem><asp:ListItem Value="completed">Completed</asp:ListItem><asp:ListItem Value="progress">In progress</asp:ListItem><asp:ListItem Value="not-started">Not started</asp:ListItem><asp:ListItem Value="needs-support">Quiz below 70%</asp:ListItem></asp:DropDownList></label>
       <label><span class="sr-only">Sort learners</span><asp:DropDownList ID="RosterSort" runat="server" aria-label="Sort learners"><asp:ListItem Value="name">Name A–Z</asp:ListItem><asp:ListItem Value="completion">Completion: highest first</asp:ListItem><asp:ListItem Value="recent">Recently active</asp:ListItem></asp:DropDownList></label>

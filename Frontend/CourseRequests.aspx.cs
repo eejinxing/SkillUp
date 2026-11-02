@@ -85,7 +85,7 @@ namespace SKILL_UP.Frontend
             term = (Request.QueryString["q"] ?? "").Trim();
             kind = Request.QueryString["kind"] == "Create" || Request.QueryString["kind"] == "Delete" ? Request.QueryString["kind"] : "";
             status = Terminal.Contains(Request.QueryString["status"]) || Request.QueryString["status"] == "Pending review" ? Request.QueryString["status"] : "";
-            sort = new[] { "oldest", "name", "priority", "program", "status" }.Contains(Request.QueryString["sort"]) ? Request.QueryString["sort"] : "newest";
+            sort = SortKeys.Contains(Request.QueryString["sort"]) ? Request.QueryString["sort"] : "newest";
             size = new[] { 10, 50 }.Contains(QueryInt("size") ?? 20) ? QueryInt("size").Value : 20;
             Tab = Request.QueryString["tab"] == "activity" ? "activity" : "overview";
             if (!IsPostBack)
@@ -160,18 +160,27 @@ namespace SKILL_UP.Frontend
             };
         }
 
+        /// <summary>
+        /// The sort values: a column's own name sorts in its usual direction (Course, Program and Status A to Z, Priority high to low,
+        /// Submitted newest first as "newest") and "-rev" reverses it. Clicking the same column heading again switches between the two.
+        /// </summary>
+        static readonly string[] SortKeys = { "newest", "oldest", "name", "name-rev", "priority", "priority-rev", "program", "program-rev", "status", "status-rev" };
+
         IEnumerable<Req> Sorted(IEnumerable<Req> rows)
         {
             var text = StringComparer.CurrentCultureIgnoreCase;
-            switch (sort)
+            var reversed = sort.EndsWith("-rev", StringComparison.Ordinal);
+            IEnumerable<Req> ordered;
+            switch (reversed ? sort.Substring(0, sort.Length - 4) : sort)
             {
-                case "priority": return rows.OrderByDescending(r => r.Priority).ThenByDescending(r => r.Row.CreatedAt);
-                case "program": return rows.OrderBy(r => r.Program, text);
-                case "status": return rows.OrderBy(r => r.Row.Status, text);
-                case "name": return rows.OrderBy(r => r.Row.CourseTitle, text);
-                case "oldest": return rows.OrderBy(r => r.Row.CreatedAt);
-                default: return rows.OrderByDescending(r => r.Row.CreatedAt);
+                case "priority": ordered = rows.OrderByDescending(r => r.Priority).ThenByDescending(r => r.Row.CreatedAt); break;
+                case "program": ordered = rows.OrderBy(r => r.Program, text).ThenByDescending(r => r.Row.CreatedAt); break;
+                case "status": ordered = rows.OrderBy(r => r.Row.Status, text).ThenByDescending(r => r.Row.CreatedAt); break;
+                case "name": ordered = rows.OrderBy(r => r.Row.CourseTitle, text).ThenByDescending(r => r.Row.CreatedAt); break;
+                case "oldest": ordered = rows.OrderBy(r => r.Row.CreatedAt); break;
+                default: ordered = rows.OrderByDescending(r => r.Row.CreatedAt); break;
             }
+            return reversed ? ordered.Reverse() : ordered;
         }
 
         /// <summary>This page's address with the current filters, changing only what is passed.</summary>
@@ -194,11 +203,15 @@ namespace SKILL_UP.Frontend
         string HeaderCell(string label, string key, string cls)
         {
             if (key == null) return "<th scope=\"col\" class=\"" + cls + "\">" + label + "</th>";
-            var on = key == sort || key == "date" && (sort == "newest" || sort == "oldest");
-            var direction = on ? (sort == "oldest" || key == "name" || key == "program" || key == "status" ? "ascending" : "descending") : "none";
-            var target = key == "date" ? (sort == "newest" ? "oldest" : "newest") : key;
+            var reversed = sort.EndsWith("-rev", StringComparison.Ordinal);
+            var on = (reversed ? sort.Substring(0, sort.Length - 4) : sort) == key || key == "date" && (sort == "newest" || sort == "oldest");
+            // Priority runs high to low until reversed; the other columns run A to Z (oldest to newest for dates) until reversed.
+            var descending = key == "date" ? sort == "newest" : key == "priority" ? !reversed : reversed;
+            var direction = on ? (descending ? "descending" : "ascending") : "none";
+            // Clicking the sorted column again flips it; clicking another column starts it in its usual direction.
+            var target = key == "date" ? (sort == "newest" ? "oldest" : "newest") : on ? (reversed ? key : key + "-rev") : key;
             return "<th scope=\"col\" class=\"" + cls + "\" data-sort-key=\"" + key + "\"" + (on ? " data-sorted" : "") + " aria-sort=\"" + direction + "\"><a class=\"rq-sort-head\" href=\""
-                + HttpUtility.HtmlAttributeEncode(Url(sortBy: target)) + "\">" + label + Draw("<path d=\"m8 9 4-4 4 4M8 15l4 4 4-4\"/>") + "</a></th>";
+                + HttpUtility.HtmlAttributeEncode(Url(sortBy: target)) + "\">" + label + Draw("<path class=\"rq-arrow-up\" d=\"m8 9 4-4 4 4\"/><path class=\"rq-arrow-down\" d=\"M8 15l4 4 4-4\"/>") + "</a></th>";
         }
 
         static string Hue(string name)
@@ -276,7 +289,8 @@ namespace SKILL_UP.Frontend
                 + "</span><span class=\"rq-action-chevron\">" + Draw(Ic["chevron"]) + "</span></a>";
             html.Append("<section class=\"rq-group\"><h3 class=\"rq-group-title\">Quick actions</h3><div class=\"rq-group-body rq-actions\">");
             if (r.Course != null && r.Course.InstructorId == Me.Id) html.Append(action("chart", "Open course", "CourseEditor?id=" + r.Course.Id, "rq-open-course"));
-            if (r.Course != null) html.Append(action("external", "View course page", "Course?id=" + r.Course.Id, ""));
+            // The public course page only opens for a published course; for any other status "Open course" above is the way in.
+            if (r.Course != null && r.Course.Status == "Published") html.Append(action("external", "View course page", "Course?id=" + r.Course.Id, ""));
             html.Append(action("clock", "Show activity history", Url(id: r.Row.Id, page: PageNumber, tab: "activity"), ""));
             html.Append(action("download", "Export this request", "CourseRequests?export=" + r.Row.Id, ""));
             html.Append(action("message", "Message " + Ui.H(r.Reviewer.Split(' ')[0]), r.Leader == null ? "Messages" : "Messages?id=" + r.Leader.Id, ""));
@@ -347,8 +361,10 @@ namespace SKILL_UP.Frontend
                     .Append(face).Append("</span><span>").Append(Ui.H(actor?.Name ?? "Former user")).Append("</span></dd></div><div><dt>Course</dt><dd><span class=\"rq-data-tag\">").Append(Ui.H(r.Row.CourseTitle))
                     .Append("</span><span class=\"rq-data-tag\">").Append(Ui.H(r.Program)).Append("</span></dd></div><div><dt>").Append(x.Action == "Submitted" ? "Context" : "Feedback")
                     .Append("</dt><dd><p class=\"rq-event-note\">").Append(Ui.H(string.IsNullOrEmpty(x.Comment) ? x.Action : x.Comment)).Append("</p></dd></div></dl>");
+                // The course editor shows the submitted details at any status (read-only while the review is pending); the public page
+                // only opens for a published course.
                 if (x.Action == "Submitted" && r.Course != null)
-                    html.Append("<footer><a href=\"Course?id=").Append(r.Course.Id).Append("\">View course details ").Append(Draw(Ic["arrow"])).Append("</a></footer>");
+                    html.Append("<footer><a href=\"").Append(r.Course.InstructorId == Me.Id ? "CourseEditor?id=" : "Course?id=").Append(r.Course.Id).Append("\">View course details ").Append(Draw(Ic["arrow"])).Append("</a></footer>");
                 html.Append("</div></li>");
             }
             html.Append("</ol>");

@@ -14,7 +14,7 @@ namespace SKILL_UP.Frontend
         {
             var lessons = OwnCourses.SelectMany(c => Data.LessonsOf(c.Id).Select(l => new
             {
-                l.Id, l.CourseId, l.Title, l.Minutes, Course = c.Title, Colour = c.Color ?? "mint",
+                l.Id, l.CourseId, l.Title, l.Minutes, Course = c.Title, Colour = c.Color ?? "mint", Art = CourseArt(c),
                 Kind = l.Type == "article" ? "DOC" : l.Type == "lab" ? "LAB" : "QUIZ",
                 Audience = l.Preview ? "Public preview" : "Enrolled learners"
             })).ToList();

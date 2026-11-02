@@ -1,11 +1,7 @@
 /* Shared base: reset, colours, type, buttons, forms, tables, the workspace shell */
 
-@import url('../assets/registered/fonts.css');
-
-@font-face {
-    font-family: Inter;
-    src: local('Inter');
-}
+/* The fonts are linked from SkillUp.Master (assets/visitor/fonts.css, assets/registered/fonts.css): an @import here made the browser
+   find them late. */
 
 * {
     box-sizing: border-box;

@@ -2,8 +2,8 @@
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
 <asp:PlaceHolder ID="Denied" runat="server" Visible="false"><div class="empty"><h3>Course access denied</h3><p>New items will appear here when they are available.</p></div></asp:PlaceHolder>
 <asp:PlaceHolder ID="Editor" runat="server">
-<section class="course-info-page" data-locked="<%= Locked ? "true" : "false" %>">
-  <div class="ci-top-links"><a class="ci-back" href="Courses">&larr; My courses</a><% if (Me.Role == "Instructor") { %><a class="ci-back" href="CourseRequests">My requests &rarr;</a><% } %></div>
+<section class="course-info-page" data-locked="<%= Locked ? "true" : "false" %>" data-fresh="<%= Fresh ? "true" : "false" %>">
+  <div class="ci-top-links crumb-trail"><a class="ci-back" href="<%: BackUrl %>"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><%: BackLabel %></a><% if (Me.Role == "Instructor") { %><a class="ci-back crumb-end" href="CourseRequests">My requests<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><% } %></div>
   <header class="ci-header">
     <span class="ci-title-icon"><img src="assets/course-editor/imgVector.svg" alt=""><span><%= Icons.Book %></span></span>
     <h1><%: Fresh ? "Create a course" : C.Title %></h1>
@@ -68,13 +68,25 @@
           <section class="ci-capsule ci-review" aria-label="Program Leader review">
             <span class="ci-capsule-art" aria-hidden="true"><%= CourseEditorArt.Review %></span>
             <div class="ci-review-content">
-              <div><small><%= IsLeader ? "PUBLISHING" : "PROGRAM LEADER REVIEW" %></small><p class="ci-review-status" data-tone="<%= Deleting ? "warn" : Status == "Published" ? "ok" : Status == "Pending review" ? "warn" : "idle" %>"><%= Status == "Pending review" ? "Awaiting approval" : Status == "Published" ? (IsLeader ? "Published" : "Approved and published") : IsLeader ? "Save your course, then publish it." : "Save your course and submit it for review." %></p></div>
+              <div><small><%= IsLeader ? "PUBLISHING" : "PROGRAM LEADER REVIEW" %></small><p class="ci-review-status" data-tone="<%= Deleting ? "warn" : Status == "Published" ? "ok" : Status == "Pending review" ? "warn" : "idle" %>"><%= Status == "Pending review" ? "Awaiting approval" : Status == "Published" ? (IsLeader ? "Published" : "Approved and published. Edit the course to submit new changes.") : IsLeader ? "Save your course, then publish it." : Status == "Draft" ? "Save your course and submit it for review." : "Edit the course, then submit it again." %></p></div>
               <% if (Deleting) { %><a class="button" href="CourseRequests">View deletion request &rarr;</a><% } else if (Fresh) { %><span>Save draft first</span><% } %>
               <skill:SubmitButton ID="WithdrawReview" runat="server" Text="Withdraw submission" CausesValidation="false" CommandArgument="withdraw" OnCommand="CourseAction_Command" data-confirm="Withdraw this submission? The course returns to Draft." />
               <skill:SubmitButton ID="SubmitReview" runat="server" CssClass="ci-submit-review" Text="Submit for approval" CausesValidation="false" CommandArgument="submit" OnCommand="CourseAction_Command" data-confirm="Submit this course and its current materials to the Program Leader for review?" />
             </div>
           </section>
           <asp:PlaceHolder ID="SavedParts" runat="server">
+          <section class="ci-cover" aria-labelledby="ci-cover-title">
+            <img src="<%: CoverUrl %>" alt="Current course image">
+            <div>
+              <h2 id="ci-cover-title">Course image</h2>
+              <p>Shown on the course card and in Learning resources. PNG, JPG or WebP, up to 2 MB.<%= HasCover ? "" : " Right now a stock image is shown." %></p>
+              <fieldset class="ci-cover-actions"<%= Locked ? " disabled" : "" %>>
+                <asp:FileUpload ID="CoverFile" runat="server" accept="image/png,image/jpeg,image/webp" aria-label="Course image file" />
+                <skill:SubmitButton ID="CoverUpload" runat="server" CssClass="primary" Text="Upload image" CausesValidation="false" OnClick="Cover_Click" />
+                <skill:SubmitButton ID="CoverRemove" runat="server" CssClass="ghost" Text="Use stock image" CausesValidation="false" OnClick="CoverRemove_Click" data-confirm="Remove the uploaded image and show a stock image instead?" />
+              </fieldset>
+            </div>
+          </section>
           <section class="ci-activities">
             <header><div><h2>Learning activities</h2><p><%= Ui.Plural(Lessons.Count, "activity", "activities") %> &middot; <%= TotalMinutes %> min total</p></div><fieldset<%= Locked ? " disabled" : "" %>><skill:SubmitButton runat="server" CssClass="ci-add-activity" Text="+ Add activity" CausesValidation="false" CommandArgument="new" OnCommand="EditLesson_Command" /></fieldset></header>
             <asp:Panel ID="LessonEditor" runat="server" CssClass="ci-lesson-editor" DefaultButton="SaveLessonButton" Visible="false">
@@ -85,6 +97,8 @@
                 <label>Estimated minutes<asp:TextBox ID="LessonMinutes" runat="server" TextMode="Number" min="1" max="600" /></label>
                 <label class="full">Learning content / instructions<asp:TextBox ID="LessonBody" runat="server" TextMode="MultiLine" Rows="6" /><asp:RequiredFieldValidator runat="server" ControlToValidate="LessonBody" ValidationGroup="lesson" ErrorMessage="Add the content or instructions." Display="Dynamic" CssClass="field-error" /></label>
                 <label class="full">Expected answer (required for labs)<asp:TextBox ID="LessonAnswer" runat="server" MaxLength="1000" /></label>
+                <label>Practice terminal<asp:DropDownList ID="LessonWorkspace" runat="server"><asp:ListItem Value="none">None (no terminal)</asp:ListItem><asp:ListItem Value="javascript">JavaScript terminal (runs in the browser)</asp:ListItem></asp:DropDownList><small>Only for JavaScript practice. Leave it on None for MongoDB, C#, SQL and other topics, because the terminal cannot run them. Not used for quizzes.</small></label>
+                <label class="full">Starter code<asp:TextBox ID="LessonStarter" runat="server" TextMode="MultiLine" Rows="3" MaxLength="4000" spellcheck="false" /><small>With the terminal on, learners start with this code. With None on a lab, learners see it as the code to complete, for example <code>db.users.____({ name: "Alex" })</code>. Leave it empty for nothing.</small></label>
                 <label class="check"><asp:CheckBox ID="LessonPreview" runat="server" /> Allow public article preview</label>
               </div>
               <div class="actions"><skill:SubmitButton ID="SaveLessonButton" runat="server" CssClass="primary" Text="Save activity" ValidationGroup="lesson" OnClick="SaveLesson_Click" /><a class="button ghost" href="<%= EditorUrl(null) %>">Cancel</a></div>

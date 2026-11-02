@@ -11,6 +11,14 @@ namespace SKILL_UP.Frontend
             if (string.IsNullOrEmpty(Request.QueryString["token"])) Go("ForgotPassword");
         }
 
+        /// <summary>The same rules as the browser check (Backend Passwords.Problem), for a browser without scripts.</summary>
+        protected void Password_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
+        {
+            var problem = Backend.Passwords.Problem(args.Value);
+            args.IsValid = problem == null;
+            if (problem != null) ((System.Web.UI.WebControls.CustomValidator)source).ErrorMessage = problem;
+        }
+
         protected void Save_Click(object sender, EventArgs e)
         {
             var payload = new { token = Request.QueryString["token"], password = AuthPassword.Text, confirm = AuthConfirm.Text };

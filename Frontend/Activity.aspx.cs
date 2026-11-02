@@ -26,6 +26,9 @@ namespace SKILL_UP.Frontend
         protected bool Guest, QuizReady, IsCompleted, ResultPassed;
         protected int Percent, SecondsLeft, HiddenQuestions, TaskNo, ResultScore;
         protected string Banner, NavHtml, HintText, UnavailableText;
+        protected bool HintShown;
+        /// <summary>For a lab without a terminal: the code the learner completes (the lab's starter code), shown above the answer box.</summary>
+        protected string CodeToComplete;
         protected List<AiPair> History = new List<AiPair>();
         protected List<QuestionRow> Questions = new List<QuestionRow>();
 
@@ -77,7 +80,8 @@ namespace SKILL_UP.Frontend
             IsCompleted = completed.Contains(L.Id);
             Quiz = Data.QuizFor(C.Id);
             QuizReady = L.Type == "quiz" && Quiz != null && Quiz.Status == "Published" && Quiz.Questions.Count > 0;
-            TaskNo = L.Type == "lab" ? 2 : 1;
+            // In a lab with a terminal the terminal is Task 1 and the question Task 2; otherwise the activity is Task 1.
+            TaskNo = L.Type == "lab" && L.Workspace == "javascript" ? 2 : 1;
             Banner = SkillBanner(C, index, Percent);
             NavHtml = Navigation();
 
@@ -88,14 +92,28 @@ namespace SKILL_UP.Frontend
                 lab.Guest = Guest;
                 lab.TaskNumber = L.Type == "lab" ? 1 : 2;
                 lab.Username = Me?.Username ?? "learner";
+                lab.StarterCode = L.StarterCode;
+                lab.BodyText = Blanks(L.Body);
             }
-            LabBefore.Visible = L.Type == "lab";
-            LabAfter.Visible = L.Type != "lab";
+            // The terminal only runs JavaScript, so it appears only where the instructor chose it. A lab without one
+            // shows its starter code as the code to complete.
+            var hasTerminal = L.Workspace == "javascript" && L.Type != "quiz";
+            LabBefore.Visible = hasTerminal && L.Type == "lab";
+            LabAfter.Visible = hasTerminal && L.Type != "lab";
+            CodeToComplete = !hasTerminal && L.Type == "lab" ? Blanks(L.StarterCode) : null;
 
             Task.ActiveViewIndex = L.Type == "quiz" ? 2 : L.Type == "lab" ? 1 : 0;
             CompleteButton.Visible = !Guest && !IsCompleted;
             foreach (var b in new[] { HintArticle, HintLab, HintQuiz, LabSubmit, QuizSubmit, ContextButton, AskButton }) b.Enabled = !Guest;
             LabAnswer.Enabled = !Guest;
+            // A lab already passed shows the correct answer in the answer box too.
+            // Once passed, the answer is final: the box is locked and the Submit button is off.
+            if (!Guest && IsCompleted && L.Type == "lab")
+            {
+                LabAnswer.Text = L.Answer;
+                LabAnswer.ReadOnly = true;
+                LabSubmit.Enabled = false;
+            }
             LabAnswer.Attributes["placeholder"] = Guest ? "Log in to answer" : "Type your answer…";
             ContextButton.Attributes["data-question"] = "Help me understand " + C.Title + " — " + L.Title + ".";
             AskBox.Enabled = !Guest;
@@ -103,6 +121,11 @@ namespace SKILL_UP.Frontend
 
             BindCompanion();
             if (L.Type == "quiz") BindQuiz();
+            if (!Guest)
+            {
+                HintText = BuildHint();
+                HintPanel.Visible = true;
+            }
         }
 
         void Unavailable(string text)
@@ -207,8 +230,8 @@ namespace SKILL_UP.Frontend
         protected void Complete_Click(object sender, EventArgs e)
         {
             if (!TryRun("complete", new { courseId = C.Id.ToString(), lessonId = L.Id.ToString() })) return;
-            var next = index + 1 < lessons.Count ? lessons[index + 1] : null;
-            Go(next != null ? LessonUrl(next) : "Course?id=" + C.Id, "Activity completed");
+            // Stay on this activity: the learner moves on with the Next activity button when ready.
+            ReloadPage("Activity completed");
         }
 
         protected void LabSubmit_Click(object sender, EventArgs e)
@@ -221,7 +244,7 @@ namespace SKILL_UP.Frontend
             }
             object result;
             if (!TryRun("complete", new { courseId = C.Id.ToString(), lessonId = L.Id.ToString(), answer }, out result)) return;
-            if ((bool?)((JObject)result)?["correct"] == true) Go("Course?id=" + C.Id, "Correct — lab completed!");
+            if ((bool?)((JObject)result)?["correct"] == true) ReloadPage("Correct — lab completed!");
             LabError.Text = "Not quite. Check the method name and try again. Your attempt has been recorded.";
         }
 
@@ -257,18 +280,37 @@ namespace SKILL_UP.Frontend
             Go(Request.RawUrl);
         }
 
-        protected void Hint_Click(object sender, EventArgs e)
+        /// <summary>
+        /// The hint button works without a page reload: the hint is already in the page (hidden) and site.js shows it. This
+        /// postback is only for a browser without scripts, and opens the hint.
+        /// </summary>
+        protected void Hint_Click(object sender, EventArgs e) => HintShown = true;
+
+        /// <summary>
+        /// A blank in a lab's text or code (three or more underscores) becomes one underscore per letter of the expected answer,
+        /// for example _ _ _ _ _ _ _ for a seven-letter answer, so the learner can see how long the missing word is. After the
+        /// lab is passed it becomes the answer itself.
+        /// </summary>
+        protected string Blanks(string text)
         {
-            HintPanel.Visible = true;
+            var answer = (L?.Type == "lab" ? L.Answer : null)?.Trim();
+            if (string.IsNullOrEmpty(text) || string.IsNullOrEmpty(answer)) return text;
+            // Once the learner has passed the lab, the blanks show the correct answer. Visitors never see it.
+            if (!Guest && IsCompleted) return System.Text.RegularExpressions.Regex.Replace(text, "_{3,}", m => answer);
+            var blank = string.Join("  ", answer.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(word => string.Join(" ", Enumerable.Repeat("_", word.Length))));
+            return System.Text.RegularExpressions.Regex.Replace(text, "_{3,}", blank);
+        }
+
+        string BuildHint()
+        {
             if (L.Type == "lab")
             {
                 var answer = L.Answer ?? "";
-                HintText = "The method starts with “" + (answer.Length >= 2 ? answer.Substring(0, 2) : answer) + "” and has " + answer.Length + " characters. Check the method name in the lesson example.";
+                return "The method starts with “" + (answer.Length >= 2 ? answer.Substring(0, 2) : answer) + "” and has " + answer.Length + " characters. Check the method name in the lesson example.";
             }
-            else if (L.Type == "quiz")
-                HintText = "Read each question carefully, then connect it to the course examples. Focus on the key concept: " + (Quiz?.Questions.FirstOrDefault()?.Topic ?? L.Title) + ". You can ask your learning companion to explain the idea.";
-            else
-                HintText = "Work through the explanation one step at a time. Try describing " + L.Title + " in your own words, then check it against the lesson example.";
+            if (L.Type == "quiz")
+                return "Read each question carefully, then connect it to the course examples. Focus on the key concept: " + (Quiz?.Questions.FirstOrDefault()?.Topic ?? L.Title) + ". You can ask your learning companion to explain the idea.";
+            return "Work through the explanation one step at a time. Try describing " + L.Title + " in your own words, then check it against the lesson example.";
         }
 
         protected void Ask_Click(object sender, EventArgs e) => Ask(AskBox.Text.Trim());

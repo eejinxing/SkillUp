@@ -37,6 +37,48 @@ namespace SKILL_UP.Frontend
         protected string LearnerName, ScopedTitle, RosterNote, RosterCount, Rail, Stats, Status = "all";
         protected CourseRow DetailCourse;
         protected EnrollmentRow DetailEnrolment;
+
+        /// <summary>
+        /// The learners search box finds a learner by user ID only: a user ID is unique, so it names exactly one learner. "14", "#14" and
+        /// "ID 14" all find learner 14; an empty box shows everyone, and anything that is not an ID finds no one. (The course filter beside
+        /// the box is separate and still narrows the list by course.)
+        /// </summary>
+        static bool IdMatches(string term, int userId)
+        {
+            term = (term ?? "").Trim();
+            if (term.Length == 0) return true;
+            if (term.StartsWith("#")) term = term.Substring(1);
+            else if (term.StartsWith("id", StringComparison.OrdinalIgnoreCase)) term = term.Substring(2);
+            int wanted;
+            return int.TryParse(term.Trim(), NumberStyles.None, CultureInfo.InvariantCulture, out wanted) && wanted == userId;
+        }
+
+        /// <summary>
+        /// The back link of a learner's detail page: the learners list it was opened from (with its search and filters), or else the page
+        /// it was opened from, such as the course editor's Learners tab or the Overview.
+        /// </summary>
+        protected string BackUrl
+        {
+            get { string url, label; Back(out url, out label); return url; }
+        }
+
+        protected string BackLabel
+        {
+            get { string url, label; Back(out url, out label); return label; }
+        }
+
+        void Back(out string url, out string label)
+        {
+            var from = Request.UrlReferrer;
+            if (from != null && string.Equals(from.Host, Request.Url.Host, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(System.IO.Path.GetFileNameWithoutExtension(from.AbsolutePath), "Learners", StringComparison.OrdinalIgnoreCase) && from.Query.IndexOf("learner=", StringComparison.Ordinal) < 0)
+            {
+                url = "Learners" + from.Query;
+                label = "Learners";
+                return;
+            }
+            BackTo("Learners", "Learners", out url, out label, "Learners", "Activity");
+        }
         protected bool Expanded;
         List<Record> roster;
 
@@ -129,7 +171,7 @@ namespace SKILL_UP.Frontend
                 r.Average = scores.Count == 0 ? (int?)null : Charts.Avg(scores);
             }
             var shown = records.Where(r => (course == null || r.C.Id == course)
-                && SearchMatch.Matches(term, r.U.Name + " " + r.C.Title, r.U.Email)
+                && IdMatches(term, r.U.Id)
                 && (state == "" || state == "completed" && r.Completion == 100 || state == "progress" && r.Completion > 0 && r.Completion < 100
                     || state == "not-started" && r.Completion == 0 || state == "needs-support" && r.Average < 70));
             var byName = StringComparer.CurrentCultureIgnoreCase;
@@ -278,7 +320,9 @@ namespace SKILL_UP.Frontend
             EnrolCourse.DataSource = CourseOptions(own);
             EnrolCourse.DataBind();
             Select(EnrolCourse, QueryInt("course")?.ToString(CultureInfo.InvariantCulture));
-            EnrolLearner.DataSource = Data.Users.Where(u => u.Role == "Learner" && u.Status == "Active").Select(u => new { u.Id, u.Name }).ToList();
+            // The list is searchable (by name, username, email or ID), so each choice carries all of those.
+            EnrolLearner.DataSource = Data.Users.Where(u => u.Role == "Learner" && u.Status == "Active").OrderBy(u => u.Name, StringComparer.CurrentCultureIgnoreCase)
+                .Select(u => new { u.Id, Name = u.Name + "  ·  ID " + u.Id + "  ·  @" + u.Username + "  ·  " + u.Email }).ToList();
             EnrolLearner.DataBind();
         }
 
@@ -322,7 +366,7 @@ namespace SKILL_UP.Frontend
             LeaderTable.Enrollments = es.Where(x =>
             {
                 var user = Data.User(x.UserId);
-                var text = (user?.Name ?? "") + " " + (Data.Course(x.CourseId)?.Title ?? "");
+                var text = (user?.Name ?? "") + " " + (user?.Username ?? "") + " " + x.UserId + " " + (Data.Course(x.CourseId)?.Title ?? "");
                 var p = Progress(x.UserId, x.CourseId);
                 var key = p == 100 ? "done" : p > 0 ? "progress" : "idle";
                 return SearchMatch.Matches(term, text, user?.Email) && (Status == "all" || key == Status);

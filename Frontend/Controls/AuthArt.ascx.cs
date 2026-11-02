@@ -32,7 +32,7 @@ namespace SKILL_UP.Frontend.Controls
                 case "reset":
                     Heading = Kind == "forgot" ? "Locked out? It happens." : "Almost there.";
                     Lead = Kind == "forgot" ? "Getting back in takes three short steps." : "Set a new password to get back to your courses.";
-                    steps = new[] { S("Enter your email", "The address you registered with."), S("Open the reset link", "It stays valid for 15 minutes."), S("Set a new password", "8+ characters, a letter and a number.") };
+                    steps = new[] { S("Enter your email", "The address you registered with."), S("Open the reset link", "It stays valid for 15 minutes."), S("Set a new password", "8+ characters, a capital, a number and a symbol.") };
                     CurrentStep = Kind == "forgot" ? 0 : 2;
                     break;
                 default:

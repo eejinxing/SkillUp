@@ -156,6 +156,11 @@ namespace SKILL_UP.Backend
             if (c != null)
             {
                 RejectPendingReview(c, "Withdraw this submission before editing.");
+                // Saving sends a published course back to draft, so a save with nothing changed is refused.
+                Func<string, string> same = s => (s ?? "").Replace("\r\n", "\n").Trim();
+                if (c.ProgramId == p.Id && same(c.Title) == same(title) && same(c.Description) == same(description) && same(c.Outcomes) == same(outcomes)
+                    && c.Difficulty == difficulty && Day(c.Deadline) == Day(deadline) && Day(c.StartDate) == Day(start) && c.Duration == duration)
+                    Fail("There are no changes to save.", 409);
                 id = c.Id;
                 db.Exec(@"UPDATE COURSE SET program_id = @p1, title = @p2, description = @p3, skill_gained = @p4, difficulty_level = @p5, deadline = @p6, start_date = @p7,
                           duration_weeks = @p8, approval_status = N'Draft', visibility_status = N'Visible', updated_at = @p9 WHERE course_id = @p0",
@@ -207,6 +212,8 @@ namespace SKILL_UP.Backend
             {
                 if (Me.Role == "Program Leader") Fail("Program Leaders publish courses directly.");
                 if (c.Status == "Pending review" || pending != null) Fail("This course already has a pending request.", 409);
+                // Any edit to the course or its activities, quiz or files puts it back to Draft. Anything else has nothing new to review.
+                if (c.Status != "Draft") Fail("There are no changes to submit. Edit the course first, then submit it for approval.", 409);
                 RequireReady(c, "submitting");
                 db.Exec("UPDATE COURSE SET approval_status = N'Pending review', visibility_status = N'Visible', updated_at = @p1 WHERE course_id = @p0", c.Id, Now);
                 var request = SubmitRequest(c, "Create", string.IsNullOrWhiteSpace(comment) ? "Submitted for review" : comment.Trim());
@@ -250,15 +257,22 @@ namespace SKILL_UP.Backend
             var answer = type == "lab" ? Text("answer", "Expected answer", 1000) : "";
             var minutes = (int)Math.Min(600, Math.Max(1, Num("minutes") ?? 15));
             var preview = Bool("preview");
+            // The terminal only runs JavaScript, so it is offered for articles and labs; a quiz never has one.
+            var workspace = Str("workspace") ?? "none";
+            if (workspace != "none" && workspace != "javascript") Fail("Choose a valid practice workspace.");
+            if (type == "quiz") workspace = "none";
+            var starter = Limit((Str("starterCode") ?? "").Replace("\r\n", "\n").TrimEnd(), 4000);
+            if (string.IsNullOrWhiteSpace(starter)) starter = null;
             int id;
             var lesson = int.TryParse(Str("id"), out id) ? m.LessonsOf(c.Id).FirstOrDefault(l => l.Id == id) : null;
             if (lesson != null)
-                db.Exec("UPDATE LAB SET title = @p1, article_content = @p2, lesson_type = @p3, minutes = @p4, is_preview = @p5 WHERE lab_id = @p0", lesson.Id, title, body, type, minutes, preview);
+                db.Exec("UPDATE LAB SET title = @p1, article_content = @p2, lesson_type = @p3, minutes = @p4, is_preview = @p5, workspace = @p6, starter_code = @p7 WHERE lab_id = @p0",
+                    lesson.Id, title, body, type, minutes, preview, workspace, starter);
             else
             {
                 var sequence = m.LessonsOf(c.Id).Select(l => l.Sequence).DefaultIfEmpty(0).Max() + 1;
-                id = db.Insert(@"INSERT INTO LAB (course_id, title, article_content, sequence_no, is_preview, status, created_at, lesson_type, minutes)
-                                 VALUES (@p0, @p1, @p2, @p3, @p4, N'Draft', @p5, @p6, @p7)", c.Id, title, body, sequence, preview, Now, type, minutes);
+                id = db.Insert(@"INSERT INTO LAB (course_id, title, article_content, sequence_no, is_preview, status, created_at, lesson_type, minutes, workspace, starter_code)
+                                 VALUES (@p0, @p1, @p2, @p3, @p4, N'Draft', @p5, @p6, @p7, @p8, @p9)", c.Id, title, body, sequence, preview, Now, type, minutes, workspace, starter);
             }
             if (type == "lab")
             {
@@ -271,6 +285,24 @@ namespace SKILL_UP.Backend
             SetCourseDraft(c.Id);
             RecalculateProgress(c.Id);
             return null;
+        }
+
+        /// <summary>A course cover is a file the course editor saved under Frontend/uploads/course-art with a random name.</summary>
+        static readonly Regex CoverPattern = new Regex(@"^uploads/course-art/[0-9a-f]{32}\.(png|jpg|webp)$");
+
+        /// <summary>
+        /// Sets (path given) or clears (path empty) the cover image of a course the caller manages. It returns the previous
+        /// cover so the page can delete that file. A cover is not course content, so it does not send a published course back to draft.
+        /// </summary>
+        object CourseArt()
+        {
+            var c = CourseFor(Str("courseId"), true);
+            RejectPendingReview(c, "Withdraw the review before changing the course image.");
+            var path = (Str("path") ?? "").Trim();
+            if (path.Length > 0 && !CoverPattern.IsMatch(path)) Fail("That image could not be used.");
+            db.Exec("UPDATE COURSE SET thumbnail = @p1, updated_at = @p2 WHERE course_id = @p0", c.Id, path.Length == 0 ? null : path, Now);
+            Log(path.Length == 0 ? "Course image removed" : "Course image changed", c.Title, "Course", c.Id);
+            return new JObject { ["previous"] = c.Thumbnail };
         }
 
         object LessonDelete()

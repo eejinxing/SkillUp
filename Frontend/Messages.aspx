@@ -2,6 +2,7 @@
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
 <%-- Puts back the column widths this person dragged last time before the page is first drawn (see "Messages: drag the dividers" in js/site.js). --%>
 <script>(function () { try { var w = JSON.parse(localStorage.getItem('skillup.messages.widths') || 'null'); if (w && isFinite(w.left) && isFinite(w.right)) { var r = document.documentElement; r.classList.add('sc-sized'); r.style.setProperty('--sc-left', w.left + 'px'); r.style.setProperty('--sc-right', w.right + 'px'); } } catch (e) { } })();</script>
+<header class="page-intro"><p class="pi-title">Stay connected</p><p>Announcements from your instructors and direct messages, all in one place.</p></header>
 <section class="skill-chat sc-v2 sc-workspace <%= Selected != null && QueryInt("id") != null ? "sc-conversation-open" : "" %>" data-api="<%= ResolveUrl("~/api/commands/") %>" data-with="<%= SelectedId %>">
   <h1 class="sc-sr-only" id="page-title" tabindex="-1">Communication workspace</h1>
   <aside class="sc-contacts chat-contacts" aria-label="Workspace and contacts">

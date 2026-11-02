@@ -32,6 +32,11 @@ namespace SKILL_UP.Frontend
         protected global::System.Web.UI.WebControls.TextBox LessonMinutes;
         protected global::System.Web.UI.WebControls.TextBox LessonBody;
         protected global::System.Web.UI.WebControls.TextBox LessonAnswer;
+        protected global::System.Web.UI.WebControls.FileUpload CoverFile;
+        protected global::SKILL_UP.Frontend.Controls.SubmitButton CoverUpload;
+        protected global::SKILL_UP.Frontend.Controls.SubmitButton CoverRemove;
+        protected global::System.Web.UI.WebControls.DropDownList LessonWorkspace;
+        protected global::System.Web.UI.WebControls.TextBox LessonStarter;
         protected global::System.Web.UI.WebControls.CheckBox LessonPreview;
         protected global::SKILL_UP.Frontend.Controls.SubmitButton SaveLessonButton;
         protected global::System.Web.UI.WebControls.Repeater LessonList;

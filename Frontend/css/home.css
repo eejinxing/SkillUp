@@ -1,6 +1,6 @@
 /* Visitor landing page (Home): hero, courses, instructors, stories, FAQ, footer, enquiry form; My Enquiries */
 
-@import url('../assets/visitor/fonts.css');
+/* The fonts (assets/visitor/fonts.css) are linked from SkillUp.Master, so they start downloading at once. */
 
 /* ==== Keep the source composition while giving the replacement copy enough room. */
 
