@@ -62,13 +62,13 @@
                 <label>Visibility<input value="<%= C?.Status == "Published" ? "Visible to learners" : "Hidden until published" %>" readonly aria-readonly="true"></label>
               </div>
             </fieldset>
-            <p class="ci-save-state" role="status">Changes require Program Leader review before publication.</p>
+            <p class="ci-save-state" role="status"><%= IsLeader ? "Saving returns the course to Draft. Publish it again when you are ready." : "Changes require Program Leader review before publication." %></p>
             <div class="ci-form-actions"><skill:SubmitButton ID="SaveButton" runat="server" CssClass="ci-save" Text="Save changes" ValidationGroup="course" OnClick="Save_Click" /><a class="ci-discard button" href="<%= EditorUrl(null) %>">Discard changes</a></div>
           </asp:Panel>
           <section class="ci-capsule ci-review" aria-label="Program Leader review">
             <span class="ci-capsule-art" aria-hidden="true"><%= CourseEditorArt.Review %></span>
             <div class="ci-review-content">
-              <div><small>PROGRAM LEADER REVIEW</small><p class="ci-review-status" data-tone="<%= Deleting ? "warn" : Status == "Published" ? "ok" : Status == "Pending review" ? "warn" : "idle" %>"><%= Status == "Pending review" ? "Awaiting approval" : Status == "Published" ? "Approved and published" : "Save your course and submit it for review." %></p></div>
+              <div><small><%= IsLeader ? "PUBLISHING" : "PROGRAM LEADER REVIEW" %></small><p class="ci-review-status" data-tone="<%= Deleting ? "warn" : Status == "Published" ? "ok" : Status == "Pending review" ? "warn" : "idle" %>"><%= Status == "Pending review" ? "Awaiting approval" : Status == "Published" ? (IsLeader ? "Published" : "Approved and published") : IsLeader ? "Save your course, then publish it." : "Save your course and submit it for review." %></p></div>
               <% if (Deleting) { %><a class="button" href="CourseRequests">View deletion request &rarr;</a><% } else if (Fresh) { %><span>Save draft first</span><% } %>
               <skill:SubmitButton ID="WithdrawReview" runat="server" Text="Withdraw submission" CausesValidation="false" CommandArgument="withdraw" OnCommand="CourseAction_Command" data-confirm="Withdraw this submission? The course returns to Draft." />
               <skill:SubmitButton ID="SubmitReview" runat="server" CssClass="ci-submit-review" Text="Submit for approval" CausesValidation="false" CommandArgument="submit" OnCommand="CourseAction_Command" data-confirm="Submit this course and its current materials to the Program Leader for review?" />

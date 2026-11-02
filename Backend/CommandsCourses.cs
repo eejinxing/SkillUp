@@ -178,18 +178,36 @@ namespace SKILL_UP.Backend
             return (Deferred)(reloaded => Workspace.CourseDto(reloaded, reloaded.Course(id), true, false));
         }
 
+        /// <summary>A course needs an activity, and a published quiz when it has a quiz activity, before it is submitted or published.</summary>
+        void RequireReady(CourseRow c, string verb)
+        {
+            var lessons = m.LessonsOf(c.Id);
+            if (lessons.Count == 0) Fail("Add at least one learning activity.");
+            var quiz = m.QuizFor(c.Id);
+            if (lessons.Any(l => l.Type == "quiz") && (quiz == null || quiz.Questions.Count == 0 || quiz.Status != "Published"))
+                Fail("Publish the quiz before " + verb + " the course.");
+        }
+
         object CourseAction(string courseId, string op, string comment)
         {
             var c = CourseFor(courseId, true);
             var pending = PendingRequest(c.Id);
+            if (op == "publish")
+            {
+                // A Program Leader publishes directly; only an instructor's course needs the leader's review.
+                Must("Program Leader");
+                if (c.Status == "Pending review" || pending != null) Fail("Decide the pending request before publishing.", 409);
+                RequireReady(c, "publishing");
+                db.Exec("UPDATE COURSE SET approval_status = N'Published', visibility_status = N'Visible', updated_at = @p1 WHERE course_id = @p0", c.Id, Now);
+                db.Exec("UPDATE LAB SET status = N'Published' WHERE course_id = @p0", c.Id);
+                Log("Course published", c.Title);
+                return null;
+            }
             if (op == "submit")
             {
+                if (Me.Role == "Program Leader") Fail("Program Leaders publish courses directly.");
                 if (c.Status == "Pending review" || pending != null) Fail("This course already has a pending request.", 409);
-                var lessons = m.LessonsOf(c.Id);
-                if (lessons.Count == 0) Fail("Add at least one learning activity.");
-                var quiz = m.QuizFor(c.Id);
-                if (lessons.Any(l => l.Type == "quiz") && (quiz == null || quiz.Questions.Count == 0 || quiz.Status != "Published"))
-                    Fail("Publish the quiz before submitting the course.");
+                RequireReady(c, "submitting");
                 db.Exec("UPDATE COURSE SET approval_status = N'Pending review', visibility_status = N'Visible', updated_at = @p1 WHERE course_id = @p0", c.Id, Now);
                 var request = SubmitRequest(c, "Create", string.IsNullOrWhiteSpace(comment) ? "Submitted for review" : comment.Trim());
                 Log("Course submitted", c.Title);

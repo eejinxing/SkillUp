@@ -28,8 +28,17 @@ namespace SKILL_UP.Frontend
         protected LessonRow EditingLesson;
         protected string Mark, ProgramName, InstructorName, Status, QuizSummary, History;
 
+        protected bool IsLeader => Me.Role == "Program Leader";
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            // A Program Leader has no one to ask for approval, so the review button publishes directly.
+            if (IsLeader)
+            {
+                SubmitReview.Text = "Publish";
+                SubmitReview.CommandArgument = "publish";
+                SubmitReview.Attributes["data-confirm"] = "Publish this course and its current materials? Learners will be able to open it.";
+            }
             var id = QueryInt("id");
             C = id == null ? null : OwnCourses.FirstOrDefault(c => c.Id == id);
             if (id != null && C == null)
@@ -155,7 +164,7 @@ namespace SKILL_UP.Frontend
             }
             AssignToggle.Visible = !Fresh && Me.Role == "Program Leader" && !AssignForm.Visible;
             WithdrawReview.Visible = !Fresh && !Deleting && Status == "Pending review";
-            SubmitReview.Visible = !Fresh && !Deleting && Status != "Pending review";
+            SubmitReview.Visible = !Fresh && !Deleting && Status != "Pending review" && !(IsLeader && Status == "Published");
             SavedParts.Visible = !Fresh;
             DeleteCourse.Visible = Me.Role != "Instructor";
             AskDeletion.Visible = Me.Role == "Instructor" && !DeletionForm.Visible;
@@ -188,7 +197,7 @@ namespace SKILL_UP.Frontend
             var op = e.CommandArgument.ToString();
             if (!TryRun("courseAction", new { id = C.Id.ToString(CultureInfo.InvariantCulture), action = op })) return;
             if (op == "delete") Go("Courses", "Course deleted");
-            ReloadPage(op == "submit" ? "Course submitted for review" : op == "withdraw" ? "Submission withdrawn" : "Course hidden");
+            ReloadPage(op == "publish" ? "Course published" : op == "submit" ? "Course submitted for review" : op == "withdraw" ? "Submission withdrawn" : "Course hidden");
         }
 
         protected void AssignToggle_Click(object sender, EventArgs e)
