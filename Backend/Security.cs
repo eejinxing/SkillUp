@@ -29,9 +29,6 @@ namespace SKILL_UP.Backend
             return bool.TryParse(ConfigurationManager.AppSettings[key], out value) ? value : fallback;
         }
 
-        /// <summary>Allows the "Sign in with a demo account" buttons (no password). Never enable in production.</summary>
-        public static bool DemoLogin => Flag("SkillUp:DemoLogin", false);
-
         /// <summary>Loads Database/demo-seed.json into an empty database on first start.</summary>
         public static bool SeedDemoData => Flag("SkillUp:SeedDemoData", false);
 
@@ -59,7 +56,9 @@ namespace SKILL_UP.Backend
         {
             password = password ?? "";
             if (password.Length < 8 || password.Length > 128) return "Use 8 to 128 characters for the password.";
-            if (!password.Any(char.IsLetter) || !password.Any(char.IsDigit)) return "The password needs at least one letter and one number.";
+            if (!password.Any(char.IsUpper)) return "Add at least one capital letter.";
+            if (!password.Any(char.IsDigit)) return "Add at least one number.";
+            if (!password.Any(c => !char.IsLetterOrDigit(c) && !char.IsWhiteSpace(c))) return "Add at least one special character, such as ! @ # $ %.";
             return null;
         }
 

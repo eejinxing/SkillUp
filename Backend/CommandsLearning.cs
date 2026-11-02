@@ -44,6 +44,8 @@ namespace SKILL_UP.Backend
             if (lesson.Type == "quiz") Fail("Submit the quiz to complete this activity.");
             if (lesson.Type == "lab")
             {
+                // A lab that is already passed is final: its answer cannot be submitted again.
+                if (m.CompletedLessons(Me.Id, c.Id).Contains(lesson.Id)) Fail("This lab is already completed and its answer can no longer be changed.", 409);
                 // Graded here, never in the browser. Every lab answer is recorded as a submission.
                 var answer = (Str("answer") ?? "").Trim();
                 var correct = string.Equals(answer, (lesson.Answer ?? "").Trim(), StringComparison.OrdinalIgnoreCase);

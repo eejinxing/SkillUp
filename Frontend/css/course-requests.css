@@ -2142,8 +2142,15 @@ html body .main:has(.rq-grid-view) {
     color: #b69cff;
 }
 
-#app .rq-grid-view th[aria-sort=ascending] .rq-sort-head svg {
-    transform: rotate(180deg);
+/* The arrow that shows the direction: up for ascending, down for descending; the other one fades back. */
+#app .rq-grid-view th[data-sorted] .rq-sort-head svg path {
+    opacity: .3;
+}
+
+#app .rq-grid-view th[aria-sort=ascending] .rq-sort-head .rq-arrow-up,
+#app .rq-grid-view th[aria-sort=descending] .rq-sort-head .rq-arrow-down {
+    opacity: 1;
+    stroke-width: 2.2;
 }
 
 /* Cells */

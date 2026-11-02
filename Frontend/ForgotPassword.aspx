@@ -13,7 +13,7 @@
             <p class="auth-modal-sub">Enter the email you registered with. In this demo, the reset link appears on screen.</p>
             <asp:Panel runat="server" DefaultButton="SendButton">
           <div class="auth-control">
-            <div class="auth-label-row"><label for="AuthEmail">Email</label></div>
+            <div class="auth-label-row"><label for="AuthEmail">Email <b class="req" title="Required" aria-hidden="true">*</b></label></div>
             <span class="auth-field"><asp:TextBox ID="AuthEmail" runat="server" ClientIDMode="Static" TextMode="Email" placeholder="The email you registered with" autocomplete="email" /></span>
             <asp:RequiredFieldValidator runat="server" ControlToValidate="AuthEmail" ErrorMessage="Enter your email." Display="Dynamic" CssClass="field-error" />
             <asp:RegularExpressionValidator runat="server" ControlToValidate="AuthEmail" ValidationExpression="^\S+@\S+\.\S+$" ErrorMessage="Enter a valid email address." Display="Dynamic" CssClass="field-error" />

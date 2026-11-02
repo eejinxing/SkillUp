@@ -2,7 +2,7 @@
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
 <asp:MultiView ID="Views" runat="server" ActiveViewIndex="0">
   <asp:View runat="server">
-    <div class="page-head"><div><h1 tabindex="-1" id="page-title">Certificates</h1><p>Your completed courses, recognised.</p></div>
+    <div class="page-head page-intro"><div><h1 tabindex="-1" id="page-title">Certificates</h1><p>Your completed courses, recognised.</p></div>
       <div class="actions tight">
         <asp:Panel ID="SearchPanel" runat="server" DefaultButton="SearchButton" CssClass="cert-search-form">
           <label class="cert-search">

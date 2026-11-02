@@ -126,9 +126,10 @@ namespace SKILL_UP.Backend
                 foreach (var l in c["lessons"] ?? new JArray())
                 {
                     var type = S(l, "type") ?? "article";
-                    var lessonId = db.Insert(@"INSERT INTO LAB (course_id, title, article_content, sequence_no, is_preview, status, created_at, lesson_type, minutes)
-                                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8)",
-                        id, S(l, "title"), S(l, "body"), sequence++, (bool?)l["preview"] == true, status == "Published" ? "Published" : "Draft", now, type, (int?)l["minutes"] ?? 15);
+                    var lessonId = db.Insert(@"INSERT INTO LAB (course_id, title, article_content, sequence_no, is_preview, status, created_at, lesson_type, minutes, workspace, starter_code)
+                                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)",
+                        id, S(l, "title"), S(l, "body"), sequence++, (bool?)l["preview"] == true, status == "Published" ? "Published" : "Draft", now, type, (int?)l["minutes"] ?? 15,
+                        S(l, "workspace") ?? "none", S(l, "starterCode"));
                     if (type == "lab")
                         db.Exec("INSERT INTO LAB_TASK (lab_id, question_text, task_type, correct_answer, points, sequence_no) VALUES (@p0, @p1, N'Text', @p2, 1, 1)",
                             lessonId, S(l, "body") ?? "", S(l, "answer") ?? "");

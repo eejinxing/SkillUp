@@ -568,6 +568,17 @@ a.au-add {
     margin-top: -2px;
 }
 
+/* The profile page is a "figma-secondary" page, whose rule gives every <details> 17px of padding top and bottom (it is meant for the
+   section cards). On the side buttons it made the first one sit in a taller row with a bigger gap below it. */
+#app .pf-side-actions :is(.pf-image-form,.pf-demo-switch) {
+    padding: 0;
+    border: 0;
+}
+
+#app .pf-side-actions :is(.pf-image-form,.pf-demo-switch)[open]>summary {
+    margin-bottom: 0;
+}
+
 #app .pf-side-actions :is(.pf-image-form,.pf-demo-switch):not([open]) {
     display: block;
 }

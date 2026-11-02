@@ -5,7 +5,7 @@
     <asp:Repeater ID="Lessons" runat="server">
       <ItemTemplate>
         <article class="panel">
-          <div class="course-art <%# Eval("Colour") %>" style="height:100px;border-radius:10px;margin-bottom:16px"><b style="font-size:28px"><%# Eval("Kind") %></b></div>
+          <div class="course-art <%# Eval("Colour") %>" style="height:100px;border-radius:10px;margin-bottom:16px"><img src="<%#: Eval("Art") %>" alt="" loading="lazy"><b style="font-size:28px"><%# Eval("Kind") %></b></div>
           <h3><%#: Eval("Title") %></h3>
           <p><%#: Eval("Course") %></p>
           <small><%# Eval("Minutes") %> min &middot; <%# Eval("Audience") %></small>

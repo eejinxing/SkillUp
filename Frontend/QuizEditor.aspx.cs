@@ -29,6 +29,8 @@ namespace SKILL_UP.Frontend
         }
 
         public override string Route => "quiz-editor";
+        /// <summary>The question editor is a step inside the course editor, so going back from the course editor skips it.</summary>
+        protected override string NavGroup => "course-edit";
         protected override string[] Roles => new[] { "Instructor", "Program Leader" };
 
         protected CourseRow C;

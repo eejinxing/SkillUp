@@ -1,5 +1,6 @@
 using System;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using Newtonsoft.Json.Linq;
 
 namespace SKILL_UP.Frontend.Controls
@@ -32,6 +33,16 @@ namespace SKILL_UP.Frontend.Controls
             SignUpEmailBox.Text = email;
             reopen = true;
         }
+
+        /// <summary>The same rules as the browser check (Backend Passwords.Problem), for a browser without scripts.</summary>
+        protected void Password_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            var problem = Backend.Passwords.Problem(args.Value);
+            args.IsValid = problem == null;
+            if (problem != null) ((System.Web.UI.WebControls.CustomValidator)source).ErrorMessage = problem;
+        }
+
+        protected void Agree_ServerValidate(object source, ServerValidateEventArgs args) => args.IsValid = AgreeTerms.Checked;
 
         protected void Register_Click(object sender, EventArgs e)
         {

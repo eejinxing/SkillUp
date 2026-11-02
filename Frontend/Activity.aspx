@@ -71,7 +71,8 @@
           <asp:View runat="server">
             <asp:Panel runat="server" CssClass="answer-task" DefaultButton="LabSubmit">
               <div class="answer-task-heading"><span class="answer-task-label">Task <%= TaskNo %></span><small>Question &middot; <%= L.Minutes %> min</small></div>
-              <div class="answer-prompt"><h2><%: L.Title %></h2><p><%: L.Body %></p></div>
+              <div class="answer-prompt"><h2><%: L.Title %></h2><p><%: Blanks(L.Body) %></p></div>
+              <% if (!string.IsNullOrWhiteSpace(CodeToComplete)) { %><figure class="answer-code"><figcaption>Complete this code</figcaption><pre><code><%: CodeToComplete %></code></pre></figure><% } %>
               <div class="answer-answer-row">
                 <label class="answer-input-label" for="LabAnswer">Your answer
                   <asp:TextBox ID="LabAnswer" runat="server" ClientIDMode="Static" autocomplete="off" spellcheck="false" />
@@ -123,7 +124,7 @@
             </asp:PlaceHolder>
           </asp:View>
         </asp:MultiView>
-        <asp:PlaceHolder ID="HintPanel" runat="server" Visible="false"><div class="notice answer-hint-text" role="status"><strong>A small hint</strong><p><%: HintText %></p></div></asp:PlaceHolder>
+        <asp:PlaceHolder ID="HintPanel" runat="server" Visible="false"><div class="notice answer-hint-text" id="answer-hint-text" role="status"<%= HintShown ? "" : " hidden" %>><strong>A small hint</strong><p><%: HintText %></p></div></asp:PlaceHolder>
       </asp:PlaceHolder>
       <skill:TerminalLab ID="LabAfter" runat="server" />
       <nav class="answer-activity-nav" aria-label="Activity navigation"><%= NavHtml %></nav>

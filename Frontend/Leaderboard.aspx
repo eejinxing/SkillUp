@@ -1,5 +1,6 @@
 <%@ Page Title="Leaderboard" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Leaderboard.aspx.cs" Inherits="SKILL_UP.Frontend.LeaderboardPage" %>
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
+<header class="page-intro"><p class="pi-title">Earn points. Climb the ranks.</p><p>See how you compare with other learners, this week and all time.</p></header>
 <section class="skill-leaderboard lb-v2 lb-timing lb-sk">
   <header class="lb-header">
     <span class="lb-brand-mark" aria-hidden="true"><%= Star %></span>

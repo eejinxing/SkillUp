@@ -58,7 +58,6 @@ namespace SKILL_UP.Backend
             switch (action)
             {
                 case "login": return Login();
-                case "demo": return Demo();
                 case "logout": SignOut = true; Me = null; return null;
                 case "register": return Register();
                 case "forgot": return Forgot();
@@ -79,6 +78,7 @@ namespace SKILL_UP.Backend
                 case "quizSubmit": result = QuizSubmit(); break;
                 case "courseSave": result = CourseSave(); break;
                 case "courseAction": result = CourseAction(Str("id"), Str("action"), Str("comment")); break;
+                case "courseArt": result = CourseArt(); break;
                 case "lessonSave": result = LessonSave(); break;
                 case "lessonDelete": result = LessonDelete(); break;
                 case "quizSave": result = QuizSave(); break;
@@ -281,20 +281,6 @@ namespace SKILL_UP.Backend
             return null;
         }
 
-        /// <summary>Prototype-only role switcher. Disabled unless SkillUp:DemoLogin is true in Web.config.</summary>
-        object Demo()
-        {
-            if (!Settings.DemoLogin) Fail("Unknown action: demo", 404);
-            var role = Str("role");
-            var u = m.Users.FirstOrDefault(x => x.Role == role && x.Status == "Active");
-            if (u == null) Fail("Demo account unavailable.");
-            db.Exec("UPDATE [USER] SET last_login = @p1 WHERE user_id = @p0", u.Id, Now);
-            Me = u;
-            SignIn = u.Id;
-            Log("Signed in", u.Name + " (demo)");
-            return null;
-        }
-
         object Register()
         {
             var name = Str("name") ?? "";
@@ -339,6 +325,8 @@ namespace SKILL_UP.Backend
             if (reset == null) Fail("Reset link is invalid or expired.");
             var password = Str("password") ?? "";
             CheckNewPassword(password, Str("confirm"));
+            var owner = m.User(reset.User);
+            if (owner != null && Passwords.Verify(password, owner.Password)) Fail("Your new password must be different from your current password.");
             db.Exec("UPDATE [USER] SET password = @p1 WHERE user_id = @p0", reset.User, Passwords.Hash(password));
             db.Exec("UPDATE PASSWORD_RESET SET is_used = 1 WHERE reset_id = @p0", reset.Id);
             Log("Password reset", "", "User", reset.User);
@@ -357,8 +345,9 @@ namespace SKILL_UP.Backend
 
         bool LinkedToBrowser(EnquiryRow q)
         {
-            if (Me != null && q.UserId == Me.Id) return true;
-            return VisitorKey != null && (int)db.Scalar("SELECT COUNT(*) FROM ENQUIRY_ACCESS WHERE visitor_key_hash = @p0 AND enquiry_id = @p1",
+            // A signed-in account sees only its own enquiries; a guest sees only the guest enquiries sent from this browser.
+            if (Me != null) return q.UserId == Me.Id;
+            return q.UserId == null && VisitorKey != null && (int)db.Scalar("SELECT COUNT(*) FROM ENQUIRY_ACCESS WHERE visitor_key_hash = @p0 AND enquiry_id = @p1",
                 Tokens.Sha256(VisitorKey), q.Id) > 0;
         }
 
@@ -404,12 +393,12 @@ namespace SKILL_UP.Backend
             return null;
         }
 
-        /// <summary>"My enquiries": those linked to this browser, plus the signed-in account's own.</summary>
+        /// <summary>"My enquiries": a signed-in account's own, or, for a guest, the guest enquiries sent from this browser. The two are never mixed.</summary>
         object EnquiryList()
         {
             var linked = VisitorKey == null ? new HashSet<int>() : new HashSet<int>(db.Query(
                 "SELECT enquiry_id FROM ENQUIRY_ACCESS WHERE visitor_key_hash = @p0", r => r.Int("enquiry_id"), Tokens.Sha256(VisitorKey)));
-            return m.Enquiries.Where(q => linked.Contains(q.Id) || (Me != null && q.UserId == Me.Id))
+            return m.Enquiries.Where(q => Me != null ? q.UserId == Me.Id : q.UserId == null && linked.Contains(q.Id))
                 .OrderByDescending(q => q.CreatedAt).ThenByDescending(q => q.Id)
                 .Select(q => Workspace.EnquiryDto(q)).ToList();
         }
@@ -479,6 +468,7 @@ namespace SKILL_UP.Backend
             AttemptGuard.Clear(key);
             var password = Str("password") ?? "";
             CheckNewPassword(password, Str("confirm"));
+            if (password == (Str("current") ?? "")) Fail("Your new password must be different from your current password.");
             db.Exec("UPDATE [USER] SET password = @p1 WHERE user_id = @p0", Me.Id, Passwords.Hash(password));
             Log("Password changed", Me.Name, "User", Me.Id);
             // Every other session of this account ends (the cookie is tied to the password); this browser gets a fresh one.

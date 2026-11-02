@@ -27,8 +27,16 @@ namespace SKILL_UP.Frontend
         /// the program the course belongs to; everyone else goes to the catalogue (visitors to the landing page's courses).
         /// </summary>
         protected string BackUrl => Me?.Role == "Learner" && Request.QueryString["from"] == "mycourses" && C != null ? "MyCourses?program=" + C.ProgramId
-            : Me == null ? HomeCourses : "Catalog";
-        protected string BackLabel => Me?.Role == "Learner" && Request.QueryString["from"] == "mycourses" ? "My courses" : Me == null ? "Our Courses" : "All courses";
+            : Me == null ? HomeCourses : StaffBack().Item1;
+        protected string BackLabel => Me?.Role == "Learner" && Request.QueryString["from"] == "mycourses" ? "My courses" : Me == null ? "Our Courses" : StaffBack().Item2;
+
+        /// <summary>Instructors and other staff go back to the page they opened the course from; everyone else to the catalogue.</summary>
+        Tuple<string, string> StaffBack()
+        {
+            string url = "Catalog", label = "All courses";
+            if (Me != null && Me.Role != "Learner") BackTo("Catalog", "All courses", out url, out label, "Activity", "Certificates");
+            return Tuple.Create(url, label);
+        }
         protected List<LessonRow> Lessons;
         protected EnrollmentRow Enrollment;
         protected List<int> Completed = new List<int>();

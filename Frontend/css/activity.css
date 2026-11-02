@@ -3359,6 +3359,53 @@
     white-space: nowrap;
 }
 
+/* "Complete this code": the starter code of a lab that has no terminal (MongoDB, C#, ...). Read-only, easy to select and copy. */
+#app .answer-page .answer-code {
+    flex: none;
+    margin: 4px 0 0;
+    padding: 0;
+    border: 1px solid #ffffff1f;
+    border-radius: 12px;
+    background: #0b0c12;
+    overflow: hidden;
+}
+
+#app .answer-page .answer-code figcaption {
+    padding: 8px 14px;
+    border-bottom: 1px solid #ffffff14;
+    color: #a39cb4;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+#app .answer-page .answer-code pre {
+    margin: 0;
+    padding: 14px;
+    overflow-x: auto;
+    color: #e9e6f2;
+    font: 14px/1.6 ui-monospace, 'Cascadia Code', Consolas, monospace;
+    white-space: pre;
+    user-select: all;
+}
+
+/* Quiz result: "Back to course" is a white button. */
+#app .answer-page .answer-quiz-result .actions a.button.primary {
+    border-color: #fff;
+    background: #fff;
+    color: #0b0b12;
+}
+
+#app .answer-page .answer-quiz-result .actions a.button.primary:hover {
+    background: #e9e6f2;
+    border-color: #e9e6f2;
+}
+
+/* The hint stays out of sight until the hint button opens it (js/site.js). */
+.answer-hint-text[hidden] {
+    display: none !important;
+}
+
 /* ==== Activity breadcrumb: the same look as the course page's (css/course.css): 13px, a soft lavender-white link with a chevron,
    muted "/" separators, and the current activity in white. ==== */
 #app .answer-page .answer-breadcrumb {

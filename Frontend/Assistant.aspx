@@ -1,6 +1,6 @@
 <%@ Page Title="AI Assistant" Language="C#" MasterPageFile="~/Frontend/SkillUp.Master" AutoEventWireup="true" CodeBehind="Assistant.aspx.cs" Inherits="SKILL_UP.Frontend.AssistantPage" %>
 <asp:Content ContentPlaceHolderID="PageContent" runat="server">
-  <div class="page-head"><div><h1 tabindex="-1" id="page-title">AI Assistant</h1><p>A little guidance for your next step.</p></div><div class="actions tight"></div></div>
+  <div class="page-head page-intro"><div><h1 tabindex="-1" id="page-title">Ask your AI Assistant</h1><p>A nudge, an explanation or an example for any activity, any time.</p></div><div class="actions tight"></div></div>
   <div class="split assistant-split">
     <%-- Marks a short window (zoom-aware, so it matches what the person really sees) before the page is first drawn; js/site.js keeps it right on resize. --%>
     <script>(function (split) { var zoom = parseFloat(getComputedStyle(document.documentElement).zoom) || 1, h = innerHeight / zoom; split.classList.toggle('is-short', h < 800); split.classList.toggle('is-tiny', h < 660); })(document.currentScript.parentElement);</script>

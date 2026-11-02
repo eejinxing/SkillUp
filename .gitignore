@@ -98,3 +98,6 @@ handoff/*.zip
 
 # Local Claude Code permissions
 .claude/settings.local.json
+
+# Uploaded course images (Frontend/uploads/course-art)
+Frontend/uploads/

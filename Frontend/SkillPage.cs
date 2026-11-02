@@ -103,6 +103,47 @@ namespace SKILL_UP.Frontend
             if (!Restricted) base.OnLoad(e);
         }
 
+        // ---- where the visitor came from ----------------------------------------------------
+        // Back links return to the page that was clicked, not always to a fixed list. Each page opened by address (a GET, not a save)
+        // is remembered in the session: the page now open ("Current") and the one before it with a different file name ("Previous").
+
+        const string NavCurrent = "SkillUp.Nav.Current", NavPrevious = "SkillUp.Nav.Previous";
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            if (Me == null || Request.HttpMethod != "GET" || Request.Headers["X-SkillUp-Live"] != null || ScriptManager.GetCurrent(this)?.IsInAsyncPostBack == true) return;
+            var path = Request.Url.AbsolutePath;
+            var current = Session[NavCurrent] as string[];
+            // Moving between pages of the same group (the course editor and its question editor) keeps the page the group was opened from.
+            if (current != null && !string.Equals(current[0], path, StringComparison.OrdinalIgnoreCase) && current[3] == Me.Id.ToString(CultureInfo.InvariantCulture) && current[4] != NavGroup)
+                Session[NavPrevious] = current;
+            Session[NavCurrent] = new[] { path, Request.RawUrl, Title ?? "", Me.Id.ToString(CultureInfo.InvariantCulture), NavGroup };
+        }
+
+        /// <summary>Pages with the same group are steps of one task, so a back link skips over them. By default each page is its own group.</summary>
+        protected virtual string NavGroup => Route;
+
+        /// <summary>
+        /// The address and name of the page this one was opened from, for a "back" link. Pages whose file name is in skip are passed
+        /// over (a page that is a step inside this one), and when nothing suitable was remembered the fallback is used.
+        /// </summary>
+        protected void BackTo(string fallbackUrl, string fallbackLabel, out string url, out string label, params string[] skip)
+        {
+            url = fallbackUrl;
+            label = fallbackLabel;
+            var previous = Session[NavPrevious] as string[];
+            if (previous == null || Me == null || previous[3] != Me.Id.ToString(CultureInfo.InvariantCulture)) return;
+            var file = System.IO.Path.GetFileNameWithoutExtension(previous[0]);
+            if (string.Equals(file, System.IO.Path.GetFileNameWithoutExtension(Request.Url.AbsolutePath), StringComparison.OrdinalIgnoreCase)) return;
+            if (skip.Any(s => string.Equals(s, file, StringComparison.OrdinalIgnoreCase))) return;
+            if (new[] { "Login", "Register", "ForgotPassword", "ResetPassword", "Home", "Default" }.Contains(file, StringComparer.OrdinalIgnoreCase)) return;
+            // The page's own address, relative to this folder, so it works wherever the site is hosted.
+            url = file + (previous[1].IndexOf('?') >= 0 ? previous[1].Substring(previous[1].IndexOf('?')) : "");
+            var name = previous[2].Replace("Skill UP · ", "").Trim();
+            label = name.Length == 0 ? fallbackLabel : name;
+        }
+
         /// <summary>The signed-in, still active account, or null for a visitor.</summary>
         UserRow Active(Model model)
         {

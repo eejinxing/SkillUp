@@ -51,7 +51,6 @@ namespace SKILL_UP.Frontend
         protected void Page_Load(object sender, EventArgs e)
         {
             Title = Me.Name;
-            DemoSwitch.Visible = Backend.Settings.DemoLogin;
             var enrolments = MyEnrollments;
             Certificates = enrolments.Count(x => Data.LessonsOf(x.CourseId).Count > 0 && Progress(Me.Id, x.CourseId) == 100);
             CourseCount = Me.Role == "Learner" ? enrolments.Count : Data.Courses.Count(c => c.InstructorId == Me.Id);
@@ -236,14 +235,29 @@ namespace SKILL_UP.Frontend
             if (TryRun("profile", new { name = me.Name, username = me.Username, email = me.Email, location = me.Location, bio = me.Bio, theme = me.Theme, language = me.Language, avatar = "" })) ReloadPage("Profile image removed");
         }
 
+        /// <summary>Open again after a refused change, so its message is in view.</summary>
+        protected bool PasswordOpen;
+
+        /// <summary>The same rules as the browser check (Backend Passwords.Problem), for a browser without scripts.</summary>
+        protected void Password_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            var problem = Backend.Passwords.Problem(args.Value);
+            args.IsValid = problem == null;
+            if (problem != null) ((CustomValidator)source).ErrorMessage = problem;
+        }
+
+        protected void Password_Click(object sender, EventArgs e)
+        {
+            PasswordOpen = true;
+            if (!IsValid) return;
+            // The command keeps this browser signed in with a fresh cookie and ends the account's other sessions.
+            if (TryRun("password", new { current = PwCurrent.Text, password = PwNew.Text, confirm = PwConfirm.Text }, out _, message => PasswordError.Text = Server.HtmlEncode(message)))
+                ReloadPage("Password updated. Your other devices have been signed out.");
+        }
+
         protected void Feedback_Click(object sender, EventArgs e)
         {
             if (IsValid && TryRun("feedback", new { rating = FeedbackRating.SelectedValue, text = FeedbackText.Text.Trim() })) ReloadPage("Thanks for your feedback");
-        }
-
-        protected void Demo_Command(object sender, CommandEventArgs e)
-        {
-            if (TryRun("demo", new { role = (string)e.CommandArgument })) Go("Dashboard", "Opened " + e.CommandArgument + " workspace");
         }
 
         protected void SignOut_Click(object sender, EventArgs e)

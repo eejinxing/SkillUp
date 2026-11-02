@@ -81,6 +81,20 @@ body:has(.skill-chat) .main {
     flex-direction: column;
 }
 
+/* The heading sits right under the top bar and the messages panel runs close to the bottom of the window, so the panel is as tall
+   as it can be. */
+#app body:has(.skill-chat) .main,
+body:has(.skill-chat) #main.main,
+body:has(.skill-chat) main#main {
+    padding-top: 4px;
+    padding-bottom: 14px;
+}
+
+body:has(.skill-chat) #app .page-intro {
+    padding-top: 0;
+    padding-bottom: 10px;
+}
+
 .skill-chat {
     flex: 1;
     height: auto;

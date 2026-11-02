@@ -252,6 +252,7 @@
      "type": "lab",
      "body": "Use the users collection to find a document with the name Alex. Complete the command: db.users.____({ name: \"Alex\" }). Enter the missing method.",
      "answer": "findOne",
+     "starterCode": "db.users.____({ name: \"Alex\" })",
      "minutes": 25,
      "preview": false
     },
@@ -343,6 +344,7 @@
      "type": "lab",
      "body": "Complete the C# statement Console.____(\"Hello\"); Enter the missing method name.",
      "answer": "WriteLine",
+     "starterCode": "Console.____(\"Hello\");",
      "minutes": 25,
      "preview": false
     },

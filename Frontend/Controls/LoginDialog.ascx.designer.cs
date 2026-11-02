@@ -7,6 +7,5 @@ namespace SKILL_UP.Frontend.Controls
         protected global::System.Web.UI.WebControls.TextBox LoginPassword;
         protected global::System.Web.UI.WebControls.Literal FormError;
         protected global::SKILL_UP.Frontend.Controls.SubmitButton LogInButton;
-        protected global::System.Web.UI.WebControls.PlaceHolder DemoPanel;
     }
 }

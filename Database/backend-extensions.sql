@@ -36,6 +36,19 @@ IF COL_LENGTH(N'LAB', N'lesson_type') IS NULL
 IF COL_LENGTH(N'LAB', N'minutes') IS NULL ALTER TABLE LAB ADD minutes INT NOT NULL CONSTRAINT DF_LAB_minutes DEFAULT 15;
 GO
 
+/* Practice workspace of an activity. 'none' (the default) shows no terminal; 'javascript' shows the in-browser JavaScript terminal.
+   starter_code is what the terminal starts with, or, for a lab without a terminal, the code the learner is asked to complete. */
+IF COL_LENGTH(N'LAB', N'workspace') IS NULL
+    ALTER TABLE LAB ADD workspace NVARCHAR(12) NOT NULL CONSTRAINT DF_LAB_workspace DEFAULT N'none'
+        CONSTRAINT CK_LAB_workspace CHECK (workspace IN (N'none', N'javascript'));
+IF COL_LENGTH(N'LAB', N'starter_code') IS NULL ALTER TABLE LAB ADD starter_code NVARCHAR(MAX) NULL;
+GO
+
+/* The sample labs were all given the same JavaScript terminal, which cannot run MongoDB or C#. Give them the code they are about instead. */
+UPDATE LAB SET starter_code = N'db.users.____({ name: "Alex" })' WHERE lesson_type = N'lab' AND title = N'Find your first document' AND starter_code IS NULL;
+UPDATE LAB SET starter_code = N'Console.____("Hello");' WHERE lesson_type = N'lab' AND title = N'Write to the console' AND starter_code IS NULL;
+GO
+
 IF COL_LENGTH(N'QUIZ_QUESTION', N'topic') IS NULL ALTER TABLE QUIZ_QUESTION ADD topic NVARCHAR(100) NULL;
 IF COL_LENGTH(N'ENROLLMENT', N'last_active') IS NULL ALTER TABLE ENROLLMENT ADD last_active DATETIME2 NULL;
 IF COL_LENGTH(N'ACTIVITY_LOG', N'detail') IS NULL ALTER TABLE ACTIVITY_LOG ADD detail NVARCHAR(500) NULL;
