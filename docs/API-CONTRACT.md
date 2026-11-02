@@ -101,7 +101,7 @@ Unless noted, `data` is null and state contains the fresh snapshot.
 | complete | courseId, lessonId, answer? | `{correct:boolean}`; wrong lab answer records attempt but not completion |
 | quizSubmit | courseId, lessonId, answers: number[] | attempt `{id,score,answers,wrongTopics,createdAt}` plus `feedback` recommendation below |
 | courseSave | id?, title, description, outcomes, programId, difficulty, deadline, duration | saved course; Draft status |
-| courseAction | id, action (`submit/hide/withdraw/delete`) | submit requires activities and published questions for quiz activities |
+| courseAction | id, action (`submit/publish/hide/withdraw/delete`) | submit (instructor) and publish (Program Leader, no request) require activities and published questions for quiz activities |
 | lessonSave | courseId, id?, title, type, body, answer, minutes, preview | content edits return course to Draft |
 | lessonDelete | courseId, id | remove activity; recalculate progress |
 | quizSave | courseId, questions, published, timeLimit | valid options + answer required; Draft course |
