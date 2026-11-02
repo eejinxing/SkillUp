@@ -84,10 +84,10 @@ namespace SKILL_UP.Backend
                 if (!hashes.ContainsKey(password)) hashes[password] = Passwords.Hash(password);
                 var name = (S(u, "name") ?? "").Trim();
                 var space = name.IndexOf(' ');
-                var id = db.Insert(@"INSERT INTO [USER] (role_id, first_name, last_name, username, password, email, bio, preferred_language, account_status, created_at, location, theme)
-                                     VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11)",
+                var id = db.Insert(@"INSERT INTO [USER] (role_id, first_name, last_name, username, password, email, bio, preferred_language, account_status, created_at, location, theme, profile_picture)
+                                     VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12)",
                     roles[S(u, "role")], space < 0 ? name : name.Substring(0, space), space < 0 ? "" : name.Substring(space + 1), S(u, "username"), hashes[password],
-                    S(u, "email"), S(u, "bio"), S(u, "language") ?? "en", S(u, "status") ?? "Active", now, S(u, "location"), S(u, "theme") ?? "dark");
+                    S(u, "email"), S(u, "bio"), S(u, "language") ?? "en", S(u, "status") ?? "Active", now, S(u, "location"), S(u, "theme") ?? "dark", S(u, "avatar"));
                 users[S(u, "id")] = id;
                 if (S(u, "role") == "Instructor")
                     db.Exec("INSERT INTO INSTRUCTOR_PROFILE (user_id, verification_status, verified_at) VALUES (@p0, @p1, @p2)",

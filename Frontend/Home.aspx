@@ -77,8 +77,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"></path></svg>
       </span>
     </a>
-    <%-- Placeholder: no cybersecurity course yet, so this card opens "Working with Data" (course 7) until one is added. --%>
-    <a class="home-topic home-reveal" href="Course?id=7" aria-label="Explore Cybersecurity courses">
+    <a class="home-topic home-reveal" href="<%= TopicUrl("security") %>" aria-label="Explore Cybersecurity courses">
       <h3>Cybersecurity</h3>
       <svg class="home-topic-art" viewBox="0 0 240 240" fill="none" aria-hidden="true"><path d="m58 43 82 46v88l-82-46Z" fill="#101214" stroke="#e7e9eb" stroke-width="4"></path><path d="m58 43 8-5 82 46-8 5Z" fill="#fafafa"></path><path d="m140 89 8-5v88l-8 5Z" fill="#aeb3b7"></path><path d="m88 151 25 14v16l-25-14Z" fill="#777e83"></path><path d="m72 169 44 25 20-11-44-25Z" fill="#17191b" stroke="#7a8186" stroke-width="2"></path><path d="m88 80 22 12v27l-11 12-11-25Z" fill="#e2e7e9"></path><path d="m94 100 5 8 7-6" fill="none" stroke="#12181b" stroke-width="3"></path><path d="m40 166 24 13 16-9m61 15 19 11 22-13" fill="none" stroke="#89969e" stroke-width="2"></path><circle cx="160" cy="155" r="18" fill="#111719" stroke="#a7b2b9" stroke-width="2"></circle><path d="m154 155 5 5 8-11" fill="none" stroke="#e8edef" stroke-width="3"></path></svg>
       <span class="home-topic-arrow" aria-hidden="true">
@@ -101,6 +100,7 @@
     </a>
   </div>
 </section>
+<% if (InstructorCount > 0) { %>
 <section class="home-section home-team" id="visitor-instructors">
   <header class="home-reveal">
     <h2>
@@ -110,78 +110,10 @@
     </h2>
     <p>Guidance at every step.</p>
   </header>
-  <div class="instructor-carousel">
+  <%-- Active instructors with a published course (Home.aspx.cs, BuildInstructors). With fewer than four, the cards sit centred and the arrows hide. --%>
+  <div class="instructor-carousel<%= InstructorCount < 4 ? " is-few" : "" %>">
     <button type="button" class="instructor-arrow" data-instructor-step="-1" aria-label="Previous instructor">‹</button>
-    <div class="instructor-track" aria-label="Instructor profiles">
-      <button type="button" class="instructor-card" aria-expanded="false" aria-label="About John Doe">
-        <span class="instructor-photo" aria-hidden="true">
-          <img src="assets/instructor-portraits/john.webp" alt="" loading="lazy" width="1024" height="1536">
-        </span>
-        <span class="instructor-identity">
-          <strong>John Doe</strong>
-          <small>Databases & development</small>
-        </span>
-        <span class="instructor-bio">
-          <strong>John Doe</strong>
-          <small>Databases & development</small>
-          <span>Turn a new concept into a working query. Practise MongoDB, explore your data, and get help with the next activity.</span>
-          <i aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg>
-          </i>
-        </span>
-      </button>
-      <button type="button" class="instructor-card" aria-expanded="false" aria-label="About Sarah Chen">
-        <span class="instructor-photo" aria-hidden="true">
-          <img src="assets/instructor-portraits/sarah.webp" alt="" loading="lazy" width="1024" height="1536">
-        </span>
-        <span class="instructor-identity">
-          <strong>Sarah Chen</strong>
-          <small>Design & creative tools</small>
-        </span>
-        <span class="instructor-bio">
-          <strong>Sarah Chen</strong>
-          <small>Design & creative tools</small>
-          <span>Build your confidence through clear examples, guided practice and feedback you can apply to your next project.</span>
-          <i aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg>
-          </i>
-        </span>
-      </button>
-      <button type="button" class="instructor-card" aria-expanded="false" aria-label="About Mark Rivera">
-        <span class="instructor-photo" aria-hidden="true">
-          <img src="assets/instructor-portraits/mark.webp" alt="" loading="lazy" width="1024" height="1536">
-        </span>
-        <span class="instructor-identity">
-          <strong>Mark Rivera</strong>
-          <small>Programming fundamentals</small>
-        </span>
-        <span class="instructor-bio">
-          <strong>Mark Rivera</strong>
-          <small>Programming fundamentals</small>
-          <span>Learn the building blocks, try them in a practical activity, and keep developing your skills one step at a time.</span>
-          <i aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg>
-          </i>
-        </span>
-      </button>
-      <button type="button" class="instructor-card" aria-expanded="false" aria-label="About Lena Kraft">
-        <span class="instructor-photo" aria-hidden="true">
-          <img src="assets/instructor-portraits/lena.webp" alt="" loading="lazy" width="1024" height="1536">
-        </span>
-        <span class="instructor-identity">
-          <strong>Lena Kraft</strong>
-          <small>Data & emerging technology</small>
-        </span>
-        <span class="instructor-bio">
-          <strong>Lena Kraft</strong>
-          <small>Data & emerging technology</small>
-          <span>Make sense of data and discover the tools behind your next idea, with a clear learning path to follow.</span>
-          <i aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg>
-          </i>
-        </span>
-      </button>
-    </div>
+    <div class="instructor-track" aria-label="Instructor profiles"><%= InstructorCards %></div>
     <button type="button" class="instructor-arrow" data-instructor-step="1" aria-label="Next instructor">›</button>
   </div>
   <div class="instructor-position" aria-hidden="true">
@@ -189,61 +121,17 @@
   </div>
   <p class="instructor-sr">Portraits are AI-generated illustrations of fictional instructors.</p>
 </section>
+<% } %>
 <section class="home-section home-stories" id="visitor-stories">
   <header class="home-section-head home-reveal">
     <div>
       <h2>Our Learners</h2>
       <p>Clear lessons. Real practice. A next step you can follow.</p>
     </div>
-    <small>Illustrative learner stories</small>
+    <small><%= StoryNote %></small>
   </header>
-  <div class="home-story-grid">
-    <div>
-      <article class="home-story home-reveal">
-        <span class="home-story-mark" aria-hidden="true">A</span>
-        <blockquote>Clear lessons and practical examples made it easier to get started.</blockquote>
-        <footer>
-          Alex Morgan
-          <span>Sample learner story</span>
-        </footer>
-      </article>
-      <article class="home-story home-reveal">
-        <span class="home-story-mark" aria-hidden="true">D</span>
-        <blockquote>I can pick up where I left off and keep building on what I’ve learned.</blockquote>
-        <footer>
-          Daniel Lim
-          <span>Sample learner story</span>
-        </footer>
-      </article>
-    </div>
-    <article class="home-story home-story-featured home-reveal">
-      <img class="home-story-portrait" src="assets/visitor/learner-mei-tan.webp" alt="Illustrative learner portrait" width="68" height="68" loading="lazy" style="object-fit:cover;object-position:center 30%">
-      <svg class="home-stars" viewBox="0 0 112 20" aria-label="4 out of 5 stars" role="img"><defs><path id="story-star" d="m10 1 2.7 5.6 6.2.9-4.5 4.4 1.1 6.2L10 15.2l-5.5 2.9 1.1-6.2-4.5-4.4 6.2-.9Z"></path></defs><g fill="#e8d07a"><use href="#story-star"></use><use href="#story-star" x="23"></use><use href="#story-star" x="46"></use><use href="#story-star" x="69"></use></g><use href="#story-star" x="92" fill="none" stroke="#e8d07a"></use></svg>
-      <blockquote>The practical lessons helped me turn new ideas into skills I can use. I could follow my progress and learn at my own pace.</blockquote>
-      <footer>
-        Mei Tan
-        <span>Sample learner story</span>
-      </footer>
-    </article>
-    <div>
-      <article class="home-story home-reveal">
-        <span class="home-story-mark" aria-hidden="true">↗</span>
-        <blockquote>The guided activities helped me put each new concept into practice.</blockquote>
-        <footer>
-          Alex Morgan
-          <span>Sample learner story</span>
-        </footer>
-      </article>
-      <article class="home-story home-reveal">
-        <span class="home-story-mark" aria-hidden="true">↗</span>
-        <blockquote>Seeing my progress gives me a clear view of what to learn next.</blockquote>
-        <footer>
-          Daniel Lim
-          <span>Sample learner story</span>
-        </footer>
-      </article>
-    </div>
-  </div>
+  <%-- Public feedback from the database (Home.aspx.cs, BuildStories). --%>
+  <%= StoryGrid %>
 </section>
 <section class="home-section home-faq" id="visitor-faq">
   <header class="home-reveal">
