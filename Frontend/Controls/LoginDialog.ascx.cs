@@ -20,11 +20,6 @@ namespace SKILL_UP.Frontend.Controls
         protected string CloseUrl => Open ? "Home" : "#close";
         protected string RegisterUrl => Open ? "Register" : "#register";
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            DemoPanel.Visible = Backend.Settings.DemoLogin;
-        }
-
         /// <summary>Where to go after signing in: the page that asked for it (?return=, on this site), this page, or the dashboard.</summary>
         public string ReturnUrl
         {
@@ -40,11 +35,6 @@ namespace SKILL_UP.Frontend.Controls
         {
             if (!Page.IsValid) { reopen = true; return; }
             if (Host.TryRun("login", new { email = LoginUser.Text.Trim(), password = LoginPassword.Text }, out _, ShowError)) Host.Go(ReturnUrl);
-        }
-
-        protected void Demo_Command(object sender, CommandEventArgs e)
-        {
-            if (Host.TryRun("demo", new { role = (string)e.CommandArgument }, out _, ShowError)) Host.Go(ReturnUrl);
         }
 
         void ShowError(string message)

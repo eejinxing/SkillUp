@@ -3,7 +3,7 @@
 <asp:PlaceHolder ID="Denied" runat="server" Visible="false"><div class="empty"><h3>Course access denied</h3><p></p></div></asp:PlaceHolder>
 <asp:PlaceHolder ID="Editor" runat="server">
 <section class="quiz-editor-page" data-locked="<%= Locked ? "true" : "false" %>">
-  <header class="answer-breadcrumb"><a href="CourseEditor?id=<%= C.Id %>">&larr; Course editor</a><h1><%: C.Title %> <span>/ Question editor</span></h1><span class="qe-course-status"><%: C.Status %></span></header>
+  <header class="answer-breadcrumb crumb-trail"><a href="CourseEditor?id=<%= C.Id %>"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Course editor</a><h1><i aria-hidden="true">/</i><b><%: C.Title %></b><i aria-hidden="true">/</i><span class="is-current">Question editor</span></h1><span class="qe-course-status crumb-end"><%: C.Status %></span></header>
   <% if (Deleting) { %><p class="qe-review-lock" role="status">Deletion pending review. Withdraw it from My requests before changing questions.</p><% } else if (Locked) { %><p class="qe-review-lock" role="status">This course is pending review. Withdraw the review in the course editor before changing questions.</p><% } %>
   <div class="answer-layout">
     <aside class="answer-ai" aria-label="AI teaching companion">

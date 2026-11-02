@@ -41,6 +41,10 @@ namespace SKILL_UP.Backend
         public bool Preview;
         public int? TaskId;
         public string Answer;
+        /// <summary>"none" or "javascript": whether the activity page shows the in-browser JavaScript terminal.</summary>
+        public string Workspace = "none";
+        /// <summary>The terminal's starting code; for a lab without a terminal, the code the learner is asked to complete.</summary>
+        public string StarterCode;
     }
 
     public sealed class QuizRow
@@ -287,7 +291,7 @@ namespace SKILL_UP.Backend
             {
                 Id = r.Int("lab_id"), CourseId = r.Int("course_id"), Sequence = r.Int("sequence_no"), Minutes = r.Int("minutes"), Title = r.Str("title"),
                 Body = r.Str("article_content"), Type = r.Str("lesson_type"), Status = r.Str("status"), Preview = r.Bool("is_preview"),
-                TaskId = r.IntN("task_id"), Answer = r.Str("correct_answer")
+                TaskId = r.IntN("task_id"), Answer = r.Str("correct_answer"), Workspace = r.Str("workspace") ?? "none", StarterCode = r.Str("starter_code")
             });
             m.Quizzes = db.Query("SELECT * FROM QUIZ ORDER BY quiz_id", r => new QuizRow
             {

@@ -1478,10 +1478,13 @@ body.shared-capsule-nav .learning-console .lx-top {
     left: 4px;
     right: 4px;
     bottom: 4px;
-    height: 55%;
     border-radius: 999px;
     background: linear-gradient(0deg, #c8ff2e, #eaff9e);
-    animation: room-level 1.6s ease-in-out infinite;
+    /* The height is the real sound level (js/call-preview.js sets --lvl on .room-level many times a second). */
+    height: var(--lvl, 3%);
+    min-height: 6px;
+    max-height: calc(100% - 8px);
+    transition: height .07s linear;
 }
 
 #skill-call-dock.is-room .room-controls {

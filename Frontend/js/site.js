@@ -14,6 +14,9 @@
 
     // ---- Every page --------------------------------------------------------------------------------
 
+    // Once the page has finished rising into place, parts swapped in later (a quiz result, new reviews) must not animate again.
+    setTimeout(() => document.documentElement.classList.add('is-settled'), 1600);
+
     // The save notice fades after a few seconds.
     const toast = document.getElementById('toast');
     if (toast && toast.classList.contains('visible')) setTimeout(() => toast.classList.remove('visible'), 5000);
@@ -26,12 +29,14 @@
 
     // Validator controls re-check a field when it loses focus. Clicking Send blurs the field, its message disappears,
     // the button moves up mid-click and the click misses, so fields are checked on submit only (as before).
-    if (window.Page_Validators) {
+    const quietValidators = () => {
+        if (!window.Page_Validators) return;
         for (const validator of window.Page_Validators) {
             const field = document.getElementById(validator.controltovalidate);
             if (field && String(field.onchange).includes('ValidatorOnChange')) field.onchange = null;
         }
-    }
+    };
+    quietValidators();
 
     // Show or hide a password field.
     document.addEventListener('click', e => {
@@ -41,6 +46,296 @@
         const show = input.type === 'password';
         input.type = show ? 'text' : 'password';
         eye.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    });
+
+    // Password rules and strength (Sign up and Reset password). The rules match Backend Passwords.Problem.
+    const passwordRules = v => ({ length: v.length >= 8 && v.length <= 128, capital: /[A-Z]/.test(v), number: /[0-9]/.test(v), special: /[^A-Za-z0-9\s]/.test(v) });
+    const passwordMet = ok => ok.length && ok.capital && ok.number && ok.special;
+    const passwordStrength = v => {
+        if (!v) return 0;
+        if (!passwordMet(passwordRules(v))) return 1;
+        return v.length >= 16 ? 4 : v.length >= 12 ? 3 : 2;
+    };
+    window.skillUpPasswordCheck = (source, args) => {
+        const ok = passwordRules(args.Value || '');
+        args.IsValid = passwordMet(ok);
+        if (!ok.length) source.innerHTML = 'Use 8 to 128 characters.';
+        else if (!ok.capital) source.innerHTML = 'Add at least one capital letter.';
+        else if (!ok.number) source.innerHTML = 'Add at least one number.';
+        else if (!ok.special) source.innerHTML = 'Add at least one special character, such as ! @ # $ %.';
+    };
+    window.skillUpAgreeCheck = (source, args) => {
+        args.IsValid = !!document.getElementById('AgreeTerms')?.checked;
+    };
+    const strengthNames = ['not entered yet', 'Weak', 'Fair', 'Good', 'Strong'];
+    const initPasswordMeters = () => document.querySelectorAll('[data-pw-for]').forEach(help => {
+        const input = document.getElementById(help.dataset.pwFor);
+        if (!input) return;
+        const meter = help.querySelector('.pw-meter');
+        const label = help.querySelector('.pw-label b');
+        const update = () => {
+            const level = passwordStrength(input.value);
+            const ok = passwordRules(input.value);
+            meter.dataset.level = level;
+            meter.setAttribute('aria-valuenow', level);
+            label.textContent = strengthNames[level];
+            help.querySelectorAll('[data-rule]').forEach(item => {
+                if (ok[item.dataset.rule] !== undefined) item.classList.toggle('is-met', ok[item.dataset.rule]);
+            });
+        };
+        input.addEventListener('input', update);
+        update();
+    });
+    initPasswordMeters();
+    // Activity hint button: the hint is already in the page, so it opens and closes in place instead of reloading the page.
+    document.addEventListener('click', e => {
+        const button = e.target.closest('.answer-hint');
+        const hint = document.getElementById('answer-hint-text');
+        if (!button || !hint || button.disabled) return;
+        e.preventDefault();
+        e.stopPropagation();
+        hint.hidden = !hint.hidden;
+        document.querySelectorAll('.answer-hint').forEach(b => b.setAttribute('aria-expanded', String(!hint.hidden)));
+        if (!hint.hidden) hint.scrollIntoView({ block: 'nearest', behavior: scrollBehavior() });
+    }, true);
+
+    // After part of an activity page is swapped in place, the page's hidden form state must match the new markup, or the next
+    // form post would be refused as invalid.
+    const syncFormState = fresh => ['__VIEWSTATE', '__VIEWSTATEGENERATOR', '__EVENTVALIDATION'].forEach(name => {
+        const from = fresh.querySelector('input[name="' + name + '"]');
+        const to = document.querySelector('input[name="' + name + '"]');
+        if (from && to) to.value = from.value;
+    });
+    const answerToast = text => {
+        const el = document.getElementById('toast');
+        if (!el) return;
+        el.textContent = text;
+        el.classList.add('visible');
+        setTimeout(() => el.classList.remove('visible'), 3500);
+    };
+
+    // Quiz: submitting, "Try again" and "Restart quiz" post the page's own form in the background and swap in the new page,
+    // so the result (or a fresh quiz) appears without a reload. Falls back to the normal form post if anything fails.
+    document.addEventListener('click', async e => {
+        const button = e.target.closest('.answer-quiz button.answer-submit, .answer-quiz button.ghost, .answer-quiz-result button.ghost');
+        const form = button?.closest('form');
+        if (!button || !form || !button.name || button.disabled || button.dataset.plain || !button.closest('.answer-page')) return;
+        const quiz = button.closest('.answer-quiz');
+        const error = quiz?.querySelector('.form-error');
+        if (quiz && button.classList.contains('answer-submit')) {
+            const unanswered = [...quiz.querySelectorAll('fieldset.answer-question')].some(q => !q.querySelector('input[type=radio]:checked'));
+            if (unanswered) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (error) error.textContent = 'Answer every question before submitting.';
+                return;
+            }
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        button.disabled = true;
+        try {
+            const data = new FormData(form);
+            data.set(button.name, button.value || '');
+            const r = await fetch(form.action || location.href, { method: 'POST', body: data, credentials: 'same-origin' });
+            if (!r.ok) throw Error(String(r.status));
+            const fresh = new DOMParser().parseFromString(await r.text(), 'text/html');
+            const workspace = fresh.querySelector('.answer-workspace');
+            if (!workspace) throw Error('no page');
+            document.querySelector('.answer-workspace').replaceWith(workspace);
+            const crumb = fresh.querySelector('.answer-breadcrumb');
+            if (crumb) document.querySelector('.answer-breadcrumb').replaceWith(crumb);
+            const nav = fresh.querySelector('.answer-activity-nav');
+            if (nav) document.querySelector('.answer-activity-nav')?.replaceWith(nav);
+            syncFormState(fresh);
+            if (window.skillUpQuizTimer) window.skillUpQuizTimer();
+            const result = workspace.querySelector('.answer-quiz-result');
+            if (result) {
+                const score = result.querySelector('h1')?.textContent.trim();
+                answerToast(result.querySelector('.answer-task-label')?.textContent.includes('passed') ? 'Quiz passed — ' + score : 'Not passed yet — ' + score + '. Review and try again.');
+            }
+        } catch {
+            button.dataset.plain = '1';
+            button.disabled = false;
+            button.click();
+        }
+    }, true);
+
+    // Submitting a lab answer, or marking a reading complete, happens in the background: a wrong answer shows its message
+    // under the box, a right one shows a pop-up and updates the page in place. If anything fails, the button falls back to
+    // its normal form post.
+    document.addEventListener('click', async e => {
+        const button = e.target.closest('button.answer-submit:not(.shell-execute)');
+        const task = button?.closest('.answer-task');
+        const page = button?.closest('.answer-page');
+        if (!button || !task || !page || task.classList.contains('answer-quiz') || task.classList.contains('lab-shell') || button.disabled || button.dataset.plain) return;
+        const api = page.querySelector('.answer-ai')?.dataset.api;
+        const box = task.querySelector('.answer-answer-row input[type=text], .answer-answer-row input:not([type])');
+        const error = task.querySelector('.form-error');
+        if (!api) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const answer = box ? box.value.trim() : null;
+        if (box && !answer) {
+            if (error) error.textContent = 'Type your answer first.';
+            box.focus();
+            return;
+        }
+        const toast = text => {
+            const el = document.getElementById('toast');
+            if (!el) return;
+            el.textContent = text;
+            el.classList.add('visible');
+            setTimeout(() => el.classList.remove('visible'), 3500);
+        };
+        button.disabled = true;
+        try {
+            const body = { courseId: page.dataset.answerCourse, lessonId: page.dataset.answerLesson };
+            if (box) body.answer = answer;
+            const r = await fetch(api + 'complete', {
+                method: 'POST', credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json', 'X-SkillUp-Request': '1' }, body: JSON.stringify(body)
+            });
+            const result = await r.json();
+            if (!r.ok) {
+                if (error) error.textContent = result.detail || 'That could not be saved. Please try again.';
+                button.disabled = false;
+                return;
+            }
+            if (result.data && result.data.correct === false) {
+                if (error) error.textContent = 'Not quite. Check the method name and try again. Your attempt has been recorded.';
+                button.disabled = false;
+                box?.focus();
+                box?.select();
+                return;
+            }
+            // Correct (or a reading completed): show the finished page without reloading it.
+            const html = await (await fetch(location.href, { credentials: 'same-origin' })).text();
+            const fresh = new DOMParser().parseFromString(html, 'text/html');
+            const swap = selector => {
+                const from = fresh.querySelector(selector);
+                const to = document.querySelector(selector);
+                if (from && to) to.replaceWith(from);
+            };
+            // Only the parts that change are swapped; the terminal (if any) keeps running.
+            const freshTask = [...fresh.querySelectorAll('.answer-task')].find(t => !t.classList.contains('lab-shell') && !t.classList.contains('answer-quiz'));
+            if (freshTask) task.replaceWith(freshTask);
+            const savedNote = fresh.querySelector('.answer-saved');
+            const workspace = document.querySelector('.answer-workspace');
+            if (savedNote && workspace && !workspace.querySelector('.answer-saved'))
+                workspace.insertBefore(savedNote, workspace.querySelector('.lab-shell, .answer-task'));
+            swap('.answer-activity-nav');
+            swap('.answer-breadcrumb');
+            syncFormState(fresh);
+            toast(box ? 'Correct — lab completed!' : 'Activity completed');
+        } catch {
+            button.dataset.plain = '1';
+            button.disabled = false;
+            button.click();
+        }
+    }, true);
+
+    // Course page, learner reviews: switching between "This course" and "All courses" posts the form in the background and
+    // swaps in the new review section, so the page does not reload or jump. Falls back to the normal postback if it fails.
+    document.addEventListener('change', async e => {
+        const select = e.target.closest('select[id$="ReviewScope"]');
+        const form = select?.closest('form');
+        const section = document.getElementById('course-reviews');
+        if (!select || !form || !section || select.dataset.plain) return;
+        e.stopPropagation();
+        section.style.opacity = '.55';
+        section.setAttribute('aria-busy', 'true');
+        try {
+            const data = new FormData(form);
+            data.set('__EVENTTARGET', select.name);
+            data.set('__EVENTARGUMENT', '');
+            const r = await fetch(form.action || location.href, { method: 'POST', body: data, credentials: 'same-origin' });
+            if (!r.ok) throw Error(String(r.status));
+            const fresh = new DOMParser().parseFromString(await r.text(), 'text/html');
+            const next = fresh.getElementById('course-reviews');
+            if (!next) throw Error('no reviews');
+            section.replaceWith(next);
+            syncFormState(fresh);
+            document.querySelector('select[id$="ReviewScope"]')?.focus({ preventScroll: true });
+        } catch {
+            section.style.opacity = '';
+            select.dataset.plain = '1';
+            if (window.__doPostBack) window.__doPostBack(select.name, '');
+        }
+    }, true);
+
+    // Course editor: Save stays off until a course field really changes. (The server also refuses a save with nothing new, because a
+    // save sends a published course back to draft.)
+    const initCourseFields = () => {
+        const courseFields = document.querySelector('.course-info-page[data-fresh="false"][data-locked="false"] .ci-fields');
+        if (!courseFields) return;
+        const fields = [...courseFields.querySelectorAll('input:not([readonly]), select, textarea')];
+        const snapshot = () => fields.map(f => f.value.replace(/\r\n/g, '\n').trim()).join('\u0001');
+        const initial = snapshot();
+        const saves = [...document.querySelectorAll('.course-info-page [id$="SaveButton"], .course-info-page [id$="HeaderSave"]')];
+        const sync = () => {
+            const changed = snapshot() !== initial;
+            saves.forEach(b => {
+                b.disabled = !changed;
+                b.title = changed ? '' : 'No changes to save';
+            });
+        };
+        courseFields.addEventListener('input', sync);
+        courseFields.addEventListener('change', sync);
+        sync();
+    };
+    initCourseFields();
+
+    // A search box above a long dropdown (the Enrol learner list): typing narrows the choices as you type. Each word typed must begin a
+    // word of the choice (name, username, email or ID), the same rule as the other search boxes. The choices still post as before.
+    const initFilterSelects = () => document.querySelectorAll('input[data-filter-select]').forEach(box => {
+        const select = document.getElementById(box.dataset.filterSelect);
+        if (!select) return;
+        const all = [...select.options].map(o => ({ value: o.value, text: o.text }));
+        const count = document.querySelector('[data-filter-count="' + select.id + '"]');
+        const submit = select.closest('form')?.querySelector('.sp-enrol-submit');
+        const wordsOf = text => (text || '').toLowerCase().match(/[\p{L}\p{N}]+/gu) || [];
+        // data-match="id": the box finds a learner by user ID only (the option's value). "14", "#14" and "ID 14" all mean learner 14.
+        const byId = box.dataset.match === 'id';
+        const wantedId = () => {
+            let t = box.value.trim();
+            if (t.startsWith('#')) t = t.slice(1);
+            else if (/^id\b/i.test(t)) t = t.slice(2);
+            t = t.trim();
+            return t === '' ? null : /^\d+$/.test(t) ? String(Number(t)) : 'none';
+        };
+        const fits = (option) => {
+            if (byId) {
+                const id = wantedId();
+                return id === null || option.value === id;
+            }
+            const wanted = wordsOf(box.value);
+            if (!wanted.length) return true;
+            const words = wordsOf(option.text);
+            return wanted.every(w => words.some(x => x.startsWith(w)));
+        };
+        const render = () => {
+            const chosen = select.value;
+            const list = all.filter(o => fits(o));
+            select.replaceChildren(...list.map(o => new Option(o.text, o.value, false, o.value === chosen)));
+            if (list.length && !list.some(o => o.value === chosen)) select.selectedIndex = 0;
+            if (count) count.textContent = list.length === 0 ? 'No learner has that user ID.' : box.value.trim() ? list.length + ' of ' + all.length + ' learners' : '';
+            if (submit) submit.disabled = list.length === 0;
+        };
+        box.addEventListener('input', render);
+        // Enter in the search box picks the first match; it does not submit the form.
+        box.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                select.focus();
+            }
+        });
+    });
+    initFilterSelects();
+
+    // Ticking the terms box clears its message at once.
+    document.getElementById('AgreeTerms')?.addEventListener('change', e => {
+        if (e.target.checked) e.target.closest('.auth-terms')?.querySelectorAll('.field-error').forEach(m => { m.style.display = 'none'; });
     });
 
     // Escape closes any open disclosure menu, and the open Log in / Sign up pop-up (as its close button would).
@@ -409,8 +704,9 @@
     }
 
     // Course requests: tick rows to export only those; the header box ticks every row on the page.
-    const requests = document.querySelector('.course-requests-page');
-    if (requests) {
+    const initRequests = () => {
+        const requests = document.querySelector('.course-requests-page');
+        if (!requests) return;
         const boxes = () => [...requests.querySelectorAll('.rq-row-check')];
         const all = requests.querySelector('#rq-select-all');
         const count = requests.querySelector('#rq-selection-count');
@@ -436,11 +732,151 @@
             sync();
         });
         sync();
-    }
+    };
+    initRequests();
 
     // The quiz editor's companion shows its newest reply.
     const aiHistory = document.getElementById('qe-ai-history');
     if (aiHistory) aiHistory.scrollTop = aiHistory.scrollHeight;
+
+    // ---- Instructor pages: no full reload for what does not need one ----------------------------------------
+    // Clicking a button (save, tab, filter, expand, delete...), choosing a filter or following a link to the same page with another
+    // address (sorting, paging, picking a request) is sent in the background, and only the page's own content is swapped in, so the
+    // top bar, the scroll position and what you were doing stay. A link to another page still opens it normally. If anything fails, the
+    // browser does the normal full request instead.
+    const softMain = document.getElementById('main');
+    const softOn = body.classList.contains('role-instructor') && !!softMain
+        && ['courses', 'course-edit', 'resources', 'learners', 'requests', 'sessions', 'profile'].includes(softMain.dataset.view);
+    if (softOn) {
+        const form = document.getElementById('SkillForm');
+        let busy = false;
+        history.replaceState({ soft: 1 }, '');
+        const hasNotice = note => note && note.classList.contains('visible') && note.textContent.trim();
+        const rerun = fresh => {
+            // The validators' own setup scripts are part of each page, so they are run again for the new content.
+            fresh.querySelectorAll('form script:not([src])').forEach(old => {
+                if (!/Page_Validators|Page_ValidationActive|ValidatorOnLoad|\.controltovalidate/.test(old.textContent)) return;
+                const s = document.createElement('script');
+                s.textContent = old.textContent;
+                document.body.appendChild(s);
+                s.remove();
+            });
+            quietValidators();
+        };
+        const apply = async (response, hash, push) => {
+            const finalUrl = new URL(response.url);
+            const fresh = new DOMParser().parseFromString(await response.text(), 'text/html');
+            const next = fresh.getElementById('main');
+            if (!next || next.dataset.view !== softMain.dataset.view || finalUrl.pathname !== location.pathname) {
+                // Another page: open it, carrying the "saved" notice (the server has already shown it to this request).
+                const note = fresh.getElementById('toast');
+                if (hasNotice(note)) { try { sessionStorage.setItem('skillup.toast', note.textContent.trim()); } catch { /* storage blocked */ } }
+                location.assign(response.url + hash);
+                return;
+            }
+            softMain.replaceChildren(...next.childNodes);
+            document.title = fresh.title;
+            syncFormState(fresh);
+            // The page may set the form's address itself (the course editor's tab), so that is the address of what is shown now.
+            const pageAction = fresh.getElementById('SkillForm')?.getAttribute('action');
+            const shown = pageAction ? new URL(pageAction, response.url) : finalUrl;
+            const where = shown.pathname + shown.search;
+            form.setAttribute('action', where);
+            if (push && where !== location.pathname + location.search) history.pushState({ soft: 1 }, '', where + hash);
+            rerun(fresh);
+            initCourseFields();
+            initFilterSelects();
+            initRequests();
+            initPasswordMeters();
+            const note = fresh.getElementById('toast');
+            if (hasNotice(note)) answerToast(note.textContent.trim());
+            // An activity opened for editing scrolls its form into view, as the old address with #lesson-editor did.
+            const target = hash || (/[?&]lesson=/.test(finalUrl.search) ? '#lesson-editor' : '');
+            if (target) document.querySelector(target)?.scrollIntoView({ behavior: scrollBehavior(), block: 'start' });
+        };
+        const working = on => {
+            softMain.toggleAttribute('aria-busy', on);
+            softMain.style.transition = 'opacity .15s';
+            softMain.style.opacity = on ? '.7' : '';
+        };
+        const softPost = async (submitter, eventTarget, eventArgument) => {
+            if (busy) return true;
+            busy = true;
+            working(true);
+            try {
+                const data = new FormData(form);
+                if (submitter) data.set(submitter.name, submitter.value || '');
+                if (eventTarget != null) {
+                    data.set('__EVENTTARGET', eventTarget);
+                    data.set('__EVENTARGUMENT', eventArgument || '');
+                }
+                const r = await fetch(form.getAttribute('action') || location.href, { method: 'POST', body: data, credentials: 'same-origin' });
+                if (!r.ok || !(r.headers.get('content-type') || '').includes('text/html')) throw Error('not a page');
+                await apply(r, '', true);
+                return true;
+            } catch {
+                return false;
+            } finally {
+                busy = false;
+                working(false);
+            }
+        };
+        const softGet = async (url, push) => {
+            if (busy) return;
+            busy = true;
+            working(true);
+            try {
+                const r = await fetch(url.pathname + url.search, { credentials: 'same-origin' });
+                if (!r.ok || !(r.headers.get('content-type') || '').includes('text/html')) throw Error('not a page');
+                await apply(r, url.hash, push);
+            } catch {
+                location.assign(url.href);
+            } finally {
+                busy = false;
+                working(false);
+            }
+        };
+        document.addEventListener('submit', async e => {
+            const submitter = e.submitter;
+            if (e.defaultPrevented || e.target !== form || !submitter || !submitter.name || !softMain.contains(submitter)
+                || submitter.dataset.plain || submitter.matches('[id$="ExportButton"]')) return;
+            e.preventDefault();
+            if (!(await softPost(submitter))) {
+                submitter.dataset.plain = '1';
+                form.requestSubmit(submitter);
+            }
+        });
+        // Drop-downs that post when changed (for example the rows per page) go through the same path.
+        const nativePostBack = window.__doPostBack;
+        if (nativePostBack) {
+            window.__doPostBack = (eventTarget, eventArgument) => {
+                if (form.onsubmit && form.onsubmit() === false) return;
+                softPost(null, eventTarget, eventArgument).then(done => { if (!done) nativePostBack(eventTarget, eventArgument); });
+            };
+        }
+        document.addEventListener('click', e => {
+            if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            const link = e.target.closest('a[href]');
+            if (!link || !softMain.contains(link) || link.target || link.hasAttribute('download') || link.dataset.plain) return;
+            const url = new URL(link.href, location.href);
+            if (url.origin !== location.origin || url.pathname !== location.pathname) return;
+            // A link to a place inside this very page (#anchor) is left to the browser; the same address without one (Cancel) redraws it.
+            if (url.search === location.search && url.hash) return;
+            e.preventDefault();
+            softGet(url, true);
+        });
+        addEventListener('popstate', e => {
+            if (e.state && e.state.soft) softGet(new URL(location.href), false);
+        });
+    }
+    // A notice saved before opening another page (see above) shows once the page is open.
+    try {
+        const saved = sessionStorage.getItem('skillup.toast');
+        if (saved) {
+            sessionStorage.removeItem('skillup.toast');
+            answerToast(saved);
+        }
+    } catch { /* storage blocked */ }
 
     // ---- Last: on narrow screens the nav links scroll sideways; keep the highlighted tab in view -----------
     // (after the landing page has highlighted the tab of the #section it opened at)
@@ -562,6 +998,8 @@
     };
     document.addEventListener('input', e => {
         const box = e.target;
+        // A box that only narrows a dropdown (the Enrol learner list) must never post its form: that would press "Enrol learner".
+        if (box instanceof HTMLInputElement && box.hasAttribute('data-filter-select')) return;
         if (!(box instanceof HTMLInputElement) || !(box.type === 'search' || box.type === 'text' && /search/i.test(box.getAttribute('aria-label') || '')) || e.isComposing || !box.form) return;
         const button = searchButton(box);
         if (!button) return;

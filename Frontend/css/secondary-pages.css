@@ -1,4 +1,183 @@
-/* Shared look of the smaller pages (Discussions, Live sessions, Certificates, …) */
+/* Shared look of the smaller pages (Live sessions, Certificates, …) */
+
+/* Breadcrumb / back links on the instructor pages (course editor, question editor, My requests, learner detail): the same look as the
+   course page's breadcrumb. A soft lavender-white link with a chevron, muted "/" separators, the current page in white. */
+#app .crumb-trail {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 13px;
+    color: #a39cb4;
+}
+
+#app .crumb-trail a:not(.button) {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #d9d4e4;
+    text-decoration: none;
+    transition: color .15s;
+}
+
+#app .crumb-trail a:not(.button):hover {
+    color: #fff;
+}
+
+#app .crumb-trail svg,
+#app .crumb-button svg {
+    flex: none;
+    width: 16px;
+    height: 16px;
+}
+
+#app .crumb-trail i {
+    font-style: normal;
+    color: #a39cb4;
+}
+
+#app .crumb-trail b {
+    font-weight: 400;
+    color: #d9d4e4;
+}
+
+#app .crumb-trail h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 400;
+    color: #d9d4e4;
+}
+
+#app .crumb-trail .is-current {
+    color: #fff;
+}
+
+#app .crumb-trail .crumb-end {
+    margin-left: auto;
+}
+
+#app .crumb-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Page intro: a big title and one muted line above the page, like the course catalogue's "Find your next skill". */
+#app .page-intro {
+    flex: none;
+    margin: 0;
+    padding: 4px 2px 18px;
+    border: 0;
+}
+
+#app .page-intro h1,
+#app .page-intro .pi-title {
+    margin: 0;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 600;
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    color: #fff;
+}
+
+#app .page-intro p:not(.pi-title) {
+    margin: 8px 0 0;
+    font-size: 15px;
+    color: #8f8aa0;
+}
+
+/* The title rises into place when the page opens, the same effect as the catalogue's "Find your next skill"
+   (catalog.css cat-rise). Used by every learner page title; the subtitle follows a moment later. */
+@keyframes page-rise {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    #app .page-intro,
+    #app .my-courses .mc-page-header {
+        animation: page-rise .5s var(--ease, cubic-bezier(.2, .7, .2, 1)) both;
+    }
+
+    #app .page-intro p:not(.pi-title) {
+        animation: page-rise .5s var(--ease, cubic-bezier(.2, .7, .2, 1)) .08s both;
+    }
+}
+
+/* Learner and instructor pages: every block of the page rises in, one after another, like the catalogue does. The blocks are the page's own top-level
+   parts, or, when the whole page sits in one wrapper, the wrapper's children. The catalogue and the Overview page have their own
+   entrance effects and are left out. site.js adds "is-settled" to the page shortly after it opens, so parts swapped in later
+   (a quiz result, new reviews) do not animate again. */
+@media (prefers-reduced-motion: no-preference) {
+    html:not(.is-settled) body:is(.role-learner, .role-instructor) :is(#main > :not(.page-intro):not(.catalog-page):not(.registered-home):not(script):not(style):not(:only-child), #main > :only-child:not(.catalog-page):not(.registered-home) > :not(script):not(style)) {
+        animation: page-rise .5s var(--ease, cubic-bezier(.2, .7, .2, 1)) both;
+    }
+
+    html:not(.is-settled) body:is(.role-learner, .role-instructor) :is(#main > :not(.page-intro):not(.catalog-page):not(.registered-home):not(script):not(style):not(:only-child), #main > :only-child:not(.catalog-page):not(.registered-home) > :not(script):not(style)):nth-child(2) {
+        animation-delay: .06s;
+    }
+
+    html:not(.is-settled) body:is(.role-learner, .role-instructor) :is(#main > :not(.page-intro):not(.catalog-page):not(.registered-home):not(script):not(style):not(:only-child), #main > :only-child:not(.catalog-page):not(.registered-home) > :not(script):not(style)):nth-child(3) {
+        animation-delay: .12s;
+    }
+
+    html:not(.is-settled) body:is(.role-learner, .role-instructor) :is(#main > :not(.page-intro):not(.catalog-page):not(.registered-home):not(script):not(style):not(:only-child), #main > :only-child:not(.catalog-page):not(.registered-home) > :not(script):not(style)):nth-child(4) {
+        animation-delay: .18s;
+    }
+
+    html:not(.is-settled) body:is(.role-learner, .role-instructor) :is(#main > :not(.page-intro):not(.catalog-page):not(.registered-home):not(script):not(style):not(:only-child), #main > :only-child:not(.catalog-page):not(.registered-home) > :not(script):not(style)):nth-child(n+5) {
+        animation-delay: .24s;
+    }
+}
+
+/* "Your enquiries" (EnquiryPortal, for visitors and every role): the same rise-in. The back link and heading come first, then the
+   list and the form. The UpdatePanel wrapper itself stays still, so the two columns do not move twice. */
+@media (prefers-reduced-motion: no-preference) {
+    html:not(.is-settled) .enquiry-portal > :not(script):not(style):not([id$="PortalPanel"]),
+    html:not(.is-settled) .enquiry-portal .ep-layout > * {
+        animation: page-rise .5s var(--ease, cubic-bezier(.2, .7, .2, 1)) both;
+    }
+
+    html:not(.is-settled) .enquiry-portal > .ep-head:not(script):not(style):not([id$="PortalPanel"]) {
+        animation-delay: .06s;
+    }
+
+    html:not(.is-settled) .enquiry-portal .ep-layout > :nth-child(1) {
+        animation-delay: .12s;
+    }
+
+    html:not(.is-settled) .enquiry-portal .ep-layout > :nth-child(2) {
+        animation-delay: .18s;
+    }
+}
+
+@media (max-height: 820px) and (min-width: 861px) {
+    #app .page-intro {
+        padding-bottom: 12px;
+    }
+
+    #app .page-intro h1,
+    #app .page-intro .pi-title {
+        font-size: 28px;
+    }
+
+    #app .page-intro p:not(.pi-title) {
+        margin-top: 4px;
+        font-size: 13px;
+    }
+}
 
 /* Secondary workflows share the existing Figma material language. */
 
@@ -61,6 +240,13 @@
 
 .figma-secondary .grid {
     gap: 18px;
+}
+
+/* My courses and Learning resources: four cards in a row on a wide window (two on a medium one, one on a phone, from base.css). */
+@media (min-width: 1151px) {
+    .figma-secondary:is([data-view=courses], [data-view=resources]) > .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
 
 .figma-secondary .metrics {
@@ -244,17 +430,32 @@
     min-width: 0;
 }
 
+/* Each resource shows its own course's image (the uploaded cover, or a stock one), with the activity type on top of it. */
 .figma-secondary[data-view=resources] .course-art {
-    background: #0a0a0a url('../assets/my-courses/imgImage18.png') center/contain no-repeat !important;
+    position: relative;
+    background: #0a0a0a !important;
     height: 150px !important;
+    padding: 0;
+}
+
+.figma-secondary[data-view=resources] .course-art img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .figma-secondary[data-view=resources] .course-art b {
+    position: absolute;
+    left: 12px;
+    top: 12px;
     background: #111d;
     border: 1px solid #666;
     border-radius: 6px;
     padding: 6px 10px;
     font-size: 13px !important;
+    letter-spacing: 0;
 }
 
 .figma-secondary[data-view=profile]>.split {

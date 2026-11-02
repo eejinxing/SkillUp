@@ -1,20 +1,19 @@
-/* Skill UP - backend extensions on top of create-tables.sql.
+/* Skill UP - bring an older database up to date.
 
-   The ERD tables hold the core records. The web UI also needs a few fields and history
-   tables the ERD does not have (course schedule and colour, lesson type, enquiry access
-   codes and which browser may open them, course request history, course files,
-   announcement comments, review replies).
-   This script adds them without changing or removing anything the ERD defines.
+   Database/create-tables.sql creates the whole current database. A database created with an older version of it
+   (the 37 ERD tables) lacks the columns and tables the web app added since; this script adds them, and drops what
+   nothing uses. On an up-to-date database every step finds nothing to do.
 
-   You do not need to run it by hand: the web app applies it automatically on its first
-   API request (Backend/DatabaseSetup.cs), and Database/setup-db.ps1 runs it too.
-   It is safe to run again; every step checks first. Batches are separated by GO. */
+   You do not need to run it by hand: the web app runs it every time it starts (Backend/DatabaseSetup.cs), and
+   Database/setup-db.ps1 runs it too. Every step checks first, so it is safe to run again. Batches are separated by GO. */
 
 IF OBJECT_ID(N'ROLE') IS NULL
     RAISERROR(N'Run Database/create-tables.sql first.', 16, 1);
 GO
 
-/* USER: profile fields used by the profile page. profile_picture holds an uploaded image as a data URL, so it needs MAX. */
+/* ---- Columns added to ERD tables ----------------------------------------------------------------------------------- */
+
+/* USER: profile page fields. profile_picture holds an uploaded image as a data URL, so it needs MAX. */
 IF COL_LENGTH(N'[USER]', N'location') IS NULL ALTER TABLE [USER] ADD location NVARCHAR(100) NULL;
 IF COL_LENGTH(N'[USER]', N'theme') IS NULL ALTER TABLE [USER] ADD theme NVARCHAR(10) NOT NULL CONSTRAINT DF_USER_theme DEFAULT N'dark';
 IF COL_LENGTH(N'[USER]', N'preferences') IS NULL ALTER TABLE [USER] ADD preferences NVARCHAR(MAX) NULL;
@@ -29,34 +28,35 @@ IF COL_LENGTH(N'COURSE', N'color') IS NULL ALTER TABLE COURSE ADD color NVARCHAR
 IF COL_LENGTH(N'COURSE', N'icon') IS NULL ALTER TABLE COURSE ADD icon NVARCHAR(10) NULL;
 GO
 
-/* LAB rows are the course's ordered learning activities: an article, a lab task or the course quiz. */
+/* LAB rows are a course's ordered activities: an article, a lab task or the course quiz. workspace 'javascript' shows the
+   in-browser JavaScript terminal, 'none' shows no terminal. starter_code is what the terminal starts with or, for a lab
+   without a terminal, the code the learner is asked to complete. */
 IF COL_LENGTH(N'LAB', N'lesson_type') IS NULL
     ALTER TABLE LAB ADD lesson_type NVARCHAR(10) NOT NULL CONSTRAINT DF_LAB_lesson_type DEFAULT N'article'
         CONSTRAINT CK_LAB_lesson_type CHECK (lesson_type IN (N'article', N'lab', N'quiz'));
 IF COL_LENGTH(N'LAB', N'minutes') IS NULL ALTER TABLE LAB ADD minutes INT NOT NULL CONSTRAINT DF_LAB_minutes DEFAULT 15;
+IF COL_LENGTH(N'LAB', N'workspace') IS NULL
+    ALTER TABLE LAB ADD workspace NVARCHAR(12) NOT NULL CONSTRAINT DF_LAB_workspace DEFAULT N'none'
+        CONSTRAINT CK_LAB_workspace CHECK (workspace IN (N'none', N'javascript'));
+IF COL_LENGTH(N'LAB', N'starter_code') IS NULL ALTER TABLE LAB ADD starter_code NVARCHAR(MAX) NULL;
+GO
+
+/* The two sample labs of databases seeded before starter_code existed got the JavaScript terminal, which cannot run
+   MongoDB or C#. Give them the code they are about instead. */
+UPDATE LAB SET starter_code = N'db.users.____({ name: "Alex" })' WHERE lesson_type = N'lab' AND title = N'Find your first document' AND starter_code IS NULL;
+UPDATE LAB SET starter_code = N'Console.____("Hello");' WHERE lesson_type = N'lab' AND title = N'Write to the console' AND starter_code IS NULL;
 GO
 
 IF COL_LENGTH(N'QUIZ_QUESTION', N'topic') IS NULL ALTER TABLE QUIZ_QUESTION ADD topic NVARCHAR(100) NULL;
 IF COL_LENGTH(N'ENROLLMENT', N'last_active') IS NULL ALTER TABLE ENROLLMENT ADD last_active DATETIME2 NULL;
 IF COL_LENGTH(N'ACTIVITY_LOG', N'detail') IS NULL ALTER TABLE ACTIVITY_LOG ADD detail NVARCHAR(500) NULL;
 IF COL_LENGTH(N'VOICE_CHANNEL', N'starts_at') IS NULL ALTER TABLE VOICE_CHANNEL ADD starts_at DATETIME2 NULL;
-/* Enquiries no longer have an access code (the ID + code lookup was removed), so the hash column is dropped from databases
-   that still have it. Visitors reach their enquiries through ENQUIRY_ACCESS below. */
-IF COL_LENGTH(N'ENQUIRY', N'access_token_hash') IS NOT NULL ALTER TABLE ENQUIRY DROP COLUMN access_token_hash;
 GO
 
-/* "My enquiries": which browser may open which enquiry.
-   The browser keeps only a random key in an HttpOnly cookie; this table stores a SHA-256 hash of it. */
-IF OBJECT_ID(N'ENQUIRY_ACCESS') IS NULL
-CREATE TABLE ENQUIRY_ACCESS (
-    access_id         INT IDENTITY(1,1) NOT NULL,
-    visitor_key_hash  NVARCHAR(64)      NOT NULL,
-    enquiry_id        INT               NOT NULL,
-    granted_at        DATETIME2         NOT NULL DEFAULT SYSDATETIME(),
-    CONSTRAINT PK_ENQUIRY_ACCESS PRIMARY KEY (access_id),
-    CONSTRAINT FK_ENQUIRY_ACCESS_enquiry_id FOREIGN KEY (enquiry_id) REFERENCES ENQUIRY (enquiry_id) ON DELETE CASCADE,
-    CONSTRAINT UQ_ENQUIRY_ACCESS_visitor_enquiry UNIQUE (visitor_key_hash, enquiry_id)
-);
+/* AI companion: one conversation per learner and activity (lesson_id is the LAB row); NULL is the general conversation
+   of the AI Assistant page. is_read: whether the learner has seen an AI reply (replies that already exist count as seen). */
+IF COL_LENGTH(N'AI_CHAT_SESSION', N'lesson_id') IS NULL ALTER TABLE AI_CHAT_SESSION ADD lesson_id INT NULL;
+IF COL_LENGTH(N'AI_CHAT_MESSAGE', N'is_read') IS NULL ALTER TABLE AI_CHAT_MESSAGE ADD is_read BIT NOT NULL CONSTRAINT DF_AI_CHAT_MESSAGE_is_read DEFAULT 1;
 GO
 
 /* Moderators can also flag a post (proposal: "Removes or flags inappropriate posts"). */
@@ -67,8 +67,60 @@ BEGIN
 END
 GO
 
-/* Course files attached by staff. The demo stores small files (up to 2 MB) as data URLs. */
-IF OBJECT_ID(N'COURSE_RESOURCE') IS NULL
+/* Enquiries no longer have an access code (the ID + code lookup was removed). Visitors reach their enquiries through
+   ENQUIRY_ACCESS below. */
+IF COL_LENGTH(N'ENQUIRY', N'access_token_hash') IS NOT NULL ALTER TABLE ENQUIRY DROP COLUMN access_token_hash;
+GO
+
+/* ---- ERD tables and columns nothing uses -------------------------------------------------------------------------- */
+/* Nothing in the web app reads or writes these: there are no badges (the profile works its achievements out from the
+   learner's progress), no notifications, and the FAQ page keeps its own questions; points, streaks, the instructor
+   profile's details, a lab task's starter code and expected output (labs keep theirs in LAB), a task answer's code output
+   and the quiz's AI-generated flag were never filled in or shown. A column's default and check constraints go first. */
+IF OBJECT_ID(N'USER_BADGE', N'U') IS NOT NULL DROP TABLE USER_BADGE;
+IF OBJECT_ID(N'BADGE', N'U') IS NOT NULL DROP TABLE BADGE;
+IF OBJECT_ID(N'NOTIFICATION', N'U') IS NOT NULL DROP TABLE NOTIFICATION;
+IF OBJECT_ID(N'FAQ', N'U') IS NOT NULL DROP TABLE FAQ;
+GO
+
+DECLARE @drop NVARCHAR(MAX) = N'';
+SELECT @drop += N'ALTER TABLE ' + QUOTENAME(OBJECT_NAME(c.object_id)) + N' DROP CONSTRAINT ' + QUOTENAME(k.name) + N';' + NCHAR(10)
+FROM sys.columns c
+JOIN (SELECT name, parent_object_id, parent_column_id FROM sys.default_constraints
+      UNION ALL SELECT name, parent_object_id, parent_column_id FROM sys.check_constraints) k
+  ON k.parent_object_id = c.object_id AND k.parent_column_id = c.column_id
+WHERE (c.object_id = OBJECT_ID(N'[USER]') AND c.name IN (N'total_points', N'current_streak'))
+   OR (c.object_id = OBJECT_ID(N'QUIZ') AND c.name = N'is_ai_generated');
+EXEC (@drop);
+GO
+
+IF COL_LENGTH(N'[USER]', N'total_points') IS NOT NULL ALTER TABLE [USER] DROP COLUMN total_points;
+IF COL_LENGTH(N'[USER]', N'current_streak') IS NOT NULL ALTER TABLE [USER] DROP COLUMN current_streak;
+IF COL_LENGTH(N'INSTRUCTOR_PROFILE', N'expertise') IS NOT NULL ALTER TABLE INSTRUCTOR_PROFILE DROP COLUMN expertise;
+IF COL_LENGTH(N'INSTRUCTOR_PROFILE', N'qualification') IS NOT NULL ALTER TABLE INSTRUCTOR_PROFILE DROP COLUMN qualification;
+IF COL_LENGTH(N'INSTRUCTOR_PROFILE', N'teaching_experience') IS NOT NULL ALTER TABLE INSTRUCTOR_PROFILE DROP COLUMN teaching_experience;
+IF COL_LENGTH(N'INSTRUCTOR_PROFILE', N'certification') IS NOT NULL ALTER TABLE INSTRUCTOR_PROFILE DROP COLUMN certification;
+IF COL_LENGTH(N'LAB_TASK', N'starter_code') IS NOT NULL ALTER TABLE LAB_TASK DROP COLUMN starter_code;
+IF COL_LENGTH(N'LAB_TASK', N'expected_output') IS NOT NULL ALTER TABLE LAB_TASK DROP COLUMN expected_output;
+IF COL_LENGTH(N'TASK_ANSWER', N'code_output') IS NOT NULL ALTER TABLE TASK_ANSWER DROP COLUMN code_output;
+IF COL_LENGTH(N'QUIZ', N'is_ai_generated') IS NOT NULL ALTER TABLE QUIZ DROP COLUMN is_ai_generated;
+GO
+
+/* ---- Tables added for the web app (see create-tables.sql for what each one holds) ----------------------------------- */
+
+IF OBJECT_ID(N'ENQUIRY_ACCESS', N'U') IS NULL
+CREATE TABLE ENQUIRY_ACCESS (
+    access_id INT IDENTITY(1,1) NOT NULL,
+    visitor_key_hash NVARCHAR(64) NOT NULL,
+    enquiry_id INT NOT NULL,
+    granted_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    CONSTRAINT PK_ENQUIRY_ACCESS PRIMARY KEY (access_id),
+    CONSTRAINT FK_ENQUIRY_ACCESS_enquiry_id FOREIGN KEY (enquiry_id) REFERENCES ENQUIRY (enquiry_id) ON DELETE CASCADE,
+    CONSTRAINT UQ_ENQUIRY_ACCESS_visitor_enquiry UNIQUE (visitor_key_hash, enquiry_id)
+);
+GO
+
+IF OBJECT_ID(N'COURSE_RESOURCE', N'U') IS NULL
 CREATE TABLE COURSE_RESOURCE (
     resource_id INT IDENTITY(1,1) NOT NULL,
     course_id INT NOT NULL,
@@ -83,10 +135,7 @@ CREATE TABLE COURSE_RESOURCE (
 );
 GO
 
-/* Create / Delete requests that instructors send to the Program Leader, with their timeline.
-   course_id, program_id and user IDs have no foreign key on purpose: the history must survive
-   after an approved deletion removes the course, or after an account is deleted. */
-IF OBJECT_ID(N'COURSE_REQUEST') IS NULL
+IF OBJECT_ID(N'COURSE_REQUEST', N'U') IS NULL
 CREATE TABLE COURSE_REQUEST (
     request_id INT IDENTITY(1,1) NOT NULL,
     kind NVARCHAR(10) NOT NULL,
@@ -103,7 +152,7 @@ CREATE TABLE COURSE_REQUEST (
 );
 GO
 
-IF OBJECT_ID(N'COURSE_REQUEST_EVENT') IS NULL
+IF OBJECT_ID(N'COURSE_REQUEST_EVENT', N'U') IS NULL
 CREATE TABLE COURSE_REQUEST_EVENT (
     event_id INT IDENTITY(1,1) NOT NULL,
     request_id INT NOT NULL,
@@ -117,7 +166,7 @@ CREATE TABLE COURSE_REQUEST_EVENT (
 );
 GO
 
-IF OBJECT_ID(N'ANNOUNCEMENT_COMMENT') IS NULL
+IF OBJECT_ID(N'ANNOUNCEMENT_COMMENT', N'U') IS NULL
 CREATE TABLE ANNOUNCEMENT_COMMENT (
     comment_id INT IDENTITY(1,1) NOT NULL,
     announcement_id INT NOT NULL,
@@ -130,8 +179,7 @@ CREATE TABLE ANNOUNCEMENT_COMMENT (
 );
 GO
 
-/* Replies to a course review (course reviews are WEBSITE_FEEDBACK rows with a course_id). */
-IF OBJECT_ID(N'FEEDBACK_REPLY') IS NULL
+IF OBJECT_ID(N'FEEDBACK_REPLY', N'U') IS NULL
 CREATE TABLE FEEDBACK_REPLY (
     reply_id INT IDENTITY(1,1) NOT NULL,
     feedback_id INT NOT NULL,
@@ -144,21 +192,13 @@ CREATE TABLE FEEDBACK_REPLY (
 );
 GO
 
--- AI companion: one conversation per learner and activity (lesson_id is the LAB row). NULL is the general conversation of the AI Assistant page.
-IF COL_LENGTH(N'AI_CHAT_SESSION', N'lesson_id') IS NULL ALTER TABLE AI_CHAT_SESSION ADD lesson_id INT NULL;
-GO
-
--- Read tracking: which announcements each person has opened (so their badge goes away and stays away), and whether an AI reply
--- has been seen (existing replies count as seen). Not tied by foreign keys, like the other extension columns: a leftover row is harmless.
 IF OBJECT_ID(N'ANNOUNCEMENT_READ', N'U') IS NULL
-    CREATE TABLE ANNOUNCEMENT_READ (
-        user_id INT NOT NULL,
-        announcement_id INT NOT NULL,
-        read_at DATETIME2 NOT NULL CONSTRAINT DF_ANNOUNCEMENT_READ_read_at DEFAULT SYSDATETIME(),
-        CONSTRAINT PK_ANNOUNCEMENT_READ PRIMARY KEY (user_id, announcement_id)
-    );
-GO
-IF COL_LENGTH(N'AI_CHAT_MESSAGE', N'is_read') IS NULL ALTER TABLE AI_CHAT_MESSAGE ADD is_read BIT NOT NULL CONSTRAINT DF_AI_CHAT_MESSAGE_is_read DEFAULT 1;
+CREATE TABLE ANNOUNCEMENT_READ (
+    user_id INT NOT NULL,
+    announcement_id INT NOT NULL,
+    read_at DATETIME2 NOT NULL CONSTRAINT DF_ANNOUNCEMENT_READ_read_at DEFAULT SYSDATETIME(),
+    CONSTRAINT PK_ANNOUNCEMENT_READ PRIMARY KEY (user_id, announcement_id)
+);
 GO
 
-PRINT N'Done: backend extensions applied.';
+PRINT N'Done: the database is up to date.';

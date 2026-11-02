@@ -26,16 +26,6 @@
         <% if (!string.IsNullOrEmpty(Me.Avatar)) { %><skill:SubmitButton runat="server" CssClass="ghost" Text="Remove image" CausesValidation="false" OnClick="RemoveAvatar_Click" /><% } %>
       </details>
       <a class="button pf-prefs" href="#pf-account">Account security</a>
-      <asp:PlaceHolder ID="DemoSwitch" runat="server">
-        <details class="pf-demo-switch">
-          <summary class="button pf-prefs">Switch demo role</summary>
-          <p>Switch accounts to see how a change travels between roles.</p>
-          <div class="demo-grid">
-            <skill:SubmitButton runat="server" Text="Learner" CommandArgument="Learner" OnCommand="Demo_Command" CausesValidation="false" />
-            <skill:SubmitButton runat="server" Text="Instructor" CommandArgument="Instructor" OnCommand="Demo_Command" CausesValidation="false" />
-          </div>
-        </details>
-      </asp:PlaceHolder>
       <skill:SubmitButton runat="server" CssClass="button pf-prefs pf-signout" Text="Sign out" CausesValidation="false" OnClick="SignOut_Click" />
     </div>
   </div></aside>
@@ -98,6 +88,41 @@
     </details>
     <details class="pf-card pf-section" id="pf-account" open>
       <summary><h2>Account</h2><%= Icon("chevron", "pf-chev") %></summary>
+      <div class="pf-rows">
+        <div class="pf-row pf-row-action"><span class="pf-row-label"><%= Icon("key") %>Password</span><div class="pf-row-value"><span>Change the password you use to log in</span></div><a class="button ghost pf-row-btn" href="#pf-password">Change password</a></div>
+      </div>
+      <details class="inline-form pf-feedback" id="pf-password"<%= PasswordOpen ? " open" : "" %>>
+        <summary>Change your password</summary>
+        <asp:Panel runat="server" CssClass="pf-password-form" DefaultButton="PasswordButton">
+          <label>Current password <b class="req" title="Required" aria-hidden="true">*</b>
+            <span class="auth-field"><asp:TextBox ID="PwCurrent" runat="server" ClientIDMode="Static" TextMode="Password" autocomplete="current-password" /><button type="button" class="auth-eye" data-auth-eye="" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></span>
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="PwCurrent" ValidationGroup="password" ErrorMessage="Enter your current password." Display="Dynamic" CssClass="field-error" />
+          </label>
+          <label>New password <b class="req" title="Required" aria-hidden="true">*</b>
+            <span class="auth-field"><asp:TextBox ID="PwNew" runat="server" ClientIDMode="Static" TextMode="Password" autocomplete="new-password" /><button type="button" class="auth-eye" data-auth-eye="" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></span>
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="PwNew" ValidationGroup="password" ErrorMessage="Choose a new password." Display="Dynamic" CssClass="field-error" />
+            <asp:CustomValidator runat="server" ControlToValidate="PwNew" ValidationGroup="password" ClientValidationFunction="skillUpPasswordCheck" OnServerValidate="Password_ServerValidate" ErrorMessage="Use 8 to 128 characters." Display="Dynamic" CssClass="field-error" />
+          </label>
+          <div class="pw-help" data-pw-for="PwNew">
+            <div class="pw-meter" role="progressbar" aria-label="Password strength" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"><i></i><i></i><i></i><i></i></div>
+            <p class="pw-label" aria-live="polite">Password strength: <b>not entered yet</b></p>
+            <ul class="pw-rules">
+              <li data-rule="length">8 to 128 characters</li>
+              <li data-rule="capital">A capital letter (A&ndash;Z)</li>
+              <li data-rule="number">A number (0&ndash;9)</li>
+              <li data-rule="special">A special character (! @ # $ %)</li>
+              <li data-rule="different">Different from your current password</li>
+            </ul>
+          </div>
+          <label>Confirm new password <b class="req" title="Required" aria-hidden="true">*</b>
+            <span class="auth-field"><asp:TextBox ID="PwConfirm" runat="server" ClientIDMode="Static" TextMode="Password" autocomplete="new-password" /><button type="button" class="auth-eye" data-auth-eye="" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></span>
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="PwConfirm" ValidationGroup="password" ErrorMessage="Type the new password again." Display="Dynamic" CssClass="field-error" />
+            <asp:CompareValidator runat="server" ControlToValidate="PwConfirm" ControlToCompare="PwNew" ValidationGroup="password" ErrorMessage="Passwords must match." Display="Dynamic" CssClass="field-error" />
+          </label>
+          <p class="form-error" role="alert"><asp:Literal ID="PasswordError" runat="server" /></p>
+          <div class="actions"><skill:SubmitButton ID="PasswordButton" runat="server" CssClass="primary" Text="Update password" ValidationGroup="password" OnClick="Password_Click" /></div>
+        </asp:Panel>
+      </details>
       <div class="pf-rows">
         <div class="pf-row pf-row-action"><span class="pf-row-label"><%= Icon("chat") %>Feedback</span><div class="pf-row-value"><span>Tell us about your learning experience</span></div><a class="button ghost pf-row-btn" href="#pf-feedback">Give feedback</a></div>
       </div>

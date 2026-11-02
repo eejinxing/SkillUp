@@ -5,6 +5,13 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0c0e12"><title>Skill UP</title>
 <%-- Named explicitly, with a version in the address, so browsers fetch the current icon instead of a cached one. Bump v when favicon.ico changes. --%>
 <link rel="icon" href="~/favicon.ico?v=2" type="image/x-icon" runat="server">
+<%-- Fonts first. The page's main font (DM Sans) is fetched at once, in parallel with the stylesheets. It used to be found only after
+     base.css and home.css were read (through @import), so text showed in a fallback font for a moment on every page. --%>
+<link rel="preload" href="assets/visitor/font-0.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/visitor/font-1.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/visitor/font-2.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="assets/visitor/fonts.css">
+<link rel="stylesheet" href="assets/registered/fonts.css">
 <%-- The order matters: later stylesheets override earlier ones (base first, webforms and responsive last). --%>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/secondary-pages.css">

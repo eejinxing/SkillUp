@@ -28,8 +28,17 @@ namespace SKILL_UP.Frontend
         protected LessonRow EditingLesson;
         protected string Mark, ProgramName, InstructorName, Status, QuizSummary, History;
 
+        protected bool IsLeader => Me.Role == "Program Leader";
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            // A Program Leader has no one to ask for approval, so the review button publishes directly.
+            if (IsLeader)
+            {
+                SubmitReview.Text = "Publish";
+                SubmitReview.CommandArgument = "publish";
+                SubmitReview.Attributes["data-confirm"] = "Publish this course and its current materials? Learners will be able to open it.";
+            }
             var id = QueryInt("id");
             C = id == null ? null : OwnCourses.FirstOrDefault(c => c.Id == id);
             if (id != null && C == null)
@@ -111,6 +120,8 @@ namespace SKILL_UP.Frontend
             LessonMinutes.Text = (EditingLesson?.Minutes ?? 15).ToString(CultureInfo.InvariantCulture);
             LessonBody.Text = EditingLesson?.Body ?? "";
             LessonAnswer.Text = EditingLesson?.Answer ?? "";
+            LessonWorkspace.SelectedValue = EditingLesson?.Workspace ?? "none";
+            LessonStarter.Text = EditingLesson?.StarterCode ?? "";
             LessonPreview.Checked = EditingLesson?.Preview ?? false;
         }
 
@@ -125,6 +136,20 @@ namespace SKILL_UP.Frontend
                 html.Append("<div class=\"list-item\">").Append(Ui.Tag(x.Action)).Append("<p>").Append(Ui.H(x.Comment)).Append("</p><small>")
                     .Append(Ui.H(Data.User(x.ActorId)?.Name ?? "Unknown user")).Append(" &middot; ").Append(Ui.Date(x.CreatedAt)).Append("</small></div>");
             return html.ToString();
+        }
+
+        /// <summary>
+        /// The top-left link goes back to the page the editor was opened from (My courses, My requests, Learning resources, the
+        /// Overview...), not always to My courses. The question editor and the course page are steps inside this course, so they are skipped.
+        /// </summary>
+        protected string BackUrl
+        {
+            get { string url, label; BackTo("Courses", "My courses", out url, out label, "QuizEditor", "Activity", "Course"); return url; }
+        }
+
+        protected string BackLabel
+        {
+            get { string url, label; BackTo("Courses", "My courses", out url, out label, "QuizEditor", "Activity", "Course"); return label; }
         }
 
         /// <summary>This editor's address; the tab is kept so a reload after a save returns to it.</summary>
@@ -155,10 +180,82 @@ namespace SKILL_UP.Frontend
             }
             AssignToggle.Visible = !Fresh && Me.Role == "Program Leader" && !AssignForm.Visible;
             WithdrawReview.Visible = !Fresh && !Deleting && Status == "Pending review";
-            SubmitReview.Visible = !Fresh && !Deleting && Status != "Pending review";
+            // An instructor can only submit a course with changes since its last approval (Draft): anything else has nothing new to
+            // review. A Program Leader publishes directly, so the button stays for any course that is not pending or already published.
+            SubmitReview.Visible = !Fresh && !Deleting && (IsLeader ? Status != "Pending review" && Status != "Published" : Status == "Draft");
             SavedParts.Visible = !Fresh;
+            CoverRemove.Visible = HasCover;
             DeleteCourse.Visible = Me.Role != "Instructor";
             AskDeletion.Visible = Me.Role == "Instructor" && !DeletionForm.Visible;
+        }
+
+        // ---- course image ----------------------------------------------------------------------
+
+        const string CoverFolder = "uploads/course-art/";
+
+        /// <summary>The image the course card shows: the uploaded cover, or the stock one.</summary>
+        protected string CoverUrl => C == null ? "" : CourseArt(C);
+        protected bool HasCover => C != null && !string.IsNullOrEmpty(C.Thumbnail);
+
+        /// <summary>The file type from the first bytes (never from the file name the browser sent), or null when it is not a PNG, JPEG or WebP.</summary>
+        static string CoverExtension(byte[] b)
+        {
+            if (b.Length > 12 && b[0] == 0x89 && b[1] == 0x50 && b[2] == 0x4E && b[3] == 0x47) return ".png";
+            if (b.Length > 12 && b[0] == 0xFF && b[1] == 0xD8 && b[2] == 0xFF) return ".jpg";
+            if (b.Length > 12 && b[0] == 'R' && b[1] == 'I' && b[2] == 'F' && b[3] == 'F' && b[8] == 'W' && b[9] == 'E' && b[10] == 'B' && b[11] == 'P') return ".webp";
+            return null;
+        }
+
+        string CoverFile_Path(string name) => System.IO.Path.Combine(Server.MapPath("~/Frontend/" + CoverFolder), name);
+
+        /// <summary>Deletes a cover file this page saved earlier. Anything else in the database value is left alone.</summary>
+        void DeleteCover(string path)
+        {
+            if (string.IsNullOrEmpty(path) || !path.StartsWith(CoverFolder, StringComparison.Ordinal)) return;
+            var name = System.IO.Path.GetFileName(path);
+            try { System.IO.File.Delete(CoverFile_Path(name)); } catch (System.IO.IOException) { }
+        }
+
+        protected void Cover_Click(object sender, EventArgs e)
+        {
+            if (C == null || Locked) return;
+            if (!CoverFile.HasFile)
+            {
+                ShowError("Choose a PNG, JPG or WebP image.");
+                return;
+            }
+            var bytes = CoverFile.FileBytes;
+            if (bytes.Length > 2 * 1024 * 1024)
+            {
+                ShowError("Course images must be smaller than 2 MB.");
+                return;
+            }
+            var extension = CoverExtension(bytes);
+            if (extension == null)
+            {
+                ShowError("Choose a PNG, JPG or WebP image.");
+                return;
+            }
+            var name = Tokens.New() + extension;
+            System.IO.Directory.CreateDirectory(Server.MapPath("~/Frontend/" + CoverFolder));
+            System.IO.File.WriteAllBytes(CoverFile_Path(name), bytes);
+            object result;
+            if (!TryRun("courseArt", new { courseId = C.Id.ToString(CultureInfo.InvariantCulture), path = CoverFolder + name }, out result))
+            {
+                System.IO.File.Delete(CoverFile_Path(name));
+                return;
+            }
+            DeleteCover((string)((JObject)result)?["previous"]);
+            ReloadPage("Course image updated");
+        }
+
+        protected void CoverRemove_Click(object sender, EventArgs e)
+        {
+            if (C == null || Locked) return;
+            object result;
+            if (!TryRun("courseArt", new { courseId = C.Id.ToString(CultureInfo.InvariantCulture), path = "" }, out result)) return;
+            DeleteCover((string)((JObject)result)?["previous"]);
+            ReloadPage("Course image removed");
         }
 
         protected void Tab_Command(object sender, CommandEventArgs e)
@@ -188,7 +285,7 @@ namespace SKILL_UP.Frontend
             var op = e.CommandArgument.ToString();
             if (!TryRun("courseAction", new { id = C.Id.ToString(CultureInfo.InvariantCulture), action = op })) return;
             if (op == "delete") Go("Courses", "Course deleted");
-            ReloadPage(op == "submit" ? "Course submitted for review" : op == "withdraw" ? "Submission withdrawn" : "Course hidden");
+            ReloadPage(op == "publish" ? "Course published" : op == "submit" ? "Course submitted for review" : op == "withdraw" ? "Submission withdrawn" : "Course hidden");
         }
 
         protected void AssignToggle_Click(object sender, EventArgs e)
@@ -217,6 +314,7 @@ namespace SKILL_UP.Frontend
             {
                 courseId = C.Id.ToString(CultureInfo.InvariantCulture), id = EditingLesson?.Id.ToString(CultureInfo.InvariantCulture) ?? "",
                 title = LessonTitle.Text, type, minutes = LessonMinutes.Text, body = LessonBody.Text, answer = LessonAnswer.Text,
+                workspace = LessonWorkspace.SelectedValue, starterCode = LessonStarter.Text,
                 preview = LessonPreview.Checked && type == "article"
             })) Go(EditorUrl(null), "Activity saved");
         }

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/D:/Git/Frontend/Login.aspx" hash="10c604ecd" filehash="a4748a1df47746d0" flags="110000" assembly="App_Web_mpznsnvf" type="ASP.frontend_login_aspx">
+    <filedeps>
+        <filedep name="/D:/Git/Frontend/Controls/AuthArt.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/LoginDialog.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/RegisterDialog.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/SiteFooter.ascx" />
+        <filedep name="/D:/Git/Frontend/Login.aspx" />
+        <filedep name="/D:/Git/Frontend/SkillUp.Master" />
+    </filedeps>
+</preserve>

@@ -1132,6 +1132,63 @@
     background: #fff;
 }
 
+/* The "Enrol learner" button in the form is white too (it was the site's green primary), like "+ Enrol learner" above it. */
+#app .student-performance .sp-enrol-form .sp-enrol-submit {
+    border-color: #f4f4f5;
+    background: #f4f4f5;
+    color: #111113;
+    box-shadow: none;
+}
+
+#app .student-performance .sp-enrol-form .sp-enrol-submit:hover:not(:disabled) {
+    background: #fff;
+    border-color: #fff;
+}
+
+#app .student-performance .sp-enrol-form .sp-enrol-submit:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+/* The enrol form uses the filter bar's own row of controls (same height, corners and colours): the course, the user ID search and the
+   learners it leaves, then the buttons at the same height. */
+#app .student-performance .sp-enrol-form .sp-enrol-fields {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.6fr);
+    margin-top: 14px;
+}
+
+#app .student-performance .sp-enrol-count {
+    margin: 10px 0 0;
+    color: #a39cb4;
+    font-size: 12.5px;
+}
+
+#app .student-performance .sp-enrol-count:empty {
+    display: none;
+}
+
+#app .student-performance .sp-enrol-form .actions {
+    margin-top: 16px;
+    gap: 10px;
+}
+
+#app .student-performance .sp-enrol-form .actions :is(button, a) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+@media (max-width: 860px) {
+    #app .student-performance .sp-enrol-form .sp-enrol-fields {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
 #app .student-performance .sp-filters :is(input,select):focus {
     border-color: #ffffff59;
     box-shadow: 0 0 0 3px #ffffff14;

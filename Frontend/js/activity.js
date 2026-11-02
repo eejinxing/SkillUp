@@ -109,14 +109,18 @@
                 output.textContent = 'Console cleared.';
                 setState('idle', 'Ready to execute');
             }
-            if (button.dataset.labAction === 'reset') editor.value = "console.log('Hello, Skill UP!');";
+            if (button.dataset.labAction === 'reset') editor.value = editor.dataset.starter || '';
             lab.querySelector('.lab-menu').open = false;
         }));
     }
 
     // ---- Quiz countdown (the server also checks the time when answers are submitted) ---------------------
-    const timer = document.getElementById('quiz-timer');
-    if (timer && timer.dataset.secondsLeft) {
+    // Called again (window.skillUpQuizTimer) when the quiz is shown or restarted in place, without a page reload.
+    let interval;
+    window.skillUpQuizTimer = () => {
+        clearInterval(interval);
+        const timer = document.getElementById('quiz-timer');
+        if (!timer || !timer.dataset.secondsLeft) return;
         const end = Date.now() + Number(timer.dataset.secondsLeft) * 1000;
         const tick = () => {
             const left = Math.max(0, Math.round((end - Date.now()) / 1000));
@@ -127,7 +131,8 @@
                 if (submit) submit.disabled = true;
             }
         };
-        const interval = setInterval(tick, 1000);
+        interval = setInterval(tick, 1000);
         tick();
-    }
+    };
+    window.skillUpQuizTimer();
 })();

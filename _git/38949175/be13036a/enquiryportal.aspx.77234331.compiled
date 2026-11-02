@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/D:/Git/Frontend/EnquiryPortal.aspx" hash="10c604ecd" filehash="4bd07c8bf5f61e2f" flags="110000" assembly="App_Web_adpkhhfw" type="ASP.frontend_enquiryportal_aspx">
+    <filedeps>
+        <filedep name="/D:/Git/Frontend/Controls/AuthArt.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/LoginDialog.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/RegisterDialog.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/SiteFooter.ascx" />
+        <filedep name="/D:/Git/Frontend/EnquiryPortal.aspx" />
+        <filedep name="/D:/Git/Frontend/SkillUp.Master" />
+    </filedeps>
+</preserve>

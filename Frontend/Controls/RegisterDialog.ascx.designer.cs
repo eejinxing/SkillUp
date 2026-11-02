@@ -10,6 +10,7 @@ namespace SKILL_UP.Frontend.Controls
         protected global::System.Web.UI.WebControls.RadioButton RoleInstructor;
         protected global::System.Web.UI.WebControls.TextBox SignUpPassword;
         protected global::System.Web.UI.WebControls.TextBox SignUpConfirm;
+        protected global::System.Web.UI.WebControls.CheckBox AgreeTerms;
         protected global::System.Web.UI.WebControls.Literal FormError;
         protected global::SKILL_UP.Frontend.Controls.SubmitButton RegisterButton;
     }

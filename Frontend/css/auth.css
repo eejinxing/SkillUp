@@ -722,7 +722,166 @@ body.ui-refined:has(main.auth-v2) {
     }
 }
 
-/* Password strength */
+/* Password strength bar, rule checklist and tip (Sign up, Reset password); Frontend/js/site.js fills in data-level and is-met. */
+:is(.auth-v2, .pf-page) .pw-help {
+    display: grid;
+    gap: .5em;
+    margin-top: .1em;
+    font-size: .85em;
+    color: var(--au-faint);
+}
+
+:is(.auth-v2, .pf-page) .pw-meter {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .35em;
+}
+
+:is(.auth-v2, .pf-page) .pw-meter i {
+    height: .35em;
+    border-radius: 99px;
+    background: #ffffff1f;
+    transition: background-color .2s;
+}
+
+:is(.auth-v2, .pf-page) .pw-meter[data-level="1"] i:nth-child(-n+1) {
+    background: #f0605d;
+}
+
+:is(.auth-v2, .pf-page) .pw-meter[data-level="2"] i:nth-child(-n+2) {
+    background: #f2a14b;
+}
+
+:is(.auth-v2, .pf-page) .pw-meter[data-level="3"] i:nth-child(-n+3) {
+    background: #e3c84a;
+}
+
+:is(.auth-v2, .pf-page) .pw-meter[data-level="4"] i {
+    background: #3fcf8e;
+}
+
+:is(.auth-v2, .pf-page) .pw-label,
+:is(.auth-v2, .pf-page) .pw-tip {
+    margin: 0;
+}
+
+:is(.auth-v2, .pf-page) .pw-label b {
+    color: var(--au-text);
+    font-weight: 600;
+}
+
+:is(.auth-v2, .pf-page) .pw-rules {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25em 1.1em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+:is(.auth-v2, .pf-page) .pw-rules li::before {
+    content: "\25CB";
+    display: inline-block;
+    width: 1.1em;
+}
+
+:is(.auth-v2, .pf-page) .pw-rules li.is-met {
+    color: #3fcf8e;
+}
+
+:is(.auth-v2, .pf-page) .pw-rules li.is-met::before {
+    content: "\2713";
+}
+
+:is(.auth-v2, .pf-page) .pw-rules li[data-rule="different"]::before {
+    content: "\2022";
+}
+
+:is(.auth-v2, .pf-page) .pw-tip em {
+    color: var(--au-text);
+    font-style: normal;
+}
+
+/* The Change password form on the Profile page reuses the strength bar and the show/hide eye. */
+.pf-page .pw-help,
+.pf-page .auth-field {
+    --au-faint: #a39cb4;
+    --au-text: #f3f5f4;
+}
+
+.pf-page .pf-password-form {
+    display: grid;
+    gap: 14px;
+    max-width: 520px;
+    padding-top: 6px;
+}
+
+.pf-page .pf-password-form label {
+    display: block;
+}
+
+.pf-page .pf-password-form label .auth-field {
+    margin-top: 6px;
+}
+
+.pf-page .pf-password-form .auth-field input {
+    width: 100%;
+    padding-right: 3.1em;
+}
+
+/* The terms tick box: a real checkbox with a red star, because it must be ticked to sign up. */
+.auth-v2 .auth-terms label.auth-check {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: .65em;
+    font-size: .9em;
+    line-height: 1.45;
+    color: var(--au-label);
+    cursor: pointer;
+}
+
+/* The checkbox keeps its own small square: the dialog's text-field rules (3.3em tall, filled, bordered) must not apply to it. */
+:is(#register-dialog, #dialog) .auth-check input[type=checkbox] {
+    flex: none;
+    width: 1.15em !important;
+    height: 1.15em !important;
+    min-height: 0;
+    margin: .15em 0 0;
+    padding: 0 !important;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    accent-color: #8b5cf6;
+    cursor: pointer;
+}
+
+:is(#register-dialog, #dialog) .auth-check input[type=checkbox]:focus-visible {
+    outline: 2px solid #a78bfa;
+    outline-offset: 2px;
+}
+
+:is(#register-dialog, #dialog) .auth-check input[type=checkbox]:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.auth-v2 .auth-check a {
+    color: var(--au-accent);
+}
+
+/* The red star after every required field's label, on the same line as the label text. */
+.auth-v2 .auth-label-row label {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: .3em;
+}
+
+.auth-v2 .req {
+    color: #f0605d;
+    font-weight: 600;
+}
+
 /* Back link: keep it inside the form column */
 .auth-v2 .auth-form {
     overflow: visible;

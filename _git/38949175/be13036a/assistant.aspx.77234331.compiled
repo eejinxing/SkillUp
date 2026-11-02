@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/D:/Git/Frontend/Assistant.aspx" hash="10c604ecd" filehash="b6f961eaaac292b5" flags="110000" assembly="App_Web_guqilfkd" type="ASP.frontend_assistant_aspx">
+    <filedeps>
+        <filedep name="/D:/Git/Frontend/Assistant.aspx" />
+        <filedep name="/D:/Git/Frontend/Controls/AuthArt.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/LoginDialog.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/RegisterDialog.ascx" />
+        <filedep name="/D:/Git/Frontend/Controls/SiteFooter.ascx" />
+        <filedep name="/D:/Git/Frontend/SkillUp.Master" />
+    </filedeps>
+</preserve>

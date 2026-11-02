@@ -37,9 +37,14 @@ namespace SKILL_UP.Backend
             }
         }
 
-        /// <summary>LocalDB could not be reached or started yet (error 50 / -1, or a LocalDB startup message).</summary>
+        /// <summary>
+        /// LocalDB could not be reached or started yet: error 50 / -1, a LocalDB startup message, or the "Login failed" (18456) and
+        /// "cannot open database" (4060) answers it gives while it is still starting and attaching App_Data/SkillUp.mdf. The same
+        /// request a moment later succeeds, so these are retried instead of showing an error page.
+        /// </summary>
         static bool IsLocalDbStartup(SqlException e) =>
-            e.Number == 50 || e.Number == -1 || e.Message.IndexOf("LocalDB", StringComparison.OrdinalIgnoreCase) >= 0;
+            e.Number == 50 || e.Number == -1 || e.Number == 18456 || e.Number == 4060
+            || e.Message.IndexOf("LocalDB", StringComparison.OrdinalIgnoreCase) >= 0;
 
         public void Begin() => Transaction = Connection.BeginTransaction();
 
