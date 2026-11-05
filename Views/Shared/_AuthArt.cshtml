@@ -1,0 +1,37 @@
+@* The artwork half of the sign-in screens: brand, feature chips and the three steps of the current flow. Model: login, register, forgot or reset. *@
+@model string
+@{
+    (string Heading, string Lead, (string Title, string Detail)[] Steps, int Current) art = Model switch
+    {
+        "register" => ("Learn practical skills, one lesson at a time.",
+            "Join as a learner to take courses, or as an instructor to share what you know.",
+            [("Create your account", "Your name, email and a password."), ("Choose what to learn", "Browse programs and enrol in a course."), ("Start your first lesson", "Progress saves as you complete activities.")], 0),
+        "forgot" => ("Locked out? It happens.", "Getting back in takes three short steps.",
+            [("Enter your email", "The address you registered with."), ("Open the reset link", "It stays valid for 15 minutes."), ("Set a new password", "8+ characters, a capital, a number and a symbol.")], 0),
+        "reset" => ("Almost there.", "Set a new password to get back to your courses.",
+            [("Enter your email", "The address you registered with."), ("Open the reset link", "It stays valid for 15 minutes."), ("Set a new password", "8+ characters, a capital, a number and a symbol.")], 2),
+        _ => ("Pick up where you left off.", "Your courses, progress and messages are kept in your workspace.",
+            [("Log in", "With your email or username."), ("Open your dashboard", "See your courses and announcements."), ("Keep learning", "Resume your next unfinished activity.")], 0)
+    };
+}
+<section class="auth-art" aria-hidden="true">
+  <div class="auth-grain"></div>
+  <a class="brand auth-brand has-skill-logo" href="/Home" tabindex="-1"><img class="skill-logo" src="/assets/skill-up-logo.png" alt="Skill UP" width="930" height="420"></a>
+  <div class="auth-orbit">
+    <span class="auth-orb"></span>
+    <span class="auth-chip" style="--d:0"><i>01</i> Guided labs</span>
+    <span class="auth-chip" style="--d:1"><i>02</i> Quizzes with instant feedback</span>
+    <span class="auth-chip" style="--d:2"><i>03</i> Progress saves as you go</span>
+    <span class="auth-chip" style="--d:3"><i>04</i> A learning companion</span>
+  </div>
+  <div class="auth-art-copy">
+    <h2>@art.Heading</h2>
+    <p>@art.Lead</p>
+    <ol class="auth-steps">
+      @for (var i = 0; i < art.Steps.Length; i++)
+      {
+        <li aria-current="@(i == art.Current ? "step" : null)"><span>@((i + 1).ToString("00"))</span><strong>@art.Steps[i].Title</strong><small>@art.Steps[i].Detail</small></li>
+      }
+    </ol>
+  </div>
+</section>

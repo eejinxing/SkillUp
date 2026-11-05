@@ -1,0 +1,65 @@
+@model SkillUp.Models.LeaderDashboardModel
+<section class="leader-dashboard"><h1 id="page-title" class="sr-only" tabindex="-1">Program overview</h1>
+  <nav class="ld-rail" aria-label="Program Leader quick navigation">@(Model.Rail)</nav>
+  <div class="ld-main">
+    <div class="ld-metrics">@(Model.Metrics)</div>
+    <div class="ld-board">
+      <div class="ld-board-main">
+        <section class="ld-activity">@Html.Raw(LeaderDashboardModel.Native("250-5174-imgVector.svg", "ld-surface"))
+          <header class="ld-chart-header">@Html.Raw(LeaderDashboardModel.Native("250-5175-imgVector.svg", "ld-surface"))<h2>Weekly Platform Activity</h2><p>@(Model.Change) <span>vs prior @(Ui.Plural(Model.Days, "day"))</span></p></header>
+          <div class="ld-chart-controls">
+            <div class="ld-periods" role="group" aria-label="Activity period">
+              <form method="get" action="/Dashboard" style="display:contents">@foreach (dynamic p in Model.Periods) { <button type="submit" name="days" value="@p.Value" aria-label="@p.Title" aria-pressed="@p.Pressed">@Html.Raw(LeaderDashboardModel.Native((string)p.File, ""))<span>@p.Label</span></button> }</form>
+            </div>
+            <div class="ld-chart-legend"><span>@Html.Raw(LeaderDashboardModel.Native("250-5186-imgVector.svg", ""))Prior period</span><span>@Html.Raw(LeaderDashboardModel.Native("250-5189-imgVector.svg", ""))Selected period</span></div>
+          </div>
+          @(Model.Chart)
+        </section>
+        @if (Model.NoCourses)
+{<section class="ld-reach ld-card"><h2>Course performance</h2><p class="ld-empty">No managed courses yet.</p></section>}
+        @if (Model.HasReach)
+{
+        <section class="ld-reach" aria-label="Program performance">
+          <section class="ld-course-panel ld-monitor-course" data-current-course="@(Model.Selected?.Id)">
+            <header class="ld-panel-heading"><h2>Course performance</h2><a href="/Analytics" aria-label="Open program analytics">@Html.Raw(LeaderDashboardModel.Arrow)</a></header>
+            <div class="ld-monitor-course-body">
+              <div class="ld-monitor-course-primary">
+                <label class="ld-course-picker"><span class="sr-only">Select course</span><form method="get" action="/Dashboard" style="display:contents"><input type="hidden" name="days" value="@Model.Days"><select name="course" onchange="this.form.submit()">@foreach (dynamic c in Model.CourseChoices) { <option value="@c.Id" selected="@(c.Id == Model.Selected.Id)">@c.Title</option> }</select></form></label>
+                <section class="ld-monitor-inspector"><header><span>Course details</span><details class="ld-monitor-actions"><summary aria-label="Course actions">@Html.Raw(LeaderDashboardModel.MonitorMore)</summary><nav aria-label="Course actions"><a href="/Course?id=@(Model.Selected?.Id)">View course</a><a href="/CourseEditor?id=@(Model.Selected?.Id)">Edit course</a><a href="/Analytics">Program analytics</a></nav></details></header>
+                  <dl class="ld-monitor-course-fields">@(Model.CourseFields)</dl></section>
+              </div>
+              <aside class="ld-course-trends ld-monitor-trends"><h3>Learner breakdown</h3><dl>@(Model.Breakdown)</dl><a class="ld-panel-more" href="/Course?id=@(Model.Selected?.Id)">View course @Html.Raw(LeaderDashboardModel.Arrow)</a></aside>
+            </div>
+            <footer class="ld-course-foot"><span>@(Model.CourseFoot)</span><span>Completion <strong>@(Model.CourseRate)</strong></span></footer>
+          </section>
+          <section class="ld-health-panel ld-monitor-health"><header class="ld-panel-heading"><h2>Learning summary</h2><a href="/Analytics" aria-label="View learning analytics">@Html.Raw(LeaderDashboardModel.Arrow)</a></header>
+            <div class="ld-monitor-health-body">@(Model.Health)</div></section>
+        </section>
+        }
+      </div>
+      <section class="ld-pending ld-notifications ld-card ld-monitor-alerts" aria-labelledby="ld-notes-title">
+        <header class="ld-notes-head"><h2 id="ld-notes-title">Alerts &amp; notifications</h2><span class="ld-monitor-current-filter">@(Model.TabLabel) @(Model.TabCount(Model.Tab))</span>
+          <details class="ld-monitor-filter"><summary aria-label="Filter notifications: @(Model.TabLabel)" title="Filter notifications">@Html.Raw(LeaderDashboardModel.FilterIcon)</summary>
+            <div class="ld-note-tabs" role="tablist" aria-label="Notification filter" aria-orientation="vertical">
+              <a class="ld-note-tab" role="tab" href="/Dashboard?days=@Model.Days&tab=unread" aria-selected="@(Model.Tab == "unread" ? "true" : "false")">Unread<em>@(Model.TabCount("unread"))</em></a>
+              <a class="ld-note-tab" role="tab" href="/Dashboard?days=@Model.Days&tab=read" aria-selected="@(Model.Tab == "read" ? "true" : "false")">Read<em>@(Model.TabCount("read"))</em></a>
+              <a class="ld-note-tab" role="tab" href="/Dashboard?days=@Model.Days&tab=archived" aria-selected="@(Model.Tab == "archived" ? "true" : "false")">Archived<em>@(Model.TabCount("archived"))</em></a>
+            </div>
+          </details>
+        </header>
+        <div class="ld-note-scroll">
+          <div class="ld-note-panel" role="tabpanel" id="ld-panel-@(Model.Tab)" tabindex="0" data-note-panel="@(Model.Tab)">
+            @foreach (dynamic n in Model.NoteList)
+{
+  <details class="ld-note ld-monitor-note" data-note="@n.Id" data-kind="@n.Kind" data-tab="@n.Tab"><summary title="Show notification actions">@Html.Raw(n.Summary)</summary>
+    <div class="ld-note-actions"><form method="post" asp-antiforgery="true" action="/Dashboard/Note" style="display:inline"><input type="hidden" name="arg" value="@(n.Action + "|" + n.Id)"><input type="hidden" name="returnTo" value="@(Context.Request.Path + Context.Request.QueryString)"><button class="ld-note-ghost" type="submit">@n.ActionLabel</button></form>@Html.Raw(n.Link)</div>
+  </details>
+}
+            @if (Model.Shown == 0) {<p class="ld-caught-up">@(Model.EmptyNote)</p>}
+          </div>
+        </div>
+        <footer class="ld-monitor-alert-foot"><a href="/Approvals">@(Ui.Plural(Model.PendingCount, "pending review"))</a><button type="button" data-leader-note-scroll aria-label="Scroll to more notifications" title="More updates">@Html.Raw(LeaderDashboardModel.ScrollIcon)</button></footer>
+      </section>
+    </div>
+  </div>
+</section>

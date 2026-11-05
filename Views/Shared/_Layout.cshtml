@@ -1,0 +1,99 @@
+@{
+    var page = Ctx.Page;
+    var frame = Ctx.Frame;
+    var home = frame == PageLayout.Home;
+    var workspace = frame == PageLayout.Workspace;
+    var title = ViewData["Title"] as string;
+    var fullTitle = string.IsNullOrEmpty(title) ? "Skill UP" : title.StartsWith("Skill UP") ? title : "Skill UP · " + title;
+
+    var bodyClasses = new List<string>();
+    if (Me?.Theme == "light") bodyClasses.Add("light");
+    if (Me != null) bodyClasses.Add("role-" + Me.Role.ToLowerInvariant().Replace(' ', '-'));
+    bodyClasses.Add("ui-refined");
+    if (Me == null) bodyClasses.Add("ui-public");
+    if (!string.IsNullOrEmpty(page.BodyClass)) bodyClasses.Add(page.BodyClass);
+    bodyClasses.Add("shared-capsule-nav");
+
+    var mainClass = workspace ? "main" + (page.Secondary ? " figma-secondary" : "") : home ? null : "public-main";
+    var stylesheets = new[]
+    {
+        "base", "secondary-pages", "my-courses", "admin-dashboard", "course", "course-requests", "learners", "users", "leader-dashboard", "profile", "header",
+        "catalog", "activity", "quiz-editor", "home", "auth", "leaderboard", "course-editor", "instructor-dashboard", "programs", "assignments", "approvals",
+        "user-editor", "messages", "analytics", "learner-dashboard", "webforms", "responsive"
+    };
+}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0c0e12"><title>@fullTitle</title>
+@* Named explicitly, with a version in the address, so browsers fetch the current icon instead of a cached one. Bump v when favicon.ico changes. *@
+<link rel="icon" href="/favicon.ico?v=2" type="image/x-icon">
+@* Fonts first, so the main font (DM Sans) is fetched at once, in parallel with the stylesheets. *@
+<link rel="preload" href="/assets/visitor/font-0.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="/assets/visitor/font-1.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="/assets/visitor/font-2.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/assets/visitor/fonts.css">
+<link rel="stylesheet" href="/assets/registered/fonts.css">
+@* The order matters: later stylesheets override earlier ones (base first, responsive last). *@
+@foreach (var sheet in stylesheets)
+{
+    <link rel="stylesheet" href="/css/@(sheet).css">
+}
+@await RenderSectionAsync("Head", required: false)
+</head>
+<body id="SkillBody" class="@string.Join(" ", bodyClasses)">
+<div id="app">
+@if (workspace) { @Html.Raw("<div class=\"shell learner-home-shell figma-shell\"><div>") }
+else if (home) { @Html.Raw("<div class=\"site-home home-refined\">") }
+<header class="skill-global-header">
+  <a class="gn-brand" href="@(Me == null ? "/Home" : "/Dashboard")" aria-label="Skill UP home"><img class="skill-logo" src="/assets/skill-up-logo.png" alt="Skill UP" width="930" height="420"></a>
+  <div class="gn-capsule">
+    <span class="gn-workspace-label">@(Me == null ? "Explore Skill UP" : "Your workspace")</span>
+    <span class="gn-date">@DateTime.Now.ToString("d MMM", System.Globalization.CultureInfo.GetCultureInfo("en-GB"))</span>
+    <nav class="gn-links" aria-label="Main navigation">
+      @foreach (var link in Nav.For(Me))
+      {
+        <a href="@link.Url" aria-current="@(link.Route == page.Route ? "page" : null)">@link.Label</a>
+      }
+    </nav>
+    <div class="gn-call-strip" aria-live="off"></div>
+  </div>
+  <div class="gn-actions">
+    @if (Me == null)
+    {
+      <a href="#login" class="gn-guest" aria-label="Log in or sign up" title="Log in or sign up"><span class="avatar gn-guest-avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span></a>
+      <a href="#register" class="gn-register">Sign up</a>
+    }
+    else
+    {
+      <a href="/Profile" aria-label="Your profile">@Ui.Avatar(Me)</a>
+    }
+  </div>
+</header>
+<main id="main" class="@mainClass" data-view="@(workspace ? page.Route : null)">
+  @RenderBody()
+</main>
+@* The landing page footer, shown to visitors on every page. *@
+@if (!workspace) { <partial name="_SiteFooter" /> }
+@* Log in and Sign up pop-ups for visitors: a link to #login or #register opens one over the page. *@
+@if (Me == null)
+{
+  <partial name="_LoginDialog" model="@(page.Route == "login")" />
+  <partial name="_RegisterDialog" model="@(page.Route == "register")" />
+  <span id="close" hidden></span>
+}
+@if (workspace) { @Html.Raw("</div></div>") }
+else if (home) { @Html.Raw("</div>") }
+</div>
+<div id="toast" role="status" aria-live="polite"@(Ctx.Notice == null ? "" : " class=visible")>@Ctx.Notice</div>
+@* Back to top: js/site.js shows it once the page is scrolled. *@
+<button type="button" class="scroll-top" data-scroll-top="" aria-label="Back to top" title="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button>
+<script src="/js/site.js" defer></script>
+@if (Me != null)
+{
+  <script type="application/json" id="call-context">@Html.Raw(Nav.CallContext(Ctx))</script>
+  <script src="/js/call-preview.js" defer></script>
+}
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

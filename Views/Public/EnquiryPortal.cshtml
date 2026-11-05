@@ -1,0 +1,115 @@
+@model PublicController.EnquiryPortalModel
+@{
+    ViewData["Title"] = "Your enquiries.";
+    var selected = Model.Selected;
+    var topics = new[] { ("Choosing a course", "Levels, paths and fit"), ("A practical activity", "Labs, quizzes and hints"), ("My account", "Sign-in, profile, progress"), ("Something else", "Anything we missed") };
+}
+<section class="enquiry-portal" aria-labelledby="ep-title">
+  <a class="ep-back" href="/Home">&larr; Back to Skill UP</a>
+  <header class="ep-head">
+    <div>
+      <h1 id="ep-title">Your enquiries.</h1>
+      <p>A place for your questions. And your next steps.</p>
+    </div>
+    <a class="ep-primary" href="/EnquiryPortal">+ New enquiry</a>
+  </header>
+  <div class="ep-layout">
+    <aside class="ep-sidebar">
+      <div class="ep-list-heading">
+        <h2>My enquiries</h2>
+        <span>@Model.Mine.Count</span>
+      </div>
+      <p class="ep-local-note">Linked to this browser, or to your account when you&rsquo;re signed in.</p>
+      <div class="ep-list" aria-label="Your saved enquiries">
+        @foreach (var q in Model.Mine)
+        {
+          <a class="ep-entry" href="/EnquiryPortal?id=@q.Id" aria-current="@(q.Id == selected?.Id ? "true" : "false")"><span>@q.Subject</span><small>@Ui.Date(q.CreatedAt)<i>@q.Status</i></small></a>
+        }
+        @if (Model.Mine.Count == 0)
+        {
+          <p class="ep-empty">No saved enquiries yet.<br>Start a new one with the form.</p>
+        }
+      </div>
+      <ol class="enq-steps ep-steps" aria-label="What happens after you send">
+        <li><b>01</b><span>Send your message</span></li>
+        <li><b>02</b><span>See it listed under My enquiries</span></li>
+        <li><b>03</b><span>View, edit or delete it in your portal</span></li>
+      </ol>
+    </aside>
+    <div class="ep-detail">
+      <header class="ep-detail-head">
+        <div>
+          <h2>@(selected == null ? "New enquiry" : selected.Subject)</h2>
+          <p>@(selected == null ? "Tell us what you need a hand with." : "Submitted " + Ui.Date(selected.CreatedAt))</p>
+        </div>
+        @if (selected != null) { <span class="ep-status">@selected.Status</span> }
+      </header>
+      @if (Model.Saved)
+      {
+        @* Same fields and look as the contact form on the landing page (Views/Shared/_EnquiryForm.cshtml). *@
+        <div class="home-enquiry-saved ep-saved" role="status">
+          <h3>Enquiry saved</h3>
+          <p>Thanks, we have your message. View, edit or delete it any time under My enquiries in this browser.</p>
+          <div class="actions"><a class="home-enquiry-open" href="/EnquiryPortal?id=@selected?.Id">View or edit this enquiry &rarr;</a></div>
+        </div>
+      }
+      else
+      {
+        <form class="home-enquiry-form ep-landing-form" method="post" asp-antiforgery="true" action="/EnquiryPortal/Save">
+          <input type="hidden" name="id" value="@selected?.Id">
+          @if (selected == null)
+          {
+            <fieldset class="home-enquiry-topics">
+              <legend>What can we help with?</legend>
+              <div>
+                @foreach (var (title, hint) in topics)
+                {
+                  <label><input type="radio" name="topic" value="@title" checked="@(Ctx.Typed("topic") == title)" /><span><strong>@title</strong><small>@hint</small></span></label>
+                }
+              </div>
+            </fieldset>
+          }
+          <div class="home-enquiry-pair">
+            <label class="home-enquiry-field"><span>Your name</span>
+              <input name="name" value="@Ctx.Typed("name", selected?.Name ?? Me?.Name)" maxlength="100" autocomplete="name" placeholder="Alex Morgan" required />
+            </label>
+            <label class="home-enquiry-field"><span>Email address</span>
+              <input name="email" type="email" value="@Ctx.Typed("email", selected?.Email ?? Me?.Email)" maxlength="254" autocomplete="email" placeholder="you@example.com" required />
+            </label>
+          </div>
+          <label class="home-enquiry-field"><span>Subject</span>
+            <input name="subject" value="@Ctx.Typed("subject", selected?.Subject)" maxlength="160" placeholder="Pick a topic above or write your own" />
+          </label>
+          <label class="home-enquiry-field"><span>Your message <small class="home-enquiry-count">Up to 3000 characters</small></span>
+            <textarea name="message" rows="3" maxlength="3000" placeholder="What did you try, and where did you get stuck?" required>@Ctx.Typed("message", selected?.Message)</textarea>
+          </label>
+          <p class="form-error" role="alert">@(Ctx.Posted.Count > 0 ? Ctx.Notice : null)</p>
+          <p class="ep-notice" role="status">@(Ctx.Posted.Count == 0 ? Ctx.Notice : null)</p>
+          <div class="home-enquiry-actions">
+            <div class="home-enquiry-action-copy">
+              <p id="home-enquiry-note">Manage your message under My enquiries.</p>
+              <small class="home-enquiry-ready">All fields are required.</small>
+            </div>
+            <button class="home-enquiry-submit" type="submit"><span>@(selected == null ? "Send enquiry" : "Save changes")</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg></button>
+          </div>
+        </form>
+        @if (selected != null)
+        {
+          if (Model.ConfirmDelete)
+          {
+            <form class="ep-delete-confirm" method="post" asp-antiforgery="true" action="/EnquiryPortal/Delete">
+              <input type="hidden" name="id" value="@selected.Id">
+              <p>Delete this enquiry? This cannot be undone.</p>
+              <button class="ep-danger" type="submit">Delete permanently</button>
+              <a class="ep-secondary" href="/EnquiryPortal?id=@selected.Id">Cancel</a>
+            </form>
+          }
+          else
+          {
+            <div class="ep-delete-row"><a class="ep-delete" href="/EnquiryPortal?id=@selected.Id&confirmDelete=1">Delete enquiry</a></div>
+          }
+        }
+      }
+    </div>
+  </div>
+</section>

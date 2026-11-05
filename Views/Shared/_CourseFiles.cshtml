@@ -1,0 +1,53 @@
+@* Course files: the list, and for staff the upload form. Model: the course the files belong to, or null for all of the staff member's courses. *@
+@model int?
+@{
+    var manage = Me != null && Me.Role != "Learner";
+    var courses = Ctx.AccessibleCourses.Where(c => Model == null || c.Id == Model).ToDictionary(c => c.Id);
+    var files = Data.Resources.Where(r => courses.ContainsKey(r.CourseId)).Select(r =>
+    {
+        long.TryParse(r.Size, out var bytes);
+        return new { r.Id, r.Name, r.DataUrl, Extension = System.IO.Path.GetExtension(r.Name).TrimStart('.'), Kb = Math.Round(bytes / 1024.0), Course = courses[r.CourseId].Title };
+    }).ToList();
+    var returnTo = Context.Request.Path + Context.Request.QueryString;
+}
+<section class="panel course-files" style="margin-top:24px">
+  <div class="panel-head"><h2>Course files</h2></div>
+  @if (manage)
+  {
+    <form class="file-upload" method="post" asp-antiforgery="true" action="/Files/Upload" enctype="multipart/form-data">
+      <input type="hidden" name="returnTo" value="@returnTo">
+      @if (Model == null)
+      {
+        <label>Course <select name="courseId">@foreach (var c in Ctx.OwnCourses) { <option value="@c.Id">@c.Title</option> }</select></label>
+      }
+      else
+      {
+        <input type="hidden" name="courseId" value="@Model">
+      }
+      <label>File (PDF, TXT or image, up to 2 MB) <input type="file" name="file" accept=".pdf,.txt,.png,.jpg,.jpeg,.webp" required></label>
+      <button class="primary" type="submit">&uarr; Upload file</button>
+      <p class="notice">Uploading or deleting a resource returns the course to Draft for review.</p>
+    </form>
+  }
+  <div class="grid">
+    @foreach (var f in files)
+    {
+      <article class="panel">
+        <div class="eyebrow">@f.Extension document</div>
+        <h3 style="margin:15px 0">@f.Name</h3>
+        <small>@f.Kb KB &middot; @f.Course</small>
+        <div class="actions">
+          <a class="button" href="@f.DataUrl" download="@f.Name">Download</a>
+          @if (manage)
+          {
+            <form method="post" asp-antiforgery="true" action="/Files/Delete" style="display:inline">
+              <input type="hidden" name="id" value="@f.Id"><input type="hidden" name="returnTo" value="@returnTo">
+              <button class="danger ghost" type="submit" data-confirm="Delete this file? The course returns to Draft for review.">Delete</button>
+            </form>
+          }
+        </div>
+      </article>
+    }
+    @if (files.Count == 0) { <p>No files have been added yet.</p> }
+  </div>
+</section>

@@ -25,8 +25,8 @@ PrecompiledWeb/
 *.pubxml.user
 *.publishsettings
 
-# Course covers uploaded in the course editor (Frontend/uploads/course-art)
-Frontend/uploads/
+# Course covers uploaded in the course editor
+wwwroot/uploads/
 
 # Local test tools and their output (not part of the site)
 node_modules/

@@ -1,0 +1,125 @@
+@model SkillUp.Models.LearnersModel
+@switch (Model.ScreenIndex)
+{
+case 0:
+<div class="page-head"><div><h1 tabindex="-1" id="page-title">@(Model.LearnerName)</h1><p>@(Model.DetailCourse?.Title) &middot; Enrolled @(Ui.Date(Model.DetailEnrolment?.EnrolledAt))</p></div><div class="actions tight"><a class="button ghost crumb-button" href="@Model.BackUrl"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>@Model.BackLabel</a></div></div>
+  <div class="metrics">
+    @{ var m_index = -1; }
+@foreach (dynamic m in Model.MetricsList)
+{
+m_index++;
+<div class="metric"><small>@m.Label</small><strong class="number">@m.Value</strong><small>@m.Note</small><span class="spark" aria-hidden="true">▂▃▅▆</span></div>
+}
+  </div>
+  <div class="grid two">
+    <section class="panel"><h2>Completed activities</h2>
+      @{ var l_index = -1; }
+@foreach (dynamic l in Model.LessonStatesList)
+{
+l_index++;
+<div class="list-item row between"><div>@l.Title<p>@l.Type</p></div>@Html.Raw(Ui.Tag((string)l.State))</div>
+}
+    </section>
+    <section class="panel"><h2>Topics to practise</h2>
+      @{ var t_index = -1; }
+@foreach (dynamic t in Model.TopicsList)
+{
+t_index++;
+<div class="list-item row between"><span>@t.Topic</span>@Html.Raw(Ui.Tag(t.Count + " incorrect attempts"))</div>
+}
+      @if (Model.NoTopics)
+{<div class="empty"><h3>No mistakes recorded</h3><p>Incorrect answers will be grouped by topic here.</p></div>}
+      <div class="divider"></div><h3>Completion types</h3>
+      @{ var tc_index = -1; }
+@foreach (dynamic tc in Model.TypeCountsList)
+{
+tc_index++;
+<div class="list-item row between"><span>@tc.Type</span><strong>@tc.Done / @tc.Total</strong></div>
+}
+    </section>
+    <section class="panel"><h2>Attempt history</h2>
+      @if (Model.AttemptRowsList.Any())
+{
+<div class="table-wrap"><table><thead><tr><th scope="col">Type</th><th scope="col">Score</th><th scope="col">Date</th></tr></thead><tbody>
+@foreach (dynamic a in Model.AttemptRowsList)
+{
+<tr><td>@a.Type</td><td>@a.Score%</td><td>@a.Date</td></tr>
+}
+</tbody></table></div>
+}
+      @if (Model.NoAttempts)
+{<div class="empty"><h3>No matching records</h3><p>Try another search or create a new record.</p></div>}
+    </section>
+  </div>
+break;
+case 1:
+<section class="student-performance">
+  <nav class="sp-rail" aria-label="Instructor quick navigation">@(Model.Rail)</nav>
+  <div class="sp-main">
+    <header class="sp-heading"><div><h1>Student performance</h1><p>@(Model.RosterNote)</p></div><a class="sp-enrol button" href="/Learners?enrol=1@(Model.RosterCourseId == null ? "" : "&course=" + Model.RosterCourseId)">+ Enrol learner</a></header>
+    @if (Model.ShowEnrol)
+{
+<form class="panel sp-enrol-form" method="post" asp-antiforgery="true" action="/Learners/Enrol">
+      <h2>Enrol a learner</h2>
+      <div class="sp-filters sp-enrol-fields">
+        <label><span class="sr-only">Course to enrol the learner in</span><select name="courseId" aria-label="Course to enrol the learner in">@foreach (dynamic c in Model.EnrolCourses) { <option value="@c.Id" selected="@(c.Id == Model.RosterCourseId)">@c.Title</option> }</select></label>
+        <label><span class="sr-only">Search learners by user ID</span><input type="search" class="sp-enrol-search" data-filter-select="EnrolLearner" data-match="id" inputmode="numeric" placeholder="Search by learner user ID…" aria-label="Search learners by user ID" autocomplete="off"></label>
+        <label><span class="sr-only">Learner to enrol</span><select id="EnrolLearner" name="userId" aria-label="Learner to enrol">@foreach (dynamic u in Model.EnrolLearners) { <option value="@u.Id">@u.Name</option> }</select></label>
+      </div>
+      <p class="sp-enrol-count" data-filter-count="EnrolLearner" aria-live="polite"></p>
+      <div class="actions"><button class="primary sp-enrol-submit" type="submit">Enrol learner</button><a class="button ghost" href="/Learners">Cancel</a></div>
+    </form>
+}
+    <form class="sp-filters" method="get" action="/Learners">
+      <label class="sp-search"><span class="sr-only">Search learners</span><input id="RosterSearch" name="q" type="search" value="@Model.RosterTerm" placeholder="Search by learner user ID…" inputmode="numeric" aria-label="Search learners by user ID" /></label>
+      <label><span class="sr-only">Filter by course</span><select name="course" aria-label="Filter by course"><option value="">All assigned courses</option>@foreach (dynamic c in Model.EnrolCourses ?? Model.TableCourses ?? new List<object>()) { <option value="@c.Id" selected="@(c.Id == Model.RosterCourseId)">@c.Title</option> }</select></label>
+      <label><span class="sr-only">Filter by progress</span><select id="RosterState" name="state" aria-label="Filter by progress"><option value="" selected="@(Model.RosterStateValue == "")">All progress</option><option value="completed" selected="@(Model.RosterStateValue == "completed")">Completed</option><option value="progress" selected="@(Model.RosterStateValue == "progress")">In progress</option><option value="not-started" selected="@(Model.RosterStateValue == "not-started")">Not started</option><option value="needs-support" selected="@(Model.RosterStateValue == "needs-support")">Quiz below 70%</option></select></label>
+      <label><span class="sr-only">Sort learners</span><select id="RosterSort" name="sort" aria-label="Sort learners"><option value="name" selected="@(Model.RosterSortValue == "name")">Name A–Z</option><option value="completion" selected="@(Model.RosterSortValue == "completion")">Completion: highest first</option><option value="recent" selected="@(Model.RosterSortValue == "recent")">Recently active</option></select></label>
+      <button class="sp-apply" type="submit">Apply</button>
+    </form>
+    <p class="sp-count" aria-live="polite">@(Model.RosterCount)</p>
+    <div class="sp-grid">
+      @{ var c_index = -1; }
+@foreach (dynamic c in Model.CardsList)
+{
+c_index++;
+<article class="sp-card@Html.Raw((bool)c.Collapsed ? " is-collapsed" : "")" id="sp-card-@c.EnrolmentId"@Html.Raw((bool)c.Complete ? " data-complete" : "")>
+            <header class="sp-block-head">@Html.Raw(c.Head)<form method="post" asp-antiforgery="true" action="/Learners/Toggle" style="display:contents"><input type="hidden" name="id" value="@c.EnrolmentId"><input type="hidden" name="returnTo" value="@(Context.Request.Path + Context.Request.QueryString)"><button class="sp-toggle" type="submit" aria-expanded="@((bool)c.Collapsed ? "false" : "true")" aria-controls="sp-body-@c.EnrolmentId" aria-label="@c.ToggleLabel">@Html.Raw(LearnersModel.Chevron)</button></form></header>
+            <div class="sp-collapse" id="sp-body-@c.EnrolmentId"@Html.Raw((bool)c.Collapsed ? " inert" : "")><div class="sp-collapse-inner">@Html.Raw(c.Body)
+              <footer class="sp-block-foot"><span>Follow up?</span><div><a class="sp-open sp-pill sp-pill-primary" href="/Learners?learner=@c.UserId&amp;course=@c.CourseId" aria-label="View @c.Name performance in @c.CourseTitle">View</a><a class="sp-pill" href="/Messages?id=@c.UserId">Message</a><form method="post" asp-antiforgery="true" action="/Teaching/RemoveEnrolment" style="display:inline"><input type="hidden" name="userId" value="@c.UserId"><input type="hidden" name="courseId" value="@c.CourseId"><input type="hidden" name="returnTo" value="@(Context.Request.Path + Context.Request.QueryString)"><button class="sp-remove sp-pill" type="submit" data-confirm="Remove this enrolment? The learner's progress for this course will be removed.">Remove enrolment</button></form></div></footer>
+            </div></div>
+          </article>
+}
+      @if (Model.NoCards)
+{<div class="sp-empty"><h2>No matching learners</h2><p>Try another search or filter. Enrol a learner to start tracking their progress.</p></div>}
+    </div>
+  </div>
+</section>
+break;
+case 2:
+<div class="la-page la-kit lr-page" data-filter="@(Model.Status)" data-expanded="@(Model.Expanded ? "true" : "false")">
+  <nav class="kx-crumbs" aria-label="Breadcrumb"><a href="/Dashboard">@(Icons.KitHome)Main</a><span aria-hidden="true">&rsaquo;</span>@if (Model.ScopedTitle != null) {<a href="/Learners">@(Icons.KitPeople)Learners</a><span aria-hidden="true">&rsaquo;</span><span>@(Model.ScopedTitle)</span>} else {<span>@(Icons.KitPeople)Learners</span>}<div class="kx-crumb-actions"><a href="/Analytics">@(Icons.KitChart)Analytics</a><button type="button" data-action="print">@(Icons.KitPrint)Print</button></div></nav>
+  <header class="kx-title"><span class="kx-title-icon">@(Icons.KitPeople)</span><h1 tabindex="-1" id="page-title">Learners</h1>
+    <div class="kx-seg" role="group" aria-label="Filter by status">
+      <a role="button" href="@Model.TableUrl("all", false)" aria-pressed="@(Model.Status == "all" ? "true" : "false")">All</a>
+      <a role="button" href="@Model.TableUrl("progress", false)" aria-pressed="@(Model.Status == "progress" ? "true" : "false")">In progress</a>
+      <a role="button" href="@Model.TableUrl("done", false)" aria-pressed="@(Model.Status == "done" ? "true" : "false")">Completed</a>
+      <a role="button" href="@Model.TableUrl("idle", false)" aria-pressed="@(Model.Status == "idle" ? "true" : "false")">Not started</a>
+    </div>
+    <div class="kx-title-actions"></div>
+  </header>
+  <div class="kx-stats">@(Model.Stats)</div>
+  <form class="lr-toolbar kx-toolbar" method="get" action="/Learners">
+    <label class="lr-search">@(Icons.Search)<input id="search" name="q" type="search" value="@Model.TableTerm" aria-label="Search learners" placeholder="Search learners or courses…" /></label>
+    @if (Model.ShowCourseFilter) { <select id="filter" name="course" aria-label="Filter by course"><option value="">All courses</option>@foreach (dynamic c in Model.TableCourses) { <option value="@c.Id" selected="@(c.Id == Model.TableCourseId)">@c.Title</option> }</select> }
+    <input type="hidden" name="status" value="@Model.Status"><button class="kx-btn" type="submit">Search</button>
+  </form>
+  <section class="kx-panel lr-panel" id="results"><partial name="_LearnerTable" model="Model.TableEnrollments" /></section>
+  @if (!Model.Expanded) { <a class="kx-more" href="@Model.TableUrl(Model.Status, true)">Load More <span aria-hidden="true">&rsaquo;</span></a> }
+  <p class="kx-foot">@(Model.ScopedTitle == null ? "" : Ui.H("Course: " + Model.ScopedTitle) + " &middot; ")Inspect individual progress, quiz results and common mistakes. Select View for a learner&rsquo;s attempts and topics to practise.</p>
+</div>
+break;
+case 3:
+<div class="empty"><h3>Learner not found</h3><p>New items will appear here when they are available.</p></div>
+break;
+}

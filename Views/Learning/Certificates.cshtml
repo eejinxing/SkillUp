@@ -1,0 +1,50 @@
+@model SkillUp.Models.CertificatesModel
+@switch (Model.ViewIndex)
+{
+case 0:
+<div class="page-head page-intro"><div><h1 tabindex="-1" id="page-title">Certificates</h1><p>Your completed courses, recognised.</p></div>
+      <div class="actions tight">
+        <form class="cert-search-form" method="get" action="/Certificates">
+          <label class="cert-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="SearchBox" name="q" type="search" value="@Model.Term" aria-label="Search certificates" placeholder="Search certificates…" autocomplete="off" />
+            <button class="sr-only" type="submit">Search</button>
+          </label>
+        </form>
+      </div>
+    </div>
+    <div class="grid">
+      @{ var e_index = -1; }
+@foreach (dynamic e in Model.Earned)
+{
+e_index++;
+<article class="panel"><span class="tag green">&#10003; Completed</span><h2 style="margin:20px 0">@e.Title</h2><p>@e.Lessons activities completed</p><div class="actions"><a class="button primary" href="/Certificates?id=@e.Id"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>View certificate</a></div></article>
+}
+      @if (Model.NoMatch)
+{<div class="empty"><h3>No certificates match</h3><p>Try another search.</p></div>}
+      @if (Model.NoneYet)
+{<div class="empty"><h3>Your first certificate is ahead</h3><p>Complete every activity and pass the quiz to unlock your certificate.</p></div>}
+    </div>
+break;
+case 1:
+<div class="page-head"><div><h1 tabindex="-1" id="page-title">Your certificate</h1><p>Print or save as a PDF from your browser.</p></div><div class="actions tight"><a class="button" href="@(Model.BackUrl)">Close</a><button type="button" class="primary" onclick="window.print()"><svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="9" rx="2"/><path d="M6 14h12v7H6z"/></svg>Print / Save PDF</button></div></div>
+    <div class="certificate">
+      <div class="certificate-logo"><img src="/assets/skill-up-logo.png" alt="Skill UP" width="1240" height="560"></div>
+      <p style="margin-top:35px">CERTIFICATE OF COMPLETION</p>
+      <h1>A new skill. A new possibility.</h1>
+      <p>This recognises that</p>
+      <div class="name">@(Me.Name)</div>
+      <p>has completed all learning activities in</p>
+      <h2 style="margin:20px">@(Model.Shown?.Title)</h2>
+      <dl class="certificate-facts">
+        <div><dt>Date of completion</dt><dd><time data-local-date="@(Model.CompletedIso)">@(Model.CompletedOn)</time></dd></div>
+        <div><dt>Course hours</dt><dd>@(Model.CourseHours)</dd></div>
+      </dl>
+      <div class="divider"></div>
+      <small>Certificate ID: @(Me.Id)-@(Model.Shown?.Id)<br>Skill UP &middot; Learning, one step at a time.</small>
+    </div>
+break;
+case 2:
+<div class="empty"><h3>Certificate not earned</h3><p>Complete every activity in the course first.</p></div>
+break;
+}

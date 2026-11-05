@@ -1,0 +1,18 @@
+@model SkillUp.Models.CoursesModel
+<div class="page-head">
+    <div><h1 tabindex="-1" id="page-title">My courses</h1><p>Build, refine and submit your next learning experience.</p></div>
+    <div class="actions tight"><a class="button primary" href="/CourseEditor">+ Create course</a></div>
+  </div>
+  <form class="toolbar" method="get" action="/Courses">
+    <input id="SearchBox" name="q" type="text" value="@Model.Term" aria-label="Search managed courses" placeholder="Search courses…" />
+    <select id="StatusFilter" name="status" aria-label="Filter course status"><option value="All statuses" selected="@(Model.StatusValue == "All statuses")">All statuses</option><option value="Draft" selected="@(Model.StatusValue == "Draft")">Draft</option><option value="Pending review" selected="@(Model.StatusValue == "Pending review")">Pending review</option><option value="Published" selected="@(Model.StatusValue == "Published")">Published</option><option value="Changes requested" selected="@(Model.StatusValue == "Changes requested")">Changes requested</option><option value="Rejected" selected="@(Model.StatusValue == "Rejected")">Rejected</option><option value="Hidden" selected="@(Model.StatusValue == "Hidden")">Hidden</option></select>
+    <button class="ghost" type="submit">Filter</button>
+  </form>
+  <div class="grid" id="results">
+    @foreach (var c in Model.Results)
+{
+<partial name="_CourseCard" model="@(new CourseCardModel(c, true))" />
+}
+    @if (Model.NoCourses)
+{<div class="empty"><h3>@(Model.Mine.Count == 0 ? "Create your first course" : "No matching courses")</h3><p>@(Model.Mine.Count == 0 ? "" : "Try another search or status.")</p></div>}
+  </div>

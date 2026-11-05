@@ -1,0 +1,41 @@
+@model PublicController.CatalogModel
+@{ ViewData["Title"] = "Explore courses"; }
+<section class="catalog-page">
+  @* Picks the compact layout (see js/site.js, which keeps it right on resize) before the page is first drawn, so the cards do not visibly change size once the scripts load. *@
+  <script>(function (page) { var zoom = parseFloat(getComputedStyle(document.documentElement).zoom) || 1; page.classList.toggle('is-compact', innerHeight / zoom < 800); })(document.currentScript.parentElement);</script>
+  <header class="cat-head">
+    <div>
+      <h1 id="page-title" tabindex="-1">Find your next skill</h1>
+      <p>Practical courses. Clear milestones. Learn at your own pace.</p>
+    </div>
+    <dl class="cat-stats">
+      <div><dt>Courses</dt><dd>@Model.Published</dd></div>
+      @if (Me != null) { <div><dt>Enrolled</dt><dd>@Model.EnrolledCount</dd></div> }
+      <div><dt>Activities</dt><dd>@Model.ActivityCount</dd></div>
+    </dl>
+  </header>
+  <form class="toolbar cat-toolbar" method="get" action="/Catalog">
+    <label class="cat-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" name="q" value="@Model.Term" aria-label="Search courses" placeholder="Search courses, topics or instructors…" />
+      <button type="submit" class="sr-only">Search</button>
+    </label>
+    <div class="cat-chips" role="group" aria-label="Filter by level">
+      @foreach (var level in Model.Levels)
+      {
+        <button type="submit" name="level" value="@level.Level" aria-pressed="@(level.Pressed ? "true" : "false")">@level.Label<em>@level.Count</em></button>
+      }
+    </div>
+  </form>
+  <p class="cat-count" id="cat-count" role="status">@Ui.Plural(Model.Shown.Count, "course")</p>
+  <div id="results" class="grid cat-grid">
+    @foreach (var course in Model.Shown)
+    {
+      <partial name="_CourseCard" model="@(new CourseCardModel(course))" />
+    }
+    @if (Model.Shown.Count == 0)
+    {
+      <div class="empty"><h3>No courses match</h3><p>Try another search or level.</p></div>
+    }
+  </div>
+</section>

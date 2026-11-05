@@ -1,0 +1,59 @@
+@model SkillUp.Models.ApprovalsModel
+@switch (Model.ScreenIndex)
+{
+case 0:
+<section class="leader-applications"><div class="la-window">@(Model.Rail)<div class="la-workspace">
+  <header class="la-heading"><div><h1>Requests</h1><p>Review course creation and deletion applications</p></div>
+    <div class="la-view"><a role="button" href="@Model.FilterUrl(view: "board")" aria-pressed="@(Model.Filters.View == "board" ? "true" : "false")">Board</a><a role="button" href="@Model.FilterUrl(view: "table")" aria-pressed="@(Model.Filters.View == "table" ? "true" : "false")">Table</a></div>
+  </header>
+  <div class="la-date-heading"><span id="la-month">@(Model.Month)</span><a role="button" href="@Model.FilterUrl(date: "")" aria-pressed="@(Model.Filters.Date.Length == 0 ? "true" : "false")">All dates</a><span id="la-date-status">@(Model.Filters.Date.Length > 0 ? "Submitted on " + Model.Filters.Date : "All submission dates")</span></div>
+  <div class="la-date-strip">
+    <a role="button" href="@Model.FilterUrl(anchor: Model.ShiftedAnchor(-12))" aria-label="Previous 12 days">‹</a>
+    <div id="la-days">
+      @foreach (dynamic d in Model.DayItems)
+{
+<a role="button" href="@Model.FilterUrl(date: (string)d.Iso)" aria-pressed="@d.Pressed" aria-label="Submitted on @d.Iso"><small>@d.Weekday</small><span>@d.Day</span></a>
+}
+    </div>
+    <a role="button" href="@Model.FilterUrl(anchor: Model.ShiftedAnchor(12))" aria-label="Next 12 days">›</a>
+  </div>
+  <form class="la-filters" method="get" action="/Approvals">
+    <label><span class="sr-only">Search course approvals</span><input id="SearchBox" name="q" type="search" value="@Model.Filters.Q" aria-label="Search course approvals" placeholder="Search course, instructor or request…" /></label>
+    <label><span class="sr-only">Application type</span><select id="KindFilter" name="kind" aria-label="Application type" onchange="this.form.submit()"><option value="" selected="@(Model.Filters.Kind == "")">All types</option><option value="Create" selected="@(Model.Filters.Kind == "Create")">Create / update</option><option value="Delete" selected="@(Model.Filters.Kind == "Delete")">Delete course</option></select></label>
+    <label><span class="sr-only">Application program</span><select name="program" aria-label="Application program" onchange="this.form.submit()"><option value="">All programs</option>@foreach (dynamic o in Model.ProgramOptions) { <option value="@o.Id" selected="@(o.Id.ToString() == Model.Filters.Program)">@o.Name</option> }</select></label>
+    <input type="hidden" name="view" value="@Model.Filters.View"><input type="hidden" name="date" value="@Model.Filters.Date"><input type="hidden" name="anchor" value="@Model.Filters.Anchor"><button class="sr-only" type="submit">Search</button>
+  </form>
+  <p id="la-count" class="la-count" role="status">@(Ui.Plural(Model.Shown.Count, "application"))</p>
+  <div id="approval-results">@(Model.Results)</div>
+</div></div></section>
+break;
+case 1:
+<section class="leader-applications la-detail" data-application="@(Model.Current?.Id)"><div class="la-window">@(Model.Rail)<div class="la-workspace">
+  <a class="la-back" href="/Approvals">&larr; All requests</a>
+  <header class="la-heading"><div><h1>@(Model.Current?.Kind == "Delete" ? "Delete course application" : "Course application")</h1><p>@(Model.Current?.CourseTitle)</p></div><span class="la-detail-status">@(Model.Current?.Status)</span></header>
+  <div class="la-detail-grid">
+    <div class="la-content">@(Model.Content)</div>
+    <aside class="la-decision-side">
+      <section class="la-detail-panel"><h2>Your decision</h2>
+        @if (Model.CanDecide)
+{
+          @if (Model.CanStart) { <form method="post" asp-antiforgery="true" action="/Approvals/Start" style="display:inline"><input type="hidden" name="id" value="@Model.Current.Id"><button class="la-start" type="submit">Start review</button></form> }
+          <p class="la-help">@(Model.Current?.Kind == "Delete" ? "Approve to remove this course, or reject to keep it." : "Approve to publish this course to learners, reject it, or request changes.") Feedback is required and shared with the instructor.</p>
+          <form class="la-decision-form" method="post" asp-antiforgery="true" action="/Approvals/Decision"><input type="hidden" name="id" value="@Model.Current.Id">
+            <label>Decision<select name="decision">@foreach (var d in Model.DecisionChoices) { <option value="@d" selected="@(Ctx.Typed("decision", Model.DefaultDecision) == d)">@d</option> }</select></label>
+            <label>Feedback to instructor<textarea id="Feedback" name="comment" rows="5" maxlength="2000">@Ctx.Typed("comment")</textarea></label>
+            <div class="actions"><button class="primary" type="submit">Submit decision</button></div>
+          </form>
+        }
+        @if (!Model.CanDecide)
+{<p class="la-copy">@(Model.Current?.Status). This application is read only.</p>}
+      </section>
+      <section class="la-detail-panel"><h2>Application progress</h2><ol class="la-timeline">@(Model.Timeline)</ol></section>
+    </aside>
+  </div>
+</div></div></section>
+break;
+case 2:
+<section class="leader-applications la-detail"><div class="la-window">@(Model.Rail)<div class="la-workspace"><h1>Request access denied</h1><p>This application is not assigned to your program or has been removed.</p><a href="/Approvals">&larr; All requests</a></div></div></section>
+break;
+}

@@ -1,0 +1,177 @@
+@model SkillUp.Models.ActivityModel
+@{
+    ViewData["Title"] = Model.PageTitle ?? "Activity";
+    var back = Model.C == null ? "/Catalog" : "/Activity?course=" + Model.C.Id + "&lesson=" + Model.L?.Id;
+}
+@switch (Model.ScreenIndex)
+{
+case 0:
+<div class="answer-page" data-answer-course="@Model.C.Id" data-answer-lesson="@Model.L.Id">
+  <header class="answer-breadcrumb">
+    <a href="/Course?id=@Model.C.Id"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Course overview</a>
+    <h1><i aria-hidden="true">/</i><b>@Model.C.Title</b><i aria-hidden="true">/</i><span>@Model.L.Title</span></h1>
+    @if (Model.Guest) { <span>Preview</span> }
+    else if (Model.QuizReady) { <span class="timer" id="quiz-timer" aria-label="Quiz time remaining" data-seconds-left="@Model.SecondsLeft">@(Model.SecondsLeft / 60):@((Model.SecondsLeft % 60).ToString("00")) remaining</span> }
+    else { <span>@Model.Percent% complete</span> }
+  </header>
+  <div class="answer-layout">
+    <aside class="answer-ai answer-ai-reference @(Model.History.Count > 0 ? "has-conversation" : "")" aria-label="AI learning companion" data-api="/api/commands/" data-lesson="@Model.L.Id">
+      <header class="answer-ai-top">
+        <a href="/Assistant?lesson=@Model.L.Id" class="answer-ai-brand" aria-label="Open Skill UP companion">SKILL<span>companion</span></a>
+        <details class="answer-ai-options"><summary aria-label="Companion options"><span aria-hidden="true">&bull;&bull;&bull;</span></summary><div><a href="/Assistant?lesson=@Model.L.Id">Open companion &#8599;</a></div></details>
+      </header>
+      <div class="answer-ai-intro">
+        <div class="answer-orb"><img src="/assets/answer/imgRectangle4.png" alt="Blue and violet AI companion orb"></div>
+        <h2><span>Your next <em>big</em></span><span><em>move</em> starts here.</span></h2>
+      </div>
+      <div class="answer-ai-conversation" aria-live="polite">
+        @foreach (var pair in Model.History)
+        {
+          <div class="answer-ai-prompt"><span class="ai-avatar">@Ui.Avatar(Me)</span><small>You &middot; @Ui.ChatTime(pair.PromptAt)</small><p>@pair.Prompt</p></div>
+          <div class="answer-ai-reply"><span class="ai-avatar bot" aria-hidden="true"></span><small>Skill UP companion &middot; @Ui.ChatTime(pair.ResponseAt)</small><p>@pair.Response</p></div>
+        }
+      </div>
+      <div class="answer-ai-bottom">
+        <div class="answer-ai-books" aria-hidden="true">
+          <div class="answer-ai-book"><small>SKILL UP</small><b>Your next<br>chapter.</b><i></i></div>
+          <div class="answer-ai-book"><small>PRACTICE</small><b>Learn.<br>Try. Repeat.</b><i></i></div>
+          <div class="answer-ai-book"><small>FIELD NOTES</small><b>Make it<br>click.</b><i></i></div>
+        </div>
+        <div class="answer-ai-suggest" role="group" aria-label="Suggested questions">
+          @foreach (dynamic s in Model.Suggestions)
+          {
+            <button type="button" disabled="@Model.Guest" data-question="@s.Question"><span>@s.Title</span><small>@s.Detail</small></button>
+          }
+        </div>
+        <form class="answer-ai-composer" method="post" asp-antiforgery="true" action="/Activity/Ask">
+          <input type="hidden" name="course" value="@Model.C.Id"><input type="hidden" name="lesson" value="@Model.L.Id">
+          <div class="answer-ai-input-wrap">
+            <button type="button" class="answer-ai-add" disabled="@Model.Guest" data-question="@Model.ContextQuestion" aria-label="Ask about this activity" title="Ask about this activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg></button>
+            <label class="sr-only" for="AskBox">Ask your learning companion</label>
+            <input id="AskBox" name="text" maxlength="1000" autocomplete="off" disabled="@Model.Guest" placeholder="@Model.AskPlaceholder">
+          </div>
+          <button type="submit" class="answer-ai-send" disabled="@Model.Guest" aria-label="Send question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button>
+          <p class="form-error" role="alert"></p>
+        </form>
+      </div>
+    </aside>
+    <div class="answer-workspace">
+      @Html.Raw(Model.Banner)
+      @if (Model.IsCompleted) { <p class="answer-saved">&#10003; This activity is completed. You can review it again.</p> }
+      @if (Model.Guest)
+      {
+        <section class="answer-guest-note" role="note">
+          <div><strong>You&rsquo;re previewing this activity</strong><p>Log in to answer, use hints, ask the companion and save your progress.@(Model.HiddenQuestions > 0 ? " " + Model.HiddenQuestions + " more question" + (Model.HiddenQuestions == 1 ? " is" : "s are") + " hidden in this preview." : "")</p></div>
+          <div><a class="answer-guest-login" href="#login">Log in</a><a class="answer-guest-register" href="#register">Create account</a></div>
+        </section>
+      }
+      @if (Model.ShowLabBefore) { <partial name="_TerminalLab" model="Model" /> }
+      @switch (Model.TaskIndex)
+      {
+      case 0:
+        <section class="answer-task">
+          <div class="answer-task-heading"><span class="answer-task-label">Task @Model.TaskNo</span><small>Reading &middot; @Model.L.Minutes min</small></div>
+          <div class="answer-prompt answer-reading"><h2>@Model.L.Title</h2><p>@Model.L.Body</p></div>
+          <div class="answer-task-actions">
+            @if (!Model.Guest && Model.IsCompleted) { <span class="answer-completed">&#10003; Completed</span> }
+            @if (Model.ShowComplete)
+            {
+              <form method="post" asp-antiforgery="true" action="/Activity/Complete" style="display:contents">
+                <input type="hidden" name="course" value="@Model.C.Id"><input type="hidden" name="lesson" value="@Model.L.Id">
+                <button type="submit" name="submit" value="complete" class="answer-glass answer-submit" aria-label="Mark as complete" title="Mark as complete"><img src="/assets/answer/imgRectangle1.png" alt="" draggable="false"></button>
+              </form>
+            }
+            <button type="button" class="answer-glass answer-hint" disabled="@Model.Guest" aria-label="Hint" title="Hint"><img src="/assets/answer/imgRectangle.png" alt="" draggable="false"></button>
+          </div>
+        </section>
+        break;
+      case 1:
+        <form class="answer-task" method="post" asp-antiforgery="true" action="/Activity/Lab">
+          <input type="hidden" name="course" value="@Model.C.Id"><input type="hidden" name="lesson" value="@Model.L.Id">
+          <div class="answer-task-heading"><span class="answer-task-label">Task @Model.TaskNo</span><small>Question &middot; @Model.L.Minutes min</small></div>
+          <div class="answer-prompt"><h2>@Model.L.Title</h2><p>@Model.Blanks(Model.L.Body)</p></div>
+          @if (!string.IsNullOrWhiteSpace(Model.CodeToComplete)) { <figure class="answer-code"><figcaption>Complete this code</figcaption><pre><code>@Model.CodeToComplete</code></pre></figure> }
+          <div class="answer-answer-row">
+            <label class="answer-input-label" for="LabAnswer">Your answer
+              <input id="LabAnswer" name="answer" value="@Model.LabAnswerValue" autocomplete="off" spellcheck="false" placeholder="@Model.LabPlaceholder" disabled="@Model.Guest" readonly="@Model.LabLocked" />
+            </label>
+            <div class="answer-task-actions">
+              <button type="submit" name="submit" value="lab" class="answer-glass answer-submit" disabled="@(Model.Guest || Model.LabLocked)" aria-label="Submit answer" title="Submit answer"><img src="/assets/answer/imgRectangle1.png" alt="" draggable="false"></button>
+              <button type="button" class="answer-glass answer-hint" disabled="@Model.Guest" aria-label="Hint" title="Hint"><img src="/assets/answer/imgRectangle.png" alt="" draggable="false"></button>
+            </div>
+          </div>
+          <p class="form-error" role="alert"></p>
+        </form>
+        break;
+      default:
+        @if (!Model.QuizReady)
+        {
+          <section class="answer-task"><span class="answer-task-label">Task @Model.TaskNo</span><h2>Quiz not available</h2><p>Your instructor is preparing this assessment.</p></section>
+        }
+        @if (Model.QuizFormVisible)
+        {
+          <form class="answer-task answer-quiz@(Model.Guest ? " answer-guest-task" : "")" method="post" asp-antiforgery="true" action="/Activity/Quiz">
+            <input type="hidden" name="course" value="@Model.C.Id"><input type="hidden" name="lesson" value="@Model.L.Id">
+            <div class="answer-task-heading"><span class="answer-task-label">Task @Model.TaskNo</span><small>@Html.Raw(Model.Guest ? "Preview &middot; " + Model.Questions.Count + " of " + Model.Quiz.Questions.Count : Model.Quiz.Questions.Count.ToString()) questions &middot; Pass mark 70%</small></div>
+            @foreach (dynamic q in Model.QuizQuestions)
+            {
+              <fieldset class="answer-question">
+                <legend><span>@q.Number@q.Text</span></legend>
+                <div class="answer-choices">
+                  @foreach (dynamic o in q.Options)
+                  {
+                    <label class="answer-choice"><img class="answer-choice-outline" src="/assets/answer/imgFrame167.svg" alt=""><input type="radio" name="@o.Name" value="@o.Index" checked="@o.Checked" disabled="@Model.Guest"><span class="answer-radio" aria-hidden="true"><img class="answer-radio-empty" src="/assets/answer/imgVector.svg" alt=""><img class="answer-radio-selected" src="/assets/answer/imgVector1.svg" alt=""></span><span class="answer-choice-text">@o.Text</span></label>
+                  }
+                </div>
+              </fieldset>
+            }
+            <p class="form-error" role="alert">@Model.QuizError</p>
+            <div class="answer-task-actions">
+              <button type="submit" name="submit" value="quiz" class="answer-glass answer-submit" disabled="@(Model.Guest || Model.QuizSubmitDisabled)" aria-label="Submit answers" title="Submit answers"><img src="/assets/answer/imgRectangle1.png" alt="" draggable="false"></button>
+              <button type="button" class="answer-glass answer-hint" disabled="@Model.Guest" aria-label="Hint" title="Hint"><img src="/assets/answer/imgRectangle.png" alt="" draggable="false"></button>
+              @if (Model.ShowRestart) { <button type="submit" name="submit" value="restart" formaction="/Activity/Restart" formnovalidate class="ghost">Restart quiz</button> }
+            </div>
+          </form>
+        }
+        @if (Model.QuizResultVisible)
+        {
+          <section class="answer-task answer-quiz-result" role="status">
+            <span class="answer-task-label">@(Model.ResultPassed ? "Quiz passed" : "Keep practising")</span>
+            <h1>@Model.ResultScore%</h1>
+            <p>@(Model.ResultPassed ? "This activity is now complete." : "You need 70% to pass. Review the explanations and try again.")</p>
+            @foreach (dynamic f in Model.ResultFeedback)
+            {
+              <div class="list-item"><strong class="result @((bool)f.Correct ? "correct" : "incorrect")">@Html.Raw((bool)f.Correct ? "&#10003;" : "&times;") @f.Text</strong><p>Your answer: @f.Selected<br>Correct answer: @f.Answer</p></div>
+            }
+            <form class="actions" method="post" asp-antiforgery="true" action="/Activity/Restart">
+              <input type="hidden" name="course" value="@Model.C.Id"><input type="hidden" name="lesson" value="@Model.L.Id">
+              <a class="button primary" href="/Course?id=@Model.C.Id">Back to course</a>
+              @if (!Model.ResultPassed) { <button type="submit" name="submit" value="restart" class="ghost">Try again</button> }
+            </form>
+          </section>
+        }
+        break;
+      }
+      @if (Model.ShowHintPanel) { <div class="notice answer-hint-text" id="answer-hint-text" role="status" hidden><strong>A small hint</strong><p>@Model.HintText</p></div> }
+      @if (Model.ShowLabAfter) { <partial name="_TerminalLab" model="Model" /> }
+      <nav class="answer-activity-nav" aria-label="Activity navigation">@Html.Raw(Model.NavHtml)</nav>
+    </div>
+  </div>
+</div>
+break;
+case 1:
+<div class="empty"><h3>Activity unavailable</h3><p>@Model.UnavailableText</p></div>
+@if (Me == null) { <a class="button" href="/Catalog">Explore courses</a> }
+break;
+case 2:
+<div class="page-head"><div><h1 tabindex="-1" id="page-title">This activity is locked</h1><p></p></div><div class="actions tight"></div></div>
+<div class="empty"><h3>Log in to keep going</h3><p>Visitors can preview the first @CourseModel.GuestPreviewCount activities. Log in and enrol to unlock the rest of @Model.C?.Title.</p></div>
+<div class="actions"><a class="button primary" href="#login">Log in</a><a class="button" href="/Course?id=@Model.C?.Id">Back to course</a></div>
+break;
+default:
+<div class="page-head"><div><h1 tabindex="-1" id="page-title">One step at a time</h1><p></p></div><div class="actions tight"></div></div>
+<div class="empty"><h3>This activity is locked</h3><p>Complete the previous activity first.</p></div>
+<a class="button" href="/Course?id=@Model.C?.Id">Back to course</a>
+break;
+}
+<script src="/js/activity.js" defer></script>

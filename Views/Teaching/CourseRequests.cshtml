@@ -1,0 +1,63 @@
+@model SkillUp.Models.CourseRequestsModel
+<section class="course-requests-page rq-data-view rq-grid-view">
+  <div class="rq-main">
+    <div class="rq-breadcrumb crumb-trail"><a href="/Dashboard"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Workspace</a><i aria-hidden="true">/</i><span class="is-current">Course requests</span></div>
+    <header class="rq-title"><div><h1>My requests</h1><p>Track course creation and deletion submissions</p></div>
+      <div class="rq-tool-group rq-table-actions">
+        <button form="rq-export" id="ExportButton" class="rq-tool" type="submit" disabled="@(Model.Filtered.Count == 0)">Export CSV</button>
+        <a class="rq-new" href="/CourseRequests?new=1">＋ New request</a>
+      </div>
+    </header>
+    @if (Model.ShowNewForm)
+{
+<form class="panel rq-new-form" method="post" asp-antiforgery="true" action="/CourseRequests/Send">
+      <h2>Submit course request</h2>
+      <div class="form-grid">
+        <label>Request type<select name="kind"><option value="Create">Create / update course</option><option value="Delete">Delete course</option></select></label>
+        <label>Course<select name="courseId">@foreach (dynamic c in Model.NewCourseOptions) { <option value="@c.Id">@c.Title</option> }</select></label>
+        <label class="full">Reason for request<textarea id="NewReason" name="reason" rows="4" maxlength="2000">@Ctx.Typed("reason")</textarea></label>
+      </div>
+      <p class="notice">Create requests need saved activities. Courses with learners can be hidden instead of deleted.</p>
+      <div class="actions"><button class="primary" type="submit">Submit request</button><a class="button ghost" href="/CourseRequests">Cancel</a></div>
+    </form>
+}
+    <div class="rq-summary">@(Model.Summary)</div>
+    <form id="rq-filters" class="rq-grid-toolbar" method="get" action="/CourseRequests">
+      <div class="rq-tool-group">
+        <span class="rq-tool rq-selected-chip">@Html.Raw(CourseRequestsModel.Draw("<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\"/><path d=\"m8.5 12 2.5 2.5 4.5-5\"/>"))<span id="rq-selection-count" role="status">0 selected</span></span>
+        <button type="button" class="rq-tool" id="rq-clear-selection" hidden>Clear</button>
+        <label class="rq-tool rq-table-search">@Html.Raw(CourseRequestsModel.Draw("<circle cx=\"11\" cy=\"11\" r=\"6\"/><path d=\"m20 20-4.2-4.2\"/>"))<span class="sr-only">Search requests</span><input id="SearchBox" name="q" type="search" value="@Model.term" aria-label="Search requests" placeholder="Search requests" /></label>
+        <label class="rq-tool rq-select-tool">@Html.Raw(CourseRequestsModel.Draw("<path d=\"M4 6h16M7 12h10M10 18h4\"/>"))<span class="sr-only">Request type</span><select id="KindFilter" name="kind" aria-label="Request type"><option value="" selected="@(Model.kind == "")">All types</option><option value="Create" selected="@(Model.kind == "Create")">Creating</option><option value="Delete" selected="@(Model.kind == "Delete")">Deleting</option></select></label>
+        <label class="rq-tool rq-select-tool"><span class="rq-tool-dot" aria-hidden="true"></span><span class="sr-only">Request status</span><select id="StatusFilter" name="status" aria-label="Request status"><option value="" selected="@(Model.status == "")">All statuses</option><option value="Pending review" selected="@(Model.status == "Pending review")">Pending review</option><option value="Approved" selected="@(Model.status == "Approved")">Approved</option><option value="Changes requested" selected="@(Model.status == "Changes requested")">Changes requested</option><option value="Rejected" selected="@(Model.status == "Rejected")">Rejected</option><option value="Withdrawn" selected="@(Model.status == "Withdrawn")">Withdrawn</option></select></label>
+        <label class="rq-tool rq-select-tool">@Html.Raw(CourseRequestsModel.Draw("<path d=\"M7 4v16M4 17l3 3 3-3M17 20V4M14 7l3-3 3 3\"/>"))<span class="sr-only">Sort requests</span><select id="SortFilter" name="sort" aria-label="Sort requests"><option value="newest" selected="@(Model.sort == "newest")">Newest first</option><option value="oldest" selected="@(Model.sort == "oldest")">Oldest first</option><option value="name" selected="@(Model.sort == "name")">Course A–Z</option><option value="name-rev" selected="@(Model.sort == "name-rev")">Course Z–A</option><option value="priority" selected="@(Model.sort == "priority")">Priority: high to low</option><option value="priority-rev" selected="@(Model.sort == "priority-rev")">Priority: low to high</option><option value="program" selected="@(Model.sort == "program")">Program A–Z</option><option value="program-rev" selected="@(Model.sort == "program-rev")">Program Z–A</option><option value="status" selected="@(Model.sort == "status")">Status A–Z</option><option value="status-rev" selected="@(Model.sort == "status-rev")">Status Z–A</option></select></label>
+        <button class="rq-tool" type="submit">Apply</button>
+        <span id="rq-result-count" class="rq-count" role="status">@(Ui.Plural(Model.Filtered.Count, "request"))</span>
+      </div>
+    </form>
+    <form id="rq-export" method="get" action="/CourseRequests/Export"><input type="hidden" name="q" value="@Model.term"><input type="hidden" name="kind" value="@Model.kind"><input type="hidden" name="status" value="@Model.status"><input type="hidden" name="sort" value="@Model.sort"><div class="rq-table-wrap" tabindex="0" aria-label="Course requests table">
+      <table class="rq-data-table">
+        <caption class="sr-only">Your submitted course requests with priority, program, type, size, reviewer, status, submission date and next step</caption>
+        <thead><tr><th class="rq-check-cell" scope="col"><input id="rq-select-all" type="checkbox" aria-label="Select all visible requests"></th>@(Model.Headers)</tr></thead>
+        <tbody id="rq-request-list">@(Model.Rows)</tbody>
+      </table>
+    </div></form>
+    <nav class="rq-pager" id="rq-pager" aria-label="Request pages">
+      <div class="rq-pager-info"><label>Rows per page <select form="rq-filters" id="PageSize" name="size" aria-label="Rows per page" onchange="this.form.submit()"><option value="10" selected="@(Model.size.ToString() == "10")">10</option><option value="20" selected="@(Model.size.ToString() == "20")">20</option><option value="50" selected="@(Model.size.ToString() == "50")">50</option></select></label><span>Showing <b>@(Model.From)–@(Model.To)</b> of <b>@(Model.Filtered.Count)</b></span></div>
+      <div class="rq-pager-pages">@(Model.PageLinks)</div>
+    </nav>
+  </div>
+  <aside class="rq-side">
+    <header class="rq-overview"><h2>Request activity</h2><div class="rq-panel-nav" id="rq-panel-nav">@(Model.Nav)</div></header>
+    <div id="rq-request-detail" class="rq-request-detail">
+      @if (Model.Active == null) { <div class="rq-timeline-empty"><span>@Html.Raw(CourseRequestsModel.Draw("<path d=\"M6 4h12v16H6Z\"/><path d=\"M9 8h6M9 12h6M9 16h3\"/>"))</span><h2>No request selected</h2><p>Select a request to see its activity and review history.</p></div> }
+      @if (Model.Active != null)
+{
+        @(Model.DetailHead)
+        <div class="rq-tabs" role="tablist" aria-label="Request details"><span class="rq-tab-glider" aria-hidden="true"></span><a class="rq-tab" role="tab" href="@(Model.Url(id: Model.Active?.Row.Id, page: Model.PageNumber, tab: "overview"))" aria-selected="@(Model.Tab == "overview" ? "true" : "false")">Overview</a><a class="rq-tab" role="tab" href="@(Model.Url(id: Model.Active?.Row.Id, page: Model.PageNumber, tab: "activity"))" aria-selected="@(Model.Tab == "activity" ? "true" : "false")">Activity</a></div>
+        <div class="rq-tab-panel" data-rq-panel="overview"@(Model.Tab == "overview" ? "" : " hidden")>@(Model.Overview)</div>
+        <div class="rq-tab-panel" data-rq-panel="activity"@(Model.Tab == "activity" ? "" : " hidden")>@(Model.Activity)</div>
+        <div class="rq-detail-actions">@if (Model.Active.Row.Status == "Pending review") { <form method="post" asp-antiforgery="true" action="/CourseRequests/Withdraw" style="display:contents"><input type="hidden" name="id" value="@Model.Active.Row.Id"><button class="rq-withdraw" type="submit" data-confirm="Withdraw this request? It will remain in your history with a Withdrawn status.">Withdraw request</button></form> }<small>@(Model.DetailNote)</small></div>
+      }
+    </div>
+  </aside>
+</section>

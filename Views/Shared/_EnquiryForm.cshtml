@@ -1,0 +1,78 @@
+@* "Ready for your next step?" enquiry form, shared by Help and the landing page. Saving creates the enquiry, links it to this
+   browser (or account) and shows a confirmation. Model: h1 when the form is the page's main content, h3 inside the landing page. *@
+@model string
+@{
+    var saved = Ctx.Query("enquirySaved") == "1";
+    var path = Context.Request.Path.Value;
+    var name = Ctx.Typed("name", Me?.Name);
+    var email = Ctx.Typed("email", Me?.Email);
+    var topic = Ctx.Typed("topic");
+    var topics = new[] { ("Choosing a course", "Levels, paths and fit"), ("A practical activity", "Labs, quizzes and hints"), ("My account", "Sign-in, profile, progress"), ("Something else", "Anything we missed") };
+}
+<section class="home-enquiry" id="home-enquiry" aria-labelledby="home-enquiry-title">
+  <div class="home-enquiry-intro">
+    <span class="home-enquiry-eyebrow">Contact</span>
+    @Html.Raw("<" + Model + " id=\"home-enquiry-title\">")Ready for your<br>next step?@Html.Raw("</" + Model + ">")
+    <p>Tell us what&rsquo;s on your mind.<br>We&rsquo;ll help you find a way forward.</p>
+    <ol class="enq-steps" aria-label="What happens after you send">
+      <li><b>01</b><span>Send your message</span></li>
+      <li><b>02</b><span>See it listed under My enquiries</span></li>
+      <li><b>03</b><span>View, edit or delete it in your portal</span></li>
+    </ol>
+    <a class="home-enquiry-portal" href="/EnquiryPortal">
+      <span class="home-enquiry-portal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 8v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6l3 5Z"></path><path d="M8 12h8m-8 4h5"></path></svg></span>
+      <span class="home-enquiry-portal-copy"><strong>My enquiry portal</strong><em>View, edit or delete your messages.</em></span>
+      <span class="home-enquiry-portal-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg></span>
+    </a>
+  </div>
+  <div class="home-enquiry-right">
+    @* Starts again with an empty form, also after a message was sent (as + New enquiry does on the My enquiries page). *@
+    <div class="home-enquiry-new-row"><a class="home-enquiry-new" href="@(path)#home-enquiry">+ New enquiry</a></div>
+    @if (saved)
+    {
+      <div class="home-enquiry-saved" role="status">
+        <h3>Enquiry saved</h3>
+        <p>Thanks, we have your message. View, edit or delete it any time under My enquiries in this browser.</p>
+        <div class="actions"><a class="home-enquiry-open" href="/EnquiryPortal">Open enquiry portal &rarr;</a></div>
+      </div>
+    }
+    else
+    {
+      <p class="home-enquiry-lead">A question about courses, your account or a practical activity? Leave us a message below.</p>
+      <form class="home-enquiry-form" method="post" asp-antiforgery="true" action="/Enquiry">
+        <input type="hidden" name="returnTo" value="@path">
+        <fieldset class="home-enquiry-topics">
+          <legend>What can we help with?</legend>
+          <div>
+            @foreach (var (title, hint) in topics)
+            {
+              <label><input type="radio" name="topic" value="@title" checked="@(topic == title)" /><span><strong>@title</strong><small>@hint</small></span></label>
+            }
+          </div>
+        </fieldset>
+        <div class="home-enquiry-pair">
+          <label class="home-enquiry-field"><span>Your name</span>
+            <input name="name" value="@name" autocomplete="name" placeholder="Alex Morgan" maxlength="100" required />
+          </label>
+          <label class="home-enquiry-field"><span>Email address</span>
+            <input name="email" type="email" value="@email" autocomplete="email" placeholder="you@example.com" maxlength="254" required />
+          </label>
+        </div>
+        <label class="home-enquiry-field"><span>Subject</span>
+          <input name="subject" value="@Ctx.Typed("subject")" placeholder="Pick a topic above or write your own" maxlength="160" />
+        </label>
+        <label class="home-enquiry-field"><span>Your message <small class="home-enquiry-count">Up to 3000 characters</small></span>
+          <textarea name="message" rows="3" maxlength="3000" placeholder="What did you try, and where did you get stuck?" required>@Ctx.Typed("message")</textarea>
+        </label>
+        <p class="form-error" role="alert">@(Ctx.Posted.Count > 0 ? Ctx.Notice : null)</p>
+        <div class="home-enquiry-actions">
+          <div class="home-enquiry-action-copy">
+            <p id="home-enquiry-note">Manage your message in the enquiry portal.</p>
+            <small class="home-enquiry-ready">All fields are required.</small>
+          </div>
+          <button class="home-enquiry-submit" type="submit"><span>Send enquiry</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg></button>
+        </div>
+      </form>
+    }
+  </div>
+</section>

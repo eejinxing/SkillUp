@@ -1,0 +1,187 @@
+@model SkillUp.Models.CourseEditorModel
+@{
+    ViewData["Title"] = "Course editor";
+    var tabs = new[] { ("Information", "information"), ("Learners", "learners"), ("Learning Resources", "resources") };
+    var editing = Model.EditingLesson;
+    string T(string field, string saved) => Ctx.Typed(field, saved);
+    var lessonType = T("type", editing?.Type ?? "article");
+    var workspace = T("workspace", editing?.Workspace ?? "none");
+}
+@if (Model.IsDenied)
+{
+  <div class="empty"><h3>Course access denied</h3><p>New items will appear here when they are available.</p></div>
+}
+else
+{
+<section class="course-info-page" data-locked="@(Model.Locked ? "true" : "false")" data-fresh="@(Model.Fresh ? "true" : "false")">
+  <div class="ci-top-links crumb-trail"><a class="ci-back" href="@Model.BackUrl"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>@Model.BackLabel</a>@if (Me.Role == "Instructor") { <a class="ci-back crumb-end" href="/CourseRequests">My requests<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a> }</div>
+  <header class="ci-header">
+    <span class="ci-title-icon"><img src="/assets/course-editor/imgVector.svg" alt=""><span>@Icons.Book</span></span>
+    <h1>@(Model.Fresh ? "Create a course" : Model.C.Title)</h1>
+    @if (Model.TabIndex == 0) { <button form="ci-form" type="submit" class="ci-save" disabled="@Model.Locked" aria-label="Save draft"><img src="/assets/course-editor/imgAddLine.svg" alt="">Save</button> }
+  </header>
+  <div class="ci-layout">
+    <aside class="ci-summary">
+      <img class="ci-summary-surface" src="/assets/course-editor/imgVector1.svg" alt="">
+      <span class="ci-course-mark" role="img" aria-label="Course icon">@Model.Mark</span>
+      <a class="ci-program-link" href="/Courses"><span>@Icons.Folder</span><span>@(Model.ProgramName ?? "Select a program")</span><span>&rsaquo;</span></a>
+      <dl>
+        <div><dt>Assigned instructor</dt><dd>@Model.InstructorName</dd></div>
+        <div><dt>Program</dt><dd>@(Model.ProgramName ?? "Not selected")</dd></div>
+        <div><dt>Difficulty</dt><dd>@(Model.Fresh ? Model.DifficultyValue : Model.C.Difficulty)</dd></div>
+        <div><dt>Course status</dt><dd>@Model.Status</dd></div>
+        <div><dt>Deadline</dt><dd>@(Model.C?.Deadline?.ToString("yyyy-MM-dd") ?? "Not set")</dd></div>
+      </dl>
+      @if (Model.ShowAssignToggle) { <a class="ci-assignment button" href="@(Model.EditorUrl(null))&assign=1">Change assignment</a> }
+      @if (Model.AssignOpen)
+      {
+        <form class="ci-assign-form" method="post" asp-antiforgery="true" action="/CourseEditor/Assign">
+          <input type="hidden" name="id" value="@Model.C.Id">
+          <label>Instructor<select name="instructorId">@foreach (dynamic o in Model.AssignOptions) { <option value="@o.Id" selected="@((string)o.Id == (Model.C.InstructorId?.ToString() ?? ""))">@o.Name</option> }</select></label>
+          <div class="actions"><button class="primary" type="submit">Save assignment</button><a class="button ghost" href="@Model.EditorUrl(null)">Cancel</a></div>
+        </form>
+      }
+    </aside>
+    <div class="ci-content">
+      <div class="ci-tabs" role="tablist" aria-label="Course editor sections">
+        <img src="/assets/course-editor/imgVector2.svg" alt="">
+        @for (var i = 0; i < tabs.Length; i++)
+        {
+          if (Model.Fresh && i > 0) { <button type="button" role="tab" disabled aria-selected="false">@tabs[i].Item1</button> }
+          else { <a role="tab" class="@(Model.TabIndex == i ? "active" : "")" aria-selected="@(Model.TabIndex == i ? "true" : "false")" href="@Model.EditorUrl(tabs[i].Item2)">@tabs[i].Item1</a> }
+        }
+      </div>
+      @if (Model.Fresh) { <p class="ci-new-help">Save the course to enable Learners and Learning Resources.</p> }
+      @if (Model.Deleting) { <p class="ci-lock" role="status">Deletion pending review &middot; Withdraw the request from My requests before editing.</p> }
+      else if (Model.Locked) { <p class="ci-lock" role="status">Pending review &middot; Withdraw the submission before editing course information or activities.</p> }
+      @switch (Model.TabIndex)
+      {
+      case 0:
+      <div role="tabpanel" data-ci-panel="information" aria-labelledby="tab-information">
+        <form id="ci-form" method="post" asp-antiforgery="true" action="/CourseEditor/Save">
+          <input type="hidden" name="id" value="@Model.C?.Id"><input type="hidden" name="program" value="@Ctx.Query("program")">
+          <fieldset class="ci-fields" disabled="@Model.Locked">
+            <legend class="sr-only">Course information</legend>
+            <div class="ci-field-grid">
+              <label>Course Name *<input id="CourseTitle" name="title" value="@T("title", Model.CourseTitleValue)" maxlength="180" required /></label>
+              <label>Program *<select id="ProgramList" name="programId">@foreach (dynamic p in Model.ProgramOptions) { <option value="@p.Id" selected="@(p.Id.ToString() == T("programId", Model.ProgramValue))">@p.Name</option> }</select></label>
+              <label>Deadline<input id="Deadline" name="deadline" type="date" value="@T("deadline", Model.DeadlineValue)" /></label>
+              <label>Assigned Instructor<input value="@Model.InstructorName" readonly aria-readonly="true"></label>
+              <label>Difficulty<select id="Difficulty" name="difficulty">@foreach (var d in new[] { "Beginner", "Intermediate", "Advanced" }) { <option value="@d" selected="@(T("difficulty", Model.DifficultyValue) == d)">@d</option> }</select></label>
+              <label>Course Status<input value="@Model.Status" readonly aria-readonly="true"></label>
+            </div>
+            <label class="ci-rich-label">Course Description *<span class="ci-capsule ci-description"><span class="ci-capsule-art" aria-hidden="true">@CourseEditorArt.Description</span><textarea id="Description" name="description" maxlength="2000" placeholder="Describe what learners will study and practise…" aria-label="Course description" required>@T("description", Model.DescriptionValue)</textarea></span></label>
+            <label class="ci-rich-label">Learning Outcomes *<span class="ci-capsule ci-outcomes"><span class="ci-capsule-art" aria-hidden="true">@CourseEditorArt.Outcomes</span><textarea id="Outcomes" name="outcomes" maxlength="1000" placeholder="Write one learning outcome per line…" aria-label="Learning outcomes (one per line)" required>@T("outcomes", Model.OutcomesValue)</textarea></span></label>
+            <div class="ci-field-grid ci-schedule">
+              <label>Estimated Duration (weeks)<input id="Duration" name="duration" type="number" min="1" max="104" step="1" value="@T("duration", Model.DurationValue)" required /></label>
+              <label>Start Date<input id="StartDate" name="startDate" type="date" value="@T("startDate", Model.StartDateValue)" /></label>
+              <label>Visibility<input value="@(Model.C?.Status == "Published" ? "Visible to learners" : "Hidden until published")" readonly aria-readonly="true"></label>
+            </div>
+          </fieldset>
+          <p class="ci-save-state" role="status">@(Model.IsLeader ? "Saving returns the course to Draft. Publish it again when you are ready." : "Changes require Program Leader review before publication.")</p>
+          <div class="ci-form-actions"><button class="ci-save" type="submit" disabled="@Model.Locked">Save changes</button><a class="ci-discard button" href="@Model.EditorUrl(null)">Discard changes</a></div>
+        </form>
+        <section class="ci-capsule ci-review" aria-label="Program Leader review">
+          <span class="ci-capsule-art" aria-hidden="true">@CourseEditorArt.Review</span>
+          <div class="ci-review-content">
+            <div><small>@(Model.IsLeader ? "PUBLISHING" : "PROGRAM LEADER REVIEW")</small><p class="ci-review-status" data-tone="@(Model.Deleting ? "warn" : Model.Status == "Published" ? "ok" : Model.Status == "Pending review" ? "warn" : "idle")">@(Model.Status == "Pending review" ? "Awaiting approval" : Model.Status == "Published" ? (Model.IsLeader ? "Published" : "Approved and published. Edit the course to submit new changes.") : Model.IsLeader ? "Save your course, then publish it." : Model.Status == "Draft" ? "Save your course and submit it for review." : "Edit the course, then submit it again for review.")</p></div>
+            @if (Model.Deleting) { <a class="button" href="/CourseRequests">View deletion request &rarr;</a> }
+            else if (Model.Fresh) { <span>Save draft first</span> }
+            @if (Model.ShowWithdraw) { <form method="post" asp-antiforgery="true" action="/CourseEditor/Action" style="display:inline"><input type="hidden" name="id" value="@Model.C.Id"><button type="submit" name="op" value="withdraw" data-confirm="Withdraw this submission? The course returns to Draft.">Withdraw submission</button></form> }
+            @if (Model.ShowSubmit) { <form method="post" asp-antiforgery="true" action="/CourseEditor/Action" style="display:inline"><input type="hidden" name="id" value="@Model.C.Id"><button class="ci-submit-review" type="submit" name="op" value="@Model.SubmitArg" data-confirm="@Model.SubmitConfirm">@Model.SubmitText</button></form> }
+          </div>
+        </section>
+        @if (Model.ShowSavedParts)
+        {
+          <section class="ci-cover" aria-labelledby="ci-cover-title">
+            <img src="@Model.CoverUrl" alt="Current course image">
+            <div>
+              <h2 id="ci-cover-title">Course image</h2>
+              <p>Shown on the course card and in Learning resources. PNG, JPG or WebP, up to 2 MB.@(Model.HasCover ? "" : " Right now a stock image is shown.")</p>
+              <form class="ci-cover-actions" method="post" asp-antiforgery="true" action="/CourseEditor/Cover" enctype="multipart/form-data">
+                <fieldset disabled="@Model.Locked" class="ci-cover-actions">
+                  <input type="hidden" name="id" value="@Model.C.Id">
+                  <input type="file" name="file" accept="image/png,image/jpeg,image/webp" aria-label="Course image file" required>
+                  <button class="primary" type="submit">Upload image</button>
+                  @if (Model.HasCover) { <button class="ghost" type="submit" formaction="/CourseEditor/CoverRemove" formenctype="application/x-www-form-urlencoded" formnovalidate data-confirm="Remove the uploaded image and show a stock image instead?">Use stock image</button> }
+                </fieldset>
+              </form>
+            </div>
+          </section>
+          <section class="ci-activities">
+            <header><div><h2>Learning activities</h2><p>@Ui.Plural(Model.Lessons.Count, "activity", "activities") &middot; @Model.TotalMinutes min total</p></div><fieldset disabled="@Model.Locked"><a class="ci-add-activity button" href="@Model.LessonUrl("new")">+ Add activity</a></fieldset></header>
+            @if (Model.ShowLessonEditor)
+            {
+              <form class="ci-lesson-editor" method="post" asp-antiforgery="true" action="/CourseEditor/Lesson">
+                <input type="hidden" name="courseId" value="@Model.C.Id"><input type="hidden" name="id" value="@editing?.Id">
+                <h3 id="lesson-editor">@(editing == null ? "Add learning activity" : "Edit activity")</h3>
+                <div class="form-grid">
+                  <label class="full">Activity title<input id="LessonTitle" name="title" value="@T("title", editing?.Title)" maxlength="200" required /></label>
+                  <label>Activity type<select id="LessonType" name="type">@foreach (var t in new[] { "article", "lab", "quiz" }) { <option value="@t" selected="@(lessonType == t)">@t</option> }</select></label>
+                  <label>Estimated minutes<input id="LessonMinutes" name="minutes" type="number" min="1" max="600" value="@T("minutes", (editing?.Minutes ?? 15).ToString())" /></label>
+                  <label class="full">Learning content / instructions<textarea id="LessonBody" name="body" rows="6" required>@T("body", editing?.Body)</textarea></label>
+                  <label class="full">Expected answer (required for labs)<input id="LessonAnswer" name="answer" value="@T("answer", editing?.Answer)" maxlength="1000" /></label>
+                  <label>Practice terminal<select id="LessonWorkspace" name="workspace"><option value="none" selected="@(workspace == "none")">None (no terminal)</option><option value="javascript" selected="@(workspace == "javascript")">JavaScript terminal (runs in the browser)</option></select><small>Only for JavaScript practice. Leave it on None for MongoDB, C#, SQL and other topics, because the terminal cannot run them. Not used for quizzes.</small></label>
+                  <label class="full">Starter code<textarea id="LessonStarter" name="starterCode" rows="3" maxlength="4000" spellcheck="false">@T("starterCode", editing?.StarterCode)</textarea><small>With the terminal on, learners start with this code. With None on a lab, learners see it as the code to complete, for example <code>db.users.____({ name: "Alex" })</code>. Leave it empty for nothing.</small></label>
+                  <label class="check"><input type="checkbox" id="LessonPreview" name="preview" value="true" checked="@(Ctx.Posted.Count > 0 ? T("preview", "") == "true" : (editing?.Preview ?? false))" /> Allow public article preview</label>
+                </div>
+                <div class="actions"><button class="primary" type="submit">Save activity</button><a class="button ghost" href="@Model.EditorUrl(null)">Cancel</a></div>
+              </form>
+            }
+            @if (Model.Lessons.Count > 0)
+            {
+              <ol class="ci-activity-list">
+                @{ var n = 0; }
+                @foreach (dynamic l in Model.LessonItems)
+                {
+                  n++;
+                  <li class="ci-activity"><span>@n.ToString("00")</span><div><strong>@l.Title</strong><p><em class="ci-kind" data-kind="@l.Type">@l.Type</em>@l.Minutes min@(l.Preview ? " · Public preview" : "")</p></div>
+                    <fieldset disabled="@Model.Locked">
+                      <a class="button" href="@Model.LessonUrl(l.Id.ToString())">Edit</a>
+                      <form method="post" asp-antiforgery="true" action="/CourseEditor/LessonDelete" style="display:inline"><input type="hidden" name="courseId" value="@Model.C.Id"><input type="hidden" name="id" value="@l.Id"><button class="danger" type="submit" data-confirm="Delete this activity? Existing progress will be recalculated from the remaining activities.">Delete</button></form>
+                    </fieldset></li>
+                }
+              </ol>
+            }
+            else { <p class="ci-empty">Add an article, lab or quiz to build your course.</p> }
+          </section>
+          <section class="ci-assessment"><span class="ci-assessment-icon" aria-hidden="true">@Icons.Check</span><div><h2>Assessment</h2><p>@Html.Raw(Model.QuizSummary)</p></div><a class="button" href="/QuizEditor?id=@Model.C.Id">Edit quiz &rarr;</a></section>
+          <details class="ci-history"><summary>Review history</summary>@Html.Raw(Model.History)</details>
+          <div class="ci-danger-actions">
+            <div><strong>Course visibility</strong><p>Hide the course from learners or @(Me.Role == "Instructor" ? "ask the Program Leader to remove it" : "remove it permanently").</p></div>
+            <form method="post" asp-antiforgery="true" action="/CourseEditor/Action" style="display:contents"><input type="hidden" name="id" value="@Model.C.Id">
+              <button type="submit" name="op" value="hide" data-confirm="Hide this course? Learners will no longer be able to open it.">Hide course</button>
+              @if (Model.ShowDeleteCourse) { <button class="danger" type="submit" name="op" value="delete" data-confirm="Delete this course permanently?">Delete course</button> }
+            </form>
+            @if (Model.ShowAskDeletion) { <a class="danger button" href="@(Model.EditorUrl(null))&deletion=1">Request deletion</a> }
+          </div>
+          @if (Model.DeletionOpen)
+          {
+            <form class="ci-lesson-editor ci-delete-request" method="post" asp-antiforgery="true" action="/CourseEditor/Deletion">
+              <input type="hidden" name="id" value="@Model.C.Id">
+              <h3>Request course deletion</h3>
+              <p>@Model.C.Title</p>
+              <label>Reason for deletion<textarea id="DeleteReason" name="reason" rows="3" maxlength="2000" required>@Ctx.Typed("reason")</textarea></label>
+              <p class="notice">Program Leader approval is required. Courses with learners can be hidden instead.</p>
+              <div class="actions"><button class="danger" type="submit">Submit deletion request</button><a class="button ghost" href="@Model.EditorUrl(null)">Cancel</a></div>
+            </form>
+          }
+        }
+      </div>
+      break;
+      case 1:
+      <div role="tabpanel" data-ci-panel="learners" aria-labelledby="tab-learners">
+        <header class="ci-section-heading"><h2>Enrolled learners</h2><a class="button" href="/Learners?course=@Model.C?.Id">View student performance &rarr;</a></header>
+        <partial name="_LearnerTable" model="Model.LearnerEnrollments" />
+      </div>
+      break;
+      default:
+      <div role="tabpanel" data-ci-panel="resources" aria-labelledby="tab-resources">
+        <partial name="_CourseFiles" model="@((int?)Model.C?.Id)" />
+      </div>
+      break;
+      }
+    </div>
+  </div>
+</section>
+}

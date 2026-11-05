@@ -1,0 +1,26 @@
+@model SkillUp.Models.AdminDashboardModel
+<section class="admin-dashboard">
+  <header class="ad-header"><h1>Admin overview</h1><nav aria-label="Admin quick navigation"><a href="/Users">User accounts</a><a href="#admin-activity">Activity</a></nav></header>
+  <section class="ad-banner ad-banner-live" aria-labelledby="ad-pulse-title"><img src="/assets/admin-dashboard/imgFrame54.svg" alt=""><div class="ad-banner-data">@(Model.Pulse)</div></section>
+  <div class="ad-top-grid">
+    <section class="ad-summary" aria-label="Platform summary">@(Model.Summary)</section>
+    <section class="ad-metric ad-active"><div class="ad-material" aria-hidden="true"></div><h2>Active learners</h2><strong class="ad-metric-value" data-admin-metric="active">@(Model.Active.ToString("N0"))</strong><p class="ad-growth">@(Model.Growth)</p>
+      <form method="get" action="/Dashboard"><label class="ad-window"><span class="sr-only">Activity window</span><select id="ActivityWindow" name="days" aria-label="Activity window" onchange="this.form.submit()"><option value="7" selected="@(Model.Days.ToString() == "7")">Last 7 days</option><option value="30" selected="@(Model.Days.ToString() == "30")">Last 30 days</option><option value="90" selected="@(Model.Days.ToString() == "90")">Last 90 days</option></select></label></form>
+      @(Model.ActiveChart)</section>
+    <section class="ad-metric ad-completion"><div class="ad-material" aria-hidden="true"></div><h2>Course completions</h2><strong class="ad-metric-value" data-admin-metric="completed">@(Model.Completed.ToString("N0"))</strong><p class="ad-growth">@(Model.Completed) of @(Model.Enrolments) enrolments completed</p>@(Model.CompletionChart)</section>
+  </div>
+  <div class="ad-lower-grid">
+    <aside class="ad-action-card"><div><h2>Needs attention</h2><p>Keep your learning workspace moving.</p><a href="/Users?status=Pending"><strong>@(Model.PendingUsers)</strong><span>Accounts awaiting verification</span></a><details class="ad-attention"><summary><strong>@(Model.PendingCourses)</strong><span>Courses awaiting Program Leader review</span><i aria-hidden="true"></i></summary>@(Model.PendingCourseList)</details><details class="ad-attention"><summary><strong>@(Model.PendingDeletions)</strong><span>Pending deletion requests</span><i aria-hidden="true"></i></summary>@(Model.PendingDeletionList)</details><a class="ad-audit-link" href="#admin-activity">Open platform activity</a></div></aside>
+    <section class="ad-course-panel ad-logs-panel" id="admin-activity">
+      <header><div><h2>User activity logs</h2><p>Recorded activity across all users and roles</p></div><a class="ad-export-logs" href="/Dashboard/Export@(Context.Request.QueryString)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg>Export CSV</a></header>
+      <form class="ad-course-filters ad-log-filters" method="get" action="/Dashboard#admin-activity">
+        <label><span class="sr-only">Search user activity</span><input id="LogSearch" name="q" type="search" value="@Model.Term" aria-label="Search user activity" placeholder="Search activity by name, action or details" /></label>
+        <label><span class="sr-only">Filter activity role</span><select id="LogRole" name="role" aria-label="Filter activity role" onchange="this.form.submit()"><option value="" selected="@(Model.RoleFilter == "")">All roles</option><option value="Admin" selected="@(Model.RoleFilter == "Admin")">Admin</option><option value="Program Leader" selected="@(Model.RoleFilter == "Program Leader")">Program Leader</option><option value="Instructor" selected="@(Model.RoleFilter == "Instructor")">Instructor</option><option value="Learner" selected="@(Model.RoleFilter == "Learner")">Learner</option><option value="System" selected="@(Model.RoleFilter == "System")">System</option></select></label>
+        <label><span class="sr-only">Filter activity category</span><select id="LogSource" name="source" aria-label="Filter activity category" onchange="this.form.submit()"><option value="" selected="@(Model.SourceFilter == "")">All activity</option><option value="Audit" selected="@(Model.SourceFilter == "Audit")">Audit</option><option value="Learning" selected="@(Model.SourceFilter == "Learning")">Learning</option><option value="Community" selected="@(Model.SourceFilter == "Community")">Community</option><option value="Messages" selected="@(Model.SourceFilter == "Messages")">Messages</option></select></label>
+        <button class="sr-only" type="submit">Search</button><input type="hidden" name="days" value="@Model.Days">
+      </form>
+      <div class="ad-table-scroll ad-tl-scroll" tabindex="0" aria-label="All user activity logs"><p class="sr-only">All recorded user activity, newest first. Times are local.</p><ol class="ad-timeline" id="ad-log-rows">@(Model.LogRows)</ol></div>
+      <footer class="ad-log-footer"><p id="ad-log-count" role="status">@(Model.LogCount)</p><span>Newest first &middot; Local time</span></footer>
+    </section>
+  </div>
+</section>

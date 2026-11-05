@@ -1,0 +1,22 @@
+@model SkillUp.Models.AssignmentsModel
+<section class="asg-page" aria-labelledby="page-title">
+  <header class="asg-head">
+    <div><h1 id="page-title" tabindex="-1">Instructor assignments</h1><p>Keep each course connected to the right instructor.</p></div>
+    <form class="asg-search" method="get" action="/Assignments">
+      <label class="sr-only" for="SearchBox">Search assignments</label>
+      <input id="SearchBox" name="q" type="search" value="@Model.Term" placeholder="Search courses or instructors…" autocomplete="off" />
+      <button class="sr-only" type="submit">Search</button>
+    </form>
+  </header>
+  <div class="asg-summary">@(Model.Summary)</div>
+  @if (Model.AssignCourse != null)
+{
+<form class="panel asg-assign-form" method="post" asp-antiforgery="true" action="/Assignments/Assign"><input type="hidden" name="q" value="@Model.Term"><input type="hidden" name="courseId" value="@Model.AssignCourse.Id">
+    <h2 id="asg-assign">Assign instructor</h2>
+    <p>@(Model.AssignCourse?.Title)</p>
+    <label>Instructor<select name="instructorId">@foreach (dynamic o in Model.InstructorOptions) { <option value="@o.Id" selected="@((string)o.Id == (Model.AssignCourse.InstructorId?.ToString() ?? ""))">@o.Name</option> }</select></label>
+    <div class="actions"><button class="primary" type="submit">Save assignment</button><a class="button ghost" href="@(Model.ListUrl)">Cancel</a></div>
+  </form>
+}
+  @(Model.Cards)
+</section>

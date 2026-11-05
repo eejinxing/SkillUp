@@ -1,0 +1,18 @@
+@model IEnumerable<PublicController.FaqEntry>
+@{ ViewData["Title"] = "Frequently asked questions"; }
+    <div class="page-head">
+        <div>
+            <h1 tabindex="-1" id="page-title">Frequently asked questions</h1>
+            <p>Answers for your next learning step.</p>
+        </div>
+        <div class="actions tight"></div>
+    </div>
+    <section class="panel">
+        @foreach (var entry in Model)
+        {
+            <details class="list-item">
+                <summary>@entry.Question</summary>
+                <p>@entry.Answer</p>
+            </details>
+        }
+    </section>

@@ -1,0 +1,30 @@
+@model SkillUp.Models.RequestReviewModel
+@if (Model.IsDenied)
+{<div class="empty"><h1>Request access denied</h1><p>This request is not assigned to your program.</p></div>}
+@if (!Model.IsDenied)
+{
+  <div class="page-head"><div><h1 tabindex="-1" id="page-title">Review deletion request</h1><p>@(Model.R?.CourseTitle)</p></div><div class="actions tight"><a class="button ghost" href="/Approvals">&larr; Course approvals</a></div></div>
+  <div class="split">
+    <section class="panel stack">
+      <h2>@(Model.R?.CourseTitle)</h2>
+      <p>@(Model.R?.Reason)</p>
+      <div><strong>Submitted by</strong><p>@(Model.Requester) &middot; @(Model.R == null ? "" : Ui.Stamp(Model.R.CreatedAt))</p></div>
+      <p>Current course: @(Model.CourseTitle) &middot; @(Model.Learners) enrolled learners</p>
+      <p>Approving removes an unenrolled course and its materials from the mock workspace. The request timeline is retained.</p>
+      @if (Model.CanStart) { <form method="post" asp-antiforgery="true" action="/RequestReview/Start" style="display:inline"><input type="hidden" name="id" value="@Model.R.Id"><button type="submit">Start review</button></form> }
+      <div class="rq-review-events">@(Model.History)</div>
+    </section>
+    <aside class="panel"><h2>Your decision</h2>
+      @if (Model.CanDecide)
+{
+<form class="stack" method="post" asp-antiforgery="true" action="/RequestReview/Decision"><input type="hidden" name="id" value="@Model.R.Id">
+        <label>Decision<select name="decision">@foreach (var d in new[] { "Approved", "Rejected" }) { <option value="@d" selected="@(Ctx.Typed("decision", "Rejected") == d)">@d</option> }</select></label>
+        <label>Feedback to instructor<textarea id="Feedback" name="comment" rows="5" maxlength="2000">@Ctx.Typed("comment")</textarea></label>
+        <div class="actions"><button class="primary" type="submit">Submit deletion decision</button></div>
+      </form>
+}
+      @if (!Model.CanDecide)
+{<p>@(Model.R?.Status)</p>}
+    </aside>
+  </div>
+}

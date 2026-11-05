@@ -1,0 +1,50 @@
+@model SkillUp.Models.LiveSessionsModel
+<div class="page-head">
+    <div><h1 tabindex="-1" id="page-title">Live sessions</h1><p>Office hours and group discussions.</p></div>
+    <div class="actions tight">@if (Me.Role == "Instructor") {<a class="button primary" href="#schedule">+ Schedule session</a>}</div>
+  </div>
+  @if (Model.ShowSchedule)
+{
+  <details class="panel inline-form" id="schedule">
+    <summary>Schedule a live session</summary>
+    <form method="post" asp-antiforgery="true" action="/LiveSessions/Schedule">
+      <label>Course <select name="courseId">@foreach (dynamic c in Model.SessionCourses) { <option value="@c.Id">@c.Title</option> }</select></label>
+      <label>Session title
+        <input id="SessionTitle" name="title" type="text" value="@Ctx.Typed("title")" maxlength="100" />
+        </label>
+      <label>Start date and time
+        <input id="SessionStart" name="startsAt" type="datetime-local" value="@Ctx.Typed("startsAt")"  />
+        </label>
+      <div class="actions"><button class="primary" type="submit">Schedule session</button></div>
+    </form>
+  </details>
+  }
+  <div class="grid two">
+    @{ var s_index = -1; }
+@foreach (dynamic s in Model.Sessions)
+{
+s_index++;
+<section class="panel">
+          @Html.Raw(s.CourseTag)
+          <h2 style="margin:14px 0">@s.Title</h2>
+          <p>@Html.Raw(s.When) &middot; @s.Host</p>
+          <small>@s.Attendees participants joined</small>
+          <div class="actions">
+            @if (!(bool)s.Joined)
+{
+<form method="post" asp-antiforgery="true" action="/LiveSessions/Join" style="display:inline"><input type="hidden" name="id" value="@s.Id"><button class="primary" type="submit">Join session</button></form>
+}
+            @if ((bool)s.Joined)
+{
+
+              <button type="button" class="primary" data-start-call="video" data-call-name="@s.Host" data-call-role="Live session · local preview" data-call-title="@s.Title">Open session</button>
+              <form method="post" asp-antiforgery="true" action="/LiveSessions/Leave" style="display:inline"><input type="hidden" name="id" value="@s.Id"><button class="ghost" type="submit">Leave</button></form>
+            
+}
+          </div>
+        </section>
+}
+    @if (Model.NoSessions)
+{<div class="empty"><h3>No sessions scheduled</h3><p></p></div>}
+  </div>
+  <p class="notice">Joining is saved to your account. The call itself is a local preview: your camera is used only after you allow it, and audio and video are not transmitted.</p>

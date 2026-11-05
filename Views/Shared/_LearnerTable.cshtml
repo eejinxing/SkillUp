@@ -1,0 +1,32 @@
+@* A table of learners and their progress (course editor, student performance). Model: the enrolments to list. *@
+@model IEnumerable<EnrollmentRow>
+@{
+    var lines = Ctx.LearnerLines(Model ?? Enumerable.Empty<EnrollmentRow>());
+    var canRemove = Me?.Role == "Instructor";
+    var returnTo = Context.Request.Path + Context.Request.QueryString;
+}
+@if (lines.Count > 0)
+{
+  <div class="table-wrap"><table><thead><tr><th scope="col">Learner</th><th scope="col">Course</th><th scope="col">Progress</th><th scope="col">Status</th><th scope="col">Last active</th><th scope="col"></th></tr></thead><tbody>
+  @foreach (dynamic l in lines)
+  {
+    <tr>
+      <td><div class="row lr-person">@l.Avatar<div><strong>@l.Name</strong><p>@l.Email</p></div></div></td>
+      <td><span class="lr-course">@l.Course</span></td>
+      <td><span class="lr-meter" role="progressbar" aria-label="@l.Course completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@l.Progress"><span><i style="--w:@(l.Progress)%"></i></span><b>@(l.Progress)%</b></span></td>
+      <td><span class="lr-status" data-status="@l.StatusKey">@l.Status</span></td>
+      <td><span class="lr-date">@l.LastActive</span></td>
+      <td><div class="actions"><a class="link lr-view" href="/Learners?learner=@l.UserId&amp;course=@l.CourseId">View</a>
+        @if (canRemove)
+        {
+          <form method="post" asp-antiforgery="true" action="/Teaching/RemoveEnrolment" style="display:inline"><input type="hidden" name="userId" value="@l.UserId"><input type="hidden" name="courseId" value="@l.CourseId"><input type="hidden" name="returnTo" value="@returnTo"><button class="ghost danger" type="submit" data-confirm="Remove this enrolment? The learner's progress for this course will be removed.">Remove</button></form>
+        }
+      </div></td>
+    </tr>
+  }
+  </tbody></table></div>
+}
+else
+{
+  <div class="empty"><h3>No matching records</h3><p>Try another search or create a new record.</p></div>
+}

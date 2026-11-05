@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>SkillUp</RootNamespace>
+    <AssemblyName>SkillUp</AssemblyName>
+    <UserSecretsId>skillup-web</UserSecretsId>
+    <!-- Old WebForms sources kept only while pages are being ported; removed at the end. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);docs/**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Database\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,147 @@
+@model SkillUp.Models.ProfileModel
+<section class="pf-page" aria-labelledby="pf-title">
+  <aside class="pf-side"><div class="pf-side-card">
+    <div class="pf-avatar">@(Ui.Avatar(Me, "profile-avatar"))<span class="pf-status" title="@(Me.Status)"></span></div>
+    <h1 id="pf-title">@(Me.Name)</h1>
+    <p class="pf-handle">@@@(Me.Username)<span class="pf-role">@(Me.Role)</span></p>
+    <nav class="pf-nav" aria-label="Profile sections">
+      <a href="#pf-overview" class="is-active">@Html.Raw(Model.Icon("overview"))Overview</a>
+      <a href="#pf-activity">@Html.Raw(Model.Icon("activity"))Activity<em>@(Model.HeatTotal)</em></a>
+      @if (Me.Role == "Learner") {<a href="#pf-certificates">@Html.Raw(Model.Icon("badge"))My Certificates<em>@(Model.Certificates)</em></a>}
+      <a href="#pf-info">@Html.Raw(Model.Icon("info"))Information</a>
+      <a href="#pf-account">@Html.Raw(Model.Icon("account"))Account</a>
+    </nav>
+    <ul class="pf-contact">
+      <li>@Html.Raw(Model.Icon("mail"))@(Me.Email)</li>
+      @if (!string.IsNullOrEmpty(Me.Location)) {<li>@Html.Raw(Model.Icon("pin"))@(Me.Location)</li>}
+      <li>@Html.Raw(Model.Icon("badge"))@(Me.Role) &middot; @(Me.Status)</li>
+    </ul>
+    <p class="pf-counts">@Html.Raw(Model.Icon("book"))<b>@(Model.CourseCount)</b> courses &middot; <b>@(Model.Certificates)</b> certificates</p>
+    <div class="pf-side-actions">
+      <details class="pf-image-form">
+        <summary class="button ghost pf-change-image">Change profile image</summary>
+        <form method="post" asp-antiforgery="true" action="/Profile/Avatar" enctype="multipart/form-data"><input type="file" name="file" accept="image/png,image/jpeg,image/webp,image/gif" required><button class="primary" type="submit">Upload image</button>@if (!string.IsNullOrEmpty(Me.Avatar)) {<button class="ghost" type="submit" formaction="/Profile/RemoveAvatar" formenctype="application/x-www-form-urlencoded" formnovalidate>Remove image</button>}</form>
+      </details>
+      <a class="button pf-prefs" href="#pf-account">Account security</a>
+      <form method="post" asp-antiforgery="true" action="/Logout" style="display:contents"><button class="button pf-prefs pf-signout" type="submit">Sign out</button></form>
+    </div>
+  </div></aside>
+  <div class="pf-main">
+    <div class="pf-hero" id="pf-overview">
+      <figure class="pf-cover" aria-hidden="true"><span class="pf-cover-glow"></span><span class="pf-cover-initials">@(Ui.Initials(Me))</span></figure>
+      <article class="pf-readme">
+        <small>@(Me.Username) / README.md</small>
+        <h2>Hi, I'm @(Me.Name.Split(' ')[0])!</h2>
+        <p>@(string.IsNullOrWhiteSpace(Me.Bio) ? "Tell other learners a little about yourself in the Information section below." : Me.Bio)</p>
+        <p>@(Model.RoleLine) You can reach me at <a href="mailto:@(Me.Email)">@(Me.Email)</a>@(string.IsNullOrEmpty(Me.Location) ? "" : " from " + Me.Location).</p>
+      </article>
+    </div>
+    <div class="pf-grid">
+      <section class="pf-card pf-achievements" aria-labelledby="pf-ach-title">
+        <header><h2 id="pf-ach-title">Achievements</h2><span class="pf-pill">@(Model.Earned)/@(Model.BadgeCount)</span></header>
+        <div class="pf-badges">
+          @{ var b_index = -1; }
+@foreach (dynamic b in Model.BadgeList)
+{
+b_index++;
+<span class="pf-badge @Html.Raw((bool)b.Earned ? "is-earned" : "")" style="--b:@b.Colour;--n:@Html.Raw(b_index)" title="@b.Title · @b.Detail@Html.Raw((bool)b.Earned ? "" : " (locked)")"><img src="/assets/badges/@(b.Sticker).png" alt="" loading="lazy"><span class="sr-only">@b.Title@Html.Raw((bool)b.Earned ? "" : " (locked)")</span></span>
+}
+        </div>
+        <p class="pf-card-foot"><span class="pf-pill is-soft">Beta</span>Earn badges as you learn and teach</p>
+      </section>
+      <section class="pf-card pf-contrib" id="pf-activity" aria-labelledby="pf-act-title">
+        <header><h2 id="pf-act-title">@(Model.HeatTotal.ToString("N0")) @(Me.Role == "Learner" ? "learning sessions" : "activities") in the last year</h2><span class="pf-pill">@(DateTime.Now.Year)</span></header>
+        <div class="pf-heat-wrap"><div class="pf-months" style="--w:@(Model.HeatWeeks)">@(Model.HeatMonths)</div><div class="pf-heat" style="--w:@(Model.HeatWeeks)" role="img" aria-label="@(Model.HeatTotal) activities over the last year">@(Model.HeatCells)</div></div>
+        <p class="pf-legend">Less<i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i>More</p>
+      </section>
+    </div>
+    <section class="pf-card pf-courses" aria-labelledby="pf-courses-title">
+      <header><h2 id="pf-courses-title">@(Me.Role == "Learner" ? "My courses" : Me.Role == "Admin" ? "Popular courses" : "Courses")</h2><a class="pf-link" href="@(Me.Role == "Learner" ? "MyCourses" : Me.Role == "Admin" ? "Catalog" : "Courses")">View all</a></header>
+      <div class="pf-course-grid">
+        @{ var c_index = -1; }
+@foreach (dynamic c in Model.CourseCards)
+{
+c_index++;
+<a class="pf-course" href="/Course?id=@c.Id"><header>@Html.Raw(Model.Icon("book"))<strong>@c.Title</strong><span class="pf-tag" data-tag="@c.TagKey">@c.Tag</span></header><p>@c.Description</p><footer><span>@Html.Raw(Model.Icon("star"))@c.Rating</span><span>@Html.Raw(Model.Icon("users"))@c.Learners</span><span>@c.Activities activities</span></footer></a>
+}
+        @if (Model.NoCourses)
+{<p class="pf-empty">No courses yet.</p>}
+      </div>
+    </section>
+    @if (Model.ShowCerts)
+{
+    <section class="pf-card pf-certs" id="pf-certificates" aria-labelledby="pf-certs-title">
+      <header><h2 id="pf-certs-title">My Certificates</h2><a class="pf-link" href="/Certificates">View all</a></header>
+      <div class="pf-course-grid">
+        @{ var ct_index = -1; }
+@foreach (dynamic ct in Model.CertCards)
+{
+ct_index++;
+<a class="pf-course pf-cert" href="/Certificates?id=@ct.Id"><header>@Html.Raw(Model.Icon("badge"))<strong>@ct.Title</strong></header><footer><span>Completed <time data-local-date="@ct.Iso">@ct.Date</time></span><span>@ct.Hours</span><span>View certificate &rarr;</span></footer></a>
+}
+        @if (Model.NoCerts)
+{<p class="pf-empty">No certificates yet. Finish every activity in a course to earn one.</p>}
+      </div>
+    </section>
+    }
+    <details class="pf-card pf-section" id="pf-info" open>
+      <summary><h2>Information</h2>@Html.Raw(Model.Icon("chevron", "pf-chev"))</summary>
+      <form method="post" asp-antiforgery="true" action="/Profile/Save">
+        <div class="pf-rows">
+          <div class="pf-row"><span class="pf-row-label">@Html.Raw(Model.Icon("user"))Full name</span><div class="pf-row-value"><input id="NameBox" name="name" type="text" value="@Ctx.Typed("name", Me.Name)" aria-label="Full name" maxlength="100" /></div><label class="pf-edit" for="NameBox" aria-label="Edit Full name">@Html.Raw(Model.Icon("pencil"))</label></div>
+          <div class="pf-row"><span class="pf-row-label">@Html.Raw(Model.Icon("at"))Username</span><div class="pf-row-value"><input id="UsernameBox" name="username" type="text" value="@Ctx.Typed("username", Me.Username)" aria-label="Username" maxlength="50" /></div><label class="pf-edit" for="UsernameBox" aria-label="Edit Username">@Html.Raw(Model.Icon("pencil"))</label></div>
+          <div class="pf-row"><span class="pf-row-label">@Html.Raw(Model.Icon("mail"))Email</span><div class="pf-row-value"><input id="EmailBox" name="email" type="email" value="@Ctx.Typed("email", Me.Email)" aria-label="Email" maxlength="255" /></div><label class="pf-edit" for="EmailBox" aria-label="Edit Email">@Html.Raw(Model.Icon("pencil"))</label></div>
+          <div class="pf-row"><span class="pf-row-label">@Html.Raw(Model.Icon("pin"))Location</span><div class="pf-row-value"><input id="LocationBox" name="location" type="text" value="@Ctx.Typed("location", Me.Location)" aria-label="Location" maxlength="100" /></div><label class="pf-edit" for="LocationBox" aria-label="Edit Location">@Html.Raw(Model.Icon("pencil"))</label></div>
+          <div class="pf-row"><span class="pf-row-label">@Html.Raw(Model.Icon("text"))About you</span><div class="pf-row-value"><textarea id="BioBox" name="bio" rows="3" aria-label="About you" maxlength="1000">@Ctx.Typed("bio", Me.Bio)</textarea></div><label class="pf-edit" for="BioBox" aria-label="Edit About you">@Html.Raw(Model.Icon("pencil"))</label></div>
+        </div>
+        <div class="actions"><button class="primary" type="submit">Save profile</button></div>
+      </form>
+    </details>
+    <details class="pf-card pf-section" id="pf-account" open>
+      <summary><h2>Account</h2>@Html.Raw(Model.Icon("chevron", "pf-chev"))</summary>
+      <div class="pf-rows">
+        <div class="pf-row pf-row-action"><span class="pf-row-label">@Html.Raw(Model.Icon("key"))Password</span><div class="pf-row-value"><span>Change the password you use to log in</span></div><a class="button ghost pf-row-btn" href="#pf-password">Change password</a></div>
+      </div>
+      <details class="inline-form pf-feedback" id="pf-password"@(Model.PasswordOpen ? " open" : "")>
+        <summary>Change your password</summary>
+        <form class="pf-password-form" method="post" asp-antiforgery="true" action="/Profile/Password">
+          <label>Current password <b class="req" title="Required" aria-hidden="true">*</b>
+            <span class="auth-field"><input id="PwCurrent" name="current" type="password"  autocomplete="current-password" /><button type="button" class="auth-eye" data-auth-eye="" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></span>
+            </label>
+          <label>New password <b class="req" title="Required" aria-hidden="true">*</b>
+            <span class="auth-field"><input id="PwNew" name="password" type="password"  autocomplete="new-password" /><button type="button" class="auth-eye" data-auth-eye="" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></span>
+            </label>
+          <div class="pw-help" data-pw-for="PwNew">
+            <div class="pw-meter" role="progressbar" aria-label="Password strength" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"><i></i><i></i><i></i><i></i></div>
+            <p class="pw-label" aria-live="polite">Password strength: <b>not entered yet</b></p>
+            <ul class="pw-rules">
+              <li data-rule="length">8 to 128 characters</li>
+              <li data-rule="capital">A capital letter (A&ndash;Z)</li>
+              <li data-rule="number">A number (0&ndash;9)</li>
+              <li data-rule="special">A special character (! @@ # $ %)</li>
+              <li data-rule="different">Different from your current password</li>
+            </ul>
+          </div>
+          <label>Confirm new password <b class="req" title="Required" aria-hidden="true">*</b>
+            <span class="auth-field"><input id="PwConfirm" name="confirm" type="password"  autocomplete="new-password" /><button type="button" class="auth-eye" data-auth-eye="" aria-label="Show password"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></span>
+            </label>
+          <p class="form-error" role="alert">@(Model.PasswordOpen ? Ctx.Notice : null)</p>
+          <div class="actions"><button class="primary" type="submit">Update password</button></div>
+        </form>
+      </details>
+      <div class="pf-rows">
+        <div class="pf-row pf-row-action"><span class="pf-row-label">@Html.Raw(Model.Icon("chat"))Feedback</span><div class="pf-row-value"><span>Tell us about your learning experience</span></div><a class="button ghost pf-row-btn" href="#pf-feedback">Give feedback</a></div>
+      </div>
+      <details class="inline-form pf-feedback" id="pf-feedback">
+        <summary>Share your feedback</summary>
+        <form method="post" asp-antiforgery="true" action="/Profile/Feedback">
+          <label>Rating <select name="rating">@foreach (var n in new[] { "5", "4", "3", "2", "1" }) { <option value="@n" selected="@(Ctx.Typed("rating", "5") == n)">@n</option> }</select></label>
+          <label>What should we know?
+            <textarea id="FeedbackText" name="text" rows="3" maxlength="2000">@Ctx.Typed("text")</textarea>
+            </label>
+          <div class="actions"><button class="primary" type="submit">Submit feedback</button></div>
+        </form>
+      </details>
+    </details>
+  </div>
+</section>

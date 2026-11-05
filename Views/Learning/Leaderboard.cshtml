@@ -1,0 +1,84 @@
+@model SkillUp.Models.LeaderboardModel
+<header class="page-intro"><p class="pi-title">Earn points. Climb the ranks.</p><p>See how you compare with other learners, this week and all time.</p></header>
+<section class="skill-leaderboard lb-v2 lb-timing lb-sk">
+  <header class="lb-header">
+    <span class="lb-brand-mark" aria-hidden="true">@Html.Raw(LeaderboardModel.Star)</span>
+    <h1 id="page-title" tabindex="-1">Leaderboard</h1>
+    <form class="lb-search" id="lb-form" method="get" action="/Leaderboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>
+      <input id="SearchBox" name="q" type="search" value="@Model.Term" placeholder="Search a learner" aria-label="Search learners" autocomplete="off" />
+      <button class="sr-only" type="submit" name="period" value="@Model.Period">Search</button>
+    </form>
+    <div class="lb-header-pills">
+      <span class="lb-pill is-gold">@Html.Raw(LeaderboardModel.Trophy)@(Model.TimeLeft)</span>
+      <span class="lb-pill" aria-label="Your points">@(Model.AllMine?.Points.ToString("N0") ?? "0")<small>pts</small></span>
+      <span class="lb-pill is-green" aria-label="Your rank"><small>Rank</small>@(Model.RankText(Model.Mine))/@(Model.Rows.Count)</span>
+      <span class="lb-live">Updated @(DateTime.Now.ToString("HH:mm"))</span>
+    </div>
+    <a class="lb-header-profile" href="/Profile"><span>@((Me.Username ?? Me.Name).ToUpperInvariant())</span>@(Ui.Avatar(Me))</a>
+  </header>
+  <div class="lb-board">
+    <div class="lb-hero">
+    <section class="lb-profile" aria-label="Your ranking">
+      <div class="lb-profile-avatar">@(Ui.Avatar(Me))</div>
+      <div class="lb-profile-copy">
+        <h2>@(Me.Name)<svg class="lb-verified" viewBox="0 0 24 24" aria-label="Verified learner"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="m7.5 12.3 3 3 6-6.3" fill="none" stroke="#14141a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></h2>
+        <div class="lb-profile-stats">
+          <span class="lb-personal-score">@Html.Raw(LeaderboardModel.Star)<strong>@(Model.Mine?.Points.ToString("N0") ?? "0")</strong></span>
+          <span><b>@(Model.MyQuizCount)</b> quiz attempts</span>
+          <span><b>@(Model.MyCourseCount)</b> courses</span>
+          <span>rank <strong class="lb-personal-rank">@(Model.RankText(Model.Mine))</strong></span>
+        </div>
+      </div>
+    </section>
+    <nav class="lb-period-nav" aria-label="Leaderboard period">
+      <button form="lb-form" type="submit" name="period" value="week" aria-pressed="@(Model.Period == "week" ? "true" : "false")" aria-label="This-week ranking">This week<sup>@(Model.WeekMine?.Points.ToString("N0") ?? "0") pts<em>@(Model.Standing(Model.Board.Week))</em></sup></button>
+      <button form="lb-form" type="submit" name="period" value="all" aria-pressed="@(Model.Period == "all" ? "true" : "false")" aria-label="All-time ranking">All time<sup>@(Model.AllMine?.Points.ToString("N0") ?? "0") pts<em>@(Model.Standing(Model.Board.All))</em></sup></button>
+      <span class="lb-period-caption">@(Model.Period == "week" ? Ui.Day(Model.Board.Start) + " – " + Ui.Day(Model.Board.End.AddMilliseconds(-1)) : "Lifetime learning points")</span>
+    </nav>
+    </div>
+    @if (Model.PodiumHtml.Length > 0) {
+    <section class="lb-sk-podium" aria-label="Top learners">
+      <header><span>Top learners</span><span class="lb-count-pill">Ranked by score</span></header>
+      <div class="lb-sk-pods">@(Model.PodiumHtml)</div>
+    </section>
+    }
+    <section class="lb-rankings" aria-label="@(Model.PeriodLabel) learner rankings">
+      <div class="lb-timing-session"><span class="lb-session-name">LEARNING STANDINGS</span><span>@(Model.PeriodLabel) <b>&middot;</b> @(Model.Rows.Count) learners</span><i class="lb-checkered" aria-hidden="true"></i></div>
+      @if (Model.Rows.Count > 0 && Model.Shown.Count > 0) {
+      <section class="lb-row-group" aria-labelledby="lb-standings">
+        <header><h2 id="lb-standings">Top 10</h2><span class="lb-group-note is-gold">@Html.Raw(LeaderboardModel.Trophy)@(Model.TimeLeft) in this week's ranking</span><span class="lb-group-note">@(Model.Gap > 0 ? Model.Gap.ToString("N0") + " points more to reach #1" : Model.Mine?.Rank == 1 ? "You are leading" : "Complete a quiz to get ranked")</span><span class="lb-count-pill">@(Model.Shown.Count)/@(Model.Rows.Count)</span></header>
+        <div class="lb-timing-labels" aria-hidden="true"><span>POS</span><span>LEARNER / COURSE</span><span title="Courses completed / enrolled">COURSES</span><span title="Best quiz score (%)">BEST</span><span title="Average quiz score (%)">AVG</span><span title="Time taken for the best quiz score; faster ranks higher on a tie">QUIZ TIME</span><span title="Total time from enrolling to completing the finished courses">COURSE TIME</span><span>STATUS</span></div>
+        <div class="lb-row-list">
+          @{ var r_index = -1; }
+@foreach (dynamic r in Model.RankRows)
+{
+r_index++;
+<article class="lb-rank-card @r.PodiumClass @Html.Raw((bool)r.IsMe ? "lb-you" : "")" data-rank="@r.Rank" data-score="@r.Points" style="--i:@Html.Raw(r_index);--learner-accent:@r.Accent">
+                <span class="lb-timing-position @Html.Raw(r.Rank == null ? "is-unranked" : "")" aria-label="Position @Html.Raw(r_index + 1)@Html.Raw(r.Rank == null ? ", not ranked yet" : ", rank " + r.Rank)">@Html.Raw((r_index + 1).ToString("00"))</span>
+                <div class="lb-timing-identity">
+                  <span class="lb-rank-person">@Html.Raw(r.AvatarHtml)<i class="lb-presence @Html.Raw((bool)r.Online ? "is-on" : "")" aria-hidden="true"></i></span>
+                  @Html.Raw(r.BadgesHtml)
+                  <div class="lb-driver-copy">
+                    <h2 title="@r.Name">@r.Name@Html.Raw((bool)r.IsMe ? "<span class=\"lb-you-label\">YOU</span>" : "")</h2>
+                    <p><span class="lb-chip lb-level-chip">LV @r.Level</span><span class="lb-row-context" title="@r.CourseTitles">@r.CourseContext</span><span class="lb-row-points" title="@r.BestTitle">@r.PointsText pts</span><span class="lb-date-chip" title="Last active">@r.LastActive</span></p>
+                  </div>
+                </div>
+                @Html.Raw(r.TimingHtml)
+                <span class="lb-row-status @r.StatusClass">@r.Status</span>
+              </article>
+}
+          @(Model.EmptySlots)
+        </div>
+      </section>
+      }
+      @if (Model.Rows.Count == 0) {<div class="lb-empty"><h2>No learners yet</h2><p>Rankings appear when active learners join the platform.</p></div>}
+      @if (Model.Rows.Count > 0 && Model.Shown.Count == 0) {<p class="lb-no-matches">No matching learners.</p>}
+      <p class="lb-list-note" id="lb-results-count" role="status">@(Model.Term.Length > 0 ? Model.Shown.Count + " of " + Model.Rows.Count + " learners" : Model.Rows.Count + " active learners · Courses completed first, then quiz score, then time taken. Learners with no points are unranked.")</p>
+    </section>
+    <footer class="lb-footer">
+      <details><summary>How points work</summary><p>All time: learners are ranked by courses completed first, so finishing a course always beats a higher quiz score without the course. Learners with the same number of completed courses are ordered by best quiz score, then quiz average. If those are equal too, the learner who took less time on the quiz with the best score ranks higher, then the one who took less time to complete their courses. Quiz time is measured from opening the quiz to submitting it. This week uses the best and average of this week's quizzes and their time. Learners with no points are unranked.</p></details>
+      <a href="/MyCourses">Continue learning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    </footer>
+  </div>
+</section>

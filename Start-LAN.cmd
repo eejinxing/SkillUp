@@ -1,3 +1,5 @@
 @echo off
-rem Starts Skill UP for testing on other devices on the same Wi-Fi (asks for administrator rights once).
-powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile -ExecutionPolicy Bypass -NoExit -File \"%~dp0Start-LAN.ps1\"'"
+rem Runs Skill UP so other devices on the same Wi-Fi can open it (http://<this PC's address>:5080), for testing calls between two devices.
+rem Windows asks once to allow the app through the firewall. PostgreSQL must be running.
+cd /d "%~dp0"
+dotnet run --launch-profile lan

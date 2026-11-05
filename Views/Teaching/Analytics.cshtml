@@ -1,0 +1,17 @@
+@model SkillUp.Models.AnalyticsModel
+<div class="la-page la-kit" data-filter="@(Model.Filter)" data-expanded="@(Model.Expanded ? "true" : "false")">
+  <nav class="kx-crumbs" aria-label="Breadcrumb"><a href="/Dashboard">@(Icons.KitHome)Main</a><span aria-hidden="true">&rsaquo;</span><span>@(Icons.KitChart)Analytics</span><div class="kx-crumb-actions"><a href="/Learners">@(Icons.KitPeople)Learners</a><button type="button" data-action="print">@(Icons.KitPrint)Print</button></div></nav>
+  <header class="kx-title"><span class="kx-title-icon">@Icons.KitChart</span><h1 tabindex="-1" id="page-title">Learning analytics</h1>
+    <div class="kx-seg" role="group" aria-label="Filter courses">
+      <a role="button" href="/Analytics?filter=all" aria-pressed="@(Model.Filter == "all" ? "true" : "false")">All</a>
+      <a role="button" href="/Analytics?filter=active" aria-pressed="@(Model.Filter == "active" ? "true" : "false")">Active</a>
+      <a role="button" href="/Analytics?filter=empty" aria-pressed="@(Model.Filter == "empty" ? "true" : "false")">No enrolments</a>
+    </div>
+    <div class="kx-title-actions"><a class="kx-btn kx-btn-lg" href="/Analytics/Export?filter=@Model.Filter">↓ Export CSV</a></div>
+  </header>
+  <div class="kx-stats">@(Model.Stats)</div>
+  <section class="kx-panel"><table class="kx-table"><caption class="sr-only">Programs</caption><thead><tr><th scope="col">Program</th><th scope="col">Courses</th><th scope="col">Enrolled</th><th scope="col">Completion</th><th scope="col">Quiz average</th><th scope="col">Action</th></tr></thead><tbody>@(Model.ProgramRows)</tbody></table></section>
+  <section class="kx-panel"><table class="kx-table"><caption class="sr-only">Courses</caption><thead><tr><th scope="col">Course</th><th scope="col">Enrolled</th><th scope="col">Participation</th><th scope="col">Completion</th><th scope="col">Quiz average</th><th scope="col">Action</th></tr></thead><tbody>@(Model.CourseRows)</tbody></table></section>
+  @if (Model.HasMore && !Model.Expanded) { <a class="kx-more" href="/Analytics?filter=@Model.Filter&more=1">Load More <span aria-hidden="true">&rsaquo;</span></a> }
+  <p class="kx-foot">Calculated from the current enrolments and submitted attempts. Participation counts enrolments with at least one completed activity.</p>
+</div>

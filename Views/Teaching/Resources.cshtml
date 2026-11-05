@@ -1,0 +1,19 @@
+@model SkillUp.Models.ResourcesModel
+<div class="page-head"><div><h1 tabindex="-1" id="page-title">Learning resources</h1><p>Course content, organised by the courses you teach.</p></div><div class="actions tight"></div></div>
+  <div class="grid">
+    @{ var l_index = -1; }
+@foreach (dynamic l in Model.LessonList)
+{
+l_index++;
+<article class="panel">
+          <div class="course-art @l.Colour" style="height:100px;border-radius:10px;margin-bottom:16px"><img src="@l.Art" alt="" loading="lazy"><b style="font-size:28px">@l.Kind</b></div>
+          <h3>@l.Title</h3>
+          <p>@l.Course</p>
+          <small>@l.Minutes min &middot; @l.Audience</small>
+          <div class="actions"><a class="button" href="/CourseEditor?id=@l.CourseId&amp;lesson=@l.Id#lesson-editor">Edit resource</a></div>
+        </article>
+}
+    @if (Model.NoLessons)
+{<div class="empty"><h3>No resources yet</h3><p></p></div>}
+  </div>
+  <partial name="_CourseFiles" model="@((int?)null)" />

@@ -1,0 +1,27 @@
+@model SkillUp.Models.CourseReviewModel
+@if (Model.IsDenied)
+{<div class="empty"><h3>Course access denied</h3><p>New items will appear here when they are available.</p></div>}
+@if (!Model.IsDenied)
+{
+  <div class="page-head"><div><h1 tabindex="-1" id="page-title">Review submission</h1><p>@(Model.C?.Title)</p></div><div class="actions tight"><a class="button ghost" href="/Approvals">&larr; Approvals</a></div></div>
+  <div class="split">
+    <section class="panel stack">@(Model.Submission)</section>
+    <aside class="stack">
+      <section class="panel"><h2>Your decision</h2>
+        @if (Model.CanStart) { <form method="post" asp-antiforgery="true" action="/CourseReview/Start" style="display:inline"><input type="hidden" name="id" value="@Model.C.Id"><button class="ghost" type="submit">Start review</button></form> }
+        @if (Model.CanDecide)
+{
+<form class="stack" method="post" asp-antiforgery="true" action="/CourseReview/Decision"><input type="hidden" name="id" value="@Model.C.Id">
+          <label>Decision<select name="decision">@foreach (var d in new[] { "Approved", "Changes requested", "Rejected" }) { <option value="@d" selected="@(Ctx.Typed("decision", "Approved") == d)">@d</option> }</select></label>
+          <label>Feedback to instructor<textarea id="Feedback" name="comment" rows="5" maxlength="2000">@Ctx.Typed("comment")</textarea></label>
+          <div class="actions"><button class="primary" type="submit">Submit decision</button></div>
+        </form>
+}
+        @if (!Model.CanDecide)
+{<p class="notice">This course is not awaiting a decision.</p>}
+      </section>
+      <section class="panel"><h2>Review history</h2>@(Model.History)</section>
+    </aside>
+  </div>
+  <partial name="_CourseFiles" model="@((int?)Model.C.Id)" />
+}

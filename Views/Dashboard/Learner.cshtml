@@ -1,0 +1,86 @@
+@model SkillUp.Models.LearnerDashboardModel
+<div class="registered-home">
+<div class="learning-console lc-x lc-velo">
+  <header class="lx-top"><a class="lx-logo" href="/Dashboard" aria-label="Skill UP overview"><img class="skill-logo" src="/assets/skill-up-logo.png" alt="Skill UP" width="930" height="420"></a></header>
+  <section class="vd-hero" aria-labelledby="vd-title">
+    <div class="vd-hero-top">
+      <div>
+        <time>@(DateTime.Now.ToString("dddd, d MMMM yyyy", System.Globalization.CultureInfo.GetCultureInfo("en-GB")))</time>
+        <h1 id="vd-title">@(Model.Greeting),<br><em>@(Model.Me.Name)</em></h1>
+        <div class="vd-hero-pills"><span>@(Model.Courses.Count) active courses</span><span>@(Model.Done) / @(Model.Total) activities completed</span></div>
+      </div>
+      <aside class="vd-hero-update" aria-label="Latest course announcement">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18v13H9l-6 4Z"/></svg> Announcements <b>@(Model.AnnouncementCount)</b></span>
+        <strong>@(Model.LatestTitle)</strong>
+        <small>@(Model.LatestDate)</small>
+      </aside>
+    </div>
+    <div class="vd-hero-bottom">
+      <nav aria-label="Dashboard sections"><button type="button" class="is-active" data-vd-scroll="vd-metrics">Overview</button><button type="button" data-vd-scroll="vd-active-courses">Active courses</button></nav>
+      <a class="vd-resume" href="@(Model.ResumeUrl)">@(Model.ResumeUrl == "Catalog" ? "Explore courses" : "Continue learning")<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </div>
+  </section>
+  <div class="vd-body">
+    <section class="vd-metrics" id="vd-metrics" aria-label="Learning overview">
+      <article class="vd-card vd-level vd-rank" aria-label="@(Model.MyRank == null ? "Not ranked yet" : "Ranking " + Model.MyRank + " of " + Model.Field)">
+        <header><span>Ranking</span><small class="vd-metric-chip">@(Model.RankChip)</small></header>
+        <div class="vd-level-track" role="img" aria-label="@(Model.MyRank == null ? "No ranking yet" : "Rank " + Model.MyRank + " of " + Model.Field + " learners")"><i style="width:@(Model.RankFill)%"></i></div>
+        @(Model.RankVisual)
+        <p>@(Model.RankNote)</p>
+        <a class="vd-level-badge" href="/Leaderboard">View leaderboard <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+        <dl class="vd-card-summary">
+          <div><dt>All-time points</dt><dd>@(Model.MyPoints.ToString("N0"))</dd></div>
+          <div><dt>This week</dt><dd>@(Model.WeekRank == null ? "Not yet" : "#" + Model.WeekRank)</dd></div>
+          <div><dt>Learners</dt><dd>@(Model.Field)</dd></div>
+        </dl>
+      </article>
+      <article class="vd-card vd-xp vd-active" aria-label="Active rate @(Model.Rate)%">
+        <header><span>Active rate</span><small class="vd-metric-chip" title="Change from the previous 30 days">@((Model.RateDelta >= 0 ? "+" : "") + Model.RateDelta)%</small></header>
+        <div class="vd-metric-rule" aria-hidden="true"><i style="width:@(Model.Rate)%"></i></div>
+        <div class="vd-main-value">@(Model.Rate)<small>%</small></div>
+        <p>Active on @(Model.Active30) of the last 30 days</p>
+        <div class="vd-toggle" role="group" aria-label="Chart range">
+          <form method="get" action="/Dashboard" style="display:contents"><button type="submit" name="range" value="month" aria-pressed="@(Model.Range == "month" ? "true" : "false")">Monthly</button><button type="submit" name="range" value="year" aria-pressed="@(Model.Range == "year" ? "true" : "false")">Yearly</button></form>
+        </div>
+        @(Model.RateChart)
+      </article>
+      <article class="vd-card vd-progress" aria-label="Activity progress">
+        <header><span>Progress</span><small class="vd-metric-chip">@(Model.Percent)%</small></header>
+        <div class="vd-metric-rule" aria-hidden="true"><i style="width:@(Model.Percent)%"></i></div>
+        <div class="vd-progress-visual">
+          <div class="vd-main-value">@(Model.Done)<small>/ @(Model.Total)</small></div>
+          <div class="vd-mini-bars" role="img" aria-label="XP activity over the last 30 days">@(Model.MiniBars)</div>
+        </div>
+        <p>@(Model.Percent)% of your activities completed</p>
+        <dl class="vd-progress-details">
+          <div><dt>Completed</dt><dd>@(Model.Done)</dd></div>
+          <div><dt>Remaining</dt><dd>@(Math.Max(0, Model.Total - Model.Done))</dd></div>
+          <div><dt>Courses</dt><dd>@(Model.Courses.Count)</dd></div>
+          <button type="button" data-vd-scroll="vd-active-courses">View course progress <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+        </dl>
+      </article>
+    </section>
+    <section class="vd-courses vd-card" id="vd-active-courses" aria-labelledby="vd-courses-title">
+      <header>
+        <h2 id="vd-courses-title">Active Courses <small>@(Model.Shown.Count)</small></h2>
+        <div class="vd-table-actions">
+          <form method="get" action="/Dashboard" style="display:contents"><input type="hidden" name="range" value="@Model.Range"><label><span class="sr-only">Filter courses by status</span>
+            <select id="StatusFilter" name="status"  onchange="this.form.submit()"><option value="all" selected="@(Model.StatusValue == "all")">All statuses</option><option value="progress" selected="@(Model.StatusValue == "progress")">In progress</option><option value="new" selected="@(Model.StatusValue == "new")">Not started</option><option value="complete" selected="@(Model.StatusValue == "complete")">Complete</option><option value="suggested" selected="@(Model.StatusValue == "suggested")">Suggested</option></select>
+          </label>
+          <button type="submit" name="sort" value="@(Model.SortByProgress ? "" : "progress")" aria-pressed="@(Model.SortByProgress ? "true" : "false")" aria-label="@(Model.SortByProgress ? "Sort courses by name" : "Sort courses by progress")"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg> Sort</button></form>
+          <a href="/MyCourses" class="vd-all-courses">All courses <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <span class="vd-course-avatar" aria-label="@(Model.Me.Name)">@(Ui.Initials(Model.Me))</span>
+        </div>
+      </header>
+      <ul class="vd-course-list">
+        @foreach (dynamic r in Model.Shown)
+{
+<li><a class="vd-course-row" href="/Course?id=@r.Id"><span class="vd-course-info"><span class="vd-subject">@Html.Raw(r.Icon)</span><span><strong>@r.Title</strong><small>@r.Detail</small></span></span><span class="vd-course-meter" role="progressbar" aria-label="@r.Title completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@r.Percent"><i style="width:@r.Percent%"></i></span><b class="vd-course-percent">@r.Percent%</b></a></li>
+}
+      </ul>
+      @if (Model.Shown.Count == 0) {<p class="vd-filter-empty">No courses in this view. <a href="/Catalog">Explore courses</a></p>}
+      <footer><span>Progress updates as you complete activities.</span><a href="/Catalog">Explore courses <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></footer>
+    </section>
+  </div>
+</div>
+</div>

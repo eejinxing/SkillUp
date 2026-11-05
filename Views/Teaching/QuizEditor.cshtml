@@ -1,0 +1,94 @@
+@model SkillUp.Models.QuizEditorModel
+@{ ViewData["Title"] = "Question editor"; }
+@if (Model.IsDenied)
+{
+  <div class="empty"><h3>Course access denied</h3><p></p></div>
+}
+else
+{
+<section class="quiz-editor-page" data-locked="@(Model.Locked ? "true" : "false")">
+  <header class="answer-breadcrumb crumb-trail"><a href="/CourseEditor?id=@Model.C.Id"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Course editor</a><h1><i aria-hidden="true">/</i><b>@Model.C.Title</b><i aria-hidden="true">/</i><span class="is-current">Question editor</span></h1><span class="qe-course-status crumb-end">@Model.C.Status</span></header>
+  @if (Model.Deleting) { <p class="qe-review-lock" role="status">Deletion pending review. Withdraw it from My requests before changing questions.</p> }
+  else if (Model.Locked) { <p class="qe-review-lock" role="status">This course is pending review. Withdraw the review in the course editor before changing questions.</p> }
+  <div class="answer-layout">
+    <aside class="answer-ai" aria-label="AI teaching companion">
+      @* Pressing Enter in a field of the editor presses the first button of the form, so that is the Save button. *@
+      <button form="qe-form" type="submit" name="op" value="save" formnovalidate tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);border:0;padding:0"></button>
+      <div class="answer-orb"><img src="/assets/quiz-editor/imgRectangle4.png" alt="Blue and violet AI companion orb"></div>
+      <h2>Lets Go Through It</h2>
+      <div class="answer-ai-conversation" id="qe-ai-history" aria-live="polite">
+        @foreach (var pair in Model.Conversation)
+        {
+          <div class="answer-ai-prompt"><span class="ai-avatar">@Ui.Avatar(Me)</span><small>You &middot; @Ui.ChatTime(pair.PromptAt)</small><p>@pair.Prompt</p></div>
+          <div class="answer-ai-reply"><span class="ai-avatar bot" aria-hidden="true"></span><small>Teaching companion &middot; sample reply &middot; @Ui.ChatTime(pair.ResponseAt)</small><p>@pair.Response</p></div>
+        }
+      </div>
+      @* The companion box belongs to the editor form, so asking keeps what you have typed in the questions. *@
+      <div class="answer-ai-composer">
+        <img class="answer-composer-surface" src="/assets/quiz-editor/imgFrame177.svg" alt="">
+        <label class="sr-only" for="AskBox">Ask the teaching companion</label>
+        <textarea form="qe-form" id="AskBox" name="ask" rows="2" maxlength="1000" placeholder="Ask Anything">@Model.AskText</textarea>
+        <button form="qe-form" type="submit" name="op" value="useContext" formnovalidate class="answer-ai-add" aria-label="Use question context" title="Use question context"><img src="/assets/quiz-editor/imgAddLine.svg" alt=""></button>
+        <button form="qe-form" type="submit" name="op" value="ask" formnovalidate class="answer-ai-send" aria-label="Send companion question"><img src="/assets/quiz-editor/imgVector2.svg" alt=""></button>
+        <p class="form-error" role="alert"></p>
+      </div>
+    </aside>
+    <div class="answer-workspace">
+      <div class="answer-banner" role="img" aria-label="MARATHON"><div class="answer-banner-crop"><img src="/assets/quiz-editor/imgRectangle3.png" alt=""></div></div>
+      <form id="qe-form" class="qe-form" method="post" asp-antiforgery="true" action="/QuizEditor/Edit">
+        <input type="hidden" name="id" value="@Model.C.Id">
+        <fieldset class="qe-editable" disabled="@Model.Locked">
+          <legend class="sr-only">Quiz settings and questions</legend>
+          <div class="qe-settings">
+            <label>Time limit <span>(minutes)</span><input id="TimeLimit" name="timeLimit" type="number" min="1" max="180" step="1" value="@Model.Draft.TimeLimit" /></label>
+            <label class="qe-publish"><input type="checkbox" id="Published" name="published" value="true" checked="@Model.Draft.Published" />Enable quiz for learners</label>
+            <button class="qe-save" type="submit" name="op" value="save" formnovalidate>Save quiz</button>
+            <p>Saving returns the course to Draft. Program Leader approval is required before learners see changes.</p>
+            <span data-quiz-save-status role="status">@Html.Raw(Model.Changed ? "Unsaved changes kept for this session &middot; Save quiz to apply" : "All questions saved")</span>
+          </div>
+          <div id="quiz-questions">
+            @foreach (dynamic q in Model.QuestionList)
+            {
+              <fieldset class="qe-question answer-task quiz-question" data-question="@q.Index">
+                <legend class="sr-only">Question @q.Number</legend>
+                <input type="hidden" name="q@(q.Index).id" value="@q.Id">
+                <header class="answer-task-heading"><span class="answer-task-label">Task @q.Number</span><button class="qe-remove" type="submit" name="op" value="removeQuestion:@q.Index" formnovalidate aria-label="Remove question @q.Number">Remove</button></header>
+                <label class="sr-only" for="Prompt@(q.Index)">Question @q.Number</label>
+                <textarea id="Prompt@(q.Index)" name="q@(q.Index).text" class="qe-prompt" rows="2" maxlength="2000" placeholder="Write your question here">@q.Text</textarea>
+                <div class="qe-options" role="group" aria-label="Answer options for question @q.Number">
+                  @foreach (dynamic o in q.Options)
+                  {
+                    <div class="qe-option"><img class="qe-option-outline" src="/assets/quiz-editor/@o.Outline" alt="">
+                      <input class="qe-correct" type="radio" name="q@(o.Question).answer" value="@o.Index" checked="@o.Correct" aria-label="Question @o.QuestionNumber: option @o.Number is correct">
+                      <label class="sr-only" for="Option@(o.Question)_@(o.Index)">Question @o.QuestionNumber option @o.Number</label>
+                      <input id="Option@(o.Question)_@(o.Index)" name="q@(o.Question).option@(o.Index)" data-option-text="" value="@o.Text" maxlength="500" placeholder="Write option @o.Number" />
+                      <button class="qe-remove-option" type="submit" name="op" value="removeOption:@o.Question:@o.Index" formnovalidate disabled="@(!(bool)o.Removable)" aria-label="Remove question @o.QuestionNumber option @o.Number">×</button>
+                    </div>
+                  }
+                </div>
+                <div class="qe-option-tools"><small>Select the circle beside the correct answer.</small><button type="submit" name="op" value="addOption:@q.Index" formnovalidate disabled="@(!(bool)q.CanAddOption)">＋ Add option</button></div>
+                <div class="qe-question-bottom">
+                  <label class="qe-topic">Topic / skill<input name="q@(q.Index).topic" value="@q.Topic" maxlength="100" placeholder="e.g. Query methods" /></label>
+                  <div class="answer-task-actions">
+                    <button class="answer-glass" type="submit" name="op" value="save" formnovalidate aria-label="Save quiz from question @q.Number" title="Save all quiz questions"><img src="/assets/quiz-editor/imgRectangle1.png" alt="Submit"></button>
+                    <button class="answer-glass" type="submit" name="op" value="hint:@q.Index" formnovalidate aria-label="Question @q.Number authoring hint" title="Question authoring hint"><img src="/assets/quiz-editor/imgRectangle.png" alt="Hint"></button>
+                  </div>
+                </div>
+                @if ((bool)q.HintOpen) { <div class="notice qe-hint" role="note"><p>Test one clear concept per question. Write plausible, distinct options and select one correct answer using the circle beside it.</p><p>The Submit key saves the entire quiz. Add a topic to group learner mistakes in performance reports.</p></div> }
+              </fieldset>
+            }
+            @if (Model.NoQuestions) { <div class="answer-task qe-empty"><h2>No questions yet</h2><p>Add a question or generate a sample draft, then review it before saving.</p></div> }
+          </div>
+          <footer class="qe-editor-actions">
+            <button type="submit" name="op" value="addQuestion" formnovalidate>＋ Add question</button>
+            <button type="submit" name="op" value="sample" formnovalidate>Generate sample AI draft</button>
+            <button type="submit" name="op" value="discard" formnovalidate>Discard changes</button>
+            <button class="qe-delete" type="submit" name="op" value="deleteQuiz" formnovalidate data-confirm="Delete this quiz? Questions will be removed. Add a new quiz before publishing any quiz activity.">Delete quiz</button>
+            <small>Sample drafts are local templates. Check every answer before publishing.</small>
+          </footer>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</section>
+}

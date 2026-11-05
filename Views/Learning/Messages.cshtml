@@ -1,0 +1,154 @@
+@model SkillUp.Models.MessagesModel
+<script>(function () { try { var w = JSON.parse(localStorage.getItem('skillup.messages.widths') || 'null'); if (w && isFinite(w.left) && isFinite(w.right)) { var r = document.documentElement; r.classList.add('sc-sized'); r.style.setProperty('--sc-left', w.left + 'px'); r.style.setProperty('--sc-right', w.right + 'px'); } } catch (e) { } })();</script>
+<header class="page-intro"><p class="pi-title">Stay connected</p><p>Announcements from your instructors and direct messages, all in one place.</p></header>
+<section class="skill-chat sc-v2 sc-workspace @(Model.Selected != null && Ctx.QueryInt("id") != null ? "sc-conversation-open" : "")" data-api="/api/commands/" data-with="@(Model.SelectedId)">
+  <h1 class="sc-sr-only" id="page-title" tabindex="-1">Communication workspace</h1>
+  <aside class="sc-contacts chat-contacts" aria-label="Workspace and contacts">
+    <nav class="sc-channels" aria-label="Course announcement channels">
+      <span class="sc-sidebar-label">COURSES</span>
+      <a href="@(Model.Url(0, 0, Model.SelectedId))" class="sc-channel @(Model.Channel == 0 ? "active" : "")"@(Model.Channel == 0 ? " aria-current=\"true\"" : "")><span class="sc-channel-dot all"></span><span>All announcements</span>@(Model.AllAnnouncementUnread > 0 ? "<small>" + Model.AllAnnouncementUnread + "</small>" : "")</a>
+      @{ var ch_index = -1; }
+@foreach (dynamic ch in Model.ChannelList)
+{
+ch_index++;
+<a href="@ch.Url" class="sc-channel @Html.Raw((bool)ch.Active ? "active" : "")"@Html.Raw((bool)ch.Active ? " aria-current=\"true\"" : "")><span class="sc-channel-dot" style="--channel-color:@ch.Colour"></span><span>@ch.Title</span>@Html.Raw((int)ch.Count > 0 ? "<small>" + ch.Count + "</small>" : "")</a>
+}
+      @if (Model.Courses.Count == 0) {<p class="sc-sidebar-empty">Your courses will appear here.</p>}
+    </nav>
+    <header class="sc-contacts-head"><h2>DIRECT MESSAGES</h2>@if (Model.TotalUnread > 0) {<span class="sc-total" aria-label="@(Model.TotalUnread) unread">@(Model.TotalUnread)</span>}</header>
+    <form class="sc-search" method="get" action="/Messages"><input type="hidden" name="channel" value="@Model.Channel"><input type="hidden" name="announcement" value="@Model.AnnouncementId"><input type="hidden" name="id" value="@Model.SelectedId">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="ContactSearch" name="q" type="search" value="@Model.SearchTerm" aria-label="Search contacts" placeholder="Find a person…" autocomplete="off" />
+      <button class="sr-only" type="submit">Search</button>
+    </form>
+    <div class="sc-contact-scroll contact-list" aria-label="Chat contacts">
+      @{ var c_index = -1; }
+@foreach (dynamic c in Model.ContactList)
+{
+c_index++;
+<a href="@c.Url" class="sc-contact @Html.Raw((bool)c.Active ? "active" : "") @Html.Raw((int)c.Unread > 0 ? "has-unread" : "")"@Html.Raw((bool)c.Active ? " aria-current=\"true\"" : "")>
+            @Html.Raw(c.FaceHtml)
+            <div class="sc-contact-copy">
+              <div class="sc-contact-line"><strong>@c.Name</strong>@Html.Raw(c.TimeHtml)</div>
+              <div class="sc-contact-line"><p>@Html.Raw(c.PreviewHtml)</p>@Html.Raw((int)c.Unread > 0 ? "<span class=\"sc-unread\" aria-label=\"" + c.Unread + " unread messages\"><b>" + c.Unread + "</b></span>" : "")</div>
+            </div>
+          </a>
+}
+      @if (Model.ContactCount == 0) {<p class="sc-contact-empty">@(Model.SearchTerm.Length > 0 ? "No matching contacts." : "No contacts available yet.")</p>}
+    </div>
+    <a class="sc-sidebar-help" href="/Help"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4Z"/></svg> Help &amp; support</a>
+  </aside>
+
+  <section class="sc-announcements" aria-label="Course announcements">
+    <header class="sc-announcements-heading">
+      <span>Workspace <b>/</b> <strong>Announcements</strong></span>
+      @if (Model.CanCompose)
+{<a class="sc-new-announcement button" href="@(Model.Url(Model.Channel, 0, Model.SelectedId))&amp;compose=1#sc-compose">+ New announcement</a>}
+    </header>
+    <div class="sc-announcements-scroll">
+      @if (Model.ShowCompose)
+{
+<form id="sc-compose" class="sc-compose panel" method="post" asp-antiforgery="true" action="/Messages/Publish"><input type="hidden" name="id" value="@Model.SelectedId">
+        <h3 id="sc-compose">New announcement</h3>
+        <label>Course <select name="courseId">@foreach (dynamic c in Model.ComposeCourses) { <option value="@c.Id" selected="@(c.Id == Model.Channel)">@c.Title</option> }</select></label>
+        <label>Title
+          <input id="ComposeTitle" name="title" type="text" value="@Ctx.Typed("title")" maxlength="200" />
+          </label>
+        <label>Message
+          <textarea id="ComposeBody" name="body" rows="5" maxlength="10000">@Ctx.Typed("body")</textarea>
+          </label>
+        <div class="actions"><button class="primary" type="submit">Publish announcement</button><a class="button ghost" href="@(Model.Url(Model.Channel, Model.AnnouncementId, Model.SelectedId))">Cancel</a></div>
+      </form>
+}
+      @if (Model.Announcement != null) {
+      <article class="sc-announcement" data-announcement-id="@(Model.Announcement.Id)">
+        <div class="sc-announcement-eyebrow"><span class="sc-announcement-symbol" aria-hidden="true">&#8599;</span><span>COURSE UPDATE</span><time>@(Ui.Date(Model.Announcement.CreatedAt))</time></div>
+        <h2>@(Model.Announcement.Title)</h2>
+        <div class="sc-announcement-tags">@if (Model.Channel != 0) {<a href="/Course?id=@(Model.ActiveCourse.Id)">@(Model.ActiveCourse.Title)</a>}<span><i aria-hidden="true"></i>Announcement</span></div>
+        @if (Model.Channel != 0) {<div class="sc-announcement-author">@Html.Raw(Model.Author == null ? "" : Model.Face(Model.Author, ""))<div><strong>@(Model.Author?.Name ?? "Former instructor")</strong><small>@(Model.Author?.Role ?? "Course team") &middot; Posted @(Ui.Date(Model.Announcement.CreatedAt))</small></div></div>
+        <p class="sc-announcement-body">@(Model.Announcement.Message)</p>
+        <a class="sc-open-course" href="/Course?id=@(Model.ActiveCourse.Id)">Open course @Html.Raw(MessagesModel.SendIcon)</a>}
+      </article>
+      <section class="sc-comments sc-discussion" aria-labelledby="sc-discussion-title">
+        <header><h3 id="sc-discussion-title">Comments</h3><span>@(Model.CommentCount)</span>@if (Model.CommentCount == 0) {<small>Questions and tips for the class go here.</small>}</header>
+        @if (Model.CommentCount > 0) { @Html.Raw("<ol class=\"sc-comment-list\">") }
+        @{ var cm_index = -1; }
+@foreach (dynamic cm in Model.CommentList)
+{
+cm_index++;
+<li class="sc-comment">
+              <header class="sc-announcement-author sc-comment-author">@Html.Raw(cm.FaceHtml)<div><strong>@cm.Name</strong><small>@cm.Role &middot; <time>@cm.When</time></small></div>
+                @if ((bool)cm.Mine) { <form method="post" asp-antiforgery="true" action="/Messages/DeleteComment" style="display:inline"><input type="hidden" name="announcement" value="@Model.AnnouncementId"><input type="hidden" name="commentId" value="@cm.Id"><button class="sc-comment-delete" type="submit" data-comment-id="@cm.Id" aria-label="Delete your comment" data-confirm="Delete your comment?">Delete</button></form> }
+              </header>
+              <p class="sc-announcement-body sc-comment-body">@cm.Text</p>
+            </li>
+}
+        @if (Model.CommentCount > 0) { @Html.Raw("</ol>") }
+        <form class="sc-comment-form" method="post" asp-antiforgery="true" action="/Messages/Comment"><input type="hidden" name="announcement" value="@Model.AnnouncementId">
+          <div class="sc-comment-box">
+            <div class="sc-comment-input">@Html.Raw(Model.Face(Me, ""))<label class="sr-only" for="CommentBox">Write a comment</label><textarea placeholder="@Model.CommentPlaceholder" id="CommentBox" name="comment" rows="1" maxlength="1000"></textarea></div>
+            <div class="sc-comment-bar"><span class="sc-comment-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4Z"/></svg><span>Visible to everyone in @(Model.ActiveCourse.Title)</span></span><button class="sc-comment-post" type="submit">Post<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 4.5 20 12 4.5 19.5 7.5 12Z"/><path d="M7.5 12H13"/></svg></button></div>
+          </div>
+        </form>
+      </section>
+      } else {
+      <div class="sc-announcement-empty"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4Z"/></svg></span><h2>No announcements yet</h2><p>@(Model.Channel != 0 ? "Updates from this course will appear here." : "Course announcements will appear here when your teaching team shares an update.")</p></div>
+      }
+      @if (Model.ChannelAnnouncements.Count > 1) {
+      <section class="sc-announcement-list" aria-label="All announcements in this channel">
+        <header><h3>All updates</h3><span>@(Model.ChannelAnnouncements.Count)</span></header>
+        @{ var a_index = -1; }
+@foreach (dynamic a in Model.AnnouncementList)
+{
+a_index++;
+<a href="@a.Url" class="@Html.Raw((bool)a.Active ? "active" : "")"@Html.Raw((bool)a.Active ? " aria-current=\"true\"" : "")><span><strong>@a.Title</strong><small>@a.Course &middot; @a.Date</small></span>@Html.Raw(MessagesModel.SendIcon)</a>
+}
+      </section>
+      }
+      @if (Model.ActiveCourse != null && Model.Channel != 0) {
+      <section class="sc-course-context">
+        <header><h3>In this course</h3><a href="/Course?id=@(Model.ActiveCourse.Id)">View course</a></header>
+        <div>
+          @{ var l_index = -1; }
+@foreach (dynamic l in Model.CourseActivities)
+{
+l_index++;
+<a href="/Course?id=@l.CourseId"><span class="sc-activity-index">@Html.Raw((l_index + 1).ToString("00"))</span><span><strong>@l.Title</strong><small>@l.Type &middot; @l.Minutes min</small></span>@Html.Raw(MessagesModel.SendIcon)</a>
+}
+          @if (Model.ActivityCount == 0) {<p>No activities published yet.</p>}
+        </div>
+      </section>
+      }
+      <p class="sc-announcement-footnote">Course updates stay here. Private messages stay in your conversation.</p>
+    </div>
+  </section>
+
+  <section class="sc-pane chat-pane" aria-label="Conversation">
+    @if (Model.Selected != null) {
+    <header class="sc-chat-heading">
+      <a class="sc-back" href="/Messages" aria-label="Back to chats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></a>
+      @Html.Raw(Model.Face(Model.Selected, "md"))
+      <div class="sc-heading-copy"><h2>@(Model.Selected.Name)</h2><small>@(Model.Selected.Role)</small></div>
+      @if (Model.Unread > 0) { <form method="post" asp-antiforgery="true" action="/Messages/MarkRead" style="display:inline"><input type="hidden" name="from" value="@Model.SelectedId"><button class="sc-mark-read" type="submit">Mark as read</button></form> }
+      @if (Model.Unread == 0) {<span class="sc-read-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Up to date</span>}
+      <div class="sc-call-actions">
+        <button type="button" data-start-call="voice" data-call-peer="@(Model.Selected.Id)" data-call-name="@(Model.Selected.Name)" data-call-role="@(Model.Selected.Role)" aria-label="Start voice call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 1 1 5-3 2c2 3 3 4 6 6l2-3 5 1 1 4c-1 4-6 3-11-1S0 5 5 3Z"/></svg></button>
+        <button type="button" data-start-call="video" data-call-peer="@(Model.Selected.Id)" data-call-name="@(Model.Selected.Name)" data-call-role="@(Model.Selected.Role)" aria-label="Start video call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="12" height="12" rx="3"/><path d="m15 10 6-4v12l-6-4"/></svg></button>
+      </div>
+    </header>
+    <div class="sc-messages bubbles" id="conversation-messages" role="log" aria-label="Messages with @(Model.Selected.Name)" aria-live="polite" tabindex="0">
+      <div class="sc-thread">@(Model.Thread)</div>
+    </div>
+    <form class="sc-composer" method="post" asp-antiforgery="true" action="/Messages/Send"><input type="hidden" name="to" value="@Model.SelectedId">
+      <div class="sc-composer-box">
+        <label class="sc-sr-only" for="MessageBox">Message</label>
+        <textarea placeholder="@Model.MessagePlaceholder" id="MessageBox" name="text" rows="1" aria-describedby="chat-send-help" maxlength="4000"></textarea>
+        <button class="sc-send" type="submit" aria-label="Send message" title="Send message">@Html.Raw(MessagesModel.SendIcon)</button>
+      </div>
+      <small id="chat-send-help">Enter to send &middot; Shift + Enter for a new line</small>
+    </form>
+    } else {
+    <div class="sc-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4Z"/></svg><h2>No conversation yet</h2><p>Active contacts will appear on the left.</p></div>
+    }
+  </section>
+</section>

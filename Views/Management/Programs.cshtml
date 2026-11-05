@@ -1,0 +1,130 @@
+@model SkillUp.Models.ProgramsModel
+<section class="program-management@(Model.P != null ? " pm-editor" : "")">@(Model.Rail)<div class="pm-main">
+
+@if (Model.IsDenied)
+{<h1>Program access denied</h1><p>This program is not assigned to you or has been removed.</p><a href="/Programs">&larr; Program Management</a>}
+
+@if (Model.ShowProgramForm)
+{
+<form class="panel pm-dialog" method="post" asp-antiforgery="true" action="/Programs/Save"><input type="hidden" name="id" value="@Model.FormProgram?.Id">
+  <h2>@(Model.FormProgram == null ? "Create program" : "Edit program")</h2>
+  <p class="dlg-note">A program groups courses into a learning path that learners follow in order.</p>
+  <label>Program name<input id="ProgramName" name="name" type="text" value="@Ctx.Typed("name", Model.FormProgram?.Name)" autocomplete="off" placeholder="e.g. Data & Development" maxlength="80" /></label>
+  <label>Description<textarea id="ProgramDescription" name="description" rows="4" placeholder="What will learners be able to do after this program?" maxlength="400">@Ctx.Typed("description", Model.FormProgram?.Description)</textarea></label>
+  <label class="check dlg-switch"><input type="checkbox" id="ProgramPublished" name="published" value="true" checked="@(Ctx.Posted.Count > 0 ? Ctx.Typed("published") == "true" : (Model.FormProgram?.Published ?? false))" /><span><b>Publish learning path</b><small>Published programs appear in learners' learning paths.</small></span></label>
+  <div class="actions"><button class="primary" type="submit">Save program</button><a class="button ghost" href="@(Model.HomeUrl)">Cancel</a></div>
+</form>
+}
+@if (Model.ShowMenu)
+{
+  <h2>@(Model.MenuProgram?.Name)</h2>
+  <p>Manage this program and its assigned courses.</p>
+  <div class="actions"><a class="button" href="/Programs?id=@(Model.MenuProgram?.Id)">Manage courses</a><a class="button" href="/Programs?edit=@(Model.MenuProgram?.Id)">Edit details</a><a class="button ghost danger" href="/Programs?delete=@(Model.MenuProgram?.Id)">Delete program</a><a class="button ghost" href="/Programs">Close</a></div>
+}
+@if (Model.ShowDelete)
+{
+<form class="panel pm-dialog" method="post" asp-antiforgery="true" action="/Programs/Delete"><input type="hidden" name="id" value="@Model.DeleteId">
+  <h2>Delete program?</h2>
+  <p>Only programs with no courses can be deleted.</p>
+  <div class="actions"><button class="danger" type="submit">Delete program</button><a class="button ghost" href="@(Model.HomeUrl)">Cancel</a></div>
+</form>
+}
+@if (Model.ShowHelp)
+{
+  <h2>Manage programs</h2>
+  <p>Create a program, assign its courses, then choose the order of its learning path.</p>
+  <p>Open a program to add or remove courses from its path. Save path applies the new sequence. Removing a course from the path keeps its program assignment.</p>
+  <p>Use Add existing course or Move program to transfer a course between programs you manage. Materials, enrolments and student progress stay with the course.</p>
+  <div class="actions"><a class="button ghost" href="/Programs">Close</a></div>
+}
+@if (Model.ShowMove)
+{
+<form class="panel pm-dialog" method="post" asp-antiforgery="true" action="/Programs/Move"><input type="hidden" name="programId" value="@Model.P.Id"><input type="hidden" name="adding" value="@(Model.MoveAdding ? "true" : "false")"><input type="hidden" name="movingId" value="@Model.MovingId">
+  <h2>@(Model.MoveTitle)</h2>
+  @if (Model.MoveBlocked)
+{<p>@(Model.MoveMessage)</p><div class="actions">@(Model.MoveAction)<a class="button ghost" href="@(Model.HomeUrl)">Cancel</a></div>}
+  @if (!Model.MoveBlocked)
+{
+
+    <label>@(Model.MoveLabel)<select name="choice">@foreach (dynamic o in Model.MoveChoices) { <option value="@o.Value">@o.Text</option> }</select></label>
+    <label class="check"><input type="checkbox" name="includeInPath" value="true" checked />Include in the target learning path</label>
+    <p class="notice">This moves the course assignment to the selected program. Materials, publication status, enrolments and student progress are retained. Courses awaiting review must be withdrawn first.</p>
+    <div class="actions"><button class="primary" type="submit">Move course</button><a class="button ghost" href="@(Model.HomeUrl)">Cancel</a></div>
+  
+}
+</form>
+}
+
+@if (!Model.IsEditor && !Model.IsDenied)
+{
+  <header class="pm-header"><div><h1>Program Management</h1><p>@(Ui.Plural(Model.Rows.Count, "managed program"))</p></div>
+    <form class="pm-header-tools" method="get" action="/Programs">
+      <label><span class="sr-only">Search programs</span><input id="SearchBox" name="q" type="search" value="@Model.SearchTerm" aria-label="Search programs" placeholder="Search programs…" /></label>
+      <button class="sr-only" type="submit">Search</button>
+      <a class="pm-create button" href="/Programs?edit=new">+ New program</a>
+    </form>
+  </header>
+  <div class="pm-grid" id="pm-program-grid">
+    @(Model.Cards)
+    <article class="pm-new"><div class="pm-new-art" aria-hidden="true">@ProgramArt.Plane()</div><h2>New Program</h2><p>Create a program and organise courses into a clear learning path.</p>
+      <div><a class="button" data-action="editProgram" href="/Programs?edit=new">＋ Add new program</a><a class="button" href="/Programs?help=1">Learn more</a></div></article>
+  </div>
+  @if (Model.NoMatches) {<p class="pm-no-results" id="pm-no-results">No matching programs. Try another name.</p>}
+}
+
+@if (Model.IsEditor)
+{
+  <a class="pm-back" href="/Programs">&larr; Program Management</a>
+  <header class="pm-header"><div><h1>@(Model.P?.Name)</h1><p>Manage assigned courses and the order of this learning path.</p></div>
+    <div><a class="button" href="@Model.HomeUrl&edit=1">Edit program details</a><form method="post" asp-antiforgery="true" action="/Programs/SavePath" style="display:inline"><input type="hidden" name="programId" value="@Model.P.Id"><button class="pm-save" type="submit" aria-label="Save learning path">Save path</button></form></div></header>
+  <div class="pm-detail-layout">
+    <aside class="pm-detail-summary">
+      <div class="pm-cover"><span class="pm-native" aria-hidden="true"><img src="/assets/program-management/@(Model.Cover)" alt=""></span></div>
+      <h2>@(Model.P?.Name)</h2><p>@(Model.P?.Description)</p>
+      <dl><div><dt>Program status</dt><dd>@(Model.P?.Published == true ? "Published" : "Draft")</dd></div><div><dt>Assigned courses</dt><dd>@(Model.Assigned.Count)</dd></div><div><dt>Courses in saved path</dt><dd>@(Model.SavedPath.Count)</dd></div><div><dt>Enrolments</dt><dd>@(Model.Enrolments)</dd></div></dl>
+      <a href="/CourseEditor?program=@(Model.P?.Id)">＋ Create a course in this program</a>
+      <a class="button" href="@Model.HomeUrl&add=1">Add existing course</a>
+      <a class="pm-delete button" href="@Model.HomeUrl&delete=1">Delete program</a>
+    </aside>
+    <div class="pm-detail-content">
+      <section class="pm-path-section"><h2>Learning path</h2>
+        <p class="pm-help">Choose and order the courses learners see in this path. Removing a course here keeps it assigned to this program. Only published courses are visible to learners.</p>
+        <div id="pm-path-form">
+          <div id="pm-path-rows">
+            @{ var r_index = -1; }
+@foreach (dynamic r in Model.PathItems)
+{
+r_index++;
+<div class="pm-course-row" data-course="@r.Id"><span class="pm-order">@Html.Raw((r_index + 1).ToString("00"))</span><div><h3>@r.Title</h3><p>@r.Status &middot; @r.Instructor</p></div>
+                  <div class="pm-row-actions"><form method="post" asp-antiforgery="true" action="/Programs/Path" style="display:contents"><input type="hidden" name="programId" value="@Model.P.Id"><input type="hidden" name="course" value="@r.Id"><button type="submit" name="op" value="up" disabled="@(r_index == 0)" aria-label="Move @r.Title up">↑</button><button type="submit" name="op" value="down" disabled="@(r_index >= Model.Path.Count() - 1)" aria-label="Move @r.Title down">↓</button><button type="submit" name="op" value="remove" aria-label="Remove @r.Title from learning path">Remove</button></form><a href="/CourseEditor?id=@r.Id" aria-label="Edit @r.Title">↗</a></div></div>
+}
+            @if (Model.Path.Count == 0) {<p class="pm-empty">No courses selected. Add an assigned course below to start this path.</p>}
+          </div>
+          <p class="pm-draft-state" role="status">@(Model.DraftState)</p>
+          <form method="post" asp-antiforgery="true" action="/Programs/DiscardPath" style="display:inline"><input type="hidden" name="programId" value="@Model.P.Id"><button class="pm-discard" type="submit">Discard path changes</button></form>
+        </div>
+      </section>
+      <section class="pm-available"><h2>Other courses in this program</h2><p class="pm-help">Add these to the learning path, or move them to another program you manage.</p>
+        <div id="pm-available-rows">
+          @{ var a_index = -1; }
+@foreach (dynamic a in Model.AvailableItems)
+{
+a_index++;
+<div class="pm-available-course"><div><strong>@a.Title</strong><small>@a.Status</small></div><form method="post" asp-antiforgery="true" action="/Programs/Path" style="display:contents"><input type="hidden" name="programId" value="@Model.P.Id"><input type="hidden" name="course" value="@a.Id"><button type="submit" name="op" value="add" aria-label="Add @a.Title to learning path">＋ Add to path</button></form><a class="button" href="@(Model.HomeUrl)&move=@a.Id" aria-label="Move @a.Title to a program">Move program</a></div>
+}
+          @if (Model.Available.Count == 0) {<p class="pm-empty">Every assigned course is included in this path.</p>}
+        </div>
+      </section>
+      <section class="pm-assigned"><header><h2>All assigned courses</h2><span>@(Model.Assigned.Count)</span></header>
+        @{ var s_index = -1; }
+@foreach (dynamic s in Model.AssignedItems)
+{
+s_index++;
+<div><a href="/CourseEditor?id=@s.Id">@s.Title</a><span>@s.Status</span><a class="button" href="@(Model.HomeUrl)&move=@s.Id" aria-label="Move @s.Title to another program">Move program</a></div>
+}
+        @if (Model.Assigned.Count == 0) {<p class="pm-empty">No assigned courses yet. Create one or add an existing course.</p>}
+      </section>
+    </div>
+  </div>
+}
+</div></section>

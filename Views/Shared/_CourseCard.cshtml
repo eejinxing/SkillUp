@@ -1,0 +1,28 @@
+@* A course tile: cover art, level bars, status, instructor, activity count, and the learner's progress when enrolled.
+   Manage: the staff view, which links to the course editor and shows the course status instead of Enrolled/Open. *@
+@model CourseCardModel
+@{
+    var c = Model.Course;
+    var manage = Model.Manage;
+    var url = (manage ? "/CourseEditor?id=" : "/Course?id=") + c.Id;
+    var level = c.Difficulty == "Advanced" ? 3 : c.Difficulty == "Intermediate" ? 2 : c.Difficulty == "Beginner" ? 1 : 0;
+    var instructor = Data.User(c.InstructorId)?.Name ?? "Former user";
+    var enrolled = Me != null && Data.Enrollments.Any(x => x.UserId == Me.Id && x.CourseId == c.Id);
+}
+<article class="course-card figma-course-tile">
+  <a class="figma-course-cover" href="@url" aria-label="@(manage ? "Manage" : "View") @c.Title">
+    <img src="@Ctx.CourseArt(c)" alt="" loading="eager">
+    <span class="cc-level" data-level="@((c.Difficulty ?? "").ToLowerInvariant())" role="img" aria-label="@c.Difficulty difficulty" title="@c.Difficulty difficulty">@for (var i = 0; i < 3; i++) { <span class="cc-level-bar@(i < level ? " is-active" : "")" style="--i:@i" aria-hidden="true"></span> }</span>
+  </a>
+  <div class="course-body">
+    <div class="row between">
+      <small>@c.Difficulty &middot; @c.Duration weeks</small>
+      @Ui.Tag(manage ? c.Status : enrolled ? "Enrolled" : "Open")
+    </div>
+    <h3>@c.Title</h3>
+    <p>@c.Description</p>
+    <small class="cc-by"><span class="cc-face" aria-hidden="true">@Ui.Initials(instructor)</span>By @instructor<span class="cc-dot" aria-hidden="true"></span>@Data.LessonsOf(c.Id).Count activities</small>
+    @if (enrolled && !manage) { @Ui.Bar(Ctx.Progress(Me.Id, c.Id)) }
+    <div class="actions"><a class="button @(enrolled ? "primary" : "")" href="@url">@(manage ? "Manage course" : enrolled ? "Continue learning" : "View course") &rarr;</a></div>
+  </div>
+</article>

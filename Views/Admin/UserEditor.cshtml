@@ -1,0 +1,98 @@
+@model SkillUp.Models.UserEditorModel
+@if (Model.IsMissing)
+{<section class="user-editor-page ue-missing"><h1>User not found</h1><p>This account may have been removed.</p><a href="/Users">&larr; User accounts</a></section>}
+
+@if (Model.IsCreate)
+{
+<section class="user-editor-page ue-account-form ue-create" data-account="new">
+  <a class="ue-back" href="/Users">&larr; User accounts</a>
+  <header class="ue-header"><div><h1>Create user account</h1><p>Add their information, then choose a role and account status.</p></div></header>
+  <form id="user-editor-form" method="post" asp-antiforgery="true" action="/UserEditor/Create">
+    <details class="ue-create-panel" open><summary><h2>Information</h2><span>@Html.Raw(UserEditorModel.Icon("chevron"))</span></summary>
+      <div class="ue-create-rows">
+        <label class="ue-create-row" data-ue-field="name"><span class="ue-create-label">@Html.Raw(UserEditorModel.Icon("name"))<span>Full name<b aria-hidden="true"> *</b></span></span><span class="ue-create-value"><input id="NewName" name="name" type="text" value="@Ctx.Typed("name")" placeholder="Enter full name" autocomplete="off" maxlength="100" /></span><span class="ue-create-pencil">@Html.Raw(UserEditorModel.Icon("edit"))</span></label>
+        <label class="ue-create-row" data-ue-field="username"><span class="ue-create-label">@Html.Raw(UserEditorModel.Icon("username"))<span>Username<b aria-hidden="true"> *</b></span></span><span class="ue-create-value"><input id="NewUsername" name="username" type="text" value="@Ctx.Typed("username")" placeholder="Choose a username" autocomplete="off" spellcheck="false" maxlength="50" /></span><span class="ue-create-pencil">@Html.Raw(UserEditorModel.Icon("edit"))</span></label>
+        <label class="ue-create-row" data-ue-field="email"><span class="ue-create-label">@Html.Raw(UserEditorModel.Icon("email"))<span>Email<b aria-hidden="true"> *</b></span></span><span class="ue-create-value"><input id="NewEmail" name="email" type="email" value="@Ctx.Typed("email")" placeholder="name@@example.com" autocomplete="off" spellcheck="false" maxlength="150" /></span><span class="ue-create-pencil">@Html.Raw(UserEditorModel.Icon("edit"))</span></label>
+        <label class="ue-create-row" data-ue-field="bio"><span class="ue-create-label">@Html.Raw(UserEditorModel.Icon("bio"))<span>About the user</span></span><span class="ue-create-value"><textarea id="NewBio" name="bio" rows="2" placeholder="Profile or application details (optional)" maxlength="1000">@Ctx.Typed("bio")</textarea></span><span class="ue-create-pencil">@Html.Raw(UserEditorModel.Icon("edit"))</span></label>
+      </div>
+    </details>
+    <details class="ue-create-panel" open><summary><h2>Account &amp; access</h2><span>@Html.Raw(UserEditorModel.Icon("chevron"))</span></summary>
+      <div class="ue-create-rows">
+        <label class="ue-create-row" data-ue-field="role"><span class="ue-create-label">@Html.Raw(UserEditorModel.Icon("role"))<span>Role<b aria-hidden="true"> *</b></span></span><span class="ue-create-value"><select id="NewRole" name="role" ><option value="Learner" selected="@(Ctx.Typed("role", "Learner") == "Learner")">Learner</option><option value="Instructor" selected="@(Ctx.Typed("role", "Learner") == "Instructor")">Instructor</option><option value="Program Leader" selected="@(Ctx.Typed("role", "Learner") == "Program Leader")">Program Leader</option><option value="Admin" selected="@(Ctx.Typed("role", "Learner") == "Admin")">Admin</option></select></span><span class="ue-create-pencil">@Html.Raw(UserEditorModel.Icon("edit"))</span></label>
+        <label class="ue-create-row" data-ue-field="status"><span class="ue-create-label">@Html.Raw(UserEditorModel.Icon("status"))<span>Account status<b aria-hidden="true"> *</b></span></span><span class="ue-create-value"><select id="NewStatus" name="status" ><option value="Active" selected="@(Ctx.Typed("status", "Active") == "Active")">Active</option><option value="Inactive" selected="@(Ctx.Typed("status", "Active") == "Inactive")">Inactive</option><option value="Pending" selected="@(Ctx.Typed("status", "Active") == "Pending")">Pending</option></select></span><span class="ue-create-pencil">@Html.Raw(UserEditorModel.Icon("edit"))</span></label>
+        <label class="ue-create-row" data-ue-field="password"><span class="ue-create-label">@Html.Raw(UserEditorModel.Icon("password"))<span>Temporary password<b aria-hidden="true"> *</b></span></span><span class="ue-create-value"><input id="NewPassword" name="password" type="password"  placeholder="8+ characters, a capital, a number and a symbol" autocomplete="new-password" aria-describedby="ue-password-help" /></span><span class="ue-create-pencil">@Html.Raw(UserEditorModel.Icon("edit"))</span></label>
+        <div class="ue-create-row ue-create-readonly"><span class="ue-create-label">@Html.Raw(UserEditorModel.Icon("id"))<span>User ID</span></span><span class="ue-create-value">Assigned when the account is created</span></div>
+      </div>
+      <p id="ue-password-help" class="ue-create-help">Share the temporary password with the user.</p>
+    </details>
+    <div class="ue-create-bottom"><div><p class="ue-draft-state" role="status">Required fields are marked with *.</p></div>
+      <div class="ue-create-actions"><a class="ue-create-discard" href="/UserEditor?id=new">Discard changes</a><button class="ue-save" type="submit" aria-label="Create account">Create account</button></div></div>
+  </form>
+</section>
+}
+
+@if (Model.IsManage)
+{
+<section class="user-editor-page ue-course-editor ue-edit" data-account="@(Model.U?.Id)">
+  <a class="ue-back" href="/Users">&larr; User accounts</a>
+  <header class="ue-header"><span class="uem-title-icon">@Html.Raw(UserEditorModel.Icon("id"))</span><h1>@(Model.U?.Name)</h1><button form="ue-form" class="ue-save" type="submit" aria-label="Save account"><span aria-hidden="true">+</span> Save</button></header>
+  <div class="uem-layout@(Model.Tab == "audit" ? " uem-layout-audit" : "")">
+    @if (Model.Tab != "audit") {<aside class="uem-summary" aria-label="Account summary">@(Model.Summary)</aside>}
+    <div class="uem-content">
+      <nav class="ue-tabs uem-tabs" aria-label="User detail tabs">@(Model.Tabs)</nav>
+      @if (Model.ShowInfo)
+{<form id="ue-form" method="post" asp-antiforgery="true" action="/UserEditor/Save"><input type="hidden" name="id" value="@Model.U.Id"><div id="user-editor-form">
+        <fieldset class="uem-fields"><legend class="sr-only">Account information</legend>
+          <div class="uem-field-grid">
+            <label class="uem-field"><span>Full name<b aria-hidden="true"> *</b></span><input id="EditName" name="name" type="text" value="@Ctx.Typed("name", Model.U.Name)" autocomplete="off" maxlength="100" /></label>
+            <label class="uem-field"><span>Role<b aria-hidden="true"> *</b></span><select id="EditRole" name="role" ><option value="Learner" selected="@(Ctx.Typed("role", Model.U.Role) == "Learner")">Learner</option><option value="Instructor" selected="@(Ctx.Typed("role", Model.U.Role) == "Instructor")">Instructor</option><option value="Program Leader" selected="@(Ctx.Typed("role", Model.U.Role) == "Program Leader")">Program Leader</option><option value="Admin" selected="@(Ctx.Typed("role", Model.U.Role) == "Admin")">Admin</option></select></label>
+            <label class="uem-field"><span>Account status<b aria-hidden="true"> *</b></span><select id="EditStatus" name="status" ><option value="Active" selected="@(Ctx.Typed("status", Model.U.Status) == "Active")">Active</option><option value="Inactive" selected="@(Ctx.Typed("status", Model.U.Status) == "Inactive")">Inactive</option><option value="Pending" selected="@(Ctx.Typed("status", Model.U.Status) == "Pending")">Pending</option></select></label>
+            <label class="uem-field"><span>Email address<b aria-hidden="true"> *</b></span><input id="EditEmail" name="email" type="email" value="@Ctx.Typed("email", Model.U.Email)" autocomplete="off" spellcheck="false" maxlength="150" /></label>
+            <label class="uem-field"><span>Username<b aria-hidden="true"> *</b></span><input id="EditUsername" name="username" type="text" value="@Ctx.Typed("username", Model.U.Username)" autocomplete="off" spellcheck="false" maxlength="50" /></label>
+            <label class="uem-field uem-readonly"><span>User ID</span><input aria-label="User ID" value="@(Model.U?.Id)" readonly aria-readonly="true"></label>
+          </div>
+          <label class="uem-field uem-bio"><span>About the user</span><textarea id="EditBio" name="bio" rows="4" placeholder="Profile or application details (optional)" maxlength="1000">@Ctx.Typed("bio", Model.U.Bio)</textarea></label>
+          <div class="uem-field-grid uem-dates"><label class="uem-field uem-readonly"><span>Joined</span><input aria-label="Joined" value="@(Model.Joined)" readonly aria-readonly="true"></label><label class="uem-field uem-readonly"><span>Last active</span><input aria-label="Last active" value="@(Model.LastActive)" readonly aria-readonly="true"></label></div>
+        </fieldset>
+        <p class="ue-draft-state" role="status">Save to apply account information and access changes.</p>
+        <div class="uem-form-actions"><button class="uem-save-changes" type="submit">Save changes</button><a class="button" href="/UserEditor?id=@Model.U.Id">Discard changes</a></div>
+      </div></form>}
+      @if (Model.ShowInfo)
+{
+        @if (Model.ShowResp)
+{
+        <section class="uem-transfer" aria-labelledby="uem-transfer-title">
+          <header><h2 id="uem-transfer-title">Responsibilities</h2><p>Only the assigned instructor or Program Leader can manage these. Transfer them before changing this account&rsquo;s role, deactivating it or deleting it.</p></header>
+          @if (Model.ShowCourseTransfer)
+{
+          <div class="uem-transfer-row">
+            <div class="uem-transfer-what"><strong>Teaches @(Ui.Plural(Model.TeachCount, "course"))</strong><p>@(Model.TeachList)</p></div>
+            <div class="uem-transfer-action">
+              @if (Model.HasInstructors) { <select name="toId" aria-label="Transfer courses to" form="ue-courses">@foreach (dynamic t in Model.CourseTargets) { <option value="@t.Id">@t.Name</option> }</select> }
+              @if (Model.HasInstructors) { <form id="ue-courses" method="post" asp-antiforgery="true" action="/UserEditor/Transfer"><input type="hidden" name="id" value="@Model.U.Id"><input type="hidden" name="what" value="courses"><button type="submit" data-confirm="Make the selected instructor the instructor of all these courses?">Transfer courses</button></form> }
+              @(Model.CourseNoTarget)
+            </div>
+          </div>
+          }
+          @if (Model.ShowProgramTransfer)
+{
+          <div class="uem-transfer-row">
+            <div class="uem-transfer-what"><strong>Leads @(Ui.Plural(Model.LeadCount, "program"))</strong><p>@(Model.LeadList)</p></div>
+            <div class="uem-transfer-action">
+              @if (Model.HasLeaders) { <select name="toId" aria-label="Transfer programs to" form="ue-programs">@foreach (dynamic t in Model.ProgramTargets) { <option value="@t.Id">@t.Name</option> }</select> }
+              @if (Model.HasLeaders) { <form id="ue-programs" method="post" asp-antiforgery="true" action="/UserEditor/Transfer"><input type="hidden" name="id" value="@Model.U.Id"><input type="hidden" name="what" value="programs"><button type="submit" data-confirm="Make the selected Program Leader the leader of all these programs? They will also review the programs' course requests.">Transfer programs</button></form> }
+              @(Model.ProgramNoTarget)
+            </div>
+          </div>
+          }
+        </section>
+        }
+        <section class="uem-access-panel" aria-label="Account access"><div><small>ACCOUNT ACCESS</small><p>@(Model.AccessText)</p></div><form method="post" asp-antiforgery="true" action="/UserEditor/Status" style="display:contents"><input type="hidden" name="id" value="@Model.U.Id"><button type="submit" disabled="@Model.Self" data-confirm="@Model.StatusConfirm">@Model.StatusText</button></form></section>
+        <section class="uem-recent"><header><h2>Recent account activity</h2><a href="/UserEditor?id=@(Model.U?.Id)&amp;tab=audit">View all &#8599;</a></header>@(Model.Recent)</section>
+        <section class="uem-danger"><div><h2>Account actions</h2><p>@(Model.Self ? "You cannot deactivate or delete your own administrator account." : "Permanently remove this user account from the workspace.")</p></div><form method="post" asp-antiforgery="true" action="/UserEditor/Delete" style="display:contents"><input type="hidden" name="id" value="@Model.U.Id"><button class="ue-delete" type="submit" disabled="@Model.Self" data-confirm="Delete this user account? This removes the account and its enrolments. Assigned staff must be reassigned first.">Delete account</button></form></section>
+      }
+      @(Model.TabPanel)
+    </div>
+  </div>
+</section>
+}

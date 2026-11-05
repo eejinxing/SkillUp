@@ -1,0 +1,48 @@
+@model SkillUp.Models.UsersModel
+<section class="admin-users-page au-market" data-view="@(Model.View)" aria-labelledby="au-title">
+  @(Model.Network)
+  <header class="au-header"><div><a class="au-back" href="/Dashboard">@Html.Raw(UsersModel.Svg("back"))Overview</a><h1 id="au-title" tabindex="-1">User accounts</h1><p>@(Data.Users.Count) users in your workspace</p></div><a class="au-add" href="/UserEditor?id=new"><span class="au-add-icon"><img src="/assets/admin-users/imgFamiconsAddCircleOutline.svg" alt=""></span>Add User</a></header>
+  @if (Model.Target != null)
+{
+<div class="panel au-actions-dialog">
+    <h2>@(Model.Target?.Name)</h2>
+    <p>@(Model.Target?.Email)<br>@(Model.Target?.Role) &middot; @(Model.Target?.Status)</p>
+    <div class="actions"><a class="button primary" href="/UserEditor?id=@(Model.Target?.Id)">View account</a><a class="button ghost" href="/UserEditor?id=@(Model.Target?.Id)">Edit account</a>@if (Model.Target.Status == "Pending") { <form method="post" asp-antiforgery="true" action="/Users/Approve" style="display:inline"><input type="hidden" name="id" value="@Model.Target.Id"><button class="ghost" type="submit">Approve</button></form> }@if (Model.Target.Id != Me.Id) { <form method="post" asp-antiforgery="true" action="/Users/Delete" style="display:inline"><input type="hidden" name="id" value="@Model.Target.Id"><button class="danger ghost" type="submit" data-confirm="Delete this user account? This removes the account and its enrolments. Assigned staff must be reassigned first.">Delete account</button></form> }<a class="button ghost" href="@(Model.ListUrl())">Close</a></div>
+  </div>
+}
+  <form id="au-form" class="au-toolbar" method="get" action="/Users">
+    <label class="au-search-wrap">@Html.Raw(UsersModel.Svg("search"))<span class="sr-only">Search users</span><input id="SearchBox" name="q" type="search" value="@Model.Term" aria-label="Search users" placeholder="Search by name, email or username" /></label>
+    <label class="au-sort">@Html.Raw(UsersModel.Svg("sort"))<span class="sr-only">Sort users</span><select id="SortList" name="sort" aria-label="Sort users" onchange="this.form.submit()"><option value="name" selected="@(Model.Sort == "name")">Name A–Z</option><option value="name-desc" selected="@(Model.Sort == "name-desc")">Name Z–A</option><option value="role" selected="@(Model.Sort == "role")">Role</option><option value="status" selected="@(Model.Sort == "status")">Status</option></select></label>
+    <div class="au-view-toggle" role="group" aria-label="Layout"><a role="button" href="@Model.ViewUrl("grid")" aria-pressed="@(Model.View == "grid" ? "true" : "false")" aria-label="Grid view">@Html.Raw(UsersModel.Svg("grid"))</a><a role="button" href="@Model.ViewUrl("list")" aria-pressed="@(Model.View == "list" ? "true" : "false")" aria-label="List view">@Html.Raw(UsersModel.Svg("list"))</a></div>
+    <button class="sr-only" type="submit">Search</button><input type="hidden" name="view" value="@Model.View">
+  </form>
+  <div class="au-body">
+    <aside class="au-sidebar" aria-label="Filters">
+      <details class="au-facet" open><summary>Role@Html.Raw(UsersModel.Svg("chevron"))</summary>
+        <label class="au-select"><span class="sr-only">Filter role</span><select form="au-form" id="RoleList" name="role" aria-label="Filter role" onchange="this.form.submit()"><option value="" selected="@(Model.Role == "")">All roles</option><option value="Learner" selected="@(Model.Role == "Learner")">Learner</option><option value="Instructor" selected="@(Model.Role == "Instructor")">Instructor</option><option value="Program Leader" selected="@(Model.Role == "Program Leader")">Program Leader</option><option value="Admin" selected="@(Model.Role == "Admin")">Admin</option></select>@Html.Raw(UsersModel.Svg("chevron"))</label>
+        <div class="au-facet-list">
+          @foreach (dynamic f in Model.RoleFacets)
+{
+<a role="button" class="au-facet-row" href="@Model.RoleFacetUrl((string)f.Role)" aria-pressed="@f.Pressed" data-role="@f.Key"><span class="au-facet-icon">@Html.Raw(f.Icon)</span><span>@f.Role</span><em>@f.Count</em><i>@Html.Raw(UsersModel.Svg("check"))</i></a>
+}
+        </div>
+      </details>
+      <details class="au-facet" open><summary>Account status@Html.Raw(UsersModel.Svg("chevron"))</summary>
+        <label class="au-select"><span class="sr-only">Filter account status</span><select form="au-form" id="StatusList" name="status" aria-label="Filter account status" onchange="this.form.submit()"><option value="" selected="@(Model.Status == "")">All statuses</option><option value="Active" selected="@(Model.Status == "Active")">Active</option><option value="Pending" selected="@(Model.Status == "Pending")">Pending</option><option value="Inactive" selected="@(Model.Status == "Inactive")">Inactive</option></select>@Html.Raw(UsersModel.Svg("chevron"))</label>
+        <div class="au-chip-row">
+          @foreach (dynamic f in Model.StatusFacets)
+{
+<a role="button" class="au-chip" href="@Model.StatusFacetUrl((string)f.Status)" aria-pressed="@f.Pressed"><span class="au-dot au-dot-@f.Key" aria-hidden="true"></span>@f.Status<em>@f.Count</em></a>
+}
+        </div>
+      </details>
+      <details class="au-facet" open><summary>Workspace mix@Html.Raw(UsersModel.Svg("chevron"))</summary>@(Model.Mix)</details>
+      @if (Model.HasFilters) { <a class="au-clear" href="@Model.ClearUrl">Clear filters</a> }
+    </aside>
+    <div class="au-results">
+      <div class="au-directory" id="au-directory">@(Model.Cards)</div>
+      @if (Model.IsEmpty) { <div class="au-empty" id="au-empty"><h2>No matching users</h2><p>Try a different name, email, username or filter.</p><a class="button" href="@Model.ClearUrl">Clear filters</a></div> }
+      <footer class="au-footer"><p id="au-count" role="status">Showing @(Model.Shown) of @(Model.Total) users</p>@if (Model.HasMore) { <a class="au-more" href="@Model.MoreUrl">Load More</a> }</footer>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+@model IEnumerable<PublicController.InstructorCard>
+@{ ViewData["Title"] = "Meet our instructors"; }
+    <div class="page-head">
+        <div>
+            <h1 tabindex="-1" id="page-title">Meet our instructors</h1>
+            <p>Practical guidance, one concept at a time.</p>
+        </div>
+        <div class="actions tight"></div>
+    </div>
+    <div class="grid">
+        @foreach (var card in Model)
+        {
+            <article class="panel instructor-card">
+                @Ui.Avatar(card.User)
+                <h3>@card.User.Name</h3>
+                <p>@card.Bio</p>
+                <small>@card.Published published courses</small>
+                <a class="button ghost" href="/Catalog">Explore courses</a>
+            </article>
+        }
+    </div>
